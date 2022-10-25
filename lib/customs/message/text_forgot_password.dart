@@ -1,0 +1,12 @@
+const String forgotPasswordTitleForgotPassword   = 'ลืมรหัสผ่าน';
+const String forgotPasswordEdtIDForgotPassword   = 'รหัสนิสิต / รหัสอาจารย์';
+const String forgotPasswordEdtEmailForgotPassword   = 'อีเมล';
+const String forgotPasswordBtnForgotPasswordNext   = 'ต่อไป';
+const String forgotPasswordSetNewTitleSetNewPassword   = 'ตั้งค่ารหัสผ่านใหม่';
+const String forgotPasswordSetNewTextOTPWillSent   = 'รหัสยืนยันตัวตนจะถูกส่งไปยัง';
+const String forgotPasswordSetNewEdtPassword   = 'รหัสผ่าน';
+const String forgotPasswordSetNewEdtConfirmPassword   = 'ยืนยันรหัสผ่าน';
+const String forgotPasswordSetNewOTP   = 'รหัส OTP';
+const String forgotPasswordSetNewTextPleaseConfirm   = 'กรุณายืนยัน';
+const String forgotPasswordSetNewBtnSentOTPAgain   = 'ส่งรหัสยืนยันอีกครั้ง';
+const String forgotPasswordSetNewBtnConfirm   = 'ยืนยัน';

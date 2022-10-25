@@ -1,0 +1,9 @@
+const String registerTitleRegister   = 'ลงทะเบียน';
+const String registerEdtIDRegister   = 'รหัสนิสิต / รหัสอาจารย์';
+const String registerEdtPhoneRegister   = 'เบอร์โทรศัพท์';
+const String registerEdtEmailRegister   = 'อีเมล';
+const String registerEdtNameRegister   = 'ชื่อ';
+const String registerEdtLastNameRegister   = 'นามสกุล';
+const String registerEdtPasswordRegister   = 'รหัสผ่าน';
+const String registerEdtConfirmPasswordRegister   = 'ยืนยันรหัสผ่าน';
+const String registerEdtSignup   = 'ลงทะเบียน';

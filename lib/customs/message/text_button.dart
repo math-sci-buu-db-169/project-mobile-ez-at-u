@@ -1,0 +1,10 @@
+const String buttonOkTH   = 'ตกลง';
+const String buttonConfirmTH   = 'ยืนยัน';
+const String buttonYesTH   = 'ใช่';
+const String buttonNoTH   = 'ไม่ใช่';
+const String buttonCancelTH   = 'ยกเลิก';
+const String buttonOkEN   = 'OK';
+const String buttonConfirmEN   = 'Confirm';
+const String buttonYesEN   = 'Yes';
+const String buttonNoEN   = 'No';
+const String buttonCancelEN   = 'Cancel';
