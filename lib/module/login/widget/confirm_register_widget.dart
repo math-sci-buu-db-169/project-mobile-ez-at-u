@@ -109,6 +109,7 @@ Widget confirmRegisterPageWidget(
                     hintLabel: screenRegisterResponse?.body?.screeninfo?.edtotp ?? confirmRegisterEdtOTP,
                     textInputType: TextInputType.number,
                     initialvalue: confirmOTPController.text,
+                    iconsFile : Icons.lock_clock_rounded,
                   ),
                   CountTimeOTPWidget(
                     sendOTP: TextSendOTPCustom(

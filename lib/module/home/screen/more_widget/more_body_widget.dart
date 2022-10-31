@@ -125,6 +125,8 @@ moreBodyWidget(BuildContext context, ScreenMoreResponse? screenMoreResponse,
                       });
                     },
                     title: screenMoreResponse?.body?.screeninfo?.btndeparthis ?? moreBtnDepartHis,
+                    iconsFile : Icons.cast_for_education_sharp,
+
                   ),
                   buildCardMore(
                     context: context,
@@ -134,6 +136,7 @@ moreBodyWidget(BuildContext context, ScreenMoreResponse? screenMoreResponse,
                       });
                     },
                     title: screenMoreResponse?.body?.screeninfo?.btncou ?? moreBtnCou,
+                    iconsFile : Icons.book,
                   ),
                   buildCardMore(
                     context: context,
@@ -143,6 +146,7 @@ moreBodyWidget(BuildContext context, ScreenMoreResponse? screenMoreResponse,
                       });
                     },
                     title: screenMoreResponse?.body?.screeninfo?.btnface ?? moreBtnFace,
+                    iconsFile : Icons.facebook_rounded,
                   ),
                   buildCardMore(
                     context: context,
@@ -152,6 +156,7 @@ moreBodyWidget(BuildContext context, ScreenMoreResponse? screenMoreResponse,
                       });
                     },
                     title: screenMoreResponse?.body?.screeninfo?.btnweb ?? moreBtnWeb,
+                    iconsFile : Icons.web_outlined,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 10),
@@ -166,6 +171,7 @@ moreBodyWidget(BuildContext context, ScreenMoreResponse? screenMoreResponse,
                   buildCardMore(
                     context: context,
                     title: screenMoreResponse?.body?.screeninfo?.btntermandcon ?? moreBtnAndTitleTermAndCon,
+                    iconsFile : Icons.quick_contacts_dialer_rounded,
                     onTap: () {
                       Navigator.push(
                         context,
@@ -178,6 +184,7 @@ moreBodyWidget(BuildContext context, ScreenMoreResponse? screenMoreResponse,
                   buildCardMore(
                     context: context,
                     title: screenMoreResponse?.body?.screeninfo?.btnfaq ?? moreBtnAndTitleFaq,
+                    iconsFile : Icons.connect_without_contact_sharp ,
                     onTap: () {
                       Navigator.push(
                         context,
@@ -190,6 +197,7 @@ moreBodyWidget(BuildContext context, ScreenMoreResponse? screenMoreResponse,
                   buildCardMore(
                     context: context,
                     title: screenMoreResponse?.body?.screeninfo?.btncontactus ?? moreBtnContactus,
+                    iconsFile : Icons.quick_contacts_dialer_rounded,
                     onTap: () {
                       Navigator.push(
                         context,

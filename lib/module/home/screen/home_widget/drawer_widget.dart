@@ -177,6 +177,7 @@ drawerHome(
                           hintLabel: textPassword,
                           textInputType: TextInputType.text,
                           initialvalue: passwordController.text,
+                          iconsFile : Icons.lock,
                         ),
                         onClickBtn: (String result) {
                           Navigator.of(context).pop();

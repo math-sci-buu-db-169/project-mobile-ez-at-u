@@ -187,6 +187,7 @@ cPasswords(
                   hintLabel: screenChangePasswordResponse?.body?.screeninfo?.edtcurrentpass ??
                       changePasswordEdtCurrentPassword,
                   textInputType: TextInputType.text,
+                  iconsFile : Icons.lock_person_rounded,
                 ),
                 TextFieldPasswordCustom(
                   textEditingController: newPasswordController,
@@ -195,6 +196,7 @@ cPasswords(
                   },
                   hintLabel: screenChangePasswordResponse?.body?.screeninfo?.edtnewpass ?? changePasswordEdtPassword,
                   textInputType: TextInputType.text,
+                  iconsFile : Icons.lock_reset_rounded,
                 ),
                 TextFieldPasswordCustom(
                   textEditingController: confirmPasswordController,
@@ -204,6 +206,7 @@ cPasswords(
                   hintLabel:
                       screenChangePasswordResponse?.body?.screeninfo?.edtcpass ?? changePasswordEdtConfirmPassword,
                   textInputType: TextInputType.text,
+                  iconsFile : Icons.security_rounded,
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.05,

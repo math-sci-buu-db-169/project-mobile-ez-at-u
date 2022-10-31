@@ -62,6 +62,7 @@ registerPageWidget(
                 hintLabel: screenRegisterResponse?.body?.screeninfo?.edtIDreg ?? registerEdtIDRegister,
                 textInputType: TextInputType.text,
                 initialvalue: userController.text,
+                iconsFile : Icons.person_rounded,
               ),
               TextFieldCustom(
                 textEditingController: nameController,
@@ -71,6 +72,7 @@ registerPageWidget(
                 hintLabel: screenRegisterResponse?.body?.screeninfo?.edtnamereg ?? registerEdtNameRegister,
                 textInputType: TextInputType.text,
                 initialvalue: nameController.text,
+                iconsFile : Icons.perm_contact_cal,
               ),
               TextFieldCustom(
                 textEditingController: lastnameController,
@@ -80,6 +82,7 @@ registerPageWidget(
                 hintLabel: screenRegisterResponse?.body?.screeninfo?.edtlnamereg ?? registerEdtLastNameRegister,
                 textInputType: TextInputType.text,
                 initialvalue: lastnameController.text,
+                iconsFile : Icons.person_pin_rounded,
               ),
               TextFieldCustom(
                 textEditingController: emailController,
@@ -89,6 +92,7 @@ registerPageWidget(
                 hintLabel: screenRegisterResponse?.body?.screeninfo?.edtemailreg ?? registerEdtEmailRegister,
                 textInputType: TextInputType.text,
                 initialvalue: emailController.text,
+                iconsFile : Icons.email_sharp,
               ),
               TextFieldCustom(
                 maxLengthOTP: 10,
@@ -99,6 +103,7 @@ registerPageWidget(
                 hintLabel: screenRegisterResponse?.body?.screeninfo?.edtphonereg ?? registerEdtPhoneRegister,
                 textInputType: TextInputType.number,
                 initialvalue: phoneController.text,
+                iconsFile : Icons.phone,
               ),
               TextFieldPasswordCustom(
                 textEditingController: passwordController,
@@ -108,6 +113,7 @@ registerPageWidget(
                 hintLabel: screenRegisterResponse?.body?.screeninfo?.edtpassreg ?? registerEdtPasswordRegister,
                 textInputType: TextInputType.text,
                 initialvalue: passwordController.text,
+                iconsFile : Icons.lock,
               ),
               TextFieldPasswordCustom(
                 textEditingController: confirmPasswordController,
@@ -117,6 +123,7 @@ registerPageWidget(
                 hintLabel: screenRegisterResponse?.body?.screeninfo?.edtcpassreg ?? registerEdtConfirmPasswordRegister,
                 textInputType: TextInputType.text,
                 initialvalue: confirmPasswordController.text,
+                iconsFile : Icons.security_rounded,
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.05,

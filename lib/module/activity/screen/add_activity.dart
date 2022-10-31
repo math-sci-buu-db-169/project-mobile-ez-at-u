@@ -178,6 +178,7 @@ buildAddActivityBody(
               hintLabel:
                   addActivityScreenApi?.body?.screeninfo?.edtactname??activityEdtActName,
               textInputType: TextInputType.text,
+              iconsFile : Icons.person_rounded,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -248,6 +249,7 @@ buildAddActivityBody(
               },
               hintLabel: addActivityScreenApi?.body?.screeninfo?.edttimehours??activityEdtTimeHours,
               textInputType: TextInputType.number,
+              iconsFile : Icons.person_rounded,
             ),
             TextFieldCustom(
               textEditingController: totalTimeMinutes,
@@ -264,6 +266,7 @@ buildAddActivityBody(
               },
               hintLabel: addActivityScreenApi?.body?.screeninfo?.edttimeminutes??activityEdtTimeMinutes,
               textInputType: TextInputType.number,
+              iconsFile : Icons.person_rounded,
             ),
             TextFieldCustom(
               textEditingController: venue,
@@ -276,6 +279,7 @@ buildAddActivityBody(
               hintLabel:
                   addActivityScreenApi?.body?.screeninfo?.edtvenue??activityEdtVenue,
               textInputType: TextInputType.text,
+              iconsFile : Icons.person_rounded,
             ),
             CustomDropdownApprover(
               width: MediaQuery.of(context).size.width,

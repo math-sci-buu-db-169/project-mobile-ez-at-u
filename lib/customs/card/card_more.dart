@@ -60,7 +60,11 @@ buildCardBoard(BuildContext context, {VoidCallback? onTap, required String title
 buildCardMore({
   VoidCallback? onTap,
   required String title,
+
   required BuildContext context,
+  required IconData iconsFile,
+
+
 }) {
   return GestureDetector(
     onTap: onTap,
@@ -105,9 +109,20 @@ buildCardMore({
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                "    $title",
-                style: const TextStyle(fontSize: 20, color: tcBlack),
+              Row(
+                children: [
+                  const SizedBox(width: 5,),
+                  Icon(
+                    iconsFile,
+                    color: tcBlack,
+                    size: 40,
+                  ),
+                  Text(
+                    "    $title",
+                    style: const TextStyle(fontSize: 20, color: tcBlack),
+                  ),
+
+                ],
               ),
               const Icon(
                 Icons.arrow_forward_ios,

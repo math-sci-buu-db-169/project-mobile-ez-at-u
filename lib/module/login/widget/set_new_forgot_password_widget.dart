@@ -108,6 +108,7 @@ setNewForgotPasswordPageWidget(
                 hintLabel: screenForgotPasswordResponse?.body?.screeninfo?.otp ?? forgotPasswordSetNewOTP,
                 textInputType: TextInputType.number,
                 initialvalue: codeController.text,
+                iconsFile : Icons.lock_clock_rounded,
               ),
               TextFieldPasswordCustom(
                 textEditingController: passwordController,
@@ -117,6 +118,7 @@ setNewForgotPasswordPageWidget(
                 hintLabel: screenForgotPasswordResponse?.body?.screeninfo?.edtpass ?? forgotPasswordSetNewEdtPassword,
                 textInputType: TextInputType.text,
                 initialvalue: passwordController.text,
+                iconsFile : Icons.lock_reset_rounded,
               ),
               TextFieldPasswordCustom(
                 textEditingController: confirmPasswordController,
@@ -127,6 +129,7 @@ setNewForgotPasswordPageWidget(
                     screenForgotPasswordResponse?.body?.screeninfo?.edtcpass ?? forgotPasswordSetNewEdtConfirmPassword,
                 textInputType: TextInputType.text,
                 initialvalue: confirmPasswordController.text,
+                iconsFile : Icons.security_rounded,
               ),
 
               CountTimeOTPWidget(

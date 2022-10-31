@@ -56,6 +56,7 @@ forgotPasswordPageWidget(BuildContext context, ScreenForgotPasswordResponse? scr
                       screenForgotPasswordResponse?.body?.screeninfo?.edtIDforgot ?? forgotPasswordEdtIDForgotPassword,
                   textInputType: TextInputType.text,
                   initialvalue: userIDController.text,
+                  iconsFile : Icons.person_rounded,
                 ),
                 TextFieldCustom(
                   textEditingController: emailController,
@@ -66,6 +67,7 @@ forgotPasswordPageWidget(BuildContext context, ScreenForgotPasswordResponse? scr
                       forgotPasswordEdtEmailForgotPassword,
                   textInputType: TextInputType.text,
                   initialvalue: emailController.text,
+                  iconsFile : Icons.email,
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.05,

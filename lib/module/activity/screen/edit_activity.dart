@@ -303,6 +303,7 @@ buildEditActivityBody(
               },
               hintLabel: addActivityScreenApi?.body?.screeninfo?.edttimehours??activityEdtTimeHours,
               textInputType: TextInputType.number,
+              iconsFile : Icons.person_rounded,
             ),
             TextFieldCustom(
               initialvalue: timeMinutesValue,
@@ -321,6 +322,7 @@ buildEditActivityBody(
               },
               hintLabel: addActivityScreenApi?.body?.screeninfo?.edttimehours??activityEdtTimeMinutes,
               textInputType: TextInputType.number,
+              iconsFile : Icons.person_rounded,
             ),
             BuildTextformfieldUnlimitCustom(
               initialvalue: venueValue,
