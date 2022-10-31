@@ -9,8 +9,9 @@ class BuildTextformfieldUnlimitCustom extends StatelessWidget {
   final TextInputType textInputType;
   final ValueChanged<String>? onChanged;
   final String? initialvalue;
+  final IconData iconsFile;
   const BuildTextformfieldUnlimitCustom(
-      {Key? key, this.textEditingController, required this.hintLabel, this.onChanged, required this.textInputType, this.initialvalue})
+      {Key? key, this.textEditingController, required this.hintLabel, this.onChanged, required this.textInputType, this.initialvalue, required this.iconsFile})
       : super(key: key);
 
   @override
@@ -34,6 +35,7 @@ class BuildTextformfieldUnlimitCustom extends StatelessWidget {
           //   print(hint_label + "    :" + value);
           // },
           decoration: InputDecoration(
+            prefixIcon: Icon(iconsFile, color: Colors.grey,),
               filled: true,
               fillColor: tcTextfile,
               hintText: " $hintLabel",

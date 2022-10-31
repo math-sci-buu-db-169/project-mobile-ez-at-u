@@ -15,6 +15,7 @@ import 'package:ez_u/module/home/screen/home_screen/home_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class EditActivityScreen extends StatelessWidget {
   final dynamic data;
@@ -243,6 +244,7 @@ buildEditActivityBody(
               hintLabel:
                   addActivityScreenApi?.body?.screeninfo?.edtactname??activityEdtActName,
               textInputType: TextInputType.text,
+              iconsFile : FontAwesomeIcons.solidPenToSquare,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -303,7 +305,7 @@ buildEditActivityBody(
               },
               hintLabel: addActivityScreenApi?.body?.screeninfo?.edttimehours??activityEdtTimeHours,
               textInputType: TextInputType.number,
-              iconsFile : Icons.person_rounded,
+              iconsFile : FontAwesomeIcons.solidClock,
             ),
             TextFieldCustom(
               initialvalue: timeMinutesValue,
@@ -338,6 +340,7 @@ buildEditActivityBody(
               hintLabel:
                   addActivityScreenApi?.body?.screeninfo?.edtvenue??activityEdtVenue,
               textInputType: TextInputType.text,
+              iconsFile: FontAwesomeIcons.mapLocation,
             ),
             customDropdownForApproverEdit(
               width: MediaQuery.of(context).size.width,
@@ -363,6 +366,7 @@ buildEditActivityBody(
               hintLabel:
                   addActivityScreenApi?.body?.screeninfo?.edtdetail??activityEdtDetail,
               textInputType: TextInputType.text,
+              iconsFile: FontAwesomeIcons.circleInfo,
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.05,

@@ -14,6 +14,7 @@ import 'package:ez_u/module/home/screen/home_screen/home_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
 import '../../../customs/message/text_add_edit_activity.dart';
@@ -178,7 +179,8 @@ buildAddActivityBody(
               hintLabel:
                   addActivityScreenApi?.body?.screeninfo?.edtactname??activityEdtActName,
               textInputType: TextInputType.text,
-              iconsFile : Icons.person_rounded,
+              // iconsFile : Icons.person_rounded,
+              iconsFile : FontAwesomeIcons.solidPenToSquare,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -249,7 +251,7 @@ buildAddActivityBody(
               },
               hintLabel: addActivityScreenApi?.body?.screeninfo?.edttimehours??activityEdtTimeHours,
               textInputType: TextInputType.number,
-              iconsFile : Icons.person_rounded,
+              iconsFile : FontAwesomeIcons.solidClock,
             ),
             TextFieldCustom(
               textEditingController: totalTimeMinutes,
@@ -266,9 +268,23 @@ buildAddActivityBody(
               },
               hintLabel: addActivityScreenApi?.body?.screeninfo?.edttimeminutes??activityEdtTimeMinutes,
               textInputType: TextInputType.number,
-              iconsFile : Icons.person_rounded,
+              iconsFile : FontAwesomeIcons.clock,
             ),
-            TextFieldCustom(
+
+            // TextFieldCustom(
+            //   textEditingController: venue,
+            //   onChanged: (value) {
+            //     venue.text = value;
+            //     if (kDebugMode) {
+            //       print(venue.text);
+            //     }
+            //   },
+            //   hintLabel:
+            //       addActivityScreenApi?.body?.screeninfo?.edtvenue??activityEdtVenue,
+            //   textInputType: TextInputType.text,
+            //   iconsFile : FontAwesomeIcons.mapLocation,
+            // ),
+            BuildTextformfieldUnlimitCustom(
               textEditingController: venue,
               onChanged: (value) {
                 venue.text = value;
@@ -277,10 +293,11 @@ buildAddActivityBody(
                 }
               },
               hintLabel:
-                  addActivityScreenApi?.body?.screeninfo?.edtvenue??activityEdtVenue,
+              addActivityScreenApi?.body?.screeninfo?.edtvenue??activityEdtVenue,
               textInputType: TextInputType.text,
-              iconsFile : Icons.person_rounded,
+              iconsFile : FontAwesomeIcons.mapLocation,
             ),
+
             CustomDropdownApprover(
               width: MediaQuery.of(context).size.width,
               dropdownList: approverArray,
@@ -303,6 +320,7 @@ buildAddActivityBody(
               hintLabel:
                   addActivityScreenApi?.body?.screeninfo?.edtdetail??activityEdtDetail,
               textInputType: TextInputType.text,
+              iconsFile: FontAwesomeIcons.circleInfo,
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.05,
