@@ -1,15 +1,15 @@
 import 'package:dio/dio.dart';
-import 'package:ez_u/module/activity/model/response/screen_status_activity_response.dart';
-import 'package:ez_u/module/home/model/response/home_response/alert_no_activity_response.dart';
-import 'package:ez_u/module/home/model/response/home_response/submit_delete_account_response.dart';
-import 'package:ez_u/module/home/model/response/home_response/submit_logout_response.dart';
-import 'package:ez_u/module/profile/model/response/api_profile_response.dart';
-import 'package:ez_u/utils/shared_preferences.dart';
+import 'package:ez_at_u/module/activity/model/response/screen_status_activity_response.dart';
+import 'package:ez_at_u/module/home/model/response/home_response/alert_no_activity_response.dart';
+import 'package:ez_at_u/module/home/model/response/home_response/submit_delete_account_response.dart';
+import 'package:ez_at_u/module/home/model/response/home_response/submit_logout_response.dart';
+import 'package:ez_at_u/module/profile/model/response/api_profile_response.dart';
+import 'package:ez_at_u/utils/shared_preferences.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ez_u/module/home/model/response/home_response/alert_logout_response.dart';
-import 'package:ez_u/module/home/model/response/home_response/change_language_response.dart';
-import 'package:ez_u/module/home/model/response/home_response/screen_home_response.dart';
-import 'package:ez_u/module/home/repository/home_repository.dart';
+import 'package:ez_at_u/module/home/model/response/home_response/alert_logout_response.dart';
+import 'package:ez_at_u/module/home/model/response/home_response/change_language_response.dart';
+import 'package:ez_at_u/module/home/model/response/home_response/screen_home_response.dart';
+import 'package:ez_at_u/module/home/repository/home_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 part 'home_event.dart';

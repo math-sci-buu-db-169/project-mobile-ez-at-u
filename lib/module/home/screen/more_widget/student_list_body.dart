@@ -1,6 +1,6 @@
-import 'package:ez_u/customs/message/text_board.dart';
-import 'package:ez_u/customs/size/size.dart';
-import 'package:ez_u/module/home/screen/more_widget/BuildListStudent.dart';
+import 'package:ez_at_u/customs/message/text_board.dart';
+import 'package:ez_at_u/customs/size/size.dart';
+import 'package:ez_at_u/module/home/screen/more_widget/BuildListStudent.dart';
 import 'package:flutter/material.dart';
 import '../../model/response/more_response/screen_more_board_student_list_response.dart';
 

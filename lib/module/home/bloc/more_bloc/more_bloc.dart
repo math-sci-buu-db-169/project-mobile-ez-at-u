@@ -1,20 +1,29 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-import 'package:ez_u/module/home/model/response/more_response/up_img_teacher_response.dart';
+import 'package:ez_at_u/module/home/model/response/more_response/up_img_teacher_response.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:ez_u/module/home/model/response/more_response/screen_more_list_name_gen_response.dart';
+import 'package:ez_at_u/module/home/model/response/more_response/screen_more_list_name_gen_response.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
-import 'package:ez_u/module/home/model/response/more_response/scree_more_pdpa_response.dart';
-import 'package:ez_u/module/home/model/response/more_response/screen_more_board_student_list_detail_response.dart';
-import 'package:ez_u/module/home/model/response/more_response/screen_more_board_teacher_response.dart';
-import 'package:ez_u/module/home/model/response/more_response/screen_more_contact_us_response.dart';
-import 'package:ez_u/module/home/model/response/more_response/screen_more_faq_response.dart';
-import 'package:ez_u/module/home/model/response/more_response/screen_more_response.dart';
-import 'package:ez_u/module/home/repository/more_repository.dart';
+import 'package:ez_at_u/module/home/model/response/more_response/scree_more_pdpa_response.dart';
+import 'package:ez_at_u/module/home/model/response/more_response/screen_more_board_student_list_detail_response.dart';
+import 'package:ez_at_u/module/home/model/response/more_response/screen_more_board_teacher_response.dart';
+import 'package:ez_at_u/module/home/model/response/more_response/screen_more_contact_us_response.dart';
+import 'package:ez_at_u/module/home/model/response/more_response/screen_more_faq_response.dart';
+import 'package:ez_at_u/module/home/model/response/more_response/screen_more_response.dart';
+import 'package:ez_at_u/module/home/repository/more_repository.dart';
 
-import 'package:ez_u/module/home/model/response/more_response/screen_more_board_student_list_response.dart';
+import 'package:ez_at_u/module/home/model/response/more_response/screen_more_board_student_list_response.dart';
+
+import '../../model/response/more_response/scree_more_pdpa_response.dart';
+import '../../model/response/more_response/screen_more_board_student_list_detail_response.dart';
+import '../../model/response/more_response/screen_more_board_student_list_response.dart';
+import '../../model/response/more_response/screen_more_board_teacher_response.dart';
+import '../../model/response/more_response/screen_more_contact_us_response.dart';
+import '../../model/response/more_response/screen_more_faq_response.dart';
+import '../../model/response/more_response/screen_more_list_name_gen_response.dart';
+import '../../model/response/more_response/screen_more_response.dart';
 
 part 'more_event.dart';
 part 'more_state.dart';

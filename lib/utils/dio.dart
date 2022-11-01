@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:ez_u/utils/shared_preferences.dart';
+import 'package:ez_at_u/utils/shared_preferences.dart';
 
 class MyDio {
   // static final _optionsBinary = BaseOptions(

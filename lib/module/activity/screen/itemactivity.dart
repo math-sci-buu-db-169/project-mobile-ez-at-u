@@ -1,5 +1,5 @@
 
-import 'package:ez_u/customs/message/text_activity.dart';
+import 'package:ez_at_u/customs/message/text_activity.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
