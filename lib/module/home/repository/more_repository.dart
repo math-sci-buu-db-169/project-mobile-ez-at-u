@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../../main_route/main_route_bloc/main_route_bloc.dart';
 import '../../../utils/dio.dart';
 
 class MoreRepository {
@@ -34,8 +36,19 @@ class MoreRepository {
     return await MyDio.createDioServer().post("/api/home/morecontactus", data: jsonEncode({}));
   }
 
-  Future<Response> getScreenMoreFAQ() async {
-    return await MyDio.createDioServer().post("/api/home/morefaq", data: jsonEncode({}));
+  Future<Response> getScreenMoreFAQ({required String module}) async {
+    prefs = await SharedPreferences.getInstance();
+    String? userLanguage = prefs.getString('userLanguage');
+    if (module =='login'){
+      return await MyDio.createDioServer().post("/api/home/morefaq", data: jsonEncode({
+        "userlanguage": userLanguage
+      }));
+    } else {
+
+      return await MyDio.createDioServer().post("/api/home/morefaq", data: jsonEncode({
+        "userlanguage": userLanguage
+      }));
+    }
   }
 
   Future<Response> getScreenMorePDPA() async {

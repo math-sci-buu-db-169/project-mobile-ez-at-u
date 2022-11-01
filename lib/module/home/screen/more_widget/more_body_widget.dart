@@ -189,7 +189,7 @@ moreBodyWidget(BuildContext context, ScreenMoreResponse? screenMoreResponse,
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const FaqScreen(),
+                          builder: (context) => const FaqScreen(module: '',),
                         ),
                       );
                     },

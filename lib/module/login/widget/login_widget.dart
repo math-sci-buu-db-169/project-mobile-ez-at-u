@@ -64,7 +64,7 @@ loginPageWidget(BuildContext context, ScreenLoginResponse? screenLoginResponse, 
                             onPressed: () {Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const FaqScreen(),
+                                builder: (context) =>  const FaqScreen( module :'login'),
                               ),
                             );},
                           ),
