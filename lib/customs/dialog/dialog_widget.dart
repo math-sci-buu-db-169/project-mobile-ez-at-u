@@ -1,6 +1,6 @@
-import 'package:ez_u/customs/button/button_style.dart';
-import 'package:ez_u/customs/color/color_const.dart';
-import 'package:ez_u/customs/text_link/text_link_to_screen_custom.dart';
+import 'package:ez_at_u/customs/button/button_style.dart';
+import 'package:ez_at_u/customs/color/color_const.dart';
+import 'package:ez_at_u/customs/text_link/text_link_to_screen_custom.dart';
 import 'package:flutter/material.dart';
 
 

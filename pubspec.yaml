@@ -1,4 +1,4 @@
-name: ez_u
+name: ez_at_u
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -11,14 +11,16 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
 # In Android, build-name is used as versionName while build-number used as versionCode.
-# Read more_response about Android versioning at https://developer.android.com/studio/publish/versioning
-# In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
-# Read more_response about iOS versioning at
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number is used as CFBundleVersion.
+# Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+# In Windows, build-name is used as the major, minor, and patch parts
+# of the product and file versions while build-number is used as the build suffix.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.17.0 <3.0.0"
+  sdk: '>=2.18.0 <3.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -33,6 +35,8 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
+
+
   cupertino_icons: ^1.0.2
   pin_code_fields: ^7.4.0
   flutter_feather_icons: ^2.0.0+1
@@ -48,13 +52,14 @@ dependencies:
   dio: ^4.0.6
   shared_preferences: ^2.0.15
   custom_timer: ^0.1.1
-  flutter_launcher_icons: ^0.10.0
+#  flutter_launcher_icons: ^0.10.0
   package_info_plus: ^1.4.3+1
-flutter_icons:
-  android: "launcher_icon"
-  ios: true
-  #  image_path: "assets/logo/EZ@ULOGO.png"
-  image_path: "assets/logo/logo.png"
+
+#flutter_icons:
+#  android: "launcher_icon"
+#  ios: true
+#  #  image_path: "assets/logo/EZ@ULOGO.png"
+#  image_path: "assets/logo/logo.png"
 
 dev_dependencies:
   flutter_test:
@@ -82,15 +87,9 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
-    - assets/logo/132632.png
-    - assets/logo/Buulogo.png
     - assets/logo/
     - assets/logo/profile.png
-    - assets/logo/EZ@ULOGOY.png
-    - assets/logo/EZ@ULOGO.png
-    - assets/logo/EZ@U.png
-    - assets/logo/EZ@UBlue.png
-    - assets/logo/135546170_3874022739315657_1820328025090151860_n.png
+
 
 
 

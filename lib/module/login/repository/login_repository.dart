@@ -1,4 +1,4 @@
-import 'package:ez_u/utils/shared_preferences.dart';
+import 'package:ez_at_u/utils/shared_preferences.dart';
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';

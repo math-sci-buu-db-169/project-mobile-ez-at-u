@@ -1,6 +1,6 @@
-import 'package:ez_u/module/activity/screen/activitydetailscreen.dart';
-import 'package:ez_u/module/activity/screen/itemactivity.dart';
-import 'package:ez_u/module/home/bloc/home_bloc/home_bloc.dart';
+import 'package:ez_at_u/module/activity/screen/activitydetailscreen.dart';
+import 'package:ez_at_u/module/activity/screen/itemactivity.dart';
+import 'package:ez_at_u/module/home/bloc/home_bloc/home_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../model/response/screen_status_activity_response.dart';

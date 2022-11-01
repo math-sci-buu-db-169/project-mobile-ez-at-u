@@ -1,5 +1,5 @@
-import 'package:ez_u/customs/color/color_const.dart';
-import 'package:ez_u/customs/size/size.dart';
+import 'package:ez_at_u/customs/color/color_const.dart';
+import 'package:ez_at_u/customs/size/size.dart';
 import 'package:flutter/material.dart';
 
 class TextFieldPasswordCustom extends StatefulWidget {

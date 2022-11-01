@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  MaterialApp(
-        title: 'EZATU',
+        title: 'Easy At You BETA',
         theme: ThemeData(
           primarySwatch: white,
           scaffoldBackgroundColor: Colors.white,
