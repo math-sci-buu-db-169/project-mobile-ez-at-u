@@ -81,7 +81,7 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
     on<MoreFAQEvent>((event, emit) async {
       try {
         emit(MoreFAQLoading());
-        Response responseMoreFAQ = await getScreenMoreFAQ();
+        Response responseMoreFAQ = await getScreenMoreFAQ(module :event.module);
         emit(MoreFAQEndLoading());
         if (responseMoreFAQ.statusCode == 200) {
           ScreenMoreFAQResponse screenMoreFAQResponse = ScreenMoreFAQResponse.fromJson(responseMoreFAQ.data);

@@ -6,7 +6,11 @@ class MoreScreenInfoEvent extends MoreEvent {}
 
 class MoreContactUsEvent extends MoreEvent {}
 
-class MoreFAQEvent extends MoreEvent {}
+class MoreFAQEvent extends MoreEvent {
+  final String module;
+
+  MoreFAQEvent({required this.module,});
+}
 
 class MorePDPAEvent extends MoreEvent {}
 

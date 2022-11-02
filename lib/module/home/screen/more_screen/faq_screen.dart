@@ -12,11 +12,12 @@ import '../../../../module/login/screen/login_screen/login_screen.dart';
 import '../../../../utils/shared_preferences.dart';
 
 class FaqScreen extends StatelessWidget {
-  const FaqScreen({Key? key}) : super(key: key);
+  final String module;
+  const FaqScreen({Key? key, required this.module}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(create: (context) => MoreBloc()..add(MoreFAQEvent()), child: const FaqPage());
+    return BlocProvider(create: (context) => MoreBloc()..add(MoreFAQEvent(module: module)), child: const FaqPage());
   }
 }
 
