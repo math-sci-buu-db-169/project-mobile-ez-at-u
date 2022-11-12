@@ -37,6 +37,7 @@ class _MoreBoardListStudentListGenPageState extends State<MoreBoardListStudentLi
   late String textSessionExpired;
   late String textSubSessionExpired;
   late String _buttonOk;
+  final TextEditingController   searchController = TextEditingController();
 
   @override
   void initState() {
@@ -81,7 +82,7 @@ class _MoreBoardListStudentListGenPageState extends State<MoreBoardListStudentLi
       builder: (context, state) {
         if (state is MoreBoardListGenStudentSuccessState) {
           _screenMoreListNameGenResponse = state.responseBoardListGenStudent;
-          return studentListGenBody(context, _screenMoreListNameGenResponse);
+          return studentListGenBody(context, _screenMoreListNameGenResponse,searchController);
         } else {
           return Container();
         }

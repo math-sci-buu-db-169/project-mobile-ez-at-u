@@ -1,6 +1,7 @@
 import 'package:ez_at_u/customs/color/color_const.dart';
 import 'package:ez_at_u/customs/size/size.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class TextFieldPasswordCustom extends StatefulWidget {
   final TextEditingController? textEditingController;
@@ -58,8 +59,8 @@ class _TextFieldPasswordCustomState extends State<TextFieldPasswordCustom> {
                     });
                   },
                   icon: _isVisible
-                      ? const Icon(Icons.visibility, color: Color(0xFF4F4F4F))
-                      : const Icon(Icons.visibility_off,
+                      ? const Icon(FontAwesomeIcons.eye,size:20, color: Color(0xFF4F4F4F))
+                      : const Icon(FontAwesomeIcons.eyeSlash,size:20,
                           color: Color(0xFF4F4F4F))),
               enabledBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: tcHint),

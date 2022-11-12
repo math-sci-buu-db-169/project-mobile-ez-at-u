@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import '../../../../customs/message/text_board.dart';
 import '../../../../customs/size/size.dart';
+import '../../../../customs/text_file/text_field_search_custom.dart';
 import '../../../../module/home/model/response/more_response/screen_more_list_name_gen_response.dart';
-import '../../../../module/home/screen/more_widget/BuildListStudent.dart';
+import '../../../../module/home/screen/more_widget/build_list_student.dart';
 import '../../../../module/home/screen/more_widget/board_Item_student.dart';
 import '../../../../module/home/screen/more_screen/board_screen/more_board_student_List_screen.dart';
 
-studentListGenBody(BuildContext context, ScreenMoreListNameGenResponse? screenMoreListNameGenResponse) {
+studentListGenBody(BuildContext context, ScreenMoreListNameGenResponse? screenMoreListNameGenResponse, TextEditingController searchController) {
   return WillPopScope(
       onWillPop: () async {
         return false;
@@ -37,6 +38,17 @@ studentListGenBody(BuildContext context, ScreenMoreListNameGenResponse? screenMo
         body: SafeArea(
           child: Column(
             children: [
+              TextFieldSearchCustom(
+                textEditingController: searchController,
+                onChanged: (valuePassword) {
+                  searchController.text = valuePassword;
+                },
+                // hintLabel: 'ชื่อรุ่นมหาลัย',
+                textInputType: TextInputType.text,
+                initialvalue: searchController.text,
+                iconsFile : Icons.search,
+              ),
+
               Container(
                 margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                 color: Colors.transparent,

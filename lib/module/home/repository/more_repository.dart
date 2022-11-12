@@ -11,12 +11,17 @@ class MoreRepository {
   }
 
   Future<Response> getMoreListGen() async {
-    return await MyDio.createDioServer().post("/api/home/morelistnamegen", data: jsonEncode({}));
+    return await MyDio.createDioServer().post("/api/home/morelistnamegen", data: jsonEncode({
+
+        "gen": "string",
+        "genname": "string"
+
+    }));
   }
 
-  Future<Response> getScreenMoreBoardStudent() async {
-    return await MyDio.createDioServer().post("ServiceTest/api/home/morelistnamegen", data: jsonEncode({}));
-  }
+  // Future<Response> getScreenMoreBoardStudent() async {
+  //   return await MyDio.createDioServer().post("ServiceTest/api/home/morelistnamegen", data: jsonEncode({}));
+  // }
 
   Future<Response> getScreenMoreBoardDetailStudent(String? studentCode) async {
     return await MyDio.createDioServer()
@@ -25,7 +30,12 @@ class MoreRepository {
 
   Future<Response> getMoreBoardListStudent(String gen) async {
     return await MyDio.createDioServer()
-        .post("/api/home/morelistnisit", data: jsonEncode({"gen": gen}));
+        .post("/api/home/morelistnisit", data: jsonEncode(
+        {"gen": gen,
+      "studentid": "string",
+      "studentname": "string",
+      "studentlastname": "string"
+        }));
   }
 
   Future<Response> getScreenMoreBoardTeacher() async {

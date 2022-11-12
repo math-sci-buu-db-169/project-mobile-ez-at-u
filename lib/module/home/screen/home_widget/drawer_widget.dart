@@ -1,3 +1,4 @@
+import 'package:ez_at_u/module/home/screen/home_widget/pin_lock_app_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -135,6 +136,26 @@ drawerHome(
                       tb1: 0.5,
                       tb2: 0.00,
                       tb3: 0.55,
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const PinLockAppScreen()));
+                    },
+                    child: Container(
+                      width: double.infinity,
+                      color: bscTransparent,
+                      padding: const EdgeInsets.only(top: 0, bottom: 10, left: 15, right: 15),
+                      child: buildTableDrawerTwoTable(
+                        context,
+                        textLeftTitle: homeBtnPINAPP ?? homeBtnPINAPP,
+                        // textLeftTitle: screenHomeResponse?.body?.screenInfo?.btncpass ?? homeBtnConfirmPassword,
+                        textRightDetail: '',
+                        tb1: 0.5,
+                        tb2: 0.05,
+                        tb3: 0.45,
+                        underline: true,
+                      ),
                     ),
                   ),
                   GestureDetector(
