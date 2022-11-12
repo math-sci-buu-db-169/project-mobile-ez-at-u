@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../../customs/card/card_more.dart';
 import '../../../../customs/color/color_const.dart';
 import '../../../../customs/message/text_more.dart';
@@ -125,7 +126,7 @@ moreBodyWidget(BuildContext context, ScreenMoreResponse? screenMoreResponse,
                       });
                     },
                     title: screenMoreResponse?.body?.screeninfo?.btndeparthis ?? moreBtnDepartHis,
-                    iconsFile : Icons.cast_for_education_sharp,
+                    iconsFile :FontAwesomeIcons.clockRotateLeft,
 
                   ),
                   buildCardMore(
@@ -136,7 +137,7 @@ moreBodyWidget(BuildContext context, ScreenMoreResponse? screenMoreResponse,
                       });
                     },
                     title: screenMoreResponse?.body?.screeninfo?.btncou ?? moreBtnCou,
-                    iconsFile : Icons.book,
+                    iconsFile : FontAwesomeIcons.usersViewfinder,
                   ),
                   buildCardMore(
                     context: context,
@@ -146,7 +147,7 @@ moreBodyWidget(BuildContext context, ScreenMoreResponse? screenMoreResponse,
                       });
                     },
                     title: screenMoreResponse?.body?.screeninfo?.btnface ?? moreBtnFace,
-                    iconsFile : Icons.facebook_rounded,
+                    iconsFile :FontAwesomeIcons.facebook,
                   ),
                   buildCardMore(
                     context: context,
@@ -156,7 +157,7 @@ moreBodyWidget(BuildContext context, ScreenMoreResponse? screenMoreResponse,
                       });
                     },
                     title: screenMoreResponse?.body?.screeninfo?.btnweb ?? moreBtnWeb,
-                    iconsFile : Icons.web_outlined,
+                    iconsFile : FontAwesomeIcons.sitemap,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 10),
@@ -171,7 +172,7 @@ moreBodyWidget(BuildContext context, ScreenMoreResponse? screenMoreResponse,
                   buildCardMore(
                     context: context,
                     title: screenMoreResponse?.body?.screeninfo?.btntermandcon ?? moreBtnAndTitleTermAndCon,
-                    iconsFile : Icons.quick_contacts_dialer_rounded,
+                    iconsFile : FontAwesomeIcons.userShield,
                     onTap: () {
                       Navigator.push(
                         context,
@@ -184,12 +185,12 @@ moreBodyWidget(BuildContext context, ScreenMoreResponse? screenMoreResponse,
                   buildCardMore(
                     context: context,
                     title: screenMoreResponse?.body?.screeninfo?.btnfaq ?? moreBtnAndTitleFaq,
-                    iconsFile : Icons.connect_without_contact_sharp ,
+                    iconsFile : FontAwesomeIcons.question ,
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const FaqScreen(),
+                          builder: (context) => const FaqScreen(module: '',),
                         ),
                       );
                     },
@@ -197,7 +198,7 @@ moreBodyWidget(BuildContext context, ScreenMoreResponse? screenMoreResponse,
                   buildCardMore(
                     context: context,
                     title: screenMoreResponse?.body?.screeninfo?.btncontactus ?? moreBtnContactus,
-                    iconsFile : Icons.quick_contacts_dialer_rounded,
+                    iconsFile : FontAwesomeIcons.comments ,
                     onTap: () {
                       Navigator.push(
                         context,

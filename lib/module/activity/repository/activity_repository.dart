@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
-import 'package:ez_u/utils/dio.dart';
+import 'package:ez_at_u/utils/dio.dart';
 import 'package:flutter/foundation.dart';
 
 class ActivityRepository  {

@@ -1,8 +1,8 @@
-import 'package:ez_u/module/login/model/response/change_password_response/change_password_response.dart';
+import 'package:ez_at_u/module/login/model/response/change_password_response/change_password_response.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
-import 'package:ez_u/module/login/model/response/screen_change_password_response.dart';
-import 'package:ez_u/module/login/repository/change_password_repository.dart';
+import 'package:ez_at_u/module/login/model/response/screen_change_password_response.dart';
+import 'package:ez_at_u/module/login/repository/change_password_repository.dart';
 
 part 'change_password_event.dart';
 part 'change_password_state.dart';

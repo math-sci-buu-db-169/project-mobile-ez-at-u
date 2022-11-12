@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../../main_route/main_route_bloc/main_route_bloc.dart';
 import '../../../utils/dio.dart';
 
 class MoreRepository {
@@ -9,12 +11,17 @@ class MoreRepository {
   }
 
   Future<Response> getMoreListGen() async {
-    return await MyDio.createDioServer().post("/api/home/morelistnamegen", data: jsonEncode({}));
+    return await MyDio.createDioServer().post("/api/home/morelistnamegen", data: jsonEncode({
+
+        "gen": "string",
+        "genname": "string"
+
+    }));
   }
 
-  Future<Response> getScreenMoreBoardStudent() async {
-    return await MyDio.createDioServer().post("ServiceTest/api/home/morelistnamegen", data: jsonEncode({}));
-  }
+  // Future<Response> getScreenMoreBoardStudent() async {
+  //   return await MyDio.createDioServer().post("ServiceTest/api/home/morelistnamegen", data: jsonEncode({}));
+  // }
 
   Future<Response> getScreenMoreBoardDetailStudent(String? studentCode) async {
     return await MyDio.createDioServer()
@@ -23,7 +30,12 @@ class MoreRepository {
 
   Future<Response> getMoreBoardListStudent(String gen) async {
     return await MyDio.createDioServer()
-        .post("/api/home/morelistnisit", data: jsonEncode({"gen": gen}));
+        .post("/api/home/morelistnisit", data: jsonEncode(
+        {"gen": gen,
+      "studentid": "string",
+      "studentname": "string",
+      "studentlastname": "string"
+        }));
   }
 
   Future<Response> getScreenMoreBoardTeacher() async {
@@ -34,8 +46,19 @@ class MoreRepository {
     return await MyDio.createDioServer().post("/api/home/morecontactus", data: jsonEncode({}));
   }
 
-  Future<Response> getScreenMoreFAQ() async {
-    return await MyDio.createDioServer().post("/api/home/morefaq", data: jsonEncode({}));
+  Future<Response> getScreenMoreFAQ({required String module}) async {
+    prefs = await SharedPreferences.getInstance();
+    String? userLanguage = prefs.getString('userLanguage');
+    if (module =='login'){
+      return await MyDio.createDioServer().post("/api/home/morefaq", data: jsonEncode({
+        "userlanguage": userLanguage
+      }));
+    } else {
+
+      return await MyDio.createDioServer().post("/api/home/morefaq", data: jsonEncode({
+        "userlanguage": userLanguage
+      }));
+    }
   }
 
   Future<Response> getScreenMorePDPA() async {

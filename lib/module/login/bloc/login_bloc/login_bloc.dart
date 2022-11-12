@@ -1,9 +1,9 @@
-import 'package:ez_u/utils/shared_preferences.dart';
+import 'package:ez_at_u/utils/shared_preferences.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
-import 'package:ez_u/module/login/model/response/screen_login_response.dart';
-import 'package:ez_u/module/login/model/response/submit_login_response.dart';
-import 'package:ez_u/module/login/repository/login_repository.dart';
+import 'package:ez_at_u/module/login/model/response/screen_login_response.dart';
+import 'package:ez_at_u/module/login/model/response/submit_login_response.dart';
+import 'package:ez_at_u/module/login/repository/login_repository.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';

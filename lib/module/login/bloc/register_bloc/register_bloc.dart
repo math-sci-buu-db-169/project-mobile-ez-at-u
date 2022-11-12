@@ -1,10 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
-import 'package:ez_u/module/login/model/response/re_send_otp_confirm_register_response.dart';
-import 'package:ez_u/module/login/model/response/screen_register_response.dart';
-import 'package:ez_u/module/login/model/response/submit_confirm_register_response.dart';
-import 'package:ez_u/module/login/model/response/submit_register_response.dart';
-import 'package:ez_u/module/login/repository/register_repository.dart';
+import 'package:ez_at_u/module/login/model/response/re_send_otp_confirm_register_response.dart';
+import 'package:ez_at_u/module/login/model/response/screen_register_response.dart';
+import 'package:ez_at_u/module/login/model/response/submit_confirm_register_response.dart';
+import 'package:ez_at_u/module/login/model/response/submit_register_response.dart';
+import 'package:ez_at_u/module/login/repository/register_repository.dart';
 
 part 'register_event.dart';
 part 'register_state.dart';

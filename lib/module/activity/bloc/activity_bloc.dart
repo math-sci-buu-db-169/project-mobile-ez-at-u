@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
-import 'package:ez_u/module/activity/model/response/add_edit_activity_screen_api.dart';
-import 'package:ez_u/module/activity/model/response/add_edit.dart';
-import 'package:ez_u/module/activity/model/response/delete.dart';
-import 'package:ez_u/module/activity/repository/activity_repository.dart';
+import 'package:ez_at_u/module/activity/model/response/add_edit_activity_screen_api.dart';
+import 'package:ez_at_u/module/activity/model/response/add_edit.dart';
+import 'package:ez_at_u/module/activity/model/response/delete.dart';
+import 'package:ez_at_u/module/activity/repository/activity_repository.dart';
 
 part 'activity_event.dart';
 

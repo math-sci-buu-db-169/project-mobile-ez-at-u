@@ -1,4 +1,4 @@
-import 'package:ez_u/customs/message/text_button.dart';
+import 'package:ez_at_u/customs/message/text_button.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -40,6 +40,13 @@ setUserLanguage( String userLanguage) async{
   prefs = await SharedPreferences.getInstance();
   await prefs.setString('userLanguage', userLanguage);
 }
+setMyNameUser( String myNameUser) async{
+  prefs = await SharedPreferences.getInstance();
+  await prefs.setString('myNameUser', myNameUser);
+  print("myNameUser");
+  print(myNameUser);
+
+}
 setButton( {String? buttonOkAPI,String? buttonConfirmAPI,String? buttonYesAPI,String? buttonNoAPI,String? buttonCancelAPI} ) async{
   prefs = await SharedPreferences.getInstance();
   await prefs.setString('buttonOk', buttonOkAPI?? buttonOkTH);
@@ -71,6 +78,35 @@ void cleanUserKey() async {
   // print( prefs.getString('UserKey') );
   // print('refreshKey');
   // print( prefs.getString('refreshKey') );
+
+}
+ setIsPinStatus({required bool pinStatus}) async {
+  prefs = await SharedPreferences.getInstance();
+  await prefs.setString('pinStatus', pinStatus.toString());
+  print('pinStatus');
+  print( prefs.getString('pinStatus') );
+
+
+
+}
+setIBioStatus({required bool bioStatus} ) async {
+  prefs = await SharedPreferences.getInstance();
+  await prefs.setString('bioStatus', bioStatus.toString());
+  print('bioStatus');
+  print( prefs.getString('bioStatus') );
+
+
+
+}
+setIsPinValue( {required String pinValue}) async {
+  prefs = await SharedPreferences.getInstance();
+  await prefs.setString('pinValue',pinValue);
+  String? pinValue2 = prefs.getString('pinValue') ;
+  print('pinValue');
+  print( prefs.getString('pinValue') );
+  print( pinValue2?.length );
+
+
 
 }
 

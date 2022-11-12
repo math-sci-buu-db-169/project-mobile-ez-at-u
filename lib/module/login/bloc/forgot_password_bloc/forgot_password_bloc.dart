@@ -1,10 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
-import 'package:ez_u/module/login/model/response/re_send_otp_forgot_password_response.dart';
-import 'package:ez_u/module/login/model/response/screen_forgot_password_response.dart';
-import 'package:ez_u/module/login/model/response/submit_forgot_password_response.dart';
-import 'package:ez_u/module/login/model/response/submit_forgot_setnew_forgotpassword_response.dart';
-import 'package:ez_u/module/login/repository/forgot_password_repository.dart';
+import 'package:ez_at_u/module/login/model/response/re_send_otp_forgot_password_response.dart';
+import 'package:ez_at_u/module/login/model/response/screen_forgot_password_response.dart';
+import 'package:ez_at_u/module/login/model/response/submit_forgot_password_response.dart';
+import 'package:ez_at_u/module/login/model/response/submit_forgot_setnew_forgotpassword_response.dart';
+import 'package:ez_at_u/module/login/repository/forgot_password_repository.dart';
 
 part 'forgot_password_event.dart';
 part 'forgot_password_state.dart';

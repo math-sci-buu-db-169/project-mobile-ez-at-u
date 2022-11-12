@@ -1,9 +1,9 @@
-import 'package:ez_u/customs/button/button_custom.dart';
-import 'package:ez_u/customs/dialog/dialog_widget.dart';
-import 'package:ez_u/customs/message/text_activity.dart';
-import 'package:ez_u/customs/progress_dialog.dart';
-import 'package:ez_u/module/activity/bloc/activity_bloc.dart';
-import 'package:ez_u/module/activity/screen/edit_activity.dart';
+import 'package:ez_at_u/customs/button/button_custom.dart';
+import 'package:ez_at_u/customs/dialog/dialog_widget.dart';
+import 'package:ez_at_u/customs/message/text_activity.dart';
+import 'package:ez_at_u/customs/progress_dialog.dart';
+import 'package:ez_at_u/module/activity/bloc/activity_bloc.dart';
+import 'package:ez_at_u/module/activity/screen/edit_activity.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

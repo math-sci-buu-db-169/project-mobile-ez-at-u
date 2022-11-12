@@ -1,8 +1,9 @@
-import 'package:ez_u/customs/color/color_const.dart';
-import 'package:ez_u/customs/size/size.dart';
+import 'package:ez_at_u/customs/color/color_const.dart';
+import 'package:ez_at_u/customs/size/size.dart';
 import 'package:flutter/material.dart';
 
-buildCardBoard(BuildContext context, {VoidCallback? onTap, required String title, required iconBoard}) {
+buildCardBoard(BuildContext context,
+    {VoidCallback? onTap, required String title, required iconBoard}) {
   return GestureDetector(
     onTap: onTap,
     child: Card(
@@ -15,7 +16,8 @@ buildCardBoard(BuildContext context, {VoidCallback? onTap, required String title
           width: MediaQuery.of(context).size.width * 0.4,
           // height: MediaQuery.of(context).size.width * 0.3,
           padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), color: transparent),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16), color: transparent),
           child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Center(
@@ -60,11 +62,8 @@ buildCardBoard(BuildContext context, {VoidCallback? onTap, required String title
 buildCardMore({
   VoidCallback? onTap,
   required String title,
-
   required BuildContext context,
   required IconData iconsFile,
-
-
 }) {
   return GestureDetector(
     onTap: onTap,
@@ -111,17 +110,18 @@ buildCardMore({
             children: [
               Row(
                 children: [
-                  const SizedBox(width: 5,),
+                  const SizedBox(
+                    width: 5,
+                  ),
                   Icon(
                     iconsFile,
                     color: tcBlack,
-                    size: 40,
+                    size: 30,
                   ),
                   Text(
                     "    $title",
                     style: const TextStyle(fontSize: 20, color: tcBlack),
                   ),
-
                 ],
               ),
               const Icon(
@@ -137,7 +137,8 @@ buildCardMore({
   );
 }
 
-buildCardStudent(BuildContext context, {VoidCallback? onTap, required String title, required String imgeStudent}) {
+buildCardStudent(BuildContext context,
+    {VoidCallback? onTap, required String title, required String imgeStudent}) {
   return GestureDetector(
     onTap: onTap,
     child: Card(
@@ -150,7 +151,8 @@ buildCardStudent(BuildContext context, {VoidCallback? onTap, required String tit
           width: MediaQuery.of(context).size.width * 0.5,
           // height: MediaQuery.of(context).size.width * 0.3,
           padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), color: transparent),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16), color: transparent),
           child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Center(
@@ -192,7 +194,12 @@ buildCardStudent(BuildContext context, {VoidCallback? onTap, required String tit
   );
 }
 
-buildCardSocial(BuildContext context, {VoidCallback? onTap, required String title, required iconSocial, required Color colorOne, required Color colorTwo}) {
+buildCardSocial(BuildContext context,
+    {VoidCallback? onTap,
+    required String title,
+    required iconSocial,
+    required Color colorOne,
+    required Color colorTwo}) {
   return GestureDetector(
     onTap: onTap,
     child: Card(
@@ -205,7 +212,8 @@ buildCardSocial(BuildContext context, {VoidCallback? onTap, required String titl
           // width: MediaQuery.of(context).size.width * 0.2,
           // height: MediaQuery.of(context).size.width * 0.3,
           padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), color: transparent),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16), color: transparent),
           child: Padding(
               padding: const EdgeInsets.all(5.0),
               child: Center(
@@ -217,13 +225,12 @@ buildCardSocial(BuildContext context, {VoidCallback? onTap, required String titl
                     //   size: MediaQuery.of(context).size.width * 0.2,
                     // ),
                     ShaderMask(
-                      shaderCallback: (bounds) =>  RadialGradient(
+                      shaderCallback: (bounds) => RadialGradient(
                         center: const Alignment(0.2, -0.6),
                         radius: 0.5,
                         colors: [
                           colorOne,
                           colorTwo,
-
                         ],
                         // tileMode: TileMode.clamp,
                         stops: const <double>[0.1, 2.6],
