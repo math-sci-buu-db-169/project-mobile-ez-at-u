@@ -40,6 +40,8 @@ class _MoreBoardStudentListPageState extends State<MoreBoardStudentListPage> wit
   late String textSubSessionExpired;
   late String _buttonOk;
 
+  final TextEditingController   searchNiSitController = TextEditingController();
+
   @override
   void initState() {
     _isSessionUnauthorized();
@@ -83,7 +85,7 @@ class _MoreBoardStudentListPageState extends State<MoreBoardStudentListPage> wit
       builder: (context, state) {
         if (state is MoreBoardListStudentSuccessState) {
           _screenMoreBoardStudentListResponse = state.responseBoardListStudent;
-          return studentListBody(context, _screenMoreBoardStudentListResponse, widget.titleGen);
+          return studentListBody(context, _screenMoreBoardStudentListResponse, widget.titleGen,searchNiSitController);
         } else {
           return Container();
         }

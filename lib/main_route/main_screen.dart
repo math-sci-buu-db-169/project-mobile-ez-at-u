@@ -1,7 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screen_lock/flutter_screen_lock.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../customs/pin/pin_screen.dart';
+import 'fingerprint_page.dart';
 import 'main_route_bloc/main_route_bloc.dart';
 import 'main_route_bloc_model/refresh_token_response.dart';
 import '../../../../../customs/dialog/dialog_widget.dart';
@@ -39,13 +43,43 @@ class _MainRouteState extends State<MainRoutePage> with ProgressDialog {
   late String textSessionExpired;
   late String textSubSessionExpired;
   late String _buttonOk;
+  late String _pinValueString;
+  late bool _isHiddenPin;
+  late bool _isHiddenBio;
   @override
   void initState() {
     valueLanguage = "TH";
     getUserLanguage();
     _isSessionUnauthorized();
+    _isSessionPin();
+    // localAuth(context);
     super.initState();
   }
+  Future<void> _isSessionPin() async {
+    prefs = await SharedPreferences.getInstance();
+    String pinStringToBool = prefs.getString('pinStatus') ?? 'false';
+    String bioStringToBool = prefs.getString('bioStatus') ?? 'false';
+    _isHiddenPin = pinStringToBool == 'true'? true:false;
+    _isHiddenBio = bioStringToBool == 'true'? true:false;
+    _pinValueString = prefs.getString('pinValue') ?? '...';
+
+    setState(() {});
+  }
+  Future<void> localAuth(BuildContext context) async {
+    final localAuth = LocalAuthentication();
+    final didAuthenticate = await localAuth.authenticate(
+      localizedReason: 'Please authenticate',
+      // biometricOnly: true,
+    );
+    if (didAuthenticate) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const HomeScreen()),
+      );
+
+    }
+  }
+
 
   getUserLanguage() async {
     prefs = await SharedPreferences.getInstance();
@@ -123,7 +157,31 @@ class _MainRouteState extends State<MainRoutePage> with ProgressDialog {
           String isToken = state.token ?? "";
           String isRefreshToken = state.refreshToken ?? "";
           _setValueAndGoHome(token: isToken, refreshToken: isRefreshToken);
-          return const HomeScreen();
+          // screenLock(
+          //   context: context,
+          //   correctString: _pinValueString,
+          //   customizedButtonChild: const Icon(
+          //     Icons.fingerprint,
+          //   ),
+          //   customizedButtonTap: () async => await localAuth(context),
+          //   onOpened: ()async => await localAuth(context),
+          //   onUnlocked: () {
+          //
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(builder: (context) => const HomeScreen()),
+          //     );
+          //     // Navigator.push(
+          //     //   context,
+          //     //   MaterialPageRoute(builder: (context) => const HomeScreen()),
+          //     // );
+          //   },
+          //
+          // );
+          return _isHiddenPin == true?
+           PinScreen(isHiddenBio:_isHiddenBio,pinValueString:_pinValueString): const HomeScreen(
+          ) ;
+
           // Navigator.push(
           //     context,MaterialPageRoute(
           //     builder: (context) => const HomeScreen(

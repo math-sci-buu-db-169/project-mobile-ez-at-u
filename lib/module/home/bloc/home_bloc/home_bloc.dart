@@ -39,6 +39,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> with HomeRepository {
               if (apiProfileResponse.head?.status == 200) {
                 prefs = await SharedPreferences.getInstance();
                 await setUserLanguage(apiProfileResponse.body?.profileGeneralInfo?.langeuage ?? 'TH');
+                await setMyNameUser(apiProfileResponse.body?.profileGeneralInfo?.name ?? '');
                 Response responseActivity = await getApiActivity();
                 if (responseActivity.statusCode == 200) {
                   ScreenStatusActivityResponse apiStatusActivityResponse =

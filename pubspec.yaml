@@ -38,23 +38,28 @@ dependencies:
 
 
   cupertino_icons: ^1.0.2
-  pin_code_fields: ^7.4.0
-  flutter_feather_icons: ^2.0.0+1
-  flutter_bloc: ^8.0.1
+#  pin_code_fields: ^7.4.0
+#  flutter_feather_icons: ^2.0.0+1
+  flutter_bloc: ^8.1.1
   hexcolor: ^2.0.7
   font_awesome_flutter: ^10.2.1
-#  chage faf from 10.1.0 to 10.2.1
-  http: ^0.13.4
-  flutter_svg: ^1.1.0
-  syncfusion_flutter_pdfviewer: ^20.1.60-beta
-  image_picker: ^0.8.5+3
+  http: ^0.13.5
+  flutter_svg: ^1.1.6
+  syncfusion_flutter_pdfviewer: ^20.3.56
+  image_picker: ^0.8.6
   google_fonts: ^3.0.1
-  url_launcher: ^6.1.3
+  url_launcher: ^6.1.6
   dio: ^4.0.6
   shared_preferences: ^2.0.15
-  custom_timer: ^0.1.1
+  custom_timer: ^0.1.2
+  package_info_plus: ^3.0.1
+  flutter_screen_lock: ^8.0.0
+  local_auth: ^2.1.2
+  tap_debouncer: ^2.0.2
+
+
+
 #  flutter_launcher_icons: ^0.10.0
-  package_info_plus: ^1.4.3+1
 
 #flutter_icons:
 #  android: "launcher_icon"

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'home_body_widget.dart';
 import '../../../../customs/button/button_custom.dart';
 import '../../../../customs/color/color_const.dart';
@@ -40,7 +41,7 @@ buildContentHomeScreen(
         leading: Builder(
           builder: (BuildContext context) {
             return IconButton(
-              icon: const Icon(Icons.settings, color: tcBlack),
+              icon: const FaIcon(FontAwesomeIcons.gear,color: tcBlack, size: 20),
               onPressed: () {
                 Scaffold.of(context).openDrawer();
               },
@@ -52,11 +53,27 @@ buildContentHomeScreen(
             child: Text(screenHomeResponse?.body?.screenInfo?.titleact ?? homeTitleAct,
                 style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: tcBlack))),
         actions: <Widget>[
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.1,
-            // child: Text(userLanguage),
-            // child: Text(userLanguage),
+          // SizedBox(
+          //   width: MediaQuery.of(context).size.width * 0.1,
+          //   // child: Text(userLanguage),
+          //   // child: Text(userLanguage),
+          // ),
+          IconButton(
+            icon: const FaIcon(FontAwesomeIcons.solidBell,color: tcBlack, size: 20),
+            onPressed: () {
+              // Navigator.push(context, MaterialPageRoute(builder: (context) =>  NotesPage()));
+
+
+            },
           ),
+          IconButton(
+            icon: const FaIcon(FontAwesomeIcons.bookmark,color: tcBlack, size: 20),
+            onPressed: () {
+              // Navigator.push(context, MaterialPageRoute(builder: (context) =>  NotesPage()));
+
+
+            },
+          )
         ],
       ),
       body: SafeArea(
@@ -101,19 +118,19 @@ buildContentHomeScreen(
                   children: [
                     Expanded(
                         child: IconButton(
-                      icon: const Icon(Icons.account_circle, color: Colors.black, size: 50),
+                      icon: const FaIcon(FontAwesomeIcons.userLarge,color: tcBlack, size: 40),
                       onPressed: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileScreen()));
                       },
                     )),
                     Expanded(
                         child: IconButton(
-                      icon: const Icon(Icons.home, color: Colors.blue, size: 50),
+                      icon: const FaIcon(FontAwesomeIcons.house,color: tcBlack, size: 40),
                       onPressed: () {},
                     )),
                     Expanded(
                         child: IconButton(
-                      icon: const Icon(Icons.auto_awesome_mosaic, color: Colors.black, size: 50),
+                      icon:  const FaIcon(FontAwesomeIcons.layerGroup,color: tcBlack, size: 40),
                       onPressed: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => const MoreScreen()));
                       },

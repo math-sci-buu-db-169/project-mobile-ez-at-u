@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../../customs/button/button_custom.dart';
 import '../../../../customs/color/color_const.dart';
 import '../../../../customs/message/text_login.dart';
@@ -44,23 +45,19 @@ loginPageWidget(BuildContext context, ScreenLoginResponse? screenLoginResponse, 
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          GestureDetector(
-                              onTap: () => {isHandleClickBtnLanguageView()},
-                              child: Row(
-                                children: [
-                                  const Icon(
-                                    Icons.language,
-                                    color: Colors.black,
-                                    size: 18,
-                                  ),
-                                  Text(screenLoginResponse?.body?.screeninfo?.btnChangeLang ?? loginBtnChangeLanguage,
-                                      style: const TextStyle(
-                                          color: Colors.black, fontWeight: FontWeight.w600, fontSize: 14)),
-                                ],
-                              )),
+                          TextButton.icon(
+                            icon: const Icon(
+                              FontAwesomeIcons.earthAsia,
+                              color: Colors.black,
+                              size: 18,),
+                            label: Text(screenLoginResponse?.body?.screeninfo?.btnChangeLang ?? loginBtnChangeLanguage,
+                                style: const TextStyle(
+                                    color: Colors.black, fontWeight: FontWeight.w600, fontSize: 14)),
+                            onPressed: () {isHandleClickBtnLanguageView();},
+                          ),
                           IconButton(
-                            icon: const Icon(Icons.error_outlined),
-                            color: Colors.black,
+                            icon: const Icon(FontAwesomeIcons.question ),
+                            color: Colors.orangeAccent,
                             onPressed: () {Navigator.push(
                               context,
                               MaterialPageRoute(
