@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../customs/message/text_board.dart';
 import '../../../../customs/size/size.dart';
 import '../../../../module/home/model/response/more_response/screen_more_board_teacher_response.dart';
-import '../../../../module/home/screen/more_widget/ิbuild_list_teacher.dart';
+import '../../../../module/home/screen/more_widget/build_list_teacher.dart';
 
 teacherStatsWidget(BuildContext context, ScreenMoreBoardTeacherResponse? screenMoreBoardTeacherResponse) {
   return Expanded(
