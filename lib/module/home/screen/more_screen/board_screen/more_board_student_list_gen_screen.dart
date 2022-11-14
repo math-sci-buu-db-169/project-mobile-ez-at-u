@@ -18,7 +18,7 @@ class MoreBoardListStudentListGenScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => MoreBloc()..add(MoreBoardListGenStudentEvent()),
+        create: (context) => MoreBloc()..add(MoreBoardListGenStudentEvent(gen: '',genname: '',)),
         child: const MoreBoardListStudentListGenPage());
   }
 }
@@ -37,14 +37,22 @@ class _MoreBoardListStudentListGenPageState extends State<MoreBoardListStudentLi
   late String textSessionExpired;
   late String textSubSessionExpired;
   late String _buttonOk;
-  final TextEditingController   searchController = TextEditingController();
+  late int _optionSearch = 0;
+  final TextEditingController   _searchController = TextEditingController();
 
   @override
   void initState() {
     _isSessionUnauthorized();
     super.initState();
   }
-
+  void _setOptionSearch(int clickOptionSearch)  {
+    setState(
+          () {
+             _optionSearch = clickOptionSearch;
+          },
+    );
+    print(_optionSearch);
+  }
   Future<void> _isSessionUnauthorized() async {
     prefs = await SharedPreferences.getInstance();
     _userLanguage = prefs.getString('userLanguage') ?? 'TH';
@@ -78,17 +86,26 @@ class _MoreBoardListStudentListGenPageState extends State<MoreBoardListStudentLi
             });
           }
         }
+        if (state is MoreBoardListGenStudentSearchSuccessState) {
+          _screenMoreListNameGenResponse = state.responseBoardListGenStudent;
+           studentListGenBody( context,_screenMoreListNameGenResponse, _searchController,_optionSearch,_setOptionSearch);
+        }
       },
       builder: (context, state) {
         if (state is MoreBoardListGenStudentSuccessState) {
           _screenMoreListNameGenResponse = state.responseBoardListGenStudent;
-          return studentListGenBody(context, _screenMoreListNameGenResponse,searchController);
-        } else {
+          return studentListGenBody( context,_screenMoreListNameGenResponse, _searchController,_optionSearch,_setOptionSearch);
+        }
+        if (state is MoreBoardListGenStudentSearchSuccessState) {
+          _screenMoreListNameGenResponse = state.responseBoardListGenStudent;
+          return studentListGenBody( context,_screenMoreListNameGenResponse, _searchController,_optionSearch,_setOptionSearch);
+        }
+        else {
           return Container();
         }
       },
       buildWhen: (context, state) {
-        return state is MoreBoardListGenStudentSuccessState;
+        return state is MoreBoardListGenStudentSuccessState||state is MoreBoardListGenStudentSearchSuccessState;
       },
     );
   }

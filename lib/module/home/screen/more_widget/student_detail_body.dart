@@ -1,3 +1,6 @@
+import 'package:flutter/services.dart';
+
+import '../../../../customs/color/color_const.dart';
 import '../../../../customs/message/text_board.dart';
 import '../../../../customs/size/size.dart';
 import '../../../../module/home/model/response/more_response/screen_more_board_student_list_detail_response.dart';
@@ -80,16 +83,20 @@ studentDetailBody(BuildContext context, ScreenMoreBoardStudentDetailResponse? sc
                                 height: 15,
                               ),
                               _buildListStudentDetail(
+                                  context:context,
                                   title: screenMoreBoardStudentDetailResponse?.body?.screeninfo?.textname ?? boardDetailNiSitTextName,
                                   value: '$sName  $sLastName'),
                               _buildListStudentDetail(
+                                  context:context,
                                   title: screenMoreBoardStudentDetailResponse?.body?.screeninfo?.textnickname ??
                                       boardDetailNiSitTextNickName,
                                   value: screenMoreBoardStudentDetailResponse?.body?.data?.nickname ?? '-'),
                               _buildListStudentDetail(
+                                  context:context,
                                   title: screenMoreBoardStudentDetailResponse?.body?.screeninfo?.textgen ?? boardDetailNiSitTextGen,
                                   value: screenMoreBoardStudentDetailResponse?.body?.data?.gen ?? '-'),
                               _buildListStudentDetail(
+                                  context:context,
                                   title: screenMoreBoardStudentDetailResponse?.body?.screeninfo?.textstudentcode ??
                                       boardDetailNiSitTextStudentCode,
                                   value: screenMoreBoardStudentDetailResponse?.body?.data?.studentcode ?? '-'),
@@ -103,7 +110,8 @@ studentDetailBody(BuildContext context, ScreenMoreBoardStudentDetailResponse? sc
                                   ),
                                 ),
                               ),
-                              _buildAdvisor(screenMoreBoardStudentDetailResponse: screenMoreBoardStudentDetailResponse),
+                              _buildAdvisor(
+                                  context:context,screenMoreBoardStudentDetailResponse: screenMoreBoardStudentDetailResponse),
                               Padding(
                                 padding: const EdgeInsets.only(top: 10.0, bottom: 6.0),
                                 child: Center(
@@ -115,48 +123,57 @@ studentDetailBody(BuildContext context, ScreenMoreBoardStudentDetailResponse? sc
                                 ),
                               ),
                               _buildListContactUser(
+                                context:context,
                                 contactUser: screenMoreBoardStudentDetailResponse?.body?.data?.phone ?? '-',
                                 iconSocial: FontAwesomeIcons.phone,
                                 colorOne: const Color(0xff4f4f4f),
                                 colorTwo: const Color(0xff000000),
                               ),
                               _buildListContactUser(
+                                context:context,
                                 contactUser: screenMoreBoardStudentDetailResponse?.body?.data?.line ?? '-',
                                 iconSocial: FontAwesomeIcons.line,
                                 colorOne: const Color(0xff00a80a),
                                 colorTwo: const Color(0xff00a80a),
                               ),
                               _buildListContactUser(
+                                context:context,
                                 contactUser: screenMoreBoardStudentDetailResponse?.body?.data?.facebook ?? '-',
                                 iconSocial: FontAwesomeIcons.facebook,
                                 colorOne: const Color(0xff0647fd),
                                 colorTwo: const Color(0xff0647fd),
                               ),
                               _buildListContactUser(
+                                  context:context,
                                   contactUser: screenMoreBoardStudentDetailResponse?.body?.data?.instagram ?? '-',
                                   iconSocial: FontAwesomeIcons.instagram,
                                   colorOne: const Color(0xFFE1306C),
                                   colorTwo: const Color(0xFFE1306C)),
                               _buildListContactUser(
+                                context:context,
                                 contactUser: screenMoreBoardStudentDetailResponse?.body?.data?.twitter ?? '-',
                                 iconSocial: FontAwesomeIcons.twitter,
                                 colorOne: const Color(0xff1DA1F2),
                                 colorTwo: const Color(0xff1DA1F2),
                               ),
                               _buildListContactUser(
+                                context:context,
                                 contactUser: screenMoreBoardStudentDetailResponse?.body?.data?.youtube ?? '-',
                                 iconSocial: FontAwesomeIcons.youtube,
                                 colorOne: const Color(0xffff0000),
                                 colorTwo: const Color(0xffff0000),
                               ),
                               _buildListStudentDetail(
+                                  context:context,
                                   title: screenMoreBoardStudentDetailResponse?.body?.screeninfo?.textcareer ?? boardDetailNiSitTextCareer,
                                   value: screenMoreBoardStudentDetailResponse?.body?.data?.attention ?? '-'),
                               _buildListStudentDetail(
+                                  context:context,
                                   title: screenMoreBoardStudentDetailResponse?.body?.screeninfo?.textworkstatus ??
                                       boardDetailNiSitTextWorkStatus,
                                   value: screenMoreBoardStudentDetailResponse?.body?.data?.status ?? '-'),
                               _buildListStudentDetail(
+                                  context:context,
                                   title:
                                       screenMoreBoardStudentDetailResponse?.body?.screeninfo?.textcompany ?? boardDetailNiSitTextCompany,
                                   value: screenMoreBoardStudentDetailResponse?.body?.data?.usercompany ?? '-'),
@@ -235,13 +252,13 @@ studentDetailBody(BuildContext context, ScreenMoreBoardStudentDetailResponse? sc
       ));
 }
 
-_buildListStudentDetail({required String title, required String value}) {
+_buildListStudentDetail({required BuildContext context,required String title, required String value}) {
   return Padding(
     padding: const EdgeInsets.only(left: 20.0, right: 10.0, top: 6.0, bottom: 6.0),
     child: Table(
       border: TableBorder.symmetric(outside: const BorderSide(width: 2, color: Colors.transparent)),
       columnWidths: const {0: FractionColumnWidth(0.35), 1: FractionColumnWidth(0.03), 2: FractionColumnWidth(0.65)},
-      defaultVerticalAlignment: TableCellVerticalAlignment.top,
+      defaultVerticalAlignment: TableCellVerticalAlignment.middle,
       children: [
         TableRow(children: [
           Text(
@@ -252,41 +269,88 @@ _buildListStudentDetail({required String title, required String value}) {
             ':',
             style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
           ),
-          Text(
-            value,
-            textAlign: TextAlign.start,
-            style: const TextStyle(fontSize: 12),
-          ),
+          Row(
+            children: [
+              Text(
+                value,
+                textAlign: TextAlign.start,
+                style: const TextStyle(fontSize: 12),
+              ),
+
+              IconButton(
+                icon: const Icon(
+                  Icons.copy_outlined,
+                  color: tcHint,
+                  size: sizeTextSmaller14,
+                ),
+                onPressed: () {
+                  Clipboard.setData(ClipboardData(text: value)).then((_) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text("$value copied to clipboard",
+                          style: const TextStyle(fontSize: sizeTextSmaller14, color: Colors.black)),
+                      duration: const Duration(seconds: 1),
+                      backgroundColor: const Color(0xFFFFF9D1),
+                    ));
+                  });
+                },
+              ),
+
+            ],
+          )
+
         ])
       ],
     ),
   );
 }
 
-_buildListNameTeacher({required String title, required String name, required String lastname}) {
+_buildListNameTeacher({required BuildContext context, required String title, required String name, required String lastname}) {
   return Padding(
-    padding: const EdgeInsets.only(left: 20.0, right: 10.0, top: 6.0, bottom: 6.0),
+    padding: const EdgeInsets.only(left: 20.0, right: 10.0, top: 1.0, bottom: 1.0),
     child: Table(
       border: TableBorder.symmetric(outside: const BorderSide(width: 2, color: Colors.transparent)),
       columnWidths: const {0: FractionColumnWidth(0.02), 1: FractionColumnWidth(0.98)},
-      defaultVerticalAlignment: TableCellVerticalAlignment.top,
+      defaultVerticalAlignment: TableCellVerticalAlignment.middle,
       children: [
         TableRow(children: [
           const SizedBox(
             width: 10,
           ),
-          Text(
-            '$title  $name $lastname',
-            textAlign: TextAlign.start,
-            style: const TextStyle(fontSize: 12),
-          ),
+          Row(
+            children: [
+              Text(
+                '$title  $name $lastname',
+                textAlign: TextAlign.start,
+                style: const TextStyle(fontSize: 12),
+              ),
+
+              IconButton(
+                icon: const Icon(
+                  Icons.copy_outlined,
+                  color: tcHint,
+                  size: sizeTextSmaller14,
+                ),
+                onPressed: () {
+                  Clipboard.setData(ClipboardData(text: title + name+ lastname)).then((_) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text("$title  $name $lastname copied to clipboard",
+                          style: const TextStyle(fontSize: sizeTextSmaller14, color: Colors.black)),
+                      duration: const Duration(seconds: 1),
+                      backgroundColor: const Color(0xFFFFF9D1),
+                    ));
+                  });
+                },
+              ),
+            ],
+          )
+
         ])
       ],
     ),
   );
 }
 
-_buildAdvisor({ScreenMoreBoardStudentDetailResponse? screenMoreBoardStudentDetailResponse}) {
+_buildAdvisor({required BuildContext context,ScreenMoreBoardStudentDetailResponse? screenMoreBoardStudentDetailResponse}) {
   if (int.parse("${screenMoreBoardStudentDetailResponse?.body?.data?.advisor?.length}") == 0) {
     return const Center(
       child: Text('-'),
@@ -297,12 +361,14 @@ _buildAdvisor({ScreenMoreBoardStudentDetailResponse? screenMoreBoardStudentDetai
       children: List.generate(
           int.parse("${screenMoreBoardStudentDetailResponse?.body?.data?.advisor?.length}"),
           (index) => _buildListNameTeacher(
+              context:context,
               title: screenMoreBoardStudentDetailResponse?.body?.data?.advisor?[index].position ?? "-",
               name: screenMoreBoardStudentDetailResponse?.body?.data?.advisor?[index].teachername ?? '-',
               lastname: screenMoreBoardStudentDetailResponse?.body?.data?.advisor?[index].teacherlastname ?? '-')));
 }
 
 _buildListContactUser({
+  required BuildContext context,
   required String contactUser,
   required IconData iconSocial,
   required Color colorOne,
@@ -313,7 +379,7 @@ _buildListContactUser({
     child: Table(
       border: TableBorder.symmetric(outside: const BorderSide(width: 2, color: Colors.transparent)),
       columnWidths: const {0: FractionColumnWidth(0.2), 1: FractionColumnWidth(0.05), 2: FractionColumnWidth(0.75)},
-      defaultVerticalAlignment: TableCellVerticalAlignment.top,
+      defaultVerticalAlignment: TableCellVerticalAlignment.middle,
       children: [
         TableRow(children: [
           ShaderMask(
@@ -338,11 +404,35 @@ _buildListContactUser({
             textAlign: TextAlign.start,
             style: TextStyle(fontSize: 14),
           ),
-          Text(
-            contactUser,
-            textAlign: TextAlign.start,
-            style: const TextStyle(fontSize: 12),
-          ),
+          Row(
+            children: [
+              Text(
+                contactUser,
+                textAlign: TextAlign.start,
+                style: const TextStyle(fontSize: 12),
+              ),
+
+
+              IconButton(
+                icon: const Icon(
+                  Icons.copy_outlined,
+                  color: tcHint,
+                  size: sizeTextSmaller14,
+                ),
+                onPressed: () {
+                  Clipboard.setData(ClipboardData(text: contactUser)).then((_) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text("$contactUser copied to clipboard",
+                          style: const TextStyle(fontSize: sizeTextSmaller14, color: Colors.black)),
+                      duration: const Duration(seconds: 1),
+                      backgroundColor: const Color(0xFFFFF9D1),
+                    ));
+                  });
+                },
+              ),
+            ],
+          )
+
         ])
       ],
     ),

@@ -95,6 +95,10 @@ class MoreBoardListStudentSuccessState extends MoreState {
   ScreenMoreBoardStudentListResponse responseBoardListStudent;
 
   MoreBoardListStudentSuccessState({required this.responseBoardListStudent});
+}class MoreBoardListStudentSearchSuccessState extends MoreState {
+  ScreenMoreBoardStudentListResponse responseBoardListStudent;
+
+  MoreBoardListStudentSearchSuccessState({required this.responseBoardListStudent});
 }
 
 // ----------------------->
@@ -111,6 +115,11 @@ class MoreBoardListGenStudentSuccessState extends MoreState {
   ScreenMoreListNameGenResponse responseBoardListGenStudent;
 
   MoreBoardListGenStudentSuccessState({required this.responseBoardListGenStudent});
+}
+class MoreBoardListGenStudentSearchSuccessState extends MoreState {
+  ScreenMoreListNameGenResponse responseBoardListGenStudent;
+
+  MoreBoardListGenStudentSearchSuccessState({required this.responseBoardListGenStudent});
 }
 
 // ----------------------->

@@ -19,7 +19,7 @@ class MoreBoardStudentListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => MoreBloc()..add(MoreBoardListStudentEvent(gen: titleGen)),
+        create: (context) => MoreBloc()..add(MoreBoardListStudentEvent(gen: titleGen,studentID: '',studentName: '',studentLastname:'' )),
         child: MoreBoardStudentListPage(titleGen: titleGen));
   }
 }
@@ -39,9 +39,18 @@ class _MoreBoardStudentListPageState extends State<MoreBoardStudentListPage> wit
   late String textSessionExpired;
   late String textSubSessionExpired;
   late String _buttonOk;
-
+  late int _optionSearchNiSit = 0;
   final TextEditingController   searchNiSitController = TextEditingController();
 
+  void _setOptionSearchNiSit(int clickOptionSearchNiSit)  {
+
+    setState(
+          () {
+        _optionSearchNiSit = clickOptionSearchNiSit;
+      },
+    );
+    print(_optionSearchNiSit);
+  }
   @override
   void initState() {
     _isSessionUnauthorized();
@@ -75,20 +84,34 @@ class _MoreBoardStudentListPageState extends State<MoreBoardStudentListPage> wit
               Navigator.pushReplacement(
                   context, MaterialPageRoute(builder: (BuildContext context) => const LoginScreen()));
             });
-          } else {
+          }
+          else {
             dialogOneLineOneBtn(context, '${state.message}\n ', _buttonOk, onClickBtn: () {
               Navigator.of(context).pop();
             });
           }
         }
+        if (state is MoreBoardListStudentSearchSuccessState) {
+          _screenMoreBoardStudentListResponse = state.responseBoardListStudent;
+           studentListBody(context, _screenMoreBoardStudentListResponse, widget.titleGen,searchNiSitController,_optionSearchNiSit,_setOptionSearchNiSit);
+        }
       },
       builder: (context, state) {
         if (state is MoreBoardListStudentSuccessState) {
           _screenMoreBoardStudentListResponse = state.responseBoardListStudent;
-          return studentListBody(context, _screenMoreBoardStudentListResponse, widget.titleGen,searchNiSitController);
+          return studentListBody(context, _screenMoreBoardStudentListResponse, widget.titleGen,searchNiSitController,_optionSearchNiSit,_setOptionSearchNiSit);
+
+        }
+        if (state is MoreBoardListStudentSearchSuccessState) {
+          _screenMoreBoardStudentListResponse = state.responseBoardListStudent;
+          return studentListBody(context, _screenMoreBoardStudentListResponse, widget.titleGen,searchNiSitController,_optionSearchNiSit,_setOptionSearchNiSit);
+
         } else {
           return Container();
         }
+      },
+      buildWhen: (context, state) {
+        return state is MoreBoardListStudentSuccessState||state is MoreBoardListStudentSearchSuccessState;
       },
     );
   }

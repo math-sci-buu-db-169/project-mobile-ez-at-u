@@ -28,23 +28,12 @@ buildCardBoard(BuildContext context,
                     //   color: IconBoarder,
                     //   size: MediaQuery.of(context).size.width * 0.2,
                     // ),
-                    ShaderMask(
-                      shaderCallback: (bounds) => const RadialGradient(
-                        center: Alignment(0.2, -0.6),
-                        radius: 0.5,
-                        colors: [
-                          Color(0xFF0033B2),
-                          Color(0xFF001B60),
-                        ],
-                        // tileMode: TileMode.clamp,
-                        stops: <double>[0.1, 2.6],
-                      ).createShader(bounds),
-                      child: Icon(
-                        iconBoard,
-                        size: MediaQuery.of(context).size.width * 0.2,
-                        color: Colors.white,
-                      ),
+                    Icon(
+                      iconBoard,
+                      size: MediaQuery.of(context).size.width * 0.1,
+                      color: Colors.black,
                     ),
+
                     Text(
                       title,
                       style: const TextStyle(

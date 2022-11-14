@@ -67,7 +67,7 @@ buildContentHomeScreen(
             },
           ),
           IconButton(
-            icon: const FaIcon(FontAwesomeIcons.bookmark,color: tcBlack, size: 20),
+            icon: const FaIcon(FontAwesomeIcons.fileLines,color: tcBlack, size: 20),
             onPressed: () {
               // Navigator.push(context, MaterialPageRoute(builder: (context) =>  NotesPage()));
 

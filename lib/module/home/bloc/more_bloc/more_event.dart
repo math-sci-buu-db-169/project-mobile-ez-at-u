@@ -21,10 +21,28 @@ class MoreBoardDetailStudentEvent extends MoreEvent {
 
 class MoreBoardListStudentEvent extends MoreEvent {
   final String gen;
-  MoreBoardListStudentEvent({required this.gen});
+  final String studentID;
+  final String studentName;
+  final String studentLastname;
+  MoreBoardListStudentEvent( {required this.gen, required  this.studentID, required   this.studentName, required   this.studentLastname,});
+}class MoreBoardListStudentSearchEvent extends MoreEvent {
+  final String gen;
+  final String studentID;
+  final String studentName;
+  final String studentLastname;
+  MoreBoardListStudentSearchEvent( {required this.gen, required  this.studentID, required   this.studentName, required   this.studentLastname,});
 }
 
-class MoreBoardListGenStudentEvent extends MoreEvent {}
+class MoreBoardListGenStudentEvent extends MoreEvent {
+  final String gen;
+  final String genname;
+  MoreBoardListGenStudentEvent({required this.gen, required this.genname});
+}
+class MoreBoardListGenStudentSearchEvent extends MoreEvent {
+  final String gen;
+  final String genname;
+  MoreBoardListGenStudentSearchEvent({required this.gen, required this.genname});
+}
 
 class MoreBoardTeacherEvent extends MoreEvent {}
 

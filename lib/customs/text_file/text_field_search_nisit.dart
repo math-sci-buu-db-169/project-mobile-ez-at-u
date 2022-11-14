@@ -1,17 +1,20 @@
+// import 'dart:html';
+
 import 'package:ez_at_u/customs/color/color_const.dart';
 import 'package:ez_at_u/customs/size/size.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class TextFieldSearchCustom extends StatefulWidget {
+class TextFieldSearchNiSitCustom extends StatefulWidget {
   final TextEditingController? textEditingController;
   // final String hintLabel;
   final TextInputType textInputType;
   final ValueChanged<String>? onChanged;
+  final Function(int optionSearchResult) callbackFromOptionSearch;
   final String? initialvalue;
 
   final IconData iconsFile;
-  const TextFieldSearchCustom({
+  const TextFieldSearchNiSitCustom({
     Key? key,
     this.textEditingController,
     // required this.hintLabel,
@@ -19,23 +22,24 @@ class TextFieldSearchCustom extends StatefulWidget {
     required this.textInputType,
     this.initialvalue,
     required this.iconsFile,
+    required this.callbackFromOptionSearch,
   }) : super(key: key);
 
 
 
   @override
-  State<TextFieldSearchCustom> createState() =>
-      _TextTextFieldSearchCustomState();
+  State<TextFieldSearchNiSitCustom> createState() =>
+      _TextFieldSearchNiSitCustomState();
 }
 
-class _TextTextFieldSearchCustomState extends State<TextFieldSearchCustom> {
+class _TextFieldSearchNiSitCustomState extends State<TextFieldSearchNiSitCustom> {
   bool _isVisible = false;
-  List<String> optionsGen =["ลำดับรุ่นมหาลัย","ชื่อรุ่นมหาลัย"];
-  String hintLabelBUU='';
+  List<String> optionsNiSit =["รหัสนิสิต","ชื่อ","นามสกุล"];
+  String hintLabelSearchNiSit='';
 
   @override
   void initState() {
-     hintLabelBUU = "ลำดับรุ่นมหาลัย" ;
+     hintLabelSearchNiSit = optionsNiSit[0] ;
      setState(() {});
      super.initState();
   }
@@ -55,18 +59,24 @@ class _TextTextFieldSearchCustomState extends State<TextFieldSearchCustom> {
           initialValue: widget.initialvalue,
           // decoration: InputDecoration.collapsed(hintText: hint_label), style: TextStyle(fontSize: 18)
           onChanged: widget.onChanged,
-          obscureText: !_isVisible,
+          obscureText: false,
           decoration: InputDecoration(
               filled: true,
               fillColor: tcTextfile,
-              hintText: hintLabelBUU,
-              prefixIcon: IconButton(
+              hintText: 'ค้นหา $hintLabelSearchNiSit ที่นี',
+              prefixIcon:  const Icon(
+                  FontAwesomeIcons.magnifyingGlass,
+                  size: 20, color: Color(0xFF4F4F4F)
+
+              ),
+              suffixIcon:
+              IconButton(
                   onPressed: () {
                     setState(() {
                       _isVisible = !_isVisible;
                       showDialog(
                           context: context,
-                          barrierDismissible: false,
+                          barrierDismissible: true,
                           builder: (BuildContext context) {
                             return Dialog(
                                 shape: RoundedRectangleBorder(
@@ -74,26 +84,18 @@ class _TextTextFieldSearchCustomState extends State<TextFieldSearchCustom> {
                                 ),
                                 child: SingleChildScrollView(
                                     padding:
-                                        const EdgeInsets.fromLTRB(0, 5, 0, 5),
+                                    const EdgeInsets.fromLTRB(0, 5, 0, 5),
                                     scrollDirection: Axis.vertical,
                                     child: Column(
                                       children: List.generate(
-                                          int.parse("2"),
-                                          (index) => Column(
+                                          optionsNiSit.length,
+                                              (index) => Column(
                                             children: [
-                                              index != 1
-                                                  ? const SizedBox()
-                                                  : const Divider(
-                                                color: Colors.grey,
-                                                height: 5,
-                                                thickness: 1,
-                                                indent: 20,
-                                                endIndent: 0,
-                                              ),
+
                                               InkWell(
                                                   onTap: () {
-
-                                                    hintLabelBUU = optionsGen[index].toString();
+                                                    widget.callbackFromOptionSearch(index);
+                                                    hintLabelSearchNiSit = optionsNiSit[index].toString();
                                                     Navigator.pop(context);
                                                     setState(() {});
                                                   },
@@ -106,7 +108,7 @@ class _TextTextFieldSearchCustomState extends State<TextFieldSearchCustom> {
                                                       children: [
                                                         TableRow(children: [
                                                           Text(
-                                                            optionsGen[index].toString(),
+                                                            optionsNiSit[index].toString(),
                                                             textAlign: TextAlign.center,
                                                             style: const TextStyle(fontSize: sizeTextSmaller14),
                                                           ),
@@ -114,7 +116,16 @@ class _TextTextFieldSearchCustomState extends State<TextFieldSearchCustom> {
                                                       ],
                                                     ),
                                                   )
-                                              )
+                                              ),
+                                              index > 1 || index == optionsNiSit.length-1
+                                                  ? const SizedBox()
+                                                  : const Divider(
+                                                color: Colors.grey,
+                                                height: 5,
+                                                thickness: 1,
+                                                indent: 0,
+                                                endIndent: 0,
+                                              ),
 
                                             ],
                                           )
@@ -125,13 +136,9 @@ class _TextTextFieldSearchCustomState extends State<TextFieldSearchCustom> {
                   },
                   icon: _isVisible
                       ? const FaIcon(FontAwesomeIcons.caretUp,
-                          color: Color(0xFF4F4F4F))
+                      color: Color(0xFF4F4F4F))
                       : const FaIcon(FontAwesomeIcons.caretDown,
-                          color: Color(0xFF4F4F4F))),
-              suffixIcon: IconButton(
-                  onPressed: () {},
-                  icon: const FaIcon(FontAwesomeIcons.magnifyingGlass,
-                      size: 20, color: Color(0xFF4F4F4F))),
+                      color: Color(0xFF4F4F4F))),
               enabledBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: tcHint),
                 borderRadius: BorderRadius.all(Radius.circular(30)),

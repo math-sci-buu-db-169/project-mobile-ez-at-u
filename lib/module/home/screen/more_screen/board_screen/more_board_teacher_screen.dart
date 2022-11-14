@@ -135,12 +135,10 @@ class _MoreBoardListTeacherPageState extends State<MoreBoardListTeacherPage> wit
                 body: Column(
                   children: [
                     // Container(
-                    //   height: 100,
+                    //   height: 40,
+                    //   width: MediaQuery.of(context).size.width,
                     //   color: Colors.blue,
-                    //   child: Image.network(
-                    //     "${_screenHomeMoreBoardTeacherResponse?.body?.screeninfo?.imgDepart}",
-                    //     fit: BoxFit.cover,
-                    //   ),
+                    //   child: Text('123'),
                     // ),
                     Padding(
                       padding: const EdgeInsets.only(top: 20, left: 8, right: 8, bottom: 10),

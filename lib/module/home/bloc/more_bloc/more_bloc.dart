@@ -141,7 +141,7 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
     on<MoreBoardListStudentEvent>((event, emit) async {
       try {
         emit(MoreBoardListStudentLoading());
-        Response responseMoreBoardListStudent = await getMoreBoardListStudent(event.gen);
+        Response responseMoreBoardListStudent = await getMoreBoardListStudent(event.gen,event.studentID,event.studentName,event.studentLastname,);
         emit(MoreBoardListStudentEndLoading());
         if (responseMoreBoardListStudent.statusCode == 200) {
           ScreenMoreBoardStudentListResponse screenMoreBoardStudentListResponse =
@@ -158,16 +158,53 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
         emit(MoreBoardListStudentError(message: e.response?.statusMessage ?? ""));
       }
     });
+
+    on<MoreBoardListStudentSearchEvent>((event, emit) async {
+      try {
+        Response responseMoreBoardListStudent = await getMoreBoardListStudent(event.gen,event.studentID,event.studentName,event.studentLastname,);
+        if (responseMoreBoardListStudent.statusCode == 200) {
+          ScreenMoreBoardStudentListResponse screenMoreBoardStudentListResponse =
+              ScreenMoreBoardStudentListResponse.fromJson(responseMoreBoardListStudent.data);
+          if (screenMoreBoardStudentListResponse.head?.status == 200) {
+            emit(MoreBoardListStudentSearchSuccessState(responseBoardListStudent: screenMoreBoardStudentListResponse));
+          } else {
+            emit(MoreBoardListStudentError(message: screenMoreBoardStudentListResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(MoreBoardListStudentError(message: responseMoreBoardListStudent.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(MoreBoardListStudentError(message: e.response?.statusMessage ?? ""));
+      }
+    });
     on<MoreBoardListGenStudentEvent>((event, emit) async {
       try {
         emit(ListGenStudentLoading());
-        Response responseListGenStudent = await getMoreListGen();
+        Response responseListGenStudent = await getMoreListGen(gen: event.gen,genname: event.genname);
         emit(ListGenStudentEndLoading());
         if (responseListGenStudent.statusCode == 200) {
           ScreenMoreListNameGenResponse screenMoreListNameGenResponse =
               ScreenMoreListNameGenResponse.fromJson(responseListGenStudent.data);
           if (screenMoreListNameGenResponse.head?.status == 200) {
             emit(MoreBoardListGenStudentSuccessState(responseBoardListGenStudent: screenMoreListNameGenResponse));
+          } else {
+            emit(ListGenStudentError(message: screenMoreListNameGenResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(ListGenStudentError(message: responseListGenStudent.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(ListGenStudentError(message: e.response?.statusMessage ?? ""));
+      }
+    });
+    on<MoreBoardListGenStudentSearchEvent>((event, emit) async {
+      try {
+        Response responseListGenStudent = await getMoreListGen(gen: event.gen,genname: event.genname);
+        if (responseListGenStudent.statusCode == 200) {
+          ScreenMoreListNameGenResponse screenMoreListNameGenResponse =
+              ScreenMoreListNameGenResponse.fromJson(responseListGenStudent.data);
+          if (screenMoreListNameGenResponse.head?.status == 200) {
+            emit(MoreBoardListGenStudentSearchSuccessState(responseBoardListGenStudent: screenMoreListNameGenResponse));
           } else {
             emit(ListGenStudentError(message: screenMoreListNameGenResponse.head?.message ?? ""));
           }
