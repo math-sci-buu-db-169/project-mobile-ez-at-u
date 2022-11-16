@@ -41,7 +41,7 @@ dependencies:
 #  pin_code_fields: ^7.4.0
 #  flutter_feather_icons: ^2.0.0+1
   flutter_bloc: ^8.1.1
-  hexcolor: ^2.0.7
+  hexcolor: ^3.0.1
   font_awesome_flutter: ^10.2.1
   http: ^0.13.5
   flutter_svg: ^1.1.6
@@ -55,6 +55,7 @@ dependencies:
   package_info_plus: ^3.0.1
   flutter_screen_lock: ^8.0.0
   local_auth: ^2.1.2
+  local_auth_android: ^1.0.14
   tap_debouncer: ^2.0.2
 
 

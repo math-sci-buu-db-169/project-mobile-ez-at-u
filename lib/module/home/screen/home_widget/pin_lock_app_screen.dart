@@ -5,23 +5,17 @@ import 'package:flutter_screen_lock/flutter_screen_lock.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../../customs/button/button_custom.dart';
 import '../../../../customs/color/color_const.dart';
 import '../../../../customs/dialog/dialog_widget.dart';
 import '../../../../customs/message/text_button.dart';
-import '../../../../customs/message/text_change_password.dart';
 import '../../../../customs/message/text_error.dart';
 import '../../../../customs/message/text_home.dart';
 import '../../../../customs/progress_dialog.dart';
 import '../../../../customs/size/size.dart';
-import '../../../../customs/text_file/text_field_password_custom.dart';
-import '../../../../customs/text_link/text_link_to_screen_custom.dart';
-import '../../../../main_route/fingerprint_page.dart';
 import '../../../../utils/shared_preferences.dart';
 import '../../../login/bloc/change_password_bloc/change_password_bloc.dart';
 import '../../../login/model/response/change_password_response/change_password_response.dart';
 import '../../../login/model/response/screen_change_password_response.dart';
-import '../../../login/screen/forgot_password_screen/forgot_password_screen.dart';
 import '../../../login/screen/login_screen/login_screen.dart';
 import '../home_screen/home_screen.dart';
 

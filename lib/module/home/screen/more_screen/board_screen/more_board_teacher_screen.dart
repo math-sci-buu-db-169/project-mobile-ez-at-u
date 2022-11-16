@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../../customs/dialog/dialog_widget.dart';
@@ -33,10 +34,7 @@ class MoreBoardListTeacherPage extends StatefulWidget {
   State<MoreBoardListTeacherPage> createState() => _MoreBoardListTeacherPageState();
 }
 
-bool isSelected = true;
-const double yalign = -1;
-const Color selectedColor = Colors.black;
-const Color normalColor = Colors.black54;
+int isSelected = 0;
 
 class _MoreBoardListTeacherPageState extends State<MoreBoardListTeacherPage> with ProgressDialog {
   ScreenMoreBoardTeacherResponse? _screenMoreBoardTeacherResponse;
@@ -63,10 +61,7 @@ class _MoreBoardListTeacherPageState extends State<MoreBoardListTeacherPage> wit
   @override
   void initState() {
     _isSessionUnauthorized();
-    defaultalign = yalign;
-    departleftcolor = selectedColor;
-    departrightcolor = normalColor;
-    isSelected = true;
+    isSelected = 0;
     setState(() {});
     super.initState();
   }
@@ -101,6 +96,10 @@ class _MoreBoardListTeacherPageState extends State<MoreBoardListTeacherPage> wit
       builder: (context, state) {
         if (state is MoreBoardTeacherSuccessState) {
           _screenMoreBoardTeacherResponse = state.responseBoardTeacher;
+          List<String>optionsDepartment = [
+            _screenMoreBoardTeacherResponse?.body?.screeninfo?.textmath ?? boardPersonalTextMath,
+            _screenMoreBoardTeacherResponse?.body?.screeninfo?.textstats ?? boardPersonalTextStat,
+          ];
           if (kDebugMode) {
             print(_screenMoreBoardTeacherResponse?.body?.teacher?.teachermath?.length);
           }
@@ -131,98 +130,165 @@ class _MoreBoardListTeacherPageState extends State<MoreBoardListTeacherPage> wit
                       fontSize: sizeTitle24,
                     ),
                   ),
+                  actions: [
+                    IconButton(
+                        onPressed: () {
+                            showDialog(
+                                context: context,
+                                barrierDismissible: true,
+                                builder: (BuildContext context) {
+                                  return Dialog(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(16),
+                                      ),
+                                      child: SingleChildScrollView(
+                                          padding:
+                                          const EdgeInsets.fromLTRB(0, 5, 0, 5),
+                                          scrollDirection: Axis.vertical,
+                                          child: Column(
+                                            children: List.generate(
+                                                optionsDepartment.length,
+                                                    (index) => Column(
+                                                  children: [
+
+                                                    InkWell(
+                                                        onTap: () {
+                                                          // widget.callbackFromOptionSearch(index);
+                                                          // hintLabelBUU = optionsDepartment[index].toString();
+                                                          isSelected = index;
+                                                          Navigator.pop(context);
+                                                          setState(() {});
+                                                        },
+                                                        child:Padding(
+                                                          padding: EdgeInsets.all(10),
+                                                          child: Table(
+                                                            border: TableBorder.symmetric(outside: const BorderSide(width: 2, color: Colors.transparent)),
+                                                            columnWidths: {0: FractionColumnWidth(1)},
+                                                            defaultVerticalAlignment: TableCellVerticalAlignment.top,
+                                                            children: [
+                                                              TableRow(children: [
+                                                                Text(
+                                                                  optionsDepartment[index].toString(),
+                                                                  textAlign: TextAlign.center,
+                                                                  style: const TextStyle(fontSize: sizeTextSmaller14),
+                                                                ),
+                                                              ])
+                                                            ],
+                                                          ),
+                                                        )
+                                                    ),
+                                                    index > 1 || index == optionsDepartment.length-1
+                                                        ? const SizedBox()
+                                                        : const Divider(
+                                                      color: Colors.grey,
+                                                      height: 5,
+                                                      thickness: 1,
+                                                      indent: 0,
+                                                      endIndent: 0,
+                                                    ),
+
+                                                  ],
+                                                )
+                                            ),
+                                          )
+                                      )
+                                  );
+                                }
+                                );
+
+                        },
+                        icon: const FaIcon(FontAwesomeIcons.filter,
+                            size: 20, color: Color(0xFF4F4F4F))),
+                  ],
                 ),
                 body: Column(
                   children: [
-                    // Container(
-                    //   height: 40,
-                    //   width: MediaQuery.of(context).size.width,
-                    //   color: Colors.blue,
-                    //   child: Text('123'),
+
+
+                    //
+                    // Padding(
+                    //   padding: const EdgeInsets.only(top: 20, left: 8, right: 8, bottom: 10),
+                    //   child: Container(
+                    //     width: width,
+                    //     height: height,
+                    //     decoration: BoxDecoration(
+                    //       color: Colors.grey[350],
+                    //       borderRadius: const BorderRadius.all(
+                    //         Radius.circular(50.0),
+                    //       ),
+                    //     ),
+                    //     child: Stack(
+                    //       children: [
+                    //         AnimatedAlign(
+                    //           alignment: Alignment(defaultalign, 0),
+                    //           duration: const Duration(milliseconds: 300),
+                    //           child: Container(
+                    //             width: width * 0.5,
+                    //             height: height,
+                    //             decoration: const BoxDecoration(
+                    //               color: Colors.white,
+                    //               borderRadius: BorderRadius.all(
+                    //                 Radius.circular(50.0),
+                    //               ),
+                    //             ),
+                    //           ),
+                    //         ),
+                    //         GestureDetector(
+                    //           onTap: () {
+                    //             defaultalign = yalign;
+                    //             departleftcolor = selectedColor;
+                    //             isSelected = true;
+                    //             departrightcolor = normalColor;
+                    //             setState(() {});
+                    //           },
+                    //           child: Align(
+                    //             alignment: const Alignment(-1, 0),
+                    //             child: Container(
+                    //               width: width * 0.5,
+                    //               color: Colors.transparent,
+                    //               alignment: Alignment.center,
+                    //               child: Text(
+                    //                 _screenMoreBoardTeacherResponse?.body?.screeninfo?.textmath ??
+                    //                     boardPersonalTextMath,
+                    //                 style: TextStyle(
+                    //                   color: departleftcolor,
+                    //                   fontWeight: FontWeight.bold,
+                    //                 ),
+                    //               ),
+                    //             ),
+                    //           ),
+                    //         ),
+                    //         GestureDetector(
+                    //           onTap: () {
+                    //             defaultalign = xalign;
+                    //             departrightcolor = selectedColor;
+                    //             isSelected = false;
+                    //             departleftcolor = normalColor;
+                    //             setState(() {});
+                    //           },
+                    //           child: Align(
+                    //             alignment: const Alignment(1, 0),
+                    //             child: Container(
+                    //               width: width * 0.5,
+                    //               color: Colors.transparent,
+                    //               alignment: Alignment.center,
+                    //               child: Text(
+                    //                 _screenMoreBoardTeacherResponse?.body?.screeninfo?.textstats ??
+                    //                     boardPersonalTextStat,
+                    //                 style: TextStyle(
+                    //                   color: departrightcolor,
+                    //                   fontWeight: FontWeight.bold,
+                    //                 ),
+                    //               ),
+                    //             ),
+                    //           ),
+                    //         ),
+                    //       ],
+                    //     ),
+                    //   ),
                     // ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 20, left: 8, right: 8, bottom: 10),
-                      child: Container(
-                        width: width,
-                        height: height,
-                        decoration: BoxDecoration(
-                          color: Colors.grey[350],
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(50.0),
-                          ),
-                        ),
-                        child: Stack(
-                          children: [
-                            AnimatedAlign(
-                              alignment: Alignment(defaultalign, 0),
-                              duration: const Duration(milliseconds: 300),
-                              child: Container(
-                                width: width * 0.5,
-                                height: height,
-                                decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(50.0),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                defaultalign = yalign;
-                                departleftcolor = selectedColor;
-                                isSelected = true;
-                                departrightcolor = normalColor;
-                                setState(() {});
-                              },
-                              child: Align(
-                                alignment: const Alignment(-1, 0),
-                                child: Container(
-                                  width: width * 0.5,
-                                  color: Colors.transparent,
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    _screenMoreBoardTeacherResponse?.body?.screeninfo?.textmath ??
-                                        boardPersonalTextMath,
-                                    style: TextStyle(
-                                      color: departleftcolor,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                defaultalign = xalign;
-                                departrightcolor = selectedColor;
-                                isSelected = false;
-                                departleftcolor = normalColor;
-                                setState(() {});
-                              },
-                              child: Align(
-                                alignment: const Alignment(1, 0),
-                                child: Container(
-                                  width: width * 0.5,
-                                  color: Colors.transparent,
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    _screenMoreBoardTeacherResponse?.body?.screeninfo?.textstats ??
-                                        boardPersonalTextStat,
-                                    style: TextStyle(
-                                      color: departrightcolor,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
                     Container(
-                      child: isSelected
+                      child: isSelected == 0
                           ? teacherMathWidget(context, _screenMoreBoardTeacherResponse)
                           : teacherStatsWidget(context, _screenMoreBoardTeacherResponse),
                     ),

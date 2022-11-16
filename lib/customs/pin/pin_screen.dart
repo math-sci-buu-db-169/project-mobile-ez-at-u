@@ -2,6 +2,8 @@ import 'package:ez_at_u/customs/pin/pin_number.dart';
 import 'package:ez_at_u/module/home/screen/home_screen/home_screen.dart';
 import 'package:ez_at_u/module/login/screen/login_screen/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'local_auth_api.dart';
@@ -9,7 +11,11 @@ import 'local_auth_api.dart';
 class PinScreen extends StatefulWidget {
   final bool isHiddenBio;
   final String pinValueString;
-  const PinScreen({Key? key, required this.isHiddenBio, required this.pinValueString, }) : super(key: key);
+  const PinScreen({
+    Key? key,
+    required this.isHiddenBio,
+    required this.pinValueString,
+  }) : super(key: key);
 
   @override
   State<PinScreen> createState() => _PinScreenState();
@@ -23,11 +29,12 @@ class _PinScreenState extends State<PinScreen> {
         child: Container(
           decoration: const BoxDecoration(
               gradient: LinearGradient(
-                  colors: [Colors.deepPurpleAccent, Colors.deepPurple],
+                  colors: [Colors.black87, Colors.black87],
                   begin: Alignment.topRight)),
-          child:   PinPage(
+          child: PinPage(
             isHiddenBio: widget.isHiddenBio,
-            pinValueString: widget.pinValueString,),
+            pinValueString: widget.pinValueString,
+          ),
         ),
       ),
     );
@@ -37,8 +44,11 @@ class _PinScreenState extends State<PinScreen> {
 class PinPage extends StatefulWidget {
   final bool isHiddenBio;
   final String pinValueString;
-  const PinPage({Key? key, required this.isHiddenBio, required this.pinValueString,}) : super(key: key);
-
+  const PinPage({
+    Key? key,
+    required this.isHiddenBio,
+    required this.pinValueString,
+  }) : super(key: key);
 
   @override
   State<PinPage> createState() => _PinPageState();
@@ -56,12 +66,13 @@ class _PinPageState extends State<PinPage> {
       borderSide: const BorderSide(color: Colors.transparent));
   int pinIndex = 0;
   late SharedPreferences prefs;
-  late String myNameUser ='' ;
+  late String myNameUser = '';
   @override
   void initState() {
     _isGetMyNameUser();
     super.initState();
   }
+
   Future<void> _isGetMyNameUser() async {
     prefs = await SharedPreferences.getInstance();
     myNameUser = prefs.getString('myNameUser') ?? '';
@@ -181,11 +192,11 @@ class _PinPageState extends State<PinPage> {
                 // Container(
                 //   width: 60.0,
                 // ),
-                widget.isHiddenBio ?
-                keyBoarBio():
-                Container(
-                  width: 60.0,
-                ),
+                widget.isHiddenBio
+                    ? keyBoarBio()
+                    : Container(
+                        width: 60.0,
+                      ),
                 KeyBoarNumber(
                     n: 0,
                     onPressed: () {
@@ -204,52 +215,56 @@ class _PinPageState extends State<PinPage> {
     ));
   }
 
-
-  keyBoarBio(){
+  keyBoarBio() {
     return Container(
       width: 60.0,
       height: 60.0,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: Colors.pinkAccent.withOpacity(0.1),
+        color: Colors.transparent.withOpacity(0.3),
       ),
       alignment: Alignment.center,
-      child: MaterialButton(
-        padding: EdgeInsets.all(8.0),
-        onPressed: () async {
-          final isAuthenticated = await LocalAuthApi.authenticate();
+      child: Tooltip(
+        message: 'Fingerprint ,Touch ID ,Biometric, Pattern ',
+        child: MaterialButton(
+            padding: EdgeInsets.all(8.0),
+            onPressed: () async {
+              final isAuthenticated = await LocalAuthApi.authenticate();
 
-          if (isAuthenticated) {
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                  builder: (context) => const HomeScreen()),
-            );
-          }
-        },
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(60.0),
-        ),
-        height: 90.0,
-        child: Icon(
-          Icons.fingerprint,
-          size: 40,
-        ),
-      ),
-    ) ;
+              if (isAuthenticated) {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => const HomeScreen()),
+                );
+              }
+            },
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(60.0),
+            ),
+            height: 90.0,
+            child:const Icon(
+              FontAwesomeIcons.fingerprint,
+              size: 35,
+              color: Colors.white,
+            )
 
+        ),
+      )
+
+    );
   }
-  keyBoarClear(){
+
+  keyBoarClear() {
     return Container(
       width: 60.0,
       height: 60.0,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: Colors.pinkAccent.withOpacity(0.1),
+        color: Colors.transparent.withOpacity(0.3),
       ),
       alignment: Alignment.center,
       child: MaterialButton(
         padding: EdgeInsets.all(8.0),
-        onPressed: ()  {
+        onPressed: () {
           clearPin();
         },
         shape: RoundedRectangleBorder(
@@ -259,29 +274,27 @@ class _PinPageState extends State<PinPage> {
         child: const Icon(
           Icons.clear_rounded,
           size: 40,
+          color: Colors.white,
         ),
       ),
-    ) ;
-
+    );
   }
-  clearPin(){
-    if (pinIndex == 0){
+
+  clearPin() {
+    if (pinIndex == 0) {
       pinIndex = 0;
-    }
-    else if(pinIndex == 4){
-      isSetPin(pinIndex,'');
-      currentPin[pinIndex - 1] ='';
+    } else if (pinIndex == 4) {
+      isSetPin(pinIndex, '');
+      currentPin[pinIndex - 1] = '';
+      pinIndex--;
+    } else {
+      isSetPin(pinIndex, '');
+      currentPin[pinIndex - 1] = '';
       pinIndex--;
     }
-    else{
-      isSetPin(pinIndex,'');
-      currentPin[pinIndex - 1] ='';
-      pinIndex--;
-    }
-    setState(() {
-
-    });
+    setState(() {});
   }
+
   pinIndexSetup(String textValue) {
     if (pinIndex == 0) {
       pinIndex = 1;
@@ -301,16 +314,13 @@ class _PinPageState extends State<PinPage> {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) => const HomeScreen()),
         );
-      }
-      else{
-        for (var i = pinIndex ; i >= 0; i--){
+      } else {
+        for (var i = pinIndex; i >= 0; i--) {
           clearPin();
         }
       }
     }
-    setState(() {
-
-    });
+    setState(() {});
   }
 
   isSetPin(int n, String textValue) {
@@ -362,24 +372,24 @@ class _PinPageState extends State<PinPage> {
   }
 
   buildSecurityText(BuildContext context) {
-    return  Column(
+    return Column(
       children: [
         Text(
-        "Hello $myNameUser, have a nice day. ",
-        style: TextStyle(
-          color: Colors.white70,
-          fontSize: 21.0,
-          fontWeight: FontWeight.bold,
+          "Hello $myNameUser, have a nice day. ",
+          style: TextStyle(
+            color: Colors.white70,
+            fontSize: 21.0,
+            fontWeight: FontWeight.bold,
+          ),
         ),
-      ),Text(
-        "Please enter your PIN.",
-        style: TextStyle(
-          color: Colors.white70,
-          fontSize: 21.0,
-          fontWeight: FontWeight.bold,
+        Text(
+          "Please enter your PIN.",
+          style: TextStyle(
+            color: Colors.white70,
+            fontSize: 21.0,
+            fontWeight: FontWeight.bold,
+          ),
         ),
-      ),
-
       ],
     );
   }
@@ -391,17 +401,24 @@ class _PinPageState extends State<PinPage> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: MaterialButton(
-            onPressed: () {},
-            height: 50.0,
-            minWidth: 50.0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(50.0),
-            ),
-            child: const Icon(
-              Icons.clear,
-              color: Colors.black,
-            ),
-          ),
+              onPressed: () {},
+              height: 50.0,
+              minWidth: 50.0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(50.0),
+              ),
+              child: Tooltip(
+                message: 'Exit Application',
+                child: IconButton(
+                  onPressed: () {
+                    SystemNavigator.pop();
+                  },
+                  icon: const Icon(
+                    Icons.clear,
+                    color: Colors.white,
+                  ),
+                ),
+              )),
         )
       ],
     );

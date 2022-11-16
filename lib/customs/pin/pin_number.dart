@@ -9,23 +9,24 @@ class PinNumber extends StatelessWidget {
   const PinNumber({Key? key, required this.textEditingController, required this.outlineInputBorder}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 50.0,
+    return SizedBox(
+      width: 20.0,
+      height: 20.0,
       child: TextField(
         controller: textEditingController,
         enabled: false,
         obscureText: true,
         textAlign: TextAlign.center,
         decoration:  InputDecoration(
-            contentPadding: const EdgeInsets.all(16.0),
+            contentPadding: const EdgeInsets.all(0.0),
           border: outlineInputBorder,
           filled: true,
-          fillColor: Colors.white70,
+          fillColor: Colors.transparent.withOpacity(0.5),
 
         ),
         style: const TextStyle(
           fontWeight: FontWeight.bold,
-          fontSize: 21.0,
+          fontSize: 20.0,
           color: Colors.white
         ),
 
@@ -46,7 +47,7 @@ class KeyBoarNumber extends StatelessWidget {
       height: 60.0,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: Colors.pinkAccent.withOpacity(0.1),
+        color: Colors.transparent.withOpacity(0.3),
 
       ),
       alignment: Alignment.center,

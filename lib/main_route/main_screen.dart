@@ -5,7 +5,6 @@ import 'package:flutter_screen_lock/flutter_screen_lock.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../customs/pin/pin_screen.dart';
-import 'fingerprint_page.dart';
 import 'main_route_bloc/main_route_bloc.dart';
 import 'main_route_bloc_model/refresh_token_response.dart';
 import '../../../../../customs/dialog/dialog_widget.dart';
