@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../utils/shared_preferences.dart';
 import '../main_route_bloc_model/refresh_token_response.dart';
 import '../main_route_repository/main_route_repository.dart';
 
@@ -45,6 +46,8 @@ class MainRouteBloc extends Bloc<MainRouteEvent, MainRouteState>
             RefreshTokenResponse refreshTokenResponse =
                 RefreshTokenResponse.fromJson(response.data);
             if (refreshTokenResponse.head?.status == 200) {
+              await setUserKey(globalKey: refreshTokenResponse.body?.token?? "");
+              await setUserRefreshKey(refreshKey: refreshTokenResponse.body?.refreshtoken?? "");
               emit(RefreshTokenSuccessState(
                 token: refreshTokenResponse.body?.token,
                 refreshToken: refreshTokenResponse.body?.refreshtoken,

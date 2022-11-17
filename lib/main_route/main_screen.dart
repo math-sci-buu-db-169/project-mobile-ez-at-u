@@ -152,30 +152,10 @@ class _MainRouteState extends State<MainRoutePage> with ProgressDialog {
           // );
           return const LoginScreen();
         } else if (state is RefreshTokenSuccessState) {
-          String isToken = state.token ?? "";
-          String isRefreshToken = state.refreshToken ?? "";
-          _setValueAndGoHome(token: isToken, refreshToken: isRefreshToken);
-          // screenLock(
-          //   context: context,
-          //   correctString: _pinValueString,
-          //   customizedButtonChild: const Icon(
-          //     Icons.fingerprint,
-          //   ),
-          //   customizedButtonTap: () async => await localAuth(context),
-          //   onOpened: ()async => await localAuth(context),
-          //   onUnlocked: () {
-          //
-          //     Navigator.push(
-          //       context,
-          //       MaterialPageRoute(builder: (context) => const HomeScreen()),
-          //     );
-          //     // Navigator.push(
-          //     //   context,
-          //     //   MaterialPageRoute(builder: (context) => const HomeScreen()),
-          //     // );
-          //   },
-          //
-          // );
+          // String isToken = state.token ?? "";
+          // String isRefreshToken = state.refreshToken ?? "";
+          // _setValueAndGoHome(token: isToken, refreshToken: isRefreshToken);
+
           return _isHiddenPin == true?
            PinLockAppScreen(isHiddenBio:_isHiddenBio,pinValueString:_pinValueString,optionLockApp:true)
               : const HomeScreen(
@@ -193,20 +173,6 @@ class _MainRouteState extends State<MainRoutePage> with ProgressDialog {
               body: Container(
             color: Colors.white,
             child:
-                //       AlertDialog(
-                //     title: const Text('AlertDialog Title'),
-                //   content: const Text('AlertDialog description'),
-                //   actions: <Widget>[
-                //     TextButton(
-                //       onPressed: () => Navigator.pop(context, 'Cancel'),
-                //       child: const Text('Cancel'),
-                //     ),
-                //     TextButton(
-                //       onPressed: () => Navigator.pop(context, 'OK'),
-                //       child: const Text('OK'),
-                //     ),
-                //   ],
-                // ),
                 Dialog(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
