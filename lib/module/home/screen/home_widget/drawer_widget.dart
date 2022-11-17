@@ -1,4 +1,4 @@
-import 'package:ez_at_u/module/home/screen/home_widget/pin_lock_app_screen.dart';
+import 'package:ez_at_u/module/home/screen/home_widget/setting_pin_lock_app_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -140,7 +140,7 @@ drawerHome(
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const PinLockAppScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const SettingPinLockAppScreen()));
                     },
                     child: Container(
                       width: double.infinity,

@@ -10,6 +10,8 @@ import '../../../../customs/dialog/dialog_widget.dart';
 import '../../../../customs/message/text_button.dart';
 import '../../../../customs/message/text_error.dart';
 import '../../../../customs/message/text_home.dart';
+import '../../../../customs/pin/pin_lock_app_screen.dart';
+import '../../../../customs/pin/pin_lock_create_screen.dart';
 import '../../../../customs/progress_dialog.dart';
 import '../../../../customs/size/size.dart';
 import '../../../../utils/shared_preferences.dart';
@@ -19,8 +21,8 @@ import '../../../login/model/response/screen_change_password_response.dart';
 import '../../../login/screen/login_screen/login_screen.dart';
 import '../home_screen/home_screen.dart';
 
-class PinLockAppScreen extends StatelessWidget {
-  const PinLockAppScreen({Key? key}) : super(key: key);
+class SettingPinLockAppScreen extends StatelessWidget {
+  const SettingPinLockAppScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -65,44 +67,47 @@ class _PinLockAppPageState extends State<PinLockAppPage> with ProgressDialog {
   }
 
   void _togglePinLockAppView() async {
-    setState(() {
-              if (_isHiddenPin == true) {
-      setIsPinStatus(pinStatus : false );
-      setIBioStatus(bioStatus : false );
-      prefs.remove("pinValue");
-    } if (_isHiddenPin == false) {
-      screenLockCreate(
-        context: context,
-        inputController: controllerPin,
-        onConfirmed: (matchedText) =>{
-          _pinValueString = matchedText,
-          _isHiddenPin = !_isHiddenPin,
-          _isHiddenPin == false ? _isHiddenBio = false : _isHiddenBio = false,
-          if (_isHiddenPin == true) {
+    setState(
+      () {
+        if (_isHiddenPin == true) {
+          setIsPinStatus(pinStatus: false);
+          setIBioStatus(bioStatus: false);
+          prefs.remove("pinValue");
+        }
+        if (_isHiddenPin == false) {
+          Navigator.push(context, MaterialPageRoute(builder: (context) =>   pinLockAppCreateScreen()));
+          // Navigator.push(context, MaterialPageRoute(builder: (context) => const PinLockAppCreateScreen(isHiddenBio: true, pinValueString: '0000',)));
 
-            _setValuePinAndHidden(pinStatus:_isHiddenPin ,pinValue:_pinValueString),
+          // const PinLockAppCreateScreen(isHiddenBio: true, pinValueString: '0000',);
+          // screenLockCreate(
+          //   context: context,
+          //   inputController: controllerPin,
+          //   onConfirmed: (matchedText) => {
+          //     _pinValueString = matchedText,
+          //     _isHiddenPin = !_isHiddenPin,
+          //     _isHiddenPin == false
+          //         ? _isHiddenBio = false
+          //         : _isHiddenBio = false,
+          //     if (_isHiddenPin == true)
+          //       {
+          //         _setValuePinAndHidden(
+          //             pinStatus: _isHiddenPin, pinValue: _pinValueString),
+          //       },
+          //     Navigator.pop(context),
+          //     // Navigator.push(context,
+          //     //     MaterialPageRoute(builder: (context) => const PinLockAppScreen())),
+          //   },
+          //   footer: TextButton(
+          //     onPressed: () {
+          //       // Release the confirmation state and return to the initial input state.
+          //       controllerPin.unsetConfirmed();
+          //     },
+          //     child: const Text('Reset input'),
+          //   ),
+          // );
+        }
 
-          },
-        Navigator.pop(context),
-          // Navigator.push(context,
-          //     MaterialPageRoute(builder: (context) => const PinLockAppScreen())),
-
-        },
-        footer: TextButton(
-          onPressed: () {
-            // Release the confirmation state and return to the initial input state.
-            controllerPin.unsetConfirmed();
-          },
-          child: const Text('Reset input'),
-
-        ),
-      );
-    }
-
-
-    _isSessionPin();
-
-
+        _isSessionPin();
       },
     );
   }
@@ -111,12 +116,11 @@ class _PinLockAppPageState extends State<PinLockAppPage> with ProgressDialog {
     setState(
       () {
         _isHiddenBio = !_isHiddenBio;
-        if(_isHiddenBio == true){
-          setIBioStatus(bioStatus : true );
-        } else{
-          setIBioStatus(bioStatus : false );
+        if (_isHiddenBio == true) {
+          setIBioStatus(bioStatus: true);
+        } else {
+          setIBioStatus(bioStatus: false);
         }
-
       },
     );
   }
@@ -132,29 +136,32 @@ class _PinLockAppPageState extends State<PinLockAppPage> with ProgressDialog {
     _buttonOk = _userLanguage == 'EN' ? buttonOkEN : buttonOkTH;
     setState(() {});
   }
+
   Future<void> _isSessionPin() async {
     prefs = await SharedPreferences.getInstance();
     setState(() {
       String pinStringToBool = prefs.getString('pinStatus') ?? 'false';
       String bioStringToBool = prefs.getString('bioStatus') ?? 'false';
-    _isHiddenPin = pinStringToBool == 'true'? true:false;
-    _isHiddenBio = bioStringToBool == 'true'? true:false;
-    _pinValueString = prefs.getString('pinValue') ?? '....';
-
+      _isHiddenPin = pinStringToBool == 'true' ? true : false;
+      _isHiddenBio = bioStringToBool == 'true' ? true : false;
+      _pinValueString = prefs.getString('pinValue') ?? '....';
     });
   }
-  void _setValuePinAndHidden({required bool pinStatus, required String pinValue}
-      ) async {
-    print("pinValue_setValuePinAndHidden");print(pinValue);
+
+  void _setValuePinAndHidden(
+      {required bool pinStatus, required String pinValue}) async {
+    print("pinValue_setValuePinAndHidden");
+    print(pinValue);
 
     prefs = await SharedPreferences.getInstance();
     await setIsPinStatus(pinStatus: pinStatus);
     // valueLanguage = prefs.getString('userChangeLanguage') ?? '';
     await setIsPinValue(pinValue: pinValue);
     setState(
-          () {},
+      () {},
     );
   }
+
   void _setValueAndGoHome(
       {ChangePasswordResponse? changePasswordResponse}) async {
     prefs = await SharedPreferences.getInstance();
@@ -223,9 +230,9 @@ class _PinLockAppPageState extends State<PinLockAppPage> with ProgressDialog {
             controllerPin,
             _isSessionPin,
             _setValuePinAndHidden,
-            isHiddenPin:_isHiddenPin,
-            isHiddenBio:_isHiddenBio,
-            pinValueString:_pinValueString,
+            isHiddenPin: _isHiddenPin,
+            isHiddenBio: _isHiddenBio,
+            pinValueString: _pinValueString,
           );
         }
 
@@ -251,10 +258,13 @@ pinLockAppBody(
     TextEditingController newPasswordController,
     InputController controllerPin,
     Future<void> Function() isSessionPin,
-    void Function({required bool pinStatus,
-    required String pinValue})
-    setValuePinAndHidden,
-    {required bool isHiddenPin, required bool isHiddenBio, required String pinValueString}) {
+    void Function({required bool pinStatus, required String pinValue})
+        setValuePinAndHidden,
+    {required bool isHiddenPin,
+    required bool isHiddenBio,
+    required String pinValueString,
+
+    }) {
   print('pinValueString');
   print(pinValueString);
   print(pinValueString.length);
@@ -262,7 +272,6 @@ pinLockAppBody(
       onWillPop: () async {
         return false;
       },
-
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -329,7 +338,6 @@ pinLockAppBody(
                                   IconButton(
                                       onPressed: () {
                                         togglePinLockAppView();
-
                                       },
                                       icon: isHiddenPin
                                           ? const Icon(Icons.toggle_on,
@@ -463,38 +471,46 @@ pinLockAppBody(
                         )),
                 isHiddenPin
                     ? GestureDetector(
-
                         onTap: () {
-                          screenLock(
-                            context: context,
-                            correctString: pinValueString,
-                            onUnlocked: () {
-                              Navigator.pop(context);
 
-                              screenLockCreate(
-                                context: context,
-                                inputController: controllerPin,
-                                onConfirmed: (matchedText) => {
-                                  setValuePinAndHidden(pinStatus:true ,pinValue:matchedText),
-
-                                  // Navigator.pop(context),
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                          const HomeScreen()))
-                                },
-                                footer: TextButton(
-                                  onPressed: () {
-                                    // Release the confirmation state and return to the initial input state.
-                                    controllerPin.unsetConfirmed();
-                                  },
-                                  child: const Text('Reset input'),
-                                ),
-                              );
-
-                            },
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) {
+                              // int index = int.parse(widget.id);
+                              return  PinLockAppScreen(isHiddenBio: false, pinValueString: pinValueString, optionLockApp: false,);
+                            }),
                           );
+
+                          // screenLock(
+                          //   context: context,
+                          //   correctString: pinValueString,
+                          //   onUnlocked: () {
+                          //     // Navigator.pop(context);
+                          //     // isSetState();
+                          //     screenLockCreate(
+                          //       context: context,
+                          //       inputController: controllerPin,
+                          //       onConfirmed: (matchedText) => {
+                          //         setValuePinAndHidden(
+                          //             pinStatus: true, pinValue: matchedText),
+                          //
+                          //         // Navigator.pop(context),
+                          //         Navigator.push(
+                          //             context,
+                          //             MaterialPageRoute(
+                          //                 builder: (context) =>
+                          //                 const HomeScreen()))
+                          //       },
+                          //       footer: TextButton(
+                          //         onPressed: () {
+                          //           // Release the confirmation state and return to the initial input state.
+                          //           controllerPin.unsetConfirmed();
+                          //         },
+                          //         child: const Text('Reset input'),
+                          //       ),
+                          //     );
+                          //   },
+                          // );
 
                           // Define it to control the confirmation state with its own events.
                         },

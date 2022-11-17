@@ -1,10 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screen_lock/flutter_screen_lock.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../customs/pin/pin_screen.dart';
+import '../customs/pin/pin_lock_app_screen.dart';
 import 'main_route_bloc/main_route_bloc.dart';
 import 'main_route_bloc_model/refresh_token_response.dart';
 import '../../../../../customs/dialog/dialog_widget.dart';
@@ -178,7 +177,8 @@ class _MainRouteState extends State<MainRoutePage> with ProgressDialog {
           //
           // );
           return _isHiddenPin == true?
-           PinScreen(isHiddenBio:_isHiddenBio,pinValueString:_pinValueString): const HomeScreen(
+           PinLockAppScreen(isHiddenBio:_isHiddenBio,pinValueString:_pinValueString,optionLockApp:true)
+              : const HomeScreen(
           ) ;
 
           // Navigator.push(

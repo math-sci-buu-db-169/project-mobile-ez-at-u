@@ -52,7 +52,7 @@ dependencies:
   dio: ^4.0.6
   shared_preferences: ^2.0.15
   custom_timer: ^0.1.2
-  package_info_plus: ^3.0.1
+  package_info_plus: ^3.0.2
   flutter_screen_lock: ^8.0.0
   local_auth: ^2.1.2
   local_auth_android: ^1.0.14

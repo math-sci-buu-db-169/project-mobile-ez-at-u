@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 class PinNumber extends StatelessWidget {
   final TextEditingController textEditingController;
   final OutlineInputBorder outlineInputBorder  ;
-  const PinNumber({Key? key, required this.textEditingController, required this.outlineInputBorder}) : super(key: key);
+  final Color rowPinColors ;
+  const PinNumber({Key? key, required this.textEditingController, required this.outlineInputBorder, required this.rowPinColors}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -21,13 +22,14 @@ class PinNumber extends StatelessWidget {
             contentPadding: const EdgeInsets.all(0.0),
           border: outlineInputBorder,
           filled: true,
-          fillColor: Colors.transparent.withOpacity(0.5),
+          fillColor: textEditingController.text == '' ? Colors.transparent.withOpacity(0.5):rowPinColors,
+          // fillColor: Colors.transparent.withOpacity(0.5),
 
         ),
         style: const TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 20.0,
-          color: Colors.white
+          color: Colors.transparent
         ),
 
       ),
@@ -43,11 +45,11 @@ class KeyBoarNumber extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 60.0,
-      height: 60.0,
+      width: 70.0,
+      height: 70.0,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: Colors.transparent.withOpacity(0.3),
+        color: Colors.white.withOpacity(0.3),
 
       ),
       alignment: Alignment.center,
@@ -58,12 +60,12 @@ class KeyBoarNumber extends StatelessWidget {
           borderRadius: BorderRadius.circular(60.0),
 
         ),
-        height: 90.0,
+        // height: 90.0,
         child: Text(
           n.toString(),
               textAlign: TextAlign.center,
           style: TextStyle(
-            fontSize: 24*MediaQuery.of(context).textScaleFactor,
+            fontSize: 30* MediaQuery.of(context).textScaleFactor,
             color: Colors.white,
             fontWeight: FontWeight.bold
           )
