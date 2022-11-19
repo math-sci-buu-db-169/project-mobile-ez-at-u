@@ -9,7 +9,8 @@ import 'package:hexcolor/hexcolor.dart';
 
 class ProfileEducationDataHead extends StatefulWidget {
   final ApiProfileResponse? dataFromAPI;
-  const ProfileEducationDataHead({Key? key, required this.dataFromAPI}) : super(key: key);
+  final String? userRole;
+  const ProfileEducationDataHead({Key? key, required this.dataFromAPI, required this.userRole}) : super(key: key);
 
   @override
   State<ProfileEducationDataHead> createState() => _ProfileEducationDataHeadState();
@@ -20,12 +21,14 @@ class _ProfileEducationDataHeadState extends State<ProfileEducationDataHead> {
   late String gpaJhValue;
   late String gpaShValue;
   late String gpaBdValue;
+  late String userRole;
   @override
   void initState() {
     dataFromAPI = widget.dataFromAPI;
     gpaJhValue = dataFromAPI?.body?.profileEduInfo?.gpaJhs??"-";
     gpaShValue = dataFromAPI?.body?.profileEduInfo?.gpaShs??"-";
     gpaBdValue = dataFromAPI?.body?.profileEduInfo?.gpaBd??"-";
+    userRole = widget.userRole??"ST";
     super.initState();
   }
   @override
@@ -34,7 +37,9 @@ class _ProfileEducationDataHeadState extends State<ProfileEducationDataHead> {
     // String gpaJhValue = dataFromAPI?.body?.profileEduInfo?.gpaJhs??"-";
     // String gpaShValue = dataFromAPI?.body?.profileEduInfo?.gpaShs??"-";
     // String gpaBdValue = dataFromAPI?.body?.profileEduInfo?.gpaBd??"-";
-    return Column(
+    return
+      (userRole == "ST") ?
+      Column(
       children: [
         Container(
           decoration: const BoxDecoration(
@@ -115,7 +120,92 @@ class _ProfileEducationDataHeadState extends State<ProfileEducationDataHead> {
             }
           },),
       ],
-    );
+    )
+          :
+      Column(
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+              border: Border(
+                  top: BorderSide(width: 1, color: Colors.black12),
+                  bottom: BorderSide(width: 1, color: Colors.transparent)),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Row(
+                children: [
+                  Text(
+                    dataFromAPI?.body?.screeninfo?.subtitleeduinfo??profileSubTitleEduInfo,
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                  Expanded(
+                    child: Container(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
+                        onPressed: () {
+                          setState(() {
+                            isUnpressed = !isUnpressed;
+                            if(isUnpressed == true){
+                              context.read<ProfileBloc>().add(EducationSubmitEvent(gpaBd: gpaBdValue, gpaSh: gpaShValue, gpaJh: gpaJhValue));
+                            }
+                          });
+                        },
+                        child: isUnpressed
+                            ? Text(dataFromAPI?.body?.screeninfo?.textedit??profileTextEdit, style: const TextStyle(color: Colors.red))
+                            : Text(dataFromAPI?.body?.screeninfo?.textsave??profileTextSave, style: const TextStyle(color: Colors.green)),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          ProfileEducationDataTab(
+            isUnpressed: isUnpressed,
+            textLeft: "ปริญญาบัณฑิต",
+            textRight: "มหาวิทยาลียบูรพา",
+            // onChange: (value) {
+            //   gpaJhValue = value;
+            //   if (kDebugMode) {
+            //     print(gpaJhValue);
+            //   }
+            // },
+          ),
+          ProfileEducationDataTab(
+            isUnpressed: isUnpressed,
+            textLeft: "ปริญญามหาบัณฑิต",
+            textRight: "มหาวิทยาลัยบูรพา2",
+            // onChange: (value) {
+            //   gpaShValue = value;
+            //   if (kDebugMode) {
+            //     print(gpaShValue);
+            //   }
+            // }
+            ),
+          ProfileEducationDataTab(
+            isUnpressed: isUnpressed,
+            textLeft: "ปริญญาดุษฎีบัณฑิต",
+            textRight: "มหาวิทยาลัยบูรพา3",
+            // onChange: (value) {
+            //   gpaBdValue = value;
+            //   if (kDebugMode) {
+            //     print(gpaBdValue);
+            //   }
+            // },
+          ),
+          ProfileEducationDataTab(
+            isUnpressed: isUnpressed,
+            textLeft: "ขอบเขตการวิจัย",
+            textRight: "Discrete Mathematics, Differential Equations, Numerical Analysis",
+            // onChange: (value) {
+            //   gpaBdValue = value;
+            //   if (kDebugMode) {
+            //     print(gpaBdValue);
+            //   }
+            // },
+          ),
+        ],
+      );
   }
 }
 ////////////////////////////////////////////////////////////////////////////////
@@ -151,18 +241,22 @@ class _ProfileEducationDataTabState extends State<ProfileEducationDataTab> {
       child: Padding(
         padding: const EdgeInsets.only(left: 10,top: 10,bottom: 10,right: 20),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              '$textLeft ',
-              style: const TextStyle(fontSize: 18),
+            Padding(
+              padding: const EdgeInsets.only(top : 12.0),
+              child: Text(
+                '$textLeft ',
+                style: const TextStyle(fontSize: 18),
+              ),
             ),
             Expanded(
               child: TextFormField(
                 cursorColor: Colors.black,
                 autofocus: false,
-                maxLength: 4,
+                minLines: 1,
+                maxLines: 5,
                 style: const TextStyle(fontSize: 18, color: Colors.black),
-                keyboardType: const TextInputType.numberWithOptions(),
                 readOnly: isUnpressed,
                 textAlign: TextAlign.right,
                 decoration: const InputDecoration(

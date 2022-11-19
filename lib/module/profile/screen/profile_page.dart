@@ -8,7 +8,6 @@ import 'package:ez_at_u/module/profile/components/careerdatatab.dart';
 import 'package:ez_at_u/module/profile/components/contactdatatab.dart';
 import 'package:ez_at_u/module/profile/components/educationdatatab.dart';
 import 'package:ez_at_u/module/profile/components/generaldatatab.dart';
-import 'package:ez_at_u/module/profile/model/response/api_profile_response.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,6 +43,8 @@ class _ProfilePageState extends State<ProfilePage> with ProgressDialog {
   ChooseAvatarSuccess? avatarImage;
   String? base64img;
   String phimg = "iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAA1lJREFUeF7t3GtyqkAQBWBchmzD/e8Al6Euw1tTKXONAvPqxzlD8ydUAtM954PBoiqelmV5ns/nKTb/BB6Px3S63W7PtHO5XPw7OnAH1+t1muf5ByTtpF8Eis8V8cr+9w5JIGkLFHuQ98y/QALFFuTzBlgFCRQblLXVaBMkUHRRth4NuyCBooOy95zOggSKLEruQ1MRSKDIoOQwUpVikEDpQynBqAYJlDaUUowmkECpQ6nBaAYJlDKUWowukEDZR2nB6AYJlHWUVgwRkED5i9KDIQYSKD8ovRiiIFINlT0u8Y6SwBAHOSqKFIYKyNFQJDHUQI6CIo2hCjI6igaGOsioKFoYJiCjoWhimIGMgqKNYQrCjmKBYQ7CimKF4QLChmKJ4QbCgmKN4QqCjuKB4Q6CiuKFAQGChuKJAQOCguKNAQXijYKAAQfihYKCAQlijYKEAQtihYKGAQ2ijYKIAQ+ihYKKQQEijYKMQQMihYKOQQXSi8KAQQfSisKCQQlSi8KEQQtSisKGQQ2SQ2HEoAfZQmHFGALkE4UZYxiQF0r6yf71UlX/p54mjLqlOyNAQHTel6lYspxR1gCYUaiXrL3gWVFoQUoCLznG+Qb/Kk8JUhN0zbEIOHQgLQG3nOOFQwXSE2zPuZY4NCASgUqMoY1DASIZpORYGjjwIBoBaowphQMNohmc5tg9OLAgFoFZ1KjFgQSxDMqyVgkOHIhHQB41t3CgQDyD8az9jgMDghAIQg8QIAhBvK5S717cQbwDWFvLPXtyBfGceO4Tj1dvbiBeE85BvP/do0cXEI+J1kB4opiDMGF4POhNQRgxrFHMQJgxLFFMQEbAsEJRBxkJwwJFFWREDG0UNZCRMTRRVECOgKGFIg5yJAwNFFGQI2JIo4iBHBlDEkUEJDD+v/3qzaIbpLeB1pd+yOf1ZNIF0lMYOVCJ3lqzaQZpLSgxWZYxWjJqAmkpxBKidJ+1WVWD1BaQniDjeDWZVYHUDMwYnGbPpdkVg5QOqDkp9rFLMiwCKRmIPSyr/nNZZkFyA1hNZKQ6e5nuggSG3mWwle0mSGDoYey9+1oFCQx9jC2UL5DAsMNYQ/kDEhj2GJ8ovyBph/3Lv/zilKmcboh5nqfTsizPtBObfwL3+336B07+3Sny7gNQAAAAAElFTkSuQmCC";
+
+  String roleFromApi = "ST";
   @override
   void initState() {
     super.initState();
@@ -253,11 +254,11 @@ class _ProfilePageState extends State<ProfilePage> with ProgressDialog {
                   ],
                 ),
 // Container(child: Image.memory(base64Decode(base64img??phimg))),
-                ProfileGeneralDataHead(dataFromAPI: apiProfileResponse),
-                ProfileEducationDataHead(dataFromAPI: apiProfileResponse),
-                ProfileAddressDataHead(dataFromAPI: apiProfileResponse),
-                ProfileContactDataHead(dataFromAPI: apiProfileResponse),
-                ProfileCareerDataHead(dataFromAPI: apiProfileResponse),
+                ProfileGeneralDataHead(dataFromAPI: apiProfileResponse, userRole: roleFromApi),
+                ProfileEducationDataHead(dataFromAPI: apiProfileResponse, userRole: roleFromApi),
+                ProfileAddressDataHead(dataFromAPI: apiProfileResponse, userRole: roleFromApi),
+                ProfileContactDataHead(dataFromAPI: apiProfileResponse, userRole: roleFromApi),
+                ProfileCareerDataHead(dataFromAPI: apiProfileResponse, userRole: roleFromApi),
                 const SizedBox(height: 60)
               ],
             ),

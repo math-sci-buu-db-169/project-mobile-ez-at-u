@@ -9,8 +9,8 @@ import '../model/response/api_profile_response.dart';
 
 class ProfileAddressDataHead extends StatefulWidget {
   final ApiProfileResponse? dataFromAPI;
-
-  const ProfileAddressDataHead({Key? key, required this.dataFromAPI})
+  final String? userRole;
+  const ProfileAddressDataHead({Key? key, required this.dataFromAPI, required this.userRole})
       : super(key: key);
 
   @override
@@ -28,6 +28,7 @@ class _ProfileAddressDataHeadState extends State<ProfileAddressDataHead> {
   late String districtValue;
   late String provinceValue;
   late String zipcodeValue;
+  late String userRole;
   @override
   void initState() {
     dataFromAPI = widget.dataFromAPI;
@@ -39,6 +40,7 @@ class _ProfileAddressDataHeadState extends State<ProfileAddressDataHead> {
     districtValue = dataFromAPI?.body?.profileAddressInfo?.district??"-";
     provinceValue = dataFromAPI?.body?.profileAddressInfo?.province??"-";
     zipcodeValue = dataFromAPI?.body?.profileAddressInfo?.zipcode??"-";
+    userRole = widget.userRole??"ST";
     super.initState();
   }
   @override
@@ -52,7 +54,9 @@ class _ProfileAddressDataHeadState extends State<ProfileAddressDataHead> {
     // String districtValue = dataFromAPI?.body?.profileAddressInfo?.district??"-";
     // String provinceValue = dataFromAPI?.body?.profileAddressInfo?.province??"-";
     // String zipcodeValue = dataFromAPI?.body?.profileAddressInfo?.zipcode??"-";
-    return Column(
+    return
+      (userRole == "ST") ?
+      Column(
       children: [
         Container(
           decoration: const BoxDecoration(
@@ -173,7 +177,9 @@ class _ProfileAddressDataHeadState extends State<ProfileAddressDataHead> {
             }
           },),
       ],
-    );
+    )
+          :
+          Column();
   }
 }
 

@@ -8,7 +8,8 @@ import '../model/response/api_profile_response.dart';
 
 class ProfileGeneralDataHead extends StatefulWidget {
   final ApiProfileResponse? dataFromAPI;
-  const ProfileGeneralDataHead({Key? key, required this.dataFromAPI})
+  final String? userRole;
+  const ProfileGeneralDataHead({Key? key, required this.dataFromAPI, required this.userRole})
       : super(key: key);
   @override
   State<ProfileGeneralDataHead> createState() => _ProfileGeneralDataHeadState();
@@ -21,12 +22,14 @@ class _ProfileGeneralDataHeadState extends State<ProfileGeneralDataHead> {
   late String nicknameValue;
   // TextEditingController nameValueController = TextEditingController();
   late String nameValue;
+  late String userRole;
   @override
   void initState() {
     dataFromAPI = widget.dataFromAPI;
     surnameValue = dataFromAPI?.body?.profileGeneralInfo?.lastname??"-";
     nicknameValue = dataFromAPI?.body?.profileGeneralInfo?.nickname??"-";
     nameValue = dataFromAPI?.body?.profileGeneralInfo?.name??"-";
+    userRole = widget.userRole??"ST";
     super.initState();
   }
   @override
@@ -34,7 +37,9 @@ class _ProfileGeneralDataHeadState extends State<ProfileGeneralDataHead> {
     // var dataFromAPI = widget.dataFromAPI;
     // String surnameValue = dataFromAPI?.body?.profileGeneralInfo?.lastname??"-";
     // String nicknameValue = dataFromAPI?.body?.profileGeneralInfo?.nickname??"-";
-    return Column(
+    return
+      (userRole == "ST") ?
+      Column(
       children: [
         Container(
           decoration: const BoxDecoration(
@@ -122,6 +127,99 @@ class _ProfileGeneralDataHeadState extends State<ProfileGeneralDataHead> {
             textLeft: dataFromAPI?.body?.screeninfo?.textgen??profileTextGen,
             textRight: dataFromAPI?.body?.profileGeneralInfo?.generation??"-"),
       ],
+    )
+    :
+    Column(
+    children: [
+      Container(
+        decoration: const BoxDecoration(
+          border: Border(
+              top: BorderSide(width: 1, color: Colors.black12),
+              bottom: BorderSide(width: 1, color: Colors.transparent)),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Row(
+            children: [
+              Text(
+                dataFromAPI?.body?.screeninfo?.subtitlegeninfo??profileSubTitleGenInfo,
+                style: const TextStyle(fontSize: 20),
+              ),
+              Expanded(
+                child: Container(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: () {
+                      setState(() {
+                        isUnpressed = !isUnpressed;
+                        if(isUnpressed == true){
+                          context.read<ProfileBloc>().add(GeneralSubmitEvent(nickname: nicknameValue
+                              // , name: nameValueController.text
+                              , name: nameValue
+                              , surname: surnameValue));
+                        }
+                      });
+                    },
+                    child: isUnpressed
+                    // ? Text('บันทึก', style: TextStyle(color: Colors.green))
+                        ? Text(dataFromAPI?.body?.screeninfo?.textedit??profileTextEdit, style: const TextStyle(color: Colors.red))
+                        : Text(dataFromAPI?.body?.screeninfo?.textsave??profileTextSave,
+                        style: const TextStyle(color: Colors.green)),
+                    // : Text('แก้ไข', style: TextStyle(color: Colors.red)),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+      ProfileGeneralDataTab(
+        isUnpressed: isUnpressed,
+        textLeft: dataFromAPI?.body?.screeninfo?.textname??profileTextName,
+        textRight: dataFromAPI?.body?.profileGeneralInfo?.name??"-",
+        // textEditingController: nameValueController..text=dataFromAPI?.body?.profileGeneralInfo?.name??"-",
+        onChange: (value) {
+          // nameValueController.text = value;
+          nameValue = value;
+          if (kDebugMode) {
+            // print(nameValueController.text);
+            print(nameValue);
+          }
+        },
+      ),
+      ProfileGeneralDataTab(
+        isUnpressed: isUnpressed,
+        textLeft: dataFromAPI?.body?.screeninfo?.textlname??profileTextLastName,
+        textRight: dataFromAPI?.body?.profileGeneralInfo?.lastname??"-",
+        onChange: (value) {
+          surnameValue = value;
+          if (kDebugMode) {
+            print(surnameValue);
+          }
+        },
+      ),
+      ProfileGeneralDataTab(
+          isUnpressed: isUnpressed,
+          textLeft: dataFromAPI?.body?.screeninfo?.textnickname??profileTextNickName,
+          textRight: dataFromAPI?.body?.profileGeneralInfo?.nickname??"-",
+          onChange: (value) {
+            nicknameValue = value;
+            if (kDebugMode) {
+              print(nicknameValue);
+            }
+          }),
+      ProfileGeneralDataTab(
+          isUnpressed: isUnpressed,
+          textLeft: "ตำแหน่งทางวิชาการ",
+          textRight: "ผู้ช่วยศาสตราจารย์",
+          // onChange: (value) {
+          //   nicknameValue = value;
+          //   if (kDebugMode) {
+          //     print(nicknameValue);
+          //   }
+          // }
+          ),
+    ],
     );
   }
 }
