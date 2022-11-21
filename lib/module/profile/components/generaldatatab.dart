@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hexcolor/hexcolor.dart';
 import '../../../customs/message/text_profile.dart';
 import '../bloc/profile_bloc.dart';
 import '../model/response/api_profile_response.dart';
@@ -42,7 +41,8 @@ class _ProfileGeneralDataHeadState extends State<ProfileGeneralDataHead> {
       Column(
       children: [
         Container(
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
+            color: Theme.of(context).splashColor,
             border: Border(
                 top: BorderSide(width: 1, color: Colors.black12),
                 bottom: BorderSide(width: 1, color: Colors.transparent)),
@@ -53,7 +53,7 @@ class _ProfileGeneralDataHeadState extends State<ProfileGeneralDataHead> {
               children: [
                 Text(
                   dataFromAPI?.body?.screeninfo?.subtitlegeninfo??profileSubTitleGenInfo,
-                  style: const TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 20, color: Theme.of(context).bottomAppBarColor),
                 ),
                 Expanded(
                   child: Container(
@@ -250,7 +250,8 @@ class _ProfileGeneralDataTabState extends State<ProfileGeneralDataTab> {
     String textRight = widget.textRight;
     bool isUnpressed = widget.isUnpressed;
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
+        color: Theme.of(context).scaffoldBackgroundColor,
         border: Border(
             top: BorderSide(width: 1, color: Colors.black12),
             bottom: BorderSide(width: 1, color: Colors.black12)),
@@ -261,13 +262,13 @@ class _ProfileGeneralDataTabState extends State<ProfileGeneralDataTab> {
           children: [
             Text(
               '$textLeft ',
-              style: const TextStyle(fontSize: 18),
+              style: TextStyle(fontSize: 18, color: Theme.of(context).bottomAppBarColor),
             ),
             Expanded(
               child: TextFormField(
-                cursorColor: Colors.black,
+                cursorColor: Theme.of(context).bottomAppBarColor,
                 autofocus: false,
-                style: const TextStyle(fontSize: 18, color: Colors.black),
+                style: TextStyle(fontSize: 18, color: Theme.of(context).bottomAppBarColor),
                 readOnly: isUnpressed,
                 // readOnly: true,
                 textAlign: TextAlign.right,
@@ -311,7 +312,7 @@ class _ProfileGeneralDataReadonlyTabState
     String textRight = widget.textRight;
     return Container(
       decoration: BoxDecoration(
-        color: HexColor('#f5f5f5'),
+        color: Theme.of(context).splashColor.withOpacity(0.7),
         border: const Border(
             top: BorderSide(width: 1, color: Colors.black12),
             bottom: BorderSide(width: 1, color: Colors.black12)),
@@ -322,12 +323,12 @@ class _ProfileGeneralDataReadonlyTabState
           children: [
             Text(
               '$textLeft ',
-              style: const TextStyle(fontSize: 18),
+              style: TextStyle(fontSize: 18, color: Theme.of(context).bottomAppBarColor),
             ),
             Expanded(
               child: TextFormField(
                 autofocus: false,
-                style: const TextStyle(fontSize: 18, color: Colors.black),
+                style: TextStyle(fontSize: 18, color: Theme.of(context).bottomAppBarColor),
                 readOnly: true,
                 textAlign: TextAlign.right,
                 decoration: const InputDecoration(

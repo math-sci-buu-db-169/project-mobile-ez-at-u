@@ -11,7 +11,6 @@ import 'package:ez_at_u/module/profile/components/generaldatatab.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hexcolor/hexcolor.dart';
 import '../../../customs/dialog/dialog_widget.dart';
 import '../../../customs/message/text_profile.dart';
 import '../../../customs/progress_dialog.dart';
@@ -137,18 +136,19 @@ class _ProfilePageState extends State<ProfilePage> with ProgressDialog {
         .width;
     return WillPopScope(onWillPop: ()async{return false;},
         child: Scaffold(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).backgroundColor,
           elevation: 0,
           leading: IconButton(
             onPressed: () {
 // Navigator.pop(context);
               Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context)=>const HomeScreen()));
             },
-            icon: const Icon(
+            icon: Icon(
               Icons.arrow_back,
               size: sizeTitle24,
-              color: Colors.black,
+              color: Theme.of(context).bottomAppBarColor,
             ),
           ),
           title: Text(
@@ -156,8 +156,8 @@ class _ProfilePageState extends State<ProfilePage> with ProgressDialog {
 // '+$global_key'
             ,
 // 'ทดสอบ bloc',
-            style: const TextStyle(
-              color: Colors.black,
+            style: TextStyle(
+              color: Theme.of(context).bottomAppBarColor,
               fontSize: sizeTitle24,
             ),
           ),
@@ -178,7 +178,7 @@ class _ProfilePageState extends State<ProfilePage> with ProgressDialog {
                     Container(
                         height: height * 0.3,
                         width: width,
-                        color: HexColor('#FFF7FD'),
+                        color: Theme.of(context).splashColor,
                         child: (apiProfileResponse?.body?.profileGeneralInfo?.img == "" || apiProfileResponse?.body?.profileGeneralInfo?.img == null)
                             ?
 // Icon(

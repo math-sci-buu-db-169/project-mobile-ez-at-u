@@ -58,6 +58,7 @@ class MyThemes {
     scaffoldBackgroundColor: Colors.grey,
     bottomAppBarColor: Colors.white,
     primaryColor: Colors.black,
+    splashColor: Color(0xFFFFCE53),
     // cardColor:Colors.white,
     primarySwatch: white,
     textTheme: GoogleFonts.notoSerifThaiTextTheme(),
@@ -70,6 +71,7 @@ class MyThemes {
     scaffoldBackgroundColor: Colors.white,
     bottomAppBarColor: Colors.black,
     primaryColor: Colors.white,
+    splashColor: Color(0xFFFFC0F8),
     // cardColor:Colors.white,
     primarySwatch: white,
     textTheme: GoogleFonts.notoSerifThaiTextTheme(
