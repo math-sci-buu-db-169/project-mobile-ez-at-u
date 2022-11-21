@@ -5,6 +5,8 @@ import '../model/response/api_profile_response.dart';
 import 'hiddencareerdatatab.dart';
 
 class ProfileCareerDropdownTab extends StatefulWidget {
+  final Color textColor;
+  final Color dataTabColor;
   final List<Status> statusArray;
   final String textLeft;
   final String userStatusValue;
@@ -24,6 +26,8 @@ class ProfileCareerDropdownTab extends StatefulWidget {
   final Function(String status) callbackFromWorkDataTabStatus;
   const ProfileCareerDropdownTab(
       {Key? key,
+        required this.textColor,
+        required this.dataTabColor,
         required this.textLeft,
         required this.userStatusValue,
         required this.jobTextLeft,
@@ -64,6 +68,8 @@ class _ProfileCareerDropdownTabState extends State<ProfileCareerDropdownTab> {
 
   @override
   Widget build(BuildContext context) {
+    Color textColor = widget.textColor;
+    Color dataTabColor = widget.dataTabColor;
     bool isUnpressed = widget.isUnpressed;
     String subTitleWorkPlace = widget.subtitleWorkplace;
     String userWorkPlace = widget.userWorkplace;
@@ -75,7 +81,8 @@ class _ProfileCareerDropdownTabState extends State<ProfileCareerDropdownTab> {
     return Column(
       children: [
         Container(
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
+            color: dataTabColor.withOpacity(0.1),
             border: Border(
                 top: BorderSide(width: 1, color: Colors.black12),
                 bottom: BorderSide(width: 1, color: Colors.black12)),
@@ -88,7 +95,7 @@ class _ProfileCareerDropdownTabState extends State<ProfileCareerDropdownTab> {
                   width: MediaQuery.of(context).size.width * 0.5,
                   child: Text(
                     widget.textLeft,
-                    style: const TextStyle(fontSize: 18),
+                    style: TextStyle(fontSize: 18, color: textColor),
                   ),
                 ),
                 Expanded(
@@ -97,23 +104,25 @@ class _ProfileCareerDropdownTabState extends State<ProfileCareerDropdownTab> {
                       ignoring: isUnpressed,
                       child:
                       PopupMenuButton<String>(
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Expanded(
                                   child: Text(
                                     showStatusValue??'',
-                                    style: const TextStyle(color: Colors.black),
+                                    style: TextStyle(fontSize:18, color: textColor),
                                     textAlign: TextAlign.end,
                                     overflow: TextOverflow.fade,
                                     softWrap: false,
                                   )),
-                              const Icon(Icons.keyboard_arrow_down)
+                              Icon(Icons.keyboard_arrow_down, color: textColor)
                             ]),
                         itemBuilder: (context) {
                           return List.generate(widget.statusArray.length,
                                   (index) {
                                 return PopupMenuItem(
+                                  textStyle: TextStyle(fontSize: 18, color: textColor),
                                   value: widget.statusArray[index].statusvalue,
                                   child:
                                   Text(widget.statusArray[index].statusname ?? ''),
@@ -147,6 +156,8 @@ class _ProfileCareerDropdownTabState extends State<ProfileCareerDropdownTab> {
           child: Column(
             children: [
               ProfileDropdownCareerDataTab(
+                dataTabColor: dataTabColor,
+                textColor: textColor,
                 isUnpressed: isUnpressed,
                 userJobTypeValue: widget.userJobValue,
                 jobTextLeft: widget.jobTextLeft,
@@ -159,6 +170,8 @@ class _ProfileCareerDropdownTabState extends State<ProfileCareerDropdownTab> {
               },
               ),
               ProfileCareerDataTab(
+                dataTabColor: dataTabColor,
+                textColor: textColor,
                   isUnpressed: isUnpressed,
                   textLeft: subTitleWorkPlace,
                   textRight: userWorkPlace, callbackFromHiddenCareerDataTab: (String workplace) {
@@ -169,6 +182,8 @@ class _ProfileCareerDropdownTabState extends State<ProfileCareerDropdownTab> {
                     // }
               },),
               ProfileCareerDataTab(
+                dataTabColor: dataTabColor,
+                textColor: textColor,
                   isUnpressed: isUnpressed,
                   textLeft: textCareer,
                   textRight: userCareer, callbackFromHiddenCareerDataTab: (String career) {
@@ -178,7 +193,8 @@ class _ProfileCareerDropdownTabState extends State<ProfileCareerDropdownTab> {
                 // }
               },),
               ProfileCareerDataTab(
-                  isUnpressed: isUnpressed,
+                dataTabColor: dataTabColor,
+                textColor: textColor,isUnpressed: isUnpressed,
                   textLeft: textComp,
                   textRight: userCompany, callbackFromHiddenCareerDataTab: (String company) {
                 widget.callbackFromWorkDataTab(company, "company");

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import '../model/response/api_profile_response.dart';
 
 class ProfileAttentionDropdownTab extends StatefulWidget {
+  final Color textColor;
+  final Color dataTabColor;
   final List<Attention> attentionArray;
   final String textLeft;
   final String userAttentionValue;
@@ -11,6 +13,8 @@ class ProfileAttentionDropdownTab extends StatefulWidget {
   final Function(String attentionResult) callbackFromAttentionDataTab;
   const ProfileAttentionDropdownTab(
       {Key? key,
+        required this.textColor,
+        required this.dataTabColor,
         required this.textLeft,
         required this.userAttentionValue,
         required this.attentionArray,
@@ -36,11 +40,14 @@ class _ProfileAttentionDropdownTabState
   }
   @override
   Widget build(BuildContext context) {
+    Color textColor = widget.textColor;
+    Color dataTabColor = widget.dataTabColor;
     String textLeft = widget.textLeft;
 
     var isUnpressed = widget.isUnpressed;
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
+        color: dataTabColor.withOpacity(0.1),
         border: Border(
             top: BorderSide(width: 1, color: Colors.black12),
             bottom: BorderSide(width: 1, color: Colors.black12)),
@@ -55,7 +62,7 @@ class _ProfileAttentionDropdownTabState
 
               child: Text(
                 textLeft,
-                style: const TextStyle(fontSize: 18),
+                style: TextStyle(fontSize: 18, color: textColor),
               ),
             ),
             Expanded(
@@ -64,26 +71,33 @@ class _ProfileAttentionDropdownTabState
                   ignoring: isUnpressed,
                   child:
                   PopupMenuButton<String>(
+                    // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Expanded(
                               child: Text(
                                 showAttentionValue??'',
-                                style: const TextStyle(color: Colors.black),
+                                style:  TextStyle(fontSize:18 ,color: textColor,),
                                 textAlign: TextAlign.end,
                                 overflow: TextOverflow.fade,
                                 softWrap: false,
                               )),
-                          const Icon(Icons.keyboard_arrow_down)
+                          Icon(Icons.keyboard_arrow_down, color: textColor,)
                         ]),
                     itemBuilder: (context) {
                       return List.generate(widget.attentionArray.length,
                               (index) {
                             return PopupMenuItem(
+                              textStyle: TextStyle(fontSize: 18, color: textColor),
                               value: widget.attentionArray[index].attenvalue,
                               child:
-                              Text(widget.attentionArray[index].attenname ?? ''),
+                              Column(
+                                children: [
+                                  Text(widget.attentionArray[index].attenname ?? ''),
+                                ],
+                              ),
                             );
                           });
                     },
@@ -92,6 +106,7 @@ class _ProfileAttentionDropdownTabState
                         userAttentionValue = value;
                         showAttentionValue = widget.attentionArray[int.parse(value)-1].attenname;
                         widget.callbackFromAttentionDataTab(userAttentionValue??"-");
+                        print(widget.attentionArray.length);
                       });
                     },
                   ),

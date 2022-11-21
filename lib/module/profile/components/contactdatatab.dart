@@ -10,9 +10,13 @@ import '../bloc/profile_bloc.dart';
 import '../model/response/api_profile_response.dart';
 
 class ProfileContactDataHead extends StatefulWidget {
+  final Color? dataTabColor;
+  final Color? dataTabColorRO;
+  final Color? textColor;
   final ApiProfileResponse? dataFromAPI;
   final String? userRole;
-  const ProfileContactDataHead({Key? key, required this.dataFromAPI, required this.userRole})
+  const ProfileContactDataHead({Key? key, required this.dataFromAPI, required this.userRole    , required this.textColor
+    , required this.dataTabColor, required this.dataTabColorRO})
       : super(key: key);
 
   @override
@@ -29,6 +33,9 @@ class _ProfileContactDataHeadState extends State<ProfileContactDataHead> {
   late String twitterValue;
   late String youtubeValue;
   late String userRole;
+  late Color textColor;
+  late Color dataTabColor;
+  late Color dataTabColorRO;
   @override
   void initState() {
     dataFromAPI = widget.dataFromAPI;
@@ -38,6 +45,9 @@ class _ProfileContactDataHeadState extends State<ProfileContactDataHead> {
     instagramValue = dataFromAPI?.body?.profileContactInfo?.instagram??"-";
     twitterValue = dataFromAPI?.body?.profileContactInfo?.twitter??"-";
     youtubeValue = dataFromAPI?.body?.profileContactInfo?.youtube??"-";
+    textColor = widget.textColor??Colors.black.withOpacity(0.5);
+    dataTabColor = widget.dataTabColor??Colors.transparent.withOpacity(0.5);
+    dataTabColorRO = widget.dataTabColorRO??Colors.transparent.withOpacity(0.5);
     userRole = widget.userRole??"ST";
     super.initState();
   }
@@ -55,7 +65,8 @@ class _ProfileContactDataHeadState extends State<ProfileContactDataHead> {
       Column(
       children: [
         Container(
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
+            color: dataTabColor,
             border: Border(
                 top: BorderSide(width: 1, color: Colors.black12),
                 bottom: BorderSide(width: 1, color: Colors.transparent)),
@@ -66,7 +77,7 @@ class _ProfileContactDataHeadState extends State<ProfileContactDataHead> {
               children: [
                 Text(
                   dataFromAPI?.body?.screeninfo?.subtitlecont??profileSubTitleContact,
-                  style: const TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 20, color: textColor),
                 ),
                 Expanded(
                   child: Container(
@@ -98,6 +109,8 @@ class _ProfileContactDataHeadState extends State<ProfileContactDataHead> {
           ),
         ),
         ProfileContactDataTab(
+          textColor: textColor,
+          dataTabColor: dataTabColor,
           isUnpressed: isUnpressed,
           iconContact: Icon(
             Icons.phone,
@@ -114,6 +127,8 @@ class _ProfileContactDataHeadState extends State<ProfileContactDataHead> {
           },
         ),
         ProfileContactDataTab(
+          textColor: textColor,
+          dataTabColor: dataTabColor,
             isUnpressed: isUnpressed,
             iconContact: Icon(
               FontAwesomeIcons.line,
@@ -127,6 +142,8 @@ class _ProfileContactDataHeadState extends State<ProfileContactDataHead> {
             }
           },),
         ProfileContactDataTab(
+          textColor: textColor,
+          dataTabColor: dataTabColor,
             isUnpressed: isUnpressed,
             iconContact: Icon(
               FontAwesomeIcons.facebook,
@@ -140,6 +157,8 @@ class _ProfileContactDataHeadState extends State<ProfileContactDataHead> {
             }
           },),
         ProfileContactDataTab(
+          textColor: textColor,
+          dataTabColor: dataTabColor,
             isUnpressed: isUnpressed,
             iconContact: Icon(
               FontAwesomeIcons.instagram,
@@ -153,6 +172,8 @@ class _ProfileContactDataHeadState extends State<ProfileContactDataHead> {
             }
           },),
         ProfileContactDataTab(
+          textColor: textColor,
+          dataTabColor: dataTabColor,
             isUnpressed: isUnpressed,
             iconContact: Icon(
               FontAwesomeIcons.twitter,
@@ -166,6 +187,8 @@ class _ProfileContactDataHeadState extends State<ProfileContactDataHead> {
             }
           },),
         ProfileContactDataTab(
+          textColor: textColor,
+          dataTabColor: dataTabColor,
             isUnpressed: isUnpressed,
             iconContact: Icon(
               FontAwesomeIcons.youtube,
@@ -184,7 +207,8 @@ class _ProfileContactDataHeadState extends State<ProfileContactDataHead> {
       Column(
         children: [
           Container(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
+              color: dataTabColor,
               border: Border(
                   top: BorderSide(width: 1, color: Colors.black12),
                   bottom: BorderSide(width: 1, color: Colors.transparent)),
@@ -195,7 +219,7 @@ class _ProfileContactDataHeadState extends State<ProfileContactDataHead> {
                 children: [
                   Text(
                     dataFromAPI?.body?.screeninfo?.subtitlecont??profileSubTitleContact,
-                    style: const TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 20, color: textColor),
                   ),
                   Expanded(
                     child: Container(
@@ -227,6 +251,8 @@ class _ProfileContactDataHeadState extends State<ProfileContactDataHead> {
             ),
           ),
           ProfileContactDataTCTab(
+            dataTabColor: dataTabColor,
+            textColor: textColor,
             textLeft: "โทร",
             isUnpressed: isUnpressed,
             iconContact: Icon(
@@ -244,6 +270,8 @@ class _ProfileContactDataHeadState extends State<ProfileContactDataHead> {
             },
           ),
           ProfileContactDataTCTab(
+            dataTabColor: dataTabColor,
+            textColor: textColor,
             textLeft: "อีเมล",
             isUnpressed: isUnpressed,
             iconContact: Icon(
@@ -258,6 +286,8 @@ class _ProfileContactDataHeadState extends State<ProfileContactDataHead> {
               }
             },),
           ProfileContactDataTCTab(
+            dataTabColor: dataTabColor,
+            textColor: textColor,
             textLeft: "ห้องปฏิบัติงาน",
             isUnpressed: isUnpressed,
             iconContact: Icon(
@@ -276,6 +306,8 @@ class _ProfileContactDataHeadState extends State<ProfileContactDataHead> {
   }
 }
 class ProfileContactDataTab extends StatefulWidget {
+  final Color textColor;
+  final Color dataTabColor;
   final Widget iconContact;
   final String textContact;
   final bool isUnpressed;
@@ -287,6 +319,8 @@ class ProfileContactDataTab extends StatefulWidget {
         required this.iconContact,
         required this.textContact,
         required this.isUnpressed,
+        required this.textColor,
+        required this.dataTabColor,
         this.keyboardType,
         this.maxLength,
         this.onChange})
@@ -299,11 +333,14 @@ class ProfileContactDataTab extends StatefulWidget {
 class _ProfileContactDataTabState extends State<ProfileContactDataTab> {
   @override
   Widget build(BuildContext context) {
+    Color textColor = widget.textColor;
+    Color dataTabColor = widget.dataTabColor;
     Widget iconContact = widget.iconContact;
     String textContact = widget.textContact;
     bool isUnpressed = widget.isUnpressed;
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
+        color: dataTabColor.withOpacity(0.1),
         border: Border(
             top: BorderSide(width: 1, color: Colors.black12),
             bottom: BorderSide(width: 1, color: Colors.black12)),
@@ -315,6 +352,7 @@ class _ProfileContactDataTabState extends State<ProfileContactDataTab> {
             iconContact,
             Expanded(
               child: TextFormField(
+                style: TextStyle(fontSize: 18, color: textColor),
                 cursorColor: Colors.black,
                 keyboardType: widget.keyboardType,
                 maxLength: widget.maxLength,
@@ -337,6 +375,8 @@ class _ProfileContactDataTabState extends State<ProfileContactDataTab> {
 
 //////
 class ProfileContactDataTCTab extends StatefulWidget {
+  final Color textColor;
+  final Color dataTabColor;
   final Widget iconContact;
   final String textContact;
   final String textLeft;
@@ -346,6 +386,8 @@ class ProfileContactDataTCTab extends StatefulWidget {
   final int? maxLength;
   const ProfileContactDataTCTab(
       {Key? key,
+        required this.textColor,
+        required this.dataTabColor,
         required this.textLeft,
       required this.iconContact,
       required this.textContact,
@@ -362,12 +404,15 @@ class ProfileContactDataTCTab extends StatefulWidget {
 class _ProfileContactDataTCTabState extends State<ProfileContactDataTCTab> {
   @override
   Widget build(BuildContext context) {
+    Color textColor = widget.textColor;
+    Color dataTabColor = widget.dataTabColor;
     Widget iconContact = widget.iconContact;
     String textContact = widget.textContact;
     String textLeft = widget.textLeft;
     bool isUnpressed = widget.isUnpressed;
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
+        color: dataTabColor.withOpacity(0.1),
         border: Border(
             top: BorderSide(width: 1, color: Colors.black12),
             bottom: BorderSide(width: 1, color: Colors.black12)),
@@ -379,10 +424,11 @@ class _ProfileContactDataTCTabState extends State<ProfileContactDataTCTab> {
             iconContact,
             Text(
               ' $textLeft ',
-              style: const TextStyle(fontSize: 18),
+              style: TextStyle(fontSize: 18, color: textColor),
             ),
             Expanded(
               child: TextFormField(
+                style: TextStyle(fontSize: 18, color: textColor),
                 cursorColor: Colors.black,
                 keyboardType: widget.keyboardType,
                 maxLength: widget.maxLength,

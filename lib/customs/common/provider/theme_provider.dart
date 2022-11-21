@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,11 +6,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../utils/shared_preferences.dart';
 
 class ThemeProvider extends ChangeNotifier {
-
   // ThemeMode themeMode = ThemeMode.system;
   late ThemeMode themeMode = ThemeMode.system;
   late SharedPreferences prefs;
-  void getPrefs( ) async {
+  void getPrefs() async {
     prefs = await SharedPreferences.getInstance();
 
     if (prefs.getInt('themeMode') != null) {
@@ -36,11 +34,12 @@ class ThemeProvider extends ChangeNotifier {
       }
     } else {
       themeMode = ThemeMode.system;
-      setThemeModeApp( intMode: 2,);
+      setThemeModeApp(
+        intMode: 2,
+      );
     }
-
-
   }
+
   bool get isDarkMode {
     if (themeMode == ThemeMode.system) {
       final brightness = SchedulerBinding.instance.window.platformBrightness;
@@ -89,30 +88,30 @@ class MyThemes {
     },
   );
   static final darkTheme = ThemeData(
-    backgroundColor:Colors.grey.shade900,
-    scaffoldBackgroundColor: Colors.grey,
-    bottomAppBarColor: Colors.white,
-    primaryColor: Colors.black,
-    // cardColor:Colors.white,
-    primarySwatch: white,
-    textTheme: GoogleFonts.notoSerifThaiTextTheme(),
-    colorScheme: const ColorScheme.dark(),
-    iconTheme: const IconThemeData(color: Colors.yellow, opacity: 0.8),
-      appBarTheme: const  AppBarTheme(backgroundColor:Colors.black,foregroundColor:Colors.white )
-  );
+      backgroundColor: Colors.grey.shade900,
+      scaffoldBackgroundColor: Colors.grey,
+      bottomAppBarColor: Colors.white,
+      primaryColor: Colors.black,
+      splashColor: Color(0xFFFFCE53),
+      // cardColor:Colors.white,
+      primarySwatch: white,
+      textTheme: GoogleFonts.notoSerifThaiTextTheme(),
+      colorScheme: const ColorScheme.dark(),
+      iconTheme: const IconThemeData(color: Colors.yellow, opacity: 0.8),
+      appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.black, foregroundColor: Colors.white));
 
   static final lightTheme = ThemeData(
-    backgroundColor:Colors.white,
-    scaffoldBackgroundColor: Colors.white,
-    bottomAppBarColor: Colors.black,
-    primaryColor: Colors.white,
-    // cardColor:Colors.white,
-    primarySwatch: white,
-    textTheme: GoogleFonts.notoSerifThaiTextTheme(
-
-    ),
-    colorScheme: const ColorScheme.light(),
-    iconTheme: const IconThemeData(color: Colors.purpleAccent, opacity: 0.8),
-      appBarTheme: const  AppBarTheme(backgroundColor:Colors.white,foregroundColor:Colors.black )
-  );
+      backgroundColor: Colors.white,
+      scaffoldBackgroundColor: Colors.white,
+      bottomAppBarColor: Colors.black,
+      primaryColor: Colors.white,
+      splashColor: Color(0xFFFFC0F8),
+      // cardColor:Colors.white,
+      primarySwatch: white,
+      textTheme: GoogleFonts.notoSerifThaiTextTheme(),
+      colorScheme: const ColorScheme.light(),
+      iconTheme: const IconThemeData(color: Colors.purpleAccent, opacity: 0.8),
+      appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.white, foregroundColor: Colors.black));
 }
