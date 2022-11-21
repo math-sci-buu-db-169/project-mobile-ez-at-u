@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../../customs/card/card_more.dart';
-import '../../../../customs/color/color_const.dart';
 import '../../../../customs/message/text_more.dart';
 import '../../../../customs/size/size.dart';
 import '../../../../module/home/model/response/more_response/screen_more_response.dart';
@@ -13,31 +12,31 @@ import '../../../../module/home/screen/more_screen/pdpa_screen.dart';
 
 moreBodyWidget(BuildContext context, ScreenMoreResponse? screenMoreResponse,
     Future<void> Function(Uri url) launchInBrowser, setState) {
+
   return WillPopScope(
       onWillPop: () async {
         return false;
       },
       child: Scaffold(
           appBar: AppBar(
-            backgroundColor: backgroundAppBar,
+            backgroundColor: Theme.of(context).primaryColor,
             elevation: 0,
             leading: IconButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: const Icon(
+              icon:  Icon(
                 Icons.arrow_back,
                 size: sizeTitle24,
-                color: Colors.black,
+                color:  Theme.of(context).bottomAppBarColor,
               ),
             ),
             title: Text(
               screenMoreResponse?.body?.screeninfo?.titlemore ?? moreTitleMore,
-              style: const TextStyle(
-                color: Colors.black,
+              style:  TextStyle(
+                // color: Colors.black,
                 fontSize: sizeTitle24,
-              ),
-            ),
+                  color: Theme.of(context).bottomAppBarColor,)),
             // Bypass imge
             // actions: <Widget>[
             //   IconButton(
@@ -59,7 +58,7 @@ moreBodyWidget(BuildContext context, ScreenMoreResponse? screenMoreResponse,
           ),
           body: SafeArea(
             child: Container(
-              color: Colors.grey[100],
+              color: Colors.transparent.withOpacity(0.1),
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               child: SingleChildScrollView(
@@ -68,9 +67,10 @@ moreBodyWidget(BuildContext context, ScreenMoreResponse? screenMoreResponse,
                     padding: const EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 10),
                     child: Text(
                       screenMoreResponse?.body?.screeninfo?.subtitileboard ?? moreSubTitleBoard,
-                      style: const TextStyle(
+                      style:  TextStyle(
                         fontSize: sizeTextBig20,
                         fontWeight: FontWeight.w600,
+                        color: Theme.of(context).bottomAppBarColor,
                       ),
                     ),
                   ),
@@ -114,9 +114,10 @@ moreBodyWidget(BuildContext context, ScreenMoreResponse? screenMoreResponse,
                     padding: const EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 10),
                     child: Text(
                       screenMoreResponse?.body?.screeninfo?.subtitiledepart ?? moreSubTitleDepart,
-                      style: const TextStyle(
+                      style:  TextStyle(
                         fontSize: sizeTextBig20,
                         fontWeight: FontWeight.w600,
+                        color: Theme.of(context).bottomAppBarColor,
                       ),
                     ),
                   ),
@@ -165,9 +166,11 @@ moreBodyWidget(BuildContext context, ScreenMoreResponse? screenMoreResponse,
                     padding: const EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 10),
                     child: Text(
                       screenMoreResponse?.body?.screeninfo?.subtitilesup ?? moreSubTitleSup,
-                      style: const TextStyle(
+                      style:  TextStyle(
                         fontSize: sizeTextBig20,
                         fontWeight: FontWeight.w600,
+                        color: Theme.of(context).bottomAppBarColor,
+
                       ),
                     ),
                   ),

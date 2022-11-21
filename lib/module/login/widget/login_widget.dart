@@ -30,7 +30,7 @@ loginPageWidget(BuildContext context, ScreenLoginResponse? screenLoginResponse, 
     },
     child: Scaffold(
       // backgroundColor: Colors.transparent,
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: SizedBox(
             height: MediaQuery.of(context).size.height,
@@ -145,7 +145,7 @@ loginPageWidget(BuildContext context, ScreenLoginResponse? screenLoginResponse, 
                       padding: const EdgeInsets.only(left: 10.0),
                       child: TextLinkToScreenCustom(
                           linklabel: screenLoginResponse?.body?.screeninfo?.btnForgotPass ?? loginBtnForgotPassword,
-                          linktextcolor: tcForgot,
+                          linktextcolor: Theme.of(context).bottomAppBarColor,
                           sizetext: sizeTextSmaller14,
                           onTap: () async {
                             Navigator.push(
@@ -164,10 +164,10 @@ loginPageWidget(BuildContext context, ScreenLoginResponse? screenLoginResponse, 
                               .add(LoginSubmitEvent(userID: userController.text, password: passwordController.text));
                         },
                         label: screenLoginResponse?.body?.screeninfo?.btnLogin ?? loginBtnLogin,
-                        colortext: tcButtonTextBlack,
-                        colorbutton: tcButtonTextWhite,
+                        colortext:  Theme.of(context).bottomAppBarColor,
+                        colorbutton:  Theme.of(context).scaffoldBackgroundColor,
                         sizetext: sizeTextBig20,
-                        colorborder: tcButtonTextBoarder,
+                        colorborder: Theme.of(context).bottomAppBarColor.withOpacity(0.5),
                         sizeborder: 10,
                       ),
                     ),
@@ -180,8 +180,8 @@ loginPageWidget(BuildContext context, ScreenLoginResponse? screenLoginResponse, 
                       children: [
                         Text(
                           screenLoginResponse?.body?.screeninfo?.textReg ?? loginTextRegister,
-                          style: const TextStyle(
-                              fontSize: sizeTextSmall16, color: Colors.black, fontWeight: FontWeight.w300),
+                          style:  TextStyle(
+                              fontSize: sizeTextSmall16, color: Theme.of(context).bottomAppBarColor, fontWeight: FontWeight.w300),
                         ),
                         const SizedBox(
                           width: 5,

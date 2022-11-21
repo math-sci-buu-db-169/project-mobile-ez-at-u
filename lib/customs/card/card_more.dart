@@ -7,7 +7,7 @@ buildCardBoard(BuildContext context,
   return GestureDetector(
     onTap: onTap,
     child: Card(
-      color: Colors.white,
+      // color: Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.0),
       ),
@@ -31,14 +31,15 @@ buildCardBoard(BuildContext context,
                     Icon(
                       iconBoard,
                       size: MediaQuery.of(context).size.width * 0.1,
-                      color: Colors.black,
+                      // color: Colors.black,
                     ),
 
                     Text(
                       title,
-                      style: const TextStyle(
+                      style:  TextStyle(
                         fontSize: sizeTextBig20,
                         fontWeight: FontWeight.w600,
+                        color: Theme.of(context).bottomAppBarColor,
                       ),
                     ),
                   ],
@@ -65,7 +66,7 @@ buildCardMore({
           //   width: MediaQuery.of(context).size.width,
           //   height: MediaQuery.of(context).size.height * 0.1,
           Card(
-        color: Colors.white,
+        // color: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12.0),
         ),
@@ -74,23 +75,23 @@ buildCardMore({
           margin: const EdgeInsets.all(1),
           // padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
           decoration: BoxDecoration(
-            color: const Color(0xFF94CCF9),
+            color: transparent,
             border: Border.all(
               color: transparent,
               width: 4,
             ),
             borderRadius: BorderRadius.circular(12.0),
-            gradient: const LinearGradient(stops: [
-              0.02,
-              0.02,
-              0.94
-            ], colors: [
-              // Color(0xFF000000),
-              Colors.white,
-              Colors.white,
-              // Color(0xFFCECECE),
-              Colors.white,
-            ], begin: Alignment.centerLeft, end: Alignment.centerRight),
+            // gradient: const LinearGradient(stops: [
+            //   0.02,
+            //   0.02,
+            //   0.94
+            // ], colors: [
+            //   // Color(0xFF000000),
+            //   Colors.white,
+            //   Colors.white,
+            //   // Color(0xFFCECECE),
+            //   Colors.white,
+            // ], begin: Alignment.centerLeft, end: Alignment.centerRight),
           ),
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height * 0.1,
@@ -104,18 +105,17 @@ buildCardMore({
                   ),
                   Icon(
                     iconsFile,
-                    color: tcBlack,
                     size: 30,
                   ),
                   Text(
                     "    $title",
-                    style: const TextStyle(fontSize: 20, color: tcBlack),
+                    style:  TextStyle(color: Theme.of(context).bottomAppBarColor,fontSize: 20,),
                   ),
                 ],
               ),
-              const Icon(
+               Icon(
                 Icons.arrow_forward_ios,
-                color: tcBlack,
+                color:  Theme.of(context).iconTheme.color,
                 size: 20,
               ),
             ],

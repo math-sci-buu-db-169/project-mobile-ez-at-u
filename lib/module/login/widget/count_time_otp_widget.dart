@@ -44,7 +44,8 @@ class _CountTimeOTPWidgetState extends State<CountTimeOTPWidget> {
                             padding: const EdgeInsets.only(left: 10, right: 10),
                             child: Text(
                               "${remaining.minutes}:${remaining.seconds}",
-                              style: const TextStyle(fontSize: sizeTextSmall16),
+                              style:  TextStyle(fontSize: sizeTextSmall16,
+                                color: Theme.of(context).bottomAppBarColor,),
                             ),
                           ),
                           widget.sendOTP,
@@ -53,7 +54,8 @@ class _CountTimeOTPWidgetState extends State<CountTimeOTPWidget> {
                 : Center(
                     child: Text(
                       "${remaining.minutes}:${remaining.seconds}",
-                      style: const TextStyle(fontSize: sizeTextSmall16),
+                      style:  TextStyle(fontSize: sizeTextSmall16,
+                          color: Theme.of(context).bottomAppBarColor,),
                     ),
                   );
           },

@@ -17,91 +17,100 @@ studentListGenBody(BuildContext context, ScreenMoreListNameGenResponse? screenMo
           return false;
         },
         child: Scaffold(
-          backgroundColor: Colors.grey[200],
+          backgroundColor: Theme.of(context).backgroundColor,
           appBar: AppBar(
-            backgroundColor: Colors.white,
+            backgroundColor: Theme.of(context).primaryColor,
             elevation: 0,
             leading: IconButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: const Icon(
+              icon:  Icon(
                 Icons.arrow_back,
                 size: sizeTitle24,
-                color: Colors.black,
+                color: Theme.of(context).bottomAppBarColor ,
+                // color: Colors.black,
               ),
             ),
             title: Text(
               screenMoreListNameGenResponse?.body?.screeninfo?.titleboardnisit ?? boardDetailNiSitTitleBoardNiSit,
-              style: const TextStyle(
-                color: Colors.black,
+              style:  TextStyle(
+                // color: Colors.black,
                 fontSize: sizeTitle24,
+                color: Theme.of(context).bottomAppBarColor ,
               ),
             ),
             actions: [
               IconButton(
                   onPressed: () {},
-                  icon: const FaIcon(FontAwesomeIcons.filter,
-                      size: 20, color: Color(0xFF4F4F4F))),
+                  icon:  FaIcon(FontAwesomeIcons.filter,
+                      size: 20,
+                      color: Theme.of(context).bottomAppBarColor ,
+                  )),
             ],
           ),
           body: SafeArea(
-            child: Column(
-              children: [
-                TextFieldSearchGenBUUCustom(
-                  textEditingController: searchNiSItController,
-                  callbackFromOptionSearch: (int optionSearchResult) {
-                    setOptionSearch(optionSearchResult);
-                    // optionSearch = optionSearchResult;
-                  },
-                  onChanged: (valuePassword) {
-                    searchNiSItController.text = valuePassword;
-                    optionSearch == 0
-                        ?
-                    context.read<MoreBloc>().add(MoreBoardListGenStudentSearchEvent(gen: searchNiSItController.text ,genname: '',))
-                        :context.read<MoreBloc>().add(MoreBoardListGenStudentSearchEvent(gen: '',genname: searchNiSItController.text ,));
-                  },
-                  // hintLabel: 'ชื่อรุ่นมหาลัย',
-                  textInputType: TextInputType.text,
-                  initialvalue: searchNiSItController.text,
-                  iconsFile : Icons.search,
-
-                ),
-
-                Container(
-                  margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                  color: Colors.transparent,
-                  child: boardItemStudentUser(
-                    dataUserStudent: screenMoreListNameGenResponse?.body?.userGen,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => MoreBoardStudentListScreen(
-                            titleGen: "${screenMoreListNameGenResponse?.body?.userGen?.numgen}",
-                          ),
-                        ),
-                      );
+            child: Container(
+              color: Colors.transparent.withOpacity(0.1),
+              height: double.infinity,
+              width: double.infinity,
+              child: Column(
+                children: [
+                  TextFieldSearchGenBUUCustom(
+                    textEditingController: searchNiSItController,
+                    callbackFromOptionSearch: (int optionSearchResult) {
+                      setOptionSearch(optionSearchResult);
+                      // optionSearch = optionSearchResult;
                     },
+                    onChanged: (valuePassword) {
+                      searchNiSItController.text = valuePassword;
+                      optionSearch == 0
+                          ?
+                      context.read<MoreBloc>().add(MoreBoardListGenStudentSearchEvent(gen: searchNiSItController.text ,genname: '',))
+                          :context.read<MoreBloc>().add(MoreBoardListGenStudentSearchEvent(gen: '',genname: searchNiSItController.text ,));
+                    },
+                    // hintLabel: 'ชื่อรุ่นมหาลัย',
+                    textInputType: TextInputType.text,
+                    initialvalue: searchNiSItController.text,
+                    iconsFile : Icons.search,
+
                   ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          buildGenListStudent(context, screenMoreListNameGenResponse),
-                          const SizedBox(
-                            height: 150,
+
+                  Container(
+                    margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                    color: Colors.transparent,
+                    child: boardItemStudentUser(
+                      dataUserStudent: screenMoreListNameGenResponse?.body?.userGen,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MoreBoardStudentListScreen(
+                              titleGen: "${screenMoreListNameGenResponse?.body?.userGen?.numgen}",
+                            ),
                           ),
-                        ],
+                        );
+                      }, context: context,
+                    ),
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            buildGenListStudent(context, screenMoreListNameGenResponse),
+                            const SizedBox(
+                              height: 150,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
+                ],
+              ),
+            )
           ),
         ));
   }

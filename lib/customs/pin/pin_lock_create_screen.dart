@@ -519,10 +519,14 @@ class _PinLockAppCreatePageState extends State<PinLockAppCreatePage> {
                 borderRadius: BorderRadius.circular(50.0),
               ),
               child: Tooltip(
-                message: 'Exit Application',
+                message: 'Exit',
                 child: IconButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                    // Navigator.pop(context);
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => const SettingPinLockAppScreen()));
                   },
                   icon: const Icon(
                     Icons.clear,

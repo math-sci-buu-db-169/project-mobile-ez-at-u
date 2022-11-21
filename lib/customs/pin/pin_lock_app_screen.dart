@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../module/home/screen/home_widget/setting_pin_lock_app_screen.dart';
 import 'local_auth_api.dart';
 
 class PinLockAppScreen extends StatefulWidget {
@@ -526,7 +527,11 @@ class _PinLockAppPageState extends State<PinLockAppPage> {
                 message: 'Exit',
                 child: IconButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                    // Navigator.pop(context);
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => const SettingPinLockAppScreen()));
                   },
                   icon: const Icon(
                     Icons.clear,

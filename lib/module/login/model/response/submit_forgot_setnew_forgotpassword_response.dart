@@ -38,48 +38,51 @@ class SubmitForgotSetNewForgotPasswordResponse {
 /// status : 200
 /// message : "success"
 /// modulename : "login"
-
 Head headFromJson(String str) => Head.fromJson(json.decode(str));
 String headToJson(Head data) => json.encode(data.toJson());
-
 class Head {
   Head({
-    int? status,
+    num? status,
     String? message,
     String? modulename,
-  }) {
+    bool? timeexpire,}){
     _status = status;
     _message = message;
     _modulename = modulename;
+    _timeexpire = timeexpire;
   }
 
   Head.fromJson(dynamic json) {
     _status = json['status'];
     _message = json['message'];
     _modulename = json['modulename'];
+    _timeexpire = json['timeexpire'];
   }
-  int? _status;
+  num? _status;
   String? _message;
   String? _modulename;
-  Head copyWith({
-    int? status,
+  bool? _timeexpire;
+  Head copyWith({  num? status,
     String? message,
     String? modulename,
-  }) =>
-      Head(
-        status: status ?? _status,
-        message: message ?? _message,
-        modulename: modulename ?? _modulename,
-      );
-  int? get status => _status;
+    bool? timeexpire,
+  }) => Head(  status: status ?? _status,
+    message: message ?? _message,
+    modulename: modulename ?? _modulename,
+    timeexpire: timeexpire ?? _timeexpire,
+  );
+  num? get status => _status;
   String? get message => _message;
   String? get modulename => _modulename;
+  bool? get timeexpire => _timeexpire;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['status'] = _status;
     map['message'] = _message;
     map['modulename'] = _modulename;
+    map['timeexpire'] = _timeexpire;
     return map;
   }
+
 }

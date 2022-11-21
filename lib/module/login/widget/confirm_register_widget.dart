@@ -30,22 +30,22 @@ Widget confirmRegisterPageWidget(
     },
     child: Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: const Icon(
+          icon:  Icon(
             Icons.arrow_back,
             size: sizeTitle24,
-            color: Colors.black,
+            color: Theme.of(context).bottomAppBarColor,
           ),
         ),
         title: Text(
           screenRegisterResponse?.body?.screeninfo?.titleconregis ?? confirmRegisterTitleConfirmRegister,
-          style: const TextStyle(
-            color: Colors.black,
+          style:  TextStyle(
+            color: Theme.of(context).bottomAppBarColor,
             fontSize: sizeTitle24,
           ),
         ),
@@ -54,7 +54,7 @@ Widget confirmRegisterPageWidget(
         child: Container(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
-            color: Colors.white,
+            color:  Theme.of(context).scaffoldBackgroundColor,
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,33 +66,36 @@ Widget confirmRegisterPageWidget(
                       ),
                       Text(
                         screenRegisterResponse?.body?.screeninfo?.textotpwillsent ?? confirmRegisterTextOTPWilSent,
-                        style: const TextStyle(
+                        style:  TextStyle(
                           fontSize: sizeTextBig20,
                           fontWeight: FontWeight.w600,
+                          color: Theme.of(context).bottomAppBarColor,
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 15, bottom: 15, left: 20, right: 20),
                         child: Text(valueEmailRegister,
-                            style: const TextStyle(
+                            style:  TextStyle(
                                 decoration: TextDecoration.underline,
-                                color: tcOTPSent,
+                                color: Theme.of(context).bottomAppBarColor.withOpacity(0.5),
                                 decorationColor: tcOTPSent,
                                 fontWeight: FontWeight.w500,
                                 fontSize: sizeTextBig20)),
                       ),
                       Text(
                         '$textRef : $ref ',
-                        style: const TextStyle(
+                        style:  TextStyle(
                           fontSize: sizeTextSmaller14,
                           fontWeight: FontWeight.w600,
+                          color: Theme.of(context).bottomAppBarColor,
                         ),
                       ),
                       Text(
                         screenRegisterResponse?.body?.screeninfo?.textpleaseconfirm ?? confirmRegisterTextPleaseConfirm,
-                        style: const TextStyle(
+                        style:  TextStyle(
                           fontSize: sizeTextBig20,
                           fontWeight: FontWeight.w500,
+                          color: Theme.of(context).bottomAppBarColor,
                         ),
                       ),
                       SizedBox(
@@ -115,7 +118,7 @@ Widget confirmRegisterPageWidget(
                     sendOTP: TextSendOTPCustom(
                       textlabel:
                           screenRegisterResponse?.body?.screeninfo?.textsentotpagain ?? confirmRegisterTextSentOTPAgain,
-                      textcolor: tcOTPSent,
+                      textcolor:Theme.of(context).bottomAppBarColor.withOpacity(0.5),
                       sizetext: sizeTextSmall16,
                       onTap: () {
                         BlocProvider.of<RegisterBloc>(context).add(ReSentOTPConfirmRegisterEvent(
@@ -137,10 +140,10 @@ Widget confirmRegisterPageWidget(
                   Center(
                     child: ButtonCustom(
                       label: screenRegisterResponse?.body?.screeninfo?.btnconfirm ?? confirmRegisterBtnConfirm,
-                      colortext: tcButtonTextBlack,
-                      colorbutton: tcButtonTextWhite,
+                      colortext:  Theme.of(context).bottomAppBarColor,
+                      colorbutton:  Theme.of(context).scaffoldBackgroundColor,
                       sizetext: sizeTextBig20,
-                      colorborder: tcButtonTextBoarder,
+                      colorborder: Theme.of(context).bottomAppBarColor.withOpacity(0.5),
                       sizeborder: 10,
                       onPressed: () {
                         BlocProvider.of<RegisterBloc>(context)

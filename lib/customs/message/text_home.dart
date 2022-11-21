@@ -10,6 +10,7 @@ const String homeTextLang   = 'ภาษา';
 const String homeTextThai   = 'Thai';
 const String homeBtnConfirmPassword   = 'เปลี่ยนรหัสผ่าน';
 const String homeBtnPINAPP   = 'รหัสล็อคหน้าจอ';
+const String homeThemeModeAPP   = 'โหมดหน้าจอ';
 const String homeBtnChangePINAPP   = 'Change PIN ';
 const String homeBtnChangePin   = 'เปลี่ยนรหัส PIN';
 const String homeBtnDelAcc   = 'ลบบัญชี';

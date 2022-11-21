@@ -1,10 +1,11 @@
+
 import 'package:ez_at_u/customs/color/color_const.dart';
 import 'package:flutter/material.dart';
 
 var styleButtonDialog = ButtonStyle(
-    backgroundColor: MaterialStateProperty.all(tcButtonTextWhite),
+    backgroundColor: MaterialStateProperty.all(Colors.transparent),
     shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
-      side: const BorderSide(color: tcButtonTextBoarder),
+      side: const BorderSide(color: Colors.white),
       borderRadius: BorderRadius.circular(16),
     )));
 

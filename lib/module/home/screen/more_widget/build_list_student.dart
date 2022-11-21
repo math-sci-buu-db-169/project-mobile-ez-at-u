@@ -23,7 +23,7 @@ buildGenListStudent(BuildContext context, ScreenMoreListNameGenResponse? screenM
                         ),
                       ),
                     );
-                  },
+                  }, context: context,
                 ))),
   );
 }

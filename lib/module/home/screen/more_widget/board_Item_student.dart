@@ -7,6 +7,7 @@ import '../../../../module/home/model/response/more_response/screen_more_list_na
 
 String phImg = "";
 boardItemStudent({
+  required BuildContext context,
   VoidCallback? onTap,
   ListGen? data,
 }) {
@@ -21,6 +22,7 @@ boardItemStudent({
             bottomLeft: Radius.circular(30),
           ),
         ),
+        elevation: 8,
         child: Table(
           border: TableBorder.symmetric(outside: const BorderSide(width: 2, color: Colors.transparent)),
           columnWidths: const {0: FractionColumnWidth(0.3), 1: FractionColumnWidth(0.01), 2: FractionColumnWidth(0.69)},
@@ -49,7 +51,7 @@ boardItemStudent({
                     Center(
                         child: Text(
                       "${data?.numgen}",
-                      style: const TextStyle(color: Colors.black, fontSize: 30),
+                      style:  const TextStyle(color: Colors.black, fontSize: 30),
                     )),
                   ]),
                 ),
@@ -57,7 +59,7 @@ boardItemStudent({
               const SizedBox(),
               Text(
                 "${data?.namegen}",
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style:  TextStyle(color: Theme.of(context).bottomAppBarColor ,fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ])
           ],
@@ -68,32 +70,21 @@ boardItemStudent({
 }
 
 boardItemStudentUser({
+  required BuildContext context,
   VoidCallback? onTap,
   UserGen? dataUserStudent,
 }) {
   return GestureDetector(
     onTap: onTap,
     // color: HexColor('#F5F5F5'),
-    child: Container(
-      padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: const BorderRadius.only(
-          topRight: Radius.circular(30),
-          // bottomLeft: Radius.circular(40),
-        ),
-        gradient: LinearGradient(stops: const [
-          0.02,
-          0.02,
-          0.25,
-          1,
-        ], colors: [
-          HexColor("${dataUserStudent?.colorgen}"),
-          Colors.white,
-          Colors.white,
-          HexColor("${dataUserStudent?.colorgen}"),
-        ], begin: Alignment.centerLeft, end: Alignment.centerRight),
-      ),
+    child:  Card(
+  shape: const RoundedRectangleBorder(
+  borderRadius: BorderRadius.only(
+  topLeft: Radius.circular(30),
+  bottomRight: Radius.circular(30),
+  ),
+  ),
+  elevation: 8,
       child: Table(
         border: TableBorder.symmetric(outside: const BorderSide(width: 2, color: Colors.transparent)),
         columnWidths: const {0: FractionColumnWidth(0.3), 1: FractionColumnWidth(0.01), 2: FractionColumnWidth(0.69)},
@@ -123,7 +114,7 @@ boardItemStudentUser({
                   Center(
                       child: Text(
                     "${dataUserStudent?.numgen}",
-                    style: const TextStyle(color: Colors.black, fontSize: 30),
+                    style:  const TextStyle(color: Colors.black, fontSize: 30),
                   )),
                 ]),
               ),
@@ -131,7 +122,7 @@ boardItemStudentUser({
             const SizedBox(),
             Text(
               "${dataUserStudent?.namegen}",
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style:  TextStyle(color: Theme.of(context).bottomAppBarColor ,fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ])
         ],

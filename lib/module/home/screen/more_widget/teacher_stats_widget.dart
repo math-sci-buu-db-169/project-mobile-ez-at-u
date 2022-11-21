@@ -8,7 +8,7 @@ teacherStatsWidget(BuildContext context, ScreenMoreBoardTeacherResponse? screenM
   return Expanded(
     child: Container(
       padding: const EdgeInsets.fromLTRB(2, 5, 2, 10),
-      color: Colors.transparent,
+      color: Colors.transparent.withOpacity(0.1),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -16,8 +16,8 @@ teacherStatsWidget(BuildContext context, ScreenMoreBoardTeacherResponse? screenM
             Padding(
               padding: const EdgeInsets.only(left: 10, top: 10),
               child: Text(screenMoreBoardTeacherResponse?.body?.screeninfo?.textadvisor ?? boardPersonalTextAdvisor,
-                  style: const TextStyle(
-                    color: Colors.black,
+                  style:  TextStyle(
+                    color: Theme.of(context).bottomAppBarColor,
                     fontSize: sizeTitle24,
                   )),
             ),
@@ -26,8 +26,8 @@ teacherStatsWidget(BuildContext context, ScreenMoreBoardTeacherResponse? screenM
               padding: const EdgeInsets.only(left: 10, top: 5),
               child: Text(
                   screenMoreBoardTeacherResponse?.body?.screeninfo?.textacademicstaff ?? boardPersonalTextAcademicStaff,
-                  style: const TextStyle(
-                    color: Colors.black,
+                  style:  TextStyle(
+                    color: Theme.of(context).bottomAppBarColor,
                     fontSize: sizeTitle24,
                   )),
             ),

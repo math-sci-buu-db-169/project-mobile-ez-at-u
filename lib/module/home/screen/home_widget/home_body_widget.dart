@@ -10,7 +10,8 @@ homeBodyActivityWidget(
   ScreenStatusActivityResponse? screenStatusActivityResponse,
 ) {
   return Container(
-    color: tcButtonTextWhite,
+    color: Theme.of(context).scaffoldBackgroundColor,
+
     child: Padding(
       padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
       child: SingleChildScrollView(
@@ -38,26 +39,29 @@ homeBodyEntryWidget(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(
+             Icon(
               Icons.running_with_errors_outlined,
-              color: tcNoActivity,
+              color:Theme.of(context).bottomAppBarColor.withOpacity(0.8),
               size: 100,
             ),
             const SizedBox(
               height: 10,
             ),
             Text(alertNoActivityResponse?.body?.screeninfo?.noactivity??noActivity,
-                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: tcNoActivity)),
+                style:  TextStyle(fontSize: 20, fontWeight: FontWeight.w500,
+                  color:Theme.of(context).bottomAppBarColor.withOpacity(0.8),)),
             const SizedBox(
               height: 5,
             ),
             Text(alertNoActivityResponse?.body?.screeninfo?.subactlineone??subNoActivityLineOne,
-                style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: tcNoActivity)),
+                style:  TextStyle(fontSize: 15, fontWeight: FontWeight.w500,
+                  color:Theme.of(context).bottomAppBarColor.withOpacity(0.8),)),
             const SizedBox(
               height: 5,
             ),
             Text(alertNoActivityResponse?.body?.screeninfo?.subactlinetwo??subNoActivityLineTwo,
-                style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: tcNoActivity)),
+                style:  TextStyle(fontSize: 15, fontWeight: FontWeight.w500,
+                  color:Theme.of(context).bottomAppBarColor.withOpacity(0.8),)),
             const SizedBox(
               height: 100,
             ),

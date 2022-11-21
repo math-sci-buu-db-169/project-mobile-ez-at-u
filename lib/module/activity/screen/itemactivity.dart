@@ -53,9 +53,9 @@ _buildListActivity({required String dataDetail, required String title}) {
   return TableRow(children: [
     Text(
       title,
-      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+      style: const TextStyle(color: Colors.black,fontSize: 16, fontWeight: FontWeight.bold),
     ),
-    const Text(':', textAlign: TextAlign.start),
+    const Text(':', style: TextStyle(color: Colors.black,fontSize: 16, fontWeight: FontWeight.bold),textAlign: TextAlign.start),
     Text(
       dataDetail,
       style: const TextStyle(color: Colors.black,fontWeight: FontWeight.w500,),

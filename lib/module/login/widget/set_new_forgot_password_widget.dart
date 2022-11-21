@@ -32,22 +32,22 @@ setNewForgotPasswordPageWidget(
     },
     child: Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: const Icon(
+          icon:  Icon(
             Icons.arrow_back,
             size: sizeTitle24,
-            color: Colors.black,
+            color:  Theme.of(context).bottomAppBarColor,
           ),
         ),
         title: Text(
           screenForgotPasswordResponse?.body?.screeninfo?.titlesetnewpass ?? forgotPasswordSetNewTitleSetNewPassword,
-          style: const TextStyle(
-            color: Colors.black,
+          style:  TextStyle(
+            color: Theme.of(context).bottomAppBarColor,
             fontSize: sizeTitle24,
           ),
         ),
@@ -62,18 +62,19 @@ setNewForgotPasswordPageWidget(
                   Text(
                     screenForgotPasswordResponse?.body?.screeninfo?.textotpwillsent ??
                         forgotPasswordSetNewTextOTPWillSent,
-                    style: const TextStyle(
+                    style:  TextStyle(
                       fontSize: sizeTextBig20,
                       fontWeight: FontWeight.w600,
+                      color: Theme.of(context).bottomAppBarColor,
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 15, bottom: 15, left: 20, right: 20),
                     child: Center(
                       child: Text(valueEmailForgotPassword,
-                          style: const TextStyle(
+                          style:  TextStyle(
                               decoration: TextDecoration.underline,
-                              color: tcOTPSent,
+                              color: Theme.of(context).bottomAppBarColor.withOpacity(0.5),
                               decorationColor: tcOTPSent,
                               fontWeight: FontWeight.w500,
                               fontSize: sizeTextBig20)),
@@ -81,17 +82,19 @@ setNewForgotPasswordPageWidget(
                   ),
                   Text(
                     '$textRef : $ref',
-                    style: const TextStyle(
+                    style:  TextStyle(
                       fontSize: sizeTextSmaller14,
                       fontWeight: FontWeight.w600,
+                      color: Theme.of(context).bottomAppBarColor,
                     ),
                   ),
                   Text(
                     screenForgotPasswordResponse?.body?.screeninfo?.texpleaseconfirm ??
                         forgotPasswordSetNewTextPleaseConfirm,
-                    style: const TextStyle(
+                    style:  TextStyle(
                       fontSize: sizeTextBig20,
                       fontWeight: FontWeight.w600,
+                      color: Theme.of(context).bottomAppBarColor,
                     ),
                   ),
                   const SizedBox(
@@ -136,7 +139,7 @@ setNewForgotPasswordPageWidget(
                 sendOTP: TextSendOTPCustom(
                   textlabel: screenForgotPasswordResponse?.body?.screeninfo?.btnsentotpagain ??
                       forgotPasswordSetNewBtnSentOTPAgain,
-                  textcolor: tcOTPSent,
+                  textcolor:Theme.of(context).bottomAppBarColor.withOpacity(0.5),
                   sizetext: sizeTextSmall16,
                   onTap: () {
                     context.read<ForgotPasswordBloc>().add(ReSentOTPSetNewForgotPasswordEvent(
@@ -151,10 +154,10 @@ setNewForgotPasswordPageWidget(
               Center(
                 child: ButtonCustom(
                   label: screenForgotPasswordResponse?.body?.screeninfo?.btnconfirm ?? forgotPasswordSetNewBtnConfirm,
-                  colortext: tcButtonTextBlack,
-                  colorbutton: tcButtonTextWhite,
+                  colortext:  Theme.of(context).bottomAppBarColor,
+                  colorbutton:  Theme.of(context).scaffoldBackgroundColor,
                   sizetext: sizeTextBig20,
-                  colorborder: tcButtonTextBoarder,
+                  colorborder: Theme.of(context).bottomAppBarColor.withOpacity(0.5),
                   sizeborder: 10,
                   onPressed: () {
                     context.read<ForgotPasswordBloc>().add(SubmitSetNewForgotPasswordEvent(

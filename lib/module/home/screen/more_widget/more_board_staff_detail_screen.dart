@@ -91,35 +91,33 @@ class _MoreBoardStaffDetailPageState extends State<MoreBoardStaffDetailPage> wit
         },
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.white,
+            backgroundColor: Theme.of(context).primaryColor,
             elevation: 0,
             leading: IconButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: const Icon(
+              icon:  Icon(
                 Icons.arrow_back,
                 size: sizeTitle24,
-                color: Colors.black,
+                color: Theme.of(context).bottomAppBarColor,
               ),
             ),
             title: Text(
               '$name  $lastname ',
-              style: const TextStyle(
-                color: Colors.black,
+              style:  TextStyle(
+                color: Theme.of(context).bottomAppBarColor,
                 fontSize: sizeSubtitle22,
               ),
             ),
           ),
           body: Container(
             padding: const EdgeInsets.fromLTRB(2, 5, 2, 10),
-            color: Colors.grey[200],
             width: double.infinity,
             height: MediaQuery.of(context).size.height,
             child: Stack(children: [
               Container(
                 height: MediaQuery.of(context).size.height,
-                color: Colors.grey[200],
               ),
               Positioned(
                 left: 5,
@@ -127,9 +125,9 @@ class _MoreBoardStaffDetailPageState extends State<MoreBoardStaffDetailPage> wit
                 top: 70,
                 child: Container(
                   padding: const EdgeInsets.fromLTRB(2, 5, 2, 10),
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
+                  decoration:  BoxDecoration(
+                    color: Colors.transparent.withOpacity(0.1),
+                    borderRadius: const BorderRadius.only(
                       bottomRight: Radius.circular(40),
                       topLeft: Radius.circular(40),
                     ),

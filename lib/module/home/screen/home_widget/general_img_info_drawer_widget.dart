@@ -19,14 +19,16 @@ buildTableGeneralImageInfo(BuildContext context, ApiProfileResponse? screenProfi
             children: [
               Text(
                 screenProfileResponse?.body?.profileGeneralInfo?.generation ?? '-',
-                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style:  TextStyle(
+                    color: Theme.of(context).bottomAppBarColor,fontSize: 20, fontWeight: FontWeight.bold),
               ),
               Table(children: [
                 TableRow(children: [
                   Text(
                     screenProfileResponse?.body?.profileGeneralInfo?.genname ?? '-',
                     textAlign: TextAlign.end,
-                    style: const TextStyle(fontSize: 18),
+                    style:  TextStyle(
+                        color: Theme.of(context).bottomAppBarColor,fontSize: 18),
                   ),
                 ]),
               ]),

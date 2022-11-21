@@ -54,6 +54,8 @@ class _HomePageState extends State<HomePage> with ProgressDialog {
   late String textSessionExpired;
   late String textSubSessionExpired;
   late String _buttonOk;
+  late int intThemeMode = 2;
+  late ThemeMode themeMode;
   // late String? _refreshKey;
   // late bool _isHidden;
   late PackageInfo _packageInfo = PackageInfo(
@@ -67,14 +69,50 @@ class _HomePageState extends State<HomePage> with ProgressDialog {
   @override
   void initState() {
     _initPackageInfo();
+    _iniGetThemeMode();
     _isSessionUnauthorized();
     super.initState();
   }
 
   Future<void> _initPackageInfo() async {
     final info = await PackageInfo.fromPlatform();
+
     setState(() {
       _packageInfo = info;
+    });
+  }
+  void _iniGetThemeMode()  async{
+
+    prefs = await SharedPreferences.getInstance();
+    setState(()  {
+      if (prefs.getInt('themeMode') == null) {
+        setThemeModeApp( intMode: 2,);
+      }
+      intThemeMode =  prefs.getInt('themeMode')?? 2;
+      if (prefs.getInt('themeMode') != null) {
+        switch (prefs.getInt('themeMode')) {
+          case 0:
+            themeMode = ThemeMode.light;
+            print("themeMode H case 0: = ${themeMode}");
+
+            break;
+          case 1:
+            themeMode = ThemeMode.dark;
+            print("themeMode  H case 1: = ${themeMode}");
+            break;
+          case 2:
+            themeMode = ThemeMode.system;
+            print("themeMode  H case 2: = ${themeMode}");
+            break;
+          default:
+            themeMode = ThemeMode.system;
+            print("themeMode  H case default: = ${themeMode}");
+            break;
+        }
+      } else {
+        themeMode = ThemeMode.system;
+        setThemeModeApp( intMode: 2,);
+      }
     });
   }
 
@@ -146,6 +184,8 @@ class _HomePageState extends State<HomePage> with ProgressDialog {
               context,
               _toggleLanguageView,
               isHidden: _screenProfileResponse?.body?.profileGeneralInfo?.langeuage == 'TH' ? true : false,
+              intThemeMode:intThemeMode,
+              iniGetThemeMode:_iniGetThemeMode,
               _screenHomeResponse,
               _screenProfileResponse,
               _userLanguage,
@@ -164,6 +204,8 @@ class _HomePageState extends State<HomePage> with ProgressDialog {
               context,
               _toggleLanguageView,
               isHidden: _screenProfileResponse?.body?.profileGeneralInfo?.langeuage == 'TH' ? true : false,
+              intThemeMode:intThemeMode,
+              iniGetThemeMode:_iniGetThemeMode,
               _screenHomeResponse,
               _screenProfileResponse,
               _userLanguage,

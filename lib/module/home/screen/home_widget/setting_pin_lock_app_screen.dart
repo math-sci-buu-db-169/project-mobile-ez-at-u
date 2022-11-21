@@ -76,35 +76,6 @@ class _PinLockAppPageState extends State<PinLockAppPage> with ProgressDialog {
         }
         if (_isHiddenPin == false) {
           Navigator.push(context, MaterialPageRoute(builder: (context) =>   pinLockAppCreateScreen()));
-          // Navigator.push(context, MaterialPageRoute(builder: (context) => const PinLockAppCreateScreen(isHiddenBio: true, pinValueString: '0000',)));
-
-          // const PinLockAppCreateScreen(isHiddenBio: true, pinValueString: '0000',);
-          // screenLockCreate(
-          //   context: context,
-          //   inputController: controllerPin,
-          //   onConfirmed: (matchedText) => {
-          //     _pinValueString = matchedText,
-          //     _isHiddenPin = !_isHiddenPin,
-          //     _isHiddenPin == false
-          //         ? _isHiddenBio = false
-          //         : _isHiddenBio = false,
-          //     if (_isHiddenPin == true)
-          //       {
-          //         _setValuePinAndHidden(
-          //             pinStatus: _isHiddenPin, pinValue: _pinValueString),
-          //       },
-          //     Navigator.pop(context),
-          //     // Navigator.push(context,
-          //     //     MaterialPageRoute(builder: (context) => const PinLockAppScreen())),
-          //   },
-          //   footer: TextButton(
-          //     onPressed: () {
-          //       // Release the confirmation state and return to the initial input state.
-          //       controllerPin.unsetConfirmed();
-          //     },
-          //     child: const Text('Reset input'),
-          //   ),
-          // );
         }
 
         _isSessionPin();
@@ -113,6 +84,8 @@ class _PinLockAppPageState extends State<PinLockAppPage> with ProgressDialog {
   }
 
   void _toggleBioLockAppView() async {
+
+
     setState(
       () {
         _isHiddenBio = !_isHiddenBio;
@@ -206,7 +179,7 @@ class _PinLockAppPageState extends State<PinLockAppPage> with ProgressDialog {
           changePasswordResponse = state.responseChangePasswordResponse;
 
           _setValueAndGoHome(changePasswordResponse: changePasswordResponse);
-          Navigator.push(
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) {
               // int index = int.parse(widget.id);
@@ -274,22 +247,23 @@ pinLockAppBody(
       },
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).backgroundColor ,
           elevation: 0,
           leading: IconButton(
             onPressed: () {
-              Navigator.pop(context);
+              // Navigator.pop(context);
+              Navigator.of(context).popUntil((route) => route.isFirst);
             },
-            icon: const Icon(
+            icon:  Icon(
               Icons.arrow_back,
               size: sizeTitle24,
-              color: Colors.black,
+              color:  Theme.of(context).bottomAppBarColor ,
             ),
           ),
-          title: const Text(
+          title:  Text(
             homeBtnPINAPP ?? homeBtnPINAPP,
             style: TextStyle(
-              color: Colors.black,
+              color: Theme.of(context).bottomAppBarColor ,
               fontSize: sizeTitle24,
             ),
           ),
@@ -302,13 +276,12 @@ pinLockAppBody(
               children: [
                 GestureDetector(
                     onTap: () {
-                      // Navigator.push(context, MaterialPageRoute(builder: (context) => const PinLockAppScreen()));
                       togglePinLockAppView();
                     },
                     child: Container(
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(0),
-                            color: HexColor("#FFFFFF")),
+                           ),
                         // margin: EdgeInsets.only(right: 10),
                         padding: const EdgeInsets.all(10),
                         width: MediaQuery.of(context).size.width,
@@ -316,6 +289,7 @@ pinLockAppBody(
                             left: 0, top: 3, right: 0, bottom: 0),
                         child: Column(
                           children: [
+
                             Table(
                               border: TableBorder.symmetric(
                                   outside: const BorderSide(
@@ -328,24 +302,34 @@ pinLockAppBody(
                                   TableCellVerticalAlignment.middle,
                               children: [
                                 TableRow(children: [
-                                  const Text(
+                                   Text(
                                     "Lock Application Screen",
                                     style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.w500,
-                                        color: Colors.black),
+                                        color: Theme.of(context).bottomAppBarColor ),
                                   ),
-                                  IconButton(
-                                      onPressed: () {
-                                        togglePinLockAppView();
-                                      },
-                                      icon: isHiddenPin
-                                          ? const Icon(Icons.toggle_on,
-                                              size: 35.0,
-                                              color: Color(0xFF00A80A))
-                                          : const Icon(Icons.toggle_off,
-                                              size: 35.0,
-                                              color: Color(0xFF4F4F4F)))
+                                  Switch.adaptive(
+                                    value: isHiddenPin == true?true:false,
+                                    onChanged: (value) {
+                                      togglePinLockAppView();
+                                    },
+                                    activeColor:Colors.green,
+                                    activeTrackColor:Colors.green,
+
+
+                                  ),
+                                  // IconButton(
+                                  //     onPressed: () {
+                                  //       togglePinLockAppView();
+                                  //     },
+                                  //     icon: isHiddenPin
+                                  //         ? const Icon(Icons.toggle_on,
+                                  //             size: 35.0,
+                                  //             color: Color(0xFF00A80A))
+                                  //         : const Icon(Icons.toggle_off,
+                                  //             size: 35.0,
+                                  //             color: Color(0xFF4F4F4F)))
                                 ])
                               ],
                             ),
@@ -361,7 +345,7 @@ pinLockAppBody(
                                     },
                                     defaultVerticalAlignment:
                                         TableCellVerticalAlignment.middle,
-                                    children: const [
+                                    children:  [
                                       TableRow(children: [
                                         Text(
                                           "      If you forget your PIN Lock Application, you will need to delete and "
@@ -370,23 +354,30 @@ pinLockAppBody(
                                           style: TextStyle(
                                               fontSize: 12,
                                               fontWeight: FontWeight.w500,
-                                              color: tcNoActivity),
+                                              color: Theme.of(context).bottomAppBarColor.withOpacity(0.8),),
                                         ),
                                       ])
                                     ],
                                   )
                           ],
                         ))),
+
+                Divider(
+                  color: Theme.of(context).bottomAppBarColor.withOpacity(0.3),
+                  height: 5,
+                  thickness: 1,
+                  indent: 0,
+                  endIndent: 0,
+                ),
                 isHiddenPin
                     ? GestureDetector(
                         onTap: () {
-                          // Navigator.push(context, MaterialPageRoute(builder: (context) => const PinLockAppScreen()));
                           toggleBioLockAppView();
                         },
                         child: Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(0),
-                                color: HexColor("#FFFFFF")),
+                                ),
                             // margin: EdgeInsets.only(right: 10),
                             padding: const EdgeInsets.all(10),
                             width: MediaQuery.of(context).size.width,
@@ -406,24 +397,23 @@ pinLockAppBody(
                                       TableCellVerticalAlignment.middle,
                                   children: [
                                     TableRow(children: [
-                                      const Text(
+                                       Text(
                                         "Fingerprint scanner and face scan",
                                         style: TextStyle(
                                             fontSize: 18,
                                             fontWeight: FontWeight.w500,
-                                            color: Colors.black),
-                                      ),
-                                      IconButton(
-                                          onPressed: () {
-                                            toggleBioLockAppView();
-                                          },
-                                          icon: isHiddenBio == true
-                                              ? const Icon(Icons.toggle_on,
-                                                  size: 35.0,
-                                                  color: Color(0xFF00A80A))
-                                              : const Icon(Icons.toggle_off,
-                                                  size: 35.0,
-                                                  color: Color(0xFF4F4F4F)))
+                                            color: Theme.of(context).bottomAppBarColor),
+                                      ),Switch.adaptive(
+                                        value: isHiddenBio == true?true:false,
+                                        onChanged: (value) {
+                                          toggleBioLockAppView();
+                                        },
+                                        activeColor:Colors.green,
+                                        activeTrackColor:Colors.green,
+
+
+                                      )
+
                                     ])
                                   ],
                                 ),
@@ -432,7 +422,7 @@ pinLockAppBody(
                     : Container(
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(0),
-                            color: HexColor("#FFFFFF")),
+                            ),
                         // margin: EdgeInsets.only(right: 10),
                         padding: const EdgeInsets.all(10),
                         width: MediaQuery.of(context).size.width,
@@ -452,72 +442,53 @@ pinLockAppBody(
                                   TableCellVerticalAlignment.middle,
                               children: [
                                 TableRow(children: [
-                                  const Text(
+                                   Text(
                                     "Fingerprint scanner and face scan",
                                     style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.w500,
-                                        color: Color(0xFF4F4F4F)),
+                                        color: Theme.of(context).bottomAppBarColor),
                                   ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(Icons.toggle_off,
-                                        size: 35.0, color: Color(0xFF4F4F4F)),
+                                  Switch.adaptive(
+                                    value: false,
+                                    onChanged: (value) {
+                                    },
+                                    activeColor:Colors.green,
+                                    activeTrackColor:Colors.green,
+
+
                                   )
                                 ])
                               ],
                             ),
                           ],
                         )),
+
+                Divider(
+                  color: Theme.of(context).bottomAppBarColor.withOpacity(0.3),
+                  height: 5,
+                  thickness: 1,
+                  indent: 0,
+                  endIndent: 0,
+                ),
+
                 isHiddenPin
                     ? GestureDetector(
                         onTap: () {
 
-                          Navigator.push(
+                          Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(builder: (context) {
                               // int index = int.parse(widget.id);
                               return  PinLockAppScreen(isHiddenBio: false, pinValueString: pinValueString, optionLockApp: false,);
                             }),
                           );
-
-                          // screenLock(
-                          //   context: context,
-                          //   correctString: pinValueString,
-                          //   onUnlocked: () {
-                          //     // Navigator.pop(context);
-                          //     // isSetState();
-                          //     screenLockCreate(
-                          //       context: context,
-                          //       inputController: controllerPin,
-                          //       onConfirmed: (matchedText) => {
-                          //         setValuePinAndHidden(
-                          //             pinStatus: true, pinValue: matchedText),
-                          //
-                          //         // Navigator.pop(context),
-                          //         Navigator.push(
-                          //             context,
-                          //             MaterialPageRoute(
-                          //                 builder: (context) =>
-                          //                 const HomeScreen()))
-                          //       },
-                          //       footer: TextButton(
-                          //         onPressed: () {
-                          //           // Release the confirmation state and return to the initial input state.
-                          //           controllerPin.unsetConfirmed();
-                          //         },
-                          //         child: const Text('Reset input'),
-                          //       ),
-                          //     );
-                          //   },
-                          // );
-
-                          // Define it to control the confirmation state with its own events.
                         },
                         child: Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(0),
-                                color: HexColor("#FFFFFF")),
+
+                            ),
                             // margin: EdgeInsets.only(right: 10),
                             padding: const EdgeInsets.all(10),
                             width: MediaQuery.of(context).size.width,
@@ -535,22 +506,19 @@ pinLockAppBody(
                                   },
                                   defaultVerticalAlignment:
                                       TableCellVerticalAlignment.middle,
-                                  children: [
+                                  children:  [
                                     TableRow(children: [
-                                      const Text(
+                                      Text(
                                         "Change Passcode ",
                                         style: TextStyle(
                                             fontSize: 18,
                                             fontWeight: FontWeight.w500,
-                                            color: Color(0xFF4F4F4F)),
+                                            color:Theme.of(context).bottomAppBarColor),
                                       ),
-                                      IconButton(
-                                        onPressed: () {},
-                                        icon: const Icon(
-                                            Icons.chevron_right_outlined,
-                                            size: 35.0,
-                                            color: Color(0xFF4F4F4F)),
-                                      )
+                                      Icon(
+                                          Icons.chevron_right_outlined,
+                                          size: 35.0,
+                                          color:Theme.of(context).bottomAppBarColor),
                                     ])
                                   ],
                                 ),
@@ -563,7 +531,7 @@ pinLockAppBody(
                                   },
                                   defaultVerticalAlignment:
                                       TableCellVerticalAlignment.middle,
-                                  children: const [
+                                  children:  [
                                     TableRow(children: [
                                       Text(
                                         "      If you forget your PIN Lock Application, you will need to delete and "
@@ -572,7 +540,7 @@ pinLockAppBody(
                                         style: TextStyle(
                                             fontSize: 12,
                                             fontWeight: FontWeight.w500,
-                                            color: tcNoActivity),
+                                            color: Theme.of(context).bottomAppBarColor.withOpacity(0.8),),
                                       ),
                                     ])
                                   ],
@@ -580,6 +548,17 @@ pinLockAppBody(
                               ],
                             )))
                     : const SizedBox(),
+                isHiddenPin
+                    ?Divider(
+                  color: Theme.of(context).bottomAppBarColor.withOpacity(0.3),
+                  height: 5,
+                  thickness: 1,
+                  indent: 0,
+                  endIndent: 0,
+                ):const SizedBox(
+                  height: 1,
+                ),
+
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.1,
                 ),

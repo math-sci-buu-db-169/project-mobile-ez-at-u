@@ -28,14 +28,16 @@ void dialogOneLineOneBtn(BuildContext context, String content ,String btn, {requ
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     const SizedBox(height: 10),
-                    Text(content, textAlign: TextAlign.center),
+                    Text(content, textAlign: TextAlign.end,
+                        style:  TextStyle( fontWeight: FontWeight.bold,
+                          color: Theme.of(context).bottomAppBarColor,)),
                     const SizedBox( height: 15),
                     ElevatedButton(
                       style: styleButtonDialog,
                       onPressed: () => {handleClickBtn()},
                       child: Text(
                         btn,
-                        style: const TextStyle(color: tcButtonTextBlack),
+                        style:  TextStyle(color: Theme.of(context).bottomAppBarColor),
                       ),
                     )
                   ],
@@ -118,7 +120,8 @@ void dialogSessionExpiredOneBtn(BuildContext context, String content , String su
                       children: [
                         const SizedBox(height: 10),
                         Text(content, textAlign: TextAlign.end,
-                            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                            style:  TextStyle(fontSize: 20, fontWeight: FontWeight.bold,
+                              color: Theme.of(context).bottomAppBarColor,)),
                         const SizedBox(height: 10),
                         Text(subContent, textAlign: TextAlign.start),
                         const SizedBox( height: 15),
@@ -379,9 +382,10 @@ void dialogFiveLineTwoTextFieldTwoBtn(BuildContext context,
                         // Text(content, textAlign: TextAlign.center),
                         Text(
                           content1,
-                          style: const TextStyle(
+                          style:  TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
+                            color: Theme.of(context).bottomAppBarColor,
                           ),
                         ),
                          Padding(
@@ -389,7 +393,7 @@ void dialogFiveLineTwoTextFieldTwoBtn(BuildContext context,
                           child: Center(
                             child: TextLinkToScreenCustom(
                                 linklabel: content2,
-                                linktextcolor: tcForgot,
+                                linktextcolor: Theme.of(context).bottomAppBarColor.withOpacity(0.5),
                                 sizetext: 10,
                                 onTap: () async {
                                   Navigator.push(
@@ -399,23 +403,27 @@ void dialogFiveLineTwoTextFieldTwoBtn(BuildContext context,
                         ),
                         Center( child:  Text(
                           content3,
-                          style: const TextStyle(
+                          style:  TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w600,
+                            color: Theme.of(context).bottomAppBarColor,
+
                           ),
                         ),) ,
                         Center( child:  Text(
                           content4,
-                          style: const TextStyle(
+                          style:  TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w600,
+                            color: Theme.of(context).bottomAppBarColor,
                           ),
                         ),) ,
                         Center( child:  Text(
                           content5,
-                          style: const TextStyle(
+                          style:  TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w600,
+                            color: Theme.of(context).bottomAppBarColor,
                           ),
                         ),) ,
 

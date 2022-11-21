@@ -30,10 +30,10 @@ class _TextFieldCustomState extends State<TextFieldCustom> {
       // padding: EdgeInsets.all(12),
         margin:  const EdgeInsets.all(12),
         child: TextFormField(
-          cursorColor: Colors.black,
+          cursorColor: Theme.of(context).bottomAppBarColor,
           maxLength: widget.maxLengthOTP,
 
-          style:  const TextStyle(fontSize: sizeText18, color: Colors.black // height: 2.0,
+          style:   TextStyle(fontSize: sizeText18, color: Theme.of(context).bottomAppBarColor // height: 2.0,
           ),
           keyboardType: widget.textInputType,
           initialValue: widget.initialvalue,
@@ -41,19 +41,19 @@ class _TextFieldCustomState extends State<TextFieldCustom> {
           decoration: InputDecoration(
               prefixIcon: Icon(widget.iconsFile,
 
-          color: Colors.grey,
+                color: Theme.of(context).iconTheme.color,
         ),
               filled: true,
-              fillColor: tcTextfile,
+              fillColor: Theme.of(context).scaffoldBackgroundColor,
               hintText: widget.hintLabel,
-              enabledBorder:  const OutlineInputBorder(
-                borderSide: BorderSide(color: tcHint),
-                borderRadius: BorderRadius.all(Radius.circular(30)),
+              enabledBorder:   OutlineInputBorder(
+                borderSide: BorderSide(color:Theme.of(context).bottomAppBarColor ),
+                borderRadius:const BorderRadius.all(Radius.circular(30)),
               ),
               contentPadding:  const EdgeInsets.all(10),
               focusedBorder:  const OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(30)),
-                borderSide: BorderSide(color: fcBlue, width: 2.0),
+                borderSide: BorderSide(color:  Colors.yellowAccent, width: 2.0),
 
               )),
 

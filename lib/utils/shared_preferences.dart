@@ -124,3 +124,13 @@ setIsChangUserLanguage( ) async{
 
 }
 
+setThemeModeApp( {required int intMode}) async {
+  prefs = await SharedPreferences.getInstance();
+  await prefs.setInt('themeMode', intMode);
+  print('themeMode themeMode themeMode themeMode themeMode 99999999999999999999999999999999999999999999999999999');
+  print( prefs.getInt('themeMode') );
+  print( intMode );
+
+
+
+}

@@ -24,7 +24,8 @@ pDPAScreenWidget(BuildContext context, ScreenPDPAResponse? screenPDPAResponse) {
                 Padding(
                   padding: const EdgeInsets.only(top: 15, bottom: 10),
                   child: Text(screenPDPAResponse?.body?.screeninfo?.titlepdpa ?? pDPATitlePDPA,
-                      textAlign: TextAlign.center, style: const TextStyle(fontSize: sizeTitle24, color: Colors.black)),
+                      textAlign: TextAlign.center, style:  TextStyle(fontSize: sizeTitle24,
+                    color: Theme.of(context).bottomAppBarColor,)),
                 ),
                 Expanded(
                   child: Container(

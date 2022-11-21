@@ -20,19 +20,21 @@ buildTableDrawerTwoTable(
             ? Text(
                 textLeftTitle,
                 textAlign: TextAlign.start,
-                style: const TextStyle(
+                style:  TextStyle(
+                    color: Theme.of(context).bottomAppBarColor,
                     fontSize: sizeTextSmaller14, decoration: TextDecoration.underline, fontWeight: FontWeight.bold),
               )
             : Text(
                 textLeftTitle,
                 textAlign: TextAlign.start,
-                style: const TextStyle(fontSize: sizeTextSmaller14, fontWeight: FontWeight.bold),
+                style:  TextStyle(
+                    color: Theme.of(context).bottomAppBarColor,fontSize: sizeTextSmaller14, fontWeight: FontWeight.bold),
               ),
         const SizedBox(),
         Text(
           textRightDetail,
           textAlign: TextAlign.end,
-          style: const TextStyle(fontSize: sizeTextSmaller14),
+          style:  TextStyle(color: Theme.of(context).bottomAppBarColor,fontSize: sizeTextSmaller14, fontWeight: FontWeight.bold),
         ),
       ])
     ],

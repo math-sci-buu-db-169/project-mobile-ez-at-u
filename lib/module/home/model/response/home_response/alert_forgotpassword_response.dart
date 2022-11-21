@@ -151,48 +151,51 @@ class Body {
 /// status : 200
 /// message : "success"
 /// module : "home"
-
 Head headFromJson(String str) => Head.fromJson(json.decode(str));
 String headToJson(Head data) => json.encode(data.toJson());
-
 class Head {
   Head({
-    int? status,
+    num? status,
     String? message,
-    String? module,
-  }) {
+    String? modulename,
+    bool? timeexpire,}){
     _status = status;
     _message = message;
-    _module = module;
+    _modulename = modulename;
+    _timeexpire = timeexpire;
   }
 
   Head.fromJson(dynamic json) {
     _status = json['status'];
     _message = json['message'];
-    _module = json['module'];
+    _modulename = json['modulename'];
+    _timeexpire = json['timeexpire'];
   }
-  int? _status;
+  num? _status;
   String? _message;
-  String? _module;
-  Head copyWith({
-    int? status,
+  String? _modulename;
+  bool? _timeexpire;
+  Head copyWith({  num? status,
     String? message,
-    String? module,
-  }) =>
-      Head(
-        status: status ?? _status,
-        message: message ?? _message,
-        module: module ?? _module,
-      );
-  int? get status => _status;
+    String? modulename,
+    bool? timeexpire,
+  }) => Head(  status: status ?? _status,
+    message: message ?? _message,
+    modulename: modulename ?? _modulename,
+    timeexpire: timeexpire ?? _timeexpire,
+  );
+  num? get status => _status;
   String? get message => _message;
-  String? get module => _module;
+  String? get modulename => _modulename;
+  bool? get timeexpire => _timeexpire;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['status'] = _status;
     map['message'] = _message;
-    map['module'] = _module;
+    map['modulename'] = _modulename;
+    map['timeexpire'] = _timeexpire;
     return map;
   }
+
 }

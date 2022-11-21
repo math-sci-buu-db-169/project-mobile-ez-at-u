@@ -17,7 +17,7 @@ forgotPasswordPageWidget(BuildContext context, ScreenForgotPasswordResponse? scr
     },
     child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           elevation: 0,
           leading: IconButton(
             onPressed: () {
@@ -25,16 +25,16 @@ forgotPasswordPageWidget(BuildContext context, ScreenForgotPasswordResponse? scr
               Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const LoginScreen()),
                   (Route<dynamic> route) => false);
             },
-            icon: const Icon(
+            icon:  Icon(
               Icons.arrow_back,
               size: sizeTitle24,
-              color: Colors.black,
+              color: Theme.of(context).bottomAppBarColor,
             ),
           ),
           title: Text(
             screenForgotPasswordResponse?.body?.screeninfo?.titleforgot ?? forgotPasswordTitleForgotPassword,
-            style: const TextStyle(
-              color: Colors.black,
+            style:  TextStyle(
+              color: Theme.of(context).bottomAppBarColor,
               fontSize: sizeTitle24,
             ),
           ),
@@ -76,10 +76,10 @@ forgotPasswordPageWidget(BuildContext context, ScreenForgotPasswordResponse? scr
                   child: ButtonCustom(
                       label: screenForgotPasswordResponse?.body?.screeninfo?.btnforgotnext ??
                           forgotPasswordBtnForgotPasswordNext,
-                      colortext: tcButtonTextBlack,
-                      colorbutton: tcButtonTextWhite,
+                      colortext:  Theme.of(context).bottomAppBarColor,
+                      colorbutton:  Theme.of(context).scaffoldBackgroundColor,
                       sizetext: sizeTextBig20,
-                      colorborder: tcButtonTextBoarder,
+                      colorborder: Theme.of(context).bottomAppBarColor.withOpacity(0.5),
                       sizeborder: 10,
                       onPressed: () {
                         context.read<ForgotPasswordBloc>().add(SubmitForgotPasswordEvent(

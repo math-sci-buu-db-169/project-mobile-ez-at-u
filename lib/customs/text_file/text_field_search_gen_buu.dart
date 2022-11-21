@@ -50,10 +50,11 @@ class _TextTextFieldSearchCustomState extends State<TextFieldSearchGenBUUCustom>
         margin: const EdgeInsets.all(12),
         // decoration: BoxDecoration(color: Colors.red[50], borderRadius: BorderRadius.circular(16)),
         child: TextFormField(
-          style: const TextStyle(
-              fontSize: sizeText18, color: Colors.black // height: 2.0,
+          style:  TextStyle(
+              fontSize: sizeText18,
+              color:  Theme.of(context).scaffoldBackgroundColor, // height: 2.0,
               ),
-          cursorColor: Colors.black,
+          // cursorColor: Colors.black,
           keyboardType: widget.textInputType,
           // controller: textEditingController,
           initialValue: widget.initialvalue,
@@ -62,11 +63,12 @@ class _TextTextFieldSearchCustomState extends State<TextFieldSearchGenBUUCustom>
           obscureText: false,
           decoration: InputDecoration(
               filled: true,
-              fillColor: tcTextfile,
+              fillColor:Colors.transparent,
               hintText: 'ค้นหา $hintLabelBUU ที่นี',
-              prefixIcon:  const Icon(
+              prefixIcon:   Icon(
                   FontAwesomeIcons.magnifyingGlass,
-                  size: 20, color: Color(0xFF4F4F4F)
+                  size: 20,
+                  color: Theme.of(context).iconTheme.color,
 
               ),
               suffixIcon: IconButton(
@@ -118,8 +120,8 @@ class _TextTextFieldSearchCustomState extends State<TextFieldSearchGenBUUCustom>
                                               ),
                                               index > 1 || index == optionsGen.length-1
                                         ? const SizedBox()
-                                                  : const Divider(
-                                                color: Colors.grey,
+                                                  :  const Divider(
+                                                // color: Theme.of(context).iconTheme.color,
                                                 height: 5,
                                                 thickness: 1,
                                                 indent: 0,
@@ -134,22 +136,27 @@ class _TextTextFieldSearchCustomState extends State<TextFieldSearchGenBUUCustom>
                     });
                   },
                   icon: _isVisible
-                      ? const FaIcon(FontAwesomeIcons.caretUp,
-                          color: Color(0xFF4F4F4F))
-                      : const FaIcon(FontAwesomeIcons.caretDown,
-                          color: Color(0xFF4F4F4F))),
+                      ?  FaIcon(FontAwesomeIcons.caretUp,
+
+                    color: Theme.of(context).iconTheme.color,
+
+                  )
+                      :  FaIcon(FontAwesomeIcons.caretDown,
+
+                    color: Theme.of(context).iconTheme.color,
+                  )),
               // suffixIcon: IconButton(
               //     onPressed: () {},
               //     icon: const FaIcon(FontAwesomeIcons.magnifyingGlass,
               //         size: 20, color: Color(0xFF4F4F4F))),
               enabledBorder: const OutlineInputBorder(
-                borderSide: BorderSide(color: tcHint),
+                borderSide: BorderSide(),
                 borderRadius: BorderRadius.all(Radius.circular(30)),
               ),
               contentPadding: const EdgeInsets.all(10),
               focusedBorder: const OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(30)),
-                borderSide: BorderSide(color: fcBlue, width: 2.0),
+                borderSide: BorderSide(width: 2.0),
               )),
         ));
   }

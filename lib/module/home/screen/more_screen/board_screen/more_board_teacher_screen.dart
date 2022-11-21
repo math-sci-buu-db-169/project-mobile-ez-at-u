@@ -108,25 +108,25 @@ class _MoreBoardListTeacherPageState extends State<MoreBoardListTeacherPage> wit
                 return false;
               },
               child: Scaffold(
-                backgroundColor: Colors.grey[200],
+                // backgroundColor: Colors.grey[200],
                 appBar: AppBar(
-                  backgroundColor: Colors.white,
+                  backgroundColor:  Theme.of(context).primaryColor,
                   elevation: 0,
                   leading: IconButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    icon: const Icon(
+                    icon:  Icon(
                       Icons.arrow_back,
                       size: sizeTitle24,
-                      color: Colors.black,
+                      color: Theme.of(context).bottomAppBarColor,
                     ),
                   ),
                   title: Text(
                     _screenMoreBoardTeacherResponse?.body?.screeninfo?.titileboardpersonal ??
                         boardPersonalTitleBoardPersonal,
-                    style: const TextStyle(
-                      color: Colors.black,
+                    style:  TextStyle(
+                      color:  Theme.of(context).bottomAppBarColor,
                       fontSize: sizeTitle24,
                     ),
                   ),
@@ -197,8 +197,9 @@ class _MoreBoardListTeacherPageState extends State<MoreBoardListTeacherPage> wit
                                 );
 
                         },
-                        icon: const FaIcon(FontAwesomeIcons.filter,
-                            size: 20, color: Color(0xFF4F4F4F))),
+                        icon:  FaIcon(FontAwesomeIcons.filter,
+                            size: 20,
+                            color: Theme.of(context).bottomAppBarColor,)),
                   ],
                 ),
                 body: Column(

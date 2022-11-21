@@ -8,7 +8,7 @@ String phImg = '';
 boardItemTeacherLeft({
   VoidCallback? onTap,
   Screeninfo? titleTeacher,
-  Teachermath? dataTeachermath,
+  Teachermath? dataTeachermath, required BuildContext context,
 }) {
   String? name = dataTeachermath?.name ?? '-';
   String? lastname = dataTeachermath?.lastname ?? '-';
@@ -70,16 +70,20 @@ boardItemTeacherLeft({
                   child: Column(
                     children: [
                       tableAJ(
+                          context:context,
                           titleTeacher: titleTeacher?.textname ?? boardPersonalTextName,
                           dataTeacher: '$name  $lastname '),
                       tableAJ(
+                          context:context,
                               titleTeacher: titleTeacher?.textpositon ?? boardPersonalTextPosition,
                               dataTeacher: dataTeachermath?.position) ??
                           '-',
                       tableAJ(
+                          context:context,
                           titleTeacher: titleTeacher?.texttel ?? boardPersonalTextTel,
                           dataTeacher: dataTeachermath?.phone ?? '-'),
                       tableAJ(
+                          context:context,
                           titleTeacher: titleTeacher?.textemail ?? boardPersonalTextEmail,
                           dataTeacher: dataTeachermath?.email ?? '-'),
                     ],
@@ -95,7 +99,7 @@ boardItemTeacherLeft({
 boardItemTeacherRight({
   VoidCallback? onTap,
   Screeninfo? titleTeacher,
-  Teacherstats? dataTeacherstats,
+  Teacherstats? dataTeacherstats, required BuildContext context,
 }) {
   String? name = dataTeacherstats?.name ?? '-';
   String? lastname = dataTeacherstats?.lastname ?? '-';
@@ -179,15 +183,19 @@ boardItemTeacherRight({
                   child: Column(
                     children: [
                       tableAJ(
+                          context:context,
                           titleTeacher: titleTeacher?.textname ?? boardPersonalTextName,
                           dataTeacher: '$name  $lastname '),
                       tableAJ(
+                          context:context,
                           titleTeacher: titleTeacher?.textpositon ?? boardPersonalTextPosition,
                           dataTeacher: dataTeacherstats?.position ?? '-'),
                       tableAJ(
+                          context:context,
                           titleTeacher: titleTeacher?.texttel ?? boardPersonalTextTel,
                           dataTeacher: dataTeacherstats?.phone ?? '-'),
                       tableAJ(
+                          context:context,
                           titleTeacher: titleTeacher?.textemail ?? boardPersonalTextEmail,
                           dataTeacher: dataTeacherstats?.email ?? '-'),
                     ],
@@ -200,7 +208,7 @@ boardItemTeacherRight({
   );
 }
 
-tableAJ({String? titleTeacher, String? dataTeacher}) {
+tableAJ({String? titleTeacher, String? dataTeacher, required BuildContext context}) {
   return Table(
     border: TableBorder.symmetric(outside: const BorderSide(width: 2, color: Colors.transparent)),
     columnWidths: const {0: FractionColumnWidth(0.3), 1: FractionColumnWidth(0.7)},
@@ -209,11 +217,11 @@ tableAJ({String? titleTeacher, String? dataTeacher}) {
       TableRow(children: [
         Text(
           "$titleTeacher :",
-          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          style:  TextStyle(color: Theme.of(context).bottomAppBarColor,fontSize: 16, fontWeight: FontWeight.bold),
         ),
         Text(
           "$dataTeacher",
-          style: const TextStyle(fontSize: 14),
+          style:  TextStyle(color: Theme.of(context).bottomAppBarColor,fontSize: 14),
         ),
       ])
     ],
@@ -223,7 +231,7 @@ tableAJ({String? titleTeacher, String? dataTeacher}) {
 boardItemStaff({
   VoidCallback? onTap,
   Screeninfo? titleTeacher,
-  Staff? dataStaff,
+  Staff? dataStaff, required BuildContext context,
 }) {
   String? name = dataStaff?.name ?? '-';
   String? lastname = dataStaff?.lastname ?? '-';
@@ -284,15 +292,19 @@ boardItemStaff({
                   child: Column(
                     children: [
                       tableAJ(
+                          context:context,
                           titleTeacher: titleTeacher?.textname ?? boardPersonalTextName,
                           dataTeacher: '$name  $lastname '),
                       tableAJ(
+                          context:context,
                           titleTeacher: titleTeacher?.textpositon ?? boardPersonalTextPosition,
                           dataTeacher: dataStaff?.position ?? '-'),
                       tableAJ(
+                          context:context,
                           titleTeacher: titleTeacher?.texttel ?? boardPersonalTextTel,
                           dataTeacher: dataStaff?.phone ?? '-'),
                       tableAJ(
+                          context:context,
                           titleTeacher: titleTeacher?.textemail ?? boardPersonalTextEmail,
                           dataTeacher: dataStaff?.email ?? '-'),
                     ],

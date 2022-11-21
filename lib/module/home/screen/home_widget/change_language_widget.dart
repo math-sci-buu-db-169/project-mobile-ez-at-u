@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../customs/common/change_theme_button_widget.dart';
 import '../../../../customs/size/size.dart';
 
 changLanguage(
@@ -12,16 +13,24 @@ changLanguage(
   required tb3,
 }) {
   return Table(
-    border: TableBorder.symmetric(outside: const BorderSide(width: 2, color: Colors.transparent)),
-    columnWidths: {0: FractionColumnWidth(tb1), 1: FractionColumnWidth(tb2), 2: FractionColumnWidth(tb3)},
+    border: TableBorder.symmetric(
+        outside: const BorderSide(width: 2, color: Colors.transparent)),
+    columnWidths: {
+      0: FractionColumnWidth(tb1),
+      1: FractionColumnWidth(tb2),
+      2: FractionColumnWidth(tb3)
+    },
     defaultVerticalAlignment: TableCellVerticalAlignment.middle,
     children: [
       TableRow(children: [
         Text(
           textLeftTitle,
           textAlign: TextAlign.start,
-          style: const TextStyle(
-              fontSize: sizeTextSmaller14, decoration: TextDecoration.underline, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              color: Theme.of(context).bottomAppBarColor,
+              fontSize: sizeTextSmaller14,
+              decoration: TextDecoration.underline,
+              fontWeight: FontWeight.bold),
         ),
         const SizedBox(),
         Row(
@@ -29,17 +38,96 @@ changLanguage(
           children: [
             Text(
               textRightDetail,
-              style: const TextStyle(fontSize: sizeTextSmaller14),
+              style: TextStyle(
+                  color: Theme.of(context).bottomAppBarColor,
+                  fontSize: sizeTextSmaller14,
+                  fontWeight: FontWeight.bold),
             ),
             //
             // _toggle(),
-            IconButton(
-                onPressed: () {
-                  toggleLanguageView();
-                },
-                icon: isHidden
-                    ? const Icon(Icons.toggle_on, color: Color(0xFF00A80A))
-                    : const Icon(Icons.toggle_off, color: Color(0xFF4F4F4F)))
+            // IconButton(
+            //     onPressed: () {
+            //       toggleLanguageView();
+            //     },
+            //     icon: isHidden
+            //         ? const Icon(Icons.toggle_on, color: Color(0xFF00A80A))
+            //         : const Icon(Icons.toggle_off, color: Color(0xFF4F4F4F))),
+            SizedBox(
+              width: 40,
+              height: 40,
+              child: FittedBox(
+                fit: BoxFit.fill,
+                child: Switch.adaptive(
+                  value: isHidden == true?true:false,
+                  onChanged: (value) {
+                    toggleLanguageView();
+                  },
+                    activeColor:Colors.green,
+                    activeTrackColor:Colors.green,
+
+
+                ),
+              ),
+            )
+
+            // IconButton(
+            //     onPressed: () {
+            //       _isVisible = !_isVisible;
+            //     },
+            //     icon: _isVisible
+            //         ? Icon(Icons.toggle_off, color: Color(0xFF4F4F4F))
+            //         : Icon(Icons.toggle_on, color: Color(0xFF00A80A))),
+          ],
+        ),
+      ])
+    ],
+  );
+}
+
+changModeTheme(
+  BuildContext context,
+  void Function() toggleLanguageView,
+  bool isHidden, {
+  required String textLeftTitle,
+  required String textRightDetail,
+  required tb1,
+  required tb2,
+  required tb3,
+}) {
+  return Table(
+    border: TableBorder.symmetric(
+        outside: const BorderSide(width: 0, color: Colors.transparent)),
+    columnWidths: {
+      0: FractionColumnWidth(tb1),
+      1: FractionColumnWidth(tb2),
+      2: FractionColumnWidth(tb3)
+    },
+    defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+    children: [
+      TableRow(children: [
+        Text(
+          textLeftTitle,
+          textAlign: TextAlign.start,
+          style: TextStyle(
+              color: Theme.of(context).bottomAppBarColor,
+              fontSize: sizeTextSmaller14,
+              decoration: TextDecoration.underline,
+              fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text(
+              textRightDetail,
+              style: TextStyle(
+                  color: Theme.of(context).bottomAppBarColor,
+                  fontSize: sizeTextSmaller14,
+                  fontWeight: FontWeight.bold),
+            ),
+            //
+            // _toggle(),
+            ChangeThemeButtonWidget(),
             // IconButton(
             //     onPressed: () {
             //       _isVisible = !_isVisible;

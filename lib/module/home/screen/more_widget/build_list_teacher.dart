@@ -17,6 +17,7 @@ buildListTeacherLeft(
         children: List.generate(
             int.parse("${screenMoreBoardTeacherResponse?.body?.teacher?.teachermath?.length}"),
             (index) => boardItemTeacherLeft(
+              context:context,
                   dataTeachermath: screenMoreBoardTeacherResponse?.body?.teacher?.teachermath?[index],
                   titleTeacher: screenMoreBoardTeacherResponse?.body?.screeninfo,
                   onTap: () {
@@ -59,6 +60,7 @@ buildListTeacherRight(
         children: List.generate(
             int.parse("${screenMoreBoardTeacherResponse?.body?.teacher?.teacherstats?.length}"),
             (index) => boardItemTeacherRight(
+              context:context,
                   dataTeacherstats: screenMoreBoardTeacherResponse?.body?.teacher?.teacherstats?.elementAt(index),
                   titleTeacher: screenMoreBoardTeacherResponse?.body?.screeninfo,
                   onTap: () {
@@ -98,6 +100,7 @@ buildListStaff(BuildContext context, ScreenMoreBoardTeacherResponse? screenMoreB
         children: List.generate(
             int.parse("${screenMoreBoardTeacherResponse?.body?.staff?.length}"),
             (index) => boardItemStaff(
+              context:context,
                   dataStaff: screenMoreBoardTeacherResponse?.body?.staff?[index],
                   titleTeacher: screenMoreBoardTeacherResponse?.body?.screeninfo,
                   onTap: () {

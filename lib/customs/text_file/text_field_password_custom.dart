@@ -30,12 +30,13 @@ class _TextFieldPasswordCustomState extends State<TextFieldPasswordCustom> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      // color: Colors.green,
         // padding: EdgeInsets.all(12),
         margin: const EdgeInsets.all(12),
         // decoration: BoxDecoration(color: Colors.red[50], borderRadius: BorderRadius.circular(16)),
         child: TextFormField(
-          style: const TextStyle(
-              fontSize: sizeText18, color: Colors.black // height: 2.0,
+          style:  TextStyle(
+              fontSize: sizeText18, color: Theme.of(context).bottomAppBarColor, // height: 2.0,
               ),
           cursorColor: Colors.black,
           keyboardType: widget.textInputType,
@@ -46,11 +47,11 @@ class _TextFieldPasswordCustomState extends State<TextFieldPasswordCustom> {
           obscureText: !_isVisible,
           decoration: InputDecoration(
               filled: true,
-              fillColor: tcTextfile,
+              fillColor:  Theme.of(context).scaffoldBackgroundColor,
               hintText: widget.hintLabel,
               prefixIcon: Icon(
                 widget.iconsFile,
-                color: Colors.grey,
+                color: Theme.of(context).iconTheme.color,
               ),
               suffixIcon: IconButton(
                   onPressed: () {
@@ -59,17 +60,17 @@ class _TextFieldPasswordCustomState extends State<TextFieldPasswordCustom> {
                     });
                   },
                   icon: _isVisible
-                      ? const Icon(FontAwesomeIcons.eye,size:20, color: Color(0xFF4F4F4F))
-                      : const Icon(FontAwesomeIcons.eyeSlash,size:20,
-                          color: Color(0xFF4F4F4F))),
-              enabledBorder: const OutlineInputBorder(
-                borderSide: BorderSide(color: tcHint),
-                borderRadius: BorderRadius.all(Radius.circular(30)),
+                      ?  Icon(FontAwesomeIcons.eye,size:20, color:Theme.of(context).iconTheme.color)
+                      :  Icon(FontAwesomeIcons.eyeSlash,size:20,
+                          color: Theme.of(context).iconTheme.color)),
+              enabledBorder:  OutlineInputBorder(
+                borderSide: BorderSide(color:Theme.of(context).bottomAppBarColor ),
+                borderRadius: const BorderRadius.all(Radius.circular(30)),
               ),
               contentPadding: const EdgeInsets.all(10),
-              focusedBorder: const OutlineInputBorder(
+              focusedBorder:  const OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(30)),
-                borderSide: BorderSide(color: fcBlue, width: 2.0),
+                borderSide: BorderSide(color:  Colors.yellowAccent, width: 2.0),
               )),
         ));
   }

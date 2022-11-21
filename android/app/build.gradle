@@ -53,8 +53,8 @@ android {
         applicationId "com.example.ez_at_u"
         // You can update the following values to match your application needs.
         // For more_response information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
-        minSdkVersion flutter.minSdkVersion  // API level 33
-        targetSdkVersion flutter.targetSdkVersion // API level 33
+        minSdkVersion 21// API level 33
+        targetSdkVersion 33// API level 33
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }

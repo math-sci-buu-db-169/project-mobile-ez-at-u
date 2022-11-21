@@ -26,22 +26,22 @@ registerPageWidget(
     },
     child: Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: const Icon(
+          icon:  Icon(
             Icons.arrow_back,
             size: sizeTitle24,
-            color: Colors.black,
+            color: Theme.of(context).bottomAppBarColor,
           ),
         ),
         title: Text(
           screenRegisterResponse?.body?.screeninfo?.titlereg ?? registerTitleRegister,
-          style: const TextStyle(
-            color: Colors.black,
+          style:  TextStyle(
+            color: Theme.of(context).bottomAppBarColor,
             fontSize: sizeTitle24,
           ),
         ),
@@ -144,10 +144,10 @@ registerPageWidget(
                     ));
                   },
                   label: screenRegisterResponse?.body?.screeninfo?.edtsignup ?? registerEdtSignup,
-                  colortext: tcButtonTextBlack,
-                  colorbutton: tcButtonTextWhite,
+                  colortext:  Theme.of(context).bottomAppBarColor,
+                  colorbutton:  Theme.of(context).scaffoldBackgroundColor,
                   sizetext: sizeTextBig20,
-                  colorborder: tcButtonTextBoarder,
+                  colorborder: Theme.of(context).bottomAppBarColor.withOpacity(0.5),
                   sizeborder: 10,
                 ),
               ),
