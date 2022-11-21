@@ -11,7 +11,8 @@ import '../model/response/api_profile_response.dart';
 
 class ProfileContactDataHead extends StatefulWidget {
   final ApiProfileResponse? dataFromAPI;
-  const ProfileContactDataHead({Key? key, required this.dataFromAPI})
+  final String? userRole;
+  const ProfileContactDataHead({Key? key, required this.dataFromAPI, required this.userRole})
       : super(key: key);
 
   @override
@@ -27,6 +28,7 @@ class _ProfileContactDataHeadState extends State<ProfileContactDataHead> {
   late String instagramValue;
   late String twitterValue;
   late String youtubeValue;
+  late String userRole;
   @override
   void initState() {
     dataFromAPI = widget.dataFromAPI;
@@ -36,6 +38,7 @@ class _ProfileContactDataHeadState extends State<ProfileContactDataHead> {
     instagramValue = dataFromAPI?.body?.profileContactInfo?.instagram??"-";
     twitterValue = dataFromAPI?.body?.profileContactInfo?.twitter??"-";
     youtubeValue = dataFromAPI?.body?.profileContactInfo?.youtube??"-";
+    userRole = widget.userRole??"ST";
     super.initState();
   }
   @override
@@ -47,7 +50,9 @@ class _ProfileContactDataHeadState extends State<ProfileContactDataHead> {
     // String instagramValue =  dataFromAPI?.body?.profileContactInfo?.instagram??"-";
     // String twitterValue =  dataFromAPI?.body?.profileContactInfo?.twitter??"-";
     // String youtubeValue =  dataFromAPI?.body?.profileContactInfo?.youtube??"-";
-    return Column(
+    return
+      (userRole == "ST") ?
+      Column(
       children: [
         Container(
           decoration: const BoxDecoration(
@@ -174,11 +179,102 @@ class _ProfileContactDataHeadState extends State<ProfileContactDataHead> {
             }
           },),
       ],
-    );
+    )
+          :
+      Column(
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+              border: Border(
+                  top: BorderSide(width: 1, color: Colors.black12),
+                  bottom: BorderSide(width: 1, color: Colors.transparent)),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Row(
+                children: [
+                  Text(
+                    dataFromAPI?.body?.screeninfo?.subtitlecont??profileSubTitleContact,
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                  Expanded(
+                    child: Container(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
+                        onPressed: () {
+                          setState(() {
+                            isUnpressed = !isUnpressed;
+                            if (isUnpressed == true) {
+                              context.read<ProfileBloc>().add(ContactSubmitEvent(
+                                  instagram: instagramValue,
+                                  twitter: twitterValue,
+                                  youtube: youtubeValue,
+                                  facebook: facebookValue,
+                                  line: lineValue,
+                                  phone: phoneValue));
+                            }
+                          });
+                        },
+                        child: isUnpressed
+                            ? Text(dataFromAPI?.body?.screeninfo?.textedit??profileTextEdit, style: const TextStyle(color: Colors.red))
+                            : Text(dataFromAPI?.body?.screeninfo?.textsave??profileTextSave,
+                            style: const TextStyle(color: Colors.green)),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          ProfileContactDataTCTab(
+            textLeft: "โทร",
+            isUnpressed: isUnpressed,
+            iconContact: Icon(
+              Icons.phone,
+              color: HexColor('#000000'),
+            ),
+            textContact: dataFromAPI?.body?.profileContactInfo?.phone??"-",
+            keyboardType: const TextInputType.numberWithOptions(),
+            maxLength: 10,
+            onChange: (value) {
+              phoneValue = value;
+              if (kDebugMode) {
+                print(phoneValue);
+              }
+            },
+          ),
+          ProfileContactDataTCTab(
+            textLeft: "อีเมล",
+            isUnpressed: isUnpressed,
+            iconContact: Icon(
+              FontAwesomeIcons.envelope,
+              color: HexColor('#00B900'),
+            ),
+            textContact: dataFromAPI?.body?.profileContactInfo?.line??"-",
+            onChange: (value) {
+              lineValue = value;
+              if (kDebugMode) {
+                print(lineValue);
+              }
+            },),
+          ProfileContactDataTCTab(
+            textLeft: "ห้องปฏิบัติงาน",
+            isUnpressed: isUnpressed,
+            iconContact: Icon(
+              FontAwesomeIcons.building,
+              color: HexColor('#3B5998'),
+            ),
+            textContact: dataFromAPI?.body?.profileContactInfo?.facebook??"-",
+            onChange: (value) {
+              facebookValue = value;
+              if (kDebugMode) {
+                print(facebookValue);
+              }
+            },),
+        ],
+      );
   }
 }
-
-//////
 class ProfileContactDataTab extends StatefulWidget {
   final Widget iconContact;
   final String textContact;
@@ -188,12 +284,12 @@ class ProfileContactDataTab extends StatefulWidget {
   final int? maxLength;
   const ProfileContactDataTab(
       {Key? key,
-      required this.iconContact,
-      required this.textContact,
-      required this.isUnpressed,
-      this.keyboardType,
+        required this.iconContact,
+        required this.textContact,
+        required this.isUnpressed,
+        this.keyboardType,
         this.maxLength,
-      this.onChange})
+        this.onChange})
       : super(key: key);
 
   @override
@@ -225,6 +321,74 @@ class _ProfileContactDataTabState extends State<ProfileContactDataTab> {
                 readOnly: isUnpressed,
                 textAlign: TextAlign.right,
                 decoration: const InputDecoration(
+                    border: InputBorder.none,
+                    counterText: ""
+                ),
+                onChanged: widget.onChange,
+                initialValue: textContact,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+//////
+class ProfileContactDataTCTab extends StatefulWidget {
+  final Widget iconContact;
+  final String textContact;
+  final String textLeft;
+  final bool isUnpressed;
+  final ValueChanged<String>? onChange;
+  final TextInputType? keyboardType;
+  final int? maxLength;
+  const ProfileContactDataTCTab(
+      {Key? key,
+        required this.textLeft,
+      required this.iconContact,
+      required this.textContact,
+      required this.isUnpressed,
+      this.keyboardType,
+        this.maxLength,
+      this.onChange})
+      : super(key: key);
+
+  @override
+  State<ProfileContactDataTCTab> createState() => _ProfileContactDataTCTabState();
+}
+
+class _ProfileContactDataTCTabState extends State<ProfileContactDataTCTab> {
+  @override
+  Widget build(BuildContext context) {
+    Widget iconContact = widget.iconContact;
+    String textContact = widget.textContact;
+    String textLeft = widget.textLeft;
+    bool isUnpressed = widget.isUnpressed;
+    return Container(
+      decoration: const BoxDecoration(
+        border: Border(
+            top: BorderSide(width: 1, color: Colors.black12),
+            bottom: BorderSide(width: 1, color: Colors.black12)),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 10,top: 10,bottom: 10,right: 20),
+        child: Row(
+          children: [
+            iconContact,
+            Text(
+              ' $textLeft ',
+              style: const TextStyle(fontSize: 18),
+            ),
+            Expanded(
+              child: TextFormField(
+                cursorColor: Colors.black,
+                keyboardType: widget.keyboardType,
+                maxLength: widget.maxLength,
+                readOnly: isUnpressed,
+                textAlign: TextAlign.right,
+                decoration: const InputDecoration(
                   border: InputBorder.none,
                   counterText: ""
                 ),
@@ -238,3 +402,4 @@ class _ProfileContactDataTabState extends State<ProfileContactDataTab> {
     );
   }
 }
+/////

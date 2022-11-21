@@ -11,8 +11,8 @@ import 'attentiondatatab.dart';
 
 class ProfileCareerDataHead extends StatefulWidget {
   final ApiProfileResponse? dataFromAPI;
-
-  const ProfileCareerDataHead({Key? key, required this.dataFromAPI})
+  final String? userRole;
+  const ProfileCareerDataHead({Key? key, required this.dataFromAPI, required this.userRole})
       : super(key: key);
 
   @override
@@ -30,6 +30,7 @@ class _ProfileCareerDataHeadState extends State<ProfileCareerDataHead> {
   late String workplaceValue;
   late String careerValue;
   late String companyValue;
+  late String userRole;
   @override
   void initState() {
     dataFromAPI = widget.dataFromAPI;
@@ -39,6 +40,7 @@ class _ProfileCareerDataHeadState extends State<ProfileCareerDataHead> {
     workplaceValue = dataFromAPI?.body?.profileCareerInfo?.userworkplace ?? "-";
     careerValue = dataFromAPI?.body?.profileCareerInfo?.usercareer ?? "-";
     companyValue = dataFromAPI?.body?.profileCareerInfo?.usercompany ?? "-";
+    userRole = widget.userRole??"ST";
     super.initState();
   }
   @override
@@ -56,7 +58,9 @@ class _ProfileCareerDataHeadState extends State<ProfileCareerDataHead> {
     //     dataFromAPI?.body?.profileCareerInfo?.usercareer ?? "-";
     // String companyValue =
     //     dataFromAPI?.body?.profileCareerInfo?.usercompany ?? "-";
-    return Column(
+    return
+      (userRole == "ST") ?
+      Column(
       children: [
         Container(
           decoration: const BoxDecoration(
@@ -200,6 +204,8 @@ class _ProfileCareerDataHeadState extends State<ProfileCareerDataHead> {
           },
         ),
       ],
-    );
+    )
+          :
+          Column();
   }
 }
