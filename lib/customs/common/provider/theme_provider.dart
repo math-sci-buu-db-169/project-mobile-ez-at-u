@@ -2,10 +2,45 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../utils/shared_preferences.dart';
 
 class ThemeProvider extends ChangeNotifier {
-  ThemeMode themeMode = ThemeMode.system;
 
+  // ThemeMode themeMode = ThemeMode.system;
+  late ThemeMode themeMode = ThemeMode.system;
+  late SharedPreferences prefs;
+  void getPrefs( ) async {
+    prefs = await SharedPreferences.getInstance();
+
+    if (prefs.getInt('themeMode') != null) {
+      switch (prefs.getInt('themeMode')) {
+        case 0:
+          themeMode = ThemeMode.light;
+          print("themeMode case 0: = $themeMode");
+
+          break;
+        case 1:
+          themeMode = ThemeMode.dark;
+          print("themeMode case 1: = $themeMode");
+          break;
+        case 2:
+          themeMode = ThemeMode.system;
+          print("themeMode case 2: = $themeMode");
+          break;
+        default:
+          themeMode = ThemeMode.system;
+          print("themeMode case default: = $themeMode");
+          break;
+      }
+    } else {
+      themeMode = ThemeMode.system;
+      setThemeModeApp( intMode: 2,);
+    }
+
+
+  }
   bool get isDarkMode {
     if (themeMode == ThemeMode.system) {
       final brightness = SchedulerBinding.instance.window.platformBrightness;
@@ -63,6 +98,7 @@ class MyThemes {
     textTheme: GoogleFonts.notoSerifThaiTextTheme(),
     colorScheme: const ColorScheme.dark(),
     iconTheme: const IconThemeData(color: Colors.yellow, opacity: 0.8),
+      appBarTheme: const  AppBarTheme(backgroundColor:Colors.black,foregroundColor:Colors.white )
   );
 
   static final lightTheme = ThemeData(
@@ -77,5 +113,6 @@ class MyThemes {
     ),
     colorScheme: const ColorScheme.light(),
     iconTheme: const IconThemeData(color: Colors.purpleAccent, opacity: 0.8),
+      appBarTheme: const  AppBarTheme(backgroundColor:Colors.white,foregroundColor:Colors.black )
   );
 }

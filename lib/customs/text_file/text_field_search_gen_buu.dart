@@ -54,7 +54,7 @@ class _TextTextFieldSearchCustomState extends State<TextFieldSearchGenBUUCustom>
               fontSize: sizeText18,
               color:  Theme.of(context).scaffoldBackgroundColor, // height: 2.0,
               ),
-          // cursorColor: Colors.black,
+          cursorColor: Theme.of(context).appBarTheme.foregroundColor,
           keyboardType: widget.textInputType,
           // controller: textEditingController,
           initialValue: widget.initialvalue,
@@ -80,6 +80,7 @@ class _TextTextFieldSearchCustomState extends State<TextFieldSearchGenBUUCustom>
                           barrierDismissible: true,
                           builder: (BuildContext context) {
                             return Dialog(
+                              // backgroundColor:Theme.of(context).scaffoldBackgroundColor,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(16),
                                 ),
@@ -111,7 +112,8 @@ class _TextTextFieldSearchCustomState extends State<TextFieldSearchGenBUUCustom>
                                                           Text(
                                                             optionsGen[index].toString(),
                                                             textAlign: TextAlign.center,
-                                                            style: const TextStyle(fontSize: sizeTextSmaller14),
+                                                            style:  TextStyle(fontSize: sizeTextSmaller14,
+                                                              color: Theme.of(context).bottomAppBarColor,),
                                                           ),
                                                         ])
                                                       ],
@@ -149,14 +151,14 @@ class _TextTextFieldSearchCustomState extends State<TextFieldSearchGenBUUCustom>
               //     onPressed: () {},
               //     icon: const FaIcon(FontAwesomeIcons.magnifyingGlass,
               //         size: 20, color: Color(0xFF4F4F4F))),
-              enabledBorder: const OutlineInputBorder(
-                borderSide: BorderSide(),
-                borderRadius: BorderRadius.all(Radius.circular(30)),
+              enabledBorder:  OutlineInputBorder(
+                borderSide: BorderSide(color:Theme.of(context).bottomAppBarColor ),
+                borderRadius: const BorderRadius.all(Radius.circular(30)),
               ),
               contentPadding: const EdgeInsets.all(10),
-              focusedBorder: const OutlineInputBorder(
+              focusedBorder:  const OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(30)),
-                borderSide: BorderSide(width: 2.0),
+                borderSide: BorderSide(color:  Colors.yellowAccent, width: 2.0),
               )),
         ));
   }

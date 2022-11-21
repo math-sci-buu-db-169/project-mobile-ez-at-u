@@ -41,7 +41,7 @@ changLanguage(
               style: TextStyle(
                   color: Theme.of(context).bottomAppBarColor,
                   fontSize: sizeTextSmaller14,
-                  fontWeight: FontWeight.bold),
+                  fontWeight: FontWeight.normal),
             ),
             //
             // _toggle(),
@@ -123,7 +123,7 @@ changModeTheme(
               style: TextStyle(
                   color: Theme.of(context).bottomAppBarColor,
                   fontSize: sizeTextSmaller14,
-                  fontWeight: FontWeight.bold),
+                  fontWeight: FontWeight.normal),
             ),
             //
             // _toggle(),

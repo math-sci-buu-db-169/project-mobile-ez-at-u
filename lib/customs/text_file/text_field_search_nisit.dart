@@ -50,10 +50,11 @@ class _TextFieldSearchNiSitCustomState extends State<TextFieldSearchNiSitCustom>
         margin: const EdgeInsets.all(12),
         // decoration: BoxDecoration(color: Colors.red[50], borderRadius: BorderRadius.circular(16)),
         child: TextFormField(
-          style: const TextStyle(
-              fontSize: sizeText18, color: Colors.black // height: 2.0,
-              ),
-          cursorColor: Colors.black,
+          style:  TextStyle(
+            fontSize: sizeText18,
+            color:  Theme.of(context).scaffoldBackgroundColor, // height: 2.0,
+          ),
+          cursorColor: Theme.of(context).appBarTheme.foregroundColor,
           keyboardType: widget.textInputType,
           // controller: textEditingController,
           initialValue: widget.initialvalue,
@@ -62,11 +63,12 @@ class _TextFieldSearchNiSitCustomState extends State<TextFieldSearchNiSitCustom>
           obscureText: false,
           decoration: InputDecoration(
               filled: true,
-              fillColor: tcTextfile,
+              fillColor:Colors.transparent,
               hintText: 'ค้นหา $hintLabelSearchNiSit ที่นี',
-              prefixIcon:  const Icon(
+              prefixIcon:   Icon(
                   FontAwesomeIcons.magnifyingGlass,
-                  size: 20, color: Color(0xFF4F4F4F)
+                size: 20,
+                color: Theme.of(context).iconTheme.color,
 
               ),
               suffixIcon:
@@ -110,7 +112,8 @@ class _TextFieldSearchNiSitCustomState extends State<TextFieldSearchNiSitCustom>
                                                           Text(
                                                             optionsNiSit[index].toString(),
                                                             textAlign: TextAlign.center,
-                                                            style: const TextStyle(fontSize: sizeTextSmaller14),
+                                                            style:  TextStyle(fontSize: sizeTextSmaller14,
+                                                              color: Theme.of(context).bottomAppBarColor,),
                                                           ),
                                                         ])
                                                       ],
@@ -135,18 +138,23 @@ class _TextFieldSearchNiSitCustomState extends State<TextFieldSearchNiSitCustom>
                     });
                   },
                   icon: _isVisible
-                      ? const FaIcon(FontAwesomeIcons.caretUp,
-                      color: Color(0xFF4F4F4F))
-                      : const FaIcon(FontAwesomeIcons.caretDown,
-                      color: Color(0xFF4F4F4F))),
-              enabledBorder: const OutlineInputBorder(
-                borderSide: BorderSide(color: tcHint),
-                borderRadius: BorderRadius.all(Radius.circular(30)),
+                      ?  FaIcon(FontAwesomeIcons.caretUp,
+
+                    color: Theme.of(context).iconTheme.color,
+
+                  )
+                      :  FaIcon(FontAwesomeIcons.caretDown,
+
+                    color: Theme.of(context).iconTheme.color,
+                  )),
+              enabledBorder:  OutlineInputBorder(
+                borderSide: BorderSide(color:Theme.of(context).bottomAppBarColor ),
+                borderRadius: const BorderRadius.all(Radius.circular(30)),
               ),
               contentPadding: const EdgeInsets.all(10),
-              focusedBorder: const OutlineInputBorder(
+              focusedBorder:  const OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(30)),
-                borderSide: BorderSide(color: fcBlue, width: 2.0),
+                borderSide: BorderSide(color:  Colors.yellowAccent, width: 2.0),
               )),
         ));
   }

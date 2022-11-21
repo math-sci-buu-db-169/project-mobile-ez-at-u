@@ -16,7 +16,7 @@ class MoreBoardStudentDetailScreen extends StatelessWidget {
   final String? studentCode;
   const MoreBoardStudentDetailScreen({
     Key? key,
-    required this.studentCode,
+    required this.studentCode, required BuildContext context,
   }) : super(key: key);
 
   @override

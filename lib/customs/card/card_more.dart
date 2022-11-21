@@ -7,13 +7,13 @@ buildCardBoard(BuildContext context,
   return GestureDetector(
     onTap: onTap,
     child: Card(
-      // color: Colors.white,
+      color:Theme.of(context).primaryColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.0),
       ),
       elevation: 8,
       child: Container(
-          width: MediaQuery.of(context).size.width * 0.4,
+          width: MediaQuery.of(context).size.width * 0.45,
           // height: MediaQuery.of(context).size.width * 0.3,
           padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
           decoration: BoxDecoration(
@@ -66,7 +66,7 @@ buildCardMore({
           //   width: MediaQuery.of(context).size.width,
           //   height: MediaQuery.of(context).size.height * 0.1,
           Card(
-        // color: Colors.white,
+        color: Theme.of(context).primaryColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12.0),
         ),

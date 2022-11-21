@@ -62,7 +62,7 @@ buildContentHomeScreen(
         title: Center(
             child: Text(screenHomeResponse?.body?.screenInfo?.titleact ?? homeTitleAct,
                 style:  TextStyle(fontSize: 20, fontWeight: FontWeight.w500,
-                    color: Theme.of(context).bottomAppBarColor  ))),
+                    color: Theme.of(context).appBarTheme.foregroundColor  ))),
         actions: <Widget>[
           // SizedBox(
           //   width: MediaQuery.of(context).size.width * 0.1,

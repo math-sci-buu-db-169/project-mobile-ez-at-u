@@ -4,7 +4,7 @@ import '../../../../customs/color/color_const.dart';
 import '../../../../customs/size/size.dart';
 
 contactThreeRow(
-  BuildContext context, {
+    { required BuildContext context,
   required String title,
   required String textCenter,
   required String value,
@@ -22,12 +22,13 @@ contactThreeRow(
         TableRow(children: [
           Text(
             title,
-            style: const TextStyle(fontSize: sizeTextSmall16, fontWeight: FontWeight.bold),
-          ),
+            style:  TextStyle(fontSize: sizeTextSmall16, fontWeight: FontWeight.bold,
+                color: Theme.of(context).appBarTheme.foregroundColor),),
           Text(
             value,
             textAlign: TextAlign.start,
-            style: const TextStyle(fontSize: sizeTextSmaller14),
+            style:  TextStyle(fontSize: sizeTextSmaller14,
+                color: Theme.of(context).appBarTheme.foregroundColor),
           ),
           IconButton(
             icon: const Icon(
@@ -53,6 +54,7 @@ contactThreeRow(
 }
 
 contactUnderlineOneRow({
+  required BuildContext context,
   required String title,
   required double sizeColumnOne,
 }) {
@@ -67,11 +69,11 @@ contactUnderlineOneRow({
         TableRow(children: [
           Text(
             title,
-            style: const TextStyle(
+            style:  TextStyle(
                 fontSize: sizeTextSmall16,
                 fontWeight: FontWeight.bold,
                 decoration: TextDecoration.underline,
-                color: Colors.black),
+                color: Theme.of(context).appBarTheme.foregroundColor),
           ),
         ])
       ],
@@ -81,7 +83,7 @@ contactUnderlineOneRow({
 
 contactOneRow({
   required String title,
-  required double sizeColumnOne,
+  required double sizeColumnOne, required BuildContext context,
 }) {
   return Padding(
     padding: const EdgeInsets.only(left: 20.0, right: 10.0, top: 0.0, bottom: 5.0),
@@ -94,10 +96,12 @@ contactOneRow({
         TableRow(children: [
           Text(
             title,
-            style: const TextStyle(
+            style:  TextStyle(
               fontSize: sizeTextSmall16,
               fontWeight: FontWeight.bold,
-            ),
+                color: Theme.of(context).appBarTheme.foregroundColor),
+  ),
+            
           ),
         ])
       ],

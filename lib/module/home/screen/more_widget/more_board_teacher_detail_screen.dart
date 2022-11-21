@@ -57,8 +57,9 @@ class _MoreBoardTeacherDetailScreenState extends State<MoreBoardTeacherDetailScr
           return false;
         },
         child: Scaffold(
+          backgroundColor: Theme.of(context).backgroundColor,
           appBar: AppBar(
-            backgroundColor: Theme.of(context).primaryColor,
+            backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
             elevation: 0,
             leading: IconButton(
               onPressed: () {
@@ -67,26 +68,24 @@ class _MoreBoardTeacherDetailScreenState extends State<MoreBoardTeacherDetailScr
               icon:  Icon(
                 Icons.arrow_back,
                 size: sizeTitle24,
-                color: Theme.of(context).bottomAppBarColor,
+                color: Theme.of(context).appBarTheme.foregroundColor,
               ),
             ),
             title: Text(
               '$name  $lastname ',
               style:  TextStyle(
-                color: Theme.of(context).bottomAppBarColor,
+                color: Theme.of(context).appBarTheme.foregroundColor,
                 fontSize: sizeSubtitle22,
               ),
             ),
           ),
           body: Container(
             padding: const EdgeInsets.fromLTRB(2, 5, 2, 10),
-            color: Theme.of(context).scaffoldBackgroundColor,
             width: double.infinity,
             height: MediaQuery.of(context).size.height,
             child: Stack(children: [
               Container(
                 height: MediaQuery.of(context).size.height,
-                color:Theme.of(context).scaffoldBackgroundColor,
               ),
               Positioned(
                 left: 5,
@@ -95,7 +94,7 @@ class _MoreBoardTeacherDetailScreenState extends State<MoreBoardTeacherDetailScr
                 child: Container(
                   padding: const EdgeInsets.fromLTRB(2, 5, 2, 10),
                   decoration:  BoxDecoration(
-                    color: Colors.transparent.withOpacity(0.1),
+                    color:Theme.of(context).appBarTheme.foregroundColor?.withOpacity(0.1),
                     borderRadius: const BorderRadius.only(
                       bottomRight: Radius.circular(40),
                       topLeft: Radius.circular(40),
@@ -107,10 +106,10 @@ class _MoreBoardTeacherDetailScreenState extends State<MoreBoardTeacherDetailScr
                       const SizedBox(
                         height: 50,
                       ),
-                      _buildTeacherDetail(title: widget.titleName, value: '$name  $lastname '),
-                      _buildTeacherDetail(title: widget.titlePosition, value: widget.position),
-                      _buildTeacherDetail(title: widget.titlePhone, value: widget.phone),
-                      _buildTeacherDetail(title: widget.titleEmail, value: widget.email),
+                      _buildTeacherDetail(context:context,title: widget.titleName, value: '$name  $lastname '),
+                      _buildTeacherDetail(context:context,title: widget.titlePosition, value: widget.position),
+                      _buildTeacherDetail(context:context,title: widget.titlePhone, value: widget.phone),
+                      _buildTeacherDetail(context:context,title: widget.titleEmail, value: widget.email),
                       const SizedBox(
                         height: 30,
                       ),
@@ -215,7 +214,8 @@ class _MoreBoardTeacherDetailScreenState extends State<MoreBoardTeacherDetailScr
   }
 }
 
-_buildTeacherDetail({required String title, required String value}) {
+_buildTeacherDetail({
+  required BuildContext context,required String title, required String value}) {
   return Padding(
     padding: const EdgeInsets.only(left: 20.0, right: 10.0, top: 6.0, bottom: 6.0),
     child: Table(
@@ -227,17 +227,20 @@ _buildTeacherDetail({required String title, required String value}) {
           // if (_screenprofileResponse?.body?.profileGeneralInfo?.img == null)
           Text(
             title,
-            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+            style:  TextStyle(fontSize: 14, fontWeight: FontWeight.bold,
+              color:Theme.of(context).appBarTheme.foregroundColor),
           ),
-          const Text(
+           Text(
             ':',
             textAlign: TextAlign.start,
-            style: TextStyle(fontSize: 12),
+            style: TextStyle(fontSize: 12,
+                color:Theme.of(context).appBarTheme.foregroundColor),
           ),
           Text(
             value,
             textAlign: TextAlign.start,
-            style: const TextStyle(fontSize: 12),
+            style:  TextStyle(fontSize: 12,
+                color:Theme.of(context).appBarTheme.foregroundColor),
           ),
         ])
       ],

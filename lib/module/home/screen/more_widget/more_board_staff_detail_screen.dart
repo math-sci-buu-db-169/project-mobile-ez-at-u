@@ -75,10 +75,12 @@ class MoreBoardStaffDetailPage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<MoreBoardStaffDetailPage> createState() => _MoreBoardStaffDetailPageState();
+  State<MoreBoardStaffDetailPage> createState() =>
+      _MoreBoardStaffDetailPageState();
 }
 
-class _MoreBoardStaffDetailPageState extends State<MoreBoardStaffDetailPage> with ProgressDialog {
+class _MoreBoardStaffDetailPageState extends State<MoreBoardStaffDetailPage>
+    with ProgressDialog {
   // ScreenMoreBoardTeacherResponse? _screenHomeMoreBoardTeacherResponse;
 
   @override
@@ -90,6 +92,7 @@ class _MoreBoardStaffDetailPageState extends State<MoreBoardStaffDetailPage> wit
           return false;
         },
         child: Scaffold(
+          backgroundColor: Theme.of(context).backgroundColor,
           appBar: AppBar(
             backgroundColor: Theme.of(context).primaryColor,
             elevation: 0,
@@ -97,7 +100,7 @@ class _MoreBoardStaffDetailPageState extends State<MoreBoardStaffDetailPage> wit
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon:  Icon(
+              icon: Icon(
                 Icons.arrow_back,
                 size: sizeTitle24,
                 color: Theme.of(context).bottomAppBarColor,
@@ -105,7 +108,7 @@ class _MoreBoardStaffDetailPageState extends State<MoreBoardStaffDetailPage> wit
             ),
             title: Text(
               '$name  $lastname ',
-              style:  TextStyle(
+              style: TextStyle(
                 color: Theme.of(context).bottomAppBarColor,
                 fontSize: sizeSubtitle22,
               ),
@@ -125,8 +128,11 @@ class _MoreBoardStaffDetailPageState extends State<MoreBoardStaffDetailPage> wit
                 top: 70,
                 child: Container(
                   padding: const EdgeInsets.fromLTRB(2, 5, 2, 10),
-                  decoration:  BoxDecoration(
-                    color: Colors.transparent.withOpacity(0.1),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context)
+                        .appBarTheme
+                        .foregroundColor
+                        ?.withOpacity(0.1),
                     borderRadius: const BorderRadius.only(
                       bottomRight: Radius.circular(40),
                       topLeft: Radius.circular(40),
@@ -138,10 +144,22 @@ class _MoreBoardStaffDetailPageState extends State<MoreBoardStaffDetailPage> wit
                       const SizedBox(
                         height: 50,
                       ),
-                      _buildStaffDetail(title: widget.titleName, value: '$name  $lastname '),
-                      _buildStaffDetail(title: widget.titlePosition, value: widget.position),
-                      _buildStaffDetail(title: widget.titlePhone, value: widget.phone),
-                      _buildStaffDetail(title: widget.titleEmail, value: widget.email),
+                      _buildStaffDetail(
+                          context: context,
+                          title: widget.titleName,
+                          value: '$name  $lastname '),
+                      _buildStaffDetail(
+                          context: context,
+                          title: widget.titlePosition,
+                          value: widget.position),
+                      _buildStaffDetail(
+                          context: context,
+                          title: widget.titlePhone,
+                          value: widget.phone),
+                      _buildStaffDetail(
+                          context: context,
+                          title: widget.titleEmail,
+                          value: widget.email),
                       const SizedBox(
                         height: 30,
                       ),
@@ -182,16 +200,20 @@ class _MoreBoardStaffDetailPageState extends State<MoreBoardStaffDetailPage> wit
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
-                                  image: const AssetImage('assets/logo/profile.png'),
+                                  image: const AssetImage(
+                                      'assets/logo/profile.png'),
                                   fit: BoxFit.cover,
-                                  colorFilter: ColorFilter.mode(Colors.grey.withOpacity(0.5), BlendMode.dstATop),
+                                  colorFilter: ColorFilter.mode(
+                                      Colors.grey.withOpacity(0.5),
+                                      BlendMode.dstATop),
                                 ),
                               ),
                               child: Container(
                                 decoration: const BoxDecoration(
                                   shape: BoxShape.circle,
                                   image: DecorationImage(
-                                    image: AssetImage('assets/logo/profile.png'),
+                                    image:
+                                        AssetImage('assets/logo/profile.png'),
                                   ),
                                 ),
                               ))
@@ -202,17 +224,20 @@ class _MoreBoardStaffDetailPageState extends State<MoreBoardStaffDetailPage> wit
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
-                                  image: MemoryImage(base64Decode(base64.normalize(widget.img))),
+                                  image: MemoryImage(base64Decode(
+                                      base64.normalize(widget.img))),
                                   fit: BoxFit.cover,
                                 ),
                               ),
                               child: ClipRRect(
                                 // make sure we apply clip it properly
-                                borderRadius: BorderRadius.circular(100), // Image border
+                                borderRadius:
+                                    BorderRadius.circular(100), // Image border
                                 child: SizedBox.fromSize(
                                   size: const Size.fromRadius(40),
                                   child: BackdropFilter(
-                                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                                    filter: ImageFilter.blur(
+                                        sigmaX: 10, sigmaY: 10),
                                     child: Container(
                                       color: Colors.grey.withOpacity(0.1),
                                       alignment: Alignment.center,
@@ -220,7 +245,8 @@ class _MoreBoardStaffDetailPageState extends State<MoreBoardStaffDetailPage> wit
                                         decoration: BoxDecoration(
                                           shape: BoxShape.circle,
                                           image: DecorationImage(
-                                            image: MemoryImage(base64Decode(base64.normalize(widget.img))),
+                                            image: MemoryImage(base64Decode(
+                                                base64.normalize(widget.img))),
                                           ),
                                         ),
                                       ),
@@ -244,28 +270,44 @@ class _MoreBoardStaffDetailPageState extends State<MoreBoardStaffDetailPage> wit
   }
 }
 
-_buildStaffDetail({required String title, required String value}) {
+_buildStaffDetail(
+    {required BuildContext context,
+    required String title,
+    required String value}) {
   return Padding(
-    padding: const EdgeInsets.only(left: 20.0, right: 10.0, top: 6.0, bottom: 6.0),
+    padding:
+        const EdgeInsets.only(left: 20.0, right: 10.0, top: 6.0, bottom: 6.0),
     child: Table(
-      border: TableBorder.symmetric(outside: const BorderSide(width: 2, color: Colors.transparent)),
-      columnWidths: const {0: FractionColumnWidth(0.25), 1: FractionColumnWidth(0.05), 2: FractionColumnWidth(0.7)},
+      border: TableBorder.symmetric(
+          outside: const BorderSide(width: 2, color: Colors.transparent)),
+      columnWidths: const {
+        0: FractionColumnWidth(0.25),
+        1: FractionColumnWidth(0.05),
+        2: FractionColumnWidth(0.7)
+      },
       // defaultVerticalAlignment: TableCellVerticalAlignment.middle,
       children: [
         TableRow(children: [
           Text(
             title,
-            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+            style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).appBarTheme.foregroundColor),
           ),
-          const Text(
+          Text(
             ':',
             textAlign: TextAlign.start,
-            style: TextStyle(fontSize: 14),
+            style: TextStyle(
+                fontSize: 14,
+                color: Theme.of(context).appBarTheme.foregroundColor),
           ),
           Text(
             value,
             textAlign: TextAlign.start,
-            style: const TextStyle(fontSize: 12),
+            style: TextStyle(
+                fontSize: 12,
+                color: Theme.of(context).appBarTheme.foregroundColor),
           ),
         ])
       ],

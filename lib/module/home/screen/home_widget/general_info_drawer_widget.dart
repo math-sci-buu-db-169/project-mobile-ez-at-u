@@ -34,7 +34,7 @@ buildTableDrawerTwoTable(
         Text(
           textRightDetail,
           textAlign: TextAlign.end,
-          style:  TextStyle(color: Theme.of(context).bottomAppBarColor,fontSize: sizeTextSmaller14, fontWeight: FontWeight.bold),
+          style:  TextStyle(color: Theme.of(context).bottomAppBarColor,fontSize: sizeTextSmaller14, fontWeight: FontWeight.normal),
         ),
       ])
     ],

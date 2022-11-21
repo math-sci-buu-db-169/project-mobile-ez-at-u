@@ -41,13 +41,13 @@ setNewForgotPasswordPageWidget(
           icon:  Icon(
             Icons.arrow_back,
             size: sizeTitle24,
-            color:  Theme.of(context).bottomAppBarColor,
+            color:  Theme.of(context).appBarTheme.foregroundColor,
           ),
         ),
         title: Text(
           screenForgotPasswordResponse?.body?.screeninfo?.titlesetnewpass ?? forgotPasswordSetNewTitleSetNewPassword,
           style:  TextStyle(
-            color: Theme.of(context).bottomAppBarColor,
+            color: Theme.of(context).appBarTheme.foregroundColor,
             fontSize: sizeTitle24,
           ),
         ),
@@ -65,7 +65,7 @@ setNewForgotPasswordPageWidget(
                     style:  TextStyle(
                       fontSize: sizeTextBig20,
                       fontWeight: FontWeight.w600,
-                      color: Theme.of(context).bottomAppBarColor,
+                      color: Theme.of(context).appBarTheme.foregroundColor,
                     ),
                   ),
                   Padding(

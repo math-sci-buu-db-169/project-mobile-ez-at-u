@@ -16,10 +16,12 @@ boardItemStudent({
     child: Padding(
       padding: const EdgeInsets.only(bottom: 5),
       child: Card(
-        shape: const RoundedRectangleBorder(
+        color: Theme.of(context).primaryColor,
+        shape:  const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             topRight: Radius.circular(30),
             bottomLeft: Radius.circular(30),
+
           ),
         ),
         elevation: 8,
@@ -76,8 +78,9 @@ boardItemStudentUser({
 }) {
   return GestureDetector(
     onTap: onTap,
-    // color: HexColor('#F5F5F5'),
+
     child:  Card(
+      color: Theme.of(context).primaryColor,
   shape: const RoundedRectangleBorder(
   borderRadius: BorderRadius.only(
   topLeft: Radius.circular(30),
@@ -132,6 +135,7 @@ boardItemStudentUser({
 }
 
 boardItemListStudent({
+  required BuildContext context,
   VoidCallback? onTap,
   Data? data,
 }) {
@@ -141,7 +145,7 @@ boardItemListStudent({
     onTap: onTap,
     child: Card(
       // color: HexColor('#F5F5F5'),
-      color: tcWhite,
+      color:Theme.of(context).primaryColor,
       child: Padding(
         padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
         child: Table(
@@ -217,14 +221,16 @@ boardItemListStudent({
                 children: [
                   Text(
                     '$sName  $sLastName ',
-                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    style:  TextStyle(fontSize: 16, fontWeight: FontWeight.bold,
+                      color:Theme.of(context).bottomAppBarColor,),
                   ),
                   Table(children: [
                     TableRow(children: [
                       Text(
                         data?.textstudentcode ?? '',
                         textAlign: TextAlign.start,
-                        style: const TextStyle(fontSize: 14),
+                        style:  TextStyle(fontSize: 14,
+                          color:Theme.of(context).bottomAppBarColor,),
                       ),
                     ]),
                   ]),

@@ -15,7 +15,8 @@ boardItemTeacherLeft({
   return GestureDetector(
     onTap: onTap,
     child: Card(
-      shape: const RoundedRectangleBorder(
+      color:Theme.of(context).primaryColor,
+      shape:  const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topRight: Radius.circular(30),
           bottomLeft: Radius.circular(30),
@@ -106,6 +107,7 @@ boardItemTeacherRight({
   return GestureDetector(
     onTap: onTap,
     child: Card(
+      color:Theme.of(context).primaryColor,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topRight: Radius.circular(30),
@@ -238,6 +240,7 @@ boardItemStaff({
   return GestureDetector(
     onTap: onTap,
     child: Card(
+      color:Theme.of(context).primaryColor,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topRight: Radius.circular(30),

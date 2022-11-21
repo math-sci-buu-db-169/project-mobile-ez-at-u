@@ -9,23 +9,25 @@ fagBody(BuildContext context, ScreenMoreFAQResponse? screenHomeMoreFAQResponse) 
         return false;
       },
       child: Scaffold(
+        backgroundColor:Theme.of(context).scaffoldBackgroundColor,
+
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor:Theme.of(context).appBarTheme.backgroundColor,
           elevation: 0,
           leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: const Icon(
+            icon:  Icon(
               Icons.arrow_back,
               size: 24,
-              color: Colors.black,
+              color: Theme.of(context).appBarTheme.foregroundColor,
             ),
           ),
           title: Text(
             screenHomeMoreFAQResponse?.body?.screeninfo?.titlefaq ?? moreBtnAndTitleFaq,
-            style: const TextStyle(
-              color: Colors.black,
+            style:  TextStyle(
+              color: Theme.of(context).appBarTheme.foregroundColor,
               fontSize: 24,
             ),
           ),

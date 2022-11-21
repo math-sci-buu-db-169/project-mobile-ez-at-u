@@ -11,7 +11,7 @@ contactMathWidget(BuildContext context, ScreenMoreContactUsResponse? screenMoreC
   String endTime = screenMoreContactUsResponse?.body?.data?.endtime ?? "16:00";
   String textUnitTime = screenMoreContactUsResponse?.body?.screeninfo?.textunittime ?? "น.";
   return Card(
-    color: Colors.white,
+    // color: Colors.white,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(12.0),
     ),
@@ -19,7 +19,7 @@ contactMathWidget(BuildContext context, ScreenMoreContactUsResponse? screenMoreC
     child: Container(
       padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
       decoration: const BoxDecoration(
-        color: Colors.white,
+        color: Colors.yellowAccent,
         borderRadius: BorderRadius.only(
           topRight: Radius.circular(30),
           // bottomLeft: Radius.circular(40),
@@ -30,8 +30,8 @@ contactMathWidget(BuildContext context, ScreenMoreContactUsResponse? screenMoreC
           1,
         ], colors: [
           contactUsMath,
-          Colors.white,
-          Colors.white,
+          Colors.transparent,
+          Colors.transparent,
         ], begin: Alignment.centerLeft, end: Alignment.centerRight),
       ),
       child: Column(
@@ -41,16 +41,18 @@ contactMathWidget(BuildContext context, ScreenMoreContactUsResponse? screenMoreC
             height: 10,
           ),
           contactUnderlineOneRow(
+            context: context,
             title: screenMoreContactUsResponse?.body?.data?.contactname ?? "ภาควิชาคณิตศาสตร์ คณะวิทยาศาสตร์ ",
             sizeColumnOne: 1,
           ),
           contactOneRow(
+            context: context,
             title: screenMoreContactUsResponse?.body?.data?.address ??
                 "มหาวิทยาลัยบูรพา 169 ถ.ลงหาดบางแสน ต.แสนสุข อ.เมือง จ.ชลบุรี 20131",
             sizeColumnOne: 1,
           ),
           contactThreeRow(
-            context,
+            context: context,
             title: screenMoreContactUsResponse?.body?.screeninfo?.texttel ?? "โทร",
             textCenter: '  ',
             value: screenMoreContactUsResponse?.body?.data?.phone ?? "0-3810-3078",
@@ -59,7 +61,7 @@ contactMathWidget(BuildContext context, ScreenMoreContactUsResponse? screenMoreC
             sizeColumnThree: 0.05,
           ),
           contactThreeRow(
-            context,
+            context: context,
             title: screenMoreContactUsResponse?.body?.screeninfo?.textfax ?? "แฟกซ์",
             textCenter: '',
             value: screenMoreContactUsResponse?.body?.data?.fax ?? "0-3839-3496",
@@ -68,7 +70,7 @@ contactMathWidget(BuildContext context, ScreenMoreContactUsResponse? screenMoreC
             sizeColumnThree: 0.05,
           ),
           contactThreeRow(
-            context,
+            context: context,
             title: "อิเมล",
             textCenter: '',
             value: screenMoreContactUsResponse?.body?.data?.email ?? "math_sci@buu.ac.th",

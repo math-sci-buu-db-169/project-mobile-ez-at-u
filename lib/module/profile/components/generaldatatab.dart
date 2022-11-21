@@ -43,6 +43,7 @@ class _ProfileGeneralDataHeadState extends State<ProfileGeneralDataHead> {
       children: [
         Container(
           decoration: const BoxDecoration(
+            color: Colors.yellow,
             border: Border(
                 top: BorderSide(width: 1, color: Colors.black12),
                 bottom: BorderSide(width: 1, color: Colors.transparent)),

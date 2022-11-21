@@ -42,16 +42,19 @@ contactFacultyWidget(BuildContext context, ScreenMoreContactUsResponse? screenMo
             height: 10,
           ),
           contactUnderlineOneRow(
+
+            context: context,
             title: screenMoreContactUsResponse?.body?.datamain?.contactname ?? "คณะวิทยาศาสตร์ มหาวิทยาลัยบูรพา ",
             sizeColumnOne: 1,
           ),
           contactOneRow(
+            context: context,
             title: screenMoreContactUsResponse?.body?.datamain?.address ??
                 "มหาวิทยาลัยบูรพา 169 ถ.ลงหาดบางแสน ต.แสนสุข อ.เมือง จ.ชลบุรี 20131",
             sizeColumnOne: 1,
           ),
           contactThreeRow(
-            context,
+            context: context,
             title: screenMoreContactUsResponse?.body?.screeninfo?.texttel ?? "โทร",
             textCenter: '  ',
             value: screenMoreContactUsResponse?.body?.datamain?.phone ?? "0-3810-3011",
@@ -60,7 +63,7 @@ contactFacultyWidget(BuildContext context, ScreenMoreContactUsResponse? screenMo
             sizeColumnThree: 0.05,
           ),
           contactThreeRow(
-            context,
+            context: context,
             title: screenMoreContactUsResponse?.body?.screeninfo?.textfax ?? "แฟกซ์",
             textCenter: '  ',
             value: screenMoreContactUsResponse?.body?.datamain?.fax ?? "0-3839-3496",
@@ -69,7 +72,7 @@ contactFacultyWidget(BuildContext context, ScreenMoreContactUsResponse? screenMo
             sizeColumnThree: 0.05,
           ),
           contactThreeRow(
-            context,
+            context: context,
             title: screenMoreContactUsResponse?.body?.screeninfo?.textemail ?? "อิเมล",
             textCenter: '  ',
             value: screenMoreContactUsResponse?.body?.datamain?.email ?? "scibuu.pr@gmail.com",

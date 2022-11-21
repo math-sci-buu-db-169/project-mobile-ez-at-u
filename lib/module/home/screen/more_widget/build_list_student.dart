@@ -32,7 +32,7 @@ buildListStudent(BuildContext context, ScreenMoreBoardStudentListResponse? scree
   if (int.parse("${screenMoreBoardStudentListResponse?.body?.data?.length}") == 0) {
     return Container(
       height: MediaQuery.of(context).size.height,
-      color: Colors.white,
+      color:Theme.of(context).primaryColor,
       child: Center(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -51,12 +51,14 @@ buildListStudent(BuildContext context, ScreenMoreBoardStudentListResponse? scree
       children: List.generate(
           int.parse("${screenMoreBoardStudentListResponse?.body?.data?.length}"),
           (index) => boardItemListStudent(
+            context:context,
                 data: screenMoreBoardStudentListResponse?.body?.data?[index],
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => MoreBoardStudentDetailScreen(
+                        context:context,
                         studentCode: screenMoreBoardStudentListResponse?.body?.data?[index].textstudentcode,
                       ),
                     ),

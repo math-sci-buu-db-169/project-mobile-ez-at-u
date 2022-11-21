@@ -108,9 +108,9 @@ class _MoreBoardListTeacherPageState extends State<MoreBoardListTeacherPage> wit
                 return false;
               },
               child: Scaffold(
-                // backgroundColor: Colors.grey[200],
+                backgroundColor: Theme.of(context).backgroundColor,
                 appBar: AppBar(
-                  backgroundColor:  Theme.of(context).primaryColor,
+                  backgroundColor:Theme.of(context).primaryColor,
                   elevation: 0,
                   leading: IconButton(
                     onPressed: () {
@@ -119,14 +119,14 @@ class _MoreBoardListTeacherPageState extends State<MoreBoardListTeacherPage> wit
                     icon:  Icon(
                       Icons.arrow_back,
                       size: sizeTitle24,
-                      color: Theme.of(context).bottomAppBarColor,
+                      color: Theme.of(context).appBarTheme.foregroundColor,
                     ),
                   ),
                   title: Text(
                     _screenMoreBoardTeacherResponse?.body?.screeninfo?.titileboardpersonal ??
                         boardPersonalTitleBoardPersonal,
                     style:  TextStyle(
-                      color:  Theme.of(context).bottomAppBarColor,
+                      color:  Theme.of(context).appBarTheme.foregroundColor,
                       fontSize: sizeTitle24,
                     ),
                   ),
@@ -170,7 +170,8 @@ class _MoreBoardListTeacherPageState extends State<MoreBoardListTeacherPage> wit
                                                                 Text(
                                                                   optionsDepartment[index].toString(),
                                                                   textAlign: TextAlign.center,
-                                                                  style: const TextStyle(fontSize: sizeTextSmaller14),
+                                                                  style:  TextStyle(fontSize: sizeTextSmaller14,
+                                                                    color: Theme.of(context).appBarTheme.foregroundColor,),
                                                                 ),
                                                               ])
                                                             ],
@@ -199,7 +200,7 @@ class _MoreBoardListTeacherPageState extends State<MoreBoardListTeacherPage> wit
                         },
                         icon:  FaIcon(FontAwesomeIcons.filter,
                             size: 20,
-                            color: Theme.of(context).bottomAppBarColor,)),
+                            color: Theme.of(context).appBarTheme.foregroundColor,)),
                   ],
                 ),
                 body: Column(

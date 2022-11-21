@@ -22,23 +22,24 @@ studentListBody(
         return false;
       },
       child: Scaffold(
+          backgroundColor: Theme.of(context).backgroundColor,
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor:Theme.of(context).primaryColor,
           elevation: 0,
           leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: const Icon(
+            icon:  Icon(
               Icons.arrow_back,
               size: sizeTitle24,
-              color: Colors.black,
+              color: Theme.of(context).bottomAppBarColor,
             ),
           ),
           title: Text(
             "$generation  $title ",
-            style: const TextStyle(
-              color: Colors.black,
+            style:  TextStyle(
+              color: Theme.of(context).bottomAppBarColor,
               fontSize: sizeTitle24,
             ),
           ),
@@ -46,18 +47,19 @@ studentListBody(
           actions: [
             IconButton(
                 onPressed: () {},
-                icon: const FaIcon(FontAwesomeIcons.magnifyingGlass,
-                    size: 20, color: Color(0xFF4F4F4F))),
+                icon:  FaIcon(FontAwesomeIcons.magnifyingGlass,
+                    size: 20,
+                  color: Theme.of(context).bottomAppBarColor,)),
             IconButton(
                 onPressed: () {},
-                icon: const FaIcon(FontAwesomeIcons.filter,
-                    size: 20, color: Color(0xFF4F4F4F))),
+                icon:  FaIcon(FontAwesomeIcons.filter,
+                    size: 20,
+                  color: Theme.of(context).bottomAppBarColor,)),
           ],
         ),
         body: SafeArea(
           child: Container(
-              padding: const EdgeInsets.fromLTRB(2, 5, 2, 10),
-              color: Colors.grey[200],
+              padding: const EdgeInsets.fromLTRB(2, 5, 2, 5),
               child: SizedBox(
                 height: MediaQuery.of(context).size.height,
                 // child: buildListStudent(context, screenMoreBoardStudentListResponse),

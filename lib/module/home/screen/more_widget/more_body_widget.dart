@@ -19,7 +19,7 @@ moreBodyWidget(BuildContext context, ScreenMoreResponse? screenMoreResponse,
       },
       child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Theme.of(context).primaryColor,
+            backgroundColor:Theme.of(context).appBarTheme.backgroundColor,
             elevation: 0,
             leading: IconButton(
               onPressed: () {
@@ -28,7 +28,7 @@ moreBodyWidget(BuildContext context, ScreenMoreResponse? screenMoreResponse,
               icon:  Icon(
                 Icons.arrow_back,
                 size: sizeTitle24,
-                color:  Theme.of(context).bottomAppBarColor,
+                color: Theme.of(context).appBarTheme.foregroundColor,
               ),
             ),
             title: Text(
@@ -36,7 +36,7 @@ moreBodyWidget(BuildContext context, ScreenMoreResponse? screenMoreResponse,
               style:  TextStyle(
                 // color: Colors.black,
                 fontSize: sizeTitle24,
-                  color: Theme.of(context).bottomAppBarColor,)),
+                  color:Theme.of(context).appBarTheme.backgroundColor,)),
             // Bypass imge
             // actions: <Widget>[
             //   IconButton(
