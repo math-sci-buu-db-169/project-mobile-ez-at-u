@@ -102,7 +102,7 @@ contactOneRow({
                 color: Theme.of(context).appBarTheme.foregroundColor),
   ),
             
-          ),
+         
         ])
       ],
     ),
