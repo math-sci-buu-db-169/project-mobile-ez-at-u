@@ -6,9 +6,15 @@ import '../bloc/profile_bloc.dart';
 import '../model/response/api_profile_response.dart';
 
 class ProfileGeneralDataHead extends StatefulWidget {
+  final Color? dataTabColor;
+  final Color? textColor;
+  final Color? dataTabColorRO;
   final ApiProfileResponse? dataFromAPI;
   final String? userRole;
-  const ProfileGeneralDataHead({Key? key, required this.dataFromAPI, required this.userRole})
+  const ProfileGeneralDataHead({Key? key, required this.dataFromAPI, required this.userRole
+    , required this.textColor
+    , required this.dataTabColor, required this.dataTabColorRO
+  })
       : super(key: key);
   @override
   State<ProfileGeneralDataHead> createState() => _ProfileGeneralDataHeadState();
@@ -22,6 +28,9 @@ class _ProfileGeneralDataHeadState extends State<ProfileGeneralDataHead> {
   // TextEditingController nameValueController = TextEditingController();
   late String nameValue;
   late String userRole;
+  late Color textColor;
+  late Color dataTabColor;
+  late Color dataTabColorRO;
   @override
   void initState() {
     dataFromAPI = widget.dataFromAPI;
@@ -29,6 +38,9 @@ class _ProfileGeneralDataHeadState extends State<ProfileGeneralDataHead> {
     nicknameValue = dataFromAPI?.body?.profileGeneralInfo?.nickname??"-";
     nameValue = dataFromAPI?.body?.profileGeneralInfo?.name??"-";
     userRole = widget.userRole??"ST";
+    textColor = widget.textColor??Colors.black.withOpacity(0.5);
+    dataTabColor = widget.dataTabColor??Colors.transparent.withOpacity(0.5);
+    dataTabColorRO = widget.dataTabColorRO??Colors.transparent.withOpacity(0.5);
     super.initState();
   }
   @override
@@ -42,7 +54,7 @@ class _ProfileGeneralDataHeadState extends State<ProfileGeneralDataHead> {
       children: [
         Container(
           decoration: BoxDecoration(
-            color: Theme.of(context).splashColor,
+            color: dataTabColor,
             border: Border(
                 top: BorderSide(width: 1, color: Colors.black12),
                 bottom: BorderSide(width: 1, color: Colors.transparent)),
@@ -53,7 +65,7 @@ class _ProfileGeneralDataHeadState extends State<ProfileGeneralDataHead> {
               children: [
                 Text(
                   dataFromAPI?.body?.screeninfo?.subtitlegeninfo??profileSubTitleGenInfo,
-                  style: TextStyle(fontSize: 20, color: Theme.of(context).bottomAppBarColor),
+                  style: TextStyle(fontSize: 20, color: textColor),
                 ),
                 Expanded(
                   child: Container(
@@ -84,6 +96,8 @@ class _ProfileGeneralDataHeadState extends State<ProfileGeneralDataHead> {
           ),
         ),
         ProfileGeneralDataTab(
+          dataTabColor: dataTabColor,
+          textColor: textColor,
           isUnpressed: isUnpressed,
           textLeft: dataFromAPI?.body?.screeninfo?.textname??profileTextName,
           textRight: dataFromAPI?.body?.profileGeneralInfo?.name??"-",
@@ -98,6 +112,8 @@ class _ProfileGeneralDataHeadState extends State<ProfileGeneralDataHead> {
           },
         ),
         ProfileGeneralDataTab(
+          dataTabColor: dataTabColor,
+          textColor: textColor,
           isUnpressed: isUnpressed,
           textLeft: dataFromAPI?.body?.screeninfo?.textlname??profileTextLastName,
           textRight: dataFromAPI?.body?.profileGeneralInfo?.lastname??"-",
@@ -109,6 +125,8 @@ class _ProfileGeneralDataHeadState extends State<ProfileGeneralDataHead> {
           },
         ),
         ProfileGeneralDataTab(
+            dataTabColor: dataTabColor,
+          textColor: textColor,
             isUnpressed: isUnpressed,
             textLeft: dataFromAPI?.body?.screeninfo?.textnickname??profileTextNickName,
             textRight: dataFromAPI?.body?.profileGeneralInfo?.nickname??"-",
@@ -119,10 +137,16 @@ class _ProfileGeneralDataHeadState extends State<ProfileGeneralDataHead> {
               }
             }),
         ProfileGeneralDataReadonlyTab(
+            dataTabColorRO: dataTabColorRO,
+            dataTabColor: dataTabColor,
+            textColor: textColor,
             isUnpressed: isUnpressed,
             textLeft: dataFromAPI?.body?.screeninfo?.textstdcode??profileTextStdCode,
             textRight: dataFromAPI?.body?.profileGeneralInfo?.studentid??"-"),
         ProfileGeneralDataReadonlyTab(
+            dataTabColorRO: dataTabColorRO,
+            dataTabColor: dataTabColor,
+            textColor: textColor,
             isUnpressed: isUnpressed,
             textLeft: dataFromAPI?.body?.screeninfo?.textgen??profileTextGen,
             textRight: dataFromAPI?.body?.profileGeneralInfo?.generation??"-"),
@@ -132,7 +156,8 @@ class _ProfileGeneralDataHeadState extends State<ProfileGeneralDataHead> {
     Column(
     children: [
       Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
+          color: dataTabColor,
           border: Border(
               top: BorderSide(width: 1, color: Colors.black12),
               bottom: BorderSide(width: 1, color: Colors.transparent)),
@@ -143,7 +168,7 @@ class _ProfileGeneralDataHeadState extends State<ProfileGeneralDataHead> {
             children: [
               Text(
                 dataFromAPI?.body?.screeninfo?.subtitlegeninfo??profileSubTitleGenInfo,
-                style: const TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: 20, color: textColor),
               ),
               Expanded(
                 child: Container(
@@ -174,6 +199,8 @@ class _ProfileGeneralDataHeadState extends State<ProfileGeneralDataHead> {
         ),
       ),
       ProfileGeneralDataTab(
+        dataTabColor: dataTabColor,
+        textColor: textColor,
         isUnpressed: isUnpressed,
         textLeft: dataFromAPI?.body?.screeninfo?.textname??profileTextName,
         textRight: dataFromAPI?.body?.profileGeneralInfo?.name??"-",
@@ -188,6 +215,8 @@ class _ProfileGeneralDataHeadState extends State<ProfileGeneralDataHead> {
         },
       ),
       ProfileGeneralDataTab(
+        dataTabColor: dataTabColor,
+        textColor: textColor,
         isUnpressed: isUnpressed,
         textLeft: dataFromAPI?.body?.screeninfo?.textlname??profileTextLastName,
         textRight: dataFromAPI?.body?.profileGeneralInfo?.lastname??"-",
@@ -199,6 +228,8 @@ class _ProfileGeneralDataHeadState extends State<ProfileGeneralDataHead> {
         },
       ),
       ProfileGeneralDataTab(
+          dataTabColor: dataTabColor,
+          textColor: textColor,
           isUnpressed: isUnpressed,
           textLeft: dataFromAPI?.body?.screeninfo?.textnickname??profileTextNickName,
           textRight: dataFromAPI?.body?.profileGeneralInfo?.nickname??"-",
@@ -209,6 +240,8 @@ class _ProfileGeneralDataHeadState extends State<ProfileGeneralDataHead> {
             }
           }),
       ProfileGeneralDataTab(
+        dataTabColor: dataTabColor,
+        textColor: textColor,
           isUnpressed: isUnpressed,
           textLeft: "ตำแหน่งทางวิชาการ",
           textRight: "ผู้ช่วยศาสตราจารย์",
@@ -226,6 +259,8 @@ class _ProfileGeneralDataHeadState extends State<ProfileGeneralDataHead> {
 
 ////////////////////////////////////////////////////////////////////////////////
 class ProfileGeneralDataTab extends StatefulWidget {
+  final Color textColor;
+  final Color dataTabColor;
   final String textLeft;
   final String textRight;
   final bool isUnpressed;
@@ -233,6 +268,8 @@ class ProfileGeneralDataTab extends StatefulWidget {
   final TextEditingController? textEditingController;
   const ProfileGeneralDataTab(
       {Key? key,
+      required this.textColor,
+      required this.dataTabColor,
       required this.textLeft,
       required this.textRight,
       required this.isUnpressed,
@@ -246,12 +283,14 @@ class ProfileGeneralDataTab extends StatefulWidget {
 class _ProfileGeneralDataTabState extends State<ProfileGeneralDataTab> {
   @override
   Widget build(BuildContext context) {
+    Color textColor = widget.textColor;
+    Color dataTabColor = widget.dataTabColor;
     String textLeft = widget.textLeft;
     String textRight = widget.textRight;
     bool isUnpressed = widget.isUnpressed;
     return Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).scaffoldBackgroundColor,
+        color: dataTabColor.withOpacity(0.1),
         border: Border(
             top: BorderSide(width: 1, color: Colors.black12),
             bottom: BorderSide(width: 1, color: Colors.black12)),
@@ -262,13 +301,13 @@ class _ProfileGeneralDataTabState extends State<ProfileGeneralDataTab> {
           children: [
             Text(
               '$textLeft ',
-              style: TextStyle(fontSize: 18, color: Theme.of(context).bottomAppBarColor),
+              style: TextStyle(fontSize: 18, color: textColor),
             ),
             Expanded(
               child: TextFormField(
-                cursorColor: Theme.of(context).bottomAppBarColor,
+                cursorColor: textColor,
                 autofocus: false,
-                style: TextStyle(fontSize: 18, color: Theme.of(context).bottomAppBarColor),
+                style: TextStyle(fontSize: 18, color: textColor),
                 readOnly: isUnpressed,
                 // readOnly: true,
                 textAlign: TextAlign.right,
@@ -288,15 +327,22 @@ class _ProfileGeneralDataTabState extends State<ProfileGeneralDataTab> {
 
 ///////////////////////////////////////////////////////////////////////////////
 class ProfileGeneralDataReadonlyTab extends StatefulWidget {
+  final Color dataTabColor;
+  final Color dataTabColorRO;
+  final Color textColor;
   final String textLeft;
   final String textRight;
   final bool isUnpressed;
 
   const ProfileGeneralDataReadonlyTab(
       {Key? key,
+        required this.textColor,
       required this.textLeft,
       required this.textRight,
-      required this.isUnpressed})
+      required this.isUnpressed,
+        required this.dataTabColor,
+        required this.dataTabColorRO
+      })
       : super(key: key);
 
   @override
@@ -308,11 +354,14 @@ class _ProfileGeneralDataReadonlyTabState
     extends State<ProfileGeneralDataReadonlyTab> {
   @override
   Widget build(BuildContext context) {
+    Color textColor = widget.textColor;
+    Color dataTabColorRO = widget.dataTabColorRO;
     String textLeft = widget.textLeft;
     String textRight = widget.textRight;
     return Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).splashColor.withOpacity(0.7),
+        // color: dataTabColorRO,
+        color:(dataTabColorRO== Colors.black)? Colors.grey.withOpacity(0.2):Colors.black.withOpacity(0.2),
         border: const Border(
             top: BorderSide(width: 1, color: Colors.black12),
             bottom: BorderSide(width: 1, color: Colors.black12)),
@@ -323,12 +372,12 @@ class _ProfileGeneralDataReadonlyTabState
           children: [
             Text(
               '$textLeft ',
-              style: TextStyle(fontSize: 18, color: Theme.of(context).bottomAppBarColor),
+              style: TextStyle(fontSize: 18, color: textColor),
             ),
             Expanded(
               child: TextFormField(
                 autofocus: false,
-                style: TextStyle(fontSize: 18, color: Theme.of(context).bottomAppBarColor),
+                style: TextStyle(fontSize: 18, color: textColor),
                 readOnly: true,
                 textAlign: TextAlign.right,
                 decoration: const InputDecoration(

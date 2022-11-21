@@ -64,6 +64,7 @@ class MyThemes {
     textTheme: GoogleFonts.notoSerifThaiTextTheme(),
     colorScheme: const ColorScheme.dark(),
     iconTheme: const IconThemeData(color: Colors.yellow, opacity: 0.8),
+      appBarTheme: const  AppBarTheme(backgroundColor:Colors.black,foregroundColor:Colors.white )
   );
 
   static final lightTheme = ThemeData(
@@ -74,10 +75,10 @@ class MyThemes {
     splashColor: Color(0xFFFFC0F8),
     // cardColor:Colors.white,
     primarySwatch: white,
-    textTheme: GoogleFonts.notoSerifThaiTextTheme(
-
-    ),
+    textTheme: GoogleFonts.notoSerifThaiTextTheme(),
     colorScheme: const ColorScheme.light(),
     iconTheme: const IconThemeData(color: Colors.purpleAccent, opacity: 0.8),
+      appBarTheme: const  AppBarTheme(backgroundColor:Colors.white,foregroundColor:Colors.black )
+
   );
 }

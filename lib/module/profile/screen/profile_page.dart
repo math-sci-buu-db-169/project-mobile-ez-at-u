@@ -125,7 +125,9 @@ class _ProfilePageState extends State<ProfilePage> with ProgressDialog {
 
   Widget buildContent(BuildContext context,
       ApiProfileResponse? apiProfileResponse, File? image, String? base64img) {
-
+    Color? textColor = Theme.of(context).bottomAppBarColor;
+    Color? dataTabColor = Theme.of(context).appBarTheme.backgroundColor;
+    Color? dataTabColorRO = Theme.of(context).appBarTheme.foregroundColor;
     var height = MediaQuery
         .of(context)
         .size
@@ -254,11 +256,17 @@ class _ProfilePageState extends State<ProfilePage> with ProgressDialog {
                   ],
                 ),
 // Container(child: Image.memory(base64Decode(base64img??phimg))),
-                ProfileGeneralDataHead(dataFromAPI: apiProfileResponse, userRole: roleFromApi),
-                ProfileEducationDataHead(dataFromAPI: apiProfileResponse, userRole: roleFromApi),
-                ProfileAddressDataHead(dataFromAPI: apiProfileResponse, userRole: roleFromApi),
-                ProfileContactDataHead(dataFromAPI: apiProfileResponse, userRole: roleFromApi),
-                ProfileCareerDataHead(dataFromAPI: apiProfileResponse, userRole: roleFromApi),
+                ProfileGeneralDataHead
+                  (dataFromAPI: apiProfileResponse, userRole: roleFromApi,
+                    textColor: textColor, dataTabColor:dataTabColor, dataTabColorRO: dataTabColorRO),
+                ProfileEducationDataHead(dataFromAPI: apiProfileResponse, userRole: roleFromApi,
+                    textColor: textColor, dataTabColor:dataTabColor, dataTabColorRO: dataTabColorRO),
+                ProfileAddressDataHead(dataFromAPI: apiProfileResponse, userRole: roleFromApi,
+                    textColor: textColor, dataTabColor:dataTabColor, dataTabColorRO: dataTabColorRO),
+                ProfileContactDataHead(dataFromAPI: apiProfileResponse, userRole: roleFromApi,
+                    textColor: textColor, dataTabColor:dataTabColor, dataTabColorRO: dataTabColorRO),
+                ProfileCareerDataHead(dataFromAPI: apiProfileResponse, userRole: roleFromApi,
+                    textColor: textColor, dataTabColor:dataTabColor, dataTabColorRO: dataTabColorRO),
                 const SizedBox(height: 60)
               ],
             ),

@@ -10,9 +10,13 @@ import '../model/response/api_profile_response.dart';
 import 'attentiondatatab.dart';
 
 class ProfileCareerDataHead extends StatefulWidget {
+  final Color? dataTabColor;
+  final Color? textColor;
+  final Color? dataTabColorRO;
   final ApiProfileResponse? dataFromAPI;
   final String? userRole;
-  const ProfileCareerDataHead({Key? key, required this.dataFromAPI, required this.userRole})
+  const ProfileCareerDataHead({Key? key, required this.dataFromAPI, required this.textColor
+    , required this.dataTabColor, required this.dataTabColorRO, required this.userRole})
       : super(key: key);
 
   @override
@@ -30,6 +34,9 @@ class _ProfileCareerDataHeadState extends State<ProfileCareerDataHead> {
   late String workplaceValue;
   late String careerValue;
   late String companyValue;
+  late Color textColor;
+  late Color dataTabColor;
+  late Color dataTabColorRO;
   late String userRole;
   @override
   void initState() {
@@ -40,6 +47,9 @@ class _ProfileCareerDataHeadState extends State<ProfileCareerDataHead> {
     workplaceValue = dataFromAPI?.body?.profileCareerInfo?.userworkplace ?? "-";
     careerValue = dataFromAPI?.body?.profileCareerInfo?.usercareer ?? "-";
     companyValue = dataFromAPI?.body?.profileCareerInfo?.usercompany ?? "-";
+    textColor = widget.textColor??Colors.black.withOpacity(0.5);
+    dataTabColor = widget.dataTabColor??Colors.transparent.withOpacity(0.5);
+    dataTabColorRO = widget.dataTabColorRO??Colors.transparent.withOpacity(0.5);
     userRole = widget.userRole??"ST";
     super.initState();
   }
@@ -63,7 +73,8 @@ class _ProfileCareerDataHeadState extends State<ProfileCareerDataHead> {
       Column(
       children: [
         Container(
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
+            color: dataTabColor,
             border: Border(
                 top: BorderSide(width: 1, color: Colors.black12),
                 bottom: BorderSide(width: 1, color: Colors.transparent)),
@@ -75,7 +86,7 @@ class _ProfileCareerDataHeadState extends State<ProfileCareerDataHead> {
                 Text(
                   dataFromAPI?.body?.screeninfo?.subtitleworkinfo ??
                       profileSubTitleWorkInfo,
-                  style: const TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 20, color: textColor),
                 ),
                 Expanded(
                   child: Container(
@@ -112,12 +123,12 @@ class _ProfileCareerDataHeadState extends State<ProfileCareerDataHead> {
           ),
         ),
         ProfileAttentionDropdownTab(
+          dataTabColor: dataTabColor,
+          textColor: textColor,
           attentionArray:
               dataFromAPI?.body?.profileCareerScreenInfo?.attention ?? [],
           userAttentionValue:
               dataFromAPI?.body?.profileCareerInfo?.userattention ?? "-",
-
-          ///
           textLeft:
               dataFromAPI?.body?.screeninfo?.textatt ?? profileTextAttention,
           isUnpressed: isUnpressed,
@@ -132,6 +143,8 @@ class _ProfileCareerDataHeadState extends State<ProfileCareerDataHead> {
           },
         ),
         ProfileCareerDropdownTab(
+          dataTabColor: dataTabColor,
+          textColor: textColor,
           textLeft:
               dataFromAPI?.body?.screeninfo?.textstatus ?? profileTextStatus,
           statusArray: dataFromAPI?.body?.profileCareerScreenInfo?.status ?? [],
