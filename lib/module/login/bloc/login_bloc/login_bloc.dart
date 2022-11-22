@@ -5,6 +5,9 @@ import 'package:ez_at_u/module/login/model/response/screen_login_response.dart';
 import 'package:ez_at_u/module/login/model/response/submit_login_response.dart';
 import 'package:ez_at_u/module/login/repository/login_repository.dart';
 
+import '../../../../customs/common/api/device_info_api.dart';
+import '../../../../customs/common/api/package_info_api.dart';
+
 part 'login_event.dart';
 part 'login_state.dart';
 
@@ -90,6 +93,32 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> with LoginRepository {
         if (responseLoginSubmit.statusCode == 200) {
           SubmitLoginResponse submitLoginResponse = SubmitLoginResponse.fromJson(responseLoginSubmit.data);
           if (submitLoginResponse.head?.status == 200) {
+
+            final packageName = await PackageInfoApi.getPackageName();
+            final appVersion = await PackageInfoApi.getAppVersion();
+            // final ipAddress = await IpInfoApi.getIPAddress();
+            final phone = await DeviceInfoApi.getPhoneInfo();
+            final phoneVersion = await DeviceInfoApi.getPhoneVersion();
+            final operatingSystem = await DeviceInfoApi.getOperatingSystem();
+            final screenResolution = await DeviceInfoApi.getScreenResolution();
+          print(packageName);
+          print(appVersion);
+          print(phone);
+          print(operatingSystem);
+          print(phoneVersion);
+
+
+
+
+
+
+
+
+
+
+
+
+
             emit(SubmitLoginState(responseSubmitLoginScreen: submitLoginResponse));
           } else {
             emit(LoginError(message: submitLoginResponse.head?.message ?? ""));
