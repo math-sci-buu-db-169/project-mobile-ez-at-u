@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../../customs/common/change_theme_button_widget.dart';
 import '../../../../customs/qr/MYQR.dart';
+import '../home_screen/info.dart';
 import 'home_body_widget.dart';
 import '../../../../customs/button/button_custom.dart';
 import '../../../../customs/color/color_const.dart';
@@ -82,7 +83,7 @@ buildContentHomeScreen(
           IconButton(
             icon:  FaIcon(FontAwesomeIcons.fileLines,color: Theme.of(context).iconTheme.color, size: 20),
             onPressed: () {
-              // Navigator.push(context, MaterialPageRoute(builder: (context) =>  NotesPage()));
+              // Navigator.push(context, MaterialPageRoute(builder: (context) =>  const InfoGetApp()));
 
 
             },
