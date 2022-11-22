@@ -253,7 +253,7 @@ buildContextActivity(
         ),
         title: Center(
           child: Text(
-            'อนุมัติกิจกรรม',
+            'ยืนยันกิจกรรม',
             // '${data.status}',
             // activityHeadStatus,
             style: const TextStyle(
@@ -366,104 +366,196 @@ buildContextActivity(
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    borderRadius: BorderRadius.circular(10),
+
+        Padding(
+                  padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 5.0,right: 5.0),
+                          child: SizedBox(
+                              width: double.infinity,
+                              child: ButtonCustom(
+                                onPressed: () {
+                                  // context.read<ActivityBloc>().add(OnClickEditActivityScreenInfoEvent(data: data));
+                                  // context.read<ActivityBloc>().add(EditActivityScreenInfoEvent(data: data));
+                                  Navigator.pushReplacement(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    return EditActivityScreen(data: data);
+                                  }));
+                                },
+                                // label: '${activityScreenText.buttonleft}',
+                                label: 'APPROVE',
+                                colortext: tcButtonTextBlack,
+                                colorbutton: Color(0xFFC5FEAC),
+                                sizetext: sizeTextSmaller14,
+                                colorborder: Color(0xFFC5FEAC),
+                                sizeborder: 10.0,
+                              )),
+                        ),
+                        const SizedBox(
+                          width: 50,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 5.0,right: 5.0),
+                          child: SizedBox(
+                              width: double.infinity,
+                              child: ButtonCustom(
+                                onPressed: () {
+                                  // context.read<ActivityBloc>().add(OnClickEditActivityScreenInfoEvent(data: data));
+                                  // context.read<ActivityBloc>().add(EditActivityScreenInfoEvent(data: data));
+                                  Navigator.pushReplacement(context,
+                                      MaterialPageRoute(builder: (context) {
+                                        return EditActivityScreen(data: data);
+                                      }));
+                                },
+                                // label: '${activityScreenText.buttonleft}',
+                                label: 'UNAPPROVE',
+                                colortext: tcButtonTextBlack,
+                                colorbutton: Color(0xFFF8FEBC),
+                                sizetext: sizeTextSmaller14,
+                                colorborder: Color(0xFFF8FEBC),
+                                sizeborder: 10.0,
+                              )),
+                        ),
+                        const SizedBox(
+                          width: 50,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 5.0,right: 5.0),
+                          child: SizedBox(
+                              width: double.infinity,
+                              child: ButtonCustom(
+                                onPressed: () {
+                                  // context.read<ActivityBloc>().add(OnClickEditActivityScreenInfoEvent(data: data));
+                                  // context.read<ActivityBloc>().add(EditActivityScreenInfoEvent(data: data));
+                                  Navigator.pushReplacement(context,
+                                      MaterialPageRoute(builder: (context) {
+                                        return EditActivityScreen(data: data);
+                                      }));
+                                },
+                                // label: '${activityScreenText.buttonleft}',
+                                label: 'REJECT',
+                                colortext: tcButtonTextBlack,
+                                colorbutton: Color(0xFFF1F5F2),
+                                sizetext: sizeTextSmaller14,
+                                colorborder: Color(0xFFF1F5F2),
+                                sizeborder: 10.0,
+                              )),
+                        ),
+                        const SizedBox(
+                          width: 50,
+                        ),
+                      ],
+                    ),
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      myIcon,
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8.0),
-                        child: Text(
-                          activityHeadStatus,
-                          style: const TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              showButton
-                  ? Padding(
-                      padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.transparent,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                                width: MediaQuery.of(context).size.width * 0.35,
-                                child: ButtonCustom(
-                                  onPressed: () {
-                                    // context.read<ActivityBloc>().add(OnClickEditActivityScreenInfoEvent(data: data));
-                                    // context.read<ActivityBloc>().add(EditActivityScreenInfoEvent(data: data));
-                                    Navigator.pushReplacement(context,
-                                        MaterialPageRoute(builder: (context) {
-                                      return EditActivityScreen(data: data);
-                                    }));
-                                  },
-                                  label: '${activityScreenText.buttonleft}',
-                                  colortext: tcButtonTextBlack,
-                                  colorbutton: tcButtonTextWhite,
-                                  sizetext: sizeTextSmaller14,
-                                  colorborder: tcButtonTextBoarder,
-                                  sizeborder: 1.0,
-                                )),
-                            const SizedBox(
-                              width: 50,
-                            ),
-                            SizedBox(
-                                width: MediaQuery.of(context).size.width * 0.35,
-                                child: ButtonCustom(
-                                  colortext: tcButtonTextWhite,
-                                  colorbutton: tcButtonTextRed,
-                                  sizetext: sizeTextSmaller14,
-                                  colorborder: tcButtonTextRedBoarder,
-                                  sizeborder: 10,
-                                  label: '${activityScreenText.buttonright}',
-                                  onPressed: () {
-                                    dialogOneLineTwoBtnWarning(
-                                        context,
-                                        alertText?.alertdeleteactivity ?? "",
-                                        buttonText?.buttonyes ?? "",
-                                        buttonText?.buttonno ?? "",
-                                        onClickBtn: (String result) {
-                                      Navigator.of(context).pop();
-                                      switch (result) {
-                                        case 'Cancel':
-                                          {
-                                            break;
-                                          }
-                                        case 'OK':
-                                          {
-                                            context.read<ActivityBloc>().add(
-                                                SubmitDeleteActivityEvent(
-                                                    id: int.parse(data.id)));
-                                            if (kDebugMode) {
-                                              print('id คือ ${data.id}');
-                                            }
-                                          }
-                                      }
-                                    });
-                                  },
-                                )),
-                          ],
-                        ),
-                      ),
-                    )
-                  : const Text(''),
+                )
+
+
+              // Padding(
+              //   padding: const EdgeInsets.only(top: 8.0),
+              //   child: Container(
+              //     decoration: BoxDecoration(
+              //       color: Colors.transparent,
+              //       borderRadius: BorderRadius.circular(10),
+              //     ),
+              //     child: Row(
+              //       mainAxisAlignment: MainAxisAlignment.center,
+              //       children: [
+              //         myIcon,
+              //         const SizedBox(
+              //           width: 10,
+              //         ),
+              //         Padding(
+              //           padding: const EdgeInsets.only(top: 8.0),
+              //           child: Text(
+              //             "ยืนยันกิจกรรม",
+              //             style: const TextStyle(
+              //                 fontSize: 16, fontWeight: FontWeight.bold),
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
+              // showButton
+              //     ? Padding(
+              //         padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+              //         child: Container(
+              //           decoration: BoxDecoration(
+              //             color: Colors.transparent,
+              //             borderRadius: BorderRadius.circular(10),
+              //           ),
+              //           child: Row(
+              //             mainAxisAlignment: MainAxisAlignment.center,
+              //             children: [
+              //               SizedBox(
+              //                   width: MediaQuery.of(context).size.width * 0.35,
+              //                   child: ButtonCustom(
+              //                     onPressed: () {
+              //                       // context.read<ActivityBloc>().add(OnClickEditActivityScreenInfoEvent(data: data));
+              //                       // context.read<ActivityBloc>().add(EditActivityScreenInfoEvent(data: data));
+              //                       Navigator.pushReplacement(context,
+              //                           MaterialPageRoute(builder: (context) {
+              //                         return EditActivityScreen(data: data);
+              //                       }));
+              //                     },
+              //                     label: '${activityScreenText.buttonleft}',
+              //                     colortext: tcButtonTextBlack,
+              //                     colorbutton: tcButtonTextWhite,
+              //                     sizetext: sizeTextSmaller14,
+              //                     colorborder: tcButtonTextBoarder,
+              //                     sizeborder: 1.0,
+              //                   )),
+              //               const SizedBox(
+              //                 width: 50,
+              //               ),
+              //               SizedBox(
+              //                   width: MediaQuery.of(context).size.width * 0.35,
+              //                   child: ButtonCustom(
+              //                     colortext: tcButtonTextWhite,
+              //                     colorbutton: tcButtonTextRed,
+              //                     sizetext: sizeTextSmaller14,
+              //                     colorborder: tcButtonTextRedBoarder,
+              //                     sizeborder: 10,
+              //                     label: '${activityScreenText.buttonright}',
+              //                     onPressed: () {
+              //                       dialogOneLineTwoBtnWarning(
+              //                           context,
+              //                           alertText?.alertdeleteactivity ?? "",
+              //                           buttonText?.buttonyes ?? "",
+              //                           buttonText?.buttonno ?? "",
+              //                           onClickBtn: (String result) {
+              //                         Navigator.of(context).pop();
+              //                         switch (result) {
+              //                           case 'Cancel':
+              //                             {
+              //                               break;
+              //                             }
+              //                           case 'OK':
+              //                             {
+              //                               context.read<ActivityBloc>().add(
+              //                                   SubmitDeleteActivityEvent(
+              //                                       id: int.parse(data.id)));
+              //                               if (kDebugMode) {
+              //                                 print('id คือ ${data.id}');
+              //                               }
+              //                             }
+              //                         }
+              //                       });
+              //                     },
+              //                   )),
+              //             ],
+              //           ),
+              //         ),
+              //       )
+              //     : const Text(''),
             ]),
           ),
         ),
