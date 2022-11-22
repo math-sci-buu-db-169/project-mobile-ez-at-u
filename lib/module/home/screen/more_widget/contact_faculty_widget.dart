@@ -12,7 +12,7 @@ contactFacultyWidget(BuildContext context, ScreenMoreContactUsResponse? screenMo
   String textUnitTime = screenMoreContactUsResponse?.body?.screeninfo?.textunittime ?? "น.";
 
   return Card(
-    color: Colors.white,
+    color: Theme.of(context).primaryColor.withOpacity(0.8),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(12.0),
     ),
@@ -20,8 +20,8 @@ contactFacultyWidget(BuildContext context, ScreenMoreContactUsResponse? screenMo
     child: Container(
       padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
       decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(
+        // color: Colors.white,
+        borderRadius:  BorderRadius.only(
           topRight: Radius.circular(0),
           // bottomLeft: Radius.circular(40),
         ),
@@ -31,8 +31,8 @@ contactFacultyWidget(BuildContext context, ScreenMoreContactUsResponse? screenMo
           1,
         ], colors: [
           contactUsFaulty,
-          Colors.white,
-          Colors.white,
+          Colors.transparent,
+          Colors.transparent,
         ], begin: Alignment.centerLeft, end: Alignment.centerRight),
       ),
       child: Column(
@@ -83,13 +83,13 @@ contactFacultyWidget(BuildContext context, ScreenMoreContactUsResponse? screenMo
           Center(
             child: Text(
               "$startPeriod - $endPeriod ",
-              style: const TextStyle(fontSize: sizeTextSmaller14),
+              style:  TextStyle(fontSize: sizeTextSmaller14,color: Theme.of(context).appBarTheme.foregroundColor),
             ),
           ),
           Center(
             child: Text(
               "$startTime - $endTime $textUnitTime ",
-              style: const TextStyle(fontSize: sizeTextSmaller14),
+              style:  TextStyle(fontSize: sizeTextSmaller14,color: Theme.of(context).appBarTheme.foregroundColor),
             ),
           ),
           const SizedBox(

@@ -29,8 +29,8 @@ drawerHome(
     TextEditingController otpCodeController,
     TextEditingController passwordController,
     {required String versionApp,
-      required void Function()  iniGetThemeMode, required int intThemeMode
-    }) {
+    required void Function() iniGetThemeMode,
+    required int intThemeMode}) {
   String name = screenProfileResponse?.body?.profileGeneralInfo?.name ?? '-';
   String lName =
       screenProfileResponse?.body?.profileGeneralInfo?.lastname ?? '-';
@@ -51,21 +51,27 @@ drawerHome(
       screenHomeResponse?.body?.alertmessage?.phonesupport ?? phoneSupport;
   String textPassword =
       screenHomeResponse?.body?.alertmessage?.alertpassword ?? alertPassword;
-  List<String> optionsThemeMode = ["light","dark","system"];
+  List<String> optionsThemeMode = ["light", "dark", "system"];
   return SafeArea(
     child: SizedBox(
       height: double.infinity,
       child: Column(
         children: <Widget>[
           Expanded(
-            child: SizedBox(
+            child: Container(
+              color: Theme.of(context).scaffoldBackgroundColor,
               child: SingleChildScrollView(
                 child: Column(children: <Widget>[
                   Container(
                     width: double.infinity,
-                    color: HexColor(screenProfileResponse
-                            ?.body?.profileGeneralInfo?.gencolor ??
-                        drawerColor),
+                    color: Theme.of(context).primaryColor == Colors.black
+                        ? HexColor(screenProfileResponse
+                                    ?.body?.profileGeneralInfo?.gencolor ??
+                                drawerColor)
+                            .withOpacity(0.3)
+                        : HexColor(screenProfileResponse
+                                    ?.body?.profileGeneralInfo?.gencolor ??
+                                drawerColor),
                     padding: const EdgeInsets.all(20),
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -190,10 +196,8 @@ drawerHome(
                       context,
                       toggleLanguageView,
                       isHidden,
-                      textLeftTitle:
-                      homeThemeModeAPP ?? homeThemeModeAPP,
-                      textRightDetail:
-                      "Dark",
+                      textLeftTitle: homeThemeModeAPP ?? homeThemeModeAPP,
+                      textRightDetail: "Dark",
                       tb1: 0.45,
                       tb2: 0.00,
                       tb3: 0.55,
@@ -403,16 +407,24 @@ drawerHome(
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 5, top: 5),
-            child: Text(
-              "EZ@ ${screenProfileResponse?.body?.profileGeneralInfo?.nickname ?? '-'}",
-              style: TextStyle(
-                color:  Theme.of(context).backgroundColor,
-                fontSize: 16,
-              ),
-            ),
-          ),
+          Container(
+              width: double.infinity,
+              color: Theme.of(context).scaffoldBackgroundColor,
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 5, top: 5),
+                  child: Text(
+                    "EZ@ ${screenProfileResponse?.body?.profileGeneralInfo?.nickname ?? '-'}",
+                    style: TextStyle(
+                      color: Theme.of(context)
+                          .appBarTheme
+                          .foregroundColor
+                          ?.withOpacity(0.05),
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+              )),
         ],
       ),
     ),

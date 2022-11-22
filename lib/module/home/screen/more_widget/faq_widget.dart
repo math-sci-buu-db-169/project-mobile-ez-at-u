@@ -23,7 +23,7 @@ List<Item> generateItems(int numberOfItems) {
 class FAQWidget extends StatefulWidget {
   final int count;
   final ScreenMoreFAQResponse? screenHomeMoreFAQResponse;
-  const FAQWidget({Key? key, required this.count, required this.screenHomeMoreFAQResponse}) : super(key: key);
+  const FAQWidget({Key? key, required this.count, required this.screenHomeMoreFAQResponse,}) : super(key: key);
 
   @override
   State<FAQWidget> createState() => _MyStatefulWidgetState();

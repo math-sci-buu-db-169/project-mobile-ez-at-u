@@ -64,7 +64,7 @@ contactUsWidget(
             ),
           ),
         ),
-        floatingActionButton: floatingLineOffice(setState, launchInBrowser, screenMoreContactUsResponse),
+        floatingActionButton: floatingLineOffice(context:context,setState, launchInBrowser, screenMoreContactUsResponse),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ));
 }

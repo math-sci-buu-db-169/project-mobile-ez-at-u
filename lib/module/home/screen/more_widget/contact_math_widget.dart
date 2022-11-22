@@ -11,15 +11,14 @@ contactMathWidget(BuildContext context, ScreenMoreContactUsResponse? screenMoreC
   String endTime = screenMoreContactUsResponse?.body?.data?.endtime ?? "16:00";
   String textUnitTime = screenMoreContactUsResponse?.body?.screeninfo?.textunittime ?? "น.";
   return Card(
-    // color: Colors.white,
+    color: Theme.of(context).primaryColor.withOpacity(0.8),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(12.0),
     ),
     elevation: 5,
     child: Container(
       padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
-      decoration: const BoxDecoration(
-        color: Colors.yellowAccent,
+      decoration:const  BoxDecoration(
         borderRadius: BorderRadius.only(
           topRight: Radius.circular(30),
           // bottomLeft: Radius.circular(40),
@@ -81,13 +80,13 @@ contactMathWidget(BuildContext context, ScreenMoreContactUsResponse? screenMoreC
           Center(
             child: Text(
               "$startPeriod - $endPeriod ",
-              style: const TextStyle(fontSize: sizeTextSmaller14),
+              style:  TextStyle(fontSize: sizeTextSmaller14,color:  Theme.of(context).appBarTheme.foregroundColor),
             ),
           ),
           Center(
             child: Text(
               "$startTime - $endTime $textUnitTime ",
-              style: const TextStyle(fontSize: sizeTextSmaller14),
+              style:  TextStyle(fontSize: sizeTextSmaller14,color: Theme.of(context).appBarTheme.foregroundColor),
             ),
           ),
           const SizedBox(

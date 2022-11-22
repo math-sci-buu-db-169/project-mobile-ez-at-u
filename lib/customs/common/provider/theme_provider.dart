@@ -89,7 +89,8 @@ class MyThemes {
   );
   static final darkTheme = ThemeData(
       backgroundColor: Colors.grey.shade900,
-      scaffoldBackgroundColor: Colors.grey,
+      scaffoldBackgroundColor: Colors.grey.shade900,
+      // scaffoldBackgroundColor: Colors.grey,
       bottomAppBarColor: Colors.white,
       primaryColor: Colors.black,
       splashColor: Color(0xFFFFCE53),

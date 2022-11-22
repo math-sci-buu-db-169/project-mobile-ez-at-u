@@ -20,20 +20,34 @@ faqPanelWidget(
       String answer = screenHomeMoreFAQResponse?.body?.faq?.elementAt(item.getIndex).answer ?? "-";
       String question = screenHomeMoreFAQResponse?.body?.faq?.elementAt(item.getIndex).question ?? "-";
       return ExpansionPanel(
+        backgroundColor: Theme.of(context).primaryColor.withOpacity(0.8),
         headerBuilder: (BuildContext context, bool isExpanded) {
           return ListTile(
             title: Text(
               "$question ",
-              style: const TextStyle(
+              style:  TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
+                color: Theme.of(context).appBarTheme.foregroundColor,
               ),
             ),
           );
         },
         body: ListTile(
-          title: Text(screenHomeMoreFAQResponse?.body?.screeninfo?.textanswer ?? moreFAQTextAnswer),
-          subtitle: Text("$answer \n"),
+          title: Text(screenHomeMoreFAQResponse?.body?.screeninfo?.textanswer ?? moreFAQTextAnswer,
+            style:  TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: Colors.green,
+            ),
+          ),
+          subtitle: Text("$answer \n",
+            style:  TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).appBarTheme.foregroundColor,
+          ),
+          ),
           // trailing: const Icon(Icons.delete),
           // onTap: () {
           //   setState(() {

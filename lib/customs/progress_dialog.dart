@@ -8,7 +8,7 @@ class ProgressDialog {
         barrierDismissible: false,
         builder: (BuildContext context) {
           return Container(
-            color: tcWhite,
+            color: Theme.of(context).primaryColor == Colors.black?Colors.black.withOpacity(0.5):tcWhite,
             height: double.infinity,
             width: double.infinity,
             alignment: Alignment.center,

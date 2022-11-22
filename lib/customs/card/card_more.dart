@@ -192,7 +192,7 @@ buildCardSocial(BuildContext context,
   return GestureDetector(
     onTap: onTap,
     child: Card(
-      color: Colors.white,
+      color: Theme.of(context).appBarTheme.backgroundColor?.withOpacity(0.5),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.0),
       ),
@@ -232,9 +232,10 @@ buildCardSocial(BuildContext context,
                     ),
                     Text(
                       title,
-                      style: const TextStyle(
+                      style:  TextStyle(
                         fontSize: sizeTextSmaller14,
                         fontWeight: FontWeight.w600,
+                        color: Theme.of(context).appBarTheme.foregroundColor
                       ),
                     ),
                   ],

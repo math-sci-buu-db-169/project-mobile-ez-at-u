@@ -58,9 +58,9 @@ contactSocialFacultyWidget(
   );
 }
 
-floatingLineOffice(setState, launchInBrowser, ScreenMoreContactUsResponse? screenMoreContactUsResponse) {
+floatingLineOffice(setState, launchInBrowser, ScreenMoreContactUsResponse? screenMoreContactUsResponse, {required BuildContext context}) {
   return FloatingActionButton.extended(
-    backgroundColor: const Color(0xFFFFFFFF),
+    backgroundColor: Theme.of(context).appBarTheme.backgroundColor?.withOpacity(0.9),
     foregroundColor: Colors.black,
     onPressed: () {
       setState(() {

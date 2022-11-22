@@ -369,6 +369,8 @@ void dialogFiveLineTwoTextFieldTwoBtn(BuildContext context,
               return false;
             },
             child: Dialog(
+                backgroundColor:Theme.of(context).scaffoldBackgroundColor,
+
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
@@ -448,7 +450,7 @@ void dialogFiveLineTwoTextFieldTwoBtn(BuildContext context,
                               onPressed: () => {handleClickBtn("Cancel")},
                               child: Text(
                                 btn2,
-                                style: const TextStyle(color: tcButtonTextBlack),
+                                style:  TextStyle(color:  Theme.of(context).appBarTheme.foregroundColor),
                               ),
                             )
                           ],
