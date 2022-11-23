@@ -25,12 +25,13 @@ class CustomDatePickerState extends State<CustomDatePicker> {
   }
   @override
   Widget build(BuildContext context) {
-
+    Color? appBarBackgroundColor = Theme.of(context).appBarTheme.backgroundColor??Colors.white;
+    Color? appBarforegroundColor = Theme.of(context).appBarTheme.foregroundColor??Colors.black;
     return Container(
       margin: const EdgeInsets.all(12),
       padding: const EdgeInsets.only(left: 10, right: 10),
       decoration: BoxDecoration(
-        border: Border.all(color: tcHint),
+        border: Border.all(color: appBarforegroundColor.withOpacity(0.5)),
         borderRadius: const BorderRadius.all(Radius.circular(30.0)),
       ),
       child: Row(
@@ -38,7 +39,7 @@ class CustomDatePickerState extends State<CustomDatePicker> {
         children: [
           Text(
             dateFormated??"16/02/2001",
-            style: const TextStyle(fontSize: 18),
+            style: TextStyle(fontSize: 18, color: appBarforegroundColor),
           ),
           IconButton(
               onPressed: () async {
@@ -46,12 +47,12 @@ class CustomDatePickerState extends State<CustomDatePicker> {
 
                     builder: (context, child) {
                       return Theme(data: Theme.of(context).copyWith(
-                        colorScheme: const ColorScheme.light(
-                          primary: Color(0xfff9ccff),
-                          onPrimary: Colors.black,
-                          onSurface: Colors.black,
+                        colorScheme: ColorScheme.light(
+                          primary: Theme.of(context).splashColor,
+                          onPrimary: appBarBackgroundColor,
+                          onSurface: appBarforegroundColor,
                         ), textButtonTheme: TextButtonThemeData(
-                        style: TextButton.styleFrom(primary: Colors.black,
+                        style: TextButton.styleFrom(foregroundColor: appBarforegroundColor,
                         ),
                       ),
                       ), child: child!,);},

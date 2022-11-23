@@ -63,7 +63,6 @@ class _AddActivityPageState extends State<AddActivityPage> with ProgressDialog {
   @override
   Widget build(BuildContext context) {
     // context.read<ActivityBloc>().add(AddActivityScreenInfoEvent());
-
     return BlocConsumer<ActivityBloc, ActivityState>(
       listener: (context, state) {
         if (state is SubmitAddEditActivityLoadingState) {
@@ -138,24 +137,26 @@ buildAddActivityBody(
   List<String>? termList = addActivityScreenApi?.body?.termlist;
   // List<String>? approverList = addActivityScreenApi?.body?.approverlist;
   var approverArray = addActivityScreenApi?.body?.approverlist ?? [];
+  Color? appBarBackgroundColor = Theme.of(context).appBarTheme.backgroundColor??Colors.white;
+  Color? appBarforegroundColor = Theme.of(context).appBarTheme.foregroundColor??Colors.black;
   return Scaffold(
     appBar: AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: appBarBackgroundColor,
       elevation: 0,
       leading: IconButton(
         onPressed: () {
           Navigator.pop(context);
         },
-        icon: const Icon(
+        icon: Icon(
           Icons.arrow_back,
           size: sizeTitle24,
-          color: Colors.black,
+          color: appBarforegroundColor,
         ),
       ),
       title: Text(
         addActivityScreenApi?.body?.screeninfo?.titleaddact??activityTitleAddAct,
-        style: const TextStyle(
-          color: Colors.black,
+        style: TextStyle(
+          color: appBarforegroundColor,
           fontSize: sizeTitle24,
         ),
       ),

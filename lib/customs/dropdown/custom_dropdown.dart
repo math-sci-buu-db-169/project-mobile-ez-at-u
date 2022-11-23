@@ -35,10 +35,12 @@ class _customDropdownState extends State<customDropdown> {
     // List<String>? dropdownlist = widget.dropdownList;
     // var dropdownValue = widget.dropdownvalue;
     // print(dropdownValue);
+    Color? appBarBackgroundColor = Theme.of(context).appBarTheme.backgroundColor??Colors.white;
+    Color? appBarforegroundColor = Theme.of(context).appBarTheme.foregroundColor??Colors.black;
     return Container(
       // height: 50,
       decoration: BoxDecoration(
-        border: Border.all(color: tcHint),
+        border: Border.all(color: appBarforegroundColor.withOpacity(0.5)),
             borderRadius: BorderRadius.circular(20),
       ),
       margin: const EdgeInsets.all(15),
@@ -46,6 +48,7 @@ class _customDropdownState extends State<customDropdown> {
         width: widget.width,
         child:
         PopupMenuButton<String>(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
           child: Row(
               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -54,21 +57,23 @@ class _customDropdownState extends State<customDropdown> {
                       padding: const EdgeInsets.all(10.0),
                       child: Text(
                         dropdownValue??hint,
-                        style: TextStyle(fontSize: sizeText18, color: Colors.black
+                        style: TextStyle(fontSize: sizeText18, color: appBarforegroundColor
                         ),
                         textAlign: TextAlign.start,
                         overflow: TextOverflow.fade,
                         softWrap: false,
                       ),
                     )),
-                const Icon(Icons.keyboard_arrow_down)
+                Icon(Icons.keyboard_arrow_down,color: appBarforegroundColor,)
               ]),
           itemBuilder: (context) {
             return List.generate(widget.dropdownList.length,
                     (index) {
                   return PopupMenuItem(
                     child:
-                    Text(widget.dropdownList[index]),
+                    Text(widget.dropdownList[index],style: TextStyle(fontSize: sizeText18, color: appBarforegroundColor
+                    ),
+                    ),
                     value: widget.dropdownList[index],
                   );
                 });

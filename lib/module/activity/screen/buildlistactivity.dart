@@ -8,7 +8,7 @@ import '../model/response/screen_status_activity_response.dart';
 
 buildListActivity(BuildContext context,
     ScreenStatusActivityResponse? screenstatusActivityResponse) {
-  String? userRole = "TC";
+  String? userRole = "ST";
   Color? appBarBackgroundColor = Theme.of(context).appBarTheme.backgroundColor??Colors.white;
   Color? appBarforegroundColor = Theme.of(context).appBarTheme.foregroundColor??Colors.black;
   return SingleChildScrollView(
