@@ -36,7 +36,7 @@ moreBodyWidget(BuildContext context, ScreenMoreResponse? screenMoreResponse,
               style:  TextStyle(
                 // color: Colors.black,
                 fontSize: sizeTitle24,
-                  color:Theme.of(context).appBarTheme.backgroundColor,)),
+                color: Theme.of(context).appBarTheme.foregroundColor,)),
             // Bypass imge
             // actions: <Widget>[
             //   IconButton(

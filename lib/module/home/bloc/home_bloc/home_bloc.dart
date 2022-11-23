@@ -13,7 +13,6 @@ import 'package:ez_at_u/module/home/repository/home_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../main_route/main_route_bloc/main_route_bloc.dart';
-import '../../../../main_route/main_route_bloc_model/CheckTokenExpiredRespomse.dart';
 import '../../../../main_route/main_route_bloc_model/refresh_token_response.dart';
 import '../../../login/model/response/log_sessions/log_sessions_response.dart';
 
@@ -25,122 +24,148 @@ late SharedPreferences prefs;
 class HomeBloc extends Bloc<HomeEvent, HomeState> with HomeRepository {
   HomeBloc() : super(HomeInitial()) {
     HomeEventInitial() async {
-      Response responseCheckTokenExpiredResponse = await getCheckTokenExpired();
-      if (responseCheckTokenExpiredResponse.statusCode == 200) {
-        CheckTokenExpiredResponse checkTokenExpiredResponse =
-        CheckTokenExpiredResponse.fromJson(responseCheckTokenExpiredResponse.data);
-        if (checkTokenExpiredResponse.head?.status == 200) {
-          if (checkTokenExpiredResponse.head?.timeexpire == false) {
-            print("checkTokenExpiredResponse ============HomeEvent======CheckTokenExpired========== ${checkTokenExpiredResponse.head?.timeexpire}");
-            print(checkTokenExpiredResponse.body?.expiremessage);
-            print(checkTokenExpiredResponse.body?.timenow);
-            print(checkTokenExpiredResponse.body?.timeexpir);
-            // emit(HomeEndLoading());
-          }
-          else{
-
-            print("checkTokenExpiredResponse ============HomeEvent=======RefreshTokenResponse========= ${checkTokenExpiredResponse.head?.timeexpire}");
-            print(checkTokenExpiredResponse.body?.expiremessage);
-            print(checkTokenExpiredResponse.body?.timenow);
-            print(checkTokenExpiredResponse.body?.timeexpir);
-            Response responseRefreshTokenResponse = await getRefreshToken(
-                refreshToken: isMainRouteRefresh.toString());
-            // emit(HomeEndLoading());
-            if (responseRefreshTokenResponse.statusCode == 200) {
-              RefreshTokenResponse refreshTokenResponse =
-              RefreshTokenResponse.fromJson(responseRefreshTokenResponse.data);
-              if (refreshTokenResponse.head?.status == 200) {
-                await setUserKey(globalKey: refreshTokenResponse.body?.token?? "");
-                await setUserRefreshKey(refreshKey: refreshTokenResponse.body?.refreshtoken?? "");
-
-
-
-              }
-              else if (refreshTokenResponse.head?.status == 400) {
-                emit(TokenExpiredState(message: responseRefreshTokenResponse.statusMessage ?? "", checkrefreshtokenmessage : refreshTokenResponse));
-              }
-              else {
-                emit(HomeError(
-                    message: refreshTokenResponse.head?.message ?? ""));
-              }
-            }  else {
-              emit(HomeError(message: responseRefreshTokenResponse.statusMessage ?? ""));
-            }
-          }
-
-        }
-        else if (checkTokenExpiredResponse.head?.status == 401) {
-
-          print("checkTokenExpiredResponse ============HomeEvent=======RefreshTokenResponse 401 ========= ${checkTokenExpiredResponse.head?.timeexpire}");
-          print(checkTokenExpiredResponse.body?.expiremessage);
-          print(checkTokenExpiredResponse.body?.timenow);
-          print(checkTokenExpiredResponse.body?.timeexpir);
-          Response responseRefreshTokenResponse = await getRefreshToken(
-              refreshToken: isMainRouteRefresh.toString());
-          // emit(HomeEndLoading());
-          if (responseRefreshTokenResponse.statusCode == 200) {
-            RefreshTokenResponse refreshTokenResponse =
-            RefreshTokenResponse.fromJson(responseRefreshTokenResponse.data);
-            if (refreshTokenResponse.head?.status == 200) {
-              await setUserKey(globalKey: refreshTokenResponse.body?.token?? "");
-              await setUserRefreshKey(refreshKey: refreshTokenResponse.body?.refreshtoken?? "");
-            }
-            else if (refreshTokenResponse.head?.status == 400) {
-              emit(TokenExpiredState(message: responseRefreshTokenResponse.statusMessage ?? "", checkrefreshtokenmessage : refreshTokenResponse));
-            }
-            else {
-              emit(HomeError(
-                  message: refreshTokenResponse.head?.message ?? ""));
-            }
-          }  else {
-            emit(HomeError(message: responseRefreshTokenResponse.statusMessage ?? ""));
-          }
-
-        }
-        else {
-          emit(HomeError(
-              message: checkTokenExpiredResponse.head?.message ?? ""));
-        }
-      }
-
-      else if (responseCheckTokenExpiredResponse.statusCode == 401) {
-
-        print("checkTokenExpiredResponse ============HomeEvent=======RefreshTokenResponse 401 ========= responseCheckTokenExpiredResponse.statusCode ");
-
-        Response responseRefreshTokenResponse = await getRefreshToken(
+      // Response responseCheckTokenExpiredResponse = await getCheckTokenExpired();
+      // if (responseCheckTokenExpiredResponse.statusCode == 200) {
+      //   CheckTokenExpiredResponse checkTokenExpiredResponse =
+      //   CheckTokenExpiredResponse.fromJson(responseCheckTokenExpiredResponse.data);
+      //   if (checkTokenExpiredResponse.head?.status == 200) {
+      //     if (checkTokenExpiredResponse.head?.timeexpire == false) {
+      //       print("checkTokenExpiredResponse ============HomeEvent======CheckTokenExpired========== ${checkTokenExpiredResponse.head?.timeexpire}");
+      //       print(checkTokenExpiredResponse.body?.expiremessage);
+      //       print(checkTokenExpiredResponse.body?.timenow);
+      //       print(checkTokenExpiredResponse.body?.timeexpir);
+      //       // emit(HomeEndLoading());
+      //     }
+      //     else{
+      //
+      //       print("checkTokenExpiredResponse ============HomeEvent=======RefreshTokenResponse========= ${checkTokenExpiredResponse.head?.timeexpire}");
+      //       print(checkTokenExpiredResponse.body?.expiremessage);
+      //       print(checkTokenExpiredResponse.body?.timenow);
+      //       print(checkTokenExpiredResponse.body?.timeexpir);
+      //       Response responseRefreshTokenResponse = await getRefreshToken(
+      //           refreshToken: isMainRouteRefresh.toString());
+      //       // emit(HomeEndLoading());
+      //       if (responseRefreshTokenResponse.statusCode == 200) {
+      //         RefreshTokenResponse refreshTokenResponse =
+      //         RefreshTokenResponse.fromJson(responseRefreshTokenResponse.data);
+      //         if (refreshTokenResponse.head?.status == 200) {
+      //           await setUserKey(globalKey: refreshTokenResponse.body?.token?? "");
+      //           await setUserRefreshKey(refreshKey: refreshTokenResponse.body?.refreshtoken?? "");
+      //
+      //
+      //
+      //         }
+      //         else if (refreshTokenResponse.head?.status == 401) {
+      //           emit(TokenExpiredState(message: responseRefreshTokenResponse.statusMessage ?? "", checkrefreshtokenmessage : refreshTokenResponse));
+      //         }
+      //         else {
+      //           emit(HomeError(
+      //               message: refreshTokenResponse.head?.message ?? ""));
+      //         }
+      //       }  else {
+      //         emit(HomeError(message: responseRefreshTokenResponse.statusMessage ?? ""));
+      //       }
+      //     }
+      //
+      //   }
+      //   else if (checkTokenExpiredResponse.head?.status == 401) {
+      //
+      //     print("checkTokenExpiredResponse ============HomeEvent=======RefreshTokenResponse 401 ========= ${checkTokenExpiredResponse.head?.timeexpire}");
+      //     print(checkTokenExpiredResponse.body?.expiremessage);
+      //     print(checkTokenExpiredResponse.body?.timenow);
+      //     print(checkTokenExpiredResponse.body?.timeexpir);
+      //     Response responseRefreshTokenResponse = await getRefreshToken(
+      //         refreshToken: isMainRouteRefresh.toString());
+      //     // emit(HomeEndLoading());
+      //     if (responseRefreshTokenResponse.statusCode == 200) {
+      //       RefreshTokenResponse refreshTokenResponse =
+      //       RefreshTokenResponse.fromJson(responseRefreshTokenResponse.data);
+      //       if (refreshTokenResponse.head?.status == 200) {
+      //         await setUserKey(globalKey: refreshTokenResponse.body?.token?? "");
+      //         await setUserRefreshKey(refreshKey: refreshTokenResponse.body?.refreshtoken?? "");
+      //       }
+      //       else if (refreshTokenResponse.head?.status == 400) {
+      //         emit(TokenExpiredState(message: responseRefreshTokenResponse.statusMessage ?? "", checkrefreshtokenmessage : refreshTokenResponse));
+      //       }
+      //       else {
+      //         emit(HomeError(
+      //             message: refreshTokenResponse.head?.message ?? ""));
+      //       }
+      //     }  else {
+      //       emit(HomeError(message: responseRefreshTokenResponse.statusMessage ?? ""));
+      //     }
+      //
+      //   }
+      //   else {
+      //     emit(HomeError(
+      //         message: checkTokenExpiredResponse.head?.message ?? ""));
+      //   }
+      // }
+      //
+      // else if (responseCheckTokenExpiredResponse.statusCode == 401) {
+      //
+      //   print("checkTokenExpiredResponse ============HomeEvent=======RefreshTokenResponse 401 ========= responseCheckTokenExpiredResponse.statusCode ");
+      //
+      //   Response responseRefreshTokenResponse = await getRefreshToken(
+      //       refreshToken: isMainRouteRefresh.toString());
+      //   // emit(HomeEndLoading());
+      //   if (responseRefreshTokenResponse.statusCode == 200) {
+      //     RefreshTokenResponse refreshTokenResponse =
+      //     RefreshTokenResponse.fromJson(responseRefreshTokenResponse.data);
+      //     if (refreshTokenResponse.head?.status == 200) {
+      //       await setUserKey(globalKey: refreshTokenResponse.body?.token?? "");
+      //       await setUserRefreshKey(refreshKey: refreshTokenResponse.body?.refreshtoken?? "");
+      //
+      //
+      //
+      //     }
+      //     else if (refreshTokenResponse.head?.status == 401) {
+      //       emit(TokenExpiredState(message: responseRefreshTokenResponse.statusMessage ?? "", checkrefreshtokenmessage : refreshTokenResponse));
+      //     }
+      //     else {
+      //       emit(HomeError(
+      //           message: refreshTokenResponse.head?.message ?? ""));
+      //     }
+      //   }  else {
+      //     emit(HomeError(message: responseRefreshTokenResponse.statusMessage ?? ""));
+      //   }
+      //
+      // }
+      // else {
+      //   emit(HomeError(message: responseCheckTokenExpiredResponse.statusMessage ?? ""));
+      // }
+      try {
+        Response response = await getRefreshToken(
             refreshToken: isMainRouteRefresh.toString());
-        // emit(HomeEndLoading());
-        if (responseRefreshTokenResponse.statusCode == 200) {
+        if (response.statusCode == 200) {
           RefreshTokenResponse refreshTokenResponse =
-          RefreshTokenResponse.fromJson(responseRefreshTokenResponse.data);
+          RefreshTokenResponse.fromJson(response.data);
           if (refreshTokenResponse.head?.status == 200) {
-            await setUserKey(globalKey: refreshTokenResponse.body?.token?? "");
-            await setUserRefreshKey(refreshKey: refreshTokenResponse.body?.refreshtoken?? "");
-
-
-
+            emit(RefreshTokenSuccessState(
+              token: refreshTokenResponse.body?.token,
+              refreshToken: refreshTokenResponse.body?.refreshtoken,
+            ));
           }
           else if (refreshTokenResponse.head?.status == 400) {
-            emit(TokenExpiredState(message: responseRefreshTokenResponse.statusMessage ?? "", checkrefreshtokenmessage : refreshTokenResponse));
+            emit(TokenExpiredState(message: response.statusMessage ?? "", checkrefreshtokenmessage : refreshTokenResponse));
           }
           else {
             emit(HomeError(
                 message: refreshTokenResponse.head?.message ?? ""));
           }
         }  else {
-          emit(HomeError(message: responseRefreshTokenResponse.statusMessage ?? ""));
+          emit(HomeError(message: response.statusMessage ?? ""));
         }
+      } on DioError catch (e) {
+        emit(HomeError(message: e.response?.statusMessage ?? ""));
+      }
 
-      }
-      else {
-        emit(HomeError(message: responseCheckTokenExpiredResponse.statusMessage ?? ""));
-      }
     };
 
     on<HomeScreenInfoEvent>((event, emit) async {
       try {
         emit(HomeLoading());
-        await HomeEventInitial() ;
+        // await HomeEventInitial() ;
         Response responseHome = await getScreenHome();
 
         if (responseHome.statusCode == 200) {
@@ -216,7 +241,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> with HomeRepository {
     on<OnClickChangeLanguageHomeEvent>((event, emit) async {
       try {
         emit(HomeLoading());
-        await HomeEventInitial() ;
+        // await HomeEventInitial() ;
         Response responseChangeLanguage = await getChangeLanguageHome(userLanguage: event.userLanguage);
         emit(HomeEndLoading());
         if (responseChangeLanguage.statusCode == 200) {
@@ -239,7 +264,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> with HomeRepository {
       String? refreshToken = prefs.getString('refreshKey');
       try {
         emit(HomeLoading());
-        await HomeEventInitial() ;
+        // await HomeEventInitial() ;
         Response responseLogoutHome = await getLogout(refreshToken: refreshToken);
         emit(HomeEndLoading());
         if (responseLogoutHome.statusCode == 200) {
@@ -268,7 +293,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> with HomeRepository {
     on<OnClickConfirmDeleteAccountHomeEvent>((event, emit) async {
       try {
         emit(HomeLoading());
-        await HomeEventInitial() ;
+        // await HomeEventInitial() ;
         Response responseDeleteAccountHome = await getDeleteAccount(password: event.password);
         emit(HomeEndLoading());
         if (responseDeleteAccountHome.statusCode == 200) {
