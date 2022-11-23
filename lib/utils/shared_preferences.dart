@@ -109,7 +109,32 @@ setIsPinValue( {required String pinValue}) async {
 
 
 }
+setIsLogSessions( {required int sessionsID,required String sessions,required String myUserID }) async {
+  prefs = await SharedPreferences.getInstance();
+  await prefs.setInt('isSessionsID',sessionsID);
+  await prefs.setString('isSessions',sessions);
+  await prefs.setString('isUserID',myUserID);
+  print('isSessionsID');
+  print( prefs.getInt('isSessionsID') );
+  print('isSessions');
+  print( prefs.getString('isSessions') );
+  print('isUserID');
+  print( prefs.getString('isUserID') );
 
+}
+void cleanIsLogSessions() async {
+  prefs = await SharedPreferences.getInstance();
+  prefs.remove("isSessionsID");
+  prefs.remove("isSessions");
+  prefs.remove("isUserID");
+  print('isSessionsID');
+  print( prefs.getInt('isSessionsID') );
+  print('isSessions');
+  print( prefs.getString('isSessions') );
+  print('isUserID');
+  print( prefs.getString('isUserID') );
+
+}
 setIsChangUserLanguage( ) async{
   String userLanguage;
   prefs = await SharedPreferences.getInstance();

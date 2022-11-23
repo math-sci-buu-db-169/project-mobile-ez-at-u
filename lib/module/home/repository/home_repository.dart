@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../utils/dio.dart';
@@ -43,5 +44,29 @@ class HomeRepository {
   Future<Response> getApiNoActivity() async {
     return await MyDio.createDioServer()
         .post("/api/home/noactivity", data: jsonEncode({}));
+  }
+  Future<Response> sendSubmitLogSessions({
+    required bool option,}
+
+      ) async {
+    prefs = await SharedPreferences.getInstance();
+    String? isUserID = prefs.getString('isUserID');
+    int isSessionsID =  prefs.getInt('isSessionsID')??1;
+    String? isSessions = prefs.getString('isSessions');
+    return await MyDio.createDioServer().post("/login/logsessions",
+        // queryParameters: {"Language": userLanguage} // for get
+        data: jsonEncode({
+          "id": isSessionsID,
+          "userid": isUserID,
+          "sessions": isSessions,
+          "phone": '',
+          "phoneversionos": '',
+          "operatingsystem":'',
+          "screenresolution": '',
+          "appversion": '',
+          "packagename": '',
+          "option": false
+        }) //for post
+    );//for post
   }
 }

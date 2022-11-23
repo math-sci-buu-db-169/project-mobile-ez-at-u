@@ -12,6 +12,8 @@ import 'package:ez_at_u/module/home/model/response/home_response/screen_home_res
 import 'package:ez_at_u/module/home/repository/home_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../login/model/response/log_sessions/log_sessions_response.dart';
+
 part 'home_event.dart';
 part 'home_state.dart';
 
@@ -124,6 +126,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> with HomeRepository {
         if (responseLogoutHome.statusCode == 200) {
           SubmitLogoutResponse submitLogoutResponse = SubmitLogoutResponse.fromJson(responseLogoutHome.data);
           if (submitLogoutResponse.head?.status == 200) {
+            Response responseSendSubmitLogSessions = await sendSubmitLogSessions(
+                option: true);
+
+            if (responseSendSubmitLogSessions.statusCode == 200) {
+              LogSessionsResponse logSessionsResponse = LogSessionsResponse.fromJson(responseSendSubmitLogSessions.data);
+              if (logSessionsResponse.head?.status == 200) {
+                cleanIsLogSessions();
+              }
+            }
             emit(HomeLogoutState(responseSubmitLogoutResponse: submitLogoutResponse));
           } else {
             emit(HomeError(message: submitLogoutResponse.head?.message ?? ""));

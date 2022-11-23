@@ -7,6 +7,7 @@ import 'package:ez_at_u/module/login/repository/login_repository.dart';
 
 import '../../../../customs/common/api/device_info_api.dart';
 import '../../../../customs/common/api/package_info_api.dart';
+import '../../model/response/log_sessions/log_sessions_response.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
@@ -106,19 +107,26 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> with LoginRepository {
           print(phone);
           print(operatingSystem);
           print(phoneVersion);
+            Response responseSendSubmitLogSessions = await sendSubmitLogSessions(
+                userid:event.userID,
+                phone: phone,
+                phoneVersionOS: phoneVersion,
+                operatingSystem: operatingSystem,
+                screenResolution: screenResolution,
+                appVersion: appVersion,
+                packageName: packageName,
+                option: true);
 
-
-
-
-
-
-
-
-
-
-
-
-
+            if (responseSendSubmitLogSessions.statusCode == 200) {
+              LogSessionsResponse logSessionsResponse = LogSessionsResponse.fromJson(responseSendSubmitLogSessions.data);
+              if (logSessionsResponse.head?.status == 200) {
+                setIsLogSessions(
+                    sessionsID: logSessionsResponse.body?.id?.toInt()?? 0,
+                    sessions: logSessionsResponse.body?.sessions??''
+                    , myUserID: event.userID
+                );
+              }
+            }
             emit(SubmitLoginState(responseSubmitLoginScreen: submitLoginResponse));
           } else {
             emit(LoginError(message: submitLoginResponse.head?.message ?? ""));
