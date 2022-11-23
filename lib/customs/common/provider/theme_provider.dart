@@ -98,7 +98,7 @@ class MyThemes {
       primarySwatch: white,
       textTheme: GoogleFonts.notoSerifThaiTextTheme(),
       colorScheme: const ColorScheme.dark(),
-      iconTheme: const IconThemeData(color: Colors.yellow, opacity: 0.8),
+      iconTheme: const IconThemeData(color: Colors.white, opacity: 1),
       appBarTheme: const AppBarTheme(
           backgroundColor: Colors.black, foregroundColor: Colors.white));
 
@@ -112,7 +112,7 @@ class MyThemes {
       primarySwatch: white,
       textTheme: GoogleFonts.notoSerifThaiTextTheme(),
       colorScheme: const ColorScheme.light(),
-      iconTheme: const IconThemeData(color: Colors.purpleAccent, opacity: 0.8),
+      iconTheme: const IconThemeData(color: Colors.black, opacity: 1),
       appBarTheme: const AppBarTheme(
           backgroundColor: Colors.white, foregroundColor: Colors.black));
 }
