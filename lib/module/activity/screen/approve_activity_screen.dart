@@ -1,5 +1,4 @@
 import 'package:ez_at_u/customs/button/button_custom.dart';
-import 'package:ez_at_u/customs/dialog/dialog_widget.dart';
 import 'package:ez_at_u/customs/message/text_activity.dart';
 import 'package:ez_at_u/customs/progress_dialog.dart';
 import 'package:ez_at_u/module/activity/bloc/activity_bloc.dart';
@@ -17,13 +16,16 @@ class ApproveActivityScreen extends StatelessWidget {
   final dynamic data;
   final dynamic buttonText;
   final dynamic alertText;
-
+  final Color appBarBackgroundColor;
+  final Color appBarForegroundColor;
   const ApproveActivityScreen(
       {Key? key,
       this.activityScreenText,
       this.data,
       this.buttonText,
-      this.alertText})
+      this.alertText,
+        required this.appBarBackgroundColor,
+        required this.appBarForegroundColor})
       : super(key: key);
 
   @override
@@ -31,6 +33,8 @@ class ApproveActivityScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => ActivityBloc(),
       child: ActivityDetailPage(
+          appBarBackgroundColor: appBarBackgroundColor,
+          appBarForegroundColor: appBarForegroundColor,
           activityScreenText: activityScreenText,
           data: data,
           buttonText: buttonText,
@@ -44,13 +48,17 @@ class ActivityDetailPage extends StatefulWidget {
   final dynamic data;
   final dynamic buttonText;
   final dynamic alertText;
+  final Color appBarBackgroundColor;
+  final Color appBarForegroundColor;
 
   const ActivityDetailPage(
       {Key? key,
       required this.activityScreenText,
       required this.data,
       required this.buttonText,
-      required this.alertText})
+      required this.alertText,
+        required this.appBarBackgroundColor,
+        required this.appBarForegroundColor})
       : super(key: key);
 
   @override
@@ -66,6 +74,8 @@ class _ActivityDetailPageState extends State<ActivityDetailPage>
   bool showButton = false;
   late SharedPreferences prefs;
   late String _userLanguage= 'TH';
+  late Color appBarBackgroundColor;
+  late Color appBarForegroundColor;
 
   //---------------------------------API----------------------------------------//
   @override
@@ -74,6 +84,8 @@ class _ActivityDetailPageState extends State<ActivityDetailPage>
     data = widget.data;
     buttonText = widget.buttonText;
     alertText = widget.alertText;
+    appBarBackgroundColor = widget.appBarBackgroundColor;
+    appBarForegroundColor = widget.appBarForegroundColor;
     _isSessionExpired();
     if (kDebugMode) {
       print('เรียก initState');
@@ -129,7 +141,7 @@ class _ActivityDetailPageState extends State<ActivityDetailPage>
       builder: (context, state) {
         if (state is ActivityInitial) {
           return buildContextActivity(context, data, showButton,
-              activityScreenText, buttonText, alertText, _userLanguage);
+              activityScreenText, buttonText, alertText, _userLanguage, appBarBackgroundColor, appBarForegroundColor);
         } else {
           return Scaffold(
               body: Container(
@@ -184,58 +196,31 @@ buildContextActivity(
   buttonText,
   alertText,
   isUserLanguage,
+    appBarBackgroundColor,
+    appBarForegroundColor
 ) {
   // print('${data.status}');
-  var myIcon = const Icon(
-    Icons.question_mark,
-    color: Colors.black,
-  );
-  String activityHeadStatus = '';
   if (data.status == "Unapproved!") {
     if (kDebugMode) {
       print('เข้า Unapproved!');
     }
-    activityHeadStatus = activityScreenText.titleunapproved ??
-        (isUserLanguage == 'EN'
-            ? statusActivityTitleUnapprovedEN
-            : statusActivityTitleUnapprovedTH);
-    myIcon = const Icon(
-      Icons.alarm,
-      color: Colors.black,
-    );
     showButton = true;
   } else if (data.status == "Approved!") {
     if (kDebugMode) {
       print('เข้า Approved!');
     }
-    activityHeadStatus = activityScreenText.titleapproved ??
-        (isUserLanguage == 'EN'
-            ? statusActivityTitleApprovedEN
-            : statusActivityTitleApprovedTH);
-    myIcon = const Icon(
-      Icons.check_circle,
-      color: Colors.black,
-    );
     showButton = false;
   } else if (data.status == "Rejected!") {
     if (kDebugMode) {
       print('เข้า Rejected');
     }
-    activityHeadStatus = activityScreenText.titlerejected ??
-        (isUserLanguage == 'EN'
-            ? statusActivityTitleRejectedEN
-            : statusActivityTitleRejectedTH);
-    myIcon = const Icon(
-      Icons.cancel,
-      color: Colors.black,
-    );
     showButton = false;
   }
   String name = data.approvername ?? '-';
   String lastname = data.approverlastname ?? '-';
   return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: appBarBackgroundColor,
         elevation: 0,
         leading: IconButton(
           onPressed: () {
@@ -245,10 +230,10 @@ buildContextActivity(
             // });
             Navigator.pop(context);
           },
-          icon: const Icon(
+          icon: Icon(
             Icons.arrow_back,
             size: sizeTitle24,
-            color: Colors.black,
+            color: appBarForegroundColor,
           ),
         ),
         title: Center(
@@ -256,8 +241,8 @@ buildContextActivity(
             'ยืนยันกิจกรรม',
             // '${data.status}',
             // activityHeadStatus,
-            style: const TextStyle(
-              color: Colors.black,
+            style: TextStyle(
+              color: appBarForegroundColor,
               fontSize: 22,
             ),
           ),

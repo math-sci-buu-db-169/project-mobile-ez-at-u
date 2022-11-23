@@ -17,13 +17,17 @@ class ActivityDetailScreen extends StatelessWidget {
   final dynamic data;
   final dynamic buttonText;
   final dynamic alertText;
+  final Color appBarBackgroundColor;
+  final Color appBarForegroundColor;
 
   const ActivityDetailScreen(
       {Key? key,
       this.activityScreenText,
       this.data,
       this.buttonText,
-      this.alertText})
+      this.alertText,
+        required this.appBarBackgroundColor,
+        required this.appBarForegroundColor})
       : super(key: key);
 
   @override
@@ -31,6 +35,8 @@ class ActivityDetailScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => ActivityBloc(),
       child: ActivityDetailPage(
+          appBarBackgroundColor: appBarBackgroundColor,
+          appBarForegroundColor: appBarForegroundColor,
           activityScreenText: activityScreenText,
           data: data,
           buttonText: buttonText,
@@ -44,13 +50,17 @@ class ActivityDetailPage extends StatefulWidget {
   final dynamic data;
   final dynamic buttonText;
   final dynamic alertText;
+  final Color appBarBackgroundColor;
+  final Color appBarForegroundColor;
 
   const ActivityDetailPage(
       {Key? key,
       required this.activityScreenText,
       required this.data,
       required this.buttonText,
-      required this.alertText})
+      required this.alertText,
+        required this.appBarBackgroundColor,
+        required this.appBarForegroundColor})
       : super(key: key);
 
   @override
@@ -66,6 +76,8 @@ class _ActivityDetailPageState extends State<ActivityDetailPage>
   bool showButton = false;
   late SharedPreferences prefs;
   late String _userLanguage= 'TH';
+  late Color appBarBackgroundColor;
+  late Color appBarForegroundColor;
 
   //---------------------------------API----------------------------------------//
   @override
@@ -74,6 +86,8 @@ class _ActivityDetailPageState extends State<ActivityDetailPage>
     data = widget.data;
     buttonText = widget.buttonText;
     alertText = widget.alertText;
+    appBarBackgroundColor = widget.appBarBackgroundColor;
+    appBarForegroundColor = widget.appBarForegroundColor;
     _isSessionExpired();
     if (kDebugMode) {
       print('เรียก initState');
@@ -129,7 +143,7 @@ class _ActivityDetailPageState extends State<ActivityDetailPage>
       builder: (context, state) {
         if (state is ActivityInitial) {
           return buildContextActivity(context, data, showButton,
-              activityScreenText, buttonText, alertText, _userLanguage);
+              activityScreenText, buttonText, alertText, _userLanguage, appBarBackgroundColor, appBarForegroundColor);
         } else {
           return Scaffold(
               body: Container(
@@ -184,6 +198,8 @@ buildContextActivity(
   buttonText,
   alertText,
   isUserLanguage,
+    appBarBackgroundColor,
+    appBarForegroundColor
 ) {
   // print('${data.status}');
   var myIcon = const Icon(
@@ -235,7 +251,7 @@ buildContextActivity(
   String lastname = data.approverlastname ?? '-';
   return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+        backgroundColor: appBarBackgroundColor,
         elevation: 0,
         leading: IconButton(
           onPressed: () {
@@ -248,7 +264,7 @@ buildContextActivity(
           icon: Icon(
             Icons.arrow_back,
             size: sizeTitle24,
-            color: Theme.of(context).appBarTheme.foregroundColor,
+            color: appBarForegroundColor,
           ),
         ),
         title: Center(
@@ -257,7 +273,7 @@ buildContextActivity(
             // '${data.status}',
             activityHeadStatus,
             style: TextStyle(
-              color: Theme.of(context).appBarTheme.foregroundColor,
+              color: appBarForegroundColor,
               fontSize: 22,
             ),
           ),

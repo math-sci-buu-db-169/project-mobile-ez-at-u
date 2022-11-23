@@ -9,6 +9,8 @@ import '../model/response/screen_status_activity_response.dart';
 buildListActivity(BuildContext context,
     ScreenStatusActivityResponse? screenstatusActivityResponse) {
   String? userRole = "TC";
+  Color? appBarBackgroundColor = Theme.of(context).appBarTheme.backgroundColor??Colors.white;
+  Color? appBarforegroundColor = Theme.of(context).appBarTheme.foregroundColor??Colors.black;
   return SingleChildScrollView(
     padding: const EdgeInsets.fromLTRB(0, 5, 0, 20),
     scrollDirection: Axis.vertical,
@@ -25,6 +27,8 @@ buildListActivity(BuildContext context,
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
                       return ActivityDetailScreen(
+                          appBarBackgroundColor: appBarBackgroundColor,
+                          appBarForegroundColor: appBarforegroundColor,
                           activityScreenText: screenstatusActivityResponse?.body?.screeninfo,
                           alertText: screenstatusActivityResponse?.body?.alertmessage,
                           buttonText: screenstatusActivityResponse?.body?.errorbutton,
@@ -33,21 +37,9 @@ buildListActivity(BuildContext context,
                     })).then((value) =>
                         {context.read<HomeBloc>().add(HomeScreenInfoEvent())});
                   },
-              // onTap: () {
-              //       Navigator.push(context,
-              //           MaterialPageRoute(builder: (context) {
-              //         return ApproveActivityScreen(
-              //             activityScreenText: screenstatusActivityResponse?.body?.screeninfo,
-              //             alertText: screenstatusActivityResponse?.body?.alertmessage,
-              //             buttonText: screenstatusActivityResponse?.body?.errorbutton,
-              //             data: screenstatusActivityResponse
-              //                 ?.body?.activity?[index]);
-              //       })).then((value) =>
-              //           {context.read<HomeBloc>().add(HomeScreenInfoEvent())});
-              //     },
                 )))
     // Student role
-    :
+    : (userRole == "TC") ?
     Column(
         children: List.generate(
             int.parse(
@@ -55,22 +47,12 @@ buildListActivity(BuildContext context,
                 (index) => ItemActivity(
               data: screenstatusActivityResponse?.body?.activity?[index],
               title: screenstatusActivityResponse?.body?.screeninfo,
-              // onTap: () {
-              //   Navigator.push(context,
-              //       MaterialPageRoute(builder: (context) {
-              //         return ActivityDetailScreen(
-              //             activityScreenText: screenstatusActivityResponse?.body?.screeninfo,
-              //             alertText: screenstatusActivityResponse?.body?.alertmessage,
-              //             buttonText: screenstatusActivityResponse?.body?.errorbutton,
-              //             data: screenstatusActivityResponse
-              //                 ?.body?.activity?[index]);
-              //       })).then((value) =>
-              //   {context.read<HomeBloc>().add(HomeScreenInfoEvent())});
-              // },
               onTap: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
                       return ApproveActivityScreen(
+                          appBarBackgroundColor: appBarBackgroundColor,
+                          appBarForegroundColor: appBarforegroundColor,
                           activityScreenText: screenstatusActivityResponse?.body?.screeninfo,
                           alertText: screenstatusActivityResponse?.body?.alertmessage,
                           buttonText: screenstatusActivityResponse?.body?.errorbutton,
@@ -79,7 +61,9 @@ buildListActivity(BuildContext context,
                     })).then((value) =>
                         {context.read<HomeBloc>().add(HomeScreenInfoEvent())});
                   },
-            ))),
+            )))
+        :
+        Container()
     // Teacher role
   );
 }
