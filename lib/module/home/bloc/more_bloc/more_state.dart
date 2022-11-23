@@ -156,3 +156,20 @@ class MoreImgUpError extends MoreState {
   String message;
   MoreImgUpError({required this.message});
 }
+class RefreshTokenSuccessState extends MoreState{
+  String? token;
+  String? refreshToken;
+  RefreshTokenSuccessState({
+    required this.token,
+    required this.refreshToken,
+  });
+}
+
+class TokenExpiredState extends MoreState{
+  String message;
+  RefreshTokenResponse checkrefreshtokenmessage;
+  TokenExpiredState({
+    required this.message,
+    required this.checkrefreshtokenmessage,
+  });
+}

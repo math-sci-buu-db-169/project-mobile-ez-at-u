@@ -64,3 +64,20 @@ class CareerSubmitSuccessState extends ProfileState{
   CareerResponse responseCareer;
   CareerSubmitSuccessState({required this.responseCareer});
 }
+class RefreshTokenSuccessState extends ProfileState{
+  String? token;
+  String? refreshToken;
+  RefreshTokenSuccessState({
+    required this.token,
+    required this.refreshToken,
+  });
+}
+
+class TokenExpiredState extends ProfileState{
+  String message;
+  RefreshTokenResponse checkrefreshtokenmessage;
+  TokenExpiredState({
+    required this.message,
+    required this.checkrefreshtokenmessage,
+  });
+}

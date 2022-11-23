@@ -6,6 +6,11 @@ import 'package:ez_at_u/module/activity/model/response/add_edit.dart';
 import 'package:ez_at_u/module/activity/model/response/delete.dart';
 import 'package:ez_at_u/module/activity/repository/activity_repository.dart';
 
+import '../../../main_route/main_route_bloc/main_route_bloc.dart';
+import '../../../main_route/main_route_bloc_model/CheckTokenExpiredRespomse.dart';
+import '../../../main_route/main_route_bloc_model/refresh_token_response.dart';
+import '../../../utils/shared_preferences.dart';
+
 part 'activity_event.dart';
 
 part 'activity_state.dart';
@@ -13,9 +18,55 @@ part 'activity_state.dart';
 class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
     with ActivityRepository {
   ActivityBloc() : super(ActivityInitial()) {
+    MoreEventInitial() async {
+
+      Response responseCheckTokenExpiredResponse = await getCheckTokenExpired();
+      if (responseCheckTokenExpiredResponse.statusCode == 200) {
+        CheckTokenExpiredResponse checkTokenExpiredResponse =
+        CheckTokenExpiredResponse.fromJson(responseCheckTokenExpiredResponse.data);
+        print("checkTokenExpiredResponse ============================ false");
+        print(checkTokenExpiredResponse.body?.expiremessage);
+        print(checkTokenExpiredResponse.head?.timeexpire);
+        if (checkTokenExpiredResponse.head?.status == 200) {
+          if (checkTokenExpiredResponse.head?.timeexpire == false) {
+
+          }
+          else{
+
+            print("checkTokenExpiredResponse ============================ true");
+            Response responseRefreshTokenResponse = await getRefreshToken(
+                refreshToken: isMainRouteRefresh.toString());
+            if (responseRefreshTokenResponse.statusCode == 200) {
+              RefreshTokenResponse refreshTokenResponse =
+              RefreshTokenResponse.fromJson(responseRefreshTokenResponse.data);
+              if (refreshTokenResponse.head?.status == 200) {
+                await setUserKey(globalKey: refreshTokenResponse.body?.token?? "");
+                await setUserRefreshKey(refreshKey: refreshTokenResponse.body?.refreshtoken?? "");
+              }
+              // else if (refreshTokenResponse.head?.status == 400) {
+              //   emit(TokenExpiredState(message: responseRefreshTokenResponse.statusMessage ?? "", checkrefreshtokenmessage : refreshTokenResponse));
+              // }
+              else {
+                emit(ActivityError(message:refreshTokenResponse.head?.message ?? ""));
+              }
+            }  else {
+              emit(ActivityError(message: responseRefreshTokenResponse.statusMessage ?? ""));
+            }
+          }
+
+        }
+        else {
+          emit(ActivityError(message:checkTokenExpiredResponse.head?.message ?? ""));
+        }
+      }  else {
+        emit(ActivityError(message: responseCheckTokenExpiredResponse.statusMessage ?? ""));
+      }
+    };
+
     on<AddActivityScreenInfoEvent>((event, emit) async {
       try {
         emit(ActivityLoading());
+        await MoreEventInitial();
         Response response = await getScreenActivity();
         emit(ActivityEndLoading());
         if (response.statusCode == 200) {
@@ -38,6 +89,7 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
     on<EditActivityScreenInfoEvent>((event, emit) async {
       try {
         emit(EditActivityLoading());
+        await MoreEventInitial();
         Response responseEditActivityScreen = await getScreenActivity();
         emit(EditActivityEndLoading());
         if (responseEditActivityScreen.statusCode == 200) {
@@ -58,11 +110,14 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
       }
     });
     on<OnClickEditActivityScreenInfoEvent>((event, emit) async {
+
+      await MoreEventInitial();
       emit(OnClickEditActivityScreenInfoState(data : event.data));
     });
     on<SubmitAddEditActivityEvent>((event, emit) async {
       try {
         emit(SubmitAddEditActivityLoadingState());
+        await MoreEventInitial();
         Response responseAddEditSubmit = await submitAddEditActivity(
             event.id,
             event.activityName,
@@ -97,6 +152,7 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
     on<SubmitDeleteActivityEvent>((event, emit) async {
       try {
         emit(ActivityDetailLoading());
+        await MoreEventInitial();
         Response responseDeleteSubmit = await submitDeleteActivity(
           event.id,
         );

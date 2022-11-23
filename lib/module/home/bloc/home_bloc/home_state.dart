@@ -57,3 +57,20 @@ class HomeLogoutState extends HomeState {
 }
 
 class OnClickConfirmDeleteAccountState extends HomeState {}
+class RefreshTokenSuccessState extends HomeState{
+  String? token;
+  String? refreshToken;
+  RefreshTokenSuccessState({
+    required this.token,
+    required this.refreshToken,
+  });
+}
+
+class TokenExpiredState extends HomeState{
+  String message;
+  RefreshTokenResponse checkrefreshtokenmessage;
+  TokenExpiredState({
+    required this.message,
+    required this.checkrefreshtokenmessage,
+  });
+}

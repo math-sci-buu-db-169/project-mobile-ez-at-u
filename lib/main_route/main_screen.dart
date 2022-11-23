@@ -151,7 +151,25 @@ class _MainRouteState extends State<MainRoutePage> with ProgressDialog {
           // )
           // );
           return const LoginScreen();
-        } else if (state is RefreshTokenSuccessState) {
+        }
+        else if (state is RefreshTokenSuccessState) {
+          // String isToken = state.token ?? "";
+          // String isRefreshToken = state.refreshToken ?? "";
+          // _setValueAndGoHome(token: isToken, refreshToken: isRefreshToken);
+
+          return _isHiddenPin == true?
+           PinLockAppScreen(isHiddenBio:_isHiddenBio,pinValueString:_pinValueString,optionLockApp:true)
+              : const HomeScreen(
+          ) ;
+
+          // Navigator.push(
+          //     context,MaterialPageRoute(
+          //     builder: (context) => const HomeScreen(
+          //     )
+          // )
+          // );
+        }
+        else if (state is CheckTokenExpiredState) {
           // String isToken = state.token ?? "";
           // String isRefreshToken = state.refreshToken ?? "";
           // _setValueAndGoHome(token: isToken, refreshToken: isRefreshToken);
@@ -210,7 +228,7 @@ class _MainRouteState extends State<MainRoutePage> with ProgressDialog {
         ));
       },
       buildWhen: (context, state) {
-        return state is MainRouteLogin || state is RefreshTokenSuccessState || state is TokenExpiredState;
+        return state is MainRouteLogin || state is RefreshTokenSuccessState || state is TokenExpiredState|| state is CheckTokenExpiredState;
       },
     );
   }

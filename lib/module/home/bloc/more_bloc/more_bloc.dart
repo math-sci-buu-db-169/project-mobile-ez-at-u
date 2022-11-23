@@ -16,6 +16,10 @@ import 'package:ez_at_u/module/home/repository/more_repository.dart';
 
 import 'package:ez_at_u/module/home/model/response/more_response/screen_more_board_student_list_response.dart';
 
+import '../../../../main_route/main_route_bloc/main_route_bloc.dart';
+import '../../../../main_route/main_route_bloc_model/CheckTokenExpiredRespomse.dart';
+import '../../../../main_route/main_route_bloc_model/refresh_token_response.dart';
+import '../../../../utils/shared_preferences.dart';
 import '../../model/response/more_response/scree_more_pdpa_response.dart';
 import '../../model/response/more_response/screen_more_board_student_list_detail_response.dart';
 import '../../model/response/more_response/screen_more_board_student_list_response.dart';
@@ -34,10 +38,56 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
     on<MoreEvent>((event, emit) {
       // TODO: implement event handler
     });
+    MoreEventInitial() async {
+
+      Response responseCheckTokenExpiredResponse = await getCheckTokenExpired();
+      if (responseCheckTokenExpiredResponse.statusCode == 200) {
+        CheckTokenExpiredResponse checkTokenExpiredResponse =
+        CheckTokenExpiredResponse.fromJson(responseCheckTokenExpiredResponse.data);
+        print("checkTokenExpiredResponse ============================ false");
+        print(checkTokenExpiredResponse.body?.expiremessage);
+        print(checkTokenExpiredResponse.head?.timeexpire);
+        if (checkTokenExpiredResponse.head?.status == 200) {
+          if (checkTokenExpiredResponse.head?.timeexpire == false) {
+
+          }
+          else{
+
+            print("checkTokenExpiredResponse ============================ true");
+            Response responseRefreshTokenResponse = await getRefreshToken(
+                refreshToken: isMainRouteRefresh.toString());
+            if (responseRefreshTokenResponse.statusCode == 200) {
+              RefreshTokenResponse refreshTokenResponse =
+              RefreshTokenResponse.fromJson(responseRefreshTokenResponse.data);
+              if (refreshTokenResponse.head?.status == 200) {
+                await setUserKey(globalKey: refreshTokenResponse.body?.token?? "");
+                await setUserRefreshKey(refreshKey: refreshTokenResponse.body?.refreshtoken?? "");
+              }
+              // else if (refreshTokenResponse.head?.status == 400) {
+              //   emit(TokenExpiredState(message: responseRefreshTokenResponse.statusMessage ?? "", checkrefreshtokenmessage : refreshTokenResponse));
+              // }
+              else {
+                emit(MoreError(message:refreshTokenResponse.head?.message ?? ""));
+              }
+            }  else {
+              emit(MoreError(message: responseRefreshTokenResponse.statusMessage ?? ""));
+            }
+          }
+
+        }
+        else {
+          emit(MoreError(message:checkTokenExpiredResponse.head?.message ?? ""));
+        }
+      }  else {
+        emit(MoreError(message: responseCheckTokenExpiredResponse.statusMessage ?? ""));
+      }
+    };
+
 
     on<MoreScreenInfoEvent>((event, emit) async {
       try {
         emit(MoreLoading());
+        await  MoreEventInitial();
         Response responseMorePDPA = await getScreenMoreInfo();
         emit(MoreEndLoading());
         if (responseMorePDPA.statusCode == 200) {
@@ -59,6 +109,7 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
     on<MorePDPAEvent>((event, emit) async {
       try {
         emit(MorePDPALoading());
+        await  MoreEventInitial();
         Response responseMorePDPA = await getScreenMorePDPA();
         emit(MorePDPAEndLoading());
         if (responseMorePDPA.statusCode == 200) {
@@ -81,6 +132,7 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
     on<MoreFAQEvent>((event, emit) async {
       try {
         emit(MoreFAQLoading());
+        await   MoreEventInitial();
         Response responseMoreFAQ = await getScreenMoreFAQ(module :event.module);
         emit(MoreFAQEndLoading());
         if (responseMoreFAQ.statusCode == 200) {
@@ -101,6 +153,7 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
     on<MoreContactUsEvent>((event, emit) async {
       try {
         emit(MoreContactUsLoading());
+        await  MoreEventInitial();
         Response responseMoreContactUs = await getScreenMoreContactUs();
         emit(MoreContactUsEndLoading());
         if (responseMoreContactUs.statusCode == 200) {
@@ -121,6 +174,7 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
     on<MoreBoardDetailStudentEvent>((event, emit) async {
       try {
         emit(MoreBoardDetailStudentLoading());
+        await MoreEventInitial();
         Response responseMoreBoardDetailStudent = await getScreenMoreBoardDetailStudent(event.studentCode);
         emit(MoreBoardDetailStudentEndLoading());
         if (responseMoreBoardDetailStudent.statusCode == 200) {
@@ -141,6 +195,7 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
     on<MoreBoardListStudentEvent>((event, emit) async {
       try {
         emit(MoreBoardListStudentLoading());
+        await MoreEventInitial();
         Response responseMoreBoardListStudent = await getMoreBoardListStudent(event.gen,event.studentID,event.studentName,event.studentLastname,);
         emit(MoreBoardListStudentEndLoading());
         if (responseMoreBoardListStudent.statusCode == 200) {
@@ -161,6 +216,8 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
 
     on<MoreBoardListStudentSearchEvent>((event, emit) async {
       try {
+
+        await MoreEventInitial();
         Response responseMoreBoardListStudent = await getMoreBoardListStudent(event.gen,event.studentID,event.studentName,event.studentLastname,);
         if (responseMoreBoardListStudent.statusCode == 200) {
           ScreenMoreBoardStudentListResponse screenMoreBoardStudentListResponse =
@@ -180,6 +237,8 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
     on<MoreBoardListGenStudentEvent>((event, emit) async {
       try {
         emit(ListGenStudentLoading());
+
+        await MoreEventInitial();
         Response responseListGenStudent = await getMoreListGen(gen: event.gen,genname: event.genname);
         emit(ListGenStudentEndLoading());
         if (responseListGenStudent.statusCode == 200) {
@@ -199,6 +258,7 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
     });
     on<MoreBoardListGenStudentSearchEvent>((event, emit) async {
       try {
+        await MoreEventInitial();
         Response responseListGenStudent = await getMoreListGen(gen: event.gen,genname: event.genname);
         if (responseListGenStudent.statusCode == 200) {
           ScreenMoreListNameGenResponse screenMoreListNameGenResponse =
@@ -218,6 +278,7 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
     on<MoreBoardTeacherEvent>((event, emit) async {
       try {
         emit(MoreBoardTeacherLoading());
+        await MoreEventInitial();
         Response responseMoreBoardTeacher = await getScreenMoreBoardTeacher();
         emit(MoreBoardTeacherEndLoading());
         if (responseMoreBoardTeacher.statusCode == 200) {
@@ -243,11 +304,14 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
       final bytes = File(image.path).readAsBytesSync();
       String base64Image = base64Encode(bytes);
       log("img_pan : $base64Image");
+
+      await MoreEventInitial();
       emit(ChooseAvatarSuccess(avatarImage: imageTemp, base64img: base64Image));
     });
     on<SubmitChangeAvatarRequest>((event, emit) async {
       try {
         emit(MoreBoardTeacherLoading());
+        await MoreEventInitial();
         Response responseBase64Img = await sentProfileImage(base64Image: event.base64Image, userid: event.userid);
         emit(MoreBoardTeacherEndLoading());
         if (responseBase64Img.statusCode == 200) {

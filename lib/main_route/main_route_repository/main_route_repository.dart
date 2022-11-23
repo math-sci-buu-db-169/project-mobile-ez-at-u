@@ -9,6 +9,11 @@ class MainRouteRepository {
           "refreshToken": refreshToken
         })
     );
+  }Future<Response> getCheckTokenExpired() async {
+    return await MyDio.createDioServer().post("/api/home/checktokenexpired",
+        data: jsonEncode({
+        })
+    );
   }
 
 }

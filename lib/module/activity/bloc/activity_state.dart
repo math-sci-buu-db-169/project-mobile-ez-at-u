@@ -86,3 +86,19 @@ class SubmitDeleteActivityState extends ActivityState {
 }
 
 class DefaultState extends ActivityState {}
+class RefreshTokenSuccessState extends ActivityState{
+  String? token;
+  String? refreshToken;
+  RefreshTokenSuccessState({
+    required this.token,
+    required this.refreshToken,
+  });
+}
+
+class TokenExpiredState extends ActivityState{
+  String message;
+  RefreshTokenResponse checkrefreshtokenmessage;
+  TokenExpiredState({
+    required this.message,
+    required this.checkrefreshtokenmessage,
+  });}

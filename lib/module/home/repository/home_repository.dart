@@ -69,4 +69,16 @@ class HomeRepository {
         }) //for post
     );//for post
   }
+  Future<Response> getRefreshToken({required String refreshToken}) async {
+    return await MyDio.createDioServer().post("/login/refresh/token",
+        data: jsonEncode({
+          "refreshToken": refreshToken
+        })
+    );
+  }Future<Response> getCheckTokenExpired() async {
+    return await MyDio.createDioServer().post("/api/home/checktokenexpired",
+        data: jsonEncode({
+        })
+    );
+  }
 }

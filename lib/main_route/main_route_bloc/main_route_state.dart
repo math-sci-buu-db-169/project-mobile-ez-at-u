@@ -29,3 +29,4 @@ class MainRouteError extends MainRouteState{
   String message;
   MainRouteError({required this.message});
 }
+class CheckTokenExpiredState extends MainRouteState {}
