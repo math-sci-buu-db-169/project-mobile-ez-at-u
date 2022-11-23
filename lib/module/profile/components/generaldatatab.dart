@@ -53,8 +53,10 @@ class _ProfileGeneralDataHeadState extends State<ProfileGeneralDataHead> {
     // var dataFromAPI = widget.dataFromAPI;
     // String surnameValue = dataFromAPI?.body?.profileGeneralInfo?.lastname??"-";
     // String nicknameValue = dataFromAPI?.body?.profileGeneralInfo?.nickname??"-";
-    return (userRole == "ST")
-        ? Column(
+    return
+      (userRole == "ST")
+        ?
+    Column(
             children: [
               Container(
                 decoration: BoxDecoration(
@@ -176,7 +178,10 @@ class _ProfileGeneralDataHeadState extends State<ProfileGeneralDataHead> {
                       dataFromAPI?.body?.profileGeneralInfo?.generation ?? "-"),
             ],
           )
-        : Column(
+        :
+      (userRole == "TC")
+        ?
+    Column(
             children: [
               Container(
                 decoration: BoxDecoration(
@@ -292,7 +297,9 @@ class _ProfileGeneralDataHeadState extends State<ProfileGeneralDataHead> {
                 // }
               ),
             ],
-          );
+          )
+    :
+    Container();
   }
 }
 

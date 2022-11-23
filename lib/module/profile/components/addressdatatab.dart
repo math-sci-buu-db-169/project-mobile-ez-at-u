@@ -70,8 +70,9 @@ class _ProfileAddressDataHeadState extends State<ProfileAddressDataHead> {
     // String districtValue = dataFromAPI?.body?.profileAddressInfo?.district??"-";
     // String provinceValue = dataFromAPI?.body?.profileAddressInfo?.province??"-";
     // String zipcodeValue = dataFromAPI?.body?.profileAddressInfo?.zipcode??"-";
-    return (userRole == "ST")
-        ? Column(
+    return
+      (userRole == "ST") ?
+    Column(
             children: [
               Container(
                 decoration: BoxDecoration(
@@ -246,7 +247,11 @@ class _ProfileAddressDataHeadState extends State<ProfileAddressDataHead> {
               ),
             ],
           )
-        : Column();
+        : (userRole == "TC") ?
+      Column()
+          :
+          Container()
+    ;
   }
 }
 
