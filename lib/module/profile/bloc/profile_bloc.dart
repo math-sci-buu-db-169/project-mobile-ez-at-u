@@ -80,7 +80,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> with ProfileRepositor
     on<ProfileApiEvent>((event, emit) async{
       try {
         emit(ProfileLoading());
-        await ProfileEventInitial() ;
+        // await ProfileEventInitial() ;
         Response response = await getApiProfile();
         emit(ProfileLoadingSuccess());
         if (response.statusCode == 200) {
@@ -127,7 +127,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> with ProfileRepositor
     on<GeneralSubmitEvent>((event, emit) async{
       try {
         emit(ProfileLoading());
-        await ProfileEventInitial() ;
+        // await ProfileEventInitial() ;
         Response responseGeneralSubmit = await sentProfileGeneralData(
             event.name,
             event.surname,
@@ -151,7 +151,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> with ProfileRepositor
     on<EducationSubmitEvent>((event, emit) async{
       try {
         emit(ProfileLoading());
-        await ProfileEventInitial() ;
+        // await ProfileEventInitial() ;
         Response responseEducationSubmit = await sentProfileEducationData(
             event.gpaJh,
             event.gpaSh,
@@ -175,7 +175,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> with ProfileRepositor
     on<AddressSubmitEvent>((event, emit) async{
       try {
         emit(ProfileLoading());
-        await ProfileEventInitial() ;
+        // await ProfileEventInitial() ;
         Response responseAddressSubmit = await sentProfileAddressData(
             event.number,
             event.moo,
@@ -205,7 +205,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> with ProfileRepositor
     on<ContactSubmitEvent>((event, emit) async{
       try {
         emit(ProfileLoading());
-        await ProfileEventInitial() ;
+        // await ProfileEventInitial() ;
         Response responseContactSubmit = await sentProfileContactData(
             event.phone,
             event.line,
@@ -235,7 +235,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> with ProfileRepositor
     on<CareerSubmitEvent>((event, emit) async{
       try {
         emit(ProfileLoading());
-        await ProfileEventInitial() ;
+        // await ProfileEventInitial() ;
         Response responseCareerSubmit = await sentProfileCareerData(
             event.attention,
             event.status,

@@ -66,7 +66,7 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
     on<AddActivityScreenInfoEvent>((event, emit) async {
       try {
         emit(ActivityLoading());
-        await MoreEventInitial();
+        // await MoreEventInitial();
         Response response = await getScreenActivity();
         emit(ActivityEndLoading());
         if (response.statusCode == 200) {
@@ -89,7 +89,7 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
     on<EditActivityScreenInfoEvent>((event, emit) async {
       try {
         emit(EditActivityLoading());
-        await MoreEventInitial();
+        // await MoreEventInitial();
         Response responseEditActivityScreen = await getScreenActivity();
         emit(EditActivityEndLoading());
         if (responseEditActivityScreen.statusCode == 200) {
@@ -111,13 +111,13 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
     });
     on<OnClickEditActivityScreenInfoEvent>((event, emit) async {
 
-      await MoreEventInitial();
+      // await MoreEventInitial();
       emit(OnClickEditActivityScreenInfoState(data : event.data));
     });
     on<SubmitAddEditActivityEvent>((event, emit) async {
       try {
         emit(SubmitAddEditActivityLoadingState());
-        await MoreEventInitial();
+        // await MoreEventInitial();
         Response responseAddEditSubmit = await submitAddEditActivity(
             event.id,
             event.activityName,
@@ -152,7 +152,7 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
     on<SubmitDeleteActivityEvent>((event, emit) async {
       try {
         emit(ActivityDetailLoading());
-        await MoreEventInitial();
+        // await MoreEventInitial();
         Response responseDeleteSubmit = await submitDeleteActivity(
           event.id,
         );
