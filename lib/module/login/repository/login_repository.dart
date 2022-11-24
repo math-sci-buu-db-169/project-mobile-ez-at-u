@@ -5,6 +5,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../utils/dio.dart';
 
 class LoginRepository {
+  Future<Response> getRefreshToken({required String refreshToken}) async {
+    return await MyDio.createDioServer().post("/login/refresh/token",
+        data: jsonEncode({
+          "refreshToken": refreshToken
+        })
+    );
+  }Future<Response> getCheckTokenExpired() async {
+    return await MyDio.createDioServer().post("/login/checktokenexpired",
+        data: jsonEncode({
+        })
+    );
+  }
   Future<Response> getScreenLogin(String userLanguage) async {
     return await MyDio.createDioServer().post("/login/loginscreen",
         data: jsonEncode({"language": userLanguage}) //for post

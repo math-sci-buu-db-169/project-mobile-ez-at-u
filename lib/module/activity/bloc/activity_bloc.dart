@@ -5,68 +5,98 @@ import 'package:ez_at_u/module/activity/model/response/add_edit_activity_screen_
 import 'package:ez_at_u/module/activity/model/response/add_edit.dart';
 import 'package:ez_at_u/module/activity/model/response/delete.dart';
 import 'package:ez_at_u/module/activity/repository/activity_repository.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../main_route/main_route_bloc/main_route_bloc.dart';
-import '../../../main_route/main_route_bloc_model/CheckTokenExpiredRespomse.dart';
+import '../../../main_route/main_route_bloc_model/check_token_expired_response.dart';
 import '../../../main_route/main_route_bloc_model/refresh_token_response.dart';
 import '../../../utils/shared_preferences.dart';
 
 part 'activity_event.dart';
 
 part 'activity_state.dart';
-
+late SharedPreferences prefs;
 class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
     with ActivityRepository {
   ActivityBloc() : super(ActivityInitial()) {
-    MoreEventInitial() async {
+    getRefActivityEventInitial(event, emit) async {
 
+      prefs = await SharedPreferences.getInstance();
+      isMainRouteRefresh =  prefs.getString('refreshKey');
+      isMainRouteKey =  prefs.getString('UserKey');
+      Response response = await getRefreshToken(
+          refreshToken: isMainRouteRefresh.toString());
+      if (response.statusCode == 200) {
+        RefreshTokenResponse refreshTokenResponse =
+        RefreshTokenResponse.fromJson(response.data);
+        if (refreshTokenResponse.head?.status == 200) {
+          await setUserKeyAndRefreshKey(
+              globalKey: refreshTokenResponse.body?.token ?? "",
+              refreshKey: refreshTokenResponse.body?.refreshtoken ?? ""
+          );
+        }
+        else if (refreshTokenResponse.head?.status == 400) {
+          emit(TokenExpiredState(message: response.statusMessage ?? "", checkrefreshtokenmessage : refreshTokenResponse));
+        }
+        else {
+          emit(ActivityError(
+              message: refreshTokenResponse.head?.message ?? ""));
+        }
+      }  else {
+        emit(ActivityError(message: response.statusMessage ?? ""));
+      }
+    }
+
+
+    checkActivityEventInitial(event, emit) async {
       Response responseCheckTokenExpiredResponse = await getCheckTokenExpired();
       if (responseCheckTokenExpiredResponse.statusCode == 200) {
         CheckTokenExpiredResponse checkTokenExpiredResponse =
-        CheckTokenExpiredResponse.fromJson(responseCheckTokenExpiredResponse.data);
-        print("checkTokenExpiredResponse ============================ false");
-        print(checkTokenExpiredResponse.body?.expiremessage);
-        print(checkTokenExpiredResponse.head?.timeexpire);
+        CheckTokenExpiredResponse.fromJson(
+            responseCheckTokenExpiredResponse.data);
         if (checkTokenExpiredResponse.head?.status == 200) {
           if (checkTokenExpiredResponse.head?.timeexpire == false) {
-
+            print(
+                "CheckActivity 1  false============checkActivity======CheckTokenExpired========== ${checkTokenExpiredResponse
+                    .head?.timeexpire}");
+            print(checkTokenExpiredResponse.body?.expiremessage);
+            print(checkTokenExpiredResponse.body?.timenow);
+            print(checkTokenExpiredResponse.body?.timeexpir);
+            // emit(ActivityEndLoading());
           }
-          else{
+          else {
 
-            print("checkTokenExpiredResponse ============================ true");
-            Response responseRefreshTokenResponse = await getRefreshToken(
-                refreshToken: isMainRouteRefresh.toString());
-            if (responseRefreshTokenResponse.statusCode == 200) {
-              RefreshTokenResponse refreshTokenResponse =
-              RefreshTokenResponse.fromJson(responseRefreshTokenResponse.data);
-              if (refreshTokenResponse.head?.status == 200) {
-                await setUserKey(globalKey: refreshTokenResponse.body?.token?? "");
-                await setUserRefreshKey(refreshKey: refreshTokenResponse.body?.refreshtoken?? "");
-              }
-              // else if (refreshTokenResponse.head?.status == 400) {
-              //   emit(TokenExpiredState(message: responseRefreshTokenResponse.statusMessage ?? "", checkrefreshtokenmessage : refreshTokenResponse));
-              // }
-              else {
-                emit(ActivityError(message:refreshTokenResponse.head?.message ?? ""));
-              }
-            }  else {
-              emit(ActivityError(message: responseRefreshTokenResponse.statusMessage ?? ""));
-            }
+            print("CheckActivity  2 == checkTokenExpiredResponse.head?.timeexpire == true");
+            await getRefActivityEventInitial(event, emit);
           }
-
+        }
+        else if (checkTokenExpiredResponse.head?.status == 401) {
+          print("CheckActivity 3 == checkTokenExpiredResponse.head?.status == 401");
+          await getRefActivityEventInitial(event, emit);
         }
         else {
-          emit(ActivityError(message:checkTokenExpiredResponse.head?.message ?? ""));
+          emit(ActivityError(
+              message: checkTokenExpiredResponse.head?.message ?? ""));
         }
-      }  else {
-        emit(ActivityError(message: responseCheckTokenExpiredResponse.statusMessage ?? ""));
       }
-    };
+
+      else if (responseCheckTokenExpiredResponse.statusCode == 401) {
+
+        print("CheckActivity 4 == checkTokenExpiredResponse.head?.status == 401");
+        await getRefActivityEventInitial(event, emit);
+      }
+      else {
+        emit(ActivityError(
+            message: responseCheckTokenExpiredResponse.statusMessage ?? ""));
+      }
+    }
+
 
     on<AddActivityScreenInfoEvent>((event, emit) async {
       try {
         emit(ActivityLoading());
-        // await MoreEventInitial();
+        print("CheckActivity 5 == AddActivityScreenInfoEvent");
+        await  checkActivityEventInitial(event, emit) ;
         Response response = await getScreenActivity();
         emit(ActivityEndLoading());
         if (response.statusCode == 200) {
@@ -89,7 +119,8 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
     on<EditActivityScreenInfoEvent>((event, emit) async {
       try {
         emit(EditActivityLoading());
-        // await MoreEventInitial();
+        print("CheckActivity 6 == EditActivityScreenInfoEvent");
+        await  checkActivityEventInitial(event, emit) ;
         Response responseEditActivityScreen = await getScreenActivity();
         emit(EditActivityEndLoading());
         if (responseEditActivityScreen.statusCode == 200) {
@@ -117,7 +148,8 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
     on<SubmitAddEditActivityEvent>((event, emit) async {
       try {
         emit(SubmitAddEditActivityLoadingState());
-        // await MoreEventInitial();
+        print("CheckActivity 7 == SubmitAddEditActivityEvent");
+        await  checkActivityEventInitial(event, emit) ;
         Response responseAddEditSubmit = await submitAddEditActivity(
             event.id,
             event.activityName,
@@ -152,7 +184,8 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
     on<SubmitDeleteActivityEvent>((event, emit) async {
       try {
         emit(ActivityDetailLoading());
-        // await MoreEventInitial();
+        print("CheckActivity 8  == SubmitDeleteActivityEvent");
+        await  checkActivityEventInitial(event, emit) ;
         Response responseDeleteSubmit = await submitDeleteActivity(
           event.id,
         );

@@ -96,8 +96,14 @@ class _MainRouteState extends State<MainRoutePage> with ProgressDialog {
   }
   void _setValueAndGoHome({required String refreshToken, required String token}) async {
     // final prefs = await SharedPreferences.getInstance();
-    await setUserKey(globalKey: token);
-    await setUserRefreshKey(refreshKey: refreshToken);
+
+    await setUserKeyAndRefreshKey(
+        globalKey: token,
+        refreshKey: refreshToken
+
+    );
+    // await setUserKey(globalKey: token);
+    // await setUserRefreshKey(refreshKey: refreshToken);
     // if (loginSubmitResponse?.body?.language=="TH") {
     //   await setUserLanguage( 'EN');
     // } else {

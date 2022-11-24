@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'customs/common/provider/theme_provider.dart';
 import 'main_route/main_screen.dart';
+import 'module/login/screen/login_screen/login_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([

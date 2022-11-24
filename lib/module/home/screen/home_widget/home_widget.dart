@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../../../../check_token/check_token_expired.dart';
 import '../../../../customs/common/change_theme_button_widget.dart';
 import '../../../../customs/qr/MYQR.dart';
 import 'home_body_widget.dart';
@@ -82,7 +83,7 @@ buildContentHomeScreen(
           IconButton(
             icon:  FaIcon(FontAwesomeIcons.fileLines,color: Theme.of(context).iconTheme.color, size: 20),
             onPressed: () {
-              // Navigator.push(context, MaterialPageRoute(builder: (context) =>  const InfoGetApp()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) =>  const CheckTokenScreen()));
 
 
             },

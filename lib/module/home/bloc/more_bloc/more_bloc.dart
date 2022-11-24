@@ -15,9 +15,10 @@ import 'package:ez_at_u/module/home/model/response/more_response/screen_more_res
 import 'package:ez_at_u/module/home/repository/more_repository.dart';
 
 import 'package:ez_at_u/module/home/model/response/more_response/screen_more_board_student_list_response.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../main_route/main_route_bloc/main_route_bloc.dart';
-import '../../../../main_route/main_route_bloc_model/CheckTokenExpiredRespomse.dart';
+import '../../../../main_route/main_route_bloc_model/check_token_expired_response.dart';
 import '../../../../main_route/main_route_bloc_model/refresh_token_response.dart';
 import '../../../../utils/shared_preferences.dart';
 import '../../model/response/more_response/scree_more_pdpa_response.dart';
@@ -32,62 +33,92 @@ import '../../model/response/more_response/screen_more_response.dart';
 part 'more_event.dart';
 part 'more_state.dart';
 
+late SharedPreferences prefs;
 class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
   bool isFetching = false;
   MoreBloc() : super(MoreInitial()) {
     on<MoreEvent>((event, emit) {
       // TODO: implement event handler
     });
-    MoreEventInitial() async {
+    getRefMoreEventInitial(event, emit) async {
 
+      prefs = await SharedPreferences.getInstance();
+      isMainRouteRefresh =  prefs.getString('refreshKey');
+      isMainRouteKey =  prefs.getString('UserKey');
+      Response response = await getRefreshToken(
+          refreshToken: isMainRouteRefresh.toString());
+      if (response.statusCode == 200) {
+        RefreshTokenResponse refreshTokenResponse =
+        RefreshTokenResponse.fromJson(response.data);
+        if (refreshTokenResponse.head?.status == 200) {
+          await setUserKeyAndRefreshKey(
+              globalKey: refreshTokenResponse.body?.token ?? "",
+              refreshKey: refreshTokenResponse.body?.refreshtoken ?? ""
+          );
+        }
+        else if (refreshTokenResponse.head?.status == 400) {
+          emit(TokenExpiredState(message: response.statusMessage ?? "", checkrefreshtokenmessage : refreshTokenResponse));
+        }
+        else {
+          emit(MoreError(
+              message: refreshTokenResponse.head?.message ?? ""));
+        }
+      }  else {
+        emit(MoreError(message: response.statusMessage ?? ""));
+      }
+    }
+
+
+    checkMoreEventInitial(event, emit) async {
       Response responseCheckTokenExpiredResponse = await getCheckTokenExpired();
       if (responseCheckTokenExpiredResponse.statusCode == 200) {
         CheckTokenExpiredResponse checkTokenExpiredResponse =
-        CheckTokenExpiredResponse.fromJson(responseCheckTokenExpiredResponse.data);
-        print("checkTokenExpiredResponse ============================ false");
-        print(checkTokenExpiredResponse.body?.expiremessage);
-        print(checkTokenExpiredResponse.head?.timeexpire);
+        CheckTokenExpiredResponse.fromJson(
+            responseCheckTokenExpiredResponse.data);
         if (checkTokenExpiredResponse.head?.status == 200) {
           if (checkTokenExpiredResponse.head?.timeexpire == false) {
-
+            print(
+                "CheckMore 1  false============checkMore======CheckTokenExpired========== ${checkTokenExpiredResponse
+                    .head?.timeexpire}");
+            print(checkTokenExpiredResponse.body?.expiremessage);
+            print(checkTokenExpiredResponse.body?.timenow);
+            print(checkTokenExpiredResponse.body?.timeexpir);
+            // emit(MoreEndLoading());
           }
-          else{
+          else {
 
-            print("checkTokenExpiredResponse ============================ true");
-            Response responseRefreshTokenResponse = await getRefreshToken(
-                refreshToken: isMainRouteRefresh.toString());
-            if (responseRefreshTokenResponse.statusCode == 200) {
-              RefreshTokenResponse refreshTokenResponse =
-              RefreshTokenResponse.fromJson(responseRefreshTokenResponse.data);
-              if (refreshTokenResponse.head?.status == 200) {
-                await setUserKey(globalKey: refreshTokenResponse.body?.token?? "");
-                await setUserRefreshKey(refreshKey: refreshTokenResponse.body?.refreshtoken?? "");
-              }
-              // else if (refreshTokenResponse.head?.status == 400) {
-              //   emit(TokenExpiredState(message: responseRefreshTokenResponse.statusMessage ?? "", checkrefreshtokenmessage : refreshTokenResponse));
-              // }
-              else {
-                emit(MoreError(message:refreshTokenResponse.head?.message ?? ""));
-              }
-            }  else {
-              emit(MoreError(message: responseRefreshTokenResponse.statusMessage ?? ""));
-            }
+            print("CheckMore  2 == checkTokenExpiredResponse.head?.timeexpire == true");
+            await getRefMoreEventInitial(event, emit);
           }
-
+        }
+        else if (checkTokenExpiredResponse.head?.status == 401) {
+          print("CheckMore 3 == checkTokenExpiredResponse.head?.status == 401");
+          await getRefMoreEventInitial(event, emit);
         }
         else {
-          emit(MoreError(message:checkTokenExpiredResponse.head?.message ?? ""));
+          emit(MoreError(
+              message: checkTokenExpiredResponse.head?.message ?? ""));
         }
-      }  else {
-        emit(MoreError(message: responseCheckTokenExpiredResponse.statusMessage ?? ""));
       }
-    };
+
+      else if (responseCheckTokenExpiredResponse.statusCode == 401) {
+
+        print("CheckMore 4 == checkTokenExpiredResponse.head?.status == 401");
+        await getRefMoreEventInitial(event, emit);
+      }
+      else {
+        emit(MoreError(
+            message: responseCheckTokenExpiredResponse.statusMessage ?? ""));
+      }
+    }
+
 
 
     on<MoreScreenInfoEvent>((event, emit) async {
       try {
         emit(MoreLoading());
-        await  MoreEventInitial();
+        print("CheckMore 5 == MoreScreenInfoEvent");
+        await  checkMoreEventInitial(event, emit) ;
         Response responseMorePDPA = await getScreenMoreInfo();
         emit(MoreEndLoading());
         if (responseMorePDPA.statusCode == 200) {
@@ -109,7 +140,8 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
     on<MorePDPAEvent>((event, emit) async {
       try {
         emit(MorePDPALoading());
-        await  MoreEventInitial();
+        print("CheckMore 6 == MorePDPAEvent");
+        await  checkMoreEventInitial(event, emit) ;
         Response responseMorePDPA = await getScreenMorePDPA();
         emit(MorePDPAEndLoading());
         if (responseMorePDPA.statusCode == 200) {
@@ -132,7 +164,8 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
     on<MoreFAQEvent>((event, emit) async {
       try {
         emit(MoreFAQLoading());
-        await   MoreEventInitial();
+        print("CheckMore 7 == MoreFAQEvent");
+        await  checkMoreEventInitial(event, emit) ;
         Response responseMoreFAQ = await getScreenMoreFAQ(module :event.module);
         emit(MoreFAQEndLoading());
         if (responseMoreFAQ.statusCode == 200) {
@@ -153,7 +186,8 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
     on<MoreContactUsEvent>((event, emit) async {
       try {
         emit(MoreContactUsLoading());
-        await  MoreEventInitial();
+        print("CheckMore 8 == MoreContactUsEvent");
+        await  checkMoreEventInitial(event, emit) ;
         Response responseMoreContactUs = await getScreenMoreContactUs();
         emit(MoreContactUsEndLoading());
         if (responseMoreContactUs.statusCode == 200) {
@@ -174,7 +208,8 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
     on<MoreBoardDetailStudentEvent>((event, emit) async {
       try {
         emit(MoreBoardDetailStudentLoading());
-        await MoreEventInitial();
+        print("CheckMore 9 == MoreBoardDetailStudentEvent");
+        await  checkMoreEventInitial(event, emit) ;
         Response responseMoreBoardDetailStudent = await getScreenMoreBoardDetailStudent(event.studentCode);
         emit(MoreBoardDetailStudentEndLoading());
         if (responseMoreBoardDetailStudent.statusCode == 200) {
@@ -195,7 +230,8 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
     on<MoreBoardListStudentEvent>((event, emit) async {
       try {
         emit(MoreBoardListStudentLoading());
-        await MoreEventInitial();
+        print("CheckMore 10 == MoreBoardListStudentEvent");
+        await  checkMoreEventInitial(event, emit) ;
         Response responseMoreBoardListStudent = await getMoreBoardListStudent(event.gen,event.studentID,event.studentName,event.studentLastname,);
         emit(MoreBoardListStudentEndLoading());
         if (responseMoreBoardListStudent.statusCode == 200) {
@@ -217,7 +253,8 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
     on<MoreBoardListStudentSearchEvent>((event, emit) async {
       try {
 
-        await MoreEventInitial();
+        print("CheckMore 10 == MoreBoardListStudentSearchEvent");
+        await  checkMoreEventInitial(event, emit) ;
         Response responseMoreBoardListStudent = await getMoreBoardListStudent(event.gen,event.studentID,event.studentName,event.studentLastname,);
         if (responseMoreBoardListStudent.statusCode == 200) {
           ScreenMoreBoardStudentListResponse screenMoreBoardStudentListResponse =
@@ -238,7 +275,8 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
       try {
         emit(ListGenStudentLoading());
 
-        await MoreEventInitial();
+        print("CheckMore 11 == MoreBoardListGenStudentEvent");
+        await  checkMoreEventInitial(event, emit) ;
         Response responseListGenStudent = await getMoreListGen(gen: event.gen,genname: event.genname);
         emit(ListGenStudentEndLoading());
         if (responseListGenStudent.statusCode == 200) {
@@ -258,7 +296,8 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
     });
     on<MoreBoardListGenStudentSearchEvent>((event, emit) async {
       try {
-        await MoreEventInitial();
+        print("CheckMore 12 == MoreBoardListGenStudentSearchEvent");
+        await  checkMoreEventInitial(event, emit) ;
         Response responseListGenStudent = await getMoreListGen(gen: event.gen,genname: event.genname);
         if (responseListGenStudent.statusCode == 200) {
           ScreenMoreListNameGenResponse screenMoreListNameGenResponse =
@@ -278,7 +317,8 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
     on<MoreBoardTeacherEvent>((event, emit) async {
       try {
         emit(MoreBoardTeacherLoading());
-        await MoreEventInitial();
+        print("CheckMore 13 == MoreBoardTeacherEvent");
+        await  checkMoreEventInitial(event, emit) ;
         Response responseMoreBoardTeacher = await getScreenMoreBoardTeacher();
         emit(MoreBoardTeacherEndLoading());
         if (responseMoreBoardTeacher.statusCode == 200) {
@@ -305,13 +345,15 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
       String base64Image = base64Encode(bytes);
       log("img_pan : $base64Image");
 
-      await MoreEventInitial();
+      print("CheckMore 14 == ChangeAvatarRequest");
+      await  checkMoreEventInitial(event, emit) ;
       emit(ChooseAvatarSuccess(avatarImage: imageTemp, base64img: base64Image));
     });
     on<SubmitChangeAvatarRequest>((event, emit) async {
       try {
         emit(MoreBoardTeacherLoading());
-        await MoreEventInitial();
+        print("CheckMore 15 == SubmitChangeAvatarRequest");
+        await  checkMoreEventInitial(event, emit) ;
         Response responseBase64Img = await sentProfileImage(base64Image: event.base64Image, userid: event.userid);
         emit(MoreBoardTeacherEndLoading());
         if (responseBase64Img.statusCode == 200) {

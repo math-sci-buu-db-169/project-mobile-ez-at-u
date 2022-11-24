@@ -6,8 +6,9 @@ import 'package:flutter/foundation.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../main_route/main_route_bloc/main_route_bloc.dart';
-import '../../../main_route/main_route_bloc_model/CheckTokenExpiredRespomse.dart';
+import '../../../main_route/main_route_bloc_model/check_token_expired_response.dart';
 import '../../../main_route/main_route_bloc_model/refresh_token_response.dart';
 import '../../../utils/shared_preferences.dart';
 import '../model/response/address.dart';
@@ -21,66 +22,88 @@ import '../repository/profile_repository.dart';
 part 'profile_event.dart';
 part 'profile_state.dart';
 
+late SharedPreferences prefs;
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> with ProfileRepository {
   ProfileBloc() : super(ProfileInitial()) {
-    ProfileEventInitial() async {
+    getRefProfileEventInitial(event, emit) async {
 
-      emit(ProfileLoading());
+      prefs = await SharedPreferences.getInstance();
+      isMainRouteRefresh =  prefs.getString('refreshKey');
+      isMainRouteKey =  prefs.getString('UserKey');
+      Response response = await getRefreshToken(
+          refreshToken: isMainRouteRefresh.toString());
+      if (response.statusCode == 200) {
+        RefreshTokenResponse refreshTokenResponse =
+        RefreshTokenResponse.fromJson(response.data);
+        if (refreshTokenResponse.head?.status == 200) {
+          await setUserKeyAndRefreshKey(
+              globalKey: refreshTokenResponse.body?.token ?? "",
+              refreshKey: refreshTokenResponse.body?.refreshtoken ?? ""
+          );
+        }
+        else if (refreshTokenResponse.head?.status == 400) {
+          emit(TokenExpiredState(message: response.statusMessage ?? "", checkrefreshtokenmessage : refreshTokenResponse));
+        }
+        else {
+          emit(ProfileError(
+              errorMessage: refreshTokenResponse.head?.message ?? ""));
+        }
+      }  else {
+        emit(ProfileError(errorMessage: response.statusMessage ?? ""));
+      }
+    }
+
+
+    checkProfileEventInitial(event, emit) async {
       Response responseCheckTokenExpiredResponse = await getCheckTokenExpired();
       if (responseCheckTokenExpiredResponse.statusCode == 200) {
         CheckTokenExpiredResponse checkTokenExpiredResponse =
-        CheckTokenExpiredResponse.fromJson(responseCheckTokenExpiredResponse.data);
-        print("checkTokenExpiredResponse ============================ false");
-        print(checkTokenExpiredResponse.body?.expiremessage);
-        print(checkTokenExpiredResponse.head?.timeexpire);
+        CheckTokenExpiredResponse.fromJson(
+            responseCheckTokenExpiredResponse.data);
         if (checkTokenExpiredResponse.head?.status == 200) {
           if (checkTokenExpiredResponse.head?.timeexpire == false) {
-
-            emit(ProfileLoadingSuccess());
+            print(
+                "CheckProfile 1  false============checkProfile======CheckTokenExpired========== ${checkTokenExpiredResponse
+                    .head?.timeexpire}");
+            print(checkTokenExpiredResponse.body?.expiremessage);
+            print(checkTokenExpiredResponse.body?.timenow);
+            print(checkTokenExpiredResponse.body?.timeexpir);
+            // emit(ProfileEndLoading());
           }
-          else{
+          else {
 
-            print("checkTokenExpiredResponse ============================ true");
-            Response responseRefreshTokenResponse = await getRefreshToken(
-                refreshToken: isMainRouteRefresh.toString());
-            emit(ProfileLoadingSuccess());
-            if (responseRefreshTokenResponse.statusCode == 200) {
-              RefreshTokenResponse refreshTokenResponse =
-              RefreshTokenResponse.fromJson(responseRefreshTokenResponse.data);
-              if (refreshTokenResponse.head?.status == 200) {
-                await setUserKey(globalKey: refreshTokenResponse.body?.token?? "");
-                await setUserRefreshKey(refreshKey: refreshTokenResponse.body?.refreshtoken?? "");
-
-
-
-              }
-              // else if (refreshTokenResponse.head?.status == 400) {
-              //   emit(TokenExpiredState(message: responseRefreshTokenResponse.statusMessage ?? "", checkrefreshtokenmessage : refreshTokenResponse));
-              // }
-              else {
-                emit(ProfileError(
-                    errorMessage: refreshTokenResponse.head?.message ?? ""));
-              }
-            }  else {
-              emit(ProfileError(errorMessage: responseRefreshTokenResponse.statusMessage ?? ""));
-            }
+            print("CheckProfile  2 == checkTokenExpiredResponse.head?.timeexpire == true");
+            await getRefProfileEventInitial(event, emit);
           }
-
+        }
+        else if (checkTokenExpiredResponse.head?.status == 401) {
+          print("CheckProfile 3 == checkTokenExpiredResponse.head?.status == 401");
+          await getRefProfileEventInitial(event, emit);
         }
         else {
           emit(ProfileError(
               errorMessage: checkTokenExpiredResponse.head?.message ?? ""));
         }
-      }  else {
-        emit(ProfileError(errorMessage: responseCheckTokenExpiredResponse.statusMessage ?? ""));
       }
-    };
+
+      else if (responseCheckTokenExpiredResponse.statusCode == 401) {
+
+        print("CheckProfile 4 == checkTokenExpiredResponse.head?.status == 401");
+        await getRefProfileEventInitial(event, emit);
+      }
+      else {
+        emit(ProfileError(
+            errorMessage: responseCheckTokenExpiredResponse.statusMessage ?? ""));
+      }
+    }
+
 
 
     on<ProfileApiEvent>((event, emit) async{
       try {
         emit(ProfileLoading());
-        // await ProfileEventInitial() ;
+        print("CheckProfile 5 == ProfileApiEvent");
+        await  checkProfileEventInitial(event, emit) ;
         Response response = await getApiProfile();
         emit(ProfileLoadingSuccess());
         if (response.statusCode == 200) {
@@ -127,7 +150,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> with ProfileRepositor
     on<GeneralSubmitEvent>((event, emit) async{
       try {
         emit(ProfileLoading());
-        // await ProfileEventInitial() ;
+        print("CheckProfile 6 == GeneralSubmitEvent");
+        await  checkProfileEventInitial(event, emit) ;
         Response responseGeneralSubmit = await sentProfileGeneralData(
             event.name,
             event.surname,
@@ -151,7 +175,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> with ProfileRepositor
     on<EducationSubmitEvent>((event, emit) async{
       try {
         emit(ProfileLoading());
-        // await ProfileEventInitial() ;
+        print("CheckProfile 7 == EducationSubmitEvent");
+        await  checkProfileEventInitial(event, emit) ;
         Response responseEducationSubmit = await sentProfileEducationData(
             event.gpaJh,
             event.gpaSh,
@@ -175,7 +200,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> with ProfileRepositor
     on<AddressSubmitEvent>((event, emit) async{
       try {
         emit(ProfileLoading());
-        // await ProfileEventInitial() ;
+        print("CheckProfile 8 == AddressSubmitEvent");
+        await  checkProfileEventInitial(event, emit) ;
         Response responseAddressSubmit = await sentProfileAddressData(
             event.number,
             event.moo,
@@ -205,7 +231,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> with ProfileRepositor
     on<ContactSubmitEvent>((event, emit) async{
       try {
         emit(ProfileLoading());
-        // await ProfileEventInitial() ;
+        print("CheckProfile 9 == ContactSubmitEvent");
+        await  checkProfileEventInitial(event, emit) ;
         Response responseContactSubmit = await sentProfileContactData(
             event.phone,
             event.line,
@@ -235,7 +262,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> with ProfileRepositor
     on<CareerSubmitEvent>((event, emit) async{
       try {
         emit(ProfileLoading());
-        // await ProfileEventInitial() ;
+        print("CheckProfile 10 == CareerSubmitEvent");
+        await  checkProfileEventInitial(event, emit) ;
         Response responseCareerSubmit = await sentProfileCareerData(
             event.attention,
             event.status,
