@@ -1,10 +1,9 @@
+import 'package:ez_at_u/module/activity/screen/activity_list_for_teacher_role.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../../../../customs/common/change_theme_button_widget.dart';
 import '../../../../customs/qr/MYQR.dart';
 import 'home_body_widget.dart';
 import '../../../../customs/button/button_custom.dart';
-import '../../../../customs/color/color_const.dart';
 import '../../../../customs/message/text_home.dart';
 import '../../../../module/activity/model/response/screen_status_activity_response.dart';
 import '../../../../module/activity/screen/add_activity.dart';
@@ -31,6 +30,7 @@ buildContentHomeScreen(
       required int intThemeMode, required void Function() iniGetThemeMode
 
     }) {
+  String userRole = "TC";
   return WillPopScope(
     onWillPop: () async {
       return false;
@@ -108,9 +108,10 @@ buildContentHomeScreen(
           Column(
             children: [
               const Expanded(child: SizedBox()),
-
+              (userRole == "ST") ?
               Center(
-                child: ButtonIconsCustom(
+                child:
+                ButtonIconsCustom(
                   label: screenHomeResponse?.body?.screenInfo?.btnadd ?? homeTextAdd,
                   buttonIcons:  Icon(
                     Icons.add,
@@ -126,9 +127,32 @@ buildContentHomeScreen(
                     Navigator.push(context, MaterialPageRoute(builder: (context) => const AddActivityScreen()));
                   },
                 ),
-              ),
-
-              // padding: const EdgeInsets.only(bottom: 10.0),
+              )
+              //Student role button
+              : (userRole == "TC") ?
+              Center(
+                child:
+                ButtonIconsCustom(
+                  // label: screenHomeResponse?.body?.screenInfo?.btnadd ?? homeTextAdd,
+                  label: "ดูทั้งหมด",
+                  buttonIcons:  Icon(
+                    FontAwesomeIcons.bars,
+                    color: Theme.of(context).iconTheme.color,
+                    size: 20.0,
+                  ),
+                  colortext: Theme.of(context).bottomAppBarColor,
+                  colorbutton: Theme.of(context).scaffoldBackgroundColor,
+                  sizetext: 14,
+                  colorborder: Theme.of(context).scaffoldBackgroundColor,
+                  sizeborder: 3,
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityListForTeacher()));
+                  },
+                ),
+              )
+              :
+                  Center(),
+              //Teacher role button
               Container(
                 margin: const EdgeInsets.only(top: 1.0, bottom: 0.0),
                 height: 60,

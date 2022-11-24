@@ -5,6 +5,7 @@ abstract class ActivityEvent {}
 
 class AddActivityScreenInfoEvent extends ActivityEvent {}
 class EditActivityScreenInfoEvent extends ActivityEvent {}
+class ActivityListForTeacherScreenInfoEvent extends ActivityEvent {}
 class OnClickEditActivityScreenInfoEvent extends ActivityEvent {
   dynamic data;
   OnClickEditActivityScreenInfoEvent({required this.data,});
