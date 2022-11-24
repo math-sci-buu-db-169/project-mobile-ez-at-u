@@ -16,13 +16,15 @@ class BuildTextformfieldUnlimitCustom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color? appBarBackgroundColor = Theme.of(context).appBarTheme.backgroundColor??Colors.white;
+    Color? appBarforegroundColor = Theme.of(context).appBarTheme.foregroundColor??Colors.black;
     return Container(
       // padding: EdgeInsets.all(12),
         margin: const EdgeInsets.all(12),
         // decoration: BoxDecoration(color: Colors.red[50], borderRadius: BorderRadius.circular(16)),
         child: TextFormField(
-          cursorColor: Colors.black,
-          style: const TextStyle(fontSize: sizeText18, color: Colors.black // height: 2.0,
+          cursorColor: appBarforegroundColor,
+          style: TextStyle(fontSize: sizeText18, color: appBarforegroundColor // height: 2.0,
           ),
           keyboardType: textInputType,
           maxLines: null,
@@ -35,12 +37,13 @@ class BuildTextformfieldUnlimitCustom extends StatelessWidget {
           //   print(hint_label + "    :" + value);
           // },
           decoration: InputDecoration(
-            prefixIcon: Icon(iconsFile, color: Colors.grey,),
+            prefixIcon: Icon(iconsFile, color: appBarforegroundColor,),
               filled: true,
-              fillColor: tcTextfile,
+              fillColor: Theme.of(context).scaffoldBackgroundColor,
               hintText: " $hintLabel",
-              enabledBorder: const OutlineInputBorder(
-                borderSide: BorderSide(color: tcHint),
+              hintStyle: TextStyle(color: appBarforegroundColor.withOpacity(0.5)),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: appBarforegroundColor.withOpacity(0.5)),
                 borderRadius: BorderRadius.all(Radius.circular(30)),
               ),
               contentPadding: const EdgeInsets.all(10),

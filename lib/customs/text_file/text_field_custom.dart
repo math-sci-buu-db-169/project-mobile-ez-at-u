@@ -44,7 +44,7 @@ class _TextFieldCustomState extends State<TextFieldCustom> {
               prefixIcon: Icon(widget.iconsFile,
                 color: Theme.of(context).iconTheme.color,
         ),
-              hintStyle: TextStyle(color: appBarforegroundColor),
+              hintStyle: TextStyle(color: appBarforegroundColor.withOpacity(0.5)),
               filled: true,
               fillColor: Theme.of(context).scaffoldBackgroundColor,
               hintText: widget.hintLabel,

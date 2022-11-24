@@ -1,4 +1,3 @@
-import 'package:ez_at_u/customs/color/color_const.dart';
 import 'package:ez_at_u/customs/size/size.dart';
 import 'package:flutter/material.dart';
 
@@ -8,11 +7,13 @@ class CustomDropdownApprover extends StatefulWidget {
   final double width;
   final String? dropdownValue;
   final Function(String result) callbackFromCustomDropdown;
+  final IconData iconsFile;
   const CustomDropdownApprover(
       {Key? key,
       required this.hint,
       required this.dropdownList,
       required this.width,
+        required this.iconsFile,
       this.dropdownValue
         , required this.callbackFromCustomDropdown
       })
@@ -34,36 +35,46 @@ class _CustomDropdownApproverState extends State<CustomDropdownApprover> {
   @override
   Widget build(BuildContext context) {
     String hint = widget.hint;
+    IconData iconsFile = widget.iconsFile;
     // List<String>? dropdownlist = widget.dropdownList;
     // var dropdownValue = widget.dropdownvalue;
     // print(dropdownValue);
+    Color? appBarforegroundColor = Theme.of(context).appBarTheme.foregroundColor??Colors.black;
     return Container(
       // height: 50,
       decoration: BoxDecoration(
-        border: Border.all(color: tcHint),
-            borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: appBarforegroundColor.withOpacity(0.5)),
+            borderRadius: BorderRadius.circular(30),
       ),
       margin: const EdgeInsets.all(15),
       child: SizedBox(
         width: widget.width,
         child:
         PopupMenuButton<String>(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
           child: Row(
               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                  child: Icon(iconsFile, color: appBarforegroundColor,),
+                ),
                 Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Text(
                         showDropdown??hint,
-                        style: const TextStyle(fontSize: sizeText18, color: Colors.black
-                        ),
+                        style:
+                        (dropdownValue == null)?
+                        TextStyle(fontSize: sizeText18, color: appBarforegroundColor.withOpacity(0.5))
+                              :
+                          TextStyle(fontSize: sizeText18, color: appBarforegroundColor),
                         textAlign: TextAlign.start,
                         overflow: TextOverflow.fade,
                         softWrap: false,
                       ),
                     )),
-                const Icon(Icons.keyboard_arrow_down)
+                Icon(Icons.keyboard_arrow_down, color: appBarforegroundColor,)
               ]),
           itemBuilder: (context) {
             return List.generate(widget.dropdownList.length,
@@ -71,7 +82,7 @@ class _CustomDropdownApproverState extends State<CustomDropdownApprover> {
                   return PopupMenuItem(
                     value: index.toString(),
                     child:
-                    Text('${widget.dropdownList[index].approvername}  ${widget.dropdownList[index].approverlastname}  '),
+                    Text('${widget.dropdownList[index].approvername}  ${widget.dropdownList[index].approverlastname}  ',style: TextStyle(color: appBarforegroundColor),),
                   );
                 });
           },

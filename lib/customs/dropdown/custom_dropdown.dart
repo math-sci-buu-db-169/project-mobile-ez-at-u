@@ -1,4 +1,3 @@
-import 'package:ez_at_u/customs/color/color_const.dart';
 import 'package:ez_at_u/customs/size/size.dart';
 import 'package:flutter/material.dart';
 
@@ -35,7 +34,6 @@ class _customDropdownState extends State<customDropdown> {
     // List<String>? dropdownlist = widget.dropdownList;
     // var dropdownValue = widget.dropdownvalue;
     // print(dropdownValue);
-    Color? appBarBackgroundColor = Theme.of(context).appBarTheme.backgroundColor??Colors.white;
     Color? appBarforegroundColor = Theme.of(context).appBarTheme.foregroundColor??Colors.black;
     return Container(
       // height: 50,
@@ -57,8 +55,11 @@ class _customDropdownState extends State<customDropdown> {
                       padding: const EdgeInsets.all(10.0),
                       child: Text(
                         dropdownValue??hint,
-                        style: TextStyle(fontSize: sizeText18, color: appBarforegroundColor
-                        ),
+                        style:
+                        (dropdownValue == null)?
+                        TextStyle(fontSize: sizeText18, color: appBarforegroundColor.withOpacity(0.5))
+                            :
+                        TextStyle(fontSize: sizeText18, color: appBarforegroundColor),
                         textAlign: TextAlign.start,
                         overflow: TextOverflow.fade,
                         softWrap: false,

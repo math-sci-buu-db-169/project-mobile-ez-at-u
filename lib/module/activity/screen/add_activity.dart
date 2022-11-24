@@ -169,7 +169,7 @@ buildAddActivityBody(
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.05,
             ),
-            TextFieldCustom(
+            BuildTextformfieldUnlimitCustom(
               textEditingController: activityName,
               onChanged: (value) {
                 activityName.text = value;
@@ -300,6 +300,7 @@ buildAddActivityBody(
             ),
 
             CustomDropdownApprover(
+              iconsFile: FontAwesomeIcons.userGroup,
               width: MediaQuery.of(context).size.width,
               dropdownList: approverArray,
               hint: addActivityScreenApi?.body?.screeninfo?.edtapprover??activityEdtApprover,
