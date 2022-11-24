@@ -9,11 +9,13 @@ class customDropdownForApproverEdit extends StatefulWidget {
   final double width;
   final String? dropdownValue;
   final Function(String result) callbackFromCustomDropdownForEdit;
+  final IconData iconsFile;
   const customDropdownForApproverEdit(
       {Key? key,
         required this.hint,
         required this.dropdownList,
         required this.width,
+        required this.iconsFile,
         this.dropdownValue, required this.callbackFromCustomDropdownForEdit})
       : super(key: key);
 
@@ -33,70 +35,52 @@ class _customDropdownForApproverEditState extends State<customDropdownForApprove
   @override
   Widget build(BuildContext context) {
     String hint = widget.hint;
+    IconData iconsFile = widget.iconsFile;
     // List<String>? dropdownlist = widget.dropdownList;
     // var dropdownValue = widget.dropdownValue;
     // print(dropdownValue);
+    Color? appBarforegroundColor = Theme.of(context).appBarTheme.foregroundColor??Colors.black;
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(color: tcHint),
-        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: appBarforegroundColor.withOpacity(0.5)),
+        borderRadius: BorderRadius.circular(30),
       ),
       margin: const EdgeInsets.all(15),
       child: SizedBox(
         width: widget.width,
         child:
-        //-------------------------------------//
-        // DropdownButtonFormField<String>(
-        //   // alignment: Alignment.centerRight,
-        //   isExpanded: true,
-        //   decoration: InputDecoration(
-        //       contentPadding: EdgeInsets.all(10),
-        //       border: OutlineInputBorder(),
-        //       enabledBorder: OutlineInputBorder(
-        //         borderSide: BorderSide(color: TC_Hint),
-        //         borderRadius: BorderRadius.all(Radius.circular(30)),
-        //       ),
-        //       focusedBorder: OutlineInputBorder(
-        //         borderRadius: BorderRadius.all(Radius.circular(30)),
-        //         borderSide: BorderSide(color: FC_Blue, width: 2.0),
-        //       )),
-        //   hint: Text(hint),
-        //   value: dropdownValue,
-        //   items: dropdownlist
-        //       ?.map((item) => DropdownMenuItem<String>(
-        //       value: item,
-        //       child: Text(
-        //         item,
-        //         style: TextStyle(fontSize: 18),
-        //       )))
-        //       .toList(),
-        //   onChanged: (item) => setState(() => dropdownValue = item ?? ''),
-        // ),
-        //-------------------------------------//
         PopupMenuButton<String>(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
           child: Row(
             // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                  child: Icon(iconsFile, color: appBarforegroundColor,),
+                ),
                 Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Text(
                         showDropdown??hint,
-                        style: TextStyle(fontSize: sizeText18, color: Colors.black
-                        ),
+                        style:
+                        (dropdownValue == null)?
+                        TextStyle(fontSize: sizeText18, color: appBarforegroundColor.withOpacity(0.5))
+                            :
+                        TextStyle(fontSize: sizeText18, color: appBarforegroundColor),
                         textAlign: TextAlign.start,
                         overflow: TextOverflow.fade,
                         softWrap: false,
                       ),
                     )),
-                const Icon(Icons.keyboard_arrow_down)
+                Icon(Icons.keyboard_arrow_down, color: appBarforegroundColor,)
               ]),
           itemBuilder: (context) {
             return List.generate(widget.dropdownList.length,
                     (index) {
                   return PopupMenuItem(
                     child:
-                    Text('${widget.dropdownList[index].approvername}  ${widget.dropdownList[index].approverlastname}  '),
+                    Text('${widget.dropdownList[index].approvername}  ${widget.dropdownList[index].approverlastname}  ',style: TextStyle(color: appBarforegroundColor)),
                     // value: widget.dropdownList[index],
                     value: index.toString(),
                   );

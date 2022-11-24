@@ -68,7 +68,7 @@ class CustomDatePickerState extends State<CustomDatePicker> {
                   widget.callbackFromCustomDatePicker(dateFormated??"16/02/2001");
                 });
               },
-              icon: const Icon(Icons.calendar_month))
+              icon: Icon(Icons.calendar_month, color: appBarforegroundColor,))
         ],
       ),
     );

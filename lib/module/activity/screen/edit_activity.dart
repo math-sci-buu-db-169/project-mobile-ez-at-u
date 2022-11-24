@@ -200,24 +200,26 @@ buildEditActivityBody(
   List<String>? termList,
   List<Approverlist>? approverList,
 ) {
+  Color? appBarBackgroundColor = Theme.of(context).appBarTheme.backgroundColor??Colors.white;
+  Color? appBarforegroundColor = Theme.of(context).appBarTheme.foregroundColor??Colors.black;
   return Scaffold(
     appBar: AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: appBarBackgroundColor,
       elevation: 0,
       leading: IconButton(
         onPressed: () {
           Navigator.pop(context);
         },
-        icon: const Icon(
+        icon: Icon(
           Icons.arrow_back,
           size: sizeTitle24,
-          color: Colors.black,
+          color: appBarforegroundColor,
         ),
       ),
       title: Text(
         addActivityScreenApi?.body?.screeninfo?.titleeditact??activityTitleEditAct,
-        style: const TextStyle(
-          color: Colors.black,
+        style: TextStyle(
+          color: appBarforegroundColor,
           fontSize: sizeTitle24,
         ),
       ),
@@ -343,6 +345,7 @@ buildEditActivityBody(
               iconsFile: FontAwesomeIcons.mapLocation,
             ),
             customDropdownForApproverEdit(
+              iconsFile: FontAwesomeIcons.userGroup,
               width: MediaQuery.of(context).size.width,
               dropdownList: approverList ?? <String>[],
               hint: addActivityScreenApi?.body?.screeninfo?.edtapprover??activityEdtApprover,
