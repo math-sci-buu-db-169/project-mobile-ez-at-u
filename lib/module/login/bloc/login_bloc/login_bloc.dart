@@ -127,6 +127,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> with LoginRepository {
                 );
               }
             }
+            await setUserKeyAndRefreshKey(
+              globalKey: submitLoginResponse.body?.token ?? "",
+              refreshKey: submitLoginResponse.body?.refreshtoken ?? "",
+              isRole: submitLoginResponse.body?.role ?? "TC",
+              userLanguage: submitLoginResponse.body?.language ?? "TH",
+            );
             emit(SubmitLoginState(responseSubmitLoginScreen: submitLoginResponse));
           } else {
             emit(LoginError(message: submitLoginResponse.head?.message ?? ""));
