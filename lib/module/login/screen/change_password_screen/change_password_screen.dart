@@ -70,9 +70,14 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> with ProgressDi
 
   void _setValueAndGoHome({ChangePasswordResponse? changePasswordResponse}) async {
     prefs = await SharedPreferences.getInstance();
-    await setUserKey(globalKey: changePasswordResponse?.body?.token);
-    // valueLanguage = prefs.getString('userChangeLanguage') ?? '';
-    await setUserRefreshKey(refreshKey: changePasswordResponse?.body?.refreshtoken);
+    await setUserKeyAndRefreshKey(
+        globalKey: changePasswordResponse?.body?.token?? "",
+        refreshKey: changePasswordResponse?.body?.refreshtoken?? ""
+
+    );
+    // await setUserKey(globalKey: changePasswordResponse?.body?.token);
+    // // valueLanguage = prefs.getString('userChangeLanguage') ?? '';
+    // await setUserRefreshKey(refreshKey: changePasswordResponse?.body?.refreshtoken);
     setState(
       () {},
     );

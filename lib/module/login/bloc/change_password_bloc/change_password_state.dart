@@ -24,3 +24,15 @@ class ChangePasswordError extends ChangePasswordState {
   String message;
   ChangePasswordError({required this.message});
 }
+class TokenExpiredState extends ChangePasswordState {
+
+  String message;
+  RefreshTokenResponse checkrefreshtokenmessage;
+  TokenExpiredState({required this.message, required this.checkrefreshtokenmessage});
+
+}
+class CheckTokenError extends ChangePasswordState {
+
+  String message;
+  CheckTokenError({required this.message});
+}

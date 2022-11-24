@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:ez_at_u/utils/shared_preferences.dart';
+import 'package:flutter/foundation.dart';
 
 class MyDio {
   // static final _optionsBinary = BaseOptions(
@@ -53,9 +54,12 @@ class MyInterceptors extends Interceptor {
   void onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
     String token = await getUserKey() ?? "";
-    // if (kDebugMode) {
-    //   print(" token : $token");
-    // }
+    if (kDebugMode) {
+      print(" token : $token");
+    } String refToken = await getUserRefKey() ?? "";
+    if (kDebugMode) {
+      print(" refToken : $refToken");
+    }
     options.headers["Authorization"] = "Bearer $token";
 
     super.onRequest(options, handler);

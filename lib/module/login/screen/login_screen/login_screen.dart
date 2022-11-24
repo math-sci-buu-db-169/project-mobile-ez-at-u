@@ -1,6 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../check_token/check_token_expired.dart';
 import '../../../../customs/dialog/dialog_widget.dart';
 import '../../../../customs/progress_dialog.dart';
 import '../../../../module/login/model/response/screen_login_response.dart';
@@ -77,8 +78,13 @@ class _LoginPageState extends State<LoginPage> with ProgressDialog {
 
   void _setValueAndGoHome({SubmitLoginResponse? loginSubmitResponse}) async {
     prefs = await SharedPreferences.getInstance();
-    await setUserKey(globalKey: loginSubmitResponse?.body?.token);
-    await setUserRefreshKey(refreshKey: loginSubmitResponse?.body?.refreshtoken);
+    await setUserKeyAndRefreshKey(
+        globalKey: loginSubmitResponse?.body?.token?? "",
+        refreshKey: loginSubmitResponse?.body?.refreshtoken?? ""
+
+    );
+    // await setUserKey(globalKey: loginSubmitResponse?.body?.token);
+    // await setUserRefreshKey(refreshKey: loginSubmitResponse?.body?.refreshtoken);
     setState(
       () {},
     );

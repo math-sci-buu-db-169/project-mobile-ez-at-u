@@ -75,7 +75,7 @@ class ActivityRepository  {
         })
     );
   }Future<Response> getCheckTokenExpired() async {
-    return await MyDio.createDioServer().post("/api/home/checktokenexpired",
+    return await MyDio.createDioServer().post("/login/checktokenexpired",
         data: jsonEncode({
         })
     );
