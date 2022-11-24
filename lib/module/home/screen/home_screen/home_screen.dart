@@ -54,6 +54,7 @@ class _HomePageState extends State<HomePage> with ProgressDialog {
   late String textSessionExpired;
   late String textSubSessionExpired;
   late String _buttonOk;
+  late String _role;
   late int intThemeMode = 2;
   late ThemeMode themeMode;
   // late String? _refreshKey;
@@ -69,6 +70,7 @@ class _HomePageState extends State<HomePage> with ProgressDialog {
   @override
   void initState() {
     _initPackageInfo();
+    _initRole();
     _iniGetThemeMode();
     _isSessionUnauthorized();
     super.initState();
@@ -81,6 +83,14 @@ class _HomePageState extends State<HomePage> with ProgressDialog {
       _packageInfo = info;
     });
   }
+  void _initRole()  async{
+
+    prefs = await SharedPreferences.getInstance();
+    setState(()  {
+      _role = prefs.getString('Role')??"TC";
+    });
+  }
+
   void _iniGetThemeMode()  async{
 
     prefs = await SharedPreferences.getInstance();
@@ -186,6 +196,7 @@ class _HomePageState extends State<HomePage> with ProgressDialog {
               isHidden: _screenProfileResponse?.body?.profileGeneralInfo?.langeuage == 'TH' ? true : false,
               intThemeMode:intThemeMode,
               iniGetThemeMode:_iniGetThemeMode,
+              role:_role,
               _screenHomeResponse,
               _screenProfileResponse,
               _userLanguage,
@@ -206,6 +217,7 @@ class _HomePageState extends State<HomePage> with ProgressDialog {
               isHidden: _screenProfileResponse?.body?.profileGeneralInfo?.langeuage == 'TH' ? true : false,
               intThemeMode:intThemeMode,
               iniGetThemeMode:_iniGetThemeMode,
+              role:_role,
               _screenHomeResponse,
               _screenProfileResponse,
               _userLanguage,

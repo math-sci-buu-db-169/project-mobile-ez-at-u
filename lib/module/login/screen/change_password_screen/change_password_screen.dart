@@ -25,7 +25,8 @@ class ChangePasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => ChangePasswordBloc()..add(ChangePasswordScreenInfoEvent()),
+        create: (context) =>
+            ChangePasswordBloc()..add(ChangePasswordScreenInfoEvent()),
         // child: const GenerativeWidget());
         child: const ChangePasswordPage());
   }
@@ -38,7 +39,8 @@ class ChangePasswordPage extends StatefulWidget {
   State<ChangePasswordPage> createState() => _ChangePasswordPageState();
 }
 
-class _ChangePasswordPageState extends State<ChangePasswordPage> with ProgressDialog {
+class _ChangePasswordPageState extends State<ChangePasswordPage>
+    with ProgressDialog {
   ChangePasswordResponse? changePasswordResponse;
   ScreenChangePasswordResponse? _screenChangePasswordResponse;
   TextEditingController currentPasswordController = TextEditingController();
@@ -62,18 +64,22 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> with ProgressDi
     prefs = await SharedPreferences.getInstance();
     _userLanguage = prefs.getString('userLanguage') ?? 'TH';
 
-    textSessionExpired = _userLanguage == 'EN' ? textUnauthorizedEN : textUnauthorizedTH;
-    textSubSessionExpired = _userLanguage == 'EN' ? textSubUnauthorizedEN : textSubUnauthorizedTH;
+    textSessionExpired =
+        _userLanguage == 'EN' ? textUnauthorizedEN : textUnauthorizedTH;
+    textSubSessionExpired =
+        _userLanguage == 'EN' ? textSubUnauthorizedEN : textSubUnauthorizedTH;
     _buttonOk = _userLanguage == 'EN' ? buttonOkEN : buttonOkTH;
     setState(() {});
   }
 
-  void _setValueAndGoHome({ChangePasswordResponse? changePasswordResponse}) async {
+  void _setValueAndGoHome(
+      {ChangePasswordResponse? changePasswordResponse}) async {
     prefs = await SharedPreferences.getInstance();
     await setUserKeyAndRefreshKey(
-        globalKey: changePasswordResponse?.body?.token?? "",
-        refreshKey: changePasswordResponse?.body?.refreshtoken?? ""
-
+      globalKey: changePasswordResponse?.body?.token ?? "",
+      refreshKey: changePasswordResponse?.body?.refreshtoken ?? "",
+      isRole: changePasswordResponse?.body?.role ?? "TC",
+      userLanguage: changePasswordResponse?.body?.language ?? "TH",
     );
     // await setUserKey(globalKey: changePasswordResponse?.body?.token);
     // // valueLanguage = prefs.getString('userChangeLanguage') ?? '';
@@ -95,13 +101,18 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> with ProgressDi
         }
         if (state is ChangePasswordError) {
           if (state.message.toString() == 'Unauthorized') {
-            dialogSessionExpiredOneBtn(context, textSessionExpired, textSubSessionExpired, _buttonOk, onClickBtn: () {
+            dialogSessionExpiredOneBtn(
+                context, textSessionExpired, textSubSessionExpired, _buttonOk,
+                onClickBtn: () {
               cleanDelete();
               Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (BuildContext context) => const LoginScreen()));
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => const LoginScreen()));
             });
           } else {
-            dialogOneLineOneBtn(context, '${state.message}\n ', _buttonOk, onClickBtn: () {
+            dialogOneLineOneBtn(context, '${state.message}\n ', _buttonOk,
+                onClickBtn: () {
               Navigator.of(context).pop();
             });
           }
@@ -121,7 +132,8 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> with ProgressDi
       },
       builder: (context, state) {
         if (state is ScreenInfoChangePasswordSuccessState) {
-          _screenChangePasswordResponse = state.responseChangePasswordScreenInfo;
+          _screenChangePasswordResponse =
+              state.responseChangePasswordScreenInfo;
           return cPasswords(
             context,
             _screenChangePasswordResponse,
@@ -168,7 +180,9 @@ cPasswords(
             ),
           ),
           title: Text(
-            screenChangePasswordResponse?.body?.screeninfo?.titlechangenewpass ?? changePasswordTitleChangeNewPassword,
+            screenChangePasswordResponse
+                    ?.body?.screeninfo?.titlechangenewpass ??
+                changePasswordTitleChangeNewPassword,
             style: const TextStyle(
               color: Colors.black,
               fontSize: sizeTitle24,
@@ -189,29 +203,33 @@ cPasswords(
                   onChanged: (value) {
                     currentPasswordController.text = value;
                   },
-                  hintLabel: screenChangePasswordResponse?.body?.screeninfo?.edtcurrentpass ??
+                  hintLabel: screenChangePasswordResponse
+                          ?.body?.screeninfo?.edtcurrentpass ??
                       changePasswordEdtCurrentPassword,
                   textInputType: TextInputType.text,
-                  iconsFile : Icons.lock_person_rounded,
+                  iconsFile: Icons.lock_person_rounded,
                 ),
                 TextFieldPasswordCustom(
                   textEditingController: newPasswordController,
                   onChanged: (value) {
                     newPasswordController.text = value;
                   },
-                  hintLabel: screenChangePasswordResponse?.body?.screeninfo?.edtnewpass ?? changePasswordEdtPassword,
+                  hintLabel: screenChangePasswordResponse
+                          ?.body?.screeninfo?.edtnewpass ??
+                      changePasswordEdtPassword,
                   textInputType: TextInputType.text,
-                  iconsFile : Icons.lock_reset_rounded,
+                  iconsFile: Icons.lock_reset_rounded,
                 ),
                 TextFieldPasswordCustom(
                   textEditingController: confirmPasswordController,
                   onChanged: (value) {
                     confirmPasswordController.text = value;
                   },
-                  hintLabel:
-                      screenChangePasswordResponse?.body?.screeninfo?.edtcpass ?? changePasswordEdtConfirmPassword,
+                  hintLabel: screenChangePasswordResponse
+                          ?.body?.screeninfo?.edtcpass ??
+                      changePasswordEdtConfirmPassword,
                   textInputType: TextInputType.text,
-                  iconsFile : Icons.security_rounded,
+                  iconsFile: Icons.security_rounded,
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.05,
@@ -219,18 +237,23 @@ cPasswords(
                 Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: TextLinkToScreenCustom(
-                      linklabel: screenChangePasswordResponse?.body?.screeninfo?.btnforgotpass ??
+                      linklabel: screenChangePasswordResponse
+                              ?.body?.screeninfo?.btnforgotpass ??
                           changePasswordTextForgotPassword,
                       linktextcolor: tcForgot,
                       sizetext: sizeTextSmaller14,
                       onTap: () async {
                         dialogOneLineTwoBtnWarning(
                             context,
-                            screenChangePasswordResponse?.body?.errorscreeninfo?.errorsubmit ??
+                            screenChangePasswordResponse
+                                    ?.body?.errorscreeninfo?.errorsubmit ??
                                 changePasswordErrorSubmit,
-                            screenChangePasswordResponse?.body?.errorbutton?.buttonok ?? buttonOkTH,
-                            screenChangePasswordResponse?.body?.errorbutton?.buttoncancel ?? buttonCancelTH,
-                            onClickBtn: (String result) {
+                            screenChangePasswordResponse
+                                    ?.body?.errorbutton?.buttonok ??
+                                buttonOkTH,
+                            screenChangePasswordResponse
+                                    ?.body?.errorbutton?.buttoncancel ??
+                                buttonCancelTH, onClickBtn: (String result) {
                           Navigator.of(context).pop();
                           switch (result) {
                             case 'Cancel':
@@ -240,7 +263,10 @@ cPasswords(
                             case 'OK':
                               {
                                 Navigator.push(
-                                    context, MaterialPageRoute(builder: (context) => const ForgotPasswordScreen()));
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ForgotPasswordScreen()));
                               }
                           }
                         });
@@ -251,17 +277,21 @@ cPasswords(
                 ),
                 Center(
                   child: ButtonCustom(
-                      label: screenChangePasswordResponse?.body?.screeninfo?.btnconfirm ?? changePasswordBtnConfirm,
+                      label: screenChangePasswordResponse
+                              ?.body?.screeninfo?.btnconfirm ??
+                          changePasswordBtnConfirm,
                       colortext: tcButtonTextBlack,
                       colorbutton: tcButtonTextWhite,
                       sizetext: sizeTextBig20,
                       colorborder: tcButtonTextBoarder,
                       sizeborder: 10,
                       onPressed: () {
-                        context.read<ChangePasswordBloc>().add(SubmitChangePasswordEvent(
-                            currentPassword: currentPasswordController.text,
-                            newPassword: newPasswordController.text,
-                            confirmPassword: confirmPasswordController.text));
+                        context.read<ChangePasswordBloc>().add(
+                            SubmitChangePasswordEvent(
+                                currentPassword: currentPasswordController.text,
+                                newPassword: newPasswordController.text,
+                                confirmPassword:
+                                    confirmPasswordController.text));
                       }),
                 ),
                 SizedBox(

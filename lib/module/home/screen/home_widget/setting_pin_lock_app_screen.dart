@@ -140,7 +140,9 @@ class _PinLockAppPageState extends State<PinLockAppPage> with ProgressDialog {
     prefs = await SharedPreferences.getInstance();
     await setUserKeyAndRefreshKey(
         globalKey: changePasswordResponse?.body?.token?? "",
-        refreshKey: changePasswordResponse?.body?.refreshtoken?? ""
+        refreshKey: changePasswordResponse?.body?.refreshtoken?? "",
+      isRole: changePasswordResponse?.body?.role ??"TC",
+      userLanguage: changePasswordResponse?.body?.language ??"TH",
 
     );
     // await setUserKey(globalKey: changePasswordResponse?.body?.token);

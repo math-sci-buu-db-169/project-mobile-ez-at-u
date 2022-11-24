@@ -77,18 +77,18 @@ class _CheckTokenExpiredState extends State<CheckTokenExpired> with ProgressDial
     });
 
   }
-  void _setValueAndGoHome({required String refreshToken, required String token}) async {
-    // await setUserKey(globalKey: token);
-    // await setUserRefreshKey(refreshKey: refreshToken);
-    await setUserKeyAndRefreshKey(
-        globalKey: token,
-        refreshKey: refreshToken
-
-    );
-    setState(
-          () {},
-    );
-  }
+  // void _setValueAndGoHome({required String refreshToken, required String token}) async {
+  //   // await setUserKey(globalKey: token);
+  //   // await setUserRefreshKey(refreshKey: refreshToken);
+  //   await setUserKeyAndRefreshKey(
+  //       globalKey: token,
+  //       refreshKey: refreshToken
+  //
+  //   );
+  //   setState(
+  //         () {},
+  //   );
+  // }
 
   RefreshTokenResponse? _checkRefreshTokenMessage;
   @override

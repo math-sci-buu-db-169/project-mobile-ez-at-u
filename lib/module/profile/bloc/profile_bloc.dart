@@ -38,7 +38,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> with ProfileRepositor
         if (refreshTokenResponse.head?.status == 200) {
           await setUserKeyAndRefreshKey(
               globalKey: refreshTokenResponse.body?.token ?? "",
-              refreshKey: refreshTokenResponse.body?.refreshtoken ?? ""
+              refreshKey: refreshTokenResponse.body?.refreshtoken ?? "",
+              isRole: refreshTokenResponse.body?.role ??"TC",
+            userLanguage: refreshTokenResponse.body?.language ??"TH",
           );
         }
         else if (refreshTokenResponse.head?.status == 400) {

@@ -71,8 +71,10 @@ class TokenBloc extends Bloc<TokenEvent, TokenState>  with CheckTokenRepository{
               RefreshTokenResponse.fromJson(response.data);
               if (refreshTokenResponse.head?.status == 200) {
                 await setUserKeyAndRefreshKey(
-                    globalKey: refreshTokenResponse.body?.token?? "",
-                    refreshKey: refreshTokenResponse.body?.refreshtoken?? ""
+                  globalKey: refreshTokenResponse.body?.token ?? "",
+                  refreshKey: refreshTokenResponse.body?.refreshtoken ?? "",
+                  isRole: refreshTokenResponse.body?.role ??"TC",
+                  userLanguage: refreshTokenResponse.body?.language ??"TH",
 
                 );
                 emit(CheckTokenSuccessState(

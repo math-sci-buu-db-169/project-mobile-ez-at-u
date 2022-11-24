@@ -47,38 +47,46 @@ Body bodyFromJson(String str) => Body.fromJson(json.decode(str));
 String bodyToJson(Body data) => json.encode(data.toJson());
 class Body {
   Body({
-      String? token, 
-      String? language, 
-      String? refreshtoken,}){
+    String? token,
+    String? language,
+    String? refreshtoken,
+    String? role,}){
     _token = token;
     _language = language;
     _refreshtoken = refreshtoken;
-}
+    _role = role;
+  }
 
   Body.fromJson(dynamic json) {
     _token = json['token'];
     _language = json['language'];
     _refreshtoken = json['refreshtoken'];
+    _role = json['role'];
   }
   String? _token;
   String? _language;
   String? _refreshtoken;
-Body copyWith({  String? token,
-  String? language,
-  String? refreshtoken,
-}) => Body(  token: token ?? _token,
-  language: language ?? _language,
-  refreshtoken: refreshtoken ?? _refreshtoken,
-);
+  String? _role;
+  Body copyWith({  String? token,
+    String? language,
+    String? refreshtoken,
+    String? role,
+  }) => Body(  token: token ?? _token,
+    language: language ?? _language,
+    refreshtoken: refreshtoken ?? _refreshtoken,
+    role: role ?? _role,
+  );
   String? get token => _token;
   String? get language => _language;
   String? get refreshtoken => _refreshtoken;
+  String? get role => _role;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['token'] = _token;
     map['language'] = _language;
     map['refreshtoken'] = _refreshtoken;
+    map['role'] = _role;
     return map;
   }
 

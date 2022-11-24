@@ -30,8 +30,8 @@ buildContentHomeScreen(
     required String versionApp,
     required bool isHidden,
     required int intThemeMode,
-    required void Function() iniGetThemeMode}) {
-  String userRole = "TC";
+    required void Function() iniGetThemeMode, required String role}) {
+  String userRole = role;
   return WillPopScope(
     onWillPop: () async {
       return false;

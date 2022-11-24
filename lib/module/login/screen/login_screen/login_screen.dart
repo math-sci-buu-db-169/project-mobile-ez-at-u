@@ -19,7 +19,8 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => LoginBloc()..add(LoginScreenInfoEvent(userLanguage: "TH")),
+        create: (context) =>
+            LoginBloc()..add(LoginScreenInfoEvent(userLanguage: "TH")),
         // child: const GenerativeWidget());
         child: const LoginPage());
   }
@@ -57,8 +58,10 @@ class _LoginPageState extends State<LoginPage> with ProgressDialog {
   Future<void> _isSessionUnauthorized() async {
     prefs = await SharedPreferences.getInstance();
     valueLanguage = prefs.getString('userLanguage') ?? 'TH';
-    textSessionExpired = valueLanguage == 'EN' ? textUnauthorizedEN : textUnauthorizedTH;
-    textSubSessionExpired = valueLanguage == 'EN' ? textSubUnauthorizedEN : textSubUnauthorizedTH;
+    textSessionExpired =
+        valueLanguage == 'EN' ? textUnauthorizedEN : textUnauthorizedTH;
+    textSubSessionExpired =
+        valueLanguage == 'EN' ? textSubUnauthorizedEN : textSubUnauthorizedTH;
     _buttonOk = valueLanguage == 'EN' ? buttonOkEN : buttonOkTH;
     setState(() {});
   }
@@ -71,7 +74,9 @@ class _LoginPageState extends State<LoginPage> with ProgressDialog {
     valueLanguage = prefs.getString('userLanguage') ?? 'TH';
     setState(
       () {
-        context.read<LoginBloc>().add(OnClickLanguageEvent(userLanguage: valueLanguage));
+        context
+            .read<LoginBloc>()
+            .add(OnClickLanguageEvent(userLanguage: valueLanguage));
       },
     );
   }
@@ -79,9 +84,10 @@ class _LoginPageState extends State<LoginPage> with ProgressDialog {
   void _setValueAndGoHome({SubmitLoginResponse? loginSubmitResponse}) async {
     prefs = await SharedPreferences.getInstance();
     await setUserKeyAndRefreshKey(
-        globalKey: loginSubmitResponse?.body?.token?? "",
-        refreshKey: loginSubmitResponse?.body?.refreshtoken?? ""
-
+      globalKey: loginSubmitResponse?.body?.token ?? "",
+      refreshKey: loginSubmitResponse?.body?.refreshtoken ?? "",
+      isRole: loginSubmitResponse?.body?.role ?? "TC",
+      userLanguage: loginSubmitResponse?.body?.language ?? "TH",
     );
     // await setUserKey(globalKey: loginSubmitResponse?.body?.token);
     // await setUserRefreshKey(refreshKey: loginSubmitResponse?.body?.refreshtoken);
@@ -103,13 +109,18 @@ class _LoginPageState extends State<LoginPage> with ProgressDialog {
         if (state is LoginError) {
           // show dialog error
           if (state.message.toString() == 'Unauthorized') {
-            dialogSessionExpiredOneBtn(context, textSessionExpired, textSubSessionExpired, _buttonOk, onClickBtn: () {
+            dialogSessionExpiredOneBtn(
+                context, textSessionExpired, textSubSessionExpired, _buttonOk,
+                onClickBtn: () {
               cleanDelete();
               Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (BuildContext context) => const LoginScreen()));
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => const LoginScreen()));
             });
           } else {
-            dialogOneLineOneBtn(context, '${state.message}\n ', _buttonOk, onClickBtn: () {
+            dialogOneLineOneBtn(context, '${state.message}\n ', _buttonOk,
+                onClickBtn: () {
               Navigator.of(context).pop();
             });
           }
@@ -117,19 +128,22 @@ class _LoginPageState extends State<LoginPage> with ProgressDialog {
         if (state is SubmitLoginState) {
           _loginSubmitResponse = state.responseSubmitLoginScreen;
           _setValueAndGoHome(loginSubmitResponse: _loginSubmitResponse);
-          Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const HomeScreen()));
         }
       },
       builder: (context, state) {
         if (state is ScreenInfoLoginSuccessState) {
           _screenLoginResponse = state.responseScreenInfoLogin;
-          return loginPageWidget(context, _screenLoginResponse, userController, passwordController,
+          return loginPageWidget(
+              context, _screenLoginResponse, userController, passwordController,
               onClickBtnLanguageView: () {
             _toggleLanguageView();
           });
         } else if (state is OnClickLanguageLoginScreenInfoSuccessState) {
           _screenLoginResponse = state.responseLanguageLoginscreen;
-          return loginPageWidget(context, _screenLoginResponse, userController, passwordController,
+          return loginPageWidget(
+              context, _screenLoginResponse, userController, passwordController,
               onClickBtnLanguageView: () {
             _toggleLanguageView();
           });
@@ -141,7 +155,8 @@ class _LoginPageState extends State<LoginPage> with ProgressDialog {
         ));
       },
       buildWhen: (context, state) {
-        return state is ScreenInfoLoginSuccessState || state is OnClickLanguageLoginScreenInfoSuccessState;
+        return state is ScreenInfoLoginSuccessState ||
+            state is OnClickLanguageLoginScreenInfoSuccessState;
       },
     );
   }

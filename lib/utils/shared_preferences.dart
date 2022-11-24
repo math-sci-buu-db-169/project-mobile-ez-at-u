@@ -4,10 +4,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 late SharedPreferences prefs;
 String versionApp = "0.0.1.0 Beta";
-setUserKeyAndRefreshKey({String? refreshKey, String? globalKey}) async {
+setUserKeyAndRefreshKey({required String? refreshKey, required String? globalKey, required String? isRole, required String? userLanguage}) async {
   prefs = await SharedPreferences.getInstance();
   await prefs.setString('refreshKey', refreshKey ?? "");
   await prefs.setString('UserKey', globalKey ?? "");
+  await prefs.setString('Role', isRole ?? "TC");
+  await prefs.setString('userLanguage', userLanguage?? "TH");
+
   // print('refreshKey');
   // print( prefs.getString('refreshKey') );
 }

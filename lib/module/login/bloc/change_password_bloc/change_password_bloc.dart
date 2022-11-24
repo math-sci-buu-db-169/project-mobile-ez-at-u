@@ -32,8 +32,10 @@ class ChangePasswordBloc extends Bloc<ChangePasswordEvent, ChangePasswordState> 
         RefreshTokenResponse.fromJson(response.data);
         if (refreshTokenResponse.head?.status == 200) {
           await setUserKeyAndRefreshKey(
-              globalKey: refreshTokenResponse.body?.token ?? "",
-              refreshKey: refreshTokenResponse.body?.refreshtoken ?? ""
+            globalKey: refreshTokenResponse.body?.token ?? "",
+            refreshKey: refreshTokenResponse.body?.refreshtoken ?? "",
+            isRole: refreshTokenResponse.body?.role ??"TC",
+            userLanguage: refreshTokenResponse.body?.language ??"TH",
           );
         }
         else if (refreshTokenResponse.head?.status == 400) {
