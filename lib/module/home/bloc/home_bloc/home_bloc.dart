@@ -291,12 +291,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> with HomeRepository {
     });
 
     on<OnClickConfirmLogoutHomeEvent>((event, emit) async {
-      prefs = await SharedPreferences.getInstance();
-      String? refreshToken = prefs.getString('refreshKey');
       try {
         emit(HomeLoading());
         print("CheckHome 7 == OnClickConfirmLogoutHomeEvent");
         await checkHomeEventInitial(event, emit);
+        prefs = await SharedPreferences.getInstance();
+        String? refreshToken = prefs.getString('refreshKey');
         Response responseLogoutHome = await getLogout(refreshToken: refreshToken);
         emit(HomeEndLoading());
         if (responseLogoutHome.statusCode == 200) {
