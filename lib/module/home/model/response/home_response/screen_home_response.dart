@@ -273,7 +273,11 @@ class ScreenInfo {
     String? btncpin,
     String? btndelacc,
     String? textappver,
-    String? btnlogout,}){
+    String? btnlogout,
+    String? modetheme,
+    String? lockscreencode,
+    String? dark,
+    String? setting,}){
     _titleact = titleact;
     _btnadd = btnadd;
     _textname = textname;
@@ -289,6 +293,10 @@ class ScreenInfo {
     _btndelacc = btndelacc;
     _textappver = textappver;
     _btnlogout = btnlogout;
+    _modetheme = modetheme;
+    _lockscreencode = lockscreencode;
+    _dark = dark;
+    _setting = setting;
   }
 
   ScreenInfo.fromJson(dynamic json) {
@@ -307,6 +315,10 @@ class ScreenInfo {
     _btndelacc = json['btndelacc'];
     _textappver = json['textappver'];
     _btnlogout = json['btnlogout'];
+    _modetheme = json['modetheme'];
+    _lockscreencode = json['lockscreencode'];
+    _dark = json['dark'];
+    _setting = json['setting'];
   }
   String? _titleact;
   String? _btnadd;
@@ -323,6 +335,10 @@ class ScreenInfo {
   String? _btndelacc;
   String? _textappver;
   String? _btnlogout;
+  String? _modetheme;
+  String? _lockscreencode;
+  String? _dark;
+  String? _setting;
   ScreenInfo copyWith({  String? titleact,
     String? btnadd,
     String? textname,
@@ -338,6 +354,10 @@ class ScreenInfo {
     String? btndelacc,
     String? textappver,
     String? btnlogout,
+    String? modetheme,
+    String? lockscreencode,
+    String? dark,
+    String? setting,
   }) => ScreenInfo(  titleact: titleact ?? _titleact,
     btnadd: btnadd ?? _btnadd,
     textname: textname ?? _textname,
@@ -353,6 +373,10 @@ class ScreenInfo {
     btndelacc: btndelacc ?? _btndelacc,
     textappver: textappver ?? _textappver,
     btnlogout: btnlogout ?? _btnlogout,
+    modetheme: modetheme ?? _modetheme,
+    lockscreencode: lockscreencode ?? _lockscreencode,
+    dark: dark ?? _dark,
+    setting: setting ?? _setting,
   );
   String? get titleact => _titleact;
   String? get btnadd => _btnadd;
@@ -369,6 +393,10 @@ class ScreenInfo {
   String? get btndelacc => _btndelacc;
   String? get textappver => _textappver;
   String? get btnlogout => _btnlogout;
+  String? get modetheme => _modetheme;
+  String? get lockscreencode => _lockscreencode;
+  String? get dark => _dark;
+  String? get setting => _setting;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -387,10 +415,20 @@ class ScreenInfo {
     map['btndelacc'] = _btndelacc;
     map['textappver'] = _textappver;
     map['btnlogout'] = _btnlogout;
+    map['modetheme'] = _modetheme;
+    map['lockscreencode'] = _lockscreencode;
+    map['dark'] = _dark;
+    map['setting'] = _setting;
     return map;
   }
 
 }
+
+/// status : 200
+/// message : "success"
+/// modulename : "Activity"
+/// timeexpire : false
+
 
 /// status : 200
 /// message : "success"

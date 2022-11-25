@@ -9,7 +9,7 @@ late SharedPreferences prefs;
 class HomeRepository {
   Future<Response> getScreenHome() async {
     return await MyDio.createDioServer()
-        .post("/api/home/drawerscreen", data: jsonEncode({}));
+        .post("/api/home/homescreen", data: jsonEncode({}));
   }
 
   Future<Response> getApiProfile() async {
@@ -77,6 +77,12 @@ class HomeRepository {
     );
   }Future<Response> getCheckTokenExpired() async {
     return await MyDio.createDioServer().post("/login/checktokenexpired",
+        data: jsonEncode({
+        })
+    );
+  }
+  Future<Response> getLockPinScreen() async {
+    return await MyDio.createDioServer().post("/api/home/lockpinscreen",
         data: jsonEncode({
         })
     );

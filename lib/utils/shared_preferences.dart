@@ -173,3 +173,14 @@ setThemeModeApp({required int intMode}) async {
   print(prefs.getInt('themeMode'));
   print(intMode);
 }
+setTextPinScreen({required String? enterPin, required String? hello, required String? niceDay, required String? enterConfirmPin, required String? enterNewPin, }) async {
+  prefs = await SharedPreferences.getInstance();
+  await prefs.setString('enterPin', enterPin ?? "Please enter your PIN.");
+  await prefs.setString('Hello', hello ?? "Hello");
+  await prefs.setString('niceDay', niceDay ?? "have a nice day.");
+  await prefs.setString('enterConfirmPin', enterConfirmPin ?? "Please enter confirm your PIN.");
+  await prefs.setString('enterNewPin', enterNewPin ?? "Please enter new your PIN.");
+
+  // print('refreshKey');
+  // print( prefs.getString('refreshKey') );
+}

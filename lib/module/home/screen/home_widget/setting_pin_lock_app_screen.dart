@@ -20,16 +20,19 @@ import '../../../login/bloc/change_password_bloc/change_password_bloc.dart';
 import '../../../login/model/response/change_password_response/change_password_response.dart';
 import '../../../login/model/response/screen_change_password_response.dart';
 import '../../../login/screen/login_screen/login_screen.dart';
+import '../../bloc/lock_app_bloc/lock_app_bloc.dart';
+import '../../model/response/home_response/lock_app_screen_response.dart';
+import '../../model/response/home_response/screen_home_response.dart';
 import '../home_screen/home_screen.dart';
 
 class SettingPinLockAppScreen extends StatelessWidget {
-  const SettingPinLockAppScreen({Key? key}) : super(key: key);
+  const SettingPinLockAppScreen({Key? key, }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
         create: (context) =>
-            ChangePasswordBloc()..add(ChangePasswordScreenInfoEvent()),
+        LockAppBloc()..add(LockAppScreenInfoEvent()),
         // child: const GenerativeWidget());
         child: const PinLockAppPage());
   }
@@ -43,12 +46,11 @@ class PinLockAppPage extends StatefulWidget {
 }
 
 class _PinLockAppPageState extends State<PinLockAppPage> with ProgressDialog {
-  ChangePasswordResponse? changePasswordResponse;
-  ScreenChangePasswordResponse? _screenChangePasswordResponse;
+  LockAppScreenResponse? _screenLockAppResponse;
   TextEditingController currentPasswordController = TextEditingController();
   TextEditingController newPasswordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
-  // context.read<ChangePasswordBloc>().add(ChangePasswordScreenInfoEvent());
+  // context.read<LockAppBloc>().add(LockAppScreenInfoEvent());
 
   late SharedPreferences prefs;
   late String _userLanguage;
@@ -69,7 +71,7 @@ class _PinLockAppPageState extends State<PinLockAppPage> with ProgressDialog {
 
   void _togglePinLockAppView() async {
     setState(
-      () {
+          () {
         if (_isHiddenPin == true) {
           setIsPinStatus(pinStatus: false);
           setIBioStatus(bioStatus: false);
@@ -88,7 +90,7 @@ class _PinLockAppPageState extends State<PinLockAppPage> with ProgressDialog {
 
 
     setState(
-      () {
+          () {
         _isHiddenBio = !_isHiddenBio;
         if (_isHiddenBio == true) {
           setIBioStatus(bioStatus: true);
@@ -104,9 +106,9 @@ class _PinLockAppPageState extends State<PinLockAppPage> with ProgressDialog {
     _userLanguage = prefs.getString('userLanguage') ?? 'TH';
 
     textSessionExpired =
-        _userLanguage == 'EN' ? textUnauthorizedEN : textUnauthorizedTH;
+    _userLanguage == 'EN' ? textUnauthorizedEN : textUnauthorizedTH;
     textSubSessionExpired =
-        _userLanguage == 'EN' ? textSubUnauthorizedEN : textSubUnauthorizedTH;
+    _userLanguage == 'EN' ? textSubUnauthorizedEN : textSubUnauthorizedTH;
     _buttonOk = _userLanguage == 'EN' ? buttonOkEN : buttonOkTH;
     setState(() {});
   }
@@ -132,79 +134,51 @@ class _PinLockAppPageState extends State<PinLockAppPage> with ProgressDialog {
     // valueLanguage = prefs.getString('userChangeLanguage') ?? '';
     await setIsPinValue(pinValue: pinValue);
     setState(
-      () {},
+          () {},
     );
   }
 
-  void _setValueAndGoHome(
-      {ChangePasswordResponse? changePasswordResponse}) async {
-    prefs = await SharedPreferences.getInstance();
-    await setUserKeyAndRefreshKey(
-        globalKey: changePasswordResponse?.body?.token?? "",
-        refreshKey: changePasswordResponse?.body?.refreshtoken?? "",
-      isRole: changePasswordResponse?.body?.role ??"TC",
-      userLanguage: changePasswordResponse?.body?.language ??"TH",
 
-    );
-    // await setUserKey(globalKey: changePasswordResponse?.body?.token);
-    // // valueLanguage = prefs.getString('userChangeLanguage') ?? '';
-    // await setUserRefreshKey(
-    //     refreshKey: changePasswordResponse?.body?.refreshtoken);
-    setState(
-      () {},
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ChangePasswordBloc, ChangePasswordState>(
+    return BlocConsumer<LockAppBloc, LockAppState>(
       listener: (context, state) {
-        if (state is ChangePasswordLoading) {
+        if (state is LockAppLoading) {
           showProgressDialog(context);
         }
-        if (state is ChangePasswordEndLoading) {
+        if (state is LockAppEndLoading) {
           hideProgressDialog(context);
         }
-        if (state is ChangePasswordError) {
+        if (state is LockAppError) {
           if (state.message.toString() == 'Unauthorized') {
             dialogSessionExpiredOneBtn(
                 context, textSessionExpired, textSubSessionExpired, _buttonOk,
                 onClickBtn: () {
-              cleanDelete();
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) => const LoginScreen()));
-            });
+                  cleanDelete();
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => const LoginScreen()));
+                });
           } else {
             dialogOneLineOneBtn(context, '${state.message}\n ', _buttonOk,
                 onClickBtn: () {
-              Navigator.of(context).pop();
-            });
+                  Navigator.of(context).pop();
+                });
           }
         }
-        if (state is SubmitChangePasswordSuccessState) {
-          changePasswordResponse = state.responseChangePasswordResponse;
 
-          _setValueAndGoHome(changePasswordResponse: changePasswordResponse);
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) {
-              // int index = int.parse(widget.id);
-              return const HomeScreen();
-            }),
-          );
-        }
       },
       builder: (context, state) {
-        if (state is ScreenInfoChangePasswordSuccessState) {
-          _screenChangePasswordResponse =
-              state.responseChangePasswordScreenInfo;
+        if (state is ScreenInfoLockAppSuccessState) {
+          _screenLockAppResponse =
+              state.lockAppScreenResponse;
           return pinLockAppBody(
             context,
             _togglePinLockAppView,
             _toggleBioLockAppView,
-            _screenChangePasswordResponse,
+            _screenLockAppResponse,
             currentPasswordController,
             confirmPasswordController,
             newPasswordController,
@@ -219,11 +193,11 @@ class _PinLockAppPageState extends State<PinLockAppPage> with ProgressDialog {
 
         return Scaffold(
             body: Container(
-          color: Colors.white,
-        ));
+              color: Colors.white,
+            ));
       },
       buildWhen: (context, state) {
-        return state is ScreenInfoChangePasswordSuccessState;
+        return state is ScreenInfoLockAppSuccessState;
       },
     );
   }
@@ -233,17 +207,17 @@ pinLockAppBody(
     BuildContext context,
     void Function() togglePinLockAppView,
     void Function() toggleBioLockAppView,
-    ScreenChangePasswordResponse? screenChangePasswordResponse,
+    LockAppScreenResponse? screenLockAppResponse,
     TextEditingController currentPasswordController,
     TextEditingController confirmPasswordController,
     TextEditingController newPasswordController,
     InputController controllerPin,
     Future<void> Function() isSessionPin,
     void Function({required bool pinStatus, required String pinValue})
-        setValuePinAndHidden,
+    setValuePinAndHidden,
     {required bool isHiddenPin,
-    required bool isHiddenBio,
-    required String pinValueString,
+      required bool isHiddenBio,
+      required String pinValueString,
 
     }) {
   print('pinValueString');
@@ -272,7 +246,7 @@ pinLockAppBody(
             ),
           ),
           title:  Text(
-            homeBtnPINAPP ?? homeBtnPINAPP,
+            screenLockAppResponse?.body?.setpinscreen?? homeBtnPINAPP,
             style: TextStyle(
               color: Theme.of(context).bottomAppBarColor ,
               fontSize: sizeTitle24,
@@ -291,8 +265,8 @@ pinLockAppBody(
                     },
                     child: Container(
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(0),
-                           ),
+                          borderRadius: BorderRadius.circular(0),
+                        ),
                         // margin: EdgeInsets.only(right: 10),
                         padding: const EdgeInsets.all(10),
                         width: MediaQuery.of(context).size.width,
@@ -310,11 +284,11 @@ pinLockAppBody(
                                 1: FractionColumnWidth(0.1),
                               },
                               defaultVerticalAlignment:
-                                  TableCellVerticalAlignment.middle,
+                              TableCellVerticalAlignment.middle,
                               children: [
                                 TableRow(children: [
-                                   Text(
-                                    "Lock Application Screen",
+                                  Text(
+                                    screenLockAppResponse?.body?.lockapp??"Lock Application Screen",
                                     style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.w500,
@@ -347,29 +321,29 @@ pinLockAppBody(
                             isHiddenPin
                                 ? const SizedBox()
                                 : Table(
-                                    border: TableBorder.symmetric(
-                                        outside: const BorderSide(
-                                            width: 2,
-                                            color: Colors.transparent)),
-                                    columnWidths: const {
-                                      0: FractionColumnWidth(1.0),
-                                    },
-                                    defaultVerticalAlignment:
-                                        TableCellVerticalAlignment.middle,
-                                    children:  [
-                                      TableRow(children: [
-                                        Text(
-                                          "      If you forget your PIN Lock Application, you will need to delete and "
-                                          "To reinstall Application EZ@U, you will need to log out. "
-                                          "You will need to delete the Application EZ@U cache data from your mobile phone.",
-                                          style: TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w500,
-                                              color: Theme.of(context).bottomAppBarColor.withOpacity(0.8),),
-                                        ),
-                                      ])
-                                    ],
-                                  )
+                              border: TableBorder.symmetric(
+                                  outside: const BorderSide(
+                                      width: 2,
+                                      color: Colors.transparent)),
+                              columnWidths: const {
+                                0: FractionColumnWidth(1.0),
+                              },
+                              defaultVerticalAlignment:
+                              TableCellVerticalAlignment.middle,
+                              children:  [
+                                TableRow(children: [
+                                  Text(
+                                    screenLockAppResponse?.body?.lockappdetail??"      If you forget your PIN Lock Application, you will need to delete and "
+                                        "To reinstall Application EZ@U, you will need to log out. "
+                                        "You will need to delete the Application EZ@U cache data from your mobile phone.",
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w500,
+                                      color: Theme.of(context).bottomAppBarColor.withOpacity(0.8),),
+                                  ),
+                                ])
+                              ],
+                            )
                           ],
                         ))),
 
@@ -382,58 +356,13 @@ pinLockAppBody(
                 ),
                 isHiddenPin
                     ? GestureDetector(
-                        onTap: () {
-                          toggleBioLockAppView();
-                        },
-                        child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(0),
-                                ),
-                            // margin: EdgeInsets.only(right: 10),
-                            padding: const EdgeInsets.all(10),
-                            width: MediaQuery.of(context).size.width,
-                            margin: const EdgeInsets.only(
-                                left: 0, top: 0, right: 2, bottom: 0),
-                            child: Column(
-                              children: [
-                                Table(
-                                  border: TableBorder.symmetric(
-                                      outside: const BorderSide(
-                                          width: 2, color: Colors.transparent)),
-                                  columnWidths: const {
-                                    0: FractionColumnWidth(0.9),
-                                    1: FractionColumnWidth(0.1),
-                                  },
-                                  defaultVerticalAlignment:
-                                      TableCellVerticalAlignment.middle,
-                                  children: [
-                                    TableRow(children: [
-                                       Text(
-                                        "Fingerprint scanner and face scan",
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w500,
-                                            color: Theme.of(context).bottomAppBarColor),
-                                      ),Switch.adaptive(
-                                        value: isHiddenBio == true?true:false,
-                                        onChanged: (value) {
-                                          toggleBioLockAppView();
-                                        },
-                                        activeColor:Colors.green,
-                                        activeTrackColor:Colors.green,
-
-
-                                      )
-
-                                    ])
-                                  ],
-                                ),
-                              ],
-                            )))
-                    : Container(
+                    onTap: () {
+                      toggleBioLockAppView();
+                    },
+                    child: Container(
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(0),
-                            ),
+                          borderRadius: BorderRadius.circular(0),
+                        ),
                         // margin: EdgeInsets.only(right: 10),
                         padding: const EdgeInsets.all(10),
                         width: MediaQuery.of(context).size.width,
@@ -450,30 +379,75 @@ pinLockAppBody(
                                 1: FractionColumnWidth(0.1),
                               },
                               defaultVerticalAlignment:
-                                  TableCellVerticalAlignment.middle,
+                              TableCellVerticalAlignment.middle,
                               children: [
                                 TableRow(children: [
-                                   Text(
-                                    "Fingerprint scanner and face scan",
+                                  Text(
+                                    screenLockAppResponse?.body?.bioscan??"Fingerprint scanner and face scan",
                                     style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.w500,
                                         color: Theme.of(context).bottomAppBarColor),
-                                  ),
-                                  Switch.adaptive(
-                                    value: false,
+                                  ),Switch.adaptive(
+                                    value: isHiddenBio == true?true:false,
                                     onChanged: (value) {
+                                      toggleBioLockAppView();
                                     },
                                     activeColor:Colors.green,
                                     activeTrackColor:Colors.green,
 
 
                                   )
+
                                 ])
                               ],
                             ),
                           ],
-                        )),
+                        )))
+                    : Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(0),
+                    ),
+                    // margin: EdgeInsets.only(right: 10),
+                    padding: const EdgeInsets.all(10),
+                    width: MediaQuery.of(context).size.width,
+                    margin: const EdgeInsets.only(
+                        left: 0, top: 0, right: 2, bottom: 0),
+                    child: Column(
+                      children: [
+                        Table(
+                          border: TableBorder.symmetric(
+                              outside: const BorderSide(
+                                  width: 2, color: Colors.transparent)),
+                          columnWidths: const {
+                            0: FractionColumnWidth(0.9),
+                            1: FractionColumnWidth(0.1),
+                          },
+                          defaultVerticalAlignment:
+                          TableCellVerticalAlignment.middle,
+                          children: [
+                            TableRow(children: [
+                              Text(
+                                screenLockAppResponse?.body?.bioscan??"Fingerprint scanner and face scan",
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                    color: Theme.of(context).bottomAppBarColor),
+                              ),
+                              Switch.adaptive(
+                                value: false,
+                                onChanged: (value) {
+                                },
+                                activeColor:Colors.green,
+                                activeTrackColor:Colors.green,
+
+
+                              )
+                            ])
+                          ],
+                        ),
+                      ],
+                    )),
 
                 Divider(
                   color: Theme.of(context).bottomAppBarColor.withOpacity(0.3),
@@ -485,79 +459,79 @@ pinLockAppBody(
 
                 isHiddenPin
                     ? GestureDetector(
-                        onTap: () {
+                    onTap: () {
 
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (context) {
-                              // int index = int.parse(widget.id);
-                              return  PinLockAppScreen(isHiddenBio: false, pinValueString: pinValueString, optionLockApp: false,);
-                            }),
-                          );
-                        },
-                        child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(0),
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) {
+                          // int index = int.parse(widget.id);
+                          return  PinLockAppScreen(isHiddenBio: false, pinValueString: pinValueString, optionLockApp: false,);
+                        }),
+                      );
+                    },
+                    child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(0),
 
+                        ),
+                        // margin: EdgeInsets.only(right: 10),
+                        padding: const EdgeInsets.all(10),
+                        width: MediaQuery.of(context).size.width,
+                        margin: const EdgeInsets.only(
+                            left: 0, top: 0, right: 2, bottom: 0),
+                        child: Column(
+                          children: [
+                            Table(
+                              border: TableBorder.symmetric(
+                                  outside: const BorderSide(
+                                      width: 2, color: Colors.transparent)),
+                              columnWidths: const {
+                                0: FractionColumnWidth(0.9),
+                                1: FractionColumnWidth(0.1),
+                              },
+                              defaultVerticalAlignment:
+                              TableCellVerticalAlignment.middle,
+                              children:  [
+                                TableRow(children: [
+                                  Text(
+                                    screenLockAppResponse?.body?.changepasscode??"Change Passcode ",
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500,
+                                        color:Theme.of(context).bottomAppBarColor),
+                                  ),
+                                  Icon(
+                                      Icons.chevron_right_outlined,
+                                      size: 35.0,
+                                      color:Theme.of(context).bottomAppBarColor),
+                                ])
+                              ],
                             ),
-                            // margin: EdgeInsets.only(right: 10),
-                            padding: const EdgeInsets.all(10),
-                            width: MediaQuery.of(context).size.width,
-                            margin: const EdgeInsets.only(
-                                left: 0, top: 0, right: 2, bottom: 0),
-                            child: Column(
-                              children: [
-                                Table(
-                                  border: TableBorder.symmetric(
-                                      outside: const BorderSide(
-                                          width: 2, color: Colors.transparent)),
-                                  columnWidths: const {
-                                    0: FractionColumnWidth(0.9),
-                                    1: FractionColumnWidth(0.1),
-                                  },
-                                  defaultVerticalAlignment:
-                                      TableCellVerticalAlignment.middle,
-                                  children:  [
-                                    TableRow(children: [
-                                      Text(
-                                        "Change Passcode ",
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w500,
-                                            color:Theme.of(context).bottomAppBarColor),
-                                      ),
-                                      Icon(
-                                          Icons.chevron_right_outlined,
-                                          size: 35.0,
-                                          color:Theme.of(context).bottomAppBarColor),
-                                    ])
-                                  ],
-                                ),
-                                Table(
-                                  border: TableBorder.symmetric(
-                                      outside: const BorderSide(
-                                          width: 2, color: Colors.transparent)),
-                                  columnWidths: const {
-                                    0: FractionColumnWidth(1.0),
-                                  },
-                                  defaultVerticalAlignment:
-                                      TableCellVerticalAlignment.middle,
-                                  children:  [
-                                    TableRow(children: [
-                                      Text(
-                                        "      If you forget your PIN Lock Application, you will need to delete and "
+                            Table(
+                              border: TableBorder.symmetric(
+                                  outside: const BorderSide(
+                                      width: 2, color: Colors.transparent)),
+                              columnWidths: const {
+                                0: FractionColumnWidth(1.0),
+                              },
+                              defaultVerticalAlignment:
+                              TableCellVerticalAlignment.middle,
+                              children:  [
+                                TableRow(children: [
+                                  Text(
+                                    screenLockAppResponse?.body?.lockappdetail?? "      If you forget your PIN Lock Application, you will need to delete and "
                                         "To reinstall Application EZ@U, you will need to log out. "
                                         "You will need to delete the Application EZ@U cache data from your mobile phone.",
-                                        style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w500,
-                                            color: Theme.of(context).bottomAppBarColor.withOpacity(0.8),),
-                                      ),
-                                    ])
-                                  ],
-                                ),
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w500,
+                                      color: Theme.of(context).bottomAppBarColor.withOpacity(0.8),),
+                                  ),
+                                ])
                               ],
-                            )))
+                            ),
+                          ],
+                        )))
                     : const SizedBox(),
                 isHiddenPin
                     ?Divider(

@@ -76,12 +76,25 @@ class _PinLockAppPageState extends State<PinLockAppPage> {
   var rowPin = MainAxisAlignment.spaceEvenly;
   double paddingKeyBoardNumberValue = 8;
   var rowPinColors = Colors.white;
+  late String  enterPin = "Please enter your PIN.";
+  late String  hello = "Hello";
+  late String niceDay ="have a nice day.";
   @override
   void initState() {
     _isGetMyNameUser();
+    _isGetTextPinScreen();
     super.initState();
   }
 
+  Future<void> _isGetTextPinScreen() async {
+    prefs = await SharedPreferences.getInstance();
+
+    setState(() {
+      enterPin =  prefs.getString('enterPin')?? "Please enter your PIN.";
+      hello =  prefs.getString('Hello')?? "Hello";
+      niceDay =  prefs.getString('niceDay')?? "have a nice day.";
+    });
+  }
   Future<void> _isGetMyNameUser() async {
     prefs = await SharedPreferences.getInstance();
     myNameUser = prefs.getString('myNameUser') ?? '';
@@ -478,16 +491,16 @@ class _PinLockAppPageState extends State<PinLockAppPage> {
     return Column(
       children: [
         Text(
-          "Hello $myNameUser, have a nice day. ",
-          style: TextStyle(
+          "$hello $myNameUser, $niceDay  ",
+          style: const TextStyle(
             color: Colors.white70,
             fontSize: 21.0,
             fontWeight: FontWeight.bold,
           ),
         ),
         Text(
-          "Please enter your PIN.",
-          style: TextStyle(
+          enterPin,
+          style: const TextStyle(
             color: Colors.white70,
             fontSize: 21.0,
             fontWeight: FontWeight.bold,

@@ -52,7 +52,6 @@ class _PinLockAppCreatePageState extends State<PinLockAppCreatePage> {
 
 
   late String pinValueString ;
-  String pinValueShowString= 'Please enter new your PIN';
    _setValuePinAndHidden(
       {required bool pinStatus, required String pinValue}) async {
     print("pinValue_setValuePinAndHidden  pinLockAppCreateScreen");
@@ -80,10 +79,24 @@ class _PinLockAppCreatePageState extends State<PinLockAppCreatePage> {
   var rowPin = MainAxisAlignment.spaceEvenly;
   double paddingKeyBoardNumberValue = 8;
   var rowPinColors = Colors.white;
+  late String  enterConfirmPin = "Please enter confirm your PIN.";
+   String  enterNewPin = "Please enter new your PIN";
+
+  late String pinValueShowString= enterNewPin;
   @override
   void initState() {
-
+    _isGetTextPinScreen();
     super.initState();
+  }
+
+  Future<void> _isGetTextPinScreen() async {
+    prefs = await SharedPreferences.getInstance();
+
+    setState(() {
+      enterConfirmPin =  prefs.getString('enterConfirmPin')?? "Please enter confirm your PIN.";
+      enterNewPin =  prefs.getString('enterNewPin')?? "Please enter new your PIN";
+      pinValueShowString= enterNewPin;
+    });
   }
 
 
@@ -367,7 +380,7 @@ class _PinLockAppCreatePageState extends State<PinLockAppCreatePage> {
         }else if (pinCreateStatus == false){
           pinCreateStatus =  true;
           pinValueString = strPin ;
-          pinValueShowString= 'Please enter confirm your PIN';
+          pinValueShowString= enterConfirmPin;
           rowPinColors = Colors.green.shade100;
           paddingKeyBoardNumberValue = 15;
           Future.delayed(const Duration(milliseconds: 50), () {

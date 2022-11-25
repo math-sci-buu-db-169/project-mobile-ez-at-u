@@ -280,7 +280,7 @@ class _SettingPageState extends State<SettingPage> with ProgressDialog {
                 ),
               ),
               title: Text(
-                'ตั้งค่า',
+                _screenHomeResponse?.body?.screenInfo?.setting ??homeSetting,
                 style: TextStyle(
                   color: Theme.of(context).appBarTheme.foregroundColor,
                   fontSize: sizeTitle24,
@@ -334,8 +334,8 @@ class _SettingPageState extends State<SettingPage> with ProgressDialog {
                                   _toggleLanguageView,
                                   isHidden,
                                   textLeftTitle:
-                                      homeThemeModeAPP ?? homeThemeModeAPP,
-                                  textRightDetail: "Dark",
+                                  _screenHomeResponse?.body?.screenInfo?.modetheme ??homeThemeModeAPP,
+                                  textRightDetail: _screenHomeResponse?.body?.screenInfo?.dark ??homeThemeDark,
                                   leftIcon: Icon(FontAwesomeIcons.sun,
                                       color: Theme.of(context).iconTheme.color),
                                   tb1: 0.1,
@@ -380,7 +380,7 @@ class _SettingPageState extends State<SettingPage> with ProgressDialog {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              const SettingPinLockAppScreen()));
+                                          const  SettingPinLockAppScreen()));
                                 },
                                 child: Container(
                                   width: double.infinity,
@@ -390,7 +390,7 @@ class _SettingPageState extends State<SettingPage> with ProgressDialog {
                                   child: buildTableDrawerTwoTableIcons(
                                     context,
                                     textLeftTitle:
-                                        homeBtnPINAPP ?? homeBtnPINAPP,
+                                    _screenHomeResponse?.body?.screenInfo?.lockscreencode ?? homeBtnPINAPP,
                                     // textLeftTitle: screenHomeResponse?.body?.screenInfo?.btncpass ?? homeBtnConfirmPassword,
                                     textRightDetail: '',
                                     leftIcon: Icon(
