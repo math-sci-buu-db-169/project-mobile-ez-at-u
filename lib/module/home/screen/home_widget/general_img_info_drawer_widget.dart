@@ -3,33 +3,66 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../../../../module/profile/model/response/api_profile_response.dart';
 
-buildTableGeneralImageInfo(BuildContext context, ApiProfileResponse? screenProfileResponse,
+buildTableGeneralImageInfo(
+    BuildContext context, ApiProfileResponse? screenProfileResponse,
     {required tb1, required tb2, required tb3}) {
   String phimg = "";
   return Padding(
     padding: const EdgeInsets.only(bottom: 10.0),
     child: Table(
-      border: TableBorder.symmetric(outside: const BorderSide(width: 2, color: Colors.transparent)),
-      columnWidths: {0: FractionColumnWidth(tb1), 1: FractionColumnWidth(tb2), 2: FractionColumnWidth(tb3)},
+      border: TableBorder.symmetric(
+          outside: const BorderSide(width: 2, color: Colors.transparent)),
+      columnWidths: {
+        0: FractionColumnWidth(tb1),
+        1: FractionColumnWidth(tb2),
+        2: FractionColumnWidth(tb3)
+      },
       defaultVerticalAlignment: TableCellVerticalAlignment.middle,
       children: [
         TableRow(children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text(
-                screenProfileResponse?.body?.profileGeneralInfo?.generation ?? '-',
-                style:  TextStyle(
-                    color: Theme.of(context).bottomAppBarColor,fontSize: 20, fontWeight: FontWeight.bold),
-              ),
+              screenProfileResponse?.body?.profileGeneralInfo?.role == "ST"
+                  ? Text(
+                      screenProfileResponse
+                              ?.body?.profileGeneralInfo?.generation ??
+                          '-',
+                      style: TextStyle(
+                          color: Theme.of(context).bottomAppBarColor,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    )
+                  : Text(
+                      screenProfileResponse
+                              ?.body?.profileGeneralInfo?.branchname ??
+                          '-',
+                      style: TextStyle(
+                          color: Theme.of(context).bottomAppBarColor,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
               Table(children: [
                 TableRow(children: [
-                  Text(
-                    screenProfileResponse?.body?.profileGeneralInfo?.genname ?? '-',
-                    textAlign: TextAlign.end,
-                    style:  TextStyle(
-                        color: Theme.of(context).bottomAppBarColor,fontSize: 18),
-                  ),
+                  screenProfileResponse?.body?.profileGeneralInfo?.role == "ST"
+                      ? Text(
+                          screenProfileResponse
+                                  ?.body?.profileGeneralInfo?.genname ??
+                              '-',
+                          textAlign: TextAlign.end,
+                          style: TextStyle(
+                              color: Theme.of(context).bottomAppBarColor,
+                              fontSize: 18),
+                        )
+                      : Text(
+                          screenProfileResponse
+                                  ?.body?.profileGeneralInfo?.facultyname ??
+                              '-',
+                          textAlign: TextAlign.end,
+                          style: TextStyle(
+                              color: Theme.of(context).bottomAppBarColor,
+                              fontSize: 18),
+                        ),
                 ]),
               ]),
             ],
@@ -53,8 +86,10 @@ buildTableGeneralImageInfo(BuildContext context, ApiProfileResponse? screenProfi
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
-                      image: MemoryImage(base64Decode(base64
-                          .normalize(screenProfileResponse?.body?.profileGeneralInfo?.img ?? base64.normalize(phimg)))),
+                      image: MemoryImage(base64Decode(base64.normalize(
+                          screenProfileResponse
+                                  ?.body?.profileGeneralInfo?.img ??
+                              base64.normalize(phimg)))),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -72,8 +107,10 @@ buildTableGeneralImageInfo(BuildContext context, ApiProfileResponse? screenProfi
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               image: DecorationImage(
-                                image: MemoryImage(base64Decode(base64.normalize(
-                                    screenProfileResponse?.body?.profileGeneralInfo?.img ?? base64.normalize(phimg)))),
+                                image: MemoryImage(base64Decode(
+                                    base64.normalize(screenProfileResponse
+                                            ?.body?.profileGeneralInfo?.img ??
+                                        base64.normalize(phimg)))),
                               ),
                             ),
                           ),

@@ -75,75 +75,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> with HomeRepository {
 
             print("CheckHome  2 == checkTokenExpiredResponse.head?.timeexpire == true");
             await getRefHomeEventInitial(event, emit);
-            // print(
-            //     "checkTokenExpiredResponse true ============checkMainRouteEventInitial=======RefreshTokenResponse========= ${checkTokenExpiredResponse
-            //         .head?.timeexpire}");
-            // print(checkTokenExpiredResponse.body?.expiremessage);
-            // print(checkTokenExpiredResponse.body?.timenow);
-            // print(checkTokenExpiredResponse.body?.timeexpir);
-            // Response responseRefreshTokenResponse = await getRefreshToken(
-            //     refreshToken: isMainRouteRefresh.toString());
-            // // emit(HomeEndLoading());
-            // if (responseRefreshTokenResponse.statusCode == 200) {
-            //   RefreshTokenResponse refreshTokenResponse =
-            //   RefreshTokenResponse.fromJson(responseRefreshTokenResponse.data);
-            //   if (refreshTokenResponse.head?.status == 200) {
-            //     await setUserKeyAndRefreshKey(
-            //         globalKey: refreshTokenResponse.body?.token ?? "",
-            //         refreshKey: refreshTokenResponse.body?.refreshtoken ?? ""
-            //
-            //     );
-            //   }
-            //   else if (refreshTokenResponse.head?.status == 401) {
-            //     emit(TokenExpiredState(
-            //         message: responseRefreshTokenResponse.statusMessage ?? "",
-            //         checkrefreshtokenmessage: refreshTokenResponse));
-            //   }
-            //   else {
-            //     emit(MainRouteError(
-            //         message: refreshTokenResponse.head?.message ?? ""));
-            //   }
-            // } else {
-            //   emit(MainRouteError(
-            //       message: responseRefreshTokenResponse.statusMessage ?? ""));
-            // }
+
           }
         }
         else if (checkTokenExpiredResponse.head?.status == 401) {
           print("CheckHome 3 == checkTokenExpiredResponse.head?.status == 401");
           await getRefHomeEventInitial(event, emit);
-          // print(
-          //     "checkTokenExpiredResponse ============checkMainRouteEventInitial=======RefreshTokenResponse 401 ========= ${checkTokenExpiredResponse
-          //         .head?.timeexpire}");
-          // print(checkTokenExpiredResponse.body?.expiremessage);
-          // print(checkTokenExpiredResponse.body?.timenow);
-          // print(checkTokenExpiredResponse.body?.timeexpir);
-          // Response responseRefreshTokenResponse = await getRefreshToken(
-          //     refreshToken: isMainRouteRefresh.toString());
-          // // emit(HomeEndLoading());
-          // if (responseRefreshTokenResponse.statusCode == 200) {
-          //   RefreshTokenResponse refreshTokenResponse =
-          //   RefreshTokenResponse.fromJson(responseRefreshTokenResponse.data);
-          //   if (refreshTokenResponse.head?.status == 200) {
-          //     await setUserKeyAndRefreshKey(
-          //         globalKey: refreshTokenResponse.body?.token ?? "",
-          //         refreshKey: refreshTokenResponse.body?.refreshtoken ?? ""
-          //
-          //     );
-          //   }
-          //   else if (refreshTokenResponse.head?.status == 400) {
-          //     emit(TokenExpiredState(
-          //         message: responseRefreshTokenResponse.statusMessage ?? "",
-          //         checkrefreshtokenmessage: refreshTokenResponse));
-          //   }
-          //   else {
-          //     emit(MainRouteError(
-          //         message: refreshTokenResponse.head?.message ?? ""));
-          //   }
-          // } else {
-          //   emit(MainRouteError(
-          //       message: responseRefreshTokenResponse.statusMessage ?? ""));
-          // }
+
         }
         else {
           emit(HomeError(
@@ -291,12 +229,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> with HomeRepository {
     });
 
     on<OnClickConfirmLogoutHomeEvent>((event, emit) async {
-      prefs = await SharedPreferences.getInstance();
-      String? refreshToken = prefs.getString('refreshKey');
       try {
         emit(HomeLoading());
         print("CheckHome 7 == OnClickConfirmLogoutHomeEvent");
         await checkHomeEventInitial(event, emit);
+        prefs = await SharedPreferences.getInstance();
+        String? refreshToken = prefs.getString('refreshKey');
         Response responseLogoutHome = await getLogout(refreshToken: refreshToken);
         emit(HomeEndLoading());
         if (responseLogoutHome.statusCode == 200) {

@@ -4,6 +4,7 @@ const String homeTextName   = 'ชื่อ';
 const String homeTexNickName   = 'ชื่อเล่น';
 const String homeTextGen   = 'รุ่น';
 const String homeTextStdCode   = 'รหัสนิสิต';
+const String homeTextPosition   = 'ตำแหน่ง';
 const String homeTextEmail   = 'อิเมล';
 const String homeTextRole   = 'ประเภทผู้ใช้งาน';
 const String homeTextLang   = 'ภาษา';

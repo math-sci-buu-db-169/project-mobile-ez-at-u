@@ -51,6 +51,8 @@ drawerHome(
       screenHomeResponse?.body?.alertmessage?.phonesupport ?? phoneSupport;
   String textPassword =
       screenHomeResponse?.body?.alertmessage?.alertpassword ?? alertPassword;
+  String role = screenProfileResponse?.body?.profileGeneralInfo?.role ?? "";
+  screenHomeResponse?.body?.alertmessage?.alertpassword ?? alertPassword;
   List<String> optionsThemeMode = ["light", "dark", "system"];
   return SafeArea(
     child: SizedBox(
@@ -70,8 +72,8 @@ drawerHome(
                                 drawerColor)
                             .withOpacity(0.3)
                         : HexColor(screenProfileResponse
-                                    ?.body?.profileGeneralInfo?.gencolor ??
-                                drawerColor),
+                                ?.body?.profileGeneralInfo?.gencolor ??
+                            drawerColor),
                     padding: const EdgeInsets.all(20),
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -116,19 +118,34 @@ drawerHome(
                           const SizedBox(
                             height: 5,
                           ),
-                          buildTableDrawerTwoTable(
-                            context,
-                            textLeftTitle: screenHomeResponse
-                                    ?.body?.screenInfo?.textstdcode ??
-                                homeTextStdCode,
-                            textRightDetail: screenProfileResponse
-                                    ?.body?.profileGeneralInfo?.studentid ??
-                                '-',
-                            tb1: 0.45,
-                            tb2: 0.05,
-                            tb3: 0.5,
-                            underline: false,
-                          ),
+                          screenProfileResponse?.body?.profileGeneralInfo?.role =="ST"
+                              ? buildTableDrawerTwoTable(
+                                  context,
+                                  textLeftTitle: screenHomeResponse
+                                          ?.body?.screenInfo?.textstdcode ??
+                                      homeTextStdCode,
+                                  textRightDetail: screenProfileResponse?.body
+                                          ?.profileGeneralInfo?.studentid ??
+                                      '-',
+                                  tb1: 0.45,
+                                  tb2: 0.05,
+                                  tb3: 0.5,
+                                  underline: false,
+                                )
+                              : buildTableDrawerTwoTable(
+                                  context,
+                                  textLeftTitle:
+                                  // screenHomeResponse
+                                  //         ?.body?.screenInfo?.textposition ??
+                                      homeTextPosition,
+                                  textRightDetail:screenProfileResponse
+                                      ?.body?.profileGeneralInfo?.rolename ??
+                                      '-',
+                                  tb1: 0.45,
+                                  tb2: 0.05,
+                                  tb3: 0.5,
+                                  underline: false,
+                                ),
                           const SizedBox(
                             height: 5,
                           ),
@@ -159,7 +176,7 @@ drawerHome(
                           screenHomeResponse?.body?.screenInfo?.textrole ??
                               homeTextRole,
                       textRightDetail: screenProfileResponse
-                              ?.body?.profileGeneralInfo?.role ??
+                              ?.body?.profileGeneralInfo?.rolename ??
                           '-',
                       tb1: 0.5,
                       tb2: 0.05,

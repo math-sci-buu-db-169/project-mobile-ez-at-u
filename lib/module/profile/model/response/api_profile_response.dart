@@ -657,29 +657,37 @@ ProfileGeneralInfo profileGeneralInfoFromJson(String str) => ProfileGeneralInfo.
 String profileGeneralInfoToJson(ProfileGeneralInfo data) => json.encode(data.toJson());
 class ProfileGeneralInfo {
   ProfileGeneralInfo({
-      String? name, 
-      String? lastname, 
-      String? nickname, 
-      String? generation, 
-      String? genname, 
-      String? gencolor, 
-      String? studentid, 
-      dynamic email, 
-      String? langeuage, 
-      String? role, 
-      String? img,}){
+    String? name,
+    String? lastname,
+    String? nickname,
+    String? generation,
+    String? genname,
+    String? gencolor,
+    String? branchname,
+    String? facultyname,
+    String? department,
+    dynamic studentid,
+    String? email,
+    String? langeuage,
+    String? role,
+    String? rolename,
+    String? img,}){
     _name = name;
     _lastname = lastname;
     _nickname = nickname;
     _generation = generation;
     _genname = genname;
     _gencolor = gencolor;
+    _branchname = branchname;
+    _facultyname = facultyname;
+    _department = department;
     _studentid = studentid;
     _email = email;
     _langeuage = langeuage;
     _role = role;
+    _rolename = rolename;
     _img = img;
-}
+  }
 
   ProfileGeneralInfo.fromJson(dynamic json) {
     _name = json['name'];
@@ -688,10 +696,14 @@ class ProfileGeneralInfo {
     _generation = json['generation'];
     _genname = json['genname'];
     _gencolor = json['gencolor'];
+    _branchname = json['branchname'];
+    _facultyname = json['facultyname'];
+    _department = json['department'];
     _studentid = json['studentid'];
     _email = json['email'];
     _langeuage = json['langeuage'];
     _role = json['role'];
+    _rolename = json['rolename'];
     _img = json['img'];
   }
   String? _name;
@@ -700,44 +712,60 @@ class ProfileGeneralInfo {
   String? _generation;
   String? _genname;
   String? _gencolor;
-  String? _studentid;
-  dynamic _email;
+  String? _branchname;
+  String? _facultyname;
+  String? _department;
+  dynamic _studentid;
+  String? _email;
   String? _langeuage;
   String? _role;
+  String? _rolename;
   String? _img;
-ProfileGeneralInfo copyWith({  String? name,
-  String? lastname,
-  String? nickname,
-  String? generation,
-  String? genname,
-  String? gencolor,
-  String? studentid,
-  dynamic email,
-  String? langeuage,
-  String? role,
-  String? img,
-}) => ProfileGeneralInfo(  name: name ?? _name,
-  lastname: lastname ?? _lastname,
-  nickname: nickname ?? _nickname,
-  generation: generation ?? _generation,
-  genname: genname ?? _genname,
-  gencolor: gencolor ?? _gencolor,
-  studentid: studentid ?? _studentid,
-  email: email ?? _email,
-  langeuage: langeuage ?? _langeuage,
-  role: role ?? _role,
-  img: img ?? _img,
-);
+  ProfileGeneralInfo copyWith({  String? name,
+    String? lastname,
+    String? nickname,
+    String? generation,
+    String? genname,
+    String? gencolor,
+    String? branchname,
+    String? facultyname,
+    String? department,
+    dynamic studentid,
+    String? email,
+    String? langeuage,
+    String? role,
+    String? rolename,
+    String? img,
+  }) => ProfileGeneralInfo(  name: name ?? _name,
+    lastname: lastname ?? _lastname,
+    nickname: nickname ?? _nickname,
+    generation: generation ?? _generation,
+    genname: genname ?? _genname,
+    gencolor: gencolor ?? _gencolor,
+    branchname: branchname ?? _branchname,
+    facultyname: facultyname ?? _facultyname,
+    department: department ?? _department,
+    studentid: studentid ?? _studentid,
+    email: email ?? _email,
+    langeuage: langeuage ?? _langeuage,
+    role: role ?? _role,
+    rolename: rolename ?? _rolename,
+    img: img ?? _img,
+  );
   String? get name => _name;
   String? get lastname => _lastname;
   String? get nickname => _nickname;
   String? get generation => _generation;
   String? get genname => _genname;
   String? get gencolor => _gencolor;
-  String? get studentid => _studentid;
-  dynamic get email => _email;
+  String? get branchname => _branchname;
+  String? get facultyname => _facultyname;
+  String? get department => _department;
+  dynamic get studentid => _studentid;
+  String? get email => _email;
   String? get langeuage => _langeuage;
   String? get role => _role;
+  String? get rolename => _rolename;
   String? get img => _img;
 
   Map<String, dynamic> toJson() {
@@ -748,16 +776,19 @@ ProfileGeneralInfo copyWith({  String? name,
     map['generation'] = _generation;
     map['genname'] = _genname;
     map['gencolor'] = _gencolor;
+    map['branchname'] = _branchname;
+    map['facultyname'] = _facultyname;
+    map['department'] = _department;
     map['studentid'] = _studentid;
     map['email'] = _email;
     map['langeuage'] = _langeuage;
     map['role'] = _role;
+    map['rolename'] = _rolename;
     map['img'] = _img;
     return map;
   }
 
 }
-
 /// titleprofile : "Profile"
 /// subtitlegeninfo : "General information"
 /// subtitlecont : "Contact"
