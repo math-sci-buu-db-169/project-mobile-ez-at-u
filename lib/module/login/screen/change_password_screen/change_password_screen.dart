@@ -167,24 +167,24 @@ cPasswords(
       },
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           elevation: 0,
           leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: const Icon(
+            icon:  Icon(
               Icons.arrow_back,
               size: sizeTitle24,
-              color: Colors.black,
+              color: Theme.of(context).appBarTheme.foregroundColor,
             ),
           ),
           title: Text(
             screenChangePasswordResponse
                     ?.body?.screeninfo?.titlechangenewpass ??
                 changePasswordTitleChangeNewPassword,
-            style: const TextStyle(
-              color: Colors.black,
+            style:  TextStyle(
+              color: Theme.of(context).appBarTheme.foregroundColor,
               fontSize: sizeTitle24,
             ),
           ),
@@ -280,10 +280,10 @@ cPasswords(
                       label: screenChangePasswordResponse
                               ?.body?.screeninfo?.btnconfirm ??
                           changePasswordBtnConfirm,
-                      colortext: tcButtonTextBlack,
-                      colorbutton: tcButtonTextWhite,
+                      colortext: Theme.of(context).appBarTheme.foregroundColor??tcButtonTextBlack,
+                      colorbutton: Theme.of(context).scaffoldBackgroundColor,
                       sizetext: sizeTextBig20,
-                      colorborder: tcButtonTextBoarder,
+                      colorborder: Theme.of(context).appBarTheme.foregroundColor??tcButtonTextBoarder,
                       sizeborder: 10,
                       onPressed: () {
                         context.read<ChangePasswordBloc>().add(

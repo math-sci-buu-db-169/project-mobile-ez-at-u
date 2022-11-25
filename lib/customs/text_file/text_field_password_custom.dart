@@ -38,7 +38,7 @@ class _TextFieldPasswordCustomState extends State<TextFieldPasswordCustom> {
           style:  TextStyle(
               fontSize: sizeText18, color: Theme.of(context).bottomAppBarColor, // height: 2.0,
               ),
-          cursorColor: Colors.black,
+          cursorColor: Theme.of(context).appBarTheme.foregroundColor,
           keyboardType: widget.textInputType,
           // controller: textEditingController,
           initialValue: widget.initialvalue,

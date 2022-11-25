@@ -1,4 +1,5 @@
 import 'package:ez_at_u/module/activity/screen/activity_list_for_teacher_role.dart';
+import 'package:ez_at_u/module/home/screen/home_widget/setting_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../../check_token/check_token_expired.dart';
@@ -57,7 +58,7 @@ buildContentHomeScreen(
         leading: Builder(
           builder: (BuildContext context) {
             return IconButton(
-              icon: FaIcon(FontAwesomeIcons.gear,
+              icon: FaIcon(FontAwesomeIcons.bars,
                   color: Theme.of(context).iconTheme.color, size: 20),
               onPressed: () {
                 Scaffold.of(context).openDrawer();
@@ -203,6 +204,17 @@ buildContentHomeScreen(
                       },
                       // icon: const FaIcon(FontAwesomeIcons.house,color: tcBlack, size: 40),
                       // onPressed: () {},
+                    )),
+                    Expanded(
+                        child: IconButton(
+                      icon: FaIcon(FontAwesomeIcons.gear,
+                          color: Theme.of(context).iconTheme.color, size: 40),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>  const SettingScreen( )));
+                      },
                     )),
                     Expanded(
                         child: IconButton(

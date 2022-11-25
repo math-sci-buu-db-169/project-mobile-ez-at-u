@@ -55,7 +55,8 @@ drawerHome(
   screenHomeResponse?.body?.alertmessage?.alertpassword ?? alertPassword;
   List<String> optionsThemeMode = ["light", "dark", "system"];
   return SafeArea(
-    child: SizedBox(
+    child: Container(
+      color: Theme.of(context).scaffoldBackgroundColor,
       height: double.infinity,
       child: Column(
         children: <Widget>[
@@ -184,49 +185,163 @@ drawerHome(
                       underline: false,
                     ),
                   ),
-                  Container(
-                    width: double.infinity,
-                    color: bscTransparent,
-                    padding: const EdgeInsets.only(
-                        top: 0, bottom: 0, left: 15, right: 10),
-                    child: changLanguage(
-                      context,
-                      toggleLanguageView,
-                      isHidden,
-                      textLeftTitle:
-                          screenHomeResponse?.body?.screenInfo?.textlang ??
-                              homeTextLang,
-                      textRightDetail:
-                          screenHomeResponse?.body?.screenInfo?.textthai ??
-                              homeTextThai,
-                      tb1: 0.45,
-                      tb2: 0.00,
-                      tb3: 0.55,
-                    ),
+                  const SizedBox(
+                    height: 8,
                   ),
-                  Container(
-                    width: double.infinity,
-                    color: bscTransparent,
-                    padding: const EdgeInsets.only(
-                        top: 0, bottom: 0, left: 15, right: 10),
-                    child: changModeTheme(
-                      context,
-                      toggleLanguageView,
-                      isHidden,
-                      textLeftTitle: homeThemeModeAPP ?? homeThemeModeAPP,
-                      textRightDetail: "Dark",
-                      tb1: 0.45,
-                      tb2: 0.00,
-                      tb3: 0.55,
-                    ),
-                  ),
+                  // Container(
+                  //   width: double.infinity,
+                  //   color: bscTransparent,
+                  //   padding: const EdgeInsets.only(
+                  //       top: 0, bottom: 0, left: 15, right: 10),
+                  //   child: changLanguage(
+                  //     context,
+                  //     toggleLanguageView,
+                  //     isHidden,
+                  //     textLeftTitle:
+                  //         screenHomeResponse?.body?.screenInfo?.textlang ??
+                  //             homeTextLang,
+                  //     textRightDetail:
+                  //         screenHomeResponse?.body?.screenInfo?.textthai ??
+                  //             homeTextThai,
+                  //     tb1: 0.45,
+                  //     tb2: 0.00,
+                  //     tb3: 0.55,
+                  //   ),
+                  // ),
+                  // Container(
+                  //   width: double.infinity,
+                  //   color: bscTransparent,
+                  //   padding: const EdgeInsets.only(
+                  //       top: 0, bottom: 0, left: 15, right: 10),
+                  //   child: changModeTheme(
+                  //     context,
+                  //     toggleLanguageView,
+                  //     isHidden,
+                  //     textLeftTitle: homeThemeModeAPP ?? homeThemeModeAPP,
+                  //     textRightDetail: "Dark",
+                  //     tb1: 0.45,
+                  //     tb2: 0.00,
+                  //     tb3: 0.55,
+                  //   ),
+                  // ),
+                  // // GestureDetector(
+                  // //   onTap: () {
+                  // //     dialogThemeMode(
+                  // //         context,
+                  // //         optionsThemeMode:optionsThemeMode,
+                  // //         callbackFromOptionThemeMode: (int optionThemeModeResult) {
+                  // //
+                  // //       },
+                  // //     );
+                  // //   },
+                  // //   child: Container(
+                  // //     width: double.infinity,
+                  // //     color: bscTransparent,
+                  // //     padding: const EdgeInsets.only(
+                  // //         top: 0, bottom: 10, left: 15, right: 15),
+                  // //     child: buildTableDrawerTwoTable(
+                  // //       context,
+                  // //       textLeftTitle: homeThemeModeAPP ?? homeThemeModeAPP,
+                  // //       // textLeftTitle: screenHomeResponse?.body?.screenInfo?.btncpass ?? homeBtnConfirmPassword,
+                  // //       textRightDetail: optionsThemeMode[intThemeMode],
+                  // //       tb1: 0.5,
+                  // //       tb2: 0.05,
+                  // //       tb3: 0.45,
+                  // //       underline: true,
+                  // //     ),
+                  // //   ),
+                  // // ),
                   // GestureDetector(
                   //   onTap: () {
-                  //     dialogThemeMode(
+                  //     Navigator.push(
                   //         context,
-                  //         optionsThemeMode:optionsThemeMode,
-                  //         callbackFromOptionThemeMode: (int optionThemeModeResult) {
-                  //
+                  //         MaterialPageRoute(
+                  //             builder: (context) =>
+                  //                 const SettingPinLockAppScreen()));
+                  //   },
+                  //   child: Container(
+                  //     width: double.infinity,
+                  //     color: bscTransparent,
+                  //     padding: const EdgeInsets.only(
+                  //         top: 0, bottom: 10, left: 15, right: 15),
+                  //     child: buildTableDrawerTwoTable(
+                  //       context,
+                  //       textLeftTitle: homeBtnPINAPP ?? homeBtnPINAPP,
+                  //       // textLeftTitle: screenHomeResponse?.body?.screenInfo?.btncpass ?? homeBtnConfirmPassword,
+                  //       textRightDetail: '',
+                  //       tb1: 0.5,
+                  //       tb2: 0.05,
+                  //       tb3: 0.45,
+                  //       underline: true,
+                  //     ),
+                  //   ),
+                  // ),
+                  // GestureDetector(
+                  //   onTap: () {
+                  //     Navigator.push(
+                  //         context,
+                  //         MaterialPageRoute(
+                  //             builder: (context) =>
+                  //                 const ChangePasswordScreen()));
+                  //   },
+                  //   child: Container(
+                  //     width: double.infinity,
+                  //     color: bscTransparent,
+                  //     padding: const EdgeInsets.only(
+                  //         top: 0, bottom: 10, left: 15, right: 15),
+                  //     child: buildTableDrawerTwoTable(
+                  //       context,
+                  //       textLeftTitle:
+                  //           screenHomeResponse?.body?.screenInfo?.btncpass ??
+                  //               homeBtnConfirmPassword,
+                  //       textRightDetail: '',
+                  //       tb1: 0.5,
+                  //       tb2: 0.05,
+                  //       tb3: 0.45,
+                  //       underline: true,
+                  //     ),
+                  //   ),
+                  // ),
+                  // GestureDetector(
+                  //   onTap: () {
+                  //     // context.read<HomeBloc>().add(OnClickDeleteAccountHomeEvent());
+                  //     dialogFiveLineTwoTextFieldTwoBtn(
+                  //       context,
+                  //       content1: textAlertDeleteAccountPassword,
+                  //       content2: textAlertDeleteAccountPDPA,
+                  //       content3: textAlertDeleteAccount,
+                  //       content4: textEmailSupport,
+                  //       content5: textPhoneSupport,
+                  //       btn1: screenHomeResponse?.body?.errorbutton?.buttonok ??
+                  //           buttonOkTH,
+                  //       btn2: screenHomeResponse
+                  //               ?.body?.errorbutton?.buttoncancel ??
+                  //           buttonCancelTH,
+                  //       isScreenTo: const PDPAMoreScreen(),
+                  //       textFieldOne: TextFieldPasswordCustom(
+                  //         textEditingController: passwordController,
+                  //         onChanged: (value) {
+                  //           passwordController.text = value;
+                  //         },
+                  //         hintLabel: textPassword,
+                  //         textInputType: TextInputType.text,
+                  //         initialvalue: passwordController.text,
+                  //         iconsFile: Icons.lock,
+                  //       ),
+                  //       onClickBtn: (String result) {
+                  //         Navigator.of(context).pop();
+                  //         switch (result) {
+                  //           case 'Cancel':
+                  //             {
+                  //               break;
+                  //             }
+                  //           case 'OK':
+                  //             {
+                  //               context.read<HomeBloc>().add(
+                  //                   OnClickConfirmDeleteAccountHomeEvent(
+                  //                       password: passwordController.text));
+                  //             }
+                  //         }
                   //       },
                   //     );
                   //   },
@@ -237,9 +352,10 @@ drawerHome(
                   //         top: 0, bottom: 10, left: 15, right: 15),
                   //     child: buildTableDrawerTwoTable(
                   //       context,
-                  //       textLeftTitle: homeThemeModeAPP ?? homeThemeModeAPP,
-                  //       // textLeftTitle: screenHomeResponse?.body?.screenInfo?.btncpass ?? homeBtnConfirmPassword,
-                  //       textRightDetail: optionsThemeMode[intThemeMode],
+                  //       textLeftTitle:
+                  //           screenHomeResponse?.body?.screenInfo?.btndelacc ??
+                  //               homeBtnDelAcc,
+                  //       textRightDetail: '',
                   //       tb1: 0.5,
                   //       tb2: 0.05,
                   //       tb3: 0.45,
@@ -247,118 +363,6 @@ drawerHome(
                   //     ),
                   //   ),
                   // ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const SettingPinLockAppScreen()));
-                    },
-                    child: Container(
-                      width: double.infinity,
-                      color: bscTransparent,
-                      padding: const EdgeInsets.only(
-                          top: 0, bottom: 10, left: 15, right: 15),
-                      child: buildTableDrawerTwoTable(
-                        context,
-                        textLeftTitle: homeBtnPINAPP ?? homeBtnPINAPP,
-                        // textLeftTitle: screenHomeResponse?.body?.screenInfo?.btncpass ?? homeBtnConfirmPassword,
-                        textRightDetail: '',
-                        tb1: 0.5,
-                        tb2: 0.05,
-                        tb3: 0.45,
-                        underline: true,
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const ChangePasswordScreen()));
-                    },
-                    child: Container(
-                      width: double.infinity,
-                      color: bscTransparent,
-                      padding: const EdgeInsets.only(
-                          top: 0, bottom: 10, left: 15, right: 15),
-                      child: buildTableDrawerTwoTable(
-                        context,
-                        textLeftTitle:
-                            screenHomeResponse?.body?.screenInfo?.btncpass ??
-                                homeBtnConfirmPassword,
-                        textRightDetail: '',
-                        tb1: 0.5,
-                        tb2: 0.05,
-                        tb3: 0.45,
-                        underline: true,
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      // context.read<HomeBloc>().add(OnClickDeleteAccountHomeEvent());
-                      dialogFiveLineTwoTextFieldTwoBtn(
-                        context,
-                        content1: textAlertDeleteAccountPassword,
-                        content2: textAlertDeleteAccountPDPA,
-                        content3: textAlertDeleteAccount,
-                        content4: textEmailSupport,
-                        content5: textPhoneSupport,
-                        btn1: screenHomeResponse?.body?.errorbutton?.buttonok ??
-                            buttonOkTH,
-                        btn2: screenHomeResponse
-                                ?.body?.errorbutton?.buttoncancel ??
-                            buttonCancelTH,
-                        isScreenTo: const PDPAMoreScreen(),
-                        textFieldOne: TextFieldPasswordCustom(
-                          textEditingController: passwordController,
-                          onChanged: (value) {
-                            passwordController.text = value;
-                          },
-                          hintLabel: textPassword,
-                          textInputType: TextInputType.text,
-                          initialvalue: passwordController.text,
-                          iconsFile: Icons.lock,
-                        ),
-                        onClickBtn: (String result) {
-                          Navigator.of(context).pop();
-                          switch (result) {
-                            case 'Cancel':
-                              {
-                                break;
-                              }
-                            case 'OK':
-                              {
-                                context.read<HomeBloc>().add(
-                                    OnClickConfirmDeleteAccountHomeEvent(
-                                        password: passwordController.text));
-                              }
-                          }
-                        },
-                      );
-                    },
-                    child: Container(
-                      width: double.infinity,
-                      color: bscTransparent,
-                      padding: const EdgeInsets.only(
-                          top: 0, bottom: 10, left: 15, right: 15),
-                      child: buildTableDrawerTwoTable(
-                        context,
-                        textLeftTitle:
-                            screenHomeResponse?.body?.screenInfo?.btndelacc ??
-                                homeBtnDelAcc,
-                        textRightDetail: '',
-                        tb1: 0.5,
-                        tb2: 0.05,
-                        tb3: 0.45,
-                        underline: true,
-                      ),
-                    ),
-                  ),
                   Container(
                     width: double.infinity,
                     color: bscTransparent,
@@ -380,48 +384,47 @@ drawerHome(
                   const SizedBox(
                     height: 20,
                   ),
-                  Container(
-                    width: double.infinity,
-                    margin: const EdgeInsets.only(left: 15, right: 15),
-                    child: buttonIconsText(
-                      onPressed: () {
-                        dialogOneLineTwoBtnWarning(
-                            context,
-                            "$textAlertLogout ",
-                            screenHomeResponse?.body?.errorbutton?.buttonok ??
-                                buttonOkTH,
-                            screenHomeResponse
-                                    ?.body?.errorbutton?.buttoncancel ??
-                                buttonCancelTH, onClickBtn: (String result) {
-                          Navigator.of(context).pop();
-                          switch (result) {
-                            case 'Cancel':
-                              {
-                                break;
-                              }
-                            case 'OK':
-                              {
-                                context
-                                    .read<HomeBloc>()
-                                    .add(OnClickConfirmLogoutHomeEvent());
-                              }
-                          }
-                        });
-                      },
-                      label: screenHomeResponse?.body?.screenInfo?.btnlogout ??
-                          homeBtnLogout,
-                      colortext: bcButtonLogout,
-                      colorbutton: Theme.of(context).backgroundColor,
-                      sizetext: sizeTextBig20,
-                      colorborder: bcButtonLogout,
-                      iconlabel: Icons.exit_to_app,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+
                 ]),
               ),
+            ),
+          ),
+          Container(
+            color: Theme.of(context).scaffoldBackgroundColor,
+            width: double.infinity,
+            margin: const EdgeInsets.only(left: 15, right: 15),
+            child: buttonIconsText(
+              onPressed: () {
+                dialogOneLineTwoBtnWarning(
+                    context,
+                    "$textAlertLogout ",
+                    screenHomeResponse?.body?.errorbutton?.buttonok ??
+                        buttonOkTH,
+                    screenHomeResponse
+                        ?.body?.errorbutton?.buttoncancel ??
+                        buttonCancelTH, onClickBtn: (String result) {
+                  Navigator.of(context).pop();
+                  switch (result) {
+                    case 'Cancel':
+                      {
+                        break;
+                      }
+                    case 'OK':
+                      {
+                        context
+                            .read<HomeBloc>()
+                            .add(OnClickConfirmLogoutHomeEvent());
+                      }
+                  }
+                });
+              },
+              label: screenHomeResponse?.body?.screenInfo?.btnlogout ??
+                  homeBtnLogout,
+              colortext: bcButtonLogout,
+              colorbutton: Theme.of(context).backgroundColor,
+              sizetext: sizeTextSmall16,
+              colorborder: bcButtonLogout,
+              iconlabel: Icons.exit_to_app,
             ),
           ),
           Container(
@@ -429,7 +432,7 @@ drawerHome(
               color: Theme.of(context).scaffoldBackgroundColor,
               child: Center(
                 child: Padding(
-                  padding: const EdgeInsets.only(bottom: 5, top: 5),
+                  padding: const EdgeInsets.only(bottom: 5, top: 1),
                   child: Text(
                     "EZ@ ${screenProfileResponse?.body?.profileGeneralInfo?.nickname ?? '-'}",
                     style: TextStyle(

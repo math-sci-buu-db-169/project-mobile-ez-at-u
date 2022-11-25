@@ -1,3 +1,4 @@
+import 'package:ez_at_u/module/home/screen/home_widget/setting_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -258,8 +259,11 @@ pinLockAppBody(
           elevation: 0,
           leading: IconButton(
             onPressed: () {
-              // Navigator.pop(context);
-              Navigator.of(context).popUntil((route) => route.isFirst);
+              Navigator.pop(context);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>  const SettingScreen( )));
             },
             icon:  Icon(
               Icons.arrow_back,

@@ -27,6 +27,15 @@ class ScreenInfoHomeSuccessState extends HomeState {
     // required this.responseNoActivity
   });
 }
+class ScreenInfoHomeSettingSuccessState extends HomeState {
+  ScreenHomeResponse responseScreenInfoHome;
+  ApiProfileResponse responseProfile;
+  ScreenInfoHomeSettingSuccessState({
+    required this.responseScreenInfoHome,
+    required this.responseProfile,
+    // required this.responseNoActivity
+  });
+}
 
 class ScreenInfoHomeNoActivitySuccessState extends HomeState {
   ScreenHomeResponse responseScreenInfoHome;

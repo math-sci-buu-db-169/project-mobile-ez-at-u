@@ -10,7 +10,7 @@ changLanguage(
   required String textRightDetail,
   required tb1,
   required tb2,
-  required tb3,
+  required tb3, required Icon leftIcon,
 }) {
   return Table(
     border: TableBorder.symmetric(
@@ -18,21 +18,24 @@ changLanguage(
     columnWidths: {
       0: FractionColumnWidth(tb1),
       1: FractionColumnWidth(tb2),
-      2: FractionColumnWidth(tb3)
+      2: FractionColumnWidth(tb3),
     },
     defaultVerticalAlignment: TableCellVerticalAlignment.middle,
     children: [
       TableRow(children: [
-        Text(
-          textLeftTitle,
-          textAlign: TextAlign.start,
-          style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor,
-              fontSize: sizeTextSmaller14,
-              decoration: TextDecoration.underline,
-              fontWeight: FontWeight.bold),
+        leftIcon,
+        Padding(padding: const EdgeInsets.only(left:5),
+          child:  Text(
+            textLeftTitle,
+            textAlign: TextAlign.start,
+            style: TextStyle(
+                color: Theme.of(context).bottomAppBarColor,
+                fontSize: sizeTextSmaller14,
+                decoration: TextDecoration.underline,
+                fontWeight: FontWeight.bold),
+          ),
         ),
-        const SizedBox(),
+
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -92,7 +95,7 @@ changModeTheme(
   required String textRightDetail,
   required tb1,
   required tb2,
-  required tb3,
+  required tb3,required Icon leftIcon,
 }) {
   return Table(
     border: TableBorder.symmetric(
@@ -105,16 +108,19 @@ changModeTheme(
     defaultVerticalAlignment: TableCellVerticalAlignment.middle,
     children: [
       TableRow(children: [
-        Text(
-          textLeftTitle,
-          textAlign: TextAlign.start,
-          style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor,
-              fontSize: sizeTextSmaller14,
-              decoration: TextDecoration.underline,
-              fontWeight: FontWeight.bold),
+        leftIcon,
+        Padding(padding: const EdgeInsets.only(left:5),
+          child: Text(
+            textLeftTitle,
+            textAlign: TextAlign.start,
+            style: TextStyle(
+                color: Theme.of(context).bottomAppBarColor,
+                fontSize: sizeTextSmaller14,
+                decoration: TextDecoration.underline,
+                fontWeight: FontWeight.bold),
+          ),
         ),
-        const SizedBox(),
+
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
