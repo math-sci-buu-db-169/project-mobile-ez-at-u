@@ -52,12 +52,6 @@ class EditActivityScreenInfoSuccessState extends ActivityState {
 
   EditActivityScreenInfoSuccessState({required this.response});
 }
-
-// class SubmitAddEditActivityState extends ActivityState {
-//   AddEditResponse responseAddEdit;
-//
-//   SubmitAddEditActivityState({required this.responseAddEdit});
-// }
 class SubmitAddEditActivityState extends ActivityState {
   AddEditResponse responseAddEdit;
 
@@ -75,16 +69,13 @@ class SubmitAddEditActivityEndLoadingState extends ActivityState {}
 
 class SubmitAddEditActivityError extends ActivityState {
   String message;
-
   SubmitAddEditActivityError({required this.message});
 }
-
 class SubmitDeleteActivityState extends ActivityState {
   DeleteResponse responseDelete;
 
   SubmitDeleteActivityState({required this.responseDelete});
 }
-
 class DefaultState extends ActivityState {}
 class RefreshTokenSuccessState extends ActivityState{
   String? token;
@@ -94,7 +85,6 @@ class RefreshTokenSuccessState extends ActivityState{
     required this.refreshToken,
   });
 }
-
 class TokenExpiredState extends ActivityState{
   String message;
   RefreshTokenResponse checkrefreshtokenmessage;
@@ -102,3 +92,8 @@ class TokenExpiredState extends ActivityState{
     required this.message,
     required this.checkrefreshtokenmessage,
   });}
+class ApproveActivityScreenInfoSuccessState extends ActivityState {
+  ApproveActivityTeacherScreen response;
+
+  ApproveActivityScreenInfoSuccessState({required this.response});
+}

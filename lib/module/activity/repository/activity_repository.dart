@@ -4,15 +4,6 @@ import 'package:ez_at_u/utils/dio.dart';
 import 'package:flutter/foundation.dart';
 
 class ActivityRepository  {
-  // Future<Response> getScreenActivity() async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   String? globalKey = prefs.getString("globalKey");
-  //   return await MyDio.createDioTest().post("/v1/api/modules/activity/wording/add_edit_activity",
-  //   data: jsonEncode({
-  //     "token": globalKey
-  //   })
-  //   );
-  // }
   Future<Response> getScreenActivity() async {
     return await MyDio.createDioServer().post("/activity/addeditactivityscreen",
     data: jsonEncode({
@@ -20,6 +11,14 @@ class ActivityRepository  {
     })
     );
   }
+  Future<Response> getScreenApproveActivityTeacher() async {
+    return await MyDio.createDioServer().post("/activity/activitylistteacher",
+    data: jsonEncode({
+
+    })
+    );
+  }
+  //----------------------------------------------------------------------------
   Future<Response> submitAddEditActivity(
       int id,
       String activityName,
@@ -50,6 +49,20 @@ class ActivityRepository  {
     })
     );
   }
+  //----------------------------------------------------------------------------
+  Future<Response> SubmitApproveActivityTeacherEvent(
+      int activityid,
+      String status,
+      ) async {
+    return await MyDio.createDioServer().post("/activity/submitaddeditactivity",
+        data: jsonEncode({
+          "activityid": activityid,
+          "status": status,
+        })
+    );
+  }
+  //----------------------------------------------------------------------------
+
   Future<Response> submitDeleteActivity(
       int id,
       ) async {
@@ -63,10 +76,6 @@ class ActivityRepository  {
     })
     );
   }
-
-// Future<Response> getScreenForgotPassword2() async {
-//   return await MyDio.createDio().post("/v1/api/modules/login/wording/forgotpassword");
-// }
 
   Future<Response> getRefreshToken({required String refreshToken}) async {
     return await MyDio.createDioServer().post("/login/refresh/token",
