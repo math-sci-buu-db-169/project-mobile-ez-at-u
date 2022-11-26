@@ -90,7 +90,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> with LoginRepository {
       try {
         emit(LoginLoading());
         Response responseLoginSubmit = await getSubmitLogin(event.userID, event.password);
-        emit(LoginEndLoading());
         if (responseLoginSubmit.statusCode == 200) {
           SubmitLoginResponse submitLoginResponse = SubmitLoginResponse.fromJson(responseLoginSubmit.data);
           if (submitLoginResponse.head?.status == 200) {
@@ -133,14 +132,19 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> with LoginRepository {
               isRole: submitLoginResponse.body?.role ?? "TC",
               userLanguage: submitLoginResponse.body?.language ?? "TH",
             );
+
+            emit(LoginEndLoading());
             emit(SubmitLoginState(responseSubmitLoginScreen: submitLoginResponse));
           } else {
+            emit(LoginEndLoading());
             emit(LoginError(message: submitLoginResponse.head?.message ?? ""));
           }
         } else {
+          emit(LoginEndLoading());
           emit(LoginError(message: responseLoginSubmit.statusMessage ?? ""));
         }
       } on DioError catch (e) {
+        emit(LoginEndLoading());
         emit(LoginError(message: e.response?.statusMessage ?? ""));
       }
     });

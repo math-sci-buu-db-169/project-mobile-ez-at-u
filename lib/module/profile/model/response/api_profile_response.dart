@@ -662,11 +662,12 @@ class ProfileGeneralInfo {
     String? nickname,
     String? generation,
     String? genname,
+    dynamic position,
     String? gencolor,
     String? branchname,
     String? facultyname,
     String? department,
-    dynamic studentid,
+    String? studentid,
     String? email,
     String? langeuage,
     String? role,
@@ -677,6 +678,7 @@ class ProfileGeneralInfo {
     _nickname = nickname;
     _generation = generation;
     _genname = genname;
+    _position = position;
     _gencolor = gencolor;
     _branchname = branchname;
     _facultyname = facultyname;
@@ -695,6 +697,7 @@ class ProfileGeneralInfo {
     _nickname = json['nickname'];
     _generation = json['generation'];
     _genname = json['genname'];
+    _position = json['position'];
     _gencolor = json['gencolor'];
     _branchname = json['branchname'];
     _facultyname = json['facultyname'];
@@ -711,11 +714,12 @@ class ProfileGeneralInfo {
   String? _nickname;
   String? _generation;
   String? _genname;
+  dynamic _position;
   String? _gencolor;
   String? _branchname;
   String? _facultyname;
   String? _department;
-  dynamic _studentid;
+  String? _studentid;
   String? _email;
   String? _langeuage;
   String? _role;
@@ -726,11 +730,12 @@ class ProfileGeneralInfo {
     String? nickname,
     String? generation,
     String? genname,
+    dynamic position,
     String? gencolor,
     String? branchname,
     String? facultyname,
     String? department,
-    dynamic studentid,
+    String? studentid,
     String? email,
     String? langeuage,
     String? role,
@@ -741,6 +746,7 @@ class ProfileGeneralInfo {
     nickname: nickname ?? _nickname,
     generation: generation ?? _generation,
     genname: genname ?? _genname,
+    position: position ?? _position,
     gencolor: gencolor ?? _gencolor,
     branchname: branchname ?? _branchname,
     facultyname: facultyname ?? _facultyname,
@@ -757,11 +763,12 @@ class ProfileGeneralInfo {
   String? get nickname => _nickname;
   String? get generation => _generation;
   String? get genname => _genname;
+  dynamic get position => _position;
   String? get gencolor => _gencolor;
   String? get branchname => _branchname;
   String? get facultyname => _facultyname;
   String? get department => _department;
-  dynamic get studentid => _studentid;
+  String? get studentid => _studentid;
   String? get email => _email;
   String? get langeuage => _langeuage;
   String? get role => _role;
@@ -775,6 +782,7 @@ class ProfileGeneralInfo {
     map['nickname'] = _nickname;
     map['generation'] = _generation;
     map['genname'] = _genname;
+    map['position'] = _position;
     map['gencolor'] = _gencolor;
     map['branchname'] = _branchname;
     map['facultyname'] = _facultyname;

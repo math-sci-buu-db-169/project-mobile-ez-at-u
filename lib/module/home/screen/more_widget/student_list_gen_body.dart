@@ -75,8 +75,11 @@ studentListGenBody(BuildContext context, ScreenMoreListNameGenResponse? screenMo
                     iconsFile : Icons.search,
 
                   ),
-
-                  Container(
+                  screenMoreListNameGenResponse?.body?.userGen?.namegen.toString() == "null"
+                      ||screenMoreListNameGenResponse?.body?.userGen?.colorgen.toString() == "null"
+                      || screenMoreListNameGenResponse?.body?.userGen?.numgen.toString() == "null"?
+                  const SizedBox()
+                      :Container(
                     margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                     color: Colors.transparent,
                     child: boardItemStudentUser(

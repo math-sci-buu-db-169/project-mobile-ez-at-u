@@ -140,7 +140,7 @@ drawerHome(
                                   //         ?.body?.screenInfo?.textposition ??
                                       homeTextPosition,
                                   textRightDetail:screenProfileResponse
-                                      ?.body?.profileGeneralInfo?.rolename ??
+                                      ?.body?.profileGeneralInfo?.position ??
                                       '-',
                                   tb1: 0.45,
                                   tb2: 0.05,

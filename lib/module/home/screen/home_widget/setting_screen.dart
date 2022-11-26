@@ -261,7 +261,11 @@ class _SettingPageState extends State<SettingPage> with ProgressDialog {
                   ? true
                   : false;
 
-          return Scaffold(
+          return WillPopScope(
+              onWillPop: () async {
+                return false;
+              },
+              child:Scaffold(
             backgroundColor: Theme.of(context).backgroundColor,
             appBar: AppBar(
               backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
@@ -517,7 +521,7 @@ class _SettingPageState extends State<SettingPage> with ProgressDialog {
                 ),
               ),
             ),
-          );
+          ));
         }
         return Scaffold(
             body: Container(
