@@ -140,8 +140,9 @@ Widget confirmRegisterPageWidget(
                   Center(
                     child: ButtonCustom(
                       label: screenRegisterResponse?.body?.screeninfo?.btnconfirm ?? confirmRegisterBtnConfirm,
-                      colortext:  Theme.of(context).bottomAppBarColor,
-                      colorbutton:  Theme.of(context).scaffoldBackgroundColor,
+                      colortext:  tcButtonTextColor,
+                      // colorbutton:  Theme.of(context).scaffoldBackgroundColor,
+                      colorbutton:  Theme.of(context).buttonColor,
                       sizetext: sizeTextBig20,
                       colorborder: Theme.of(context).bottomAppBarColor.withOpacity(0.5),
                       sizeborder: 10,

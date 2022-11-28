@@ -89,16 +89,16 @@ buildContentHomeScreen(
               // Navigator.push(context, MaterialPageRoute(builder: (context) =>  NotesPage()));
             },
           ),
-          IconButton(
-            icon: FaIcon(FontAwesomeIcons.fileLines,
-                color: Theme.of(context).iconTheme.color, size: 20),
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const CheckTokenScreen()));
-            },
-          ),
+          // IconButton(
+          //   icon: FaIcon(FontAwesomeIcons.fileLines,
+          //       color: Theme.of(context).iconTheme.color, size: 20),
+          //   onPressed: () {
+          //     Navigator.push(
+          //         context,
+          //         MaterialPageRoute(
+          //             builder: (context) => const CheckTokenScreen()));
+          //   },
+          // ),
           // IconButton(
           //   icon: const FaIcon(FontAwesomeIcons.qrcode,color: tcBlack, size: 20),
           //   onPressed: () {
@@ -130,7 +130,8 @@ buildContentHomeScreen(
                           color: Theme.of(context).iconTheme.color,
                           size: 20.0,
                         ),
-                        colortext: Theme.of(context).bottomAppBarColor,
+                        // colortext: Theme.of(context).bottomAppBarColor,
+                        colortext:  Theme.of(context).bottomAppBarColor,
                         colorbutton: Theme.of(context).scaffoldBackgroundColor,
                         sizetext: 14,
                         colorborder: Theme.of(context).scaffoldBackgroundColor,

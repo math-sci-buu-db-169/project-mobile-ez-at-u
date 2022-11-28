@@ -47,7 +47,7 @@ class _TextFieldPasswordCustomState extends State<TextFieldPasswordCustom> {
           obscureText: !_isVisible,
           decoration: InputDecoration(
               filled: true,
-              fillColor:  Theme.of(context).scaffoldBackgroundColor,
+              fillColor:   Theme.of(context).primaryColor == Colors.black ?fillColorDark:fillColorLight,
               hintText: widget.hintLabel,
               prefixIcon: Icon(
                 widget.iconsFile,
@@ -60,17 +60,17 @@ class _TextFieldPasswordCustomState extends State<TextFieldPasswordCustom> {
                     });
                   },
                   icon: _isVisible
-                      ?  Icon(FontAwesomeIcons.eye,size:20, color:Theme.of(context).iconTheme.color)
-                      :  Icon(FontAwesomeIcons.eyeSlash,size:20,
+                      ?  Icon(FontAwesomeIcons.eye,size:15, color:Theme.of(context).iconTheme.color)
+                      :  Icon(FontAwesomeIcons.eyeSlash,size:15,
                           color: Theme.of(context).iconTheme.color)),
               enabledBorder:  OutlineInputBorder(
-                borderSide: BorderSide(color:Theme.of(context).bottomAppBarColor ),
-                borderRadius: const BorderRadius.all(Radius.circular(30)),
+                borderSide: BorderSide(color: Colors.transparent),
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
               ),
               contentPadding: const EdgeInsets.all(10),
-              focusedBorder:  const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(30)),
-                borderSide: BorderSide(color:  Colors.yellowAccent, width: 2.0),
+              focusedBorder:   OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                borderSide: BorderSide(color: Theme.of(context).bottomAppBarColor, width: 2.0),
               )),
         ));
   }

@@ -26,7 +26,6 @@ class ButtonCustom extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ButtonStyle(
-
           elevation: MaterialStateProperty.all(sizeborder), //Defines Elevation
           // shadowColor: MaterialStateProperty.all(Colors.black), //Defines Shadow Color
           backgroundColor: MaterialStateProperty.all<Color>(colorbutton),
@@ -35,11 +34,13 @@ class ButtonCustom extends StatelessWidget {
             borderRadius: BorderRadius.circular(50.0),
             side: BorderSide(color: colorborder, width: 2),
           ))),
-      child:Padding(
-        padding: const EdgeInsets.only(left: 30.0, right:30.0),
-        child:  Text(
-          label,
-          style: TextStyle(fontSize: sizetext, color: colortext, fontWeight: FontWeight.w600),
+      child:SizedBox(
+        width: MediaQuery.of(context).size.width-50,
+        child:  Center(
+          child: Text(
+            label,
+            style: TextStyle(fontSize: sizetext, color: colortext, fontWeight: FontWeight.w600),
+          ),
         ),
       ),
 

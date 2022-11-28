@@ -156,11 +156,11 @@ class _TextTextFieldSearchCustomState extends State<TextFieldSearchGenBUUCustom>
               //         size: 20, color: Color(0xFF4F4F4F))),
               enabledBorder:  OutlineInputBorder(
                 borderSide: BorderSide(color:Theme.of(context).bottomAppBarColor ),
-                borderRadius: const BorderRadius.all(Radius.circular(30)),
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
               ),
               contentPadding: const EdgeInsets.all(10),
               focusedBorder:  const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(30)),
+                borderRadius: BorderRadius.all(Radius.circular(10)),
                 borderSide: BorderSide(color:  Colors.yellowAccent, width: 2.0),
               )),
         ));

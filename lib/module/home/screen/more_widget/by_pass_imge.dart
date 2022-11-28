@@ -159,8 +159,9 @@ class _Bypass2State extends State<Bypass2> with ProgressDialog {
                             });
                     },
                     label: 'ส่ง',
-                    colortext: tcButtonTextBlack,
-                    colorbutton: tcButtonTextWhite,
+                    colortext: tcButtonTextColor,
+                    // colorbutton:  Theme.of(context).scaffoldBackgroundColor,
+                    colorbutton:  Theme.of(context).buttonColor,
                     sizetext: sizeTextBig20,
                     colorborder: tcButtonTextBoarder,
                     sizeborder: 10,

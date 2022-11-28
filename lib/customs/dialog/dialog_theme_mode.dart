@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../../utils/shared_preferences.dart';
 import '../size/size.dart';
-
 dialogThemeMode(BuildContext context, {required List<String> optionsThemeMode,
   required Null Function(int optionSearchResult) callbackFromOptionThemeMode})
 {

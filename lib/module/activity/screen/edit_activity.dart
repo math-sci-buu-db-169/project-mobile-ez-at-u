@@ -248,28 +248,32 @@ buildEditActivityBody(
               textInputType: TextInputType.text,
               iconsFile : FontAwesomeIcons.solidPenToSquare,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                customDropdownForEdit(
-                  dropdownList: yearList ?? <String>[],
-                  hint: 'Year',
-                  width: MediaQuery.of(context).size.width * 0.4,
-                  dropdownValue: yearValue,
-                  callbackFromCustomDropdownForEdit: (String result) {
-                    year.text = result;
-                  },
-                ),
-                customDropdownForEdit(
-                    dropdownList: termList ?? <String>[],
-                    hint: 'Term',
-                    width: MediaQuery.of(context).size.width * 0.4,
-                    dropdownValue: termValue,
+            Padding(
+              padding: const EdgeInsets.only(top: 10,bottom: 10,left: 10,right: 10),
+              child:  Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  customDropdownForEdit(
+                    dropdownList: yearList ?? <String>[],
+                    hint: 'Year',
+                    width: MediaQuery.of(context).size.width * 0.44,
+                    dropdownValue: yearValue,
                     callbackFromCustomDropdownForEdit: (String result) {
-                      term.text = result;
-                    }),
-              ],
+                      year.text = result;
+                    },
+                  ),
+                  customDropdownForEdit(
+                      dropdownList: termList ?? <String>[],
+                      hint: 'Term',
+                      width: MediaQuery.of(context).size.width * 0.44,
+                      dropdownValue: termValue,
+                      callbackFromCustomDropdownForEdit: (String result) {
+                        term.text = result;
+                      }),
+                ],
+              ),
             ),
+
             customDatePickerForEdit(
               hintLabel: addActivityScreenApi?.body?.screeninfo?.edtstartdate??activityEdtStartDate,
               dateValue: sDateValue,

@@ -39,17 +39,16 @@ class BuildTextformfieldUnlimitCustom extends StatelessWidget {
           decoration: InputDecoration(
             prefixIcon: Icon(iconsFile, color: appBarforegroundColor,),
               filled: true,
-              fillColor: Theme.of(context).scaffoldBackgroundColor,
+              fillColor: Theme.of(context).primaryColor == Colors.black ?fillColorDark:fillColorLight,
               hintText: " $hintLabel",
-              hintStyle: TextStyle(color: appBarforegroundColor.withOpacity(0.5)),
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: appBarforegroundColor.withOpacity(0.5)),
-                borderRadius: BorderRadius.all(Radius.circular(30)),
+              enabledBorder:   OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.transparent ),
+                borderRadius:const BorderRadius.all(Radius.circular(10)),
               ),
-              contentPadding: const EdgeInsets.all(10),
-              focusedBorder: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(30)),
-                borderSide: BorderSide(color: fcBlue, width: 2.0),
+              contentPadding:  const EdgeInsets.all(10),
+              focusedBorder:   OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                borderSide: BorderSide(color:  Theme.of(context).bottomAppBarColor, width: 2.0),
               )),
         ));
   }

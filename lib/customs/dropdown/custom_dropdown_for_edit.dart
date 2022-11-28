@@ -36,11 +36,13 @@ class _customDropdownForEditState extends State<customDropdownForEdit> {
     // print(dropdownValue);
     Color? appBarforegroundColor = Theme.of(context).appBarTheme.foregroundColor??Colors.black;
     return Container(
+      // height: 50,
       decoration: BoxDecoration(
-        border: Border.all(color: appBarforegroundColor.withOpacity(0.5)),
-        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: Theme.of(context).primaryColor == Colors.black ?fillColorDark:fillColorLight),
+        borderRadius: BorderRadius.circular(10.0),
+        color:  Theme.of(context).primaryColor == Colors.black ?fillColorDark:fillColorLight,
       ),
-      margin: const EdgeInsets.all(15),
+      margin: const EdgeInsets.only(top: 0 ,bottom: 0),
       child: SizedBox(
         width: widget.width,
         child:

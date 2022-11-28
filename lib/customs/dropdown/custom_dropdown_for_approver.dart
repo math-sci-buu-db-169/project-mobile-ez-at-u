@@ -1,6 +1,8 @@
 import 'package:ez_at_u/customs/size/size.dart';
 import 'package:flutter/material.dart';
 
+import '../color/color_const.dart';
+
 class CustomDropdownApprover extends StatefulWidget {
   final String hint;
   final List<dynamic> dropdownList;
@@ -41,10 +43,10 @@ class _CustomDropdownApproverState extends State<CustomDropdownApprover> {
     // print(dropdownValue);
     Color? appBarforegroundColor = Theme.of(context).appBarTheme.foregroundColor??Colors.black;
     return Container(
-      // height: 50,
       decoration: BoxDecoration(
-        border: Border.all(color: appBarforegroundColor.withOpacity(0.5)),
-            borderRadius: BorderRadius.circular(30),
+        border: Border.all(color:  Theme.of(context).primaryColor == Colors.black ?fillColorDark:fillColorLight,),
+            borderRadius: BorderRadius.circular(10),
+        color:  Theme.of(context).primaryColor == Colors.black ?fillColorDark:fillColorLight,
       ),
       margin: const EdgeInsets.all(15),
       child: SizedBox(

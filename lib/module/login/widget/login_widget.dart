@@ -46,13 +46,13 @@ loginPageWidget(BuildContext context, ScreenLoginResponse? screenLoginResponse, 
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           TextButton.icon(
-                            icon: const Icon(
+                            icon:  Icon(
                               FontAwesomeIcons.earthAsia,
-                              color: Colors.black,
+                              color: Theme.of(context).iconTheme.color,
                               size: 18,),
                             label: Text(screenLoginResponse?.body?.screeninfo?.btnChangeLang ?? loginBtnChangeLanguage,
-                                style: const TextStyle(
-                                    color: Colors.black, fontWeight: FontWeight.w600, fontSize: 14)),
+                                style:  TextStyle(
+                                    color: Theme.of(context).bottomAppBarColor, fontWeight: FontWeight.w600, fontSize: 14)),
                             onPressed: () {isHandleClickBtnLanguageView();},
                           ),
                           IconButton(
@@ -164,8 +164,9 @@ loginPageWidget(BuildContext context, ScreenLoginResponse? screenLoginResponse, 
                               .add(LoginSubmitEvent(userID: userController.text, password: passwordController.text));
                         },
                         label: screenLoginResponse?.body?.screeninfo?.btnLogin ?? loginBtnLogin,
-                        colortext:  Theme.of(context).bottomAppBarColor,
-                        colorbutton:  Theme.of(context).scaffoldBackgroundColor,
+                        colortext:  tcButtonTextColor,
+                        // colorbutton:  Theme.of(context).scaffoldBackgroundColor,
+                        colorbutton:  Theme.of(context).buttonColor,
                         sizetext: sizeTextBig20,
                         colorborder: Theme.of(context).bottomAppBarColor.withOpacity(0.5),
                         sizeborder: 10,

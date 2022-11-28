@@ -44,7 +44,7 @@ pDPAScreenWidget(BuildContext context, ScreenPDPAResponse? screenPDPAResponse) {
                     Expanded(
                         child: ButtonCustom(
                       label: screenPDPAResponse?.body?.screeninfo?.btnaccept ?? pDPABtnAccept,
-                      colortext: tcButtonTextBlack,
+                      colortext: tcButtonTextColor,
                       colorbutton: tcButtonTextWhite,
                       sizetext: sizeTextBig20,
                       colorborder: tcButtonTextBoarder,

@@ -78,7 +78,7 @@ mPDPAMoreWidget(BuildContext context, ScreenMorePDPAResponse? screenHomeMorePDPA
                             Expanded(
                                 child: ButtonCustom(
                               label: screenHomeMorePDPAResponse?.body?.screeninfo?.btnaccept ?? pDPABtnAccept,
-                              colortext: tcButtonTextBlack,
+                              colortext: tcButtonTextColor,
                               colorbutton: tcButtonTextWhite,
                               sizetext: sizeTextBig20,
                               colorborder: tcButtonTextBoarder,
@@ -93,7 +93,7 @@ mPDPAMoreWidget(BuildContext context, ScreenMorePDPAResponse? screenHomeMorePDPA
                             Expanded(
                                 child: ButtonCustom(
                               label: screenHomeMorePDPAResponse?.body?.screeninfo?.btndecline ?? pDPABtnDecline,
-                              colortext: tcButtonTextWhite,
+                              colortext: tcButtonTextColor,
                               colorbutton: tcButtonTextRed,
                               sizetext: sizeTextBig20,
                               colorborder: tcButtonTextRedBoarder,

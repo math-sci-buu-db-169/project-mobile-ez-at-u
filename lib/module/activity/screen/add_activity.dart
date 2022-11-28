@@ -25,8 +25,7 @@ class AddActivityScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          ActivityBloc()..add(AddActivityScreenInfoEvent()),
+      create: (context) => ActivityBloc()..add(AddActivityScreenInfoEvent()),
       child: const AddActivityPage(),
     );
   }
@@ -54,12 +53,13 @@ class _AddActivityPageState extends State<AddActivityPage> with ProgressDialog {
   DateTime date = DateTime.now();
   late String? dateFormated;
   @override
-  void initState(){
+  void initState() {
     dateFormated = DateFormat('d/M/y').format(date);
     sDate.text = dateFormated.toString();
     fDate.text = dateFormated.toString();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     // context.read<ActivityBloc>().add(AddActivityScreenInfoEvent());
@@ -85,7 +85,8 @@ class _AddActivityPageState extends State<AddActivityPage> with ProgressDialog {
           // print(state.responseAddEdit.toJson());
           // print("TEST SubmitAddEditActivityState");
           // context.read<ActivityBloc>().add(ActivityEvent());
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>const HomeScreen()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const HomeScreen()));
         }
       },
       builder: (context, state) {
@@ -137,8 +138,10 @@ buildAddActivityBody(
   List<String>? termList = addActivityScreenApi?.body?.termlist;
   // List<String>? approverList = addActivityScreenApi?.body?.approverlist;
   var approverArray = addActivityScreenApi?.body?.approverlist ?? [];
-  Color? appBarBackgroundColor = Theme.of(context).appBarTheme.backgroundColor??Colors.white;
-  Color? appBarforegroundColor = Theme.of(context).appBarTheme.foregroundColor??Colors.black;
+  Color? appBarBackgroundColor =
+      Theme.of(context).appBarTheme.backgroundColor ?? Colors.white;
+  Color? appBarforegroundColor =
+      Theme.of(context).appBarTheme.foregroundColor ?? Colors.black;
   return Scaffold(
     appBar: AppBar(
       backgroundColor: appBarBackgroundColor,
@@ -154,7 +157,8 @@ buildAddActivityBody(
         ),
       ),
       title: Text(
-        addActivityScreenApi?.body?.screeninfo?.titleaddact??activityTitleAddAct,
+        addActivityScreenApi?.body?.screeninfo?.titleaddact ??
+            activityTitleAddAct,
         style: TextStyle(
           color: appBarforegroundColor,
           fontSize: sizeTitle24,
@@ -177,41 +181,48 @@ buildAddActivityBody(
                   print(activityName.text);
                 }
               },
-              hintLabel:
-                  addActivityScreenApi?.body?.screeninfo?.edtactname??activityEdtActName,
+              hintLabel: addActivityScreenApi?.body?.screeninfo?.edtactname ??
+                  activityEdtActName,
               textInputType: TextInputType.text,
               // iconsFile : Icons.person_rounded,
-              iconsFile : FontAwesomeIcons.solidPenToSquare,
+              iconsFile: FontAwesomeIcons.solidPenToSquare,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                customDropdown(
-                  dropdownList: yearList ?? <String>[],
-                  hint: addActivityScreenApi?.body?.screeninfo?.edtyear??activityEdtYear,
-                  width: MediaQuery.of(context).size.width * 0.4,
-                  callbackFromCustomDropdown: (String result) {
-                    year.text = result;
-                    if (kDebugMode) {
-                      print(year.text);
-                    }
-                  },
-                ),
-                customDropdown(
-                  dropdownList: termList ?? <String>[],
-                  hint: addActivityScreenApi?.body?.screeninfo?.edtterm??activityEdtTerm,
-                  width: MediaQuery.of(context).size.width * 0.4,
-                  callbackFromCustomDropdown: (String result) {
-                    term.text = result;
-                    if (kDebugMode) {
-                      print(term.text);
-                    }
-                  },
-                ),
-              ],
+
+            Padding(
+              padding: const EdgeInsets.only(top: 10,bottom: 10,left: 10,right: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  customDropdown(
+                    dropdownList: yearList ?? <String>[],
+                    hint: addActivityScreenApi?.body?.screeninfo?.edtyear ??
+                        activityEdtYear,
+                    width: MediaQuery.of(context).size.width * 0.44,
+                    callbackFromCustomDropdown: (String result) {
+                      year.text = result;
+                      if (kDebugMode) {
+                        print(year.text);
+                      }
+                    },
+                  ),
+                  customDropdown(
+                    dropdownList: termList ?? <String>[],
+                    hint: addActivityScreenApi?.body?.screeninfo?.edtterm ??
+                        activityEdtTerm,
+                    width: MediaQuery.of(context).size.width * 0.44,
+                    callbackFromCustomDropdown: (String result) {
+                      term.text = result;
+                      if (kDebugMode) {
+                        print(term.text);
+                      }
+                    },
+                  ),
+                ],
+              ),
             ),
             CustomDatePicker(
-              hintLabel: addActivityScreenApi?.body?.screeninfo?.edtstartdate??activityEdtStartDate,
+              hintLabel: addActivityScreenApi?.body?.screeninfo?.edtstartdate ??
+                  activityEdtStartDate,
               callbackFromCustomDatePicker: (String result) {
                 sDate.text = result;
                 if (kDebugMode) {
@@ -220,7 +231,9 @@ buildAddActivityBody(
               },
             ),
             CustomDatePicker(
-              hintLabel: addActivityScreenApi?.body?.screeninfo?.edtfinishdate??activityEdtFinishDate,
+              hintLabel:
+                  addActivityScreenApi?.body?.screeninfo?.edtfinishdate ??
+                      activityEdtFinishDate,
               callbackFromCustomDatePicker: (String result) {
                 fDate.text = result;
                 if (kDebugMode) {
@@ -242,7 +255,7 @@ buildAddActivityBody(
               onChanged: (value) {
                 if (value.length == 1) {
                   totalTimeHours.text = "0$value";
-                }else{
+                } else {
                   totalTimeHours.text = value;
                 }
                 // totalTimeHours.text = value;
@@ -250,16 +263,17 @@ buildAddActivityBody(
                   print("Hours == ${totalTimeHours.text}");
                 }
               },
-              hintLabel: addActivityScreenApi?.body?.screeninfo?.edttimehours??activityEdtTimeHours,
+              hintLabel: addActivityScreenApi?.body?.screeninfo?.edttimehours ??
+                  activityEdtTimeHours,
               textInputType: TextInputType.number,
-              iconsFile : FontAwesomeIcons.solidClock,
+              iconsFile: FontAwesomeIcons.solidClock,
             ),
             TextFieldCustom(
               textEditingController: totalTimeMinutes,
               onChanged: (value) {
                 if (value.length == 1) {
                   totalTimeMinutes.text = "0$value";
-                }else{
+                } else {
                   totalTimeMinutes.text = value;
                 }
                 // totalTimeMinutes.text = value;
@@ -267,9 +281,11 @@ buildAddActivityBody(
                   print("Minutes == ${totalTimeMinutes.text}");
                 }
               },
-              hintLabel: addActivityScreenApi?.body?.screeninfo?.edttimeminutes??activityEdtTimeMinutes,
+              hintLabel:
+                  addActivityScreenApi?.body?.screeninfo?.edttimeminutes ??
+                      activityEdtTimeMinutes,
               textInputType: TextInputType.number,
-              iconsFile : FontAwesomeIcons.clock,
+              iconsFile: FontAwesomeIcons.clock,
             ),
 
             // TextFieldCustom(
@@ -293,17 +309,18 @@ buildAddActivityBody(
                   print(venue.text);
                 }
               },
-              hintLabel:
-              addActivityScreenApi?.body?.screeninfo?.edtvenue??activityEdtVenue,
+              hintLabel: addActivityScreenApi?.body?.screeninfo?.edtvenue ??
+                  activityEdtVenue,
               textInputType: TextInputType.text,
-              iconsFile : FontAwesomeIcons.mapLocation,
+              iconsFile: FontAwesomeIcons.mapLocation,
             ),
 
             CustomDropdownApprover(
               iconsFile: FontAwesomeIcons.userGroup,
               width: MediaQuery.of(context).size.width,
               dropdownList: approverArray,
-              hint: addActivityScreenApi?.body?.screeninfo?.edtapprover??activityEdtApprover,
+              hint: addActivityScreenApi?.body?.screeninfo?.edtapprover ??
+                  activityEdtApprover,
               callbackFromCustomDropdown: (String result) {
                 approver.text = result;
                 if (kDebugMode) {
@@ -319,8 +336,8 @@ buildAddActivityBody(
                   print(detail.text);
                 }
               },
-              hintLabel:
-                  addActivityScreenApi?.body?.screeninfo?.edtdetail??activityEdtDetail,
+              hintLabel: addActivityScreenApi?.body?.screeninfo?.edtdetail ??
+                  activityEdtDetail,
               textInputType: TextInputType.text,
               iconsFile: FontAwesomeIcons.circleInfo,
             ),
@@ -329,7 +346,8 @@ buildAddActivityBody(
             ),
             Center(
               child: ButtonCustom(
-                label: addActivityScreenApi?.body?.screeninfo?.btnconfirm??activityBtnConfirm,
+                label: addActivityScreenApi?.body?.screeninfo?.btnconfirm ??
+                    activityBtnConfirm,
                 colortext: tcButtonTextBlack,
                 colorbutton: tcButtonTextWhite,
                 sizetext: sizeTextBig20,
@@ -360,8 +378,12 @@ buildAddActivityBody(
                         term: term.text));
                   } else {
                     dialogOneLineOneBtn(
-                        context, addActivityScreenApi?.body?.alertmessage?.alertfillallactivity??alertFillAllActivity, addActivityScreenApi?.body?.errorbutton?.buttonok??buttonOK,
-                        onClickBtn: () {
+                        context,
+                        addActivityScreenApi
+                                ?.body?.alertmessage?.alertfillallactivity ??
+                            alertFillAllActivity,
+                        addActivityScreenApi?.body?.errorbutton?.buttonok ??
+                            buttonOK, onClickBtn: () {
                       Navigator.of(context).pop();
                     });
                   }

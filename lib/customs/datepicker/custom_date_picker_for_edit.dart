@@ -29,10 +29,11 @@ class _customDatePickerForEditState extends State<customDatePickerForEdit> {
     Color? appBarforegroundColor = Theme.of(context).appBarTheme.foregroundColor??Colors.black;
     return Container(
       margin: const EdgeInsets.all(12),
-      padding: const EdgeInsets.only(left:10, right: 10),
+      padding: const EdgeInsets.only(left: 10, right: 10),
       decoration: BoxDecoration(
-        border: Border.all(color: appBarforegroundColor.withOpacity(0.5)),
-        borderRadius: BorderRadius.all(Radius.circular(30.0)),
+        border: Border.all(color: Theme.of(context).primaryColor == Colors.black ?fillColorDark:fillColorLight),
+        borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+        color:  Theme.of(context).primaryColor == Colors.black ?fillColorDark:fillColorLight,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
