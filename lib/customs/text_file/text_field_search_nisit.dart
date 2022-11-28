@@ -5,6 +5,8 @@ import 'package:ez_at_u/customs/size/size.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../module/home/model/response/more_response/screen_more_board_student_list_response.dart';
+
 class TextFieldSearchNiSitCustom extends StatefulWidget {
   final TextEditingController? textEditingController;
   // final String hintLabel;
@@ -12,7 +14,7 @@ class TextFieldSearchNiSitCustom extends StatefulWidget {
   final ValueChanged<String>? onChanged;
   final Function(int optionSearchResult) callbackFromOptionSearch;
   final String? initialvalue;
-
+  final ScreenMoreBoardStudentListResponse? screenMoreBoardStudentListResponse;
   final IconData iconsFile;
   const TextFieldSearchNiSitCustom({
     Key? key,
@@ -23,6 +25,7 @@ class TextFieldSearchNiSitCustom extends StatefulWidget {
     this.initialvalue,
     required this.iconsFile,
     required this.callbackFromOptionSearch,
+    required this.screenMoreBoardStudentListResponse,
   }) : super(key: key);
 
 
@@ -34,17 +37,20 @@ class TextFieldSearchNiSitCustom extends StatefulWidget {
 
 class _TextFieldSearchNiSitCustomState extends State<TextFieldSearchNiSitCustom> {
   bool _isVisible = false;
-  List<String> optionsNiSit =["รหัสนิสิต","ชื่อ","นามสกุล"];
-  String hintLabelSearchNiSit='';
+  // List<String> optionsNiSit =["รหัสนิสิต","ชื่อ","นามสกุล"];
+  String? hintLabelSearchNiSit='';
 
   @override
   void initState() {
-     hintLabelSearchNiSit = optionsNiSit[0] ;
+     hintLabelSearchNiSit = widget.screenMoreBoardStudentListResponse?.body?.options?[0].title.toString() ;
      setState(() {});
      super.initState();
   }
   @override
   Widget build(BuildContext context) {
+    String search = widget.screenMoreBoardStudentListResponse?.body?.screeninfo?.search?? 'ค้นหา';
+    String here = widget.screenMoreBoardStudentListResponse?.body?.screeninfo?.here?? 'ที่นี';
+
     return Container(
         // padding: EdgeInsets.all(12),
         margin: const EdgeInsets.all(12),
@@ -52,7 +58,7 @@ class _TextFieldSearchNiSitCustomState extends State<TextFieldSearchNiSitCustom>
         child: TextFormField(
           style:  TextStyle(
             fontSize: sizeText18,
-            color:  Theme.of(context).scaffoldBackgroundColor, // height: 2.0,
+            color:  Theme.of(context).appBarTheme.foregroundColor // height: 2.0,
           ),
           cursorColor: Theme.of(context).appBarTheme.foregroundColor,
           keyboardType: widget.textInputType,
@@ -64,7 +70,7 @@ class _TextFieldSearchNiSitCustomState extends State<TextFieldSearchNiSitCustom>
           decoration: InputDecoration(
               filled: true,
               fillColor:Colors.transparent,
-              hintText: 'ค้นหา $hintLabelSearchNiSit ที่นี',
+              hintText: '$search $hintLabelSearchNiSit $here',
               prefixIcon:   Icon(
                   FontAwesomeIcons.magnifyingGlass,
                 size: 20,
@@ -90,14 +96,14 @@ class _TextFieldSearchNiSitCustomState extends State<TextFieldSearchNiSitCustom>
                                     scrollDirection: Axis.vertical,
                                     child: Column(
                                       children: List.generate(
-                                          optionsNiSit.length,
+                                          widget.screenMoreBoardStudentListResponse?.body?.options?.length??0,
                                               (index) => Column(
                                             children: [
 
                                               InkWell(
                                                   onTap: () {
                                                     widget.callbackFromOptionSearch(index);
-                                                    hintLabelSearchNiSit = optionsNiSit[index].toString();
+                                                    hintLabelSearchNiSit =  widget.screenMoreBoardStudentListResponse?.body?.options?[index].title.toString();
                                                     Navigator.pop(context);
                                                     setState(() {});
                                                   },
@@ -110,7 +116,7 @@ class _TextFieldSearchNiSitCustomState extends State<TextFieldSearchNiSitCustom>
                                                       children: [
                                                         TableRow(children: [
                                                           Text(
-                                                            optionsNiSit[index].toString(),
+                                                            widget.screenMoreBoardStudentListResponse?.body?.options?[index].title.toString() ?? '',
                                                             textAlign: TextAlign.center,
                                                             style:  TextStyle(fontSize: sizeTextSmaller14,
                                                               color: Theme.of(context).bottomAppBarColor,),
@@ -120,7 +126,7 @@ class _TextFieldSearchNiSitCustomState extends State<TextFieldSearchNiSitCustom>
                                                     ),
                                                   )
                                               ),
-                                              index > 1 || index == optionsNiSit.length-1
+                                              index > 1 || index == (widget.screenMoreBoardStudentListResponse?.body?.options?.length?? 1)-1
                                                   ? const SizedBox()
                                                   : const Divider(
                                                 color: Colors.grey,

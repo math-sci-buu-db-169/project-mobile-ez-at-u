@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../../customs/message/text_board.dart';
-import '../../../../module/home/model/response/more_response/screen_more_board_teacher_response.dart';
-import '../../../../module/home/screen/more_widget/board_item_teacher.dart';
-import '../../../../module/home/screen/more_widget/more_board_staff_detail_screen.dart';
-import '../../../../module/home/screen/more_widget/more_board_teacher_detail_screen.dart';
+import '../../../../../customs/message/text_board.dart';
+import '../../../model/response/more_response/screen_more_board_teacher_response.dart';
+import 'board_item_teacher.dart';
+import 'more_board_staff_detail_screen.dart';
+import 'more_board_teacher_detail_screen.dart';
 
 buildListTeacherLeft(
   BuildContext context,

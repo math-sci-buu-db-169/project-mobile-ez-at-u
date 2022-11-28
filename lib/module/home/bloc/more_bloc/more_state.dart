@@ -173,3 +173,28 @@ class TokenExpiredState extends MoreState{
     required this.checkrefreshtokenmessage,
   });
 }
+
+class MoreRelatedLinksScreenInfoSuccessState extends MoreState {
+  RelatedLinksResponse relatedLinksResponse;
+  MoreRelatedLinksScreenInfoSuccessState({required this.relatedLinksResponse});
+}
+class MoreRelatedLinksLoading extends MoreState {}
+
+class MoreRelatedLinksEndLoading extends MoreState {}
+
+class MoreRelatedLinksError extends MoreState {
+  String message;
+  MoreRelatedLinksError({required this.message});
+}
+class MoreCoursesScreenInfoSuccessState extends MoreState {
+  CoursesScreenResponse coursesScreenResponse;
+  MoreCoursesScreenInfoSuccessState({required this.coursesScreenResponse});
+}
+class MoreCoursesLoading extends MoreState {}
+
+class MoreCoursesEndLoading extends MoreState {}
+
+class MoreCoursesError extends MoreState {
+  String message;
+  MoreCoursesError({required this.message});
+}

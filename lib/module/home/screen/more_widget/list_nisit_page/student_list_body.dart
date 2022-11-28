@@ -4,10 +4,10 @@ import 'package:ez_at_u/module/home/screen/more_widget/build_list_student.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../../../../customs/text_file/text_field_custom.dart';
-import '../../../../customs/text_file/text_field_search_nisit.dart';
-import '../../bloc/more_bloc/more_bloc.dart';
-import '../../model/response/more_response/screen_more_board_student_list_response.dart';
+import '../../../../../customs/text_file/text_field_custom.dart';
+import '../../../../../customs/text_file/text_field_search_nisit.dart';
+import '../../../bloc/more_bloc/more_bloc.dart';
+import '../../../model/response/more_response/screen_more_board_student_list_response.dart';
 
 studentListBody(
     BuildContext context, ScreenMoreBoardStudentListResponse? screenMoreBoardStudentListResponse,
@@ -50,11 +50,11 @@ studentListBody(
                 icon:  FaIcon(FontAwesomeIcons.magnifyingGlass,
                     size: 20,
                   color: Theme.of(context).bottomAppBarColor,)),
-            IconButton(
-                onPressed: () {},
-                icon:  FaIcon(FontAwesomeIcons.filter,
-                    size: 20,
-                  color: Theme.of(context).bottomAppBarColor,)),
+            // IconButton(
+            //     onPressed: () {},
+            //     icon:  FaIcon(FontAwesomeIcons.filter,
+            //         size: 20,
+            //       color: Theme.of(context).bottomAppBarColor,)),
           ],
         ),
         body: SafeArea(
@@ -67,6 +67,7 @@ studentListBody(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     TextFieldSearchNiSitCustom(
+                      screenMoreBoardStudentListResponse:screenMoreBoardStudentListResponse,
                       textEditingController: searchNiSitController,
                       callbackFromOptionSearch: (int optionSearchResult) {
                         setOptionSearchNiSit(optionSearchResult);

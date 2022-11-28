@@ -21,6 +21,8 @@ import '../../../../main_route/main_route_bloc/main_route_bloc.dart';
 import '../../../../main_route/main_route_bloc_model/check_token_expired_response.dart';
 import '../../../../main_route/main_route_bloc_model/refresh_token_response.dart';
 import '../../../../utils/shared_preferences.dart';
+import '../../model/response/more_response/courses_screen_response.dart';
+import '../../model/response/more_response/related_links_response.dart';
 import '../../model/response/more_response/scree_more_pdpa_response.dart';
 import '../../model/response/more_response/screen_more_board_student_list_detail_response.dart';
 import '../../model/response/more_response/screen_more_board_student_list_response.dart';
@@ -370,6 +372,50 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
         }
       } on DioError catch (e) {
         emit(MoreBoardTeacherError(message: e.response?.statusMessage ?? ""));
+      }
+    });
+    on<MoreRelatedLinksEvent>((event, emit) async {
+      try {
+        emit(MoreRelatedLinksLoading());
+        print("CheckMore 13 == MoreBoardTeacherEvent");
+        await  checkMoreEventInitial(event, emit) ;
+        Response responseRelatedLinksScreen = await getRelatedLinksScreen();
+        emit(MoreRelatedLinksEndLoading());
+        if (responseRelatedLinksScreen.statusCode == 200) {
+          RelatedLinksResponse relatedLinksResponse =
+          RelatedLinksResponse.fromJson(responseRelatedLinksScreen.data);
+          if (relatedLinksResponse.head?.status == 200) {
+            emit(MoreRelatedLinksScreenInfoSuccessState(relatedLinksResponse: relatedLinksResponse));
+          } else {
+            emit(MoreRelatedLinksError(message: relatedLinksResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(MoreRelatedLinksError(message: responseRelatedLinksScreen.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(MoreRelatedLinksError(message: e.response?.statusMessage ?? ""));
+      }
+    });
+    on<MoreCoursesScreenEvent>((event, emit) async {
+      try {
+        emit(MoreCoursesLoading());
+        print("CheckMore 14 == MoreCoursesScreenEvent");
+        await  checkMoreEventInitial(event, emit) ;
+        Response responseCoursesScreen = await getMoreCourseScreen();
+        emit(MoreCoursesEndLoading());
+        if (responseCoursesScreen.statusCode == 200) {
+          CoursesScreenResponse coursesScreenResponse =
+          CoursesScreenResponse.fromJson(responseCoursesScreen.data);
+          if (coursesScreenResponse.head?.status == 200) {
+            emit(MoreCoursesScreenInfoSuccessState(coursesScreenResponse: coursesScreenResponse));
+          } else {
+            emit(MoreCoursesError(message: coursesScreenResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(MoreCoursesError(message: responseCoursesScreen.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(MoreCoursesError(message: e.response?.statusMessage ?? ""));
       }
     });
   }

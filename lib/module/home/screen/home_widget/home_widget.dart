@@ -192,19 +192,19 @@ buildContentHomeScreen(
                                 builder: (context) => const ProfileScreen()));
                       },
                     )),
-                    Expanded(
-                        child: IconButton(
-                      icon: FaIcon(FontAwesomeIcons.qrcode,
-                          color: Theme.of(context).iconTheme.color, size: 40),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const QRViewExample()));
-                      },
-                      // icon: const FaIcon(FontAwesomeIcons.house,color: tcBlack, size: 40),
-                      // onPressed: () {},
-                    )),
+                    // Expanded(
+                    //     child: IconButton(
+                    //   icon: FaIcon(FontAwesomeIcons.qrcode,
+                    //       color: Theme.of(context).iconTheme.color, size: 40),
+                    //   onPressed: () {
+                    //     Navigator.push(
+                    //         context,
+                    //         MaterialPageRoute(
+                    //             builder: (context) => const QRViewExample()));
+                    //   },
+                    //   // icon: const FaIcon(FontAwesomeIcons.house,color: tcBlack, size: 40),
+                    //   // onPressed: () {},
+                    // )),
                     Expanded(
                         child: IconButton(
                       icon: FaIcon(FontAwesomeIcons.gear,

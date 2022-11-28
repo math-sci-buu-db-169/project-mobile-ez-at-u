@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../../../../customs/card/card_more.dart';
-import '../../../../customs/message/text_more.dart';
-import '../../../../customs/size/size.dart';
-import '../../../../module/home/model/response/more_response/screen_more_response.dart';
-import '../../../../module/home/screen/more_screen/board_screen/more_board_student_list_gen_screen.dart';
-import '../../../../module/home/screen/more_screen/board_screen/more_board_teacher_screen.dart';
-import '../../../../module/home/screen/more_screen/contact_us_screen.dart';
-import '../../../../module/home/screen/more_screen/faq_screen.dart';
-import '../../../../module/home/screen/more_screen/pdpa_screen.dart';
+import '../../../../../customs/card/card_more.dart';
+import '../../../../../customs/message/text_more.dart';
+import '../../../../../customs/size/size.dart';
+import '../../../model/response/more_response/screen_more_response.dart';
+import '../../more_screen/board_screen/more_board_student_list_gen_screen.dart';
+import '../../more_screen/board_screen/more_board_teacher_screen.dart';
+import '../../more_screen/contact_us_screen.dart';
+import '../../more_screen/course_screen.dart';
+import '../../more_screen/faq_screen.dart';
+import '../../more_screen/pdpa_screen.dart';
+import '../../more_screen/related_links_screen.dart';
 
 moreBodyWidget(BuildContext context, ScreenMoreResponse? screenMoreResponse,
     Future<void> Function(Uri url) launchInBrowser, setState) {
@@ -129,19 +131,35 @@ moreBodyWidget(BuildContext context, ScreenMoreResponse? screenMoreResponse,
                       });
                     },
                     title: screenMoreResponse?.body?.screeninfo?.btndeparthis ?? moreBtnDepartHis,
-                    iconsFile :FontAwesomeIcons.clockRotateLeft,
+                    iconsFile :FontAwesomeIcons.hourglassHalf,
 
                   ),
                   buildCardMore(
                     context: context,
                     onTap: () {
-                      setState(() {
-                        launchInBrowser(Uri.parse("${screenMoreResponse?.body?.luksuitUrl}"));
-                      });
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>  const CourseScreen(),
+                        ),
+                      );
+                      // setState(() {
+                      //   launchInBrowser(Uri.parse("${screenMoreResponse?.body?.luksuitUrl}"));
+                      // });
                     },
                     title: screenMoreResponse?.body?.screeninfo?.btncou ?? moreBtnCou,
                     iconsFile : FontAwesomeIcons.usersViewfinder,
                   ),
+                  // buildCardMore(
+                  //   context: context,
+                  //   onTap: () {
+                  //     setState(() {
+                  //       launchInBrowser(Uri.parse("https://sites.google.com/go.buu.ac.th/bscmathematics?pli=1"));
+                  //     });
+                  //   },
+                  //   title: 'หลักสูตรระดับปริญญาตรี',
+                  //   iconsFile : FontAwesomeIcons.usersViewfinder,
+                  // ),
                   buildCardMore(
                     context: context,
                     onTap: () {
@@ -160,8 +178,23 @@ moreBodyWidget(BuildContext context, ScreenMoreResponse? screenMoreResponse,
                       });
                     },
                     title: screenMoreResponse?.body?.screeninfo?.btnweb ?? moreBtnWeb,
-                    iconsFile : FontAwesomeIcons.sitemap,
+                    iconsFile : FontAwesomeIcons.satelliteDish,
                   ),
+                   buildCardMore(
+                    context: context,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const RelatedLinksScreen(),
+                        ),
+                      );
+                    },
+                    title: screenMoreResponse?.body?.screeninfo?.relatedlinks ?? moreBtnRelatedLinks,
+                    iconsFile : FontAwesomeIcons.shuffle,
+                  ),
+
+
                   Padding(
                     padding: const EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 10),
                     child: Text(
@@ -203,7 +236,7 @@ moreBodyWidget(BuildContext context, ScreenMoreResponse? screenMoreResponse,
                   buildCardMore(
                     context: context,
                     title: screenMoreResponse?.body?.screeninfo?.btncontactus ?? moreBtnContactus,
-                    iconsFile : FontAwesomeIcons.comments ,
+                    iconsFile : FontAwesomeIcons.message ,
                     onTap: () {
                       Navigator.push(
                         context,

@@ -53,3 +53,5 @@ class SubmitChangeAvatarRequest extends MoreEvent {
   final String userid;
   SubmitChangeAvatarRequest({required this.base64Image, required this.userid});
 }
+class MoreRelatedLinksEvent extends MoreEvent {}
+class MoreCoursesScreenEvent extends MoreEvent {}

@@ -85,8 +85,21 @@ class MoreRepository {
           "refreshToken": refreshToken
         })
     );
-  }Future<Response> getCheckTokenExpired() async {
+  }
+  Future<Response> getCheckTokenExpired() async {
     return await MyDio.createDioServer().post("/login/checktokenexpired",
+        data: jsonEncode({
+        })
+    );
+  }
+  Future<Response> getMoreCourseScreen() async {
+    return await MyDio.createDioServer().post("/api/home/morecourse",
+        data: jsonEncode({
+        })
+    );
+  }
+  Future<Response> getRelatedLinksScreen() async {
+    return await MyDio.createDioServer().post("/api/home/morerelatedlinks",
         data: jsonEncode({
         })
     );

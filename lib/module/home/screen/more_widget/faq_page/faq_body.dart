@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../customs/message/text_more.dart';
-import '../../../../module/home/model/response/more_response/screen_more_faq_response.dart';
-import '../../../../module/home/screen/more_widget/faq_widget.dart';
+import '../../../../../customs/message/text_more.dart';
+import '../../../model/response/more_response/screen_more_faq_response.dart';
+import 'faq_widget.dart';
 
 fagBody(BuildContext context, ScreenMoreFAQResponse? screenHomeMoreFAQResponse) {
   return WillPopScope(

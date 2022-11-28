@@ -2,10 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../../../customs/card/card_more.dart';
-import '../../../../customs/color/color_const.dart';
-import '../../../../customs/size/size.dart';
-import '../../../../module/home/model/response/more_response/screen_more_contact_us_response.dart';
+import '../../../../../customs/card/card_more.dart';
+import '../../../../../customs/color/color_const.dart';
+import '../../../../../customs/size/size.dart';
+import '../../../model/response/more_response/screen_more_contact_us_response.dart';
 
 contactSocialFacultyWidget(
     BuildContext context, setState, launchInBrowser, ScreenMoreContactUsResponse? screenMoreContactUsResponse) {

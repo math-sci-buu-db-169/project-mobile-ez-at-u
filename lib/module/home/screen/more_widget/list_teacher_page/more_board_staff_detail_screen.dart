@@ -2,9 +2,10 @@ import 'dart:convert';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../customs/progress_dialog.dart';
-import '../../../../customs/size/size.dart';
-import '../../../../module/home/bloc/more_bloc/more_bloc.dart';
+
+import '../../../../../customs/progress_dialog.dart';
+import '../../../../../customs/size/size.dart';
+import '../../../bloc/more_bloc/more_bloc.dart';
 
 class MoreBoardStaffDetailScreen extends StatelessWidget {
   final String name;

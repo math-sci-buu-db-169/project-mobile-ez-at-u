@@ -1,6 +1,4 @@
-import 'package:ez_at_u/module/home/model/response/home_response/screen_home_response.dart';
 import 'package:ez_at_u/module/home/screen/home_widget/setting_pin_lock_app_screen.dart';
-import 'package:ez_at_u/module/profile/model/response/api_profile_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -13,6 +11,7 @@ import '../../../../customs/size/size.dart';
 import '../../../../customs/text_file/text_field_password_custom.dart';
 import '../../../login/screen/change_password_screen/change_password_screen.dart';
 import '../../bloc/home_bloc/home_bloc.dart';
+import '../../model/response/home_response/setting_screen_response.dart';
 import '../home_screen/home_screen.dart';
 import '../more_screen/pdpa_screen.dart';
 import 'change_language_widget.dart';
@@ -23,9 +22,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../module/login/screen/login_screen/login_screen.dart';
 import '../../../../customs/message/text_error.dart';
 import '../../../../customs/progress_dialog.dart';
-import '../../../../module/activity/model/response/screen_status_activity_response.dart';
-import '../../../../module/home/model/response/home_response/alert_no_activity_response.dart';
-import '../../../../module/home/screen/home_widget/home_widget.dart';
 import '../../../../utils/shared_preferences.dart';
 
 class SettingScreen extends StatelessWidget {
@@ -52,11 +48,7 @@ class SettingPage extends StatefulWidget {
 }
 
 class _SettingPageState extends State<SettingPage> with ProgressDialog {
-  ScreenHomeResponse? _screenHomeResponse;
-  ApiProfileResponse? _screenProfileResponse;
-  ScreenStatusActivityResponse? _screenStatusActivityResponse;
-
-  AlertNoActivityResponse? _noActivityResponse;
+  SettingScreenResponse? _settingScreenResponse;
 
   TextEditingController otpCodeController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -165,7 +157,7 @@ class _SettingPageState extends State<SettingPage> with ProgressDialog {
   }
 
   void _toggleLanguageView() {
-    _screenProfileResponse?.body?.profileGeneralInfo?.langeuage == 'TH'
+    _settingScreenResponse?.body?.screenInfo?.langeuage == 'TH'
         ? _userLanguage = "EN"
         : _userLanguage = "TH";
     context
@@ -230,33 +222,28 @@ class _SettingPageState extends State<SettingPage> with ProgressDialog {
       },
       builder: (context, state) {
         if (state is ScreenInfoHomeSettingSuccessState) {
-          _screenHomeResponse = state.responseScreenInfoHome;
-          _screenProfileResponse = state.responseProfile;
-          _userLanguage =
-              _screenProfileResponse?.body?.profileGeneralInfo?.langeuage ??
-                  "TH";
+          _settingScreenResponse = state.settingScreenResponse;
+            _userLanguage =  _settingScreenResponse?.body?.screenInfo?.langeuage ??"TH";
           String textAlertDeleteAccount =
-              _screenHomeResponse?.body?.alertmessage?.alertdeleteaccount ??
+              _settingScreenResponse?.body?.alertmessage?.alertdeleteaccount ??
                   alertDeleteAccount;
-          String textAlertDeleteAccountPassword = _screenHomeResponse
+          String textAlertDeleteAccountPassword = _settingScreenResponse
                   ?.body?.alertmessage?.alertdeleteaccountpassword ??
               alertDeleteAccount;
           String textAlertDeleteAccountPDPA =
-              _screenHomeResponse?.body?.alertmessage?.alertdeleteaccountpdpa ??
+              _settingScreenResponse?.body?.alertmessage?.alertdeleteaccountpdpa ??
                   alertDeleteAccount;
           String textEmailSupport =
-              _screenHomeResponse?.body?.alertmessage?.emailsupport ??
+              _settingScreenResponse?.body?.alertmessage?.emailsupport ??
                   emailSupport;
           String textPhoneSupport =
-              _screenHomeResponse?.body?.alertmessage?.phonesupport ??
+              _settingScreenResponse?.body?.alertmessage?.phonesupport ??
                   phoneSupport;
           String textPassword =
-              _screenHomeResponse?.body?.alertmessage?.alertpassword ??
+              _settingScreenResponse?.body?.alertmessage?.alertpassword ??
                   alertPassword;
-          String role =
-              _screenProfileResponse?.body?.profileGeneralInfo?.role ?? "";
           bool isHidden =
-              _screenProfileResponse?.body?.profileGeneralInfo?.langeuage ==
+          _settingScreenResponse?.body?.screenInfo?.langeuage ==
                       'TH'
                   ? true
                   : false;
@@ -284,7 +271,7 @@ class _SettingPageState extends State<SettingPage> with ProgressDialog {
                 ),
               ),
               title: Text(
-                _screenHomeResponse?.body?.screenInfo?.setting ??homeSetting,
+                _settingScreenResponse?.body?.screenInfo?.setting ??homeSetting,
                 style: TextStyle(
                   color: Theme.of(context).appBarTheme.foregroundColor,
                   fontSize: sizeTitle24,
@@ -312,10 +299,10 @@ class _SettingPageState extends State<SettingPage> with ProgressDialog {
                                   context,
                                   _toggleLanguageView,
                                   isHidden,
-                                  textLeftTitle: _screenHomeResponse
+                                  textLeftTitle: _settingScreenResponse
                                           ?.body?.screenInfo?.textlang ??
                                       homeTextLang,
-                                  textRightDetail: _screenHomeResponse
+                                  textRightDetail: _settingScreenResponse
                                           ?.body?.screenInfo?.textthai ??
                                       homeTextThai,
                                   leftIcon: Icon(FontAwesomeIcons.language,
@@ -338,8 +325,8 @@ class _SettingPageState extends State<SettingPage> with ProgressDialog {
                                   _toggleLanguageView,
                                   isHidden,
                                   textLeftTitle:
-                                  _screenHomeResponse?.body?.screenInfo?.modetheme ??homeThemeModeAPP,
-                                  textRightDetail: _screenHomeResponse?.body?.screenInfo?.dark ??homeThemeDark,
+                                  _settingScreenResponse?.body?.screenInfo?.modetheme ??homeThemeModeAPP,
+                                  textRightDetail: _settingScreenResponse?.body?.screenInfo?.dark ??homeThemeDark,
                                   leftIcon: Icon(FontAwesomeIcons.sun,
                                       color: Theme.of(context).iconTheme.color),
                                   tb1: 0.1,
@@ -394,7 +381,7 @@ class _SettingPageState extends State<SettingPage> with ProgressDialog {
                                   child: buildTableDrawerTwoTableIcons(
                                     context,
                                     textLeftTitle:
-                                    _screenHomeResponse?.body?.screenInfo?.lockscreencode ?? homeBtnPINAPP,
+                                    _settingScreenResponse?.body?.screenInfo?.lockscreencode ?? homeBtnPINAPP,
                                     // textLeftTitle: screenHomeResponse?.body?.screenInfo?.btncpass ?? homeBtnConfirmPassword,
                                     textRightDetail: '',
                                     leftIcon: Icon(
@@ -430,7 +417,7 @@ class _SettingPageState extends State<SettingPage> with ProgressDialog {
                                       top: 0, bottom: 10, left: 15, right: 15),
                                   child: buildTableDrawerTwoTableIcons(
                                     context,
-                                    textLeftTitle: _screenHomeResponse
+                                    textLeftTitle: _settingScreenResponse
                                             ?.body?.screenInfo?.btncpass ??
                                         homeBtnConfirmPassword,
                                     textRightDetail: '',
@@ -459,10 +446,10 @@ class _SettingPageState extends State<SettingPage> with ProgressDialog {
                                     content3: textAlertDeleteAccount,
                                     content4: textEmailSupport,
                                     content5: textPhoneSupport,
-                                    btn1: _screenHomeResponse
+                                    btn1: _settingScreenResponse
                                             ?.body?.errorbutton?.buttonok ??
                                         buttonOkTH,
-                                    btn2: _screenHomeResponse
+                                    btn2: _settingScreenResponse
                                             ?.body?.errorbutton?.buttoncancel ??
                                         buttonCancelTH,
                                     isScreenTo: const PDPAMoreScreen(),
@@ -500,7 +487,7 @@ class _SettingPageState extends State<SettingPage> with ProgressDialog {
                                       top: 0, bottom: 10, left: 15, right: 15),
                                   child: buildTableDrawerTwoTableIcons(
                                     context,
-                                    textLeftTitle: _screenHomeResponse
+                                    textLeftTitle: _settingScreenResponse
                                             ?.body?.screenInfo?.btndelacc ??
                                         homeBtnDelAcc,
                                     textRightDetail: '',

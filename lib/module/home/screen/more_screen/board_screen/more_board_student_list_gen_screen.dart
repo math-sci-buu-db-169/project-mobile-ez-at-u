@@ -10,7 +10,7 @@ import '../../../../../utils/shared_preferences.dart';
 import '../../../../login/screen/login_screen/login_screen.dart';
 import '../../../bloc/more_bloc/more_bloc.dart';
 import '../../../model/response/more_response/screen_more_list_name_gen_response.dart';
-import '../../more_widget/student_list_gen_body.dart';
+import '../../more_widget/list_nisit_page/student_list_gen_body.dart';
 
 class MoreBoardListStudentListGenScreen extends StatelessWidget {
   const MoreBoardListStudentListGenScreen({Key? key}) : super(key: key);

@@ -8,7 +8,7 @@ import '../../../../customs/message/text_error.dart';
 import '../../../../customs/progress_dialog.dart';
 import '../../../../module/home/bloc/more_bloc/more_bloc.dart';
 import '../../../../module/home/model/response/more_response/screen_more_contact_us_response.dart';
-import '../../../../module/home/screen/more_widget/contact_us_widget.dart';
+import '../more_widget/contact_page/contact_us_widget.dart';
 import '../../../../module/login/screen/login_screen/login_screen.dart';
 import '../../../../utils/shared_preferences.dart';
 

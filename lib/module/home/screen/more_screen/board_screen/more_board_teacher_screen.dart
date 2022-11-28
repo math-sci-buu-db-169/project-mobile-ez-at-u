@@ -14,8 +14,8 @@ import '../../../../../utils/shared_preferences.dart';
 import '../../../../login/screen/login_screen/login_screen.dart';
 import '../../../bloc/more_bloc/more_bloc.dart';
 import '../../../model/response/more_response/screen_more_board_teacher_response.dart';
-import '../../more_widget/teacher_math_widget.dart';
-import '../../more_widget/teacher_stats_widget.dart';
+import '../../more_widget/list_teacher_page/teacher_math_widget.dart';
+import '../../more_widget/list_teacher_page/teacher_stats_widget.dart';
 
 class MoreBoardListTeacherScreen extends StatelessWidget {
   const MoreBoardListTeacherScreen({Key? key}) : super(key: key);

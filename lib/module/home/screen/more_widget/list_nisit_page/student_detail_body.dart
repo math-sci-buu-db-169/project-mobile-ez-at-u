@@ -1,12 +1,13 @@
 import 'package:flutter/services.dart';
-
-import '../../../../customs/color/color_const.dart';
-import '../../../../customs/message/text_board.dart';
-import '../../../../customs/size/size.dart';
-import '../../../../module/home/model/response/more_response/screen_more_board_student_list_detail_response.dart';
+import '../../../../../customs/color/color_const.dart';
+import '../../../../../customs/message/text_board.dart';
+import '../../../../../customs/size/size.dart';
+import '../../../../../module/home/model/response/more_response/screen_more_board_student_list_detail_response.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import '../../../model/response/more_response/screen_more_board_student_list_detail_response.dart';
 
 studentDetailBody(BuildContext context, ScreenMoreBoardStudentDetailResponse? screenMoreBoardStudentDetailResponse) {
   String sName = screenMoreBoardStudentDetailResponse?.body?.data?.name ?? '-';
@@ -100,6 +101,21 @@ studentDetailBody(BuildContext context, ScreenMoreBoardStudentDetailResponse? sc
                                   title: screenMoreBoardStudentDetailResponse?.body?.screeninfo?.textstudentcode ??
                                       boardDetailNiSitTextStudentCode,
                                   value: screenMoreBoardStudentDetailResponse?.body?.data?.studentcode ?? '-'),
+
+                              _buildListStudentDetail(
+                                  context:context,
+                                  title: screenMoreBoardStudentDetailResponse?.body?.screeninfo?.textcareer ?? boardDetailNiSitTextCareer,
+                                  value: screenMoreBoardStudentDetailResponse?.body?.data?.attention ?? '-'),
+                              _buildListStudentDetail(
+                                  context:context,
+                                  title: screenMoreBoardStudentDetailResponse?.body?.screeninfo?.textworkstatus ??
+                                      boardDetailNiSitTextWorkStatus,
+                                  value: screenMoreBoardStudentDetailResponse?.body?.data?.status ?? '-'),
+                              _buildListStudentDetail(
+                                  context:context,
+                                  title:
+                                      screenMoreBoardStudentDetailResponse?.body?.screeninfo?.textcompany ?? boardDetailNiSitTextCompany,
+                                  value: screenMoreBoardStudentDetailResponse?.body?.data?.usercompany ?? '-'),
                               Padding(
                                 padding: const EdgeInsets.only(top: 10.0, bottom: 6.0),
                                 child: Center(
@@ -112,6 +128,7 @@ studentDetailBody(BuildContext context, ScreenMoreBoardStudentDetailResponse? sc
                               ),
                               _buildAdvisor(
                                   context:context,screenMoreBoardStudentDetailResponse: screenMoreBoardStudentDetailResponse),
+
                               Padding(
                                 padding: const EdgeInsets.only(top: 10.0, bottom: 6.0),
                                 child: Center(
@@ -163,20 +180,6 @@ studentDetailBody(BuildContext context, ScreenMoreBoardStudentDetailResponse? sc
                                 colorOne: const Color(0xffff0000),
                                 colorTwo: const Color(0xffff0000),
                               ),
-                              _buildListStudentDetail(
-                                  context:context,
-                                  title: screenMoreBoardStudentDetailResponse?.body?.screeninfo?.textcareer ?? boardDetailNiSitTextCareer,
-                                  value: screenMoreBoardStudentDetailResponse?.body?.data?.attention ?? '-'),
-                              _buildListStudentDetail(
-                                  context:context,
-                                  title: screenMoreBoardStudentDetailResponse?.body?.screeninfo?.textworkstatus ??
-                                      boardDetailNiSitTextWorkStatus,
-                                  value: screenMoreBoardStudentDetailResponse?.body?.data?.status ?? '-'),
-                              _buildListStudentDetail(
-                                  context:context,
-                                  title:
-                                      screenMoreBoardStudentDetailResponse?.body?.screeninfo?.textcompany ?? boardDetailNiSitTextCompany,
-                                  value: screenMoreBoardStudentDetailResponse?.body?.data?.usercompany ?? '-'),
                             ],
                           ),
                         ),
@@ -257,7 +260,7 @@ _buildListStudentDetail({required BuildContext context,required String title, re
     padding: const EdgeInsets.only(left: 20.0, right: 10.0, top: 6.0, bottom: 6.0),
     child: Table(
       border: TableBorder.symmetric(outside: const BorderSide(width: 2, color: Colors.transparent)),
-      columnWidths: const {0: FractionColumnWidth(0.35), 1: FractionColumnWidth(0.03), 2: FractionColumnWidth(0.65)},
+      columnWidths: const {0: FractionColumnWidth(0.35), 1: FractionColumnWidth(0.03), 2: FractionColumnWidth(0.55), 3: FractionColumnWidth(0.07)},
       defaultVerticalAlignment: TableCellVerticalAlignment.middle,
       children: [
         TableRow(children: [
@@ -269,34 +272,30 @@ _buildListStudentDetail({required BuildContext context,required String title, re
             ':',
             style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
           ),
-          Row(
-            children: [
-              Text(
-                value,
-                textAlign: TextAlign.start,
-                style: const TextStyle(fontSize: 12),
-              ),
+          Text(
+            value,
+            textAlign: TextAlign.start,
+            style: const TextStyle(fontSize: 12),
+            overflow: TextOverflow.ellipsis,
+          ),
 
-              IconButton(
-                icon: const Icon(
-                  Icons.copy_outlined,
-                  color: tcHint,
-                  size: sizeTextSmaller14,
-                ),
-                onPressed: () {
-                  Clipboard.setData(ClipboardData(text: value)).then((_) {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text("$value copied to clipboard",
-                          style: const TextStyle(fontSize: sizeTextSmaller14, color: Colors.black)),
-                      duration: const Duration(seconds: 1),
-                      backgroundColor: const Color(0xFFFFF9D1),
-                    ));
-                  });
-                },
-              ),
-
-            ],
-          )
+          IconButton(
+            icon: const Icon(
+              Icons.copy_outlined,
+              color: tcHint,
+              size: sizeTextSmaller14,
+            ),
+            onPressed: () {
+              Clipboard.setData(ClipboardData(text: value)).then((_) {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text("$value copied to clipboard",
+                      style: const TextStyle(fontSize: sizeTextSmaller14, color: Colors.black)),
+                  duration: const Duration(seconds: 1),
+                  backgroundColor: const Color(0xFFFFF9D1),
+                ));
+              });
+            },
+          ),
 
         ])
       ],
@@ -309,40 +308,36 @@ _buildListNameTeacher({required BuildContext context, required String title, req
     padding: const EdgeInsets.only(left: 20.0, right: 10.0, top: 1.0, bottom: 1.0),
     child: Table(
       border: TableBorder.symmetric(outside: const BorderSide(width: 2, color: Colors.transparent)),
-      columnWidths: const {0: FractionColumnWidth(0.02), 1: FractionColumnWidth(0.98)},
+      columnWidths: const {0: FractionColumnWidth(0.02), 1: FractionColumnWidth(0.91), 2: FractionColumnWidth(0.07)},
       defaultVerticalAlignment: TableCellVerticalAlignment.middle,
       children: [
         TableRow(children: [
           const SizedBox(
             width: 10,
           ),
-          Row(
-            children: [
-              Text(
-                '$title  $name $lastname',
-                textAlign: TextAlign.start,
-                style: const TextStyle(fontSize: 12),
-              ),
+          Text(
+            '$title  $name $lastname',
+            textAlign: TextAlign.start,
+            style: const TextStyle(fontSize: 12),
+          ),
 
-              IconButton(
-                icon: const Icon(
-                  Icons.copy_outlined,
-                  color: tcHint,
-                  size: sizeTextSmaller14,
-                ),
-                onPressed: () {
-                  Clipboard.setData(ClipboardData(text: title + name+ lastname)).then((_) {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text("$title  $name $lastname copied to clipboard",
-                          style: const TextStyle(fontSize: sizeTextSmaller14, color: Colors.black)),
-                      duration: const Duration(seconds: 1),
-                      backgroundColor: const Color(0xFFFFF9D1),
-                    ));
-                  });
-                },
-              ),
-            ],
-          )
+          IconButton(
+            icon: const Icon(
+              Icons.copy_outlined,
+              color: tcHint,
+              size: sizeTextSmaller14,
+            ),
+            onPressed: () {
+              Clipboard.setData(ClipboardData(text: title + name+ lastname)).then((_) {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text("$title  $name $lastname copied to clipboard",
+                      style: const TextStyle(fontSize: sizeTextSmaller14, color: Colors.black)),
+                  duration: const Duration(seconds: 1),
+                  backgroundColor: const Color(0xFFFFF9D1),
+                ));
+              });
+            },
+          ),
 
         ])
       ],
@@ -378,7 +373,7 @@ _buildListContactUser({
     padding: const EdgeInsets.only(left: 20.0, right: 10.0, top: 6.0, bottom: 6.0),
     child: Table(
       border: TableBorder.symmetric(outside: const BorderSide(width: 2, color: Colors.transparent)),
-      columnWidths: const {0: FractionColumnWidth(0.2), 1: FractionColumnWidth(0.05), 2: FractionColumnWidth(0.75)},
+      columnWidths: const {0: FractionColumnWidth(0.15), 1: FractionColumnWidth(0.03), 2: FractionColumnWidth(0.75), 3: FractionColumnWidth(0.05)},
       defaultVerticalAlignment: TableCellVerticalAlignment.middle,
       children: [
         TableRow(children: [
@@ -404,34 +399,30 @@ _buildListContactUser({
             textAlign: TextAlign.start,
             style: TextStyle(fontSize: 14),
           ),
-          Row(
-            children: [
-              Text(
-                contactUser,
-                textAlign: TextAlign.start,
-                style: const TextStyle(fontSize: 12),
-              ),
+          Text(
+            contactUser,
+            textAlign: TextAlign.start,
+            style: const TextStyle(fontSize: 12),
+          ),
 
 
-              IconButton(
-                icon: const Icon(
-                  Icons.copy_outlined,
-                  color: tcHint,
-                  size: sizeTextSmaller14,
-                ),
-                onPressed: () {
-                  Clipboard.setData(ClipboardData(text: contactUser)).then((_) {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text("$contactUser copied to clipboard",
-                          style: const TextStyle(fontSize: sizeTextSmaller14, color: Colors.black)),
-                      duration: const Duration(seconds: 1),
-                      backgroundColor: const Color(0xFFFFF9D1),
-                    ));
-                  });
-                },
-              ),
-            ],
-          )
+          IconButton(
+            icon: const Icon(
+              Icons.copy_outlined,
+              color: tcHint,
+              size: sizeTextSmaller14,
+            ),
+            onPressed: () {
+              Clipboard.setData(ClipboardData(text: contactUser)).then((_) {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text("$contactUser copied to clipboard",
+                      style: const TextStyle(fontSize: sizeTextSmaller14, color: Colors.black)),
+                  duration: const Duration(seconds: 1),
+                  backgroundColor: const Color(0xFFFFF9D1),
+                ));
+              });
+            },
+          ),
 
         ])
       ],

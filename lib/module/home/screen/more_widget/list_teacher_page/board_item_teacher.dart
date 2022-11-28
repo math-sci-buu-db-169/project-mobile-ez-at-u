@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import '../../../../customs/message/text_board.dart';
-import '../../../../module/home/model/response/more_response/screen_more_board_teacher_response.dart';
+import '../../../../../customs/message/text_board.dart';
+import '../../../model/response/more_response/screen_more_board_teacher_response.dart';
 
 String phImg = '';
 

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../../../customs/size/size.dart';
-import '../../../../module/home/model/response/more_response/screen_more_contact_us_response.dart';
-import '../../../../module/home/screen/more_widget/contact_Social_faculty_widget.dart';
-import '../../../../module/home/screen/more_widget/contact_faculty_widget.dart';
-import '../../../../module/home/screen/more_widget/contact_math_widget.dart';
+import '../../../../../customs/size/size.dart';
+import '../../../model/response/more_response/screen_more_contact_us_response.dart';
+import 'contact_Social_faculty_widget.dart';
+import 'contact_faculty_widget.dart';
+import 'contact_math_widget.dart';
 
 contactUsWidget(
   BuildContext context,

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../../../customs/message/text_board.dart';
-import '../../../../customs/size/size.dart';
-import '../../../../module/home/model/response/more_response/screen_more_board_teacher_response.dart';
-import '../../../../module/home/screen/more_widget/build_list_teacher.dart';
+import '../../../../../customs/message/text_board.dart';
+import '../../../../../customs/size/size.dart';
+import '../../../model/response/more_response/screen_more_board_teacher_response.dart';
+import 'build_list_teacher.dart';
 
-teacherStatsWidget(BuildContext context, ScreenMoreBoardTeacherResponse? screenMoreBoardTeacherResponse) {
+teacherMathWidget(BuildContext context, ScreenMoreBoardTeacherResponse? screenMoreBoardTeacherResponse) {
   return Expanded(
     child: Container(
       padding: const EdgeInsets.fromLTRB(2, 5, 2, 10),
@@ -21,7 +21,7 @@ teacherStatsWidget(BuildContext context, ScreenMoreBoardTeacherResponse? screenM
                     fontSize: sizeTitle24,
                   )),
             ),
-            buildListTeacherRight(context, screenMoreBoardTeacherResponse),
+            buildListTeacherLeft(context, screenMoreBoardTeacherResponse),
             Padding(
               padding: const EdgeInsets.only(left: 10, top: 5),
               child: Text(

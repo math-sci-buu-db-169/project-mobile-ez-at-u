@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../../../../customs/message/text_board.dart';
-import '../../../../customs/size/size.dart';
-import '../../../../customs/text_file/text_field_search_gen_buu.dart';
-import '../../../../module/home/model/response/more_response/screen_more_list_name_gen_response.dart';
-import '../../../../module/home/screen/more_widget/build_list_student.dart';
-import '../../../../module/home/screen/more_widget/board_Item_student.dart';
-import '../../../../module/home/screen/more_screen/board_screen/more_board_student_List_screen.dart';
-import '../../bloc/more_bloc/more_bloc.dart';
+import '../../../../../customs/message/text_board.dart';
+import '../../../../../customs/size/size.dart';
+import '../../../../../customs/text_file/text_field_search_gen_buu.dart';
+import '../../../model/response/more_response/screen_more_list_name_gen_response.dart';
+import '../build_list_student.dart';
+import 'board_Item_student.dart';
+import '../../more_screen/board_screen/more_board_student_List_screen.dart';
+import '../../../bloc/more_bloc/more_bloc.dart';
 
 studentListGenBody(BuildContext context, ScreenMoreListNameGenResponse? screenMoreListNameGenResponse, TextEditingController searchNiSItController, int optionSearch, void Function(int) setOptionSearch) {
 
@@ -40,23 +40,24 @@ studentListGenBody(BuildContext context, ScreenMoreListNameGenResponse? screenMo
                 color: Theme.of(context).bottomAppBarColor ,
               ),
             ),
-            actions: [
-              IconButton(
-                  onPressed: () {},
-                  icon:  FaIcon(FontAwesomeIcons.filter,
-                      size: 20,
-                      color: Theme.of(context).bottomAppBarColor ,
-                  )),
-            ],
+            // actions: [
+            //   IconButton(
+            //       onPressed: () {},
+            //       icon:  FaIcon(FontAwesomeIcons.filter,
+            //           size: 20,
+            //           color: Theme.of(context).bottomAppBarColor ,
+            //       )),
+            // ],
           ),
           body: SafeArea(
             child: Container(
-              color: Colors.transparent.withOpacity(0.1),
+              color: Theme.of(context).appBarTheme.backgroundColor,
               height: double.infinity,
               width: double.infinity,
               child: Column(
                 children: [
                   TextFieldSearchGenBUUCustom(
+                    screenMoreListNameGenResponse: screenMoreListNameGenResponse,
                     textEditingController: searchNiSItController,
                     callbackFromOptionSearch: (int optionSearchResult) {
                       setOptionSearch(optionSearchResult);

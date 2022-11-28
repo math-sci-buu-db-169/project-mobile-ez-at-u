@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../module/home/model/response/more_response/screen_more_faq_response.dart';
-import '../../../../module/home/screen/more_widget/faq_panel_widget.dart';
+import '../../../model/response/more_response/screen_more_faq_response.dart';
+import 'faq_panel_widget.dart';
 
 class Item {
   Item({

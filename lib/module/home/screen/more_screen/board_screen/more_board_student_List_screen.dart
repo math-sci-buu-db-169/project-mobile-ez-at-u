@@ -10,7 +10,7 @@ import '../../../../../utils/shared_preferences.dart';
 import '../../../../login/screen/login_screen/login_screen.dart';
 import '../../../bloc/more_bloc/more_bloc.dart';
 import '../../../model/response/more_response/screen_more_board_student_list_response.dart';
-import '../../more_widget/student_list_body.dart';
+import '../../more_widget/list_nisit_page/student_list_body.dart';
 
 class MoreBoardStudentListScreen extends StatelessWidget {
   final String titleGen;

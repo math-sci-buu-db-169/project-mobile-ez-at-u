@@ -45,26 +45,28 @@ class ScreenMoreListNameGenResponse {
   }
 }
 
-/// screeninfo : {"titleboardnisit":"Board of Student"}
-/// user_gen : {"namegen":"กรีนทีมัทฉะลาเต้","colorgen":"#6BCB77","numgen":"65"}
-/// list_gen : [{"namegen":"อำพันรัตติกาล","colorgen":"#FFD93D","numgen":"66"},{"namegen":"กรีนทีมัทฉะลาเต้","colorgen":"#6BCB77","numgen":"65"},{"namegen":"ธารไพลิน เมฆินปัณฑูร","colorgen":"#4D96FF","numgen":"64"},{"namegen":"ทินกรซ้อนเมฆา","colorgen":"#FF6B6B","numgen":"63"},{"namegen":"รัตติกาลสานตะวัน","colorgen":"#FFD93D","numgen":"62"},{"namegen":"อินทร์อัศนีฤทธิ์จักรกฤษณ์มรกต","colorgen":"#6BCB77","numgen":"61"},{"namegen":"รัตนภูวดินทร์","colorgen":"#4D96FF","numgen":"60"},{"namegen":"สตรอเบอร์รี่ ซันเดย์","colorgen":"#FF6B6B","numgen":"59"},{"namegen":"บูรพธุวดารา","colorgen":"#FFD93D","numgen":"58"},{"namegen":"พัชรนิลปัทม์","colorgen":"#6BCB77","numgen":"57"},{"namegen":"มุกรัตน์ธารา","colorgen":"#4D96FF","numgen":"56"},{"namegen":"กษิรชาด","colorgen":"#FF6B6B","numgen":"55"},{"namegen":"กิตติกวินประภัสศิลป์มธุกร","colorgen":"#FFD93D","numgen":"54"},{"namegen":"นาคินบดินทร์ขจรกลิ่น","colorgen":"#6BCB77","numgen":"53"},{"namegen":"บูรไพลิน หัสดินทร์นราธิป","colorgen":"#4D96FF","numgen":"52"},{"namegen":"รังสิมารุจี นทีคุณารักษ์","colorgen":"#FF6B6B","numgen":"51"},{"namegen":"ทศวชิรชลธี","colorgen":"#FFD93D","numgen":"50"},{"namegen":"วนพิชญภากร","colorgen":"#6BCB77","numgen":"49"},{"namegen":"กาญจนกันทร","colorgen":"#4D96FF","numgen":"48"},{"namegen":"วริช ชโลทร","colorgen":"#FF6B6B","numgen":"47"},{"namegen":"สัตตนิลบุษย์","colorgen":"#FFD93D","numgen":"46"},{"namegen":"นรินทราทิตย์","colorgen":"#6BCB77","numgen":"45"},{"namegen":"วิลินกร","colorgen":"#4D96FF","numgen":"44"},{"namegen":"เศวตชาดชลทิศ","colorgen":"#FF6B6B","numgen":"43"},{"namegen":"เอกภัทร์ภุมรินทร์","colorgen":"#FFD93D","numgen":"42"},{"namegen":"ธีรวรการ","colorgen":"#6BCB77","numgen":"41"},{"namegen":"สัตประพัทธ์","colorgen":"#4D96FF","numgen":"40"},{"namegen":"กฤติกา","colorgen":"#FF6B6B","numgen":"39"},{"namegen":"เก็จทรายแก้ว","colorgen":"#FFD93D","numgen":"38"},{"namegen":"เคนกรี","colorgen":"#6BCB77","numgen":"37"},{"namegen":"อติทีน","colorgen":"#4D96FF","numgen":"36"},{"namegen":"ณัลลกัณฑ์","colorgen":"#FF6B6B","numgen":"35"},{"namegen":"พิหเคนทร์","colorgen":"#FFD93D","numgen":"34"},{"namegen":"ทวิชากร","colorgen":"#6BCB77","numgen":"33"},{"namegen":"มธุกร","colorgen":"#4D96FF","numgen":"32"},{"namegen":"นเคศวร","colorgen":"#FF6B6B","numgen":"31"},{"namegen":"ศฤคาล","colorgen":"#FFD93D","numgen":"30"},{"namegen":"ชฎายุ","colorgen":"#6BCB77","numgen":"29"},{"namegen":"ภุมรินทร์","colorgen":"#4D96FF","numgen":"28"},{"namegen":"พณิณธร","colorgen":"#FF6B6B","numgen":"27"},{"namegen":"มฤคมาศ","colorgen":"#FFD93D","numgen":"26"},{"namegen":"ตฤณสีห์","colorgen":"#6BCB77","numgen":"25"},{"namegen":"เหมราช","colorgen":"#4D96FF","numgen":"24"},{"namegen":"ฉัททันต์","colorgen":"#FF6B6B","numgen":"23"},{"namegen":"บัวขาว","colorgen":"#FFD93D","numgen":"22"},{"namegen":"กรกฎ","colorgen":"#6BCB77","numgen":"21"},{"namegen":"นางนวล","colorgen":"#4D96FF","numgen":"20"},{"namegen":"จามรี","colorgen":"#FF6B6B","numgen":"19"},{"namegen":"เสือดาว","colorgen":"#FFD93D","numgen":"18"},{"namegen":"หงส์ขาว","colorgen":"#6BCB77","numgen":"17"},{"namegen":"พิราบขาว","colorgen":"#4D96FF","numgen":"16"},{"namegen":"เห่าไฟ","colorgen":"#FF6B6B","numgen":"15"},{"namegen":"กระทิงดำ","colorgen":"#FFD93D","numgen":"14"},{"namegen":"เอราวัณ","colorgen":"#6BCB77","numgen":"13"},{"namegen":"ยูงทอง","colorgen":"#4D96FF","numgen":"12"},{"namegen":"จงอางขาว","colorgen":"#FF6B6B","numgen":"11"},{"namegen":"พยัคฆราช","colorgen":"#FFD93D","numgen":"10"},{"namegen":"อินทรีผงาด","colorgen":"#6BCB77","numgen":"9"},{"namegen":"สิงห์ผยอง","colorgen":"#4D96FF","numgen":"8"},{"namegen":"ผึ้งหลวง","colorgen":"#FF6B6B","numgen":"7"},{"namegen":"มดทอง","colorgen":"#FFD93D","numgen":"6"},{"namegen":"ฉลามขาว","colorgen":"#6BCB77","numgen":"5"},{"namegen":"ช้างเผือก","colorgen":"#4D96FF","numgen":"4"},{"namegen":"อรชร","colorgen":"#FF6B6B","numgen":"3"},{"namegen":"ศรอนงค์","colorgen":"#FFD93D","numgen":"2"},{"namegen":"ม้าสีหมอก","colorgen":"#8B8B8B","numgen":"1"}]
-
 Body bodyFromJson(String str) => Body.fromJson(json.decode(str));
 String bodyToJson(Body data) => json.encode(data.toJson());
-
 class Body {
   Body({
     Screeninfo? screeninfo,
+    List<Options>? options,
     UserGen? userGen,
-    List<ListGen>? listGen,
-  }) {
+    List<ListGen>? listGen,}){
     _screeninfo = screeninfo;
+    _options = options;
     _userGen = userGen;
     _listGen = listGen;
   }
 
   Body.fromJson(dynamic json) {
     _screeninfo = json['screeninfo'] != null ? Screeninfo.fromJson(json['screeninfo']) : null;
+    if (json['options'] != null) {
+      _options = [];
+      json['options'].forEach((v) {
+        _options?.add(Options.fromJson(v));
+      });
+    }
     _userGen = json['user_gen'] != null ? UserGen.fromJson(json['user_gen']) : null;
     if (json['list_gen'] != null) {
       _listGen = [];
@@ -74,19 +76,20 @@ class Body {
     }
   }
   Screeninfo? _screeninfo;
+  List<Options>? _options;
   UserGen? _userGen;
   List<ListGen>? _listGen;
-  Body copyWith({
-    Screeninfo? screeninfo,
+  Body copyWith({  Screeninfo? screeninfo,
+    List<Options>? options,
     UserGen? userGen,
     List<ListGen>? listGen,
-  }) =>
-      Body(
-        screeninfo: screeninfo ?? _screeninfo,
-        userGen: userGen ?? _userGen,
-        listGen: listGen ?? _listGen,
-      );
+  }) => Body(  screeninfo: screeninfo ?? _screeninfo,
+    options: options ?? _options,
+    userGen: userGen ?? _userGen,
+    listGen: listGen ?? _listGen,
+  );
   Screeninfo? get screeninfo => _screeninfo;
+  List<Options>? get options => _options;
   UserGen? get userGen => _userGen;
   List<ListGen>? get listGen => _listGen;
 
@@ -94,6 +97,9 @@ class Body {
     final map = <String, dynamic>{};
     if (_screeninfo != null) {
       map['screeninfo'] = _screeninfo?.toJson();
+    }
+    if (_options != null) {
+      map['options'] = _options?.map((v) => v.toJson()).toList();
     }
     if (_userGen != null) {
       map['user_gen'] = _userGen?.toJson();
@@ -103,21 +109,20 @@ class Body {
     }
     return map;
   }
+
 }
 
-/// namegen : "อำพันรัตติกาล"
-/// colorgen : "#FFD93D"
-/// numgen : "66"
+/// namegen : " พชรเมฆินทร์ ไพลิน นิลกาฬ"
+/// colorgen : "#4D96FF"
+/// numgen : "68"
 
 ListGen listGenFromJson(String str) => ListGen.fromJson(json.decode(str));
 String listGenToJson(ListGen data) => json.encode(data.toJson());
-
 class ListGen {
   ListGen({
     String? namegen,
     String? colorgen,
-    String? numgen,
-  }) {
+    String? numgen,}){
     _namegen = namegen;
     _colorgen = colorgen;
     _numgen = numgen;
@@ -131,16 +136,13 @@ class ListGen {
   String? _namegen;
   String? _colorgen;
   String? _numgen;
-  ListGen copyWith({
-    String? namegen,
+  ListGen copyWith({  String? namegen,
     String? colorgen,
     String? numgen,
-  }) =>
-      ListGen(
-        namegen: namegen ?? _namegen,
-        colorgen: colorgen ?? _colorgen,
-        numgen: numgen ?? _numgen,
-      );
+  }) => ListGen(  namegen: namegen ?? _namegen,
+    colorgen: colorgen ?? _colorgen,
+    numgen: numgen ?? _numgen,
+  );
   String? get namegen => _namegen;
   String? get colorgen => _colorgen;
   String? get numgen => _numgen;
@@ -152,6 +154,7 @@ class ListGen {
     map['numgen'] = _numgen;
     return map;
   }
+
 }
 
 /// namegen : "กรีนทีมัทฉะลาเต้"
@@ -160,13 +163,11 @@ class ListGen {
 
 UserGen userGenFromJson(String str) => UserGen.fromJson(json.decode(str));
 String userGenToJson(UserGen data) => json.encode(data.toJson());
-
 class UserGen {
   UserGen({
     String? namegen,
     String? colorgen,
-    String? numgen,
-  }) {
+    String? numgen,}){
     _namegen = namegen;
     _colorgen = colorgen;
     _numgen = numgen;
@@ -180,16 +181,13 @@ class UserGen {
   String? _namegen;
   String? _colorgen;
   String? _numgen;
-  UserGen copyWith({
-    String? namegen,
+  UserGen copyWith({  String? namegen,
     String? colorgen,
     String? numgen,
-  }) =>
-      UserGen(
-        namegen: namegen ?? _namegen,
-        colorgen: colorgen ?? _colorgen,
-        numgen: numgen ?? _numgen,
-      );
+  }) => UserGen(  namegen: namegen ?? _namegen,
+    colorgen: colorgen ?? _colorgen,
+    numgen: numgen ?? _numgen,
+  );
   String? get namegen => _namegen;
   String? get colorgen => _colorgen;
   String? get numgen => _numgen;
@@ -201,42 +199,93 @@ class UserGen {
     map['numgen'] = _numgen;
     return map;
   }
+
+}
+
+/// title : "college grade order"
+/// value : "1"
+
+Options optionsFromJson(String str) => Options.fromJson(json.decode(str));
+String optionsToJson(Options data) => json.encode(data.toJson());
+class Options {
+  Options({
+    String? title,
+    String? value,}){
+    _title = title;
+    _value = value;
+  }
+
+  Options.fromJson(dynamic json) {
+    _title = json['title'];
+    _value = json['value'];
+  }
+  String? _title;
+  String? _value;
+  Options copyWith({  String? title,
+    String? value,
+  }) => Options(  title: title ?? _title,
+    value: value ?? _value,
+  );
+  String? get title => _title;
+  String? get value => _value;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['title'] = _title;
+    map['value'] = _value;
+    return map;
+  }
+
 }
 
 /// titleboardnisit : "Board of Student"
+/// search : "search"
+/// here : "here"
 
 Screeninfo screeninfoFromJson(String str) => Screeninfo.fromJson(json.decode(str));
 String screeninfoToJson(Screeninfo data) => json.encode(data.toJson());
-
 class Screeninfo {
   Screeninfo({
     String? titleboardnisit,
-  }) {
+    String? search,
+    String? here,}){
     _titleboardnisit = titleboardnisit;
+    _search = search;
+    _here = here;
   }
 
   Screeninfo.fromJson(dynamic json) {
     _titleboardnisit = json['titleboardnisit'];
+    _search = json['search'];
+    _here = json['here'];
   }
   String? _titleboardnisit;
-  Screeninfo copyWith({
-    String? titleboardnisit,
-  }) =>
-      Screeninfo(
-        titleboardnisit: titleboardnisit ?? _titleboardnisit,
-      );
+  String? _search;
+  String? _here;
+  Screeninfo copyWith({  String? titleboardnisit,
+    String? search,
+    String? here,
+  }) => Screeninfo(  titleboardnisit: titleboardnisit ?? _titleboardnisit,
+    search: search ?? _search,
+    here: here ?? _here,
+  );
   String? get titleboardnisit => _titleboardnisit;
+  String? get search => _search;
+  String? get here => _here;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['titleboardnisit'] = _titleboardnisit;
+    map['search'] = _search;
+    map['here'] = _here;
     return map;
   }
-}
 
+}
 /// status : 200
 /// message : "success"
 /// modulename : "home"
+/// timeexpire : false
 
 Head headFromJson(String str) => Head.fromJson(json.decode(str));
 String headToJson(Head data) => json.encode(data.toJson());

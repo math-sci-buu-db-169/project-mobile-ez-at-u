@@ -87,4 +87,10 @@ class HomeRepository {
         })
     );
   }
+  Future<Response> getSettingScreen() async {
+    return await MyDio.createDioServer().post("/api/home/settingscreen",
+        data: jsonEncode({
+        })
+    );
+  }
 }

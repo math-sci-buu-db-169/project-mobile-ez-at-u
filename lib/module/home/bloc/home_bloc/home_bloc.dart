@@ -15,6 +15,7 @@ import '../../../../check_token/token_bloc.dart';
 import '../../../../main_route/main_route_bloc_model/check_token_expired_response.dart';
 import '../../../../main_route/main_route_bloc_model/refresh_token_response.dart';
 import '../../../login/model/response/log_sessions/log_sessions_response.dart';
+import '../../model/response/home_response/setting_screen_response.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';
@@ -306,49 +307,31 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> with HomeRepository {
     on<HomeScreenSettingInfoEvent>((event, emit) async {
       try {
         emit(HomeLoading());
-        print("CheckHome 6 == HomeScreenInfoEvent");
+        print("CheckHome 9 == HomeSettingScreenInfoEvent");
         await checkHomeEventInitial(event, emit);
-        Response responseHome = await getScreenHome();
+        Response responseHome = await getSettingScreen();
 
         if (responseHome.statusCode == 200) {
-          ScreenHomeResponse screenHomeResponse =
-              ScreenHomeResponse.fromJson(responseHome.data);
-          if (screenHomeResponse.head?.status == 200) {
+          SettingScreenResponse settingScreenResponse =
+          SettingScreenResponse.fromJson(responseHome.data);
+          if (settingScreenResponse.head?.status == 200) {
             await setButton(
-                buttonOkAPI: screenHomeResponse.body?.errorbutton?.buttonok,
+                buttonOkAPI: settingScreenResponse.body?.errorbutton?.buttonok,
                 buttonConfirmAPI:
-                    screenHomeResponse.body?.errorbutton?.buttonconfirm,
-                buttonYesAPI: screenHomeResponse.body?.errorbutton?.buttonyes,
-                buttonNoAPI: screenHomeResponse.body?.errorbutton?.buttonno,
+                settingScreenResponse.body?.errorbutton?.buttonconfirm,
+                buttonYesAPI: settingScreenResponse.body?.errorbutton
+                    ?.buttonyes,
+                buttonNoAPI: settingScreenResponse.body?.errorbutton?.buttonno,
                 buttonCancelAPI:
-                    screenHomeResponse.body?.errorbutton?.buttoncancel);
-            Response responseProfile = await getApiProfile();
-
+                settingScreenResponse.body?.errorbutton?.buttoncancel);
             emit(HomeEndLoading());
-            if (responseProfile.statusCode == 200) {
-              ApiProfileResponse apiProfileResponse =
-                  ApiProfileResponse.fromJson(responseProfile.data);
-              if (apiProfileResponse.head?.status == 200) {
-                prefs = await SharedPreferences.getInstance();
-                await setUserLanguage(
-                    apiProfileResponse.body?.profileGeneralInfo?.langeuage ??
-                        'TH');
-                await setMyNameUser(
-                    apiProfileResponse.body?.profileGeneralInfo?.name ?? '');
+            emit(ScreenInfoHomeSettingSuccessState(settingScreenResponse: settingScreenResponse,));
 
-                emit(ScreenInfoHomeSettingSuccessState(
-                  responseScreenInfoHome: screenHomeResponse,
-                  responseProfile: apiProfileResponse,
-                ));
-              } else {
-                emit(
-                    HomeError(message: apiProfileResponse.head?.message ?? ""));
-              }
-            } else {
-              emit(HomeError(message: responseHome.statusMessage ?? ""));
-            }
-          } else {
-            emit(HomeError(message: screenHomeResponse.head?.message ?? ""));
+
+
+          }
+          else {
+            emit(HomeError(message: settingScreenResponse.head?.message ?? ""));
           }
         } else {
           emit(HomeError(message: responseHome.statusMessage ?? ""));

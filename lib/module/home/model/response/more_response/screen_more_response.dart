@@ -43,7 +43,11 @@ class ScreenMoreResponse {
     return map;
   }
 }
-// screeninfo : {"titlemore":"เพิ่มเติม","subtitileboard":"ทำเนียบ","btnstd":"นักเรียน","btntc":"อาจารย์","subtitiledepart":"เกี่ยวกับภาควิชา","btndeparthis":"ประวัติภาควิชา","btncou":"หลักสูตร","btnface":"เฟซบุ๊ก","btnweb":"เว็บไซต์","subtitilesup":"สนับสนุน","btntermandcon":"ข้อตกลงและเงื่อนไข","btnfaq":"คำถามที่พบบ่อย","btncontactus":"ติดต่อเรา"}
+
+/// screeninfo : {"titlemore":"More","subtitileboard":"Board","btnstd":"Student","btntc":"Teacher","subtitiledepart":"About department","btndeparthis":"Department history","btncou":"Course","btnface":"Facebook","btnweb":"Website","subtitilesup":"Support","btntermandcon":"Terms and conditions","btnfaq":"FAQ","btncontactus":"Contact us","relatedlinks":"Related Links"}
+/// facultyid : "SC03"
+/// departmentid : "MA01"
+/// branchid : "M01"
 /// pavat_url : "https://math.buu.ac.th/history/frontend/index"
 /// luksuit_url : "https://math.buu.ac.th/course/frontend/index"
 /// facebook_url : "https://www.facebook.com/SciMathBUU"
@@ -51,16 +55,20 @@ class ScreenMoreResponse {
 
 Body bodyFromJson(String str) => Body.fromJson(json.decode(str));
 String bodyToJson(Body data) => json.encode(data.toJson());
-
 class Body {
   Body({
     Screeninfo? screeninfo,
+    String? facultyid,
+    String? departmentid,
+    String? branchid,
     String? pavatUrl,
     String? luksuitUrl,
     String? facebookUrl,
-    String? websiteUrl,
-  }) {
+    String? websiteUrl,}){
     _screeninfo = screeninfo;
+    _facultyid = facultyid;
+    _departmentid = departmentid;
+    _branchid = branchid;
     _pavatUrl = pavatUrl;
     _luksuitUrl = luksuitUrl;
     _facebookUrl = facebookUrl;
@@ -69,31 +77,43 @@ class Body {
 
   Body.fromJson(dynamic json) {
     _screeninfo = json['screeninfo'] != null ? Screeninfo.fromJson(json['screeninfo']) : null;
+    _facultyid = json['facultyid'];
+    _departmentid = json['departmentid'];
+    _branchid = json['branchid'];
     _pavatUrl = json['pavat_url'];
     _luksuitUrl = json['luksuit_url'];
     _facebookUrl = json['facebook_url'];
     _websiteUrl = json['website_url'];
   }
   Screeninfo? _screeninfo;
+  String? _facultyid;
+  String? _departmentid;
+  String? _branchid;
   String? _pavatUrl;
   String? _luksuitUrl;
   String? _facebookUrl;
   String? _websiteUrl;
-  Body copyWith({
-    Screeninfo? screeninfo,
+  Body copyWith({  Screeninfo? screeninfo,
+    String? facultyid,
+    String? departmentid,
+    String? branchid,
     String? pavatUrl,
     String? luksuitUrl,
     String? facebookUrl,
     String? websiteUrl,
-  }) =>
-      Body(
-        screeninfo: screeninfo ?? _screeninfo,
-        pavatUrl: pavatUrl ?? _pavatUrl,
-        luksuitUrl: luksuitUrl ?? _luksuitUrl,
-        facebookUrl: facebookUrl ?? _facebookUrl,
-        websiteUrl: websiteUrl ?? _websiteUrl,
-      );
+  }) => Body(  screeninfo: screeninfo ?? _screeninfo,
+    facultyid: facultyid ?? _facultyid,
+    departmentid: departmentid ?? _departmentid,
+    branchid: branchid ?? _branchid,
+    pavatUrl: pavatUrl ?? _pavatUrl,
+    luksuitUrl: luksuitUrl ?? _luksuitUrl,
+    facebookUrl: facebookUrl ?? _facebookUrl,
+    websiteUrl: websiteUrl ?? _websiteUrl,
+  );
   Screeninfo? get screeninfo => _screeninfo;
+  String? get facultyid => _facultyid;
+  String? get departmentid => _departmentid;
+  String? get branchid => _branchid;
   String? get pavatUrl => _pavatUrl;
   String? get luksuitUrl => _luksuitUrl;
   String? get facebookUrl => _facebookUrl;
@@ -104,31 +124,35 @@ class Body {
     if (_screeninfo != null) {
       map['screeninfo'] = _screeninfo?.toJson();
     }
+    map['facultyid'] = _facultyid;
+    map['departmentid'] = _departmentid;
+    map['branchid'] = _branchid;
     map['pavat_url'] = _pavatUrl;
     map['luksuit_url'] = _luksuitUrl;
     map['facebook_url'] = _facebookUrl;
     map['website_url'] = _websiteUrl;
     return map;
   }
+
 }
 
-/// titlemore : "เพิ่มเติม"
-/// subtitileboard : "ทำเนียบ"
-/// btnstd : "นักเรียน"
-/// btntc : "อาจารย์"
-/// subtitiledepart : "เกี่ยวกับภาควิชา"
-/// btndeparthis : "ประวัติภาควิชา"
-/// btncou : "หลักสูตร"
-/// btnface : "เฟซบุ๊ก"
-/// btnweb : "เว็บไซต์"
-/// subtitilesup : "สนับสนุน"
-/// btntermandcon : "ข้อตกลงและเงื่อนไข"
-/// btnfaq : "คำถามที่พบบ่อย"
-/// btncontactus : "ติดต่อเรา"
+/// titlemore : "More"
+/// subtitileboard : "Board"
+/// btnstd : "Student"
+/// btntc : "Teacher"
+/// subtitiledepart : "About department"
+/// btndeparthis : "Department history"
+/// btncou : "Course"
+/// btnface : "Facebook"
+/// btnweb : "Website"
+/// subtitilesup : "Support"
+/// btntermandcon : "Terms and conditions"
+/// btnfaq : "FAQ"
+/// btncontactus : "Contact us"
+/// relatedlinks : "Related Links"
 
 Screeninfo screeninfoFromJson(String str) => Screeninfo.fromJson(json.decode(str));
 String screeninfoToJson(Screeninfo data) => json.encode(data.toJson());
-
 class Screeninfo {
   Screeninfo({
     String? titlemore,
@@ -144,7 +168,7 @@ class Screeninfo {
     String? btntermandcon,
     String? btnfaq,
     String? btncontactus,
-  }) {
+    String? relatedlinks,}){
     _titlemore = titlemore;
     _subtitileboard = subtitileboard;
     _btnstd = btnstd;
@@ -158,6 +182,7 @@ class Screeninfo {
     _btntermandcon = btntermandcon;
     _btnfaq = btnfaq;
     _btncontactus = btncontactus;
+    _relatedlinks = relatedlinks;
   }
 
   Screeninfo.fromJson(dynamic json) {
@@ -174,6 +199,7 @@ class Screeninfo {
     _btntermandcon = json['btntermandcon'];
     _btnfaq = json['btnfaq'];
     _btncontactus = json['btncontactus'];
+    _relatedlinks = json['relatedlinks'];
   }
   String? _titlemore;
   String? _subtitileboard;
@@ -188,8 +214,8 @@ class Screeninfo {
   String? _btntermandcon;
   String? _btnfaq;
   String? _btncontactus;
-  Screeninfo copyWith({
-    String? titlemore,
+  String? _relatedlinks;
+  Screeninfo copyWith({  String? titlemore,
     String? subtitileboard,
     String? btnstd,
     String? btntc,
@@ -202,22 +228,22 @@ class Screeninfo {
     String? btntermandcon,
     String? btnfaq,
     String? btncontactus,
-  }) =>
-      Screeninfo(
-        titlemore: titlemore ?? _titlemore,
-        subtitileboard: subtitileboard ?? _subtitileboard,
-        btnstd: btnstd ?? _btnstd,
-        btntc: btntc ?? _btntc,
-        subtitiledepart: subtitiledepart ?? _subtitiledepart,
-        btndeparthis: btndeparthis ?? _btndeparthis,
-        btncou: btncou ?? _btncou,
-        btnface: btnface ?? _btnface,
-        btnweb: btnweb ?? _btnweb,
-        subtitilesup: subtitilesup ?? _subtitilesup,
-        btntermandcon: btntermandcon ?? _btntermandcon,
-        btnfaq: btnfaq ?? _btnfaq,
-        btncontactus: btncontactus ?? _btncontactus,
-      );
+    String? relatedlinks,
+  }) => Screeninfo(  titlemore: titlemore ?? _titlemore,
+    subtitileboard: subtitileboard ?? _subtitileboard,
+    btnstd: btnstd ?? _btnstd,
+    btntc: btntc ?? _btntc,
+    subtitiledepart: subtitiledepart ?? _subtitiledepart,
+    btndeparthis: btndeparthis ?? _btndeparthis,
+    btncou: btncou ?? _btncou,
+    btnface: btnface ?? _btnface,
+    btnweb: btnweb ?? _btnweb,
+    subtitilesup: subtitilesup ?? _subtitilesup,
+    btntermandcon: btntermandcon ?? _btntermandcon,
+    btnfaq: btnfaq ?? _btnfaq,
+    btncontactus: btncontactus ?? _btncontactus,
+    relatedlinks: relatedlinks ?? _relatedlinks,
+  );
   String? get titlemore => _titlemore;
   String? get subtitileboard => _subtitileboard;
   String? get btnstd => _btnstd;
@@ -231,6 +257,7 @@ class Screeninfo {
   String? get btntermandcon => _btntermandcon;
   String? get btnfaq => _btnfaq;
   String? get btncontactus => _btncontactus;
+  String? get relatedlinks => _relatedlinks;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -247,13 +274,16 @@ class Screeninfo {
     map['btntermandcon'] = _btntermandcon;
     map['btnfaq'] = _btnfaq;
     map['btncontactus'] = _btncontactus;
+    map['relatedlinks'] = _relatedlinks;
     return map;
   }
+
 }
 
 /// status : 200
 /// message : "success"
 /// modulename : "home"
+/// timeexpire : false
 
 Head headFromJson(String str) => Head.fromJson(json.decode(str));
 String headToJson(Head data) => json.encode(data.toJson());

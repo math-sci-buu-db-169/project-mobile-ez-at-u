@@ -3,7 +3,7 @@ import '../../model/response/more_response/screen_more_board_student_list_respon
 import '../../model/response/more_response/screen_more_list_name_gen_response.dart';
 import '../more_screen/board_screen/more_board_student_List_screen.dart';
 import '../more_screen/board_screen/more_board_student_detail_screen.dart';
-import '../../../../module/home/screen/more_widget/board_Item_student.dart';
+import 'list_nisit_page/board_Item_student.dart';
 
 buildGenListStudent(BuildContext context, ScreenMoreListNameGenResponse? screenMoreListNameGenResponse) {
   return SingleChildScrollView(
@@ -11,7 +11,7 @@ buildGenListStudent(BuildContext context, ScreenMoreListNameGenResponse? screenM
     scrollDirection: Axis.vertical,
     child: Column(
         children: List.generate(
-            int.parse("${screenMoreListNameGenResponse?.body?.listGen?.length}"),
+            screenMoreListNameGenResponse?.body?.listGen?.length ?? 0,
             (index) => boardItemStudent(
                   data: screenMoreListNameGenResponse?.body?.listGen?[index],
                   onTap: () {
@@ -19,7 +19,7 @@ buildGenListStudent(BuildContext context, ScreenMoreListNameGenResponse? screenM
                       context,
                       MaterialPageRoute(
                         builder: (context) => MoreBoardStudentListScreen(
-                          titleGen: "${screenMoreListNameGenResponse?.body?.listGen?[index].numgen}",
+                          titleGen: screenMoreListNameGenResponse?.body?.listGen?[index].numgen??'',
                         ),
                       ),
                     );

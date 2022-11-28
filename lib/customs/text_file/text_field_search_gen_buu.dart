@@ -2,6 +2,7 @@
 
 import 'package:ez_at_u/customs/color/color_const.dart';
 import 'package:ez_at_u/customs/size/size.dart';
+import 'package:ez_at_u/module/home/model/response/more_response/screen_more_list_name_gen_response.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -12,7 +13,7 @@ class TextFieldSearchGenBUUCustom extends StatefulWidget {
   final ValueChanged<String>? onChanged;
   final Function(int optionSearchResult) callbackFromOptionSearch;
   final String? initialvalue;
-
+final ScreenMoreListNameGenResponse? screenMoreListNameGenResponse;
   final IconData iconsFile;
   const TextFieldSearchGenBUUCustom({
     Key? key,
@@ -22,7 +23,7 @@ class TextFieldSearchGenBUUCustom extends StatefulWidget {
     required this.textInputType,
     this.initialvalue,
     required this.iconsFile,
-    required this.callbackFromOptionSearch,
+    required this.callbackFromOptionSearch, this.screenMoreListNameGenResponse,
   }) : super(key: key);
 
 
@@ -35,16 +36,18 @@ class TextFieldSearchGenBUUCustom extends StatefulWidget {
 class _TextTextFieldSearchCustomState extends State<TextFieldSearchGenBUUCustom> {
   bool _isVisible = false;
   List<String> optionsGen =["ลำดับรุ่นมหาลัย","ชื่อรุ่นมหาลัย"];
-  String hintLabelBUU='';
+  String? hintLabelBUU='';
 
   @override
   void initState() {
-     hintLabelBUU = optionsGen[0] ;
+     hintLabelBUU = widget.screenMoreListNameGenResponse?.body?.options?[0].title.toString() ;
      setState(() {});
      super.initState();
   }
   @override
   Widget build(BuildContext context) {
+    String search = widget.screenMoreListNameGenResponse?.body?.screeninfo?.search?? 'ค้นหา';
+    String here = widget.screenMoreListNameGenResponse?.body?.screeninfo?.here?? 'ที่นี';
     return Container(
         // padding: EdgeInsets.all(12),
         margin: const EdgeInsets.all(12),
@@ -52,7 +55,7 @@ class _TextTextFieldSearchCustomState extends State<TextFieldSearchGenBUUCustom>
         child: TextFormField(
           style:  TextStyle(
               fontSize: sizeText18,
-              color:  Theme.of(context).scaffoldBackgroundColor, // height: 2.0,
+              color:  Theme.of(context).appBarTheme.foregroundColor, // height: 2.0,
               ),
           cursorColor: Theme.of(context).appBarTheme.foregroundColor,
           keyboardType: widget.textInputType,
@@ -64,7 +67,7 @@ class _TextTextFieldSearchCustomState extends State<TextFieldSearchGenBUUCustom>
           decoration: InputDecoration(
               filled: true,
               fillColor:Colors.transparent,
-              hintText: 'ค้นหา $hintLabelBUU ที่นี',
+              hintText: '$search $hintLabelBUU $here',
               prefixIcon:   Icon(
                   FontAwesomeIcons.magnifyingGlass,
                   size: 20,
@@ -90,14 +93,14 @@ class _TextTextFieldSearchCustomState extends State<TextFieldSearchGenBUUCustom>
                                     scrollDirection: Axis.vertical,
                                     child: Column(
                                       children: List.generate(
-                                          optionsGen.length,
+                                          widget.screenMoreListNameGenResponse?.body?.options?.length??0,
                                           (index) => Column(
                                             children: [
 
                                               InkWell(
                                                   onTap: () {
                                                     widget.callbackFromOptionSearch(index);
-                                                    hintLabelBUU = optionsGen[index].toString();
+                                                    hintLabelBUU =  widget.screenMoreListNameGenResponse?.body?.options?[index].title.toString();
                                                     Navigator.pop(context);
                                                     setState(() {});
                                                   },
@@ -110,7 +113,7 @@ class _TextTextFieldSearchCustomState extends State<TextFieldSearchGenBUUCustom>
                                                       children: [
                                                         TableRow(children: [
                                                           Text(
-                                                            optionsGen[index].toString(),
+                                                            widget.screenMoreListNameGenResponse?.body?.options?[index].title.toString() ?? '',
                                                             textAlign: TextAlign.center,
                                                             style:  TextStyle(fontSize: sizeTextSmaller14,
                                                               color: Theme.of(context).bottomAppBarColor,),
@@ -120,7 +123,7 @@ class _TextTextFieldSearchCustomState extends State<TextFieldSearchGenBUUCustom>
                                                     ),
                                                   )
                                               ),
-                                              index > 1 || index == optionsGen.length-1
+                                              index > 1 || index == (widget.screenMoreListNameGenResponse?.body?.options?.length??0) -1
                                         ? const SizedBox()
                                                   :  const Divider(
                                                 // color: Theme.of(context).iconTheme.color,

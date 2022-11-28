@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import '../../../../customs/color/color_const.dart';
-import '../../../../module/home/model/response/more_response/screen_more_board_student_list_response.dart';
-import '../../../../module/home/model/response/more_response/screen_more_list_name_gen_response.dart';
+import '../../../../../customs/color/color_const.dart';
+import '../../../model/response/more_response/screen_more_board_student_list_response.dart';
+import '../../../model/response/more_response/screen_more_list_name_gen_response.dart';
 
 String phImg = "";
 boardItemStudent({
@@ -16,7 +16,9 @@ boardItemStudent({
     child: Padding(
       padding: const EdgeInsets.only(bottom: 5),
       child: Card(
-        color: Theme.of(context).primaryColor,
+        elevation: 8,
+        shadowColor: Theme.of(context).appBarTheme.foregroundColor,
+        color:Theme.of(context).appBarTheme.backgroundColor,
         shape:  const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             topRight: Radius.circular(30),
@@ -24,7 +26,7 @@ boardItemStudent({
 
           ),
         ),
-        elevation: 8,
+
         child: Table(
           border: TableBorder.symmetric(outside: const BorderSide(width: 2, color: Colors.transparent)),
           columnWidths: const {0: FractionColumnWidth(0.3), 1: FractionColumnWidth(0.01), 2: FractionColumnWidth(0.69)},
@@ -80,14 +82,15 @@ boardItemStudentUser({
     onTap: onTap,
 
     child:  Card(
-      color: Theme.of(context).primaryColor,
+      elevation: 8,
+      shadowColor: Theme.of(context).appBarTheme.foregroundColor,
+      color:Theme.of(context).appBarTheme.backgroundColor,
   shape: const RoundedRectangleBorder(
   borderRadius: BorderRadius.only(
   topLeft: Radius.circular(30),
   bottomRight: Radius.circular(30),
   ),
   ),
-  elevation: 8,
       child: Table(
         border: TableBorder.symmetric(outside: const BorderSide(width: 2, color: Colors.transparent)),
         columnWidths: const {0: FractionColumnWidth(0.3), 1: FractionColumnWidth(0.01), 2: FractionColumnWidth(0.69)},
@@ -144,12 +147,13 @@ boardItemListStudent({
   return GestureDetector(
     onTap: onTap,
     child: Card(
-      // color: HexColor('#F5F5F5'),
-      color:Theme.of(context).primaryColor,
+      elevation: 8,
+      shadowColor: Theme.of(context).appBarTheme.foregroundColor,
+      color:Theme.of(context).appBarTheme.backgroundColor,
       child: Padding(
         padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
         child: Table(
-          border: TableBorder.symmetric(outside: const BorderSide(width: 2, color: Colors.transparent)),
+          border: TableBorder.symmetric(outside: const BorderSide(width: 10, color: Colors.transparent)),
           columnWidths: const {0: FractionColumnWidth(0.3), 1: FractionColumnWidth(0.05), 2: FractionColumnWidth(0.65)},
           defaultVerticalAlignment: TableCellVerticalAlignment.middle,
           children: [

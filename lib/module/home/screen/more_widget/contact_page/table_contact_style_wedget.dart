@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../../../customs/color/color_const.dart';
-import '../../../../customs/size/size.dart';
+import '../../../../../customs/color/color_const.dart';
+import '../../../../../customs/size/size.dart';
 
 contactThreeRow(
     { required BuildContext context,

@@ -136,8 +136,8 @@ drawerHome(
                               : buildTableDrawerTwoTable(
                                   context,
                                   textLeftTitle:
-                                  // screenHomeResponse
-                                  //         ?.body?.screenInfo?.textposition ??
+                                  screenHomeResponse
+                                          ?.body?.screenInfo?.position ??
                                       homeTextPosition,
                                   textRightDetail:screenProfileResponse
                                       ?.body?.profileGeneralInfo?.position ??

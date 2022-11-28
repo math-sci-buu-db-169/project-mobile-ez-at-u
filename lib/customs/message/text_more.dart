@@ -16,3 +16,4 @@ const String moreTextRight   = 'ใช่หรือไม่';
 const String moreTextYes   = 'ตกลง';
 const String moreTextNo   = 'ยกเลิก';
 const String moreFAQTextAnswer   = 'คำตอบ';
+const String moreBtnRelatedLinks  = "ลิงก์ที่เกี่ยวข้อง";
