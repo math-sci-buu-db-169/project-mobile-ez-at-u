@@ -11,10 +11,17 @@ class ActivityRepository  {
     })
     );
   }
-  Future<Response> getScreenApproveActivityTeacher() async {
+  Future<Response> getScreenActivityListTeacher(String filterstatus, int? studentid, String studentname, String activityname) async {
+    print(filterstatus);
+    print(studentid);
+    print(studentname);
+    print(activityname);
     return await MyDio.createDioServer().post("/activity/activitylistteacher",
     data: jsonEncode({
-
+      "filterstatus": filterstatus,
+      "studentid": studentid,
+      "studentname": studentname,
+      "activityname": activityname
     })
     );
   }

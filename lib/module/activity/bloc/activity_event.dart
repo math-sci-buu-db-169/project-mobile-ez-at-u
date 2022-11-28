@@ -5,7 +5,6 @@ abstract class ActivityEvent {}
 
 class AddActivityScreenInfoEvent extends ActivityEvent {}
 class EditActivityScreenInfoEvent extends ActivityEvent {}
-class ActivityListForTeacherScreenInfoEvent extends ActivityEvent {}
 class OnClickEditActivityScreenInfoEvent extends ActivityEvent {
   dynamic data;
   OnClickEditActivityScreenInfoEvent({required this.data,});
@@ -51,4 +50,31 @@ class SubmitApproveActivityTeacherEvent extends ActivityEvent {
     required this.status
   });
 }
-class ApproveActivityTeacherScreenInfoEvent extends ActivityEvent {}
+class ActivityListTeacherScreenInfoEvent extends ActivityEvent {
+  String filterstatus;
+  int? studentid;
+  String studentname;
+  String activityname;
+
+  ActivityListTeacherScreenInfoEvent({
+    required this.filterstatus,
+    required this.studentid,
+    required this.studentname,
+    required this.activityname
+
+  });
+}
+class ActivityListTeacherSearchScreenInfoEvent extends ActivityEvent {
+  String filterstatus;
+  int? studentid;
+  String studentname;
+  String activityname;
+
+  ActivityListTeacherSearchScreenInfoEvent({
+    required this.filterstatus,
+    required this.studentid,
+    required this.studentname,
+    required this.activityname
+
+  });
+}

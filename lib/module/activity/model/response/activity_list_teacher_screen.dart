@@ -1,26 +1,26 @@
 import 'dart:convert';
 /// head : {"status":200,"message":"success","modulename":"activity","timeexpire":false}
-/// body : {"screeninfo":{"titleteacheractivity":"Activity","textactivity":"Activity","studentcode":"Student code","student":"Student","startdate":"Start date","time":"Period","venue":"Venue","year":"Year","term":"Term","detail":"Detail","finishdate":"Finish date","date":"Date"},"activitylist":[{"acid":"50","acname":"ยืนยันแล้ว","year":"2022","term":"1","startdate":"1/11/2022","finishdate":"1/11/2022","timehours":"10","timeminutes":"20","venue":"HOME","stdname":"คุณต้นสาย","stdlastname":"ตรีถัน","stdcode":"62030080","detail":"Test","status":"Approved!","color":"#C7FFAD"},{"acid":"47","acname":"asd","year":"2010","term":"1","startdate":"1/11/2022","finishdate":"1/11/2022","timehours":"10","timeminutes":"20","venue":"HOME","stdname":"คุณต้นสาย","stdlastname":"ตรีถัน","stdcode":"62030080","detail":"Test","status":"Unapproved!","color":"#FAFFBE"}]}
+/// body : {"screeninfo":{"titleteacheractivity":"กิจกรรม","textactivity":"กิจกรรม","studentcode":"รหัสนิสิต","student":"นิสิต","startdate":"วันที่เริ่มทำ","time":"ระยะเวลา","venue":"สถานที่ทำกิจกรรม","year":"ปี","term":"เทอม","detail":"รายละเอียด","finishdate":"วันที่ทำเสร็จ","date":"วันที่"},"activitylist":[{"acid":"55","acname":"de","year":"2015","term":"summer","startdate":"28/11/2022","finishdate":"28/11/2022","timehours":"08","timeminutes":"03","venue":"rer","stdname":"คุณสิทธิพล","stdlastname":"ชินโน","stdcode":"62030340","detail":"frf","status":"Unapproved!","color":"#FAFFBE"},{"acid":"53","acname":"ปฏิเสธ","year":"2022","term":"1","startdate":"1/11/2022","finishdate":"1/11/2022","timehours":"10","timeminutes":"20","venue":"HOME","stdname":"คุณต้นสาย","stdlastname":"ตรีถัน","stdcode":"62030080","detail":"Test","status":"Rejected!","color":"#f3f6f4"},{"acid":"50","acname":"ยืนยันแล้ว","year":"2022","term":"1","startdate":"1/11/2022","finishdate":"1/11/2022","timehours":"10","timeminutes":"20","venue":"HOME","stdname":"คุณต้นสาย","stdlastname":"ตรีถัน","stdcode":"62030080","detail":"Test","status":"Approved!","color":"#C7FFAD"},{"acid":"47","acname":"asd","year":"2010","term":"1","startdate":"1/11/2022","finishdate":"1/11/2022","timehours":"10","timeminutes":"20","venue":"HOME","stdname":"คุณต้นสาย","stdlastname":"ตรีถัน","stdcode":"62030080","detail":"Test","status":"Unapproved!","color":"#FAFFBE"}],"options":[{"title":"ชื่อนิสิต","value":"1"},{"title":"ชื่อกิจกรรม","value":"2"}],"options_status":[{"status":"รอรับการยืนยัน","value":"1"},{"status":"ยืนยันแล้ว","value":"2"},{"status":"ถูกปฏิเสธ","value":"3"}]}
 
-ApproveActivityTeacherScreen approveActivityTeacherScreenFromJson(String str) => ApproveActivityTeacherScreen.fromJson(json.decode(str));
-String approveActivityTeacherScreenToJson(ApproveActivityTeacherScreen data) => json.encode(data.toJson());
-class ApproveActivityTeacherScreen {
-  ApproveActivityTeacherScreen({
+ActivityListTeacherScreen activityListTeacherScreenFromJson(String str) => ActivityListTeacherScreen.fromJson(json.decode(str));
+String activityListTeacherScreenToJson(ActivityListTeacherScreen data) => json.encode(data.toJson());
+class ActivityListTeacherScreen {
+  ActivityListTeacherScreen({
       Head? head, 
       Body? body,}){
     _head = head;
     _body = body;
 }
 
-  ApproveActivityTeacherScreen.fromJson(dynamic json) {
+  ActivityListTeacherScreen.fromJson(dynamic json) {
     _head = json['head'] != null ? Head.fromJson(json['head']) : null;
     _body = json['body'] != null ? Body.fromJson(json['body']) : null;
   }
   Head? _head;
   Body? _body;
-ApproveActivityTeacherScreen copyWith({  Head? head,
+ActivityListTeacherScreen copyWith({  Head? head,
   Body? body,
-}) => ApproveActivityTeacherScreen(  head: head ?? _head,
+}) => ActivityListTeacherScreen(  head: head ?? _head,
   body: body ?? _body,
 );
   Head? get head => _head;
@@ -39,17 +39,23 @@ ApproveActivityTeacherScreen copyWith({  Head? head,
 
 }
 
-/// screeninfo : {"titleteacheractivity":"Activity","textactivity":"Activity","studentcode":"Student code","student":"Student","startdate":"Start date","time":"Period","venue":"Venue","year":"Year","term":"Term","detail":"Detail","finishdate":"Finish date","date":"Date"}
-/// activitylist : [{"acid":"50","acname":"ยืนยันแล้ว","year":"2022","term":"1","startdate":"1/11/2022","finishdate":"1/11/2022","timehours":"10","timeminutes":"20","venue":"HOME","stdname":"คุณต้นสาย","stdlastname":"ตรีถัน","stdcode":"62030080","detail":"Test","status":"Approved!","color":"#C7FFAD"},{"acid":"47","acname":"asd","year":"2010","term":"1","startdate":"1/11/2022","finishdate":"1/11/2022","timehours":"10","timeminutes":"20","venue":"HOME","stdname":"คุณต้นสาย","stdlastname":"ตรีถัน","stdcode":"62030080","detail":"Test","status":"Unapproved!","color":"#FAFFBE"}]
+/// screeninfo : {"titleteacheractivity":"กิจกรรม","textactivity":"กิจกรรม","studentcode":"รหัสนิสิต","student":"นิสิต","startdate":"วันที่เริ่มทำ","time":"ระยะเวลา","venue":"สถานที่ทำกิจกรรม","year":"ปี","term":"เทอม","detail":"รายละเอียด","finishdate":"วันที่ทำเสร็จ","date":"วันที่"}
+/// activitylist : [{"acid":"55","acname":"de","year":"2015","term":"summer","startdate":"28/11/2022","finishdate":"28/11/2022","timehours":"08","timeminutes":"03","venue":"rer","stdname":"คุณสิทธิพล","stdlastname":"ชินโน","stdcode":"62030340","detail":"frf","status":"Unapproved!","color":"#FAFFBE"},{"acid":"53","acname":"ปฏิเสธ","year":"2022","term":"1","startdate":"1/11/2022","finishdate":"1/11/2022","timehours":"10","timeminutes":"20","venue":"HOME","stdname":"คุณต้นสาย","stdlastname":"ตรีถัน","stdcode":"62030080","detail":"Test","status":"Rejected!","color":"#f3f6f4"},{"acid":"50","acname":"ยืนยันแล้ว","year":"2022","term":"1","startdate":"1/11/2022","finishdate":"1/11/2022","timehours":"10","timeminutes":"20","venue":"HOME","stdname":"คุณต้นสาย","stdlastname":"ตรีถัน","stdcode":"62030080","detail":"Test","status":"Approved!","color":"#C7FFAD"},{"acid":"47","acname":"asd","year":"2010","term":"1","startdate":"1/11/2022","finishdate":"1/11/2022","timehours":"10","timeminutes":"20","venue":"HOME","stdname":"คุณต้นสาย","stdlastname":"ตรีถัน","stdcode":"62030080","detail":"Test","status":"Unapproved!","color":"#FAFFBE"}]
+/// options : [{"title":"ชื่อนิสิต","value":"1"},{"title":"ชื่อกิจกรรม","value":"2"}]
+/// options_status : [{"status":"รอรับการยืนยัน","value":"1"},{"status":"ยืนยันแล้ว","value":"2"},{"status":"ถูกปฏิเสธ","value":"3"}]
 
 Body bodyFromJson(String str) => Body.fromJson(json.decode(str));
 String bodyToJson(Body data) => json.encode(data.toJson());
 class Body {
   Body({
       Screeninfo? screeninfo, 
-      List<Activitylist>? activitylist,}){
+      List<Activitylist>? activitylist, 
+      List<Options>? options, 
+      List<OptionsStatus>? optionsStatus,}){
     _screeninfo = screeninfo;
     _activitylist = activitylist;
+    _options = options;
+    _optionsStatus = optionsStatus;
 }
 
   Body.fromJson(dynamic json) {
@@ -60,16 +66,36 @@ class Body {
         _activitylist?.add(Activitylist.fromJson(v));
       });
     }
+    if (json['options'] != null) {
+      _options = [];
+      json['options'].forEach((v) {
+        _options?.add(Options.fromJson(v));
+      });
+    }
+    if (json['options_status'] != null) {
+      _optionsStatus = [];
+      json['options_status'].forEach((v) {
+        _optionsStatus?.add(OptionsStatus.fromJson(v));
+      });
+    }
   }
   Screeninfo? _screeninfo;
   List<Activitylist>? _activitylist;
+  List<Options>? _options;
+  List<OptionsStatus>? _optionsStatus;
 Body copyWith({  Screeninfo? screeninfo,
   List<Activitylist>? activitylist,
+  List<Options>? options,
+  List<OptionsStatus>? optionsStatus,
 }) => Body(  screeninfo: screeninfo ?? _screeninfo,
   activitylist: activitylist ?? _activitylist,
+  options: options ?? _options,
+  optionsStatus: optionsStatus ?? _optionsStatus,
 );
   Screeninfo? get screeninfo => _screeninfo;
   List<Activitylist>? get activitylist => _activitylist;
+  List<Options>? get options => _options;
+  List<OptionsStatus>? get optionsStatus => _optionsStatus;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -79,26 +105,104 @@ Body copyWith({  Screeninfo? screeninfo,
     if (_activitylist != null) {
       map['activitylist'] = _activitylist?.map((v) => v.toJson()).toList();
     }
+    if (_options != null) {
+      map['options'] = _options?.map((v) => v.toJson()).toList();
+    }
+    if (_optionsStatus != null) {
+      map['options_status'] = _optionsStatus?.map((v) => v.toJson()).toList();
+    }
     return map;
   }
 
 }
 
-/// acid : "50"
-/// acname : "ยืนยันแล้ว"
-/// year : "2022"
-/// term : "1"
-/// startdate : "1/11/2022"
-/// finishdate : "1/11/2022"
-/// timehours : "10"
-/// timeminutes : "20"
-/// venue : "HOME"
-/// stdname : "คุณต้นสาย"
-/// stdlastname : "ตรีถัน"
-/// stdcode : "62030080"
-/// detail : "Test"
-/// status : "Approved!"
-/// color : "#C7FFAD"
+/// status : "รอรับการยืนยัน"
+/// value : "1"
+
+OptionsStatus optionsStatusFromJson(String str) => OptionsStatus.fromJson(json.decode(str));
+String optionsStatusToJson(OptionsStatus data) => json.encode(data.toJson());
+class OptionsStatus {
+  OptionsStatus({
+      String? status, 
+      String? value,}){
+    _status = status;
+    _value = value;
+}
+
+  OptionsStatus.fromJson(dynamic json) {
+    _status = json['status'];
+    _value = json['value'];
+  }
+  String? _status;
+  String? _value;
+OptionsStatus copyWith({  String? status,
+  String? value,
+}) => OptionsStatus(  status: status ?? _status,
+  value: value ?? _value,
+);
+  String? get status => _status;
+  String? get value => _value;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['status'] = _status;
+    map['value'] = _value;
+    return map;
+  }
+
+}
+
+/// title : "ชื่อนิสิต"
+/// value : "1"
+
+Options optionsFromJson(String str) => Options.fromJson(json.decode(str));
+String optionsToJson(Options data) => json.encode(data.toJson());
+class Options {
+  Options({
+      String? title, 
+      String? value,}){
+    _title = title;
+    _value = value;
+}
+
+  Options.fromJson(dynamic json) {
+    _title = json['title'];
+    _value = json['value'];
+  }
+  String? _title;
+  String? _value;
+Options copyWith({  String? title,
+  String? value,
+}) => Options(  title: title ?? _title,
+  value: value ?? _value,
+);
+  String? get title => _title;
+  String? get value => _value;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['title'] = _title;
+    map['value'] = _value;
+    return map;
+  }
+
+}
+
+/// acid : "55"
+/// acname : "de"
+/// year : "2015"
+/// term : "summer"
+/// startdate : "28/11/2022"
+/// finishdate : "28/11/2022"
+/// timehours : "08"
+/// timeminutes : "03"
+/// venue : "rer"
+/// stdname : "คุณสิทธิพล"
+/// stdlastname : "ชินโน"
+/// stdcode : "62030340"
+/// detail : "frf"
+/// status : "Unapproved!"
+/// color : "#FAFFBE"
 
 Activitylist activitylistFromJson(String str) => Activitylist.fromJson(json.decode(str));
 String activitylistToJson(Activitylist data) => json.encode(data.toJson());
@@ -237,18 +341,18 @@ Activitylist copyWith({  String? acid,
 
 }
 
-/// titleteacheractivity : "Activity"
-/// textactivity : "Activity"
-/// studentcode : "Student code"
-/// student : "Student"
-/// startdate : "Start date"
-/// time : "Period"
-/// venue : "Venue"
-/// year : "Year"
-/// term : "Term"
-/// detail : "Detail"
-/// finishdate : "Finish date"
-/// date : "Date"
+/// titleteacheractivity : "กิจกรรม"
+/// textactivity : "กิจกรรม"
+/// studentcode : "รหัสนิสิต"
+/// student : "นิสิต"
+/// startdate : "วันที่เริ่มทำ"
+/// time : "ระยะเวลา"
+/// venue : "สถานที่ทำกิจกรรม"
+/// year : "ปี"
+/// term : "เทอม"
+/// detail : "รายละเอียด"
+/// finishdate : "วันที่ทำเสร็จ"
+/// date : "วันที่"
 
 Screeninfo screeninfoFromJson(String str) => Screeninfo.fromJson(json.decode(str));
 String screeninfoToJson(Screeninfo data) => json.encode(data.toJson());

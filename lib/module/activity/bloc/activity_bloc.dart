@@ -1,4 +1,4 @@
-import 'package:ez_at_u/module/activity/model/response/approve_activity_teacher_screen.dart';
+import 'package:ez_at_u/module/activity/model/response/activity_list_teacher_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
@@ -221,26 +221,55 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
         emit(ActivityError(message: e.response?.statusMessage ?? ""));
       }
     });
-    on<ApproveActivityTeacherScreenInfoEvent>((event, emit) async {
+    on<ActivityListTeacherScreenInfoEvent>((event, emit) async {
       try {
         emit(ActivityLoading());
         print("CheckActivity 9 == AddActivityScreenInfoEvent");
         await  checkActivityEventInitial(event, emit) ;
         print("เข้ามั้ยนะ");
-        Response response = await getScreenApproveActivityTeacher();
+        Response response = await getScreenActivityListTeacher(event.filterstatus,event.studentid,event.studentname,event.activityname);
         emit(ActivityEndLoading());
         if (response.statusCode == 200) {
-          ApproveActivityTeacherScreen screenApproveActivityResponse =
-          ApproveActivityTeacherScreen.fromJson(response.data);
-          if (screenApproveActivityResponse.head?.status == 200) {
+          ActivityListTeacherScreen screenActivityListResponse =
+          ActivityListTeacherScreen.fromJson(response.data);
+          if (screenActivityListResponse.head?.status == 200) {
             print("เข้า success");
-            emit(ApproveActivityScreenInfoSuccessState(
-                response: screenApproveActivityResponse));
+            emit(ActivityListTeacherScreenInfoSuccessState(
+                response: screenActivityListResponse));
             print("เข้า success หลัง");
           } else {
             print("เข้า error");
             emit(ActivityError(
-                message: screenApproveActivityResponse.head?.message ?? ""));
+                message: screenActivityListResponse.head?.message ?? ""));
+          }
+        } else {
+          print("เข้า error");
+          emit(ActivityError(message: response.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(ActivityError(message: e.response?.statusMessage ?? ""));
+      }
+    });
+    on<ActivityListTeacherSearchScreenInfoEvent>((event, emit) async {
+      try {
+        // emit(ActivityLoading());
+        print("CheckActivity 9 == AddActivityScreenInfoEvent");
+        await  checkActivityEventInitial(event, emit) ;
+        print("เข้ามั้ยนะ");
+        Response response = await getScreenActivityListTeacher(event.filterstatus,event.studentid,event.studentname,event.activityname);
+        // emit(ActivityEndLoading());
+        if (response.statusCode == 200) {
+          ActivityListTeacherScreen screenActivityListResponse =
+          ActivityListTeacherScreen.fromJson(response.data);
+          if (screenActivityListResponse.head?.status == 200) {
+            print("เข้า success");
+            emit(ActivityListTeacherScreenInfoSuccessState(
+                response: screenActivityListResponse));
+            print("เข้า success หลัง");
+          } else {
+            print("เข้า error");
+            emit(ActivityError(
+                message: screenActivityListResponse.head?.message ?? ""));
           }
         } else {
           print("เข้า error");
