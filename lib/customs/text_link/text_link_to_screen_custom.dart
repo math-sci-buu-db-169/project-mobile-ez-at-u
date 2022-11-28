@@ -18,6 +18,8 @@ class TextLinkToScreenCustom extends StatelessWidget {
     return GestureDetector(
       onTap:onTap ,
       child: Text(linklabel,
+
+          textAlign:TextAlign.center,
           style: TextStyle(
             decoration: TextDecoration.underline,
             color: linktextcolor,

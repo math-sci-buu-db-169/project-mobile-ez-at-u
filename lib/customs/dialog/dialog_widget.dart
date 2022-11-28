@@ -19,7 +19,7 @@ void dialogOneLineOneBtn(BuildContext context, String content ,String btn, {requ
             },
             child: Dialog(
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(10),
             ),
             child: SingleChildScrollView(
               child: Padding(
@@ -61,7 +61,7 @@ void dialogTwoLineOneBtn(BuildContext context, String content , String subConten
             },
             child: Dialog(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 child: SingleChildScrollView(
                   child: Padding(
@@ -109,11 +109,11 @@ void dialogSessionExpiredOneBtn(BuildContext context, String content , String su
             },
             child: Dialog(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 child: SingleChildScrollView(
                   child: Padding(
-                    padding: const EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(10),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -161,10 +161,10 @@ void dialogOneLineTwoBtn(BuildContext context, String content, String btn1, Stri
             },
             child: Dialog(
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(24),
+              borderRadius: BorderRadius.circular(10),
             ),
-            child: Padding(
-              padding: const EdgeInsets.all(16),
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -172,7 +172,7 @@ void dialogOneLineTwoBtn(BuildContext context, String content, String btn1, Stri
                   Text(content, textAlign: TextAlign.center),
                   const SizedBox(height: 20),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       ElevatedButton(
                         style: styleButtonDialog,
@@ -182,7 +182,7 @@ void dialogOneLineTwoBtn(BuildContext context, String content, String btn1, Stri
                           style: const TextStyle(color: tcButtonTextBlack),
                         ),
                       ),
-                      const SizedBox(width: 20),
+                      const SizedBox(width: 10),
                       ElevatedButton(
                         style: styleButtonDialogCancel,
                         onPressed: () => {handleClickBtn("Cancel")},
@@ -198,6 +198,8 @@ void dialogOneLineTwoBtn(BuildContext context, String content, String btn1, Stri
             )));
       });
 }
+
+
 void dialogOneLineTwoBtnWarning(BuildContext context, String content, String btn1, String btn2,
     {required void Function(String result) onClickBtn}) {
   void handleClickBtn(String result) {
@@ -214,18 +216,18 @@ void dialogOneLineTwoBtnWarning(BuildContext context, String content, String btn
             },
             child: Dialog(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(24),
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(10),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       const SizedBox(height: 10),
-                      Text(content, textAlign: TextAlign.center),
+                      Text(content, textAlign: TextAlign.center,style: TextStyle(color:  Theme.of(context).bottomAppBarColor),),
                       const SizedBox(height: 20),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           ElevatedButton(
                             style: styleButtonDialogWarning,
@@ -235,13 +237,13 @@ void dialogOneLineTwoBtnWarning(BuildContext context, String content, String btn
                               style: const TextStyle(color:tcButtonTextWhite ),
                             ),
                           ),
-                          const SizedBox(width: 20),
+                          const SizedBox(width: 10),
                           ElevatedButton(
-                            style: styleButtonDialog,
+                            style: styleButtonDialogWarningCancel,
                             onPressed: () => {handleClickBtn("Cancel")},
                             child: Text(
                               btn2,
-                              style: const TextStyle(color: tcButtonTextBlack),
+                              style: const TextStyle(color: tcButtonTextRed),
                             ),
                           )
                         ],
@@ -251,6 +253,7 @@ void dialogOneLineTwoBtnWarning(BuildContext context, String content, String btn
                 )));
       });
 }
+
 void dialogFourLineOneTextFieldTwoBtn(BuildContext context,
     {required void Function(String result) onClickBtn, required textFieldTwo, required textFieldOne,
       required btn1, required btn2
@@ -273,7 +276,7 @@ void dialogFourLineOneTextFieldTwoBtn(BuildContext context,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(10),
                   child: SingleChildScrollView(
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -324,7 +327,7 @@ void dialogFourLineOneTextFieldTwoBtn(BuildContext context,
 
                         const SizedBox(height: 20),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             ElevatedButton(
                               style: styleButtonDialog,
@@ -334,7 +337,7 @@ void dialogFourLineOneTextFieldTwoBtn(BuildContext context,
                                 style: const TextStyle(color: tcButtonTextBlack),
                               ),
                             ),
-                            const SizedBox(width: 20),
+                            const SizedBox(width: 10),
                             ElevatedButton(
                               style: styleButtonDialogCancel,
                               onPressed: () => {handleClickBtn("Cancel")},
@@ -351,6 +354,8 @@ void dialogFourLineOneTextFieldTwoBtn(BuildContext context,
                 )));
       });
 }
+
+
 void dialogFiveLineTwoTextFieldTwoBtn(BuildContext context,
     {required void Function(String result) onClickBtn ,required textFieldOne,
       required btn1, required btn2
@@ -375,7 +380,7 @@ void dialogFiveLineTwoTextFieldTwoBtn(BuildContext context,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(10),
                   child: SingleChildScrollView(
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -384,6 +389,7 @@ void dialogFiveLineTwoTextFieldTwoBtn(BuildContext context,
                         // Text(content, textAlign: TextAlign.center),
                         Text(
                           content1,
+                          textAlign:TextAlign.center,
                           style:  TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
@@ -405,6 +411,7 @@ void dialogFiveLineTwoTextFieldTwoBtn(BuildContext context,
                         ),
                         Center( child:  Text(
                           content3,
+                          textAlign:TextAlign.center,
                           style:  TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w600,
@@ -414,6 +421,7 @@ void dialogFiveLineTwoTextFieldTwoBtn(BuildContext context,
                         ),) ,
                         Center( child:  Text(
                           content4,
+                          textAlign:TextAlign.center,
                           style:  TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w600,
@@ -422,6 +430,7 @@ void dialogFiveLineTwoTextFieldTwoBtn(BuildContext context,
                         ),) ,
                         Center( child:  Text(
                           content5,
+                          textAlign:TextAlign.center,
                           style:  TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w600,
@@ -434,7 +443,7 @@ void dialogFiveLineTwoTextFieldTwoBtn(BuildContext context,
 
                         const SizedBox(height: 20),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             ElevatedButton(
                               style: styleButtonDialogWarning,
@@ -444,13 +453,13 @@ void dialogFiveLineTwoTextFieldTwoBtn(BuildContext context,
                                 style: const TextStyle(color: tcButtonTextWhite),
                               ),
                             ),
-                            const SizedBox(width: 20),
+                            const SizedBox(width: 10),
                             ElevatedButton(
-                              style: styleButtonDialog,
+                              style: styleButtonDialogWarningCancel,
                               onPressed: () => {handleClickBtn("Cancel")},
                               child: Text(
                                 btn2,
-                                style:  TextStyle(color:  Theme.of(context).appBarTheme.foregroundColor),
+                                style:  TextStyle(color:  tcButtonTextRed),
                               ),
                             )
                           ],
