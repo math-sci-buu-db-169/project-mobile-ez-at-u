@@ -169,7 +169,8 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
       try {
         emit(MoreFAQLoading());
         print("CheckMore 7 == MoreFAQEvent");
-        await  checkMoreEventInitial(event, emit) ;
+        if(event.module !='login' ) {
+       await  checkMoreEventInitial(event, emit) ;}
         Response responseMoreFAQ = await getScreenMoreFAQ(module :event.module);
         emit(MoreFAQEndLoading());
         if (responseMoreFAQ.statusCode == 200) {

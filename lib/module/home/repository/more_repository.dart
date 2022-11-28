@@ -60,7 +60,7 @@ class MoreRepository {
       }));
     } else {
 
-      return await MyDio.createDioServer().post("/api/home/morefaq", data: jsonEncode({
+      return await MyDio.createDioServer().post("/api/home/morefaqs", data: jsonEncode({
         "userlanguage": userLanguage
       }));
     }
