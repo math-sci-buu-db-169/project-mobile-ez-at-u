@@ -227,6 +227,9 @@ class _ActivityListForTeacherPageState
                     searchStatus ='';
                   setState(() {
           switch(int.parse(value)){
+            case 0 :{
+              searchStatus = '';
+            }break;
             case 1 :{
               searchStatus = 'U';
             }break;
@@ -291,7 +294,6 @@ class _ActivityListForTeacherPageState
                                 studentname:'' ,
                                 activityname: widget.searchActivityController.text,));
                             }
-                            break;
                             break;
                             default: {
                               context.read<ActivityBloc>().add(ActivityListTeacherSearchScreenInfoEvent(filterstatus: searchStatus,
