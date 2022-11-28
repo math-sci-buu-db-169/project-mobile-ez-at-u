@@ -1,9 +1,8 @@
 import 'package:ez_at_u/customs/dialog/dialog_widget.dart';
 import 'package:ez_at_u/customs/progress_dialog.dart';
 import 'package:ez_at_u/module/activity/bloc/activity_bloc.dart';
-import 'package:ez_at_u/module/activity/model/response/approve_activity_teacher_screen.dart';
+import 'package:ez_at_u/module/activity/model/response/activity_list_teacher_screen.dart';
 import 'package:ez_at_u/module/activity/screen/item_activity_for_teacher_role.dart';
-import 'package:ez_at_u/module/activity/screen/itemactivity.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,7 +29,7 @@ class ActivityListForTeacherSTF extends StatefulWidget {
 }
 
 class _ActivityListForTeacherSTFState extends State<ActivityListForTeacherSTF> with ProgressDialog {
-  ApproveActivityTeacherScreen? _approveActivityScreenApi;
+  ActivityListTeacherScreen? _approveActivityScreenApi;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ActivityBloc, ActivityState>(
@@ -72,7 +71,7 @@ class _ActivityListForTeacherSTFState extends State<ActivityListForTeacherSTF> w
 
 
 ActivityListForTeacherPage(
-    BuildContext context, ApproveActivityTeacherScreen? approveActivityScreenApi
+    BuildContext context, ActivityListTeacherScreen? approveActivityScreenApi
     ){
   String? titleaprroveactivity = approveActivityScreenApi?.body?.screeninfo?.titleteacheractivity;
   List<Activitylist> activityList = approveActivityScreenApi?.body?.activitylist??[];

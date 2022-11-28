@@ -93,7 +93,7 @@ class TokenExpiredState extends ActivityState{
     required this.checkrefreshtokenmessage,
   });}
 class ApproveActivityScreenInfoSuccessState extends ActivityState {
-  ApproveActivityTeacherScreen response;
+  ActivityListTeacherScreen response;
 
   ApproveActivityScreenInfoSuccessState({required this.response});
 }
