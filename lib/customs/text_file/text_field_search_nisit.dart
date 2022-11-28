@@ -158,10 +158,10 @@ class _TextFieldSearchNiSitCustomState extends State<TextFieldSearchNiSitCustom>
                 borderRadius: const BorderRadius.all(Radius.circular(10)),
               ),
               contentPadding: const EdgeInsets.all(10),
-              focusedBorder:  const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-                borderSide: BorderSide(color:  Colors.yellowAccent, width: 2.0),
+              focusedBorder:   OutlineInputBorder(
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
+                  borderSide: BorderSide(color:  Theme.of(context).bottomAppBarColor, width: 1)),
               )),
-        ));
+        );
   }
 }

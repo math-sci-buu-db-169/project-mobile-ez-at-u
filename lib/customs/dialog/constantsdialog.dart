@@ -8,4 +8,5 @@ class ConstantsDialog{
   static const double avatarRadius =45;
   static const IconData close = IconData(0xe16a, fontFamily: 'MaterialIcons');
   static const Color buttonColors = Color(0xFFFDEA8F);
+  static const Color buttonCancelColors = Color(0xFFFFFFFF);
 }

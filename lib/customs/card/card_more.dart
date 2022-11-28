@@ -202,7 +202,7 @@ buildCardSocial(BuildContext context,
           // height: MediaQuery.of(context).size.width * 0.3,
           padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16), color: transparent),
+              borderRadius: BorderRadius.circular(16), color: Theme.of(context).primaryColor ==Colors.black? transparent:Colors.white ),
           child: Padding(
               padding: const EdgeInsets.all(5.0),
               child: Center(

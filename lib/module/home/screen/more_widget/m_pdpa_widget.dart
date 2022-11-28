@@ -14,22 +14,22 @@ mPDPAMoreWidget(BuildContext context, ScreenMorePDPAResponse? screenHomeMorePDPA
       },
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor:Theme.of(context).appBarTheme.backgroundColor,
           elevation: 0,
           leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: const Icon(
+            icon:  Icon(
               Icons.arrow_back,
               size: sizeTitle24,
-              color: Colors.black,
+              color: Theme.of(context).appBarTheme.foregroundColor,
             ),
           ),
           title: Text(
             screenHomeMorePDPAResponse?.body?.screeninfo?.titlepdpa ?? moreBtnAndTitleTermAndCon,
-            style: const TextStyle(
-              color: Colors.black,
+            style:  TextStyle(
+              color: Theme.of(context).appBarTheme.foregroundColor,
               fontSize: sizeTitle24,
             ),
           ),

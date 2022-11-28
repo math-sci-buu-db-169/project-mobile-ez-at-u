@@ -10,19 +10,25 @@ var styleButtonDialog = ButtonStyle(
     backgroundColor: MaterialStateProperty.all(ConstantsDialog.buttonColors),
     shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
       side: const BorderSide(color: Colors.white),
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(5),
     )));
 
 
+var styleButtonDialogWarningCancel = ButtonStyle(
+    backgroundColor: MaterialStateProperty.all(ConstantsDialog.buttonCancelColors),
+    shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
+      side: const BorderSide(color: tcButtonTextRed),
+      borderRadius: BorderRadius.circular(5),
+    )));
 var styleButtonDialogCancel = ButtonStyle(
     backgroundColor: MaterialStateProperty.all(tcButtonTextRed),
     shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
       side: const BorderSide(color: tcButtonTextRed),
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(5),
     )));
 var styleButtonDialogWarning = ButtonStyle(
     backgroundColor: MaterialStateProperty.all(tcButtonTextRed),
     shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
-      side: const BorderSide(color: tcButtonTextRed),
-      borderRadius: BorderRadius.circular(16),
+      side: const BorderSide(color: tcButtonTextWhite),
+      borderRadius: BorderRadius.circular(5),
     )));
