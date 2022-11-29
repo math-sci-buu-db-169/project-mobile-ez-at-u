@@ -1,4 +1,5 @@
 import 'package:ez_at_u/module/activity/model/response/activity_list_teacher_screen.dart';
+import 'package:ez_at_u/module/activity/model/response/add_edit_delete_activity_by_teacher_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
@@ -257,6 +258,35 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
         await  checkActivityEventInitial(event, emit) ;
         print("เข้ามั้ยนะ");
         Response response = await getScreenActivityListTeacher(event.filterstatus,event.studentid,event.studentname,event.activityname);
+        // emit(ActivityEndLoading());
+        if (response.statusCode == 200) {
+          ActivityListTeacherScreen screenActivityListResponse =
+          ActivityListTeacherScreen.fromJson(response.data);
+          if (screenActivityListResponse.head?.status == 200) {
+            print("เข้า success");
+            emit(ActivityListTeacherScreenInfoSuccessState(
+                response: screenActivityListResponse));
+            print("เข้า success หลัง");
+          } else {
+            print("เข้า error");
+            emit(ActivityError(
+                message: screenActivityListResponse.head?.message ?? ""));
+          }
+        } else {
+          print("เข้า error");
+          emit(ActivityError(message: response.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(ActivityError(message: e.response?.statusMessage ?? ""));
+      }
+    });
+    on<getScreenAddEditDeleteActivityByTeacherEvent>((event, emit) async {
+      try {
+        // emit(ActivityLoading());
+        print("CheckActivity 9 == AddActivityScreenInfoEvent");
+        await  checkActivityEventInitial(event, emit) ;
+        print("เข้ามั้ยนะ");
+        Response response = await getScreenAddEditDeleteActivityByTeacher();
         // emit(ActivityEndLoading());
         if (response.statusCode == 200) {
           ActivityListTeacherScreen screenActivityListResponse =

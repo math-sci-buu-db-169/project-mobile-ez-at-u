@@ -69,6 +69,15 @@ class ActivityRepository  {
     );
   }
   //----------------------------------------------------------------------------
+  //----------------------------------------------------------------------------
+  Future<Response> getScreenAddEditDeleteActivityByTeacher(
+      ) async {
+    return await MyDio.createDioServer().post("/activity/addeditdeleteactivitybyteacherscreen",
+        data: jsonEncode({
+        })
+    );
+  }
+  //----------------------------------------------------------------------------
 
   Future<Response> submitDeleteActivity(
       int id,

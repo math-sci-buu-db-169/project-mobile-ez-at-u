@@ -102,3 +102,8 @@ class ActivityListTeacherScreenSearchInfoSuccessState extends ActivityState {
 
   ActivityListTeacherScreenSearchInfoSuccessState({required this.response});
 }
+class getScreenAddEditDeleteActivityByTeacherSuccessState extends ActivityState {
+  AddEditDeleteActivityByTeacherScreen response;
+
+  getScreenAddEditDeleteActivityByTeacherSuccessState({required this.response});
+}

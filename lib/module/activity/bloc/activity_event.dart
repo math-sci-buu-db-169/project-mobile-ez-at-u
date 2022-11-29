@@ -78,3 +78,5 @@ class ActivityListTeacherSearchScreenInfoEvent extends ActivityEvent {
 
   });
 }
+class getScreenAddEditDeleteActivityByTeacherEvent extends ActivityEvent {
+}
