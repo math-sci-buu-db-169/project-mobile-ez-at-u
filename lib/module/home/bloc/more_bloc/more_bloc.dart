@@ -146,11 +146,13 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
         emit(MorePDPALoading());
         print("CheckMore 6 == MorePDPAEvent");
         await  checkMoreEventInitial(event, emit) ;
-        Response responseMorePDPA = await getScreenMorePDPA();
+        Response responseMorePDPA = await getScreenMorePDPA(versionPDPA:event.versionPDPA,usabilityScreen:event.usabilityScreen);
         emit(MorePDPAEndLoading());
         if (responseMorePDPA.statusCode == 200) {
           ScreenMorePDPAResponse screenMorePDPAResponse = ScreenMorePDPAResponse.fromJson(responseMorePDPA.data);
           if (screenMorePDPAResponse.head?.status == 200) {
+
+            await setVersionPDPA(versionPDPA: screenMorePDPAResponse.body?.data?.versionuse);
             emit(MorePDPASuccessState(
               responsePDPA: screenMorePDPAResponse,
             ));

@@ -41,8 +41,12 @@ setUserKeyAndRefreshKey({required String? refreshKey, required String? globalKey
     return prefs.getString('refreshKey');
   }
 
+getVersionPDPA() async {
+  prefs = await SharedPreferences.getInstance();
+  return prefs.getString('VersionPDPA');
+}
 
-setVersionPDPA({String? versionPDPA}) async {
+setVersionPDPA({required String? versionPDPA}) async {
   prefs = await SharedPreferences.getInstance();
   await prefs.setString('VersionPDPA', versionPDPA ?? "");
   debugPrint('VersionPDPA');

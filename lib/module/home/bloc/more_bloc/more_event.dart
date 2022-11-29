@@ -2,7 +2,8 @@ part of 'more_bloc.dart';
 
 abstract class MoreEvent {}
 
-class MoreScreenInfoEvent extends MoreEvent {}
+class MoreScreenInfoEvent extends MoreEvent {
+}
 
 class MoreContactUsEvent extends MoreEvent {}
 
@@ -12,7 +13,11 @@ class MoreFAQEvent extends MoreEvent {
   MoreFAQEvent({required this.module,});
 }
 
-class MorePDPAEvent extends MoreEvent {}
+class MorePDPAEvent extends MoreEvent {
+  final String? versionPDPA;
+  final bool usabilityScreen;
+  MorePDPAEvent({required this.versionPDPA, required this.usabilityScreen});
+}
 
 class MoreBoardDetailStudentEvent extends MoreEvent {
   final String? studentCode;
