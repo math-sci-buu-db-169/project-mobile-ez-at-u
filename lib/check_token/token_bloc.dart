@@ -5,7 +5,6 @@ import 'package:dio/dio.dart';
 import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../customs/common/thm.dart';
 import '../main_route/main_route_bloc/main_route_bloc.dart';
 import '../main_route/main_route_bloc_model/refresh_token_response.dart';
 import '../utils/shared_preferences.dart';
