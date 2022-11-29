@@ -261,134 +261,79 @@ class _ActivityListForTeacherPageState
           ],
         ),
         body: SafeArea(
-          child: SingleChildScrollView(
-            child: Container(
-              color: Theme.of(context).scaffoldBackgroundColor,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                child: SingleChildScrollView(
-                  child: Center(
+          child: Container(
+            color: Theme.of(context).scaffoldBackgroundColor,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+              child: Column(
+                children: [
+                  TextFieldSearchActivityCustom(
+                    activityListTeacherScreen: widget.approveActivityScreenApi,
+                    searchActivityController: widget.searchActivityController,
+                    callbackFromOptionSearch: (int optionSearchResult) {
+                      // setOptionSearchNiSit(optionSearchResult);
+                      optionSearch = optionSearchResult;
+                    },
+                    onChanged: (valuePassword) {
+                      widget.searchActivityController.text = valuePassword;
+                      print(valuePassword);
+                      switch(optionSearch) {
+                        case 1: {
+                          context.read<ActivityBloc>().add(ActivityListTeacherSearchScreenInfoEvent(filterstatus: searchStatus,
+                            studentid: null,
+                            studentname: widget.searchActivityController.text,
+                            activityname: '',));
+                        }
+                        break;
+                        case 2: {
+                          context.read<ActivityBloc>().add(ActivityListTeacherSearchScreenInfoEvent(filterstatus: searchStatus,
+                            studentid: null,
+                            studentname:'' ,
+                            activityname: widget.searchActivityController.text,));
+                        }
+                        break;
+                        default: {
+                          context.read<ActivityBloc>().add(ActivityListTeacherSearchScreenInfoEvent(filterstatus: searchStatus,
+                            studentid:null,
+                            studentname:  widget.searchActivityController.text,
+                            activityname: '',));
+                        }
+                        break;
+                      }
+
+                    },
+                    // hintLabel: 'ชื่อรุ่นมหาลัย',
+                    textInputType: TextInputType.text,
+                    initialvalue: widget.searchActivityController.text,
+                    iconsFile : Icons.search,
+                  ),
+                  Expanded(
+                    child: SingleChildScrollView(
                       child: Column(
-                    children: [
-                      TextFieldSearchActivityCustom(
-                        activityListTeacherScreen: widget.approveActivityScreenApi,
-                        searchActivityController: widget.searchActivityController,
-                        callbackFromOptionSearch: (int optionSearchResult) {
-                          // setOptionSearchNiSit(optionSearchResult);
-                          optionSearch = optionSearchResult;
-                        },
-                        onChanged: (valuePassword) {
-                          widget.searchActivityController.text = valuePassword;
-                          print(valuePassword);
-                          switch(optionSearch) {
-                            case 1: {
-                              context.read<ActivityBloc>().add(ActivityListTeacherSearchScreenInfoEvent(filterstatus: searchStatus,
-                                studentid: null,
-                                studentname: widget.searchActivityController.text,
-                                activityname: '',));
-                            }
-                            break;
-                            case 2: {
-                              context.read<ActivityBloc>().add(ActivityListTeacherSearchScreenInfoEvent(filterstatus: searchStatus,
-                                studentid: null,
-                                studentname:'' ,
-                                activityname: widget.searchActivityController.text,));
-                            }
-                            break;
-                            default: {
-                              context.read<ActivityBloc>().add(ActivityListTeacherSearchScreenInfoEvent(filterstatus: searchStatus,
-                                studentid:null,
-                                studentname:  widget.searchActivityController.text,
-                                activityname: '',));
-                            }
-                            break;
-                          }
-
-                        },
-                        // hintLabel: 'ชื่อรุ่นมหาลัย',
-                        textInputType: TextInputType.text,
-                        initialvalue: widget.searchActivityController.text,
-                        iconsFile : Icons.search,
-
-                      ),
-                      // TextFormField(
-                      //   style: TextStyle(
-                      //     fontSize: sizeText18,
-                      //     color: Theme.of(context)
-                      //         .scaffoldBackgroundColor, // height: 2.0,
-                      //   ),
-                      //   cursorColor:
-                      //       Theme.of(context).appBarTheme.foregroundColor,
-                      //   keyboardType: TextInputType.text,
-                      //   // controller: textEditingController,
-                      //   initialValue: widget.searchActivityController.text,
-                      //   // decoration: InputDecoration.collapsed(hintText: hint_label), style: TextStyle(fontSize: 18)
-                      //   onChanged: (value) {
-                      //     widget.searchActivityController.text = value;
-                      //   },
-                      //   obscureText: false,
-                      // ),
-                      Column(
                           children: List.generate(
                               int.parse("${activityList.length}"),
-                              (index) => ItemActivityForTeacherRole(
-                                    data: activityList[index],
-                                    title: widget.approveActivityScreenApi?.body
-                                        ?.screeninfo,
-                                    onTap: () {
-                                      // Navigator.push(context,
-                                      //     MaterialPageRoute(builder: (context) {
-                                      //       return ApproveActivityScreen(
-                                      //           appBarBackgroundColor: appBarBackgroundColor,
-                                      //           appBarForegroundColor: appBarforegroundColor,
-                                      //           activityScreenText: screenstatusActivityResponse?.body?.screeninfo,
-                                      //           alertText: screenstatusActivityResponse?.body?.alertmessage,
-                                      //           buttonText: screenstatusActivityResponse?.body?.errorbutton,
-                                      //           data: screenstatusActivityResponse
-                                      //               ?.body?.activity?[index]);
-                                      //     })).then((value) =>
-                                      // {context.read<HomeBloc>().add(HomeScreenInfoEvent())});
-                                    },
-                                  )))
-                    ],
+                                  (index) => ItemActivityForTeacherRole(
+                                data: activityList[index],
+                                title: widget.approveActivityScreenApi?.body
+                                    ?.screeninfo,
+                                onTap: () {
+                                  // Navigator.push(context,
+                                  //     MaterialPageRoute(builder: (context) {
+                                  //       return ApproveActivityScreen(
+                                  //           appBarBackgroundColor: appBarBackgroundColor,
+                                  //           appBarForegroundColor: appBarforegroundColor,
+                                  //           activityScreenText: screenstatusActivityResponse?.body?.screeninfo,
+                                  //           alertText: screenstatusActivityResponse?.body?.alertmessage,
+                                  //           buttonText: screenstatusActivityResponse?.body?.errorbutton,
+                                  //           data: screenstatusActivityResponse
+                                  //               ?.body?.activity?[index]);
+                                  //     })).then((value) =>
+                                  // {context.read<HomeBloc>().add(HomeScreenInfoEvent())});
+                                },
+                              ))),
+                    ),
                   )
-
-                      // Column(
-                      //   children: [
-                      //     // buildListActivity(context, screenStatusActivityResponse),
-                      //     Padding(
-                      //       padding: const EdgeInsets.all(8.0),
-                      //       child: Container(
-                      //         width: 100,
-                      //         height: 100,
-                      //         color: Colors.red,),
-                      //     ),
-                      //     Padding(
-                      //       padding: const EdgeInsets.all(8.0),
-                      //       child: Container(
-                      //         width: 100,
-                      //         height: 100,
-                      //         color: Colors.green,),
-                      //     ),
-                      //     Padding(
-                      //       padding: const EdgeInsets.all(8.0),
-                      //       child: Container(
-                      //         width: 100,
-                      //         height: 100,
-                      //         color: Colors.blue,),
-                      //     ),
-                      //     Padding(
-                      //       padding: const EdgeInsets.all(8.0),
-                      //       child: Container(
-                      //         width: 100,
-                      //         height: 100,
-                      //         color: Colors.black,),
-                      //     ),
-                      //   ],
-                      // ),
-
-                      ),
-                ),
+                ],
               ),
             ),
           ),

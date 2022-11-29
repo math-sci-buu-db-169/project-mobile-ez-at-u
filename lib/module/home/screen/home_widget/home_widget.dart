@@ -2,9 +2,6 @@ import 'package:ez_at_u/module/activity/screen/activity_list_for_teacher_role.da
 import 'package:ez_at_u/module/home/screen/home_widget/setting_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../../../../check_token/check_token_expired.dart';
-import '../../../../customs/common/change_theme_button_widget.dart';
-import '../../../../customs/qr/MYQR.dart';
 import 'home_body_widget.dart';
 import '../../../../customs/button/button_custom.dart';
 import '../../../../customs/message/text_home.dart';
@@ -31,7 +28,8 @@ buildContentHomeScreen(
     required String versionApp,
     required bool isHidden,
     required int intThemeMode,
-    required void Function() iniGetThemeMode, required String role}) {
+    required void Function() iniGetThemeMode,
+    required String role}) {
   String userRole = role;
   return WillPopScope(
     onWillPop: () async {
@@ -54,61 +52,73 @@ buildContentHomeScreen(
         ),
       ),
       appBar: AppBar(
-        backgroundColor: Theme.of(context).primaryColor,
-        leading: Builder(
-          builder: (BuildContext context) {
-            return IconButton(
-              icon: FaIcon(FontAwesomeIcons.bars,
-                  color: Theme.of(context).iconTheme.color, size: 20),
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
-              },
-              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-            );
-          },
-        ),
-        title: Center(
-            child: Text(
-                screenHomeResponse?.body?.screenInfo?.titleact ?? homeTitleAct,
-                style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
-                    color: Theme.of(context).appBarTheme.foregroundColor))),
-        actions: <Widget>[
-          // SizedBox(
-          //   width: MediaQuery.of(context).size.width * 0.1,
-          //   // child: Text(userLanguage),
-          //   // child: Text(userLanguage),
-          // ),
-
-          // ChangeThemeButtonWidget(),
-          IconButton(
-            icon: FaIcon(FontAwesomeIcons.solidBell,
-                color: Theme.of(context).iconTheme.color, size: 20),
-            onPressed: () {
-              // Navigator.push(context, MaterialPageRoute(builder: (context) =>  NotesPage()));
+          backgroundColor: Theme.of(context).primaryColor,
+          leading: Builder(
+            builder: (BuildContext context) {
+              return IconButton(
+                icon: FaIcon(FontAwesomeIcons.bars,
+                    color: Theme.of(context).iconTheme.color, size: 20),
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
+                tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+              );
             },
           ),
-          // IconButton(
-          //   icon: FaIcon(FontAwesomeIcons.fileLines,
-          //       color: Theme.of(context).iconTheme.color, size: 20),
-          //   onPressed: () {
-          //     Navigator.push(
-          //         context,
-          //         MaterialPageRoute(
-          //             builder: (context) => const CheckTokenScreen()));
-          //   },
-          // ),
-          // IconButton(
-          //   icon: const FaIcon(FontAwesomeIcons.qrcode,color: tcBlack, size: 20),
-          //   onPressed: () {
-          //     Navigator.push(context, MaterialPageRoute(builder: (context) =>  const QRViewExample()));
-          //
-          //
-          //   },
-          // )
-        ],
-      ),
+          title: Center(
+              child: Text(
+                  screenHomeResponse?.body?.screenInfo?.titleact ??
+                      homeTitleAct,
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                      color: Theme.of(context).appBarTheme.foregroundColor))),
+          actions: (userRole == "TC")
+              ? <Widget>[
+                  // SizedBox(
+                  //   width: MediaQuery.of(context).size.width * 0.1,
+                  //   // child: Text(userLanguage),
+                  //   // child: Text(userLanguage),
+                  // ),
+
+                  // ChangeThemeButtonWidget(),
+                  // IconButton(
+                  //   icon: FaIcon(FontAwesomeIcons.solidBell,
+                  //       color: Theme.of(context).iconTheme.color, size: 20),
+                  //   onPressed: () {
+                  //     // Navigator.push(context, MaterialPageRoute(builder: (context) =>  NotesPage()));
+                  //   },
+                  // ),
+                  IconButton(
+                    icon: FaIcon(FontAwesomeIcons.fileLines,
+                        color: Theme.of(context).iconTheme.color, size: 20),
+                    onPressed: () {
+                      // Navigator.push(context, MaterialPageRoute(builder: (context) => const CheckTokenScreen()));
+                    },
+                  ),
+                  IconButton(
+                    icon: FaIcon(FontAwesomeIcons.plus,
+                        color: Theme.of(context).iconTheme.color, size: 20),
+                    onPressed: () {
+                      // Navigator.push(context, MaterialPageRoute(builder: (context) =>  const QRViewExample()));
+                    },
+                  )
+                ]
+              : (userRole == "ST")
+                  ? <Widget>[
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.1,
+                        // child: Text(userLanguage),
+                        // child: Text(userLanguage),
+                      ),
+                    ]
+                  : <Widget>[
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.1,
+                        // child: Text(userLanguage),
+                        // child: Text(userLanguage),
+                      ),
+                    ]),
       body: SafeArea(
         child: Stack(children: [
           activityIsEmpty
@@ -131,7 +141,7 @@ buildContentHomeScreen(
                           size: 20.0,
                         ),
                         // colortext: Theme.of(context).bottomAppBarColor,
-                        colortext:  Theme.of(context).bottomAppBarColor,
+                        colortext: Theme.of(context).bottomAppBarColor,
                         colorbutton: Theme.of(context).scaffoldBackgroundColor,
                         sizetext: 14,
                         colorborder: Theme.of(context).scaffoldBackgroundColor,
@@ -214,7 +224,7 @@ buildContentHomeScreen(
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>  const SettingScreen( )));
+                                builder: (context) => const SettingScreen()));
                       },
                     )),
                     Expanded(
