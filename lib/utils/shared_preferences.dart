@@ -1,5 +1,6 @@
 import 'package:ez_at_u/customs/message/text_button.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 late SharedPreferences prefs;
@@ -177,6 +178,35 @@ setThemeModeApp({required int intMode}) async {
   print(prefs.getInt('themeMode'));
   print(intMode);
 }
+
+
+getThemeModeApp() async {
+    prefs = await SharedPreferences.getInstance();
+     int mode = prefs.getInt('themeMode')??0;
+    ThemeMode themeModeApp =ThemeMode.system ;
+     switch (mode){
+       case 0 :{
+         themeModeApp = ThemeMode.light;
+      }break;
+       case 1 :{
+         themeModeApp =ThemeMode.dark;
+      }break;
+       case 2 :{
+         themeModeApp =ThemeMode.system;
+      }break;
+       default:{
+         themeModeApp =ThemeMode.system;
+       }
+     }
+    return ThemeMode.light;
+  }
+
+
+
+
+
+
+
 setTextPinScreen({required String? enterPin, required String? hello, required String? niceDay, required String? enterConfirmPin, required String? enterNewPin, }) async {
   prefs = await SharedPreferences.getInstance();
   await prefs.setString('enterPin', enterPin ?? "Please enter your PIN.");
