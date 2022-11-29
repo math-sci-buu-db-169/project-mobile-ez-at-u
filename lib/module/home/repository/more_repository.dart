@@ -66,8 +66,13 @@ class MoreRepository {
     }
   }
 
-  Future<Response> getScreenMorePDPA() async {
-    return await MyDio.createDioServer().post("/api/home/morepdpa", data: jsonEncode({}));
+  Future<Response> getScreenMorePDPA({required bool usabilityScreen, required String? versionPDPA}) async {
+    return await MyDio.createDioServer().post("/api/home/morepdpa", data: jsonEncode({
+
+        "usabilityscreen": usabilityScreen,
+        "pdpaversion": versionPDPA
+
+    }));
   }
 
   Future<Response> sentProfileImage({required userid, required String base64Image}) async {

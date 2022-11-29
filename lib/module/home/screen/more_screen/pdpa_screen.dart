@@ -16,7 +16,10 @@ class PDPAMoreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(create: (context) => MoreBloc()..add(MorePDPAEvent()), child: const PDPAPage());
+    return BlocProvider(create: (context) => MoreBloc()..add(MorePDPAEvent(
+        usabilityScreen:true,versionPDPA:''
+
+    )), child: const PDPAPage());
   }
 }
 
@@ -34,13 +37,30 @@ class _PDPAPageState extends State<PDPAPage> with ProgressDialog {
   late String textSessionExpired;
   late String textSubSessionExpired;
   late String _buttonOk;
-
+  late String getIsVersionPDPA ='';
+  bool isChecked = false;
+  Color getColor(Set<MaterialState> states) {
+    const Set<MaterialState> interactiveStates = <MaterialState>{
+      MaterialState.pressed,
+      MaterialState.hovered,
+      MaterialState.focused,
+    };
+    if (states.any(interactiveStates.contains)) {
+      return Colors.blue;
+    }
+    return Theme.of(context).bottomAppBarColor ;
+  }
   @override
   void initState() {
     _isSessionUnauthorized();
+    getIsVersionPDPA =getVersionPDPA().toString();
     super.initState();
   }
-
+  isCheckedSetState(bool? value){
+    setState(() {
+      isChecked = value!;
+    });
+  }
   Future<void> _isSessionUnauthorized() async {
     prefs = await SharedPreferences.getInstance();
     _userLanguage = prefs.getString('userLanguage') ?? 'TH';
@@ -78,10 +98,15 @@ class _PDPAPageState extends State<PDPAPage> with ProgressDialog {
       builder: (context, state) {
         if (state is MorePDPASuccessState) {
           _screenHomeMorePDPAResponse = state.responsePDPA;
-          return mPDPAMoreWidget(context, _screenHomeMorePDPAResponse);
+          return mPDPAMoreWidget(context, _screenHomeMorePDPAResponse,getIsVersionPDPA,isChecked,getColor,isCheckedSetState);
         } else {
           return Container();
         }
+      },
+
+      buildWhen: (context, state) {
+        return state is MorePDPASuccessState ||
+            state is MorePDPASuccessState;
       },
     );
   }

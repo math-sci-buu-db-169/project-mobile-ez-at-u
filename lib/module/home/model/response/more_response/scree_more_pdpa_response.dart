@@ -44,17 +44,15 @@ class ScreenMorePDPAResponse {
   }
 }
 
-/// screeninfo : {"titlepdpa":"Terms of service and Privacy policy","btnaccept":"Accept","btndecline":"Decline"}
-/// data : {"pdpaversion":"1","pdpaurl":"http://www.ratchakitcha.soc.go.th/DATA/PDF/2562/A/069/T_0052.PDF"}
+/// screeninfo : {"titlepdpa":"Terms and conditions","btnaccept":"Accept","btndecline":"Decline","textcheckbox":"ยอมรับเงื่อนไขและข้อตกลง"}
+/// data : {"pdpaversion":"1.0.1","pdpaurl":"https://webzbinaryz.web.app/pdpa","versionuse":"1"}
 
 Body bodyFromJson(String str) => Body.fromJson(json.decode(str));
 String bodyToJson(Body data) => json.encode(data.toJson());
-
 class Body {
   Body({
     Screeninfo? screeninfo,
-    Data? data,
-  }) {
+    Data? data,}){
     _screeninfo = screeninfo;
     _data = data;
   }
@@ -65,14 +63,11 @@ class Body {
   }
   Screeninfo? _screeninfo;
   Data? _data;
-  Body copyWith({
-    Screeninfo? screeninfo,
+  Body copyWith({  Screeninfo? screeninfo,
     Data? data,
-  }) =>
-      Body(
-        screeninfo: screeninfo ?? _screeninfo,
-        data: data ?? _data,
-      );
+  }) => Body(  screeninfo: screeninfo ?? _screeninfo,
+    data: data ?? _data,
+  );
   Screeninfo? get screeninfo => _screeninfo;
   Data? get data => _data;
 
@@ -86,100 +81,112 @@ class Body {
     }
     return map;
   }
+
 }
 
-/// pdpaversion : "1"
-/// pdpaurl : "http://www.ratchakitcha.soc.go.th/DATA/PDF/2562/A/069/T_0052.PDF"
+/// pdpaversion : "1.0.1"
+/// pdpaurl : "https://webzbinaryz.web.app/pdpa"
+/// versionuse : "1"
 
 Data dataFromJson(String str) => Data.fromJson(json.decode(str));
 String dataToJson(Data data) => json.encode(data.toJson());
-
 class Data {
   Data({
     String? pdpaversion,
     String? pdpaurl,
-  }) {
+    String? versionuse,}){
     _pdpaversion = pdpaversion;
     _pdpaurl = pdpaurl;
+    _versionuse = versionuse;
   }
 
   Data.fromJson(dynamic json) {
     _pdpaversion = json['pdpaversion'];
     _pdpaurl = json['pdpaurl'];
+    _versionuse = json['versionuse'];
   }
   String? _pdpaversion;
   String? _pdpaurl;
-  Data copyWith({
-    String? pdpaversion,
+  String? _versionuse;
+  Data copyWith({  String? pdpaversion,
     String? pdpaurl,
-  }) =>
-      Data(
-        pdpaversion: pdpaversion ?? _pdpaversion,
-        pdpaurl: pdpaurl ?? _pdpaurl,
-      );
+    String? versionuse,
+  }) => Data(  pdpaversion: pdpaversion ?? _pdpaversion,
+    pdpaurl: pdpaurl ?? _pdpaurl,
+    versionuse: versionuse ?? _versionuse,
+  );
   String? get pdpaversion => _pdpaversion;
   String? get pdpaurl => _pdpaurl;
+  String? get versionuse => _versionuse;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['pdpaversion'] = _pdpaversion;
     map['pdpaurl'] = _pdpaurl;
+    map['versionuse'] = _versionuse;
     return map;
   }
+
 }
 
-/// titlepdpa : "Terms of service and Privacy policy"
+/// titlepdpa : "Terms and conditions"
 /// btnaccept : "Accept"
 /// btndecline : "Decline"
+/// textcheckbox : "ยอมรับเงื่อนไขและข้อตกลง"
 
 Screeninfo screeninfoFromJson(String str) => Screeninfo.fromJson(json.decode(str));
 String screeninfoToJson(Screeninfo data) => json.encode(data.toJson());
-
 class Screeninfo {
   Screeninfo({
     String? titlepdpa,
     String? btnaccept,
     String? btndecline,
-  }) {
+    String? textcheckbox,}){
     _titlepdpa = titlepdpa;
     _btnaccept = btnaccept;
     _btndecline = btndecline;
+    _textcheckbox = textcheckbox;
   }
 
   Screeninfo.fromJson(dynamic json) {
     _titlepdpa = json['titlepdpa'];
     _btnaccept = json['btnaccept'];
     _btndecline = json['btndecline'];
+    _textcheckbox = json['textcheckbox'];
   }
   String? _titlepdpa;
   String? _btnaccept;
   String? _btndecline;
-  Screeninfo copyWith({
-    String? titlepdpa,
+  String? _textcheckbox;
+  Screeninfo copyWith({  String? titlepdpa,
     String? btnaccept,
     String? btndecline,
-  }) =>
-      Screeninfo(
-        titlepdpa: titlepdpa ?? _titlepdpa,
-        btnaccept: btnaccept ?? _btnaccept,
-        btndecline: btndecline ?? _btndecline,
-      );
+    String? textcheckbox,
+  }) => Screeninfo(  titlepdpa: titlepdpa ?? _titlepdpa,
+    btnaccept: btnaccept ?? _btnaccept,
+    btndecline: btndecline ?? _btndecline,
+    textcheckbox: textcheckbox ?? _textcheckbox,
+  );
   String? get titlepdpa => _titlepdpa;
   String? get btnaccept => _btnaccept;
   String? get btndecline => _btndecline;
+  String? get textcheckbox => _textcheckbox;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['titlepdpa'] = _titlepdpa;
     map['btnaccept'] = _btnaccept;
     map['btndecline'] = _btndecline;
+    map['textcheckbox'] = _textcheckbox;
     return map;
   }
+
 }
 
 /// status : 200
 /// message : "success"
 /// modulename : "home"
+/// timeexpire : false
 
 Head headFromJson(String str) => Head.fromJson(json.decode(str));
 String headToJson(Head data) => json.encode(data.toJson());
