@@ -282,24 +282,23 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
     });
     on<getScreenAddEditDeleteActivityByTeacherEvent>((event, emit) async {
       try {
-        // emit(ActivityLoading());
+        emit(ActivityLoading());
         print("CheckActivity 9 == AddActivityScreenInfoEvent");
         await  checkActivityEventInitial(event, emit) ;
         print("เข้ามั้ยนะ");
         Response response = await getScreenAddEditDeleteActivityByTeacher();
-        // emit(ActivityEndLoading());
+        emit(ActivityEndLoading());
         if (response.statusCode == 200) {
-          ActivityListTeacherScreen screenActivityListResponse =
-          ActivityListTeacherScreen.fromJson(response.data);
-          if (screenActivityListResponse.head?.status == 200) {
+          AddEditDeleteActivityByTeacherScreen screenAddActivityByTeacherResponse =
+          AddEditDeleteActivityByTeacherScreen.fromJson(response.data);
+          if (screenAddActivityByTeacherResponse.head?.status == 200) {
             print("เข้า success");
-            emit(ActivityListTeacherScreenInfoSuccessState(
-                response: screenActivityListResponse));
-            print("เข้า success หลัง");
+            emit(getScreenAddEditDeleteActivityByTeacherSuccessState(
+                response: screenAddActivityByTeacherResponse));
           } else {
             print("เข้า error");
             emit(ActivityError(
-                message: screenActivityListResponse.head?.message ?? ""));
+                message: screenAddActivityByTeacherResponse.head?.message ?? ""));
           }
         } else {
           print("เข้า error");
@@ -307,6 +306,37 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
         }
       } on DioError catch (e) {
         emit(ActivityError(message: e.response?.statusMessage ?? ""));
+      }
+    });
+
+    on<SubmitAddEditDeleteActivityByTeacherEvent>((event, emit) async {
+      try {
+        emit(SubmitAddEditActivityByTeacherLoadingState());
+        print("CheckActivity 10 == SubmitAddEditActivityEvent");
+        await  checkActivityEventInitial(event, emit) ;
+        Response responseAddEditDeleteByTeacherSubmit = await submitAddEditDeleteActivityByTeacher(
+            id : event.id,
+            activityNameByTeacher: event.activityNameByTeacher,
+            objectives: event.objectives,
+            sDate: event.sDate,
+            fDate: event.fDate,
+        );
+        print(responseAddEditDeleteByTeacherSubmit.statusCode);
+        emit(SubmitAddEditActivityByTeacherEndLoadingState());
+        if (responseAddEditDeleteByTeacherSubmit.statusCode == 200) {
+          AddEditResponse addEditDeleteByTeacherResponse =
+          AddEditResponse.fromJson(responseAddEditDeleteByTeacherSubmit.data);
+          if (addEditDeleteByTeacherResponse.head?.status == 200) {
+            emit(SubmitAddEditDeleteByTeacherActivityState(responseAddEditDeleteByTeacher: addEditDeleteByTeacherResponse));
+          } else {
+            emit(SubmitAddEditDeleteActivityByTeacherError(message: addEditDeleteByTeacherResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(SubmitAddEditDeleteActivityByTeacherError(
+              message: responseAddEditDeleteByTeacherSubmit.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(SubmitAddEditDeleteActivityByTeacherError(message: e.response?.statusMessage ?? ""));
       }
     });
   }

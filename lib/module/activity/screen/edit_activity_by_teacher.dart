@@ -16,26 +16,26 @@ import 'package:intl/intl.dart';
 
 import '../../../customs/message/text_add_edit_activity.dart';
 
-class AddActivityByTeacherScreen extends StatelessWidget {
-  const AddActivityByTeacherScreen({Key? key}) : super(key: key);
+class EditActivityByTeacherScreen extends StatelessWidget {
+  const EditActivityByTeacherScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ActivityBloc()..add(getScreenAddEditDeleteActivityByTeacherEvent()),
-      child: const AddActivityByTeacherPage(),
+      child: const EditActivityByTeacherPage(),
     );
   }
 }
 
-class AddActivityByTeacherPage extends StatefulWidget {
-  const AddActivityByTeacherPage({Key? key}) : super(key: key);
+class EditActivityByTeacherPage extends StatefulWidget {
+  const EditActivityByTeacherPage({Key? key}) : super(key: key);
 
   @override
-  State<AddActivityByTeacherPage> createState() => _AddActivityByTeacherPageState();
+  State<EditActivityByTeacherPage> createState() => _EditActivityByTeacherPageState();
 }
 
-class _AddActivityByTeacherPageState extends State<AddActivityByTeacherPage> with ProgressDialog {
+class _EditActivityByTeacherPageState extends State<EditActivityByTeacherPage> with ProgressDialog {
   TextEditingController activityNameByTeacher = TextEditingController();
   TextEditingController objectives = TextEditingController();
   TextEditingController sDate = TextEditingController();

@@ -69,15 +69,6 @@ class ActivityRepository  {
     );
   }
   //----------------------------------------------------------------------------
-  //----------------------------------------------------------------------------
-  Future<Response> getScreenAddEditDeleteActivityByTeacher(
-      ) async {
-    return await MyDio.createDioServer().post("/activity/addeditdeleteactivitybyteacherscreen",
-        data: jsonEncode({
-        })
-    );
-  }
-  //----------------------------------------------------------------------------
 
   Future<Response> submitDeleteActivity(
       int id,
@@ -105,4 +96,39 @@ class ActivityRepository  {
         })
     );
   }
+  //----------------------------------------------------------------------------
+  Future<Response> getScreenAddEditDeleteActivityByTeacher(
+      ) async {
+    return await MyDio.createDioServer().post("/activity/addeditdeleteactivitybyteacherscreen",
+        data: jsonEncode({
+        })
+    );
+  }
+  //----------------------------------------------------------------------------
+  Future<Response> submitAddEditDeleteActivityByTeacher({
+      required int id,
+    required String activityNameByTeacher,
+    required String objectives,
+    required String sDate,
+    required String fDate,
+}) async {
+    print("มาถึง API มั้ย");
+    print(id);
+    print(activityNameByTeacher);
+    print(objectives);
+    print(sDate);
+    print(fDate);
+    print("มาถึง API มั้ย");
+    return await MyDio.createDioServer().post("/activity/addeditdeleteactivitybyteacher",
+        data: jsonEncode({
+          "activitynameid": id,
+          "activityname": activityNameByTeacher,
+          "objectives": objectives,
+          "startdatebyteacher": sDate,
+          "finishdatebyteacher": fDate,
+          "isdelete": "false"
+        })
+    );
+  }
+//----------------------------------------------------------------------------
 }
