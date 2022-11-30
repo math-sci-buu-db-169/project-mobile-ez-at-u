@@ -37,6 +37,19 @@ class MoreBoardListStudentEvent extends MoreEvent {
   final String studentLastname;
   MoreBoardListStudentSearchEvent( {required this.gen, required  this.studentID, required   this.studentName, required   this.studentLastname,});
 }
+class MoreSrarchNisitEvent extends MoreEvent {
+  final String gen;
+  final String studentID;
+  final String studentName;
+  final String studentLastname;
+  MoreSrarchNisitEvent( {required this.gen, required  this.studentID, required   this.studentName, required   this.studentLastname,});
+}class MoreSrarchNisitNinitEvent extends MoreEvent {
+  final String gen;
+  final String studentID;
+  final String studentName;
+  final String studentLastname;
+  MoreSrarchNisitNinitEvent( {required this.gen, required  this.studentID, required   this.studentName, required   this.studentLastname,});
+}
 
 class MoreBoardListGenStudentEvent extends MoreEvent {
   final String gen;

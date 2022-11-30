@@ -421,5 +421,51 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
         emit(MoreCoursesError(message: e.response?.statusMessage ?? ""));
       }
     });
+
+    on<MoreSrarchNisitNinitEvent>((event, emit) async {
+      try {
+        emit(MoreSrarchNisitLoading());
+        print("CheckMore 14 == MoreSrarchNisitNinitEvent");
+        await  checkMoreEventInitial(event, emit) ;
+        Response responseMoreBoardListStudent = await getMoreBoardListStudent(event.gen,event.studentID,event.studentName,event.studentLastname,);
+        emit(MoreSrarchNisitEndLoading());
+        if (responseMoreBoardListStudent.statusCode == 200) {
+          ScreenMoreBoardStudentListResponse screenMoreBoardStudentListResponse =
+          ScreenMoreBoardStudentListResponse.fromJson(responseMoreBoardListStudent.data);
+          if (screenMoreBoardStudentListResponse.head?.status == 200) {
+            emit(MoreSrarchNisitNinitSuccessState(responseBoardListStudent: screenMoreBoardStudentListResponse));
+          } else {
+            emit(MoreSrarchNisitError(message: screenMoreBoardStudentListResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(MoreSrarchNisitError(message: responseMoreBoardListStudent.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(MoreSrarchNisitError(message: e.response?.statusMessage ?? ""));
+      }
+    });
+
+    on<MoreSrarchNisitEvent>((event, emit) async {
+      try {
+        // emit(MoreSrarchNisitLoading());
+        print("CheckMore 15 == MoreSrarchNisitEvent");
+        // await  checkMoreEventInitial(event, emit) ;
+        Response responseMoreBoardListStudent = await getMoreBoardListStudent(event.gen,event.studentID,event.studentName,event.studentLastname,);
+        emit(MoreSrarchNisitEndLoading());
+        if (responseMoreBoardListStudent.statusCode == 200) {
+          ScreenMoreBoardStudentListResponse screenMoreBoardStudentListResponse =
+          ScreenMoreBoardStudentListResponse.fromJson(responseMoreBoardListStudent.data);
+          if (screenMoreBoardStudentListResponse.head?.status == 200) {
+            emit(MoreSrarchNisitSuccessState(responseBoardListStudent: screenMoreBoardStudentListResponse));
+          } else {
+            emit(MoreSrarchNisitError(message: screenMoreBoardStudentListResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(MoreSrarchNisitError(message: responseMoreBoardListStudent.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(MoreSrarchNisitError(message: e.response?.statusMessage ?? ""));
+      }
+    });
   }
 }
