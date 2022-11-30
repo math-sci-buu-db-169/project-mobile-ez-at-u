@@ -2,6 +2,7 @@ import 'package:ez_at_u/module/home/screen/home_widget/setting_pin_lock_app_scre
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:package_info/package_info.dart';
 
 import '../../../../customs/color/color_const.dart';
 import '../../../../customs/dialog/dialog_widget.dart';
@@ -17,7 +18,6 @@ import '../more_screen/pdpa_screen.dart';
 import 'change_language_widget.dart';
 import 'general_info_drawer_widget.dart';
 
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../module/login/screen/login_screen/login_screen.dart';
 import '../../../../customs/message/text_error.dart';
@@ -70,7 +70,6 @@ class _SettingPageState extends State<SettingPage> with ProgressDialog {
     appName: 'Unknown',
     packageName: 'Unknown',
     buildNumber: 'Unknown',
-    buildSignature: 'Unknown',
     version: 'Unknown',
   );
 

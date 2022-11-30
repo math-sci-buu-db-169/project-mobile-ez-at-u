@@ -2,6 +2,7 @@ import 'package:ez_at_u/module/activity/screen/activity_list_for_teacher_role.da
 import 'package:ez_at_u/module/home/screen/home_widget/setting_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../../../../resume/app.dart';
 import 'home_body_widget.dart';
 import '../../../../customs/button/button_custom.dart';
 import '../../../../customs/message/text_home.dart';
@@ -203,19 +204,19 @@ buildContentHomeScreen(
                                 builder: (context) => const ProfileScreen()));
                       },
                     )),
-                    // Expanded(
-                    //     child: IconButton(
-                    //   icon: FaIcon(FontAwesomeIcons.qrcode,
-                    //       color: Theme.of(context).iconTheme.color, size: 40),
-                    //   onPressed: () {
-                    //     Navigator.push(
-                    //         context,
-                    //         MaterialPageRoute(
-                    //             builder: (context) => const QRViewExample()));
-                    //   },
-                    //   // icon: const FaIcon(FontAwesomeIcons.house,color: tcBlack, size: 40),
-                    //   // onPressed: () {},
-                    // )),
+                    Expanded(
+                        child: IconButton(
+                      icon: FaIcon(FontAwesomeIcons.solidFilePdf,
+                          color: Theme.of(context).iconTheme.color, size: 40),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const MyAppResume()));
+                      },
+                      // icon: const FaIcon(FontAwesomeIcons.house,color: tcBlack, size: 40),
+                      // onPressed: () {},
+                    )),
                     Expanded(
                         child: IconButton(
                       icon: FaIcon(FontAwesomeIcons.gear,
