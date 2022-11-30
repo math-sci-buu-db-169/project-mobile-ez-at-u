@@ -2,16 +2,11 @@ import 'package:ez_at_u/customs/button/button_custom.dart';
 import 'package:ez_at_u/customs/color/color_const.dart';
 import 'package:ez_at_u/customs/datepicker/custom_date_picker.dart';
 import 'package:ez_at_u/customs/dialog/dialog_widget.dart';
-import 'package:ez_at_u/customs/dropdown/custom_dropdown.dart';
-import 'package:ez_at_u/customs/dropdown/custom_dropdown_for_approver.dart';
 import 'package:ez_at_u/customs/progress_dialog.dart';
 import 'package:ez_at_u/customs/size/size.dart';
 import 'package:ez_at_u/customs/text_file/build_textformfiled_unlimit_custom.dart';
-import 'package:ez_at_u/customs/text_file/text_field_custom.dart';
 import 'package:ez_at_u/module/activity/bloc/activity_bloc.dart';
-import 'package:ez_at_u/module/activity/model/response/add_edit_activity_screen_api.dart';
 import 'package:ez_at_u/module/activity/model/response/add_edit_delete_activity_by_teacher_screen.dart';
-import 'package:ez_at_u/module/home/screen/home_screen/home_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
@@ -40,10 +35,10 @@ class AddActivityByTeacherPage extends StatefulWidget {
 }
 
 class _AddActivityByTeacherPageState extends State<AddActivityByTeacherPage> with ProgressDialog {
-  TextEditingController activityName = TextEditingController();
+  TextEditingController activityNameByTeacher = TextEditingController();
+  TextEditingController objectives = TextEditingController();
   TextEditingController sDate = TextEditingController();
   TextEditingController fDate = TextEditingController();
-  TextEditingController objectives = TextEditingController();
   AddEditDeleteActivityByTeacherScreen? _addEditDeleteActivityByTeacherScreenApi;
   DateTime date = DateTime.now();
   late String? dateFormated;
@@ -60,13 +55,13 @@ class _AddActivityByTeacherPageState extends State<AddActivityByTeacherPage> wit
     // context.read<ActivityBloc>().add(AddActivityScreenInfoEvent());
     return BlocConsumer<ActivityBloc, ActivityState>(
       listener: (context, state) {
-        if (state is SubmitAddEditActivityLoadingState) {
+        if (state is SubmitAddEditActivityByTeacherLoadingState) {
           showProgressDialog(context);
         }
-        if (state is SubmitAddEditActivityEndLoadingState) {
+        if (state is SubmitAddEditActivityByTeacherEndLoadingState) {
           hideProgressDialog(context);
         }
-        if (state is SubmitAddEditActivityError) {
+        if (state is SubmitAddEditDeleteActivityByTeacherError) {
           dialogOneLineOneBtn(context, '${state.message}\n ', "OK",
               onClickBtn: () {
             Navigator.of(context).pop();
@@ -75,64 +70,62 @@ class _AddActivityByTeacherPageState extends State<AddActivityByTeacherPage> wit
             print(state.message);
           }
         }
-        if (state is SubmitAddEditActivityState) {
-          // print("TEST SubmitAddEditActivityState");
-          // print(state.responseAddEdit.toJson());
-          // print("TEST SubmitAddEditActivityState");
-          // context.read<ActivityBloc>().add(ActivityEvent());
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const HomeScreen()));
+        if (state is ActivityLoading) {
+          showProgressDialog(context);
+        }
+        if (state is ActivityEndLoading) {
+          hideProgressDialog(context);
+        }
+        if (state is ActivityError) {
+          dialogOneLineOneBtn(context, '${state.message}\n ', "OK",
+              onClickBtn: () {
+                Navigator.of(context).pop();
+              });
+          if (kDebugMode) {
+            print(state.message);
+          }
         }
       },
       builder: (context, state) {
         if (state is getScreenAddEditDeleteActivityByTeacherSuccessState) {
           _addEditDeleteActivityByTeacherScreenApi = state.response;
 
-          return buildAddActivityBody(
+          return buildAddActivityByTeacherBody(
             context,
             _addEditDeleteActivityByTeacherScreenApi,
-            activityName,
-            year,
-            term,
+            activityNameByTeacher,
+            objectives,
             sDate,
             fDate,
-            totalTimeHours,
-            totalTimeMinutes,
-            venue,
-            approver,
-            detail,
+
           );
         } else {
-          return Container();
+          return Container(
+            color: Theme.of(context).primaryColor == Colors.black?Colors.black.withOpacity(0.5):tcWhite,
+            height: double.infinity,
+            width: double.infinity,
+            alignment: Alignment.center,
+            child: const CircularProgressIndicator(
+              color: circleprogresscolor,
+            ),
+          );
         }
       },
       buildWhen: (context, state) {
-        return state is ActivityScreenInfoSuccessState;
+        return state is getScreenAddEditDeleteActivityByTeacherSuccessState;
       },
     );
   }
 }
 
-buildAddActivityBody(
+buildAddActivityByTeacherBody(
   BuildContext context,
-  AddEditActivityScreenApi? addActivityScreenApi,
-  TextEditingController activityName,
-  TextEditingController year,
-  TextEditingController term,
+    AddEditDeleteActivityByTeacherScreen? addEditDeleteActivityScreenByTeacherApi,
+  TextEditingController activityNameByTeacher,
+  TextEditingController objectives,
   TextEditingController sDate,
   TextEditingController fDate,
-  TextEditingController totalTimeHours,
-  TextEditingController totalTimeMinutes,
-  TextEditingController venue,
-  TextEditingController approver,
-  TextEditingController detail,
 ) {
-  // print(addActivityScreenApi?.head?.status);
-  // print(addActivityScreenApi?.body?.screeninfo?.titleaddact);
-  List<String>? yearList = addActivityScreenApi?.body?.yearlist;
-  List<String>? termList = addActivityScreenApi?.body?.termlist;
-  // List<String>? approverList = addActivityScreenApi?.body?.approverlist;
-  var approverArray = addActivityScreenApi?.body?.approverlist ?? [];
   Color? appBarBackgroundColor =
       Theme.of(context).appBarTheme.backgroundColor ?? Colors.white;
   Color? appBarforegroundColor =
@@ -152,7 +145,7 @@ buildAddActivityBody(
         ),
       ),
       title: Text(
-        addActivityScreenApi?.body?.screeninfo?.titleaddact ??
+        addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.titleaddactivity ??
             activityTitleAddAct,
         style: TextStyle(
           color: appBarforegroundColor,
@@ -169,54 +162,35 @@ buildAddActivityBody(
               height: MediaQuery.of(context).size.height * 0.05,
             ),
             BuildTextformfieldUnlimitCustom(
-              textEditingController: activityName,
+              textEditingController: activityNameByTeacher,
               onChanged: (value) {
-                activityName.text = value;
+                activityNameByTeacher.text = value;
                 if (kDebugMode) {
-                  print(activityName.text);
+                  print(activityNameByTeacher.text);
                 }
               },
-              hintLabel: addActivityScreenApi?.body?.screeninfo?.edtactname ??
+              hintLabel: addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.textactivityname ??
                   activityEdtActName,
               textInputType: TextInputType.text,
               // iconsFile : Icons.person_rounded,
               iconsFile: FontAwesomeIcons.solidPenToSquare,
             ),
-
-            Padding(
-              padding: const EdgeInsets.only(top: 10,bottom: 10,left: 10,right: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  customDropdown(
-                    dropdownList: yearList ?? <String>[],
-                    hint: addActivityScreenApi?.body?.screeninfo?.edtyear ??
-                        activityEdtYear,
-                    width: MediaQuery.of(context).size.width * 0.44,
-                    callbackFromCustomDropdown: (String result) {
-                      year.text = result;
-                      if (kDebugMode) {
-                        print(year.text);
-                      }
-                    },
-                  ),
-                  customDropdown(
-                    dropdownList: termList ?? <String>[],
-                    hint: addActivityScreenApi?.body?.screeninfo?.edtterm ??
-                        activityEdtTerm,
-                    width: MediaQuery.of(context).size.width * 0.44,
-                    callbackFromCustomDropdown: (String result) {
-                      term.text = result;
-                      if (kDebugMode) {
-                        print(term.text);
-                      }
-                    },
-                  ),
-                ],
-              ),
+            BuildTextformfieldUnlimitCustom(
+              textEditingController: objectives,
+              onChanged: (value) {
+                objectives.text = value;
+                if (kDebugMode) {
+                  print(objectives.text);
+                }
+              },
+              hintLabel: addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.textobjectives ??
+                  activityEdtActName,
+              textInputType: TextInputType.text,
+              // iconsFile : Icons.person_rounded,
+              iconsFile: FontAwesomeIcons.bullseye,
             ),
             CustomDatePicker(
-              hintLabel: addActivityScreenApi?.body?.screeninfo?.edtstartdate ??
+              hintLabel: addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.textstartdate ??
                   activityEdtStartDate,
               callbackFromCustomDatePicker: (String result) {
                 sDate.text = result;
@@ -227,7 +201,7 @@ buildAddActivityBody(
             ),
             CustomDatePicker(
               hintLabel:
-                  addActivityScreenApi?.body?.screeninfo?.edtfinishdate ??
+                  addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.textfinishdate ??
                       activityEdtFinishDate,
               callbackFromCustomDatePicker: (String result) {
                 fDate.text = result;
@@ -245,103 +219,12 @@ buildAddActivityBody(
             //     }
             //   },
             // ),
-            TextFieldCustom(
-              textEditingController: totalTimeHours,
-              onChanged: (value) {
-                if (value.length == 1) {
-                  totalTimeHours.text = "0$value";
-                } else {
-                  totalTimeHours.text = value;
-                }
-                // totalTimeHours.text = value;
-                if (kDebugMode) {
-                  print("Hours == ${totalTimeHours.text}");
-                }
-              },
-              hintLabel: addActivityScreenApi?.body?.screeninfo?.edttimehours ??
-                  activityEdtTimeHours,
-              textInputType: TextInputType.number,
-              iconsFile: FontAwesomeIcons.solidClock,
-            ),
-            TextFieldCustom(
-              textEditingController: totalTimeMinutes,
-              onChanged: (value) {
-                if (value.length == 1) {
-                  totalTimeMinutes.text = "0$value";
-                } else {
-                  totalTimeMinutes.text = value;
-                }
-                // totalTimeMinutes.text = value;
-                if (kDebugMode) {
-                  print("Minutes == ${totalTimeMinutes.text}");
-                }
-              },
-              hintLabel:
-                  addActivityScreenApi?.body?.screeninfo?.edttimeminutes ??
-                      activityEdtTimeMinutes,
-              textInputType: TextInputType.number,
-              iconsFile: FontAwesomeIcons.clock,
-            ),
-
-            // TextFieldCustom(
-            //   textEditingController: venue,
-            //   onChanged: (value) {
-            //     venue.text = value;
-            //     if (kDebugMode) {
-            //       print(venue.text);
-            //     }
-            //   },
-            //   hintLabel:
-            //       addActivityScreenApi?.body?.screeninfo?.edtvenue??activityEdtVenue,
-            //   textInputType: TextInputType.text,
-            //   iconsFile : FontAwesomeIcons.mapLocation,
-            // ),
-            BuildTextformfieldUnlimitCustom(
-              textEditingController: venue,
-              onChanged: (value) {
-                venue.text = value;
-                if (kDebugMode) {
-                  print(venue.text);
-                }
-              },
-              hintLabel: addActivityScreenApi?.body?.screeninfo?.edtvenue ??
-                  activityEdtVenue,
-              textInputType: TextInputType.text,
-              iconsFile: FontAwesomeIcons.mapLocation,
-            ),
-
-            CustomDropdownApprover(
-              iconsFile: FontAwesomeIcons.userGroup,
-              width: MediaQuery.of(context).size.width,
-              dropdownList: approverArray,
-              hint: addActivityScreenApi?.body?.screeninfo?.edtapprover ??
-                  activityEdtApprover,
-              callbackFromCustomDropdown: (String result) {
-                approver.text = result;
-                if (kDebugMode) {
-                  print(approver.text);
-                }
-              },
-            ),
-            BuildTextformfieldUnlimitCustom(
-              textEditingController: detail,
-              onChanged: (value) {
-                detail.text = value;
-                if (kDebugMode) {
-                  print(detail.text);
-                }
-              },
-              hintLabel: addActivityScreenApi?.body?.screeninfo?.edtdetail ??
-                  activityEdtDetail,
-              textInputType: TextInputType.text,
-              iconsFile: FontAwesomeIcons.circleInfo,
-            ),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.05,
             ),
             Center(
               child: ButtonCustom(
-                label: addActivityScreenApi?.body?.screeninfo?.btnconfirm ??
+                label: addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.buttonadd ??
                     activityBtnConfirm,
                 colortext: tcButtonTextBlack,
                 colorbutton: tcButtonTextWhite,
@@ -349,39 +232,30 @@ buildAddActivityBody(
                 colorborder: tcButtonTextBoarder,
                 sizeborder: 10,
                 onPressed: () {
-                  if (year.text.isNotEmpty &&
-                      totalTimeHours.text.isNotEmpty &&
-                      totalTimeMinutes.text.isNotEmpty &&
-                      approver.text.isNotEmpty &&
-                      // fDate.text.isNotEmpty &&
-                      venue.text.isNotEmpty &&
-                      detail.text.isNotEmpty &&
-                      // sDate.text.isNotEmpty &&
-                      activityName.text.isNotEmpty &&
-                      term.text.isNotEmpty) {
-                    context.read<ActivityBloc>().add(SubmitAddEditActivityEvent(
+                  if (activityNameByTeacher.text.isNotEmpty &&
+                      objectives.text.isNotEmpty &&
+                      sDate.text.isNotEmpty &&
+                      fDate.text.isNotEmpty) {
+                    context.read<ActivityBloc>().add(SubmitAddEditDeleteActivityByTeacherEvent(
                         id: 0,
-                        year: year.text,
-                        totalTimeHours: totalTimeHours.text,
-                        totalTimeMinutes: totalTimeMinutes.text,
-                        approver: approver.text,
-                        fDate: fDate.text,
-                        venue: venue.text,
-                        detail: detail.text,
+                        activityNameByTeacher: activityNameByTeacher.text,
+                        objectives: objectives.text,
                         sDate: sDate.text,
-                        activityName: activityName.text,
-                        term: term.text));
-                  } else {
-                    dialogOneLineOneBtn(
-                        context,
-                        addActivityScreenApi
-                                ?.body?.alertmessage?.alertfillallactivity ??
-                            alertFillAllActivity,
-                        addActivityScreenApi?.body?.errorbutton?.buttonok ??
-                            buttonOK, onClickBtn: () {
-                      Navigator.of(context).pop();
-                    });
+                        fDate: fDate.text,
+
+                    ));
                   }
+                  // else {
+                  //   dialogOneLineOneBtn(
+                  //       context,
+                  //       addEditDeleteActivityScreenByTeacherApi
+                  //               ?.body?.alertmessage?.alertfillallactivity ??
+                  //           alertFillAllActivity,
+                  //       addEditDeleteActivityScreenByTeacherApi?.body?.errorbutton?.buttonok ??
+                  //           buttonOK, onClickBtn: () {
+                  //     Navigator.of(context).pop();
+                  //   });
+                  // }
                 },
               ),
             ),
