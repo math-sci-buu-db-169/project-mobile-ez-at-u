@@ -7,6 +7,7 @@ import 'package:ez_at_u/customs/size/size.dart';
 import 'package:ez_at_u/customs/text_file/build_textformfiled_unlimit_custom.dart';
 import 'package:ez_at_u/module/activity/bloc/activity_bloc.dart';
 import 'package:ez_at_u/module/activity/model/response/add_edit_delete_activity_by_teacher_screen.dart';
+import 'package:ez_at_u/module/home/screen/home_screen/home_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
@@ -60,6 +61,10 @@ class _AddActivityByTeacherPageState extends State<AddActivityByTeacherPage> wit
         }
         if (state is SubmitAddEditActivityByTeacherEndLoadingState) {
           hideProgressDialog(context);
+        }
+        if (state is SubmitAddEditDeleteByTeacherActivityState) {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const HomeScreen()));
         }
         if (state is SubmitAddEditDeleteActivityByTeacherError) {
           dialogOneLineOneBtn(context, '${state.message}\n ', "OK",
@@ -244,18 +249,24 @@ buildAddActivityByTeacherBody(
                         fDate: fDate.text,
 
                     ));
+                  }else {
+                    dialogOneLineOneBtn(
+                        context,
+                        // addEditDeleteActivityScreenByTeacherApi
+                        //     ?.body?.alertmessage?.alertfillallactivity ??
+                        alertFillAllActivity??alertFillAllActivity,
+                        // addEditDeleteActivityScreenByTeacherApi?.body?.errorbutton?.buttonok ??
+                        buttonOK??
+                            buttonOK, onClickBtn: () {
+                      Navigator.of(context).pop();
+                    });
                   }
-                  // else {
-                  //   dialogOneLineOneBtn(
-                  //       context,
-                  //       addEditDeleteActivityScreenByTeacherApi
-                  //               ?.body?.alertmessage?.alertfillallactivity ??
-                  //           alertFillAllActivity,
-                  //       addEditDeleteActivityScreenByTeacherApi?.body?.errorbutton?.buttonok ??
-                  //           buttonOK, onClickBtn: () {
-                  //     Navigator.of(context).pop();
-                  //   });
-                  // }
+                  print("------------------ข้อมูล------------------");
+                  print(activityNameByTeacher.text);
+                  print(objectives.text);
+                  print(sDate.text);
+                  print(fDate.text);
+                  print("------------------ข้อมูล------------------");
                 },
               ),
             ),

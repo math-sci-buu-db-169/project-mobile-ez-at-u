@@ -112,13 +112,20 @@ class ActivityRepository  {
     required String sDate,
     required String fDate,
 }) async {
+    print("มาถึง API มั้ย");
+    print(id);
+    print(activityNameByTeacher);
+    print(objectives);
+    print(sDate);
+    print(fDate);
+    print("มาถึง API มั้ย");
     return await MyDio.createDioServer().post("/activity/addeditdeleteactivitybyteacher",
         data: jsonEncode({
-          "activityid": id,
+          "activitynameid": id,
           "activityname": activityNameByTeacher,
           "objectives": objectives,
-          "startdate": sDate,
-          "finishdate": fDate,
+          "startdatebyteacher": sDate,
+          "finishdatebyteacher": fDate,
           "isdelete": "false"
         })
     );

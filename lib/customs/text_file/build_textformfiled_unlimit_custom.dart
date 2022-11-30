@@ -23,10 +23,11 @@ class BuildTextformfieldUnlimitCustom extends StatelessWidget {
         margin: const EdgeInsets.all(12),
         // decoration: BoxDecoration(color: Colors.red[50], borderRadius: BorderRadius.circular(16)),
         child: TextFormField(
+          textInputAction: TextInputAction.newline,
           cursorColor: appBarforegroundColor,
           style: TextStyle(fontSize: sizeText18, color: appBarforegroundColor // height: 2.0,
           ),
-          keyboardType: textInputType,
+          keyboardType: TextInputType.multiline,
           maxLines: null,
           // controller: textEditingController,
           initialValue: initialvalue,
