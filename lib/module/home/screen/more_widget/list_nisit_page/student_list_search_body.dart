@@ -4,26 +4,26 @@ import 'package:ez_at_u/module/home/screen/more_widget/build_list_student.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../../../../../customs/text_file/text_field_custom.dart';
-import '../../../../../customs/text_file/text_field_search_nisit.dart';
+import '../../../../../customs/text_file/text_field_search_nisit_all.dart';
 import '../../../bloc/more_bloc/more_bloc.dart';
 import '../../../model/response/more_response/screen_more_board_student_list_response.dart';
-import '../search_nisit_screen/search_nisit_screen.dart';
 
-studentListBody(
+
+studentListScreenBody(
     BuildContext context, ScreenMoreBoardStudentListResponse? screenMoreBoardStudentListResponse,
-    String title,
     TextEditingController searchNiSitController,
     int optionSearchNiSit,
-    void Function(int clickOptionSearch) setOptionSearchNiSit) {
+    void Function(int clickOptionSearch) setOptionSearchNiSit, void Function(String clickOptionSearchGenNiSit) setOptionSearchGenNiSit,
+    String optionSearchGen) {
   String generation =
       screenMoreBoardStudentListResponse?.body?.screeninfo?.titleboardgen ?? boardDetailNiSitTitleBoardNiSitGen;
+ List<String> lengthPopupMenuItem =["ล้างทั้งหมด",'68','67','66','65','64','63'];
   return WillPopScope(
       onWillPop: () async {
         return false;
       },
       child: Scaffold(
-          backgroundColor: Theme.of(context).backgroundColor,
+        backgroundColor: Theme.of(context).backgroundColor,
         appBar: AppBar(
           backgroundColor:Theme.of(context).primaryColor,
           elevation: 0,
@@ -38,7 +38,7 @@ studentListBody(
             ),
           ),
           title: Text(
-            "$generation  $title ",
+            "$generation  $optionSearchGen ",
             style:  TextStyle(
               color: Theme.of(context).bottomAppBarColor,
               fontSize: sizeTitle24,
@@ -46,17 +46,52 @@ studentListBody(
           ),
 
           actions: [
-            IconButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const MoreSrarchNisitScreen()),
-                  );
-                  
-                },
-                icon:  FaIcon(FontAwesomeIcons.magnifyingGlass,
+            PopupMenuButton(
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Icon(
+                    FontAwesomeIcons.filter,
                     size: 20,
-                  color: Theme.of(context).bottomAppBarColor,)),
+                    color: Theme.of(context).bottomAppBarColor,
+                  ),
+                ),
+              ),
+              itemBuilder: (context) {
+                return List.generate(
+                    (lengthPopupMenuItem.length)
+                    , (index) {
+
+                  return  PopupMenuItem(
+                    value: index,
+                    child: Text(lengthPopupMenuItem[index] ??'Settings',style: TextStyle(color: Theme.of(context).appBarTheme.foregroundColor),),
+                  );
+
+                }
+                );
+              },
+                onSelected: (value) {
+                  optionSearchGen ='';
+                  if(value != 0){
+                    optionSearchGen = lengthPopupMenuItem[value];
+                  }
+                  setOptionSearchGenNiSit(optionSearchGen);
+                  context.read<MoreBloc>().add(MoreSrarchNisitEvent(gen: optionSearchGen,studentID: '',studentName: '',studentLastname:'' ));
+
+                }
+
+            ),
+
+
+
+
+
+            // IconButton(
+            //     onPressed: () {},
+            //     icon:  FaIcon(FontAwesomeIcons.filter,
+            //       size: 20,
+            //       color: Theme.of(context).bottomAppBarColor,)),
             // IconButton(
             //     onPressed: () {},
             //     icon:  FaIcon(FontAwesomeIcons.filter,
@@ -73,7 +108,7 @@ studentListBody(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TextFieldSearchNiSitCustom(
+                    TextFieldSearchNiSitAllCustom(
                       screenMoreBoardStudentListResponse:screenMoreBoardStudentListResponse,
                       textEditingController: searchNiSitController,
                       callbackFromOptionSearch: (int optionSearchResult) {
@@ -85,25 +120,25 @@ studentListBody(
                         print(optionSearchNiSit);
                         switch(optionSearchNiSit) {
                           case 0: {
-                            context.read<MoreBloc>().add(MoreBoardListStudentSearchEvent(
-                              gen:title , studentID: searchNiSitController.text, studentName: '', studentLastname: '',));
+                            context.read<MoreBloc>().add(MoreSrarchNisitEvent(
+                              gen:optionSearchGen , studentID: searchNiSitController.text, studentName: '', studentLastname: '',));
                           }
                           break;
 
                           case 1: {
-                            context.read<MoreBloc>().add(MoreBoardListStudentSearchEvent(
-                              gen:title , studentID:'' , studentName: searchNiSitController.text ,studentLastname: '',));
+                            context.read<MoreBloc>().add(MoreSrarchNisitEvent(
+                              gen:optionSearchGen , studentID:'' , studentName: searchNiSitController.text ,studentLastname: '',));
 
                           }
                           break;
                           case 2: {
-                            context.read<MoreBloc>().add(MoreBoardListStudentSearchEvent(
-                            gen:title , studentID: '', studentName: '', studentLastname: searchNiSitController.text,));
+                            context.read<MoreBloc>().add(MoreSrarchNisitEvent(
+                              gen:optionSearchGen , studentID: '', studentName: '', studentLastname: searchNiSitController.text,));
                           }
                           break;
                           default: {
-                            context.read<MoreBloc>().add(MoreBoardListStudentSearchEvent(
-                              gen:title , studentID: '', studentName: '', studentLastname: '',));
+                            context.read<MoreBloc>().add(MoreSrarchNisitEvent(
+                              gen:optionSearchGen , studentID: '', studentName: '', studentLastname: '',));
                           }
                           break;
                         }

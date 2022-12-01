@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:package_info_plus/package_info_plus.dart';
+import 'package:package_info/package_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../module/login/screen/login_screen/login_screen.dart';
 import '../../../../customs/dialog/dialog_widget.dart';
@@ -63,7 +63,6 @@ class _HomePageState extends State<HomePage> with ProgressDialog {
     appName: 'Unknown',
     packageName: 'Unknown',
     buildNumber: 'Unknown',
-    buildSignature: 'Unknown',
     version: 'Unknown',
   );
 

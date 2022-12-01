@@ -39,3 +39,4 @@ const contactUsMath = Color(0xFF050000);
 const contactUsFaulty = Color(0xFFFFEA11);
 const fillColorDark = Color(0xFF1F222A);
 const fillColorLight = Color(0xFFFAFAFA);
+const fillColorLight2 = Colors;

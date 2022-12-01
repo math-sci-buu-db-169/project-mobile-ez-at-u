@@ -198,3 +198,22 @@ class MoreCoursesError extends MoreState {
   String message;
   MoreCoursesError({required this.message});
 }
+// ----------------------------------------->
+class MoreSrarchNisitLoading extends MoreState {}
+
+class MoreSrarchNisitEndLoading extends MoreState {}
+
+class MoreSrarchNisitError extends MoreState {
+  String message;
+  MoreSrarchNisitError({required this.message});
+}
+
+class MoreSrarchNisitNinitSuccessState extends MoreState {
+  ScreenMoreBoardStudentListResponse responseBoardListStudent;
+
+  MoreSrarchNisitNinitSuccessState({required this.responseBoardListStudent});
+}class MoreSrarchNisitSuccessState extends MoreState {
+  ScreenMoreBoardStudentListResponse responseBoardListStudent;
+
+  MoreSrarchNisitSuccessState({required this.responseBoardListStudent});
+}
