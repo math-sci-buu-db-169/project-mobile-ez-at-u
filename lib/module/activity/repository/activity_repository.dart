@@ -90,7 +90,8 @@ class ActivityRepository  {
           "refreshToken": refreshToken
         })
     );
-  }Future<Response> getCheckTokenExpired() async {
+  }
+  Future<Response> getCheckTokenExpired() async {
     return await MyDio.createDioServer().post("/login/checktokenexpired",
         data: jsonEncode({
         })
@@ -131,4 +132,10 @@ class ActivityRepository  {
     );
   }
 //----------------------------------------------------------------------------
+  Future<Response> getActivityNameListByTeacher() async {
+    return await MyDio.createDioServer().post("/activity/activitynamebyteacherlist",
+        data: jsonEncode({
+        })
+    );
+  }
 }
