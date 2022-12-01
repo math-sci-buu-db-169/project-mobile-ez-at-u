@@ -2,6 +2,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 
+const colorBoxDotted = Color(0xFFEBEBEB);
+const colorDottedBorder= Color(0xFFFFFF00);
 const colorBoxOne = Color(0xFFFFFF00);
 const colorBoxTwo = Color(0xFFFFFFFF);
 const tcRegiter = Color(0xfff79c4f);

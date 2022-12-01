@@ -86,7 +86,8 @@ class _MyAppRunState extends State<MyAppRun> {
             // ),
             // home: HomeScreen(),              '/': (context) =>const MainRouteScreen(),
             routes: {
-              '/': (context) =>const MainRouteScreen(),
+              // '/': (context) =>const MainRouteScreen(),
+              '/': (context) =>const ContentDesignResumeScreen(),
             }
         );
       },
