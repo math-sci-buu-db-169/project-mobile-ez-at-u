@@ -468,7 +468,7 @@ Future<pw.PageTheme> _myPageTheme(
           children: [
             pw.Positioned(
               // child: pw.SvgImage(svg: bgShape),
-              child: pw.Container(width: 60, height: 850, color: colorOfPdfUs),
+              child: pw.Container(width: 50, height: 850, color: colorOfPdfUs),
               left: 0,
               top: 0,
             ),

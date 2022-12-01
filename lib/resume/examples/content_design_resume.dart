@@ -38,6 +38,19 @@ class _ContentDesignResumeState extends State<ContentDesignResume> {
 
         appBar: AppBar(
             backgroundColor: Theme.of(context).primaryColor,
+
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.arrow_back,
+              size: sizeTitle24,
+              color: Theme.of(context).appBarTheme.foregroundColor,
+            ),
+          ),
+
+
             // leading: Builder(
             //   builder: (BuildContext context) {
             //     return IconButton(
@@ -50,6 +63,7 @@ class _ContentDesignResumeState extends State<ContentDesignResume> {
             //     );
             //   },
             // ),
+
             title: Center(
                 child: Text( "Content Design Resume",
                     style: TextStyle(

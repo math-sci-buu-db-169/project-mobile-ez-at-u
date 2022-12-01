@@ -16,7 +16,7 @@
 
 import 'dart:async';
 import 'dart:io';
-
+import 'package:intl/intl.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:open_file/open_file.dart';
@@ -24,8 +24,10 @@ import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart' as ul;
 
+import '../check_token/token_bloc.dart';
 import '../customs/color/pdf_color_const.dart';
 import 'data.dart';
 import 'examples.dart';
@@ -49,11 +51,22 @@ class MyAppResumeState extends State<MyAppResume> with SingleTickerProviderState
   var _data = const CustomData();
   var _hasData = false;
   var _pending = false;
+  String formattedDateDocument = DateFormat('yMd').format(DateTime.now());// 28/03/2020
 
+  late String myNameUser = 'document';
   @override
   void initState() {
+    _isGetMyNameUser();
     super.initState();
     _init();
+  }
+
+
+  Future<void> _isGetMyNameUser() async {
+    prefs = await SharedPreferences.getInstance();
+    myNameUser = prefs.getString('myNameUser') ?? '';
+    print("myNameUser : $myNameUser");
+    setState(() {});
   }
 
   @override
@@ -119,7 +132,7 @@ class MyAppResumeState extends State<MyAppResume> with SingleTickerProviderState
 
     final appDocDir = await getApplicationDocumentsDirectory();
     final appDocPath = appDocDir.path;
-    final file = File(appDocPath + '/' + 'document.pdf');
+    final file = File('$appDocPath/$myNameUser$formattedDateDocument.pdf');
     print('Save as file ${file.path} ...');
     await file.writeAsBytes(bytes);
     await OpenFile.open(file.path);
