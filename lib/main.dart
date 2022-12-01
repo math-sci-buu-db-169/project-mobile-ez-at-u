@@ -84,9 +84,9 @@ class _MyAppRunState extends State<MyAppRun> {
             //     Theme.of(context).textTheme,
             //   ),
             // ),
-            // home: HomeScreen(),
+            // home: HomeScreen(),              '/': (context) =>const MainRouteScreen(),
             routes: {
-              '/': (context) =>const ContentDesignResumeScreen(),
+              '/': (context) =>const MainRouteScreen(),
             }
         );
       },
