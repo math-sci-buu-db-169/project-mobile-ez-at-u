@@ -4,6 +4,7 @@ import 'package:ez_at_u/module/home/screen/home_widget/setting_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../../resume/app.dart';
+import '../../../../resume/examples/content_design_resume.dart';
 import 'home_body_widget.dart';
 import '../../../../customs/button/button_custom.dart';
 import '../../../../customs/message/text_home.dart';
@@ -213,7 +214,7 @@ buildContentHomeScreen(
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const MyAppResume()));
+                                builder: (context) =>  ContentDesignResumeScreen()));
                       },
                       // icon: const FaIcon(FontAwesomeIcons.house,color: tcBlack, size: 40),
                       // onPressed: () {},

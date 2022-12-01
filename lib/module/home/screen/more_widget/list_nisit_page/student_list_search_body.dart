@@ -17,7 +17,7 @@ studentListScreenBody(
     String optionSearchGen) {
   String generation =
       screenMoreBoardStudentListResponse?.body?.screeninfo?.titleboardgen ?? boardDetailNiSitTitleBoardNiSitGen;
- List<String> lengthPopupMenuItem =["ล้างทั้งหมด",'65','64','63'];
+ List<String> lengthPopupMenuItem =["ล้างทั้งหมด",'68','67','66','65','64','63'];
   return WillPopScope(
       onWillPop: () async {
         return false;

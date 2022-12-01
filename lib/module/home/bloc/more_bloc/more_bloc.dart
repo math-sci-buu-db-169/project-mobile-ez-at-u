@@ -449,9 +449,9 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
       try {
         // emit(MoreSrarchNisitLoading());
         print("CheckMore 15 == MoreSrarchNisitEvent");
-        // await  checkMoreEventInitial(event, emit) ;
+        await  checkMoreEventInitial(event, emit) ;
         Response responseMoreBoardListStudent = await getMoreBoardListStudent(event.gen,event.studentID,event.studentName,event.studentLastname,);
-        emit(MoreSrarchNisitEndLoading());
+        // emit(MoreSrarchNisitEndLoading());
         if (responseMoreBoardListStudent.statusCode == 200) {
           ScreenMoreBoardStudentListResponse screenMoreBoardStudentListResponse =
           ScreenMoreBoardStudentListResponse.fromJson(responseMoreBoardListStudent.data);

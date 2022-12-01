@@ -26,11 +26,13 @@ import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 import 'package:url_launcher/url_launcher.dart' as ul;
 
+import '../customs/color/pdf_color_const.dart';
 import 'data.dart';
 import 'examples.dart';
 
 class MyAppResume extends StatefulWidget {
-  const MyAppResume({Key? key}) : super(key: key);
+  final PdfColor colorOfPdfUs;
+  const MyAppResume({Key? key, required this.colorOfPdfUs}) : super(key: key);
 
   @override
   MyAppResumeState createState() {
@@ -154,7 +156,7 @@ class MyAppResumeState extends State<MyAppResume> with SingleTickerProviderState
 
       PdfPreview(
         maxPageWidth: 700,
-        build: (format) => examples[_tab].builder(format, _data),
+        build: (format) => examples[_tab].builder(format, _data,widget.colorOfPdfUs,colorOfPdf.lightGreen,colorOfPdf.black),
         actions: actions,
         onPrinted: _showPrintedToast,
         onShared: _showSharedToast,
