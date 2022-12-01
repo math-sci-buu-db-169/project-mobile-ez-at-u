@@ -177,75 +177,88 @@ buildEditActivityByTeacherBody(
     ),
     body: SafeArea(
       // height: MediaQuery.of(context).size.height,
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.05,
+      child: Column(
+        children: [
+          Expanded(
+            child: Container(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.05,
+                    ),
+                    BuildTextformfieldUnlimitCustom(
+                      initialvalue: activityNameValue,
+                      textEditingController: activityNameByTeacher,
+                      onChanged: (value) {
+                        activityNameByTeacher.text = value;
+                        if (kDebugMode) {
+                          print(activityNameByTeacher.text);
+                        }
+                      },
+                      hintLabel: addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.textactivityname ??
+                          activityEdtActName,
+                      textInputType: TextInputType.text,
+                      // iconsFile : Icons.person_rounded,
+                      iconsFile: FontAwesomeIcons.solidPenToSquare,
+                    ),
+                    BuildTextformfieldUnlimitCustom(
+                      initialvalue: objectivesValue,
+                      textEditingController: objectives,
+                      onChanged: (value) {
+                        objectives.text = value;
+                        if (kDebugMode) {
+                          print(objectives.text);
+                        }
+                      },
+                      hintLabel: addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.textobjectives ??
+                          activityEdtActName,
+                      textInputType: TextInputType.text,
+                      // iconsFile : Icons.person_rounded,
+                      iconsFile: FontAwesomeIcons.bullseye,
+                    ),
+                    customDatePickerForEdit(
+                      hintLabel: addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.textstartdate??activityEdtStartDate,
+                      dateValue: sDateValue,
+                      callbackFromCustomDatePickerForEdit: (String result) {
+                        sDate.text = result;
+                        if (kDebugMode) {
+                          print(sDate.text);
+                        }
+                      },
+                    ),
+                    customDatePickerForEdit(
+                      hintLabel: addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.textfinishdate??activityEdtFinishDate,
+                      dateValue: fDateValue,
+                      callbackFromCustomDatePickerForEdit: (String result) {
+                        fDate.text = result;
+                        if (kDebugMode) {
+                          print(fDate.text);
+                        }
+                      },
+                    ),
+                    // CustomTimePicker(
+                    //   hintLabel: addActivityScreenApi?.body?.screeninfo?.edttime??activityEdtTime,
+                    //   callbackFromCustomTimePicker: (String result) {
+                    //     fDate.text = result;
+                    //     if (kDebugMode) {
+                    //       print(fDate.text);
+                    //     }
+                    //   },
+                    // ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.05,
+                    ),
+                  ],
+                ),
+              ),
             ),
-            BuildTextformfieldUnlimitCustom(
-              initialvalue: activityNameValue,
-              textEditingController: activityNameByTeacher,
-              onChanged: (value) {
-                activityNameByTeacher.text = value;
-                if (kDebugMode) {
-                  print(activityNameByTeacher.text);
-                }
-              },
-              hintLabel: addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.textactivityname ??
-                  activityEdtActName,
-              textInputType: TextInputType.text,
-              // iconsFile : Icons.person_rounded,
-              iconsFile: FontAwesomeIcons.solidPenToSquare,
-            ),
-            BuildTextformfieldUnlimitCustom(
-              initialvalue: objectivesValue,
-              textEditingController: objectives,
-              onChanged: (value) {
-                objectives.text = value;
-                if (kDebugMode) {
-                  print(objectives.text);
-                }
-              },
-              hintLabel: addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.textobjectives ??
-                  activityEdtActName,
-              textInputType: TextInputType.text,
-              // iconsFile : Icons.person_rounded,
-              iconsFile: FontAwesomeIcons.bullseye,
-            ),
-            customDatePickerForEdit(
-              hintLabel: addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.textstartdate??activityEdtStartDate,
-              dateValue: sDateValue,
-              callbackFromCustomDatePickerForEdit: (String result) {
-                sDate.text = result;
-                if (kDebugMode) {
-                  print(sDate.text);
-                }
-              },
-            ),
-            customDatePickerForEdit(
-              hintLabel: addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.textfinishdate??activityEdtFinishDate,
-              dateValue: fDateValue,
-              callbackFromCustomDatePickerForEdit: (String result) {
-                fDate.text = result;
-                if (kDebugMode) {
-                  print(fDate.text);
-                }
-              },
-            ),
-            // CustomTimePicker(
-            //   hintLabel: addActivityScreenApi?.body?.screeninfo?.edttime??activityEdtTime,
-            //   callbackFromCustomTimePicker: (String result) {
-            //     fDate.text = result;
-            //     if (kDebugMode) {
-            //       print(fDate.text);
-            //     }
-            //   },
-            // ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.05,
-            ),
-            Row(
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.02,
+          ),
+          Container(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
@@ -318,12 +331,12 @@ buildEditActivityByTeacherBody(
                                   {
                                     context.read<ActivityBloc>().add(
                                         SubmitAddEditDeleteActivityByTeacherEvent(
-                                          id: activityNameIdValue,
-                                          activityNameByTeacher: activityNameByTeacher.text,
-                                          objectives: objectives.text,
-                                          sDate: sDate.text,
-                                          fDate: fDate.text,
-                                          isDelete: "true"
+                                            id: activityNameIdValue,
+                                            activityNameByTeacher: activityNameByTeacher.text,
+                                            objectives: objectives.text,
+                                            sDate: sDate.text,
+                                            fDate: fDate.text,
+                                            isDelete: "true"
                                         ));
                                   }
                               }
@@ -332,11 +345,11 @@ buildEditActivityByTeacherBody(
                     )),
               ],
             ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.1,
-            ),
-          ],
-        ),
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.02,
+          ),
+        ],
       ),
     ),
   );
