@@ -101,8 +101,8 @@ class SubmitAddEditDeleteActivityByTeacherError extends ActivityState {
   String message;
   SubmitAddEditDeleteActivityByTeacherError({required this.message});
 }
-class getDataActivityListByTeacherSuccessState extends ActivityState {
-  AddEditDeleteActivityByTeacherScreen response;
+class getDataActivityNameListByTeacherSuccessState extends ActivityState {
+  ActivityNameListByTeacher response;
 
-  getScreenAddEditDeleteActivityByTeacherSuccessState({required this.response});
+  getDataActivityNameListByTeacherSuccessState({required this.response});
 }

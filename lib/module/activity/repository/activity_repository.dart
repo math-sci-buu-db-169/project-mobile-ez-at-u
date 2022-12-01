@@ -112,6 +112,7 @@ class ActivityRepository  {
     required String objectives,
     required String sDate,
     required String fDate,
+    required String isDelete,
 }) async {
     print("มาถึง API มั้ย");
     print(id);
@@ -127,7 +128,7 @@ class ActivityRepository  {
           "objectives": objectives,
           "startdatebyteacher": sDate,
           "finishdatebyteacher": fDate,
-          "isdelete": "false"
+          "isdelete": isDelete
         })
     );
   }

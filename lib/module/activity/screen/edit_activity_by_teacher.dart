@@ -1,12 +1,14 @@
 import 'package:ez_at_u/customs/button/button_custom.dart';
 import 'package:ez_at_u/customs/color/color_const.dart';
 import 'package:ez_at_u/customs/datepicker/custom_date_picker.dart';
+import 'package:ez_at_u/customs/datepicker/custom_date_picker_for_edit.dart';
 import 'package:ez_at_u/customs/dialog/dialog_widget.dart';
 import 'package:ez_at_u/customs/progress_dialog.dart';
 import 'package:ez_at_u/customs/size/size.dart';
 import 'package:ez_at_u/customs/text_file/build_textformfiled_unlimit_custom.dart';
 import 'package:ez_at_u/module/activity/bloc/activity_bloc.dart';
 import 'package:ez_at_u/module/activity/model/response/add_edit_delete_activity_by_teacher_screen.dart';
+import 'package:ez_at_u/module/activity/screen/activity_name_by_teacher_page.dart';
 import 'package:ez_at_u/module/home/screen/home_screen/home_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,19 +19,21 @@ import 'package:intl/intl.dart';
 import '../../../customs/message/text_add_edit_activity.dart';
 
 class EditActivityByTeacherScreen extends StatelessWidget {
-  const EditActivityByTeacherScreen({Key? key}) : super(key: key);
+  final dynamic data;
+  const EditActivityByTeacherScreen({Key? key, required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ActivityBloc()..add(getScreenAddEditDeleteActivityByTeacherEvent()),
-      child: const EditActivityByTeacherPage(),
+      child: EditActivityByTeacherPage(data: data,),
     );
   }
 }
 
 class EditActivityByTeacherPage extends StatefulWidget {
-  const EditActivityByTeacherPage({Key? key}) : super(key: key);
+  final dynamic data;
+  const EditActivityByTeacherPage({Key? key, required this.data}) : super(key: key);
 
   @override
   State<EditActivityByTeacherPage> createState() => _EditActivityByTeacherPageState();
@@ -41,13 +45,12 @@ class _EditActivityByTeacherPageState extends State<EditActivityByTeacherPage> w
   TextEditingController sDate = TextEditingController();
   TextEditingController fDate = TextEditingController();
   AddEditDeleteActivityByTeacherScreen? _addEditDeleteActivityByTeacherScreenApi;
-  DateTime date = DateTime.now();
-  late String? dateFormated;
   @override
   void initState() {
-    dateFormated = DateFormat('d/M/y').format(date);
-    sDate.text = dateFormated.toString();
-    fDate.text = dateFormated.toString();
+    activityNameByTeacher.text = widget.data.activitynameresponse;
+    objectives.text = widget.data.objectivesresponse;
+    sDate.text = widget.data.startdatebyteacherresponse;
+    fDate.text = widget.data.finishdatebyteacherresponse;
     super.initState();
   }
 
@@ -64,7 +67,7 @@ class _EditActivityByTeacherPageState extends State<EditActivityByTeacherPage> w
         }
         if (state is SubmitAddEditDeleteByTeacherActivityState) {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const HomeScreen()));
+              MaterialPageRoute(builder: (context) => const ActivityNameListByTeacherScreen()));
         }
         if (state is SubmitAddEditDeleteActivityByTeacherError) {
           dialogOneLineOneBtn(context, '${state.message}\n ', "OK",
@@ -94,14 +97,23 @@ class _EditActivityByTeacherPageState extends State<EditActivityByTeacherPage> w
       builder: (context, state) {
         if (state is getScreenAddEditDeleteActivityByTeacherSuccessState) {
           _addEditDeleteActivityByTeacherScreenApi = state.response;
-
-          return buildAddActivityByTeacherBody(
+          int activityNameIdValue = widget.data.activitynameidresponse;
+          String activityNameValue = "${widget.data.activitynameresponse}";
+          String objectivesValue = "${widget.data.objectivesresponse}";
+          String sDateValue= "${widget.data.startdatebyteacherresponse}";
+          String fDateValue = "${widget.data.finishdatebyteacherresponse}";
+          return buildEditActivityByTeacherBody(
             context,
             _addEditDeleteActivityByTeacherScreenApi,
             activityNameByTeacher,
             objectives,
             sDate,
             fDate,
+              activityNameIdValue,
+              activityNameValue,
+              objectivesValue,
+              sDateValue,
+              fDateValue
 
           );
         } else {
@@ -123,13 +135,18 @@ class _EditActivityByTeacherPageState extends State<EditActivityByTeacherPage> w
   }
 }
 
-buildAddActivityByTeacherBody(
+buildEditActivityByTeacherBody(
   BuildContext context,
     AddEditDeleteActivityByTeacherScreen? addEditDeleteActivityScreenByTeacherApi,
   TextEditingController activityNameByTeacher,
   TextEditingController objectives,
   TextEditingController sDate,
   TextEditingController fDate,
+    int activityNameIdValue,
+    String activityNameValue,
+    String objectivesValue,
+    String sDateValue,
+    String fDateValue
 ) {
   Color? appBarBackgroundColor =
       Theme.of(context).appBarTheme.backgroundColor ?? Colors.white;
@@ -150,8 +167,8 @@ buildAddActivityByTeacherBody(
         ),
       ),
       title: Text(
-        addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.titleaddactivity ??
-            activityTitleAddAct,
+        addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.titleeditactivity ??
+            activityTitleEditAct,
         style: TextStyle(
           color: appBarforegroundColor,
           fontSize: sizeTitle24,
@@ -167,6 +184,7 @@ buildAddActivityByTeacherBody(
               height: MediaQuery.of(context).size.height * 0.05,
             ),
             BuildTextformfieldUnlimitCustom(
+              initialvalue: activityNameValue,
               textEditingController: activityNameByTeacher,
               onChanged: (value) {
                 activityNameByTeacher.text = value;
@@ -181,6 +199,7 @@ buildAddActivityByTeacherBody(
               iconsFile: FontAwesomeIcons.solidPenToSquare,
             ),
             BuildTextformfieldUnlimitCustom(
+              initialvalue: objectivesValue,
               textEditingController: objectives,
               onChanged: (value) {
                 objectives.text = value;
@@ -194,21 +213,20 @@ buildAddActivityByTeacherBody(
               // iconsFile : Icons.person_rounded,
               iconsFile: FontAwesomeIcons.bullseye,
             ),
-            CustomDatePicker(
-              hintLabel: addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.textstartdate ??
-                  activityEdtStartDate,
-              callbackFromCustomDatePicker: (String result) {
+            customDatePickerForEdit(
+              hintLabel: addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.textstartdate??activityEdtStartDate,
+              dateValue: sDateValue,
+              callbackFromCustomDatePickerForEdit: (String result) {
                 sDate.text = result;
                 if (kDebugMode) {
                   print(sDate.text);
                 }
               },
             ),
-            CustomDatePicker(
-              hintLabel:
-                  addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.textfinishdate ??
-                      activityEdtFinishDate,
-              callbackFromCustomDatePicker: (String result) {
+            customDatePickerForEdit(
+              hintLabel: addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.textfinishdate??activityEdtFinishDate,
+              dateValue: fDateValue,
+              callbackFromCustomDatePickerForEdit: (String result) {
                 fDate.text = result;
                 if (kDebugMode) {
                   print(fDate.text);
@@ -227,48 +245,92 @@ buildAddActivityByTeacherBody(
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.05,
             ),
-            Center(
-              child: ButtonCustom(
-                label: addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.buttonadd ??
-                    activityBtnConfirm,
-                colortext: tcButtonTextBlack,
-                colorbutton: tcButtonTextWhite,
-                sizetext: sizeTextBig20,
-                colorborder: tcButtonTextBoarder,
-                sizeborder: 10,
-                onPressed: () {
-                  if (activityNameByTeacher.text.isNotEmpty &&
-                      objectives.text.isNotEmpty &&
-                      sDate.text.isNotEmpty &&
-                      fDate.text.isNotEmpty) {
-                    context.read<ActivityBloc>().add(SubmitAddEditDeleteActivityByTeacherEvent(
-                        id: 0,
-                        activityNameByTeacher: activityNameByTeacher.text,
-                        objectives: objectives.text,
-                        sDate: sDate.text,
-                        fDate: fDate.text,
-
-                    ));
-                  }else {
-                    dialogOneLineOneBtn(
-                        context,
-                        // addEditDeleteActivityScreenByTeacherApi
-                        //     ?.body?.alertmessage?.alertfillallactivity ??
-                        alertFillAllActivity??alertFillAllActivity,
-                        // addEditDeleteActivityScreenByTeacherApi?.body?.errorbutton?.buttonok ??
-                        buttonOK??
-                            buttonOK, onClickBtn: () {
-                      Navigator.of(context).pop();
-                    });
-                  }
-                  print("------------------ข้อมูล------------------");
-                  print(activityNameByTeacher.text);
-                  print(objectives.text);
-                  print(sDate.text);
-                  print(fDate.text);
-                  print("------------------ข้อมูล------------------");
-                },
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.35,
+                  child: ButtonCustom(
+                    label: addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.buttonsave ??
+                        activityBtnConfirm,
+                    colortext: tcButtonTextBlack,
+                    colorbutton: tcButtonTextWhite,
+                    sizetext: sizeTextBig20,
+                    colorborder: tcButtonTextBoarder,
+                    sizeborder: 10,
+                    onPressed: () {
+                      if (activityNameByTeacher.text.isNotEmpty &&
+                          objectives.text.isNotEmpty &&
+                          sDate.text.isNotEmpty &&
+                          fDate.text.isNotEmpty) {
+                        context.read<ActivityBloc>().add(SubmitAddEditDeleteActivityByTeacherEvent(
+                            id: activityNameIdValue,
+                            activityNameByTeacher: activityNameByTeacher.text,
+                            objectives: objectives.text,
+                            sDate: sDate.text,
+                            fDate: fDate.text,
+                            isDelete: "false"
+                        ));
+                      }else {
+                        dialogOneLineOneBtn(
+                            context,
+                            // addEditDeleteActivityScreenByTeacherApi
+                            //     ?.body?.alertmessage?.alertfillallactivity ??
+                            alertFillAllActivity??alertFillAllActivity,
+                            // addEditDeleteActivityScreenByTeacherApi?.body?.errorbutton?.buttonok ??
+                            buttonOK??
+                                buttonOK, onClickBtn: () {
+                          Navigator.of(context).pop();
+                        });
+                      }
+                    },
+                  ),
+                ),
+                const SizedBox(
+                  width: 20,
+                ),
+                SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.35,
+                    child: ButtonCustom(
+                      colortext: tcButtonTextWhite,
+                      colorbutton: tcButtonTextRed,
+                      sizetext: sizeTextBig20,
+                      colorborder: tcButtonTextRedBoarder,
+                      sizeborder: 10,
+                      label: addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.buttondelete?? "Delete",
+                      onPressed: () {
+                        dialogOneLineTwoBtnWarning(
+                            context,
+                            // alertText?.alertdeleteactivity ?? "",
+                            // buttonText?.buttonyes ?? "",
+                            // buttonText?.buttonno ?? "",
+                            "ท่านต้องการลบกิจกรรมนี้ใช่หรือไม่",
+                            "ใช่",
+                            "ไม่",
+                            onClickBtn: (String result) {
+                              Navigator.of(context).pop();
+                              switch (result) {
+                                case 'Cancel':
+                                  {
+                                    break;
+                                  }
+                                case 'OK':
+                                  {
+                                    context.read<ActivityBloc>().add(
+                                        SubmitAddEditDeleteActivityByTeacherEvent(
+                                          id: activityNameIdValue,
+                                          activityNameByTeacher: activityNameByTeacher.text,
+                                          objectives: objectives.text,
+                                          sDate: sDate.text,
+                                          fDate: fDate.text,
+                                          isDelete: "true"
+                                        ));
+                                  }
+                              }
+                            });
+                      },
+                    )),
+              ],
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.1,

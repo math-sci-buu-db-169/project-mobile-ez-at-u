@@ -1,4 +1,5 @@
 import 'package:ez_at_u/module/activity/model/response/activity_list_teacher_screen.dart';
+import 'package:ez_at_u/module/activity/model/response/activity_name_list_by_teacher.dart';
 import 'package:ez_at_u/module/activity/model/response/add_edit_delete_activity_by_teacher_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -308,7 +309,6 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
         emit(ActivityError(message: e.response?.statusMessage ?? ""));
       }
     });
-
     on<SubmitAddEditDeleteActivityByTeacherEvent>((event, emit) async {
       try {
         emit(SubmitAddEditActivityByTeacherLoadingState());
@@ -320,6 +320,7 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
             objectives: event.objectives,
             sDate: event.sDate,
             fDate: event.fDate,
+          isDelete: event.isDelete,
         );
         print(responseAddEditDeleteByTeacherSubmit.statusCode);
         emit(SubmitAddEditActivityByTeacherEndLoadingState());
@@ -337,6 +338,34 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
         }
       } on DioError catch (e) {
         emit(SubmitAddEditDeleteActivityByTeacherError(message: e.response?.statusMessage ?? ""));
+      }
+    });
+    on<getDataActivityNameListByTeacherEvent>((event, emit) async {
+      try {
+        emit(ActivityLoading());
+        print("CheckActivity 11 == AddActivityScreenInfoEvent");
+        await  checkActivityEventInitial(event, emit) ;
+        print("เข้ามั้ยนะ");
+        Response response = await getActivityNameListByTeacher();
+        emit(ActivityEndLoading());
+        if (response.statusCode == 200) {
+          ActivityNameListByTeacher activityNameListByTeacherResponse =
+          ActivityNameListByTeacher.fromJson(response.data);
+          if (activityNameListByTeacherResponse.head?.status == 200) {
+            print("เข้า success");
+            emit(getDataActivityNameListByTeacherSuccessState(
+                response: activityNameListByTeacherResponse));
+          } else {
+            print("เข้า error");
+            emit(ActivityError(
+                message: activityNameListByTeacherResponse.head?.message ?? ""));
+          }
+        } else {
+          print("เข้า error");
+          emit(ActivityError(message: response.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(ActivityError(message: e.response?.statusMessage ?? ""));
       }
     });
   }

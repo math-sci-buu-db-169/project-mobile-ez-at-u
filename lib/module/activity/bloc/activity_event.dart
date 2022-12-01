@@ -78,19 +78,21 @@ class ActivityListTeacherSearchScreenInfoEvent extends ActivityEvent {
 
   });
 }
-class getScreenAddEditDeleteActivityByTeacherEvent extends ActivityEvent {
-}
+class getScreenAddEditDeleteActivityByTeacherEvent extends ActivityEvent {}
 class SubmitAddEditDeleteActivityByTeacherEvent extends ActivityEvent {
   int id;
   String activityNameByTeacher;
   String objectives;
   String sDate;
   String fDate;
+  String isDelete;
   SubmitAddEditDeleteActivityByTeacherEvent({
     required this.id,
     required this.activityNameByTeacher,
     required this.objectives,
     required this.sDate,
     required this.fDate,
+    required this.isDelete,
   });
 }
+class getDataActivityNameListByTeacherEvent extends ActivityEvent {}

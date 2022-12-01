@@ -1,12 +1,10 @@
-import 'package:ez_at_u/customs/button/button_custom.dart';
 import 'package:ez_at_u/customs/color/color_const.dart';
-import 'package:ez_at_u/customs/datepicker/custom_date_picker.dart';
 import 'package:ez_at_u/customs/dialog/dialog_widget.dart';
 import 'package:ez_at_u/customs/progress_dialog.dart';
 import 'package:ez_at_u/customs/size/size.dart';
-import 'package:ez_at_u/customs/text_file/build_textformfiled_unlimit_custom.dart';
 import 'package:ez_at_u/module/activity/bloc/activity_bloc.dart';
-import 'package:ez_at_u/module/activity/model/response/add_edit_delete_activity_by_teacher_screen.dart';
+import 'package:ez_at_u/module/activity/model/response/activity_name_list_by_teacher.dart';
+import 'package:ez_at_u/module/activity/screen/edit_activity_by_teacher.dart';
 import 'package:ez_at_u/module/home/screen/home_screen/home_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,32 +20,25 @@ class ActivityNameListByTeacherScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ActivityBloc()..add(getScreenAddEditDeleteActivityByTeacherEvent()),
-      child: const AddActivityByTeacherPage(),
+      create: (context) => ActivityBloc()..add(getDataActivityNameListByTeacherEvent()),
+      child: const ActivityNameListByTeacherPage(),
     );
   }
 }
 
-class AddActivityByTeacherPage extends StatefulWidget {
-  const AddActivityByTeacherPage({Key? key}) : super(key: key);
+class ActivityNameListByTeacherPage extends StatefulWidget {
+  const ActivityNameListByTeacherPage({Key? key}) : super(key: key);
 
   @override
-  State<AddActivityByTeacherPage> createState() => _AddActivityByTeacherPageState();
+  State<ActivityNameListByTeacherPage> createState() => _ActivityNameListByTeacherPageState();
 }
 
-class _AddActivityByTeacherPageState extends State<AddActivityByTeacherPage> with ProgressDialog {
-  TextEditingController activityNameByTeacher = TextEditingController();
-  TextEditingController objectives = TextEditingController();
-  TextEditingController sDate = TextEditingController();
-  TextEditingController fDate = TextEditingController();
-  AddEditDeleteActivityByTeacherScreen? _addEditDeleteActivityByTeacherScreenApi;
-  DateTime date = DateTime.now();
+class _ActivityNameListByTeacherPageState extends State<ActivityNameListByTeacherPage> with ProgressDialog {
+  ActivityNameListByTeacher? _activityNameListByTeacherScreenApi;
   late String? dateFormated;
   @override
   void initState() {
-    dateFormated = DateFormat('d/M/y').format(date);
-    sDate.text = dateFormated.toString();
-    fDate.text = dateFormated.toString();
+
     super.initState();
   }
 
@@ -86,16 +77,12 @@ class _AddActivityByTeacherPageState extends State<AddActivityByTeacherPage> wit
         }
       },
       builder: (context, state) {
-        if (state is getScreenAddEditDeleteActivityByTeacherSuccessState) {
-          _addEditDeleteActivityByTeacherScreenApi = state.response;
+        if (state is getDataActivityNameListByTeacherSuccessState) {
+          _activityNameListByTeacherScreenApi = state.response;
 
-          return buildAddActivityByTeacherBody(
+          return buildActivityNameListByTeacherBody(
             context,
-            _addEditDeleteActivityByTeacherScreenApi,
-            activityNameByTeacher,
-            objectives,
-            sDate,
-            fDate,
+            _activityNameListByTeacherScreenApi,
 
           );
         } else {
@@ -111,19 +98,15 @@ class _AddActivityByTeacherPageState extends State<AddActivityByTeacherPage> wit
         }
       },
       buildWhen: (context, state) {
-        return state is getScreenAddEditDeleteActivityByTeacherSuccessState;
+        return state is getDataActivityNameListByTeacherSuccessState;
       },
     );
   }
 }
 
-buildAddActivityByTeacherBody(
+buildActivityNameListByTeacherBody(
     BuildContext context,
-    AddEditDeleteActivityByTeacherScreen? addEditDeleteActivityScreenByTeacherApi,
-    TextEditingController activityNameByTeacher,
-    TextEditingController objectives,
-    TextEditingController sDate,
-    TextEditingController fDate,
+    ActivityNameListByTeacher? addEditDeleteActivityScreenByTeacherApi,
     ) {
   Color? appBarBackgroundColor =
       Theme.of(context).appBarTheme.backgroundColor ?? Colors.white;
@@ -132,10 +115,10 @@ buildAddActivityByTeacherBody(
   return Scaffold(
     appBar: AppBar(
       backgroundColor: appBarBackgroundColor,
-      elevation: 0,
+      elevation: 2,
       leading: IconButton(
         onPressed: () {
-          Navigator.pop(context);
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>const HomeScreen()));
         },
         icon: Icon(
           Icons.arrow_back,
@@ -144,7 +127,7 @@ buildAddActivityByTeacherBody(
         ),
       ),
       title: Text(
-        addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.titleaddactivity ??
+        addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.titlelistactivityname ??
             activityTitleAddAct,
         style: TextStyle(
           color: appBarforegroundColor,
@@ -154,122 +137,58 @@ buildAddActivityByTeacherBody(
     ),
     body: SafeArea(
       // height: MediaQuery.of(context).size.height,
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.05,
-            ),
-            BuildTextformfieldUnlimitCustom(
-              textEditingController: activityNameByTeacher,
-              onChanged: (value) {
-                activityNameByTeacher.text = value;
-                if (kDebugMode) {
-                  print(activityNameByTeacher.text);
-                }
-              },
-              hintLabel: addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.textactivityname ??
-                  activityEdtActName,
-              textInputType: TextInputType.text,
-              // iconsFile : Icons.person_rounded,
-              iconsFile: FontAwesomeIcons.solidPenToSquare,
-            ),
-            BuildTextformfieldUnlimitCustom(
-              textEditingController: objectives,
-              onChanged: (value) {
-                objectives.text = value;
-                if (kDebugMode) {
-                  print(objectives.text);
-                }
-              },
-              hintLabel: addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.textobjectives ??
-                  activityEdtActName,
-              textInputType: TextInputType.text,
-              // iconsFile : Icons.person_rounded,
-              iconsFile: FontAwesomeIcons.bullseye,
-            ),
-            CustomDatePicker(
-              hintLabel: addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.textstartdate ??
-                  activityEdtStartDate,
-              callbackFromCustomDatePicker: (String result) {
-                sDate.text = result;
-                if (kDebugMode) {
-                  print(sDate.text);
-                }
-              },
-            ),
-            CustomDatePicker(
-              hintLabel:
-              addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.textfinishdate ??
-                  activityEdtFinishDate,
-              callbackFromCustomDatePicker: (String result) {
-                fDate.text = result;
-                if (kDebugMode) {
-                  print(fDate.text);
-                }
-              },
-            ),
-            // CustomTimePicker(
-            //   hintLabel: addActivityScreenApi?.body?.screeninfo?.edttime??activityEdtTime,
-            //   callbackFromCustomTimePicker: (String result) {
-            //     fDate.text = result;
-            //     if (kDebugMode) {
-            //       print(fDate.text);
-            //     }
-            //   },
-            // ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.05,
-            ),
-            Center(
-              child: ButtonCustom(
-                label: addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.buttonadd ??
-                    activityBtnConfirm,
-                colortext: tcButtonTextBlack,
-                colorbutton: tcButtonTextWhite,
-                sizetext: sizeTextBig20,
-                colorborder: tcButtonTextBoarder,
-                sizeborder: 10,
-                onPressed: () {
-                  if (activityNameByTeacher.text.isNotEmpty &&
-                      objectives.text.isNotEmpty &&
-                      sDate.text.isNotEmpty &&
-                      fDate.text.isNotEmpty) {
-                    context.read<ActivityBloc>().add(SubmitAddEditDeleteActivityByTeacherEvent(
-                      id: 0,
-                      activityNameByTeacher: activityNameByTeacher.text,
-                      objectives: objectives.text,
-                      sDate: sDate.text,
-                      fDate: fDate.text,
-
-                    ));
-                  }else {
-                    dialogOneLineOneBtn(
-                        context,
-                        // addEditDeleteActivityScreenByTeacherApi
-                        //     ?.body?.alertmessage?.alertfillallactivity ??
-                        alertFillAllActivity??alertFillAllActivity,
-                        // addEditDeleteActivityScreenByTeacherApi?.body?.errorbutton?.buttonok ??
-                        buttonOK??
-                            buttonOK, onClickBtn: () {
-                      Navigator.of(context).pop();
-                    });
-                  }
-                  print("------------------ข้อมูล------------------");
-                  print(activityNameByTeacher.text);
-                  print(objectives.text);
-                  print(sDate.text);
-                  print(fDate.text);
-                  print("------------------ข้อมูล------------------");
-                },
-              ),
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.1,
-            ),
-          ],
-        ),
-      ),
+      child: buildListActivityNameByTeacher(context, addEditDeleteActivityScreenByTeacherApi)
     ),
   );
+}
+
+buildListActivityNameByTeacher(BuildContext context, ActivityNameListByTeacher? addEditDeleteActivityScreenByTeacherApi){
+  List<dynamic>? listFromApi = addEditDeleteActivityScreenByTeacherApi?.body?.activitynamelistteacher;
+  return SingleChildScrollView(
+    padding: const EdgeInsets.fromLTRB(0, 5, 0, 20),
+    scrollDirection: Axis.vertical,
+    child: Column(
+            children: List.generate(int.parse(
+                "${addEditDeleteActivityScreenByTeacherApi?.body?.activitynamelistteacher?.length}"),
+                    (index) => ActivityNameCard(data: listFromApi?[index],onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=> EditActivityByTeacherScreen(data: listFromApi?[index],)));}))
+    ),
+  );
+}
+
+class ActivityNameCard extends StatelessWidget {
+  final dynamic data;
+  final GestureTapCallback? onTap;
+  const ActivityNameCard({Key? key, required this.data, this.onTap}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 8.0),
+          child: Card(
+            shape: RoundedRectangleBorder(
+                side: BorderSide(color: Theme.of(context).splashColor), 
+                borderRadius: BorderRadius.circular(10)
+            ),
+            elevation: 5,
+            child: Container(
+                width: MediaQuery.of(context).size.width * 0.9,
+                decoration: BoxDecoration(
+                  border: Border(
+                    left: BorderSide(color: Theme.of(context).splashColor,width: 10)
+                  )
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(10,10,5,10),
+                  child: Text(data?.activitynameresponse,style: TextStyle(color: Theme.of(context).appBarTheme.foregroundColor),),
+                )
+            )
+
+          ),
+        ),
+      ),
+    );
+  }
 }

@@ -247,6 +247,7 @@ buildAddActivityByTeacherBody(
                         objectives: objectives.text,
                         sDate: sDate.text,
                         fDate: fDate.text,
+                        isDelete: "false",
 
                     ));
                   }else {

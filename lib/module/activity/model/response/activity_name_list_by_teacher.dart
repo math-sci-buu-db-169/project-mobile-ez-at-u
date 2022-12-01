@@ -1,6 +1,6 @@
 import 'dart:convert';
 /// head : {"status":200,"message":"success","modulename":"activity","timeexpire":false}
-/// body : {"activitynamelistteacher":[{"activitynameidresponse":6,"activitynameresponse":"ทดลองเพิ่มกิจกรรมโดยอาจารย์ 6","objectivesresponse":"วัตถุประสงค์ที่ 1 เพื่อ... วัตถุประสงค์ที่ 2 เพื่อ... วัตถุประสงค์ที่ 3 เพื่อ...","startdatebyteacherresponse":"29/11/2022","finishdatebyteacherresponse":"29/11/2022"},{"activitynameidresponse":7,"activitynameresponse":"ทดลองเพิ่มกิจกรรมโดยอาจารย์ 7","objectivesresponse":"วัตถุประสงค์ที่ 1 เพื่อ... วัตถุประสงค์ที่ 2 เพื่อ... วัตถุประสงค์ที่ 3 เพื่อ...","startdatebyteacherresponse":"29/11/2022","finishdatebyteacherresponse":"29/11/2022"},{"activitynameidresponse":8,"activitynameresponse":"ทดสอบจาก swagger1","objectivesresponse":"1111","startdatebyteacherresponse":"11/11/2011","finishdatebyteacherresponse":"12/12/2012"},{"activitynameidresponse":9,"activitynameresponse":"ทดสอบจาก post man1","objectivesresponse":"1111","startdatebyteacherresponse":"11/11/2011","finishdatebyteacherresponse":"12/12/2012"},{"activitynameidresponse":10,"activitynameresponse":"ทดสอบจากแอป 1","objectivesresponse":"1\n2\n3\n4\n5","startdatebyteacherresponse":"30/11/2022","finishdatebyteacherresponse":"30/11/2022"}]}
+/// body : {"screeninfo":{"titlelistactivityname":"Activity name list"},"activitynamelistteacher":[{"activitynameidresponse":6,"activitynameresponse":"ทดลองเพิ่มกิจกรรมโดยอาจารย์ 6","objectivesresponse":"วัตถุประสงค์ที่ 1 เพื่อ... วัตถุประสงค์ที่ 2 เพื่อ... วัตถุประสงค์ที่ 3 เพื่อ...","startdatebyteacherresponse":"29/11/2022","finishdatebyteacherresponse":"29/11/2022"},{"activitynameidresponse":7,"activitynameresponse":"ทดลองเพิ่มกิจกรรมโดยอาจารย์ 7","objectivesresponse":"วัตถุประสงค์ที่ 1 เพื่อ... วัตถุประสงค์ที่ 2 เพื่อ... วัตถุประสงค์ที่ 3 เพื่อ...","startdatebyteacherresponse":"29/11/2022","finishdatebyteacherresponse":"29/11/2022"},{"activitynameidresponse":8,"activitynameresponse":"ทดสอบจาก swagger1","objectivesresponse":"1111","startdatebyteacherresponse":"11/11/2011","finishdatebyteacherresponse":"12/12/2012"},{"activitynameidresponse":9,"activitynameresponse":"ทดสอบจาก post man1","objectivesresponse":"1111","startdatebyteacherresponse":"11/11/2011","finishdatebyteacherresponse":"12/12/2012"},{"activitynameidresponse":10,"activitynameresponse":"ทดสอบจากแอป 1","objectivesresponse":"1\n2\n3\n4\n5","startdatebyteacherresponse":"30/11/2022","finishdatebyteacherresponse":"30/11/2022"}]}
 
 ActivityNameListByTeacher activityNameListByTeacherFromJson(String str) => ActivityNameListByTeacher.fromJson(json.decode(str));
 String activityNameListByTeacherToJson(ActivityNameListByTeacher data) => json.encode(data.toJson());
@@ -39,17 +39,21 @@ ActivityNameListByTeacher copyWith({  Head? head,
 
 }
 
+/// screeninfo : {"titlelistactivityname":"Activity name list"}
 /// activitynamelistteacher : [{"activitynameidresponse":6,"activitynameresponse":"ทดลองเพิ่มกิจกรรมโดยอาจารย์ 6","objectivesresponse":"วัตถุประสงค์ที่ 1 เพื่อ... วัตถุประสงค์ที่ 2 เพื่อ... วัตถุประสงค์ที่ 3 เพื่อ...","startdatebyteacherresponse":"29/11/2022","finishdatebyteacherresponse":"29/11/2022"},{"activitynameidresponse":7,"activitynameresponse":"ทดลองเพิ่มกิจกรรมโดยอาจารย์ 7","objectivesresponse":"วัตถุประสงค์ที่ 1 เพื่อ... วัตถุประสงค์ที่ 2 เพื่อ... วัตถุประสงค์ที่ 3 เพื่อ...","startdatebyteacherresponse":"29/11/2022","finishdatebyteacherresponse":"29/11/2022"},{"activitynameidresponse":8,"activitynameresponse":"ทดสอบจาก swagger1","objectivesresponse":"1111","startdatebyteacherresponse":"11/11/2011","finishdatebyteacherresponse":"12/12/2012"},{"activitynameidresponse":9,"activitynameresponse":"ทดสอบจาก post man1","objectivesresponse":"1111","startdatebyteacherresponse":"11/11/2011","finishdatebyteacherresponse":"12/12/2012"},{"activitynameidresponse":10,"activitynameresponse":"ทดสอบจากแอป 1","objectivesresponse":"1\n2\n3\n4\n5","startdatebyteacherresponse":"30/11/2022","finishdatebyteacherresponse":"30/11/2022"}]
 
 Body bodyFromJson(String str) => Body.fromJson(json.decode(str));
 String bodyToJson(Body data) => json.encode(data.toJson());
 class Body {
   Body({
+      Screeninfo? screeninfo, 
       List<Activitynamelistteacher>? activitynamelistteacher,}){
+    _screeninfo = screeninfo;
     _activitynamelistteacher = activitynamelistteacher;
 }
 
   Body.fromJson(dynamic json) {
+    _screeninfo = json['screeninfo'] != null ? Screeninfo.fromJson(json['screeninfo']) : null;
     if (json['activitynamelistteacher'] != null) {
       _activitynamelistteacher = [];
       json['activitynamelistteacher'].forEach((v) {
@@ -57,14 +61,21 @@ class Body {
       });
     }
   }
+  Screeninfo? _screeninfo;
   List<Activitynamelistteacher>? _activitynamelistteacher;
-Body copyWith({  List<Activitynamelistteacher>? activitynamelistteacher,
-}) => Body(  activitynamelistteacher: activitynamelistteacher ?? _activitynamelistteacher,
+Body copyWith({  Screeninfo? screeninfo,
+  List<Activitynamelistteacher>? activitynamelistteacher,
+}) => Body(  screeninfo: screeninfo ?? _screeninfo,
+  activitynamelistteacher: activitynamelistteacher ?? _activitynamelistteacher,
 );
+  Screeninfo? get screeninfo => _screeninfo;
   List<Activitynamelistteacher>? get activitynamelistteacher => _activitynamelistteacher;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
+    if (_screeninfo != null) {
+      map['screeninfo'] = _screeninfo?.toJson();
+    }
     if (_activitynamelistteacher != null) {
       map['activitynamelistteacher'] = _activitynamelistteacher?.map((v) => v.toJson()).toList();
     }
@@ -131,6 +142,33 @@ Activitynamelistteacher copyWith({  num? activitynameidresponse,
     map['objectivesresponse'] = _objectivesresponse;
     map['startdatebyteacherresponse'] = _startdatebyteacherresponse;
     map['finishdatebyteacherresponse'] = _finishdatebyteacherresponse;
+    return map;
+  }
+
+}
+
+/// titlelistactivityname : "Activity name list"
+
+Screeninfo screeninfoFromJson(String str) => Screeninfo.fromJson(json.decode(str));
+String screeninfoToJson(Screeninfo data) => json.encode(data.toJson());
+class Screeninfo {
+  Screeninfo({
+      String? titlelistactivityname,}){
+    _titlelistactivityname = titlelistactivityname;
+}
+
+  Screeninfo.fromJson(dynamic json) {
+    _titlelistactivityname = json['titlelistactivityname'];
+  }
+  String? _titlelistactivityname;
+Screeninfo copyWith({  String? titlelistactivityname,
+}) => Screeninfo(  titlelistactivityname: titlelistactivityname ?? _titlelistactivityname,
+);
+  String? get titlelistactivityname => _titlelistactivityname;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['titlelistactivityname'] = _titlelistactivityname;
     return map;
   }
 
