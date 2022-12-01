@@ -1,6 +1,6 @@
 import 'dart:convert';
 /// head : {"status":200,"message":"success","modulename":"activity","timeexpire":false}
-/// body : {"screeninfo":{"titlelistactivityname":"Activity name list"},"activitynamelistteacher":[{"activitynameidresponse":6,"activitynameresponse":"ทดลองเพิ่มกิจกรรมโดยอาจารย์ 6","objectivesresponse":"วัตถุประสงค์ที่ 1 เพื่อ... วัตถุประสงค์ที่ 2 เพื่อ... วัตถุประสงค์ที่ 3 เพื่อ...","startdatebyteacherresponse":"29/11/2022","finishdatebyteacherresponse":"29/11/2022"},{"activitynameidresponse":7,"activitynameresponse":"ทดลองเพิ่มกิจกรรมโดยอาจารย์ 7","objectivesresponse":"วัตถุประสงค์ที่ 1 เพื่อ... วัตถุประสงค์ที่ 2 เพื่อ... วัตถุประสงค์ที่ 3 เพื่อ...","startdatebyteacherresponse":"29/11/2022","finishdatebyteacherresponse":"29/11/2022"},{"activitynameidresponse":8,"activitynameresponse":"ทดสอบจาก swagger1","objectivesresponse":"1111","startdatebyteacherresponse":"11/11/2011","finishdatebyteacherresponse":"12/12/2012"},{"activitynameidresponse":9,"activitynameresponse":"ทดสอบจาก post man1","objectivesresponse":"1111","startdatebyteacherresponse":"11/11/2011","finishdatebyteacherresponse":"12/12/2012"},{"activitynameidresponse":10,"activitynameresponse":"ทดสอบจากแอป 1","objectivesresponse":"1\n2\n3\n4\n5","startdatebyteacherresponse":"30/11/2022","finishdatebyteacherresponse":"30/11/2022"}]}
+/// body : {"screeninfo":{"titlelistactivityname":"รายชื่อกิจกรรม"},"activitynamelistteacher":[{"activitynameidresponse":7,"activitynameresponse":"ทดลองเพิ่มกิจกรรมโดยอาจารย์ 7","objectivesresponse":"วัตถุประสงค์ที่ 1 เพื่อ... วัตถุประสงค์ที่ 2 เพื่อ... วัตถุประสงค์ที่ 3 เพื่อ...","startdatebyteacherresponse":"29/11/2022","finishdatebyteacherresponse":"29/11/2022"},{"activitynameidresponse":8,"activitynameresponse":"ทดสอบจาก swagger1","objectivesresponse":"1111","startdatebyteacherresponse":"11/11/2011","finishdatebyteacherresponse":"12/12/2012"},{"activitynameidresponse":9,"activitynameresponse":"ทดสอบจาก post man1","objectivesresponse":"1111","startdatebyteacherresponse":"11/11/2011","finishdatebyteacherresponse":"12/12/2012"},{"activitynameidresponse":10,"activitynameresponse":"ทดสอบจากแอป 1 แก้ไขครั้งที่1","objectivesresponse":"1\n2\n3\n4\n5\nแก้ไขครั้งที่1","startdatebyteacherresponse":"29/11/2022","finishdatebyteacherresponse":"1/12/2022"},{"activitynameidresponse":11,"activitynameresponse":"ทดสอบแอป2","objectivesresponse":"ฟฟฟ\nดดด","startdatebyteacherresponse":"1/12/2022","finishdatebyteacherresponse":"1/12/2022"},{"activitynameidresponse":12,"activitynameresponse":"ทดดดดดดดดสอบบบบบบบจากกกกกกแอปปปปปปปปปปป 3","objectivesresponse":"1 ออออออออออออออออออออออออออออออออออ\n2 ดดดดดดดดดดดดดดดดดดดดดดดดดดดดดดดดด","startdatebyteacherresponse":"1/12/2022","finishdatebyteacherresponse":"1/12/2022"},{"activitynameidresponse":14,"activitynameresponse":"ทด\nสอบ\nจาก\nแอป\nครั้ง\nที่\n4","objectivesresponse":"1234","startdatebyteacherresponse":"1/12/2022","finishdatebyteacherresponse":"1/12/2022"}]}
 
 ActivityNameListByTeacher activityNameListByTeacherFromJson(String str) => ActivityNameListByTeacher.fromJson(json.decode(str));
 String activityNameListByTeacherToJson(ActivityNameListByTeacher data) => json.encode(data.toJson());
@@ -39,8 +39,8 @@ ActivityNameListByTeacher copyWith({  Head? head,
 
 }
 
-/// screeninfo : {"titlelistactivityname":"Activity name list"}
-/// activitynamelistteacher : [{"activitynameidresponse":6,"activitynameresponse":"ทดลองเพิ่มกิจกรรมโดยอาจารย์ 6","objectivesresponse":"วัตถุประสงค์ที่ 1 เพื่อ... วัตถุประสงค์ที่ 2 เพื่อ... วัตถุประสงค์ที่ 3 เพื่อ...","startdatebyteacherresponse":"29/11/2022","finishdatebyteacherresponse":"29/11/2022"},{"activitynameidresponse":7,"activitynameresponse":"ทดลองเพิ่มกิจกรรมโดยอาจารย์ 7","objectivesresponse":"วัตถุประสงค์ที่ 1 เพื่อ... วัตถุประสงค์ที่ 2 เพื่อ... วัตถุประสงค์ที่ 3 เพื่อ...","startdatebyteacherresponse":"29/11/2022","finishdatebyteacherresponse":"29/11/2022"},{"activitynameidresponse":8,"activitynameresponse":"ทดสอบจาก swagger1","objectivesresponse":"1111","startdatebyteacherresponse":"11/11/2011","finishdatebyteacherresponse":"12/12/2012"},{"activitynameidresponse":9,"activitynameresponse":"ทดสอบจาก post man1","objectivesresponse":"1111","startdatebyteacherresponse":"11/11/2011","finishdatebyteacherresponse":"12/12/2012"},{"activitynameidresponse":10,"activitynameresponse":"ทดสอบจากแอป 1","objectivesresponse":"1\n2\n3\n4\n5","startdatebyteacherresponse":"30/11/2022","finishdatebyteacherresponse":"30/11/2022"}]
+/// screeninfo : {"titlelistactivityname":"รายชื่อกิจกรรม"}
+/// activitynamelistteacher : [{"activitynameidresponse":7,"activitynameresponse":"ทดลองเพิ่มกิจกรรมโดยอาจารย์ 7","objectivesresponse":"วัตถุประสงค์ที่ 1 เพื่อ... วัตถุประสงค์ที่ 2 เพื่อ... วัตถุประสงค์ที่ 3 เพื่อ...","startdatebyteacherresponse":"29/11/2022","finishdatebyteacherresponse":"29/11/2022"},{"activitynameidresponse":8,"activitynameresponse":"ทดสอบจาก swagger1","objectivesresponse":"1111","startdatebyteacherresponse":"11/11/2011","finishdatebyteacherresponse":"12/12/2012"},{"activitynameidresponse":9,"activitynameresponse":"ทดสอบจาก post man1","objectivesresponse":"1111","startdatebyteacherresponse":"11/11/2011","finishdatebyteacherresponse":"12/12/2012"},{"activitynameidresponse":10,"activitynameresponse":"ทดสอบจากแอป 1 แก้ไขครั้งที่1","objectivesresponse":"1\n2\n3\n4\n5\nแก้ไขครั้งที่1","startdatebyteacherresponse":"29/11/2022","finishdatebyteacherresponse":"1/12/2022"},{"activitynameidresponse":11,"activitynameresponse":"ทดสอบแอป2","objectivesresponse":"ฟฟฟ\nดดด","startdatebyteacherresponse":"1/12/2022","finishdatebyteacherresponse":"1/12/2022"},{"activitynameidresponse":12,"activitynameresponse":"ทดดดดดดดดสอบบบบบบบจากกกกกกแอปปปปปปปปปปป 3","objectivesresponse":"1 ออออออออออออออออออออออออออออออออออ\n2 ดดดดดดดดดดดดดดดดดดดดดดดดดดดดดดดดด","startdatebyteacherresponse":"1/12/2022","finishdatebyteacherresponse":"1/12/2022"},{"activitynameidresponse":14,"activitynameresponse":"ทด\nสอบ\nจาก\nแอป\nครั้ง\nที่\n4","objectivesresponse":"1234","startdatebyteacherresponse":"1/12/2022","finishdatebyteacherresponse":"1/12/2022"}]
 
 Body bodyFromJson(String str) => Body.fromJson(json.decode(str));
 String bodyToJson(Body data) => json.encode(data.toJson());
@@ -84,8 +84,8 @@ Body copyWith({  Screeninfo? screeninfo,
 
 }
 
-/// activitynameidresponse : 6
-/// activitynameresponse : "ทดลองเพิ่มกิจกรรมโดยอาจารย์ 6"
+/// activitynameidresponse : 7
+/// activitynameresponse : "ทดลองเพิ่มกิจกรรมโดยอาจารย์ 7"
 /// objectivesresponse : "วัตถุประสงค์ที่ 1 เพื่อ... วัตถุประสงค์ที่ 2 เพื่อ... วัตถุประสงค์ที่ 3 เพื่อ..."
 /// startdatebyteacherresponse : "29/11/2022"
 /// finishdatebyteacherresponse : "29/11/2022"
@@ -147,7 +147,7 @@ Activitynamelistteacher copyWith({  num? activitynameidresponse,
 
 }
 
-/// titlelistactivityname : "Activity name list"
+/// titlelistactivityname : "รายชื่อกิจกรรม"
 
 Screeninfo screeninfoFromJson(String str) => Screeninfo.fromJson(json.decode(str));
 String screeninfoToJson(Screeninfo data) => json.encode(data.toJson());

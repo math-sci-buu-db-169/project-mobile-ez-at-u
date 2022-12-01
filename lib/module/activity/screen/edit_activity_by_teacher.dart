@@ -304,9 +304,9 @@ buildEditActivityByTeacherBody(
                             // alertText?.alertdeleteactivity ?? "",
                             // buttonText?.buttonyes ?? "",
                             // buttonText?.buttonno ?? "",
-                            "ท่านต้องการลบกิจกรรมนี้ใช่หรือไม่",
-                            "ใช่",
-                            "ไม่",
+                            addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.warningdeletetext?? "Do you want to delete this activity?",
+                            addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.buttondelete?? "Delete",
+                            addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.buttoncancel?? "Cancel",
                             onClickBtn: (String result) {
                               Navigator.of(context).pop();
                               switch (result) {

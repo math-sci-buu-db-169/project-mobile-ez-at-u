@@ -1,6 +1,6 @@
 import 'dart:convert';
 /// head : {"status":200,"message":"success","modulename":"activity","timeexpire":false}
-/// body : {"screeninfo":{"titleaddactivity":"Add activity","textactivityname":"Activity name","textobjectives":"Objectives","textstartdate":"Start date","textfinishdate":"Finish date","buttonadd":"Add","titlelistactivityname":"Activity name list","titleeditactivity":"Edit activity","buttonsave":"Save","buttondelete":"Delete"}}
+/// body : {"screeninfo":{"titleaddactivity":"เพิ่มกิจกรรม","textactivityname":"ชื่อกิจกรรม","textobjectives":"วัตถุประสงค์","textstartdate":"วันที่เริ่มกิจกรรม","textfinishdate":"วันที่ทำกิจกรรมเสร็จสิ้น","buttonadd":"เพิ่ม","titlelistactivityname":"รายชื่อกิจกรรม","titleeditactivity":"แก้ไขกิจกรรม","buttonsave":"บันทึก","buttondelete":"ลบ","buttoncancel":"ยกเลิก","warningdeletetext":"คุณต้องการลบกิจกรรมนี้ใช่หรือไม่?"}}
 
 AddEditDeleteActivityByTeacherScreen addEditDeleteActivityByTeacherScreenFromJson(String str) => AddEditDeleteActivityByTeacherScreen.fromJson(json.decode(str));
 String addEditDeleteActivityByTeacherScreenToJson(AddEditDeleteActivityByTeacherScreen data) => json.encode(data.toJson());
@@ -39,7 +39,7 @@ AddEditDeleteActivityByTeacherScreen copyWith({  Head? head,
 
 }
 
-/// screeninfo : {"titleaddactivity":"Add activity","textactivityname":"Activity name","textobjectives":"Objectives","textstartdate":"Start date","textfinishdate":"Finish date","buttonadd":"Add","titlelistactivityname":"Activity name list","titleeditactivity":"Edit activity","buttonsave":"Save","buttondelete":"Delete"}
+/// screeninfo : {"titleaddactivity":"เพิ่มกิจกรรม","textactivityname":"ชื่อกิจกรรม","textobjectives":"วัตถุประสงค์","textstartdate":"วันที่เริ่มกิจกรรม","textfinishdate":"วันที่ทำกิจกรรมเสร็จสิ้น","buttonadd":"เพิ่ม","titlelistactivityname":"รายชื่อกิจกรรม","titleeditactivity":"แก้ไขกิจกรรม","buttonsave":"บันทึก","buttondelete":"ลบ","buttoncancel":"ยกเลิก","warningdeletetext":"คุณต้องการลบกิจกรรมนี้ใช่หรือไม่?"}
 
 Body bodyFromJson(String str) => Body.fromJson(json.decode(str));
 String bodyToJson(Body data) => json.encode(data.toJson());
@@ -68,16 +68,18 @@ Body copyWith({  Screeninfo? screeninfo,
 
 }
 
-/// titleaddactivity : "Add activity"
-/// textactivityname : "Activity name"
-/// textobjectives : "Objectives"
-/// textstartdate : "Start date"
-/// textfinishdate : "Finish date"
-/// buttonadd : "Add"
-/// titlelistactivityname : "Activity name list"
-/// titleeditactivity : "Edit activity"
-/// buttonsave : "Save"
-/// buttondelete : "Delete"
+/// titleaddactivity : "เพิ่มกิจกรรม"
+/// textactivityname : "ชื่อกิจกรรม"
+/// textobjectives : "วัตถุประสงค์"
+/// textstartdate : "วันที่เริ่มกิจกรรม"
+/// textfinishdate : "วันที่ทำกิจกรรมเสร็จสิ้น"
+/// buttonadd : "เพิ่ม"
+/// titlelistactivityname : "รายชื่อกิจกรรม"
+/// titleeditactivity : "แก้ไขกิจกรรม"
+/// buttonsave : "บันทึก"
+/// buttondelete : "ลบ"
+/// buttoncancel : "ยกเลิก"
+/// warningdeletetext : "คุณต้องการลบกิจกรรมนี้ใช่หรือไม่?"
 
 Screeninfo screeninfoFromJson(String str) => Screeninfo.fromJson(json.decode(str));
 String screeninfoToJson(Screeninfo data) => json.encode(data.toJson());
@@ -92,7 +94,9 @@ class Screeninfo {
       String? titlelistactivityname, 
       String? titleeditactivity, 
       String? buttonsave, 
-      String? buttondelete,}){
+      String? buttondelete, 
+      String? buttoncancel, 
+      String? warningdeletetext,}){
     _titleaddactivity = titleaddactivity;
     _textactivityname = textactivityname;
     _textobjectives = textobjectives;
@@ -103,6 +107,8 @@ class Screeninfo {
     _titleeditactivity = titleeditactivity;
     _buttonsave = buttonsave;
     _buttondelete = buttondelete;
+    _buttoncancel = buttoncancel;
+    _warningdeletetext = warningdeletetext;
 }
 
   Screeninfo.fromJson(dynamic json) {
@@ -116,6 +122,8 @@ class Screeninfo {
     _titleeditactivity = json['titleeditactivity'];
     _buttonsave = json['buttonsave'];
     _buttondelete = json['buttondelete'];
+    _buttoncancel = json['buttoncancel'];
+    _warningdeletetext = json['warningdeletetext'];
   }
   String? _titleaddactivity;
   String? _textactivityname;
@@ -127,6 +135,8 @@ class Screeninfo {
   String? _titleeditactivity;
   String? _buttonsave;
   String? _buttondelete;
+  String? _buttoncancel;
+  String? _warningdeletetext;
 Screeninfo copyWith({  String? titleaddactivity,
   String? textactivityname,
   String? textobjectives,
@@ -137,6 +147,8 @@ Screeninfo copyWith({  String? titleaddactivity,
   String? titleeditactivity,
   String? buttonsave,
   String? buttondelete,
+  String? buttoncancel,
+  String? warningdeletetext,
 }) => Screeninfo(  titleaddactivity: titleaddactivity ?? _titleaddactivity,
   textactivityname: textactivityname ?? _textactivityname,
   textobjectives: textobjectives ?? _textobjectives,
@@ -147,6 +159,8 @@ Screeninfo copyWith({  String? titleaddactivity,
   titleeditactivity: titleeditactivity ?? _titleeditactivity,
   buttonsave: buttonsave ?? _buttonsave,
   buttondelete: buttondelete ?? _buttondelete,
+  buttoncancel: buttoncancel ?? _buttoncancel,
+  warningdeletetext: warningdeletetext ?? _warningdeletetext,
 );
   String? get titleaddactivity => _titleaddactivity;
   String? get textactivityname => _textactivityname;
@@ -158,6 +172,8 @@ Screeninfo copyWith({  String? titleaddactivity,
   String? get titleeditactivity => _titleeditactivity;
   String? get buttonsave => _buttonsave;
   String? get buttondelete => _buttondelete;
+  String? get buttoncancel => _buttoncancel;
+  String? get warningdeletetext => _warningdeletetext;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -171,6 +187,8 @@ Screeninfo copyWith({  String? titleaddactivity,
     map['titleeditactivity'] = _titleeditactivity;
     map['buttonsave'] = _buttonsave;
     map['buttondelete'] = _buttondelete;
+    map['buttoncancel'] = _buttoncancel;
+    map['warningdeletetext'] = _warningdeletetext;
     return map;
   }
 
