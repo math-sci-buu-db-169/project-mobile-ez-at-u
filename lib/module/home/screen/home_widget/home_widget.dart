@@ -1,4 +1,5 @@
 import 'package:ez_at_u/module/activity/screen/activity_list_for_teacher_role.dart';
+import 'package:ez_at_u/module/activity/screen/activity_name_by_teacher_page.dart';
 import 'package:ez_at_u/module/activity/screen/add_activity_by_teacher.dart';
 import 'package:ez_at_u/module/home/screen/home_widget/setting_screen.dart';
 import 'package:flutter/material.dart';
@@ -96,7 +97,7 @@ buildContentHomeScreen(
                     icon: FaIcon(FontAwesomeIcons.fileLines,
                         color: Theme.of(context).iconTheme.color, size: 20),
                     onPressed: () {
-                      // Navigator.push(context, MaterialPageRoute(builder: (context) => const CheckTokenScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityNameListByTeacherScreen()));
                     },
                   ),
                   IconButton(
