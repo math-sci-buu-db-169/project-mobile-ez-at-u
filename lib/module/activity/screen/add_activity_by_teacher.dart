@@ -1,6 +1,7 @@
 import 'package:ez_at_u/customs/button/button_custom.dart';
 import 'package:ez_at_u/customs/color/color_const.dart';
 import 'package:ez_at_u/customs/datepicker/custom_date_picker.dart';
+import 'package:ez_at_u/customs/datepicker/custom_date_picker_for_teacher.dart';
 import 'package:ez_at_u/customs/dialog/dialog_widget.dart';
 import 'package:ez_at_u/customs/progress_dialog.dart';
 import 'package:ez_at_u/customs/size/size.dart';
@@ -194,7 +195,8 @@ buildAddActivityByTeacherBody(
               // iconsFile : Icons.person_rounded,
               iconsFile: FontAwesomeIcons.bullseye,
             ),
-            CustomDatePicker(
+            CustomDatePickerForTeacher(
+              textOnTopOfDatePicker: addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.textstartdate??activityEdtStartDate,
               hintLabel: addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.textstartdate ??
                   activityEdtStartDate,
               callbackFromCustomDatePicker: (String result) {
@@ -204,7 +206,8 @@ buildAddActivityByTeacherBody(
                 }
               },
             ),
-            CustomDatePicker(
+            CustomDatePickerForTeacher(
+              textOnTopOfDatePicker: addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.textfinishdate??activityEdtFinishDate,
               hintLabel:
                   addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.textfinishdate ??
                       activityEdtFinishDate,
