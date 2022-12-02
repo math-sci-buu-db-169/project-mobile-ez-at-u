@@ -98,7 +98,7 @@ class MyThemes {
       buttonColor: Color(0xFFFDEA8F),
       // cardColor:Colors.white,
       primarySwatch: white,
-      textTheme: GoogleFonts.notoSerifThaiTextTheme(),
+      textTheme: GoogleFonts.promptTextTheme(),
       colorScheme: const ColorScheme.dark(),
       iconTheme: const IconThemeData(color: Colors.white, opacity: 1),
       appBarTheme: const AppBarTheme(
@@ -114,7 +114,7 @@ class MyThemes {
       buttonColor: Color(0xFFFDEA8F),
       // cardColor:Colors.white,
       primarySwatch: white,
-      textTheme: GoogleFonts.notoSerifThaiTextTheme(),
+      textTheme: GoogleFonts.promptTextTheme(),
       colorScheme: const ColorScheme.light(),
       iconTheme: const IconThemeData(color: Colors.black, opacity: 1),
       appBarTheme: const AppBarTheme(
