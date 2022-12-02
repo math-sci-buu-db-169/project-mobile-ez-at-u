@@ -108,18 +108,30 @@ class BuildTextformfieldNotlimitCustomCheckbox extends StatelessWidget {
   final TextInputType textInputType;
   final ValueChanged<String>? onChanged;
   final String? initialvalue;
-  final IconData iconsFile;
    final bool isChecked;
-  final Color Function(Set<MaterialState> states) getColor;
   final    Function(bool? value) isCheckedSetState;
   const BuildTextformfieldNotlimitCustomCheckbox(
-      {Key? key, this.textEditingController, required this.hintLabel, this.onChanged, required this.textInputType, this.initialvalue, required this.iconsFile, required this.isChecked, required this.getColor, required this.isCheckedSetState})
+      {Key? key, this.textEditingController, required this.hintLabel, this.onChanged, required this.textInputType, this.initialvalue,  required this.isChecked, required this.isCheckedSetState})
       : super(key: key);
+
+
 
   @override
   Widget build(BuildContext context) {
     Color? appBarBackgroundColor = Theme.of(context).appBarTheme.backgroundColor??Colors.white;
     Color? appBarforegroundColor = Theme.of(context).appBarTheme.foregroundColor??Colors.black;
+    Color getColor(Set<MaterialState> states) {
+      const Set<MaterialState> interactiveStates = <MaterialState>{
+        MaterialState.pressed,
+        MaterialState.hovered,
+        MaterialState.focused,
+      };
+      if (states.any(interactiveStates.contains)) {
+        return Colors.blue;
+      }
+      return Theme.of(context).bottomAppBarColor;
+    }
+
     return Container(
       // padding: EdgeInsets.all(12),
 
