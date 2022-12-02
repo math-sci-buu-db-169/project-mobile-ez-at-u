@@ -16,7 +16,18 @@ const examples = <Example>[
 ];
 
 typedef LayoutCallbackWithData = Future<Uint8List> Function(
-    PdfPageFormat pageFormat, CustomData data, PdfColor colorOfPdfUs,PdfColor colorOfPdfUsTwo,PdfColor colorOfPdfUsThree);
+    PdfPageFormat pageFormat, CustomData data,
+    PdfColor colorOfPdfUsTheme,
+    PdfColor colorOfPdfUsButtonTitle,
+    PdfColor colorOfPdfUsName,
+    PdfColor colorOfPdfUsPosition,
+    PdfColor colorOfPdfUsExperience,
+    PdfColor colorOfPdfUsEducations,
+    PdfColor colorOfPdfUsContact,
+    PdfColor colorOfPdfUsCertifications,
+    PdfColor colorOfPdfUsSkills,
+    PdfColor colorOfPdfUsAbout,
+    PdfColor colorOfPdfUsText);
 
 class Example {
   const Example(this.name, this.file, this.builder, [this.needsData = false]);

@@ -33,16 +33,28 @@ const sep = 150.0;
 Future<Uint8List> generateResume(
     PdfPageFormat format,
     CustomData data,
-    PdfColor colorOfPdfUs,
-    PdfColor colorOfPdfUsTwo,
-    PdfColor colorOfPdfUsThree) async {
+    PdfColor colorOfPdfUsTheme,
+    PdfColor colorOfPdfUsButtonTitle,
+    PdfColor colorOfPdfUsName,
+    PdfColor colorOfPdfUsPosition,
+    PdfColor colorOfPdfUsExperience,
+    PdfColor colorOfPdfUsEducations,
+    PdfColor colorOfPdfUsContact,
+    PdfColor colorOfPdfUsCertifications,
+    PdfColor colorOfPdfUsSkills,
+    PdfColor colorOfPdfUsAbout,
+    PdfColor colorOfPdfUsText
+
+
+
+    ) async {
   final doc = pw.Document(title: 'Resume', author: 'EZ@U');
 
   final profileImage = pw.MemoryImage(
     (await rootBundle.load(isProfileImage)).buffer.asUint8List(),
   );
 
-  final pageTheme = await _myPageTheme(format, colorOfPdfUs);
+  final pageTheme = await _myPageTheme(format, colorOfPdfUsTheme);
 
   doc.addPage(
     pw.MultiPage(
@@ -77,7 +89,7 @@ Future<Uint8List> generateResume(
                                       .defaultTextStyle
                                       .copyWith(
                                           fontWeight: pw.FontWeight.bold,
-                                          color: colorOfPdfUs)),
+                                          color: colorOfPdfUsTheme)),
                               pw.Padding(
                                   padding: const pw.EdgeInsets.only(top: 1)),
                               pw.Column(
@@ -103,7 +115,7 @@ Future<Uint8List> generateResume(
                                                           left: 2,
                                                           right: 5),
                                                   decoration: pw.BoxDecoration(
-                                                    color: colorOfPdfUs,
+                                                    color: colorOfPdfUsTheme,
                                                     shape: pw.BoxShape.circle,
                                                   ),
                                                 ),
@@ -122,7 +134,7 @@ Future<Uint8List> generateResume(
                                             decoration: pw.BoxDecoration(
                                                 border: pw.Border(
                                                     left: pw.BorderSide(
-                                                        color: colorOfPdfUs,
+                                                        color: colorOfPdfUsTheme,
                                                         width: 2))),
                                             padding: const pw.EdgeInsets.only(
                                                 left: 10, top: 5, bottom: 5),
@@ -151,7 +163,7 @@ Future<Uint8List> generateResume(
                             child: pw.Container(
                               width: 100,
                               height: 100,
-                              color: colorOfPdfUs,
+                              color: colorOfPdfUsTheme,
                               child: pw.Image(profileImage),
                             )),
                         // pw.Row(
@@ -222,43 +234,43 @@ Future<Uint8List> generateResume(
 
                   _Category(
                     title: 'EXPERIENCE',
-                    colorOfPdfUs: colorOfPdfUs,
-                    colorOfPdfUsTwo: colorOfPdfUsTwo,
-                    colorOfPdfUsThree: colorOfPdfUsThree,
+                    colorOfPdfUs: colorOfPdfUsExperience,
+                    colorOfPdfUsTwo: colorOfPdfUsExperience,
+                    colorOfPdfUsThree: colorOfPdfUsExperience,
                   ),
                   _Block(
                     title: 'Bachelor Of Commerce',
                     detail: 'Bachelor Interior Design',
-                    colorOfPdfUs: colorOfPdfUs,
-                    colorOfPdfUsTwo: colorOfPdfUsTwo,
-                    colorOfPdfUsThree: colorOfPdfUsThree,
+                    colorOfPdfUs: colorOfPdfUsExperience,
+                    colorOfPdfUsTwo: colorOfPdfUsExperience,
+                    colorOfPdfUsThree: colorOfPdfUsExperience,
                   ),
                   _Block(
                     title: 'Bachelor Interior Design',
                     detail: 'Bachelor Interior Design',
-                    colorOfPdfUs: colorOfPdfUs,
-                    colorOfPdfUsTwo: colorOfPdfUsTwo,
-                    colorOfPdfUsThree: colorOfPdfUsThree,
+                    colorOfPdfUs: colorOfPdfUsExperience,
+                    colorOfPdfUsTwo: colorOfPdfUsExperience,
+                    colorOfPdfUsThree: colorOfPdfUsExperience,
                   ),
                   _Category(
                     title: 'Education',
-                    colorOfPdfUs: colorOfPdfUs,
-                    colorOfPdfUsTwo: colorOfPdfUsTwo,
-                    colorOfPdfUsThree: colorOfPdfUsThree,
+                    colorOfPdfUs: colorOfPdfUsEducations,
+                    colorOfPdfUsTwo: colorOfPdfUsEducations,
+                    colorOfPdfUsThree: colorOfPdfUsEducations,
                   ),
                   _Block(
                     title: isBachelor,
                     detail: '$isBachelorValue     ( $isBachelorValueDate )',
-                    colorOfPdfUs: colorOfPdfUs,
-                    colorOfPdfUsTwo: colorOfPdfUsTwo,
-                    colorOfPdfUsThree: colorOfPdfUsThree,
+                    colorOfPdfUs: colorOfPdfUsTheme,
+                    colorOfPdfUsTwo: colorOfPdfUsEducations,
+                    colorOfPdfUsThree: colorOfPdfUsEducations,
                   ),
                   _Block(
                     title: isHighSchool,
                     detail: '$isHighSchoolValue     ( $isHighSchoolValueDate )',
-                    colorOfPdfUs: colorOfPdfUs,
-                    colorOfPdfUsTwo: colorOfPdfUsTwo,
-                    colorOfPdfUsThree: colorOfPdfUsThree,
+                    colorOfPdfUs: colorOfPdfUsEducations,
+                    colorOfPdfUsTwo: colorOfPdfUsEducations,
+                    colorOfPdfUsThree: colorOfPdfUsEducations,
                   ),
                 ],
               ),
@@ -281,104 +293,104 @@ Future<Uint8List> generateResume(
                             ),
                             _Category(
                               title: 'CONTACT',
-                              colorOfPdfUs: colorOfPdfUs,
-                              colorOfPdfUsTwo: colorOfPdfUsTwo,
-                              colorOfPdfUsThree: colorOfPdfUsThree,
+                              colorOfPdfUs: colorOfPdfUsContact,
+                              colorOfPdfUsTwo: colorOfPdfUsContact,
+                              colorOfPdfUsThree: colorOfPdfUsContact,
                             ),
                             _BlockOneLine(
                               title: isFacebook,
                               detail: isFacebookValue,
-                              colorOfPdfUs: colorOfPdfUs,
-                              colorOfPdfUsTwo: colorOfPdfUsTwo,
-                              colorOfPdfUsThree: colorOfPdfUsThree,
+                              colorOfPdfUs: colorOfPdfUsContact,
+                              colorOfPdfUsTwo: colorOfPdfUsContact,
+                              colorOfPdfUsThree: colorOfPdfUsContact,
                             ),
                             _BlockOneLine(
                               title: isLine,
                               detail: isLineValue,
-                              colorOfPdfUs: colorOfPdfUs,
-                              colorOfPdfUsTwo: colorOfPdfUsTwo,
-                              colorOfPdfUsThree: colorOfPdfUsThree,
+                              colorOfPdfUs: colorOfPdfUsContact,
+                              colorOfPdfUsTwo: colorOfPdfUsContact,
+                              colorOfPdfUsThree: colorOfPdfUsContact,
                             ),
                             _BlockOneLine(
                               title: isIG,
                               detail: isIGValue,
-                              colorOfPdfUs: colorOfPdfUs,
-                              colorOfPdfUsTwo: colorOfPdfUsTwo,
-                              colorOfPdfUsThree: colorOfPdfUsThree,
+                              colorOfPdfUs: colorOfPdfUsContact,
+                              colorOfPdfUsTwo: colorOfPdfUsContact,
+                              colorOfPdfUsThree: colorOfPdfUsContact,
                             ),
                             _BlockOneLine(
                               title: isEmail,
                               detail: isEmailVAlue,
-                              colorOfPdfUs: colorOfPdfUs,
-                              colorOfPdfUsTwo: colorOfPdfUsTwo,
-                              colorOfPdfUsThree: colorOfPdfUsThree,
+                              colorOfPdfUs: colorOfPdfUsContact,
+                              colorOfPdfUsTwo: colorOfPdfUsContact,
+                              colorOfPdfUsThree: colorOfPdfUsContact,
                             ),
                             _Block(
                               title: isAddress,
                               detail: isAddressValue,
-                              colorOfPdfUs: colorOfPdfUs,
-                              colorOfPdfUsTwo: colorOfPdfUsTwo,
-                              colorOfPdfUsThree: colorOfPdfUsThree,
+                              colorOfPdfUs: colorOfPdfUsContact,
+                              colorOfPdfUsTwo: colorOfPdfUsContact,
+                              colorOfPdfUsThree: colorOfPdfUsContact,
                             ),
                             _Category(
                               title: isCertifications,
-                              colorOfPdfUs: colorOfPdfUs,
-                              colorOfPdfUsTwo: colorOfPdfUsTwo,
-                              colorOfPdfUsThree: colorOfPdfUsThree,
+                              colorOfPdfUs: colorOfPdfUsContact,
+                              colorOfPdfUsTwo: colorOfPdfUsContact,
+                              colorOfPdfUsThree: colorOfPdfUsContact,
                             ),
                             _Block(
                               title: isBachelorValueDate,
                               detail: 'Bachelor Interior Design',
-                              colorOfPdfUs: colorOfPdfUs,
-                              colorOfPdfUsTwo: colorOfPdfUsTwo,
-                              colorOfPdfUsThree: colorOfPdfUsThree,
+                              colorOfPdfUs: colorOfPdfUsContact,
+                              colorOfPdfUsTwo: colorOfPdfUsContact,
+                              colorOfPdfUsThree: colorOfPdfUsContact,
                             ),
                             _Block(
                               title: isHighSchoolValueDate,
                               detail: 'Bachelor Interior Design',
-                              colorOfPdfUs: colorOfPdfUs,
-                              colorOfPdfUsTwo: colorOfPdfUsTwo,
-                              colorOfPdfUsThree: colorOfPdfUsThree,
+                              colorOfPdfUs: colorOfPdfUsContact,
+                              colorOfPdfUsTwo: colorOfPdfUsContact,
+                              colorOfPdfUsThree: colorOfPdfUsContact,
                             ),
                             pw.Expanded(child: pw.SizedBox()),
                             _Category(
-                              title: 'isSKILLS',
-                              colorOfPdfUs: colorOfPdfUs,
-                              colorOfPdfUsTwo: colorOfPdfUsTwo,
-                              colorOfPdfUsThree: colorOfPdfUsThree,
+                              title: isSKILLS,
+                              colorOfPdfUs: colorOfPdfUsSkills,
+                              colorOfPdfUsTwo: colorOfPdfUsSkills,
+                              colorOfPdfUsThree: colorOfPdfUsSkills,
                             ),
                             pw.Column(children: <pw.Widget>[
                               _Percent(
                                 size: 50,
                                 value: .9,
                                 title: pw.Text(isWord),
-                                colorOfPdfUs: colorOfPdfUs,
-                                colorOfPdfUsTwo: colorOfPdfUsTwo,
-                                colorOfPdfUsThree: colorOfPdfUsThree,
+                                colorOfPdfUs: colorOfPdfUsSkills,
+                                colorOfPdfUsTwo: colorOfPdfUsSkills,
+                                colorOfPdfUsThree: colorOfPdfUsSkills,
                               ),
                               _Percent(
                                 size: 50,
                                 value: .7,
                                 title: pw.Text(isExcel),
-                                colorOfPdfUs: colorOfPdfUs,
-                                colorOfPdfUsTwo: colorOfPdfUsTwo,
-                                colorOfPdfUsThree: colorOfPdfUsThree,
+                                colorOfPdfUs: colorOfPdfUsSkills,
+                                colorOfPdfUsTwo: colorOfPdfUsSkills,
+                                colorOfPdfUsThree: colorOfPdfUsSkills,
                               ),
                               _Percent(
                                 size: 50,
                                 value: .6,
                                 title: pw.Text(isPowerPoint),
-                                colorOfPdfUs: colorOfPdfUs,
-                                colorOfPdfUsTwo: colorOfPdfUsTwo,
-                                colorOfPdfUsThree: colorOfPdfUsThree,
+                                colorOfPdfUs: colorOfPdfUsSkills,
+                                colorOfPdfUsTwo: colorOfPdfUsSkills,
+                                colorOfPdfUsThree: colorOfPdfUsSkills,
                               ),
                               _Percent(
                                 size: 50,
                                 value: .6,
                                 title: pw.Text(isEnglish),
-                                colorOfPdfUs: colorOfPdfUs,
-                                colorOfPdfUsTwo: colorOfPdfUsTwo,
-                                colorOfPdfUsThree: colorOfPdfUsThree,
+                                colorOfPdfUs: colorOfPdfUsSkills,
+                                colorOfPdfUsTwo: colorOfPdfUsSkills,
+                                colorOfPdfUsThree: colorOfPdfUsSkills,
                               ),
                             ]),
                           ],
@@ -729,7 +741,9 @@ class _Percent extends pw.StatelessWidget {
       pw.LinearProgressIndicator(
         value: value,
         backgroundColor: backgroundColor,
+        valueColor: colorOfPdfUs,
         minHeight: 5,
+
       ),
     ];
 

@@ -33,8 +33,19 @@ import 'data.dart';
 import 'examples.dart';
 
 class MyAppResume extends StatefulWidget {
-  final PdfColor colorOfPdfUs;
-  const MyAppResume({Key? key, required this.colorOfPdfUs}) : super(key: key);
+
+  final PdfColor colorOfPdfUsTheme;
+  final PdfColor colorOfPdfUsButtonTitle;
+  final PdfColor colorOfPdfUsName;
+  final PdfColor colorOfPdfUsPosition;
+  final  PdfColor colorOfPdfUsExperience;
+  final PdfColor colorOfPdfUsEducations;
+  final  PdfColor colorOfPdfUsContact;
+  final PdfColor colorOfPdfUsCertifications;
+  final PdfColor colorOfPdfUsSkills;
+  final PdfColor colorOfPdfUsAbout;
+  final PdfColor colorOfPdfUsText;
+  const MyAppResume({Key? key,  required this.colorOfPdfUsTheme, required this.colorOfPdfUsButtonTitle, required this.colorOfPdfUsName, required this.colorOfPdfUsPosition, required this.colorOfPdfUsExperience, required this.colorOfPdfUsEducations, required this.colorOfPdfUsContact, required this.colorOfPdfUsCertifications, required this.colorOfPdfUsSkills, required this.colorOfPdfUsAbout, required this.colorOfPdfUsText}) : super(key: key);
 
   @override
   MyAppResumeState createState() {
@@ -169,7 +180,18 @@ class MyAppResumeState extends State<MyAppResume> with SingleTickerProviderState
 
       PdfPreview(
         maxPageWidth: 700,
-        build: (format) => examples[_tab].builder(format, _data,widget.colorOfPdfUs,colorOfPdf.lightGreen,colorOfPdf.black),
+        build: (format) => examples[_tab].builder(format, _data,
+             widget.colorOfPdfUsTheme,
+            widget.colorOfPdfUsButtonTitle,
+            widget.colorOfPdfUsName,
+            widget.colorOfPdfUsPosition,
+            widget. colorOfPdfUsExperience,
+            widget.colorOfPdfUsEducations,
+            widget.colorOfPdfUsContact,
+            widget.colorOfPdfUsCertifications,
+            widget.colorOfPdfUsSkills,
+            widget. colorOfPdfUsAbout,
+            widget.colorOfPdfUsText),
         actions: actions,
         onPrinted: _showPrintedToast,
         onShared: _showSharedToast,
