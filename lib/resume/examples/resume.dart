@@ -15,6 +15,7 @@
  */
 
 import 'dart:async';
+import 'dart:convert';
 import 'dart:math';
 import 'dart:typed_data';
 
@@ -23,7 +24,9 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../check_token/token_bloc.dart';
 import '../../customs/color/pdf_color_const.dart';
 import '../../customs/message/text_demo_resume.dart';
 import '../data.dart';
@@ -43,13 +46,17 @@ Future<Uint8List> generateResume(
     PdfColor colorOfPdfUsCertifications,
     PdfColor colorOfPdfUsSkills,
     PdfColor colorOfPdfUsAbout,
-    PdfColor colorOfPdfUsText
+    PdfColor colorOfPdfUsText,
+    double widthSizeCM,
+    double heightSizeCM
 
 
 
     ) async {
   final doc = pw.Document(title: 'Resume', author: 'EZ@U');
-
+  late SharedPreferences prefs;
+    prefs = await SharedPreferences.getInstance();
+    String isPhotoResume = prefs.getString('ResumePhoto') ?? '';
   final profileImage = pw.MemoryImage(
     (await rootBundle.load(isProfileImage)).buffer.asUint8List(),
   );
@@ -161,10 +168,18 @@ Future<Uint8List> generateResume(
                         pw.Padding(
                             padding: pw.EdgeInsets.all(10.0),
                             child: pw.Container(
-                              width: 100,
-                              height: 100,
+                              width: widthSizeCM * PdfPageFormat.cm,
+                              height: heightSizeCM* PdfPageFormat.cm ,
                               color: colorOfPdfUsTheme,
-                              child: pw.Image(profileImage),
+                              child: isPhotoResume == ''? pw.Image(profileImage): pw.Container(
+                                decoration: pw. BoxDecoration(
+                                  // shape: pw. BoxShape.circle,
+                                  image: pw. DecorationImage(
+                                    image:  pw.MemoryImage(base64Decode(base64.normalize(
+                                        isPhotoResume))),
+                                  ),
+                                ),
+                              ),
                             )),
                         // pw.Row(
                         //   crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -334,23 +349,23 @@ Future<Uint8List> generateResume(
                             ),
                             _Category(
                               title: isCertifications,
-                              colorOfPdfUs: colorOfPdfUsContact,
-                              colorOfPdfUsTwo: colorOfPdfUsContact,
-                              colorOfPdfUsThree: colorOfPdfUsContact,
+                              colorOfPdfUs: colorOfPdfUsCertifications,
+                              colorOfPdfUsTwo: colorOfPdfUsCertifications,
+                              colorOfPdfUsThree: colorOfPdfUsCertifications,
                             ),
                             _Block(
                               title: isBachelorValueDate,
                               detail: 'Bachelor Interior Design',
-                              colorOfPdfUs: colorOfPdfUsContact,
-                              colorOfPdfUsTwo: colorOfPdfUsContact,
-                              colorOfPdfUsThree: colorOfPdfUsContact,
+                              colorOfPdfUs: colorOfPdfUsCertifications,
+                              colorOfPdfUsTwo: colorOfPdfUsCertifications,
+                              colorOfPdfUsThree: colorOfPdfUsCertifications,
                             ),
                             _Block(
                               title: isHighSchoolValueDate,
                               detail: 'Bachelor Interior Design',
-                              colorOfPdfUs: colorOfPdfUsContact,
-                              colorOfPdfUsTwo: colorOfPdfUsContact,
-                              colorOfPdfUsThree: colorOfPdfUsContact,
+                              colorOfPdfUs: colorOfPdfUsCertifications,
+                              colorOfPdfUsTwo: colorOfPdfUsCertifications,
+                              colorOfPdfUsThree: colorOfPdfUsCertifications,
                             ),
                             pw.Expanded(child: pw.SizedBox()),
                             _Category(

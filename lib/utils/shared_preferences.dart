@@ -65,6 +65,12 @@ setMyNameUser(String myNameUser) async {
   print("myNameUser");
   print(myNameUser);
 }
+setResumePhoto({required String resumePhoto}) async {
+  prefs = await SharedPreferences.getInstance();
+  await prefs.setString('ResumePhoto', resumePhoto);
+  print("ResumePhoto");
+  print(resumePhoto);
+}
 
 setButton(
     {String? buttonOkAPI,

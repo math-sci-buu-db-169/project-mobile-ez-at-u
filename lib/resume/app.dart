@@ -45,7 +45,9 @@ class MyAppResume extends StatefulWidget {
   final PdfColor colorOfPdfUsSkills;
   final PdfColor colorOfPdfUsAbout;
   final PdfColor colorOfPdfUsText;
-  const MyAppResume({Key? key,  required this.colorOfPdfUsTheme, required this.colorOfPdfUsButtonTitle, required this.colorOfPdfUsName, required this.colorOfPdfUsPosition, required this.colorOfPdfUsExperience, required this.colorOfPdfUsEducations, required this.colorOfPdfUsContact, required this.colorOfPdfUsCertifications, required this.colorOfPdfUsSkills, required this.colorOfPdfUsAbout, required this.colorOfPdfUsText}) : super(key: key);
+  final double widthSizeCM;
+  final double heightSizeCM;
+  const MyAppResume({Key? key,  required this.colorOfPdfUsTheme, required this.colorOfPdfUsButtonTitle, required this.colorOfPdfUsName, required this.colorOfPdfUsPosition, required this.colorOfPdfUsExperience, required this.colorOfPdfUsEducations, required this.colorOfPdfUsContact, required this.colorOfPdfUsCertifications, required this.colorOfPdfUsSkills, required this.colorOfPdfUsAbout, required this.colorOfPdfUsText, required this.widthSizeCM, required this.heightSizeCM}) : super(key: key);
 
   @override
   MyAppResumeState createState() {
@@ -191,7 +193,9 @@ class MyAppResumeState extends State<MyAppResume> with SingleTickerProviderState
             widget.colorOfPdfUsCertifications,
             widget.colorOfPdfUsSkills,
             widget. colorOfPdfUsAbout,
-            widget.colorOfPdfUsText),
+            widget.colorOfPdfUsText,
+        widget.widthSizeCM,
+        widget.heightSizeCM),
         actions: actions,
         onPrinted: _showPrintedToast,
         onShared: _showSharedToast,

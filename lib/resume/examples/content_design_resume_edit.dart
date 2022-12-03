@@ -22,26 +22,25 @@ import '../../module/home/bloc/resume_bloc.dart';
 import '../../module/login/screen/login_screen/login_screen.dart';
 import '../../utils/shared_preferences.dart';
 import '../app.dart';
-import 'content_design_resume_edit.dart';
 
 
-class ContentDesignResumeScreen extends StatelessWidget {
-  const ContentDesignResumeScreen({Key? key}) : super(key: key);
+class ContentDesignResumeEditScreen extends StatelessWidget {
+  const ContentDesignResumeEditScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(create: (context) => ResumeBloc()..add(ResumeInnitEvent()),child:const  ContentDesignResume());
+    return BlocProvider(create: (context) => ResumeBloc()..add(ResumeInnitEvent()),child:const  ContentDesignEditResume());
   }
 }
 
-class ContentDesignResume extends StatefulWidget {
-  const ContentDesignResume({Key? key}) : super(key: key);
+class ContentDesignEditResume extends StatefulWidget {
+  const ContentDesignEditResume({Key? key}) : super(key: key);
 
   @override
-  State<ContentDesignResume> createState() => _ContentDesignResumeState();
+  State<ContentDesignEditResume> createState() => _ContentDesignEditResumeState();
 }
 
-class _ContentDesignResumeState extends State<ContentDesignResume> with ProgressDialog {
+class _ContentDesignEditResumeState extends State<ContentDesignEditResume> with ProgressDialog {
   TextEditingController resumeAbout = TextEditingController();
   TextEditingController resumeName = TextEditingController();
   TextEditingController resumePositions = TextEditingController();
@@ -50,28 +49,6 @@ class _ContentDesignResumeState extends State<ContentDesignResume> with Progress
   bool isChecked2 = false;
   bool isChecked3 = false;
   bool isChecked4 = false;
-  bool isEducationsTitle = true;
-  bool isEducationsOne = true;
-  bool isEducationsTwo= true;
-  bool isContactTitle = true;
-  bool isContactOne = true;
-  bool isContactTwo= true;
-  bool isContactThree= true;
-  bool isContactFour= true;
-  bool isContactFive= true;
-
-  bool isExperienceTitle = true;
-  bool isExperienceOne = true;
-  bool isExperienceTwo= true;
-  bool isExperienceThree= true;
-  bool isCertTitle = true;
-  bool isCertOne = true;
-  bool isCertTwo= true;
-  bool isCertThree= true;
-  bool isSkillsTitle = true;
-  bool isSkillsOne = true;
-  bool isSkillsTwo= true;
-  bool isSkillsThree= true;
   late double sizePhoto = 1.5 ;
   late  double widthSizeCM  = 3.00;
   late double heightSizeCM  = 4.00;
@@ -205,24 +182,23 @@ class _ContentDesignResumeState extends State<ContentDesignResume> with Progress
                   // ),
 
                   title: Center(
-                      child: Text("Set Theme And Color",
+                      child: Text("Content Design Resume",
                           style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.w500,
                               color: Theme.of(context).appBarTheme.foregroundColor))),
 
-                    // actions: [
-                    //   IconButton(onPressed:  () =>
-                    //       Navigator.push(
-                    //         context,
-                    //         MaterialPageRoute(builder: (context) => const ContentDesignResumeEditScreen()),
-                    //       ), icon:  Icon(
-                    //   FontAwesomeIcons.filter,
-                    //   size: 20,
-                    //   color: Theme.of(context).bottomAppBarColor,
-                    // ),)
-                    // ]
-                  // // actions: [
+                    actions: [
+                      IconButton(onPressed:  () =>
+                          context
+                              .read<ResumeBloc>()
+                              .add(ChangePhotoRequest()), icon:  Icon(
+                      FontAwesomeIcons.filter,
+                      size: 20,
+                      color: Theme.of(context).bottomAppBarColor,
+                    ),)
+                    ]
+                  // actions: [
                   //   PopupMenuButton(
                   //     child: Align(
                   //       alignment: Alignment.centerRight,
@@ -275,135 +251,83 @@ class _ContentDesignResumeState extends State<ContentDesignResume> with Progress
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
+
                                       Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Row(
-                                            children: [
 
-                                              GestureDetector(
-                                                  onTap: () async {
-                                                    await showMenu<int>(
-                                                        context: context,
-                                                        position: RelativeRect.fromLTRB(0, 0, 0, 0),
-                                                        items: List.generate(
-                                                            colorOfPdfList.length ?? 0, (index) {
-                                                          return PopupMenuItem(
-                                                            value: index,
-                                                            child: Text(
-                                                              "${colorOfPdfList[index].nameColor}",
-                                                              style: TextStyle(
-                                                                  fontSize: 20,
-                                                                  color: (colorOfPdfList[index]
-                                                                      .materialColor ==
-                                                                      Colors.black) ||
-                                                                      (colorOfPdfList[index]
-                                                                          .materialColor ==
-                                                                          Colors.white)
-                                                                      ? Theme.of(context)
-                                                                      .appBarTheme
-                                                                      .foregroundColor
-                                                                      : colorOfPdfList[index]
-                                                                      .materialColor),
-                                                            ),
-                                                            onTap:(){
-                                                              setState(() {
-                                                                materialColorOfPdfUsTheme = colorOfPdfList[index].materialColor;
-                                                                // if(colorOfPdfList[index].materialColor ==Colors.black ||colorOfPdfList[index].materialColor ==Colors.white){
-                                                                //   materialColorOfPdfUsAbout = Theme.of(context).appBarTheme.foregroundColor ??Colors.black;
-                                                                // }
-                                                                colorOfPdfUsTheme = colorOfPdfList[index].pdfOfColor;
-
-
-
-
-                                                              });
-
-                                                            },
-                                                          );
-                                                        }));
-
-                                                  },
-                                                  child:Container(
-
-                                                    color:
-                                                    (materialColorOfPdfUsTheme == Colors.black && materialColorOfPdfUsTheme == Colors.black ) ?
-                                                    Colors.white :
-                                                    (materialColorOfPdfUsTheme == Colors.white && materialColorOfPdfUsTheme == Colors.white ) ?
-                                                    Colors.black : Theme.of(context).scaffoldBackgroundColor
-
-                                                    ,
-                                                    child:  Icon(
-                                                        FontAwesomeIcons.droplet,
-                                                        size: 20,
-                                                        color: materialColorOfPdfUsTheme
-                                                    ),
-                                                  )
+                                GestureDetector(
+                                    onTap: () async {
+                                      int? value = await showMenu<int>(
+                                          context: context,
+                                          position: RelativeRect.fromLTRB(0, 0, 0, 0),
+                                          items: List.generate(
+                                              colorOfPdfList.length ?? 0, (index) {
+                                            return PopupMenuItem(
+                                              value: index,
+                                              child: Text(
+                                                "${colorOfPdfList[index].nameColor}",
+                                                style: TextStyle(
+                                                    fontSize: 20,
+                                                    color: (colorOfPdfList[index]
+                                                        .materialColor ==
+                                                        Colors.black) ||
+                                                        (colorOfPdfList[index]
+                                                            .materialColor ==
+                                                            Colors.white)
+                                                        ? Theme.of(context)
+                                                        .appBarTheme
+                                                        .foregroundColor
+                                                        : colorOfPdfList[index]
+                                                        .materialColor),
                                               ),
-                                              Padding(
-                                                padding: EdgeInsets.only(left: 10),
-                                                child: Text(
-                                                  "Theme Color",
-                                                  style: TextStyle(
-                                                      fontSize: 20,
-                                                      fontWeight: FontWeight.w500,
-                                                      color: Theme.of(context)
-                                                          .appBarTheme
-                                                          .foregroundColor),
+                                              onTap:(){
+                                                setState(() {
+                                                  materialColorOfPdfUsTheme = colorOfPdfList[index].materialColor;
+                                                  // if(colorOfPdfList[index].materialColor ==Colors.black ||colorOfPdfList[index].materialColor ==Colors.white){
+                                                  //   materialColorOfPdfUsAbout = Theme.of(context).appBarTheme.foregroundColor ??Colors.black;
+                                                  // }
+                                                  colorOfPdfUsTheme = colorOfPdfList[index].pdfOfColor;
+
+
+
+
+                                                          });
+
+                                                        },
+                                                      );
+                                                    }));
+
+                                              },
+                                              child:Container(
+
+                                                color:
+                                                (materialColorOfPdfUsTheme == Colors.black && materialColorOfPdfUsTheme == Colors.black ) ?
+                                                Colors.white :
+                                                (materialColorOfPdfUsTheme == Colors.white && materialColorOfPdfUsTheme == Colors.white ) ?
+                                                Colors.black : Theme.of(context).scaffoldBackgroundColor
+
+                                                ,
+                                                child:  Icon(
+                                                    FontAwesomeIcons.droplet,
+                                                    size: 20,
+                                                    color: materialColorOfPdfUsTheme
                                                 ),
                                               )
-                                            ],
                                           ),
-                                          Row(
-                                            children: [
-
-                                              InkWell(
-                                                  onTap: ()  {
-                                                    Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(builder: (context) => const ContentDesignResumeEditScreen()),
-                                                    );
-                                                  },
-                                                  child:Container(
-
-                                                    color:
-                                                    (materialColorOfPdfUsTheme == Colors.black && materialColorOfPdfUsTheme == Colors.black ) ?
-                                                    Colors.white :
-                                                    (materialColorOfPdfUsTheme == Colors.white && materialColorOfPdfUsTheme == Colors.white ) ?
-                                                    Colors.black : Theme.of(context).scaffoldBackgroundColor
-
-                                                    ,
-                                                    child:  Row(
-                                                      children: [
-                                                        Icon(
-                                                            FontAwesomeIcons.pen,
-                                                            size: 12,
-                                                            color: materialColorOfPdfUsTheme
-                                                        ),
-                                                        Padding(
-                                                          padding: EdgeInsets.only(left: 10),
-                                                          child: Text(
-                                                            "Edit Information",
-                                                            style: TextStyle(
-
-                                                                decoration: TextDecoration.underline,
-                                                                decorationThickness: 2,
-                                                                fontSize: 12,
-                                                                fontWeight: FontWeight.w500,
-                                                                color: Theme.of(context)
-                                                                    .appBarTheme
-                                                                    .foregroundColor),
-                                                          ),
-                                                        )
-                                                      ],
-                                                    )
-                                                  )
-                                              ),
-                                            ],
-                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.only(left: 10),
+                                            child: Text(
+                                              "Theme Color",
+                                              style: TextStyle(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Theme.of(context)
+                                                      .appBarTheme
+                                                      .foregroundColor),
+                                            ),
+                                          )
                                         ],
                                       ),
-
                                       Text(
                                         "Pictuce",
                                         style: TextStyle(
@@ -426,7 +350,7 @@ class _ContentDesignResumeState extends State<ContentDesignResume> with Progress
                                               child: Stack(
                                                 children: [
                                                   Container(
-                                                    padding: EdgeInsets.all(10),
+                                                    padding: EdgeInsets.all(20),
                                                     decoration: BoxDecoration(
                                                       borderRadius:
                                                       BorderRadius.circular(50),
@@ -449,23 +373,23 @@ class _ContentDesignResumeState extends State<ContentDesignResume> with Progress
 
                                                           child:
                                                           Center(
-                                                              child:
-                                                              isPhotoResume ==''?Image.asset(
-                                                                "assets/profile.jpg",
-                                                                width: 600.0,
-                                                                height: 240.0,
-                                                                fit: BoxFit.cover,
-                                                              ):
-                                                              Image.memory((base64Decode(base64.normalize(
-                                                                  isPhotoResume ))),)
+                                                            child:
+                                                            isPhotoResume ==''?Image.asset(
+                                                              "assets/profile.jpg",
+                                                              width: 600.0,
+                                                              height: 240.0,
+                                                              fit: BoxFit.cover,
+                                                            ):
+                                                            Image.memory((base64Decode(base64.normalize(
+                                                                isPhotoResume ))),)
                                                           ), //background color of inner container
                                                         ),
                                                       ),
                                                     ),
                                                   ),
                                                   Positioned(
-                                                    left: 15,
-                                                    top: 15,
+                                                    left: 30,
+                                                    top: 25,
                                                     child: Icon(
                                                       FontAwesomeIcons.image,
                                                       color: Theme.of(context)
@@ -481,16 +405,42 @@ class _ContentDesignResumeState extends State<ContentDesignResume> with Progress
                                                   )
                                                 ],
                                               )),
-                                          Row(
+                                          Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                              Padding(
+                                                padding: EdgeInsets.only(left: 15),
+                                                child: Text(
+                                                  "The aspect ratio must be 1:1 \n"
+                                                      "The file size does not exceed 5 MB \n",
+                                                  style: TextStyle(
+                                                      fontSize: 10,
+                                                      fontWeight: FontWeight.w500,
+                                                      color: Theme.of(context)
+                                                          .appBarTheme
+                                                          .foregroundColor),
+                                                ),
+                                              ),
+                                              Row(
+                                                crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                                 children: [
+                                                  Icon(
+                                                    FontAwesomeIcons.squareCheck,
+                                                    color:
+                                                    Theme.of(context).iconTheme.color,
+                                                    size: 20,
+                                                    shadows: <Shadow>[
+                                                      Shadow(
+                                                          color: Colors.white,
+                                                          blurRadius: 15.0)
+                                                    ],
+                                                  ),
                                                   Padding(
-                                                    padding: EdgeInsets.only(left: 15),
+                                                    padding: EdgeInsets.only(left: 5),
                                                     child: Text(
-                                                      "   The aspect ratio must be 3:4 \n"
-                                                          "The file size does not exceed 5 MB ",
+                                                      "The aspect ratio must be 1:1 \n"
+                                                          "The file size does not exceed 5 MB \n",
                                                       style: TextStyle(
                                                           fontSize: 10,
                                                           fontWeight: FontWeight.w500,
@@ -499,138 +449,103 @@ class _ContentDesignResumeState extends State<ContentDesignResume> with Progress
                                                               .foregroundColor),
                                                     ),
                                                   ),
-                                                  Row(
-                                                    crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                    children: [
-                                                      Icon(
-                                                        FontAwesomeIcons.squareCheck,
-                                                        color:
-                                                        Theme.of(context).iconTheme.color,
-                                                        size: 20,
-                                                        shadows: <Shadow>[
-                                                          Shadow(
-                                                              color: Colors.white,
-                                                              blurRadius: 15.0)
-                                                        ],
-                                                      ),
-                                                      Padding(
-                                                        padding: EdgeInsets.only(left: 5),
-                                                        child: Text(
-                                                          "Please select the information \nthat will be used to create a resume.",
-                                                          style: TextStyle(
-                                                              fontSize: 10,
-                                                              fontWeight: FontWeight.w500,
-                                                              color: Theme.of(context)
-                                                                  .appBarTheme
-                                                                  .foregroundColor),
-                                                        ),
-                                                      ),
+                                                ],
+                                              ),
+                                              Row(
+                                                crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                                children: [
+                                                  Icon(
+                                                    FontAwesomeIcons.square,
+                                                    color:
+                                                    Theme.of(context).iconTheme.color,
+                                                    size: 20,
+                                                    shadows: <Shadow>[
+                                                      Shadow(
+                                                          color: Colors.white,
+                                                          blurRadius: 15.0)
                                                     ],
                                                   ),
-                                                  Row(
-                                                    crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                    children: [
-                                                      Container(
-
-                                                        color:
-                                                        (materialColorOfPdfUsAbout == Colors.black && materialColorOfPdfUsAbout == Colors.black ) ?
-                                                        Colors.white :
-                                                        (materialColorOfPdfUsAbout == Colors.white && materialColorOfPdfUsAbout == Colors.white ) ?
-                                                        Colors.black : Theme.of(context).scaffoldBackgroundColor
-
-                                                        ,
-                                                        child:  Icon(
-                                                            FontAwesomeIcons.droplet,
-                                                            size: 20,
-                                                            color: materialColorOfPdfUsAbout
-                                                        ),
-                                                      )
-                                                      ,
-                                                      Padding(
-                                                        padding: EdgeInsets.only(left: 5),
-                                                        child: Text(
-                                                          "Please select a color\n"
-                                                              "to use in creating a resume.\n",
-                                                          style: TextStyle(
-                                                              fontSize: 10,
-                                                              fontWeight: FontWeight.w500,
-                                                              color: Theme.of(context)
-                                                                  .appBarTheme
-                                                                  .foregroundColor),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  InkWell(
-                                                    onTap: () async {
-                                                      int? value = await showMenu<int>(
-                                                          context: context,
-                                                          position: RelativeRect.fromLTRB(0, 0, 0, 0),
-                                                          items: List.generate(
-                                                              sizeImageResume.length ?? 0, (index) {
-                                                            return PopupMenuItem(
-                                                              value: index,
-                                                              child: Text(
-                                                                "${sizeImageResume[index].sizePhoto} N' ${sizeImageResume[index].widthSizeCM} x ${sizeImageResume[index].heightSizeCM} cm",
-                                                                style: TextStyle(
-                                                                    fontSize: 20,
-                                                                    color:Theme.of(context).appBarTheme.foregroundColor
-                                                                ),
-                                                              ),
-                                                              onTap:(){
-                                                                setState(() {
-                                                                  sizePhoto = sizeImageResume[index].sizePhoto;
-                                                                  widthSizeCM  = sizeImageResume[index].widthSizeCM;
-                                                                  heightSizeCM  = sizeImageResume[index].heightSizeCM;
-
-
-
-
-                                                                });
-
-                                                              },
-                                                            );
-                                                          }));
-
-                                                    },
-                                                    child:
-                                                    Row(
-                                                      crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                      children: [
-                                                        Text(
-                                                          "Select",
-                                                          style: TextStyle(
-                                                              decoration: TextDecoration.underline,
-                                                              decorationThickness: 2,
-                                                              fontSize: 10,
-                                                              fontWeight: FontWeight.w500,
-                                                              color: Theme.of(context)
-                                                                  .appBarTheme
-                                                                  .foregroundColor),
-                                                        ),
-                                                        Padding(
-                                                          padding: EdgeInsets.only(left: 5),
-                                                          child: Text(
-                                                            "${sizePhoto == 1.5 ?"Default":''} size  : $sizePhoto N'' $widthSizeCM x $heightSizeCM (w x h) Cm  ",
-                                                            style: TextStyle(
-                                                                fontSize: 10,
-                                                                fontWeight: FontWeight.w500,
-                                                                color: Theme.of(context)
-                                                                    .appBarTheme
-                                                                    .foregroundColor),
-                                                          ),
-                                                        ),
-                                                      ],
+                                                  Padding(
+                                                    padding: EdgeInsets.only(left: 5),
+                                                    child: Text(
+                                                      "The aspect ratio must be 1:1 \n"
+                                                          "The file size does not exceed 5 MB \n",
+                                                      style: TextStyle(
+                                                          fontSize: 10,
+                                                          fontWeight: FontWeight.w500,
+                                                          color: Theme.of(context)
+                                                              .appBarTheme
+                                                              .foregroundColor),
                                                     ),
                                                   ),
                                                 ],
                                               ),
+                                           InkWell(
+                                             onTap: () async {
+                                               int? value = await showMenu<int>(
+                                                   context: context,
+                                                   position: RelativeRect.fromLTRB(0, 0, 0, 0),
+                                                   items: List.generate(
+                                                       sizeImageResume.length ?? 0, (index) {
+                                                     return PopupMenuItem(
+                                                       value: index,
+                                                       child: Text(
+                                                         "${sizeImageResume[index].sizePhoto} N' ${sizeImageResume[index].widthSizeCM} x ${sizeImageResume[index].heightSizeCM} cm",
+                                                         style: TextStyle(
+                                                             fontSize: 20,
+                                                             color:Theme.of(context).appBarTheme.foregroundColor
+                                                         ),
+                                                       ),
+                                                       onTap:(){
+                                                         setState(() {
+                                                           sizePhoto = sizeImageResume[index].sizePhoto;
+                                                          widthSizeCM  = sizeImageResume[index].widthSizeCM;
+                                                           heightSizeCM  = sizeImageResume[index].heightSizeCM;
+
+
+
+
+                                                         });
+
+                                                       },
+                                                     );
+                                                   }));
+
+                                             },
+                                                child:
+                                                Row(
+                                                crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                                children: [
+                                                Text(
+                                                "Select",
+                                                style: TextStyle(
+                                                    decoration: TextDecoration.underline,
+                                                    decorationThickness: 2,
+                                                    fontSize: 10,
+                                                    fontWeight: FontWeight.w500,
+                                                    color: Theme.of(context)
+                                                        .appBarTheme
+                                                        .foregroundColor),
+                                              ),
+                                                  Padding(
+                                                    padding: EdgeInsets.only(left: 5),
+                                                    child: Text(
+                                                      "${sizePhoto == 1.5 ?"Default":''} size  : $sizePhoto N'' $widthSizeCM x $heightSizeCM (w x h) Cm  ",
+                                                      style: TextStyle(
+                                                          fontSize: 10,
+                                                          fontWeight: FontWeight.w500,
+                                                          color: Theme.of(context)
+                                                              .appBarTheme
+                                                              .foregroundColor),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              ),
                                             ],
                                           ),
-
                                         ],
                                       ),
                                       const Divider(
@@ -982,10 +897,10 @@ class _ContentDesignResumeState extends State<ContentDesignResume> with Progress
                                             checkColor: Theme.of(context).primaryColor,
                                             fillColor: MaterialStateProperty.resolveWith(
                                                 getColor),
-                                            value: isEducationsTitle ,
+                                            value: isChecked1,
                                             onChanged: (bool? value) {
                                               setState(() {
-                                                isEducationsTitle  = value ?? false;
+                                                isChecked1 = value ?? false;
                                               });
                                             },
                                           ),
@@ -1001,10 +916,10 @@ class _ContentDesignResumeState extends State<ContentDesignResume> with Progress
                                         },
                                         hintLabel: "Educations 1",
                                         textInputType: TextInputType.text,
-                                        isChecked: isEducationsOne ,
+                                        isChecked: isChecked1,
                                         isCheckedSetState: (bool? value) {
                                           setState(() {
-                                            isEducationsOne  = value ?? false;
+                                            isChecked1 = value ?? false;
                                           });
                                         },
                                       ),
@@ -1018,10 +933,10 @@ class _ContentDesignResumeState extends State<ContentDesignResume> with Progress
                                         },
                                         hintLabel: "Educations ที่ 2",
                                         textInputType: TextInputType.text,
-                                        isChecked: isEducationsTwo ,
+                                        isChecked: isChecked1,
                                         isCheckedSetState: (bool? value) {
                                           setState(() {
-                                            isEducationsTwo = value ?? false;
+                                            isChecked1 = value ?? false;
                                           });
                                         },
                                       ), Row(
@@ -1102,10 +1017,10 @@ class _ContentDesignResumeState extends State<ContentDesignResume> with Progress
                                             checkColor: Theme.of(context).primaryColor,
                                             fillColor: MaterialStateProperty.resolveWith(
                                                 getColor),
-                                            value: isContactTitle ,
+                                            value: isChecked1,
                                             onChanged: (bool? value) {
                                               setState(() {
-                                                isContactTitle  = value ?? false;
+                                                isChecked1 = value ?? false;
                                               });
                                             },
                                           ),
@@ -1121,10 +1036,10 @@ class _ContentDesignResumeState extends State<ContentDesignResume> with Progress
                                         },
                                         hintLabel: "Contact 1",
                                         textInputType: TextInputType.text,
-                                        isChecked: isContactOne ,
+                                        isChecked: isChecked1,
                                         isCheckedSetState: (bool? value) {
                                           setState(() {
-                                            isContactOne  = value ?? false;
+                                            isChecked1 = value ?? false;
                                           });
                                         },
                                       ),
@@ -1138,10 +1053,10 @@ class _ContentDesignResumeState extends State<ContentDesignResume> with Progress
                                         },
                                         hintLabel: "Contact ที่ 2",
                                         textInputType: TextInputType.text,
-                                        isChecked: isContactTwo,
+                                        isChecked: isChecked1,
                                         isCheckedSetState: (bool? value) {
                                           setState(() {
-                                            isContactTwo = value ?? false;
+                                            isChecked1 = value ?? false;
                                           });
                                         },
                                       ),
@@ -1155,10 +1070,10 @@ class _ContentDesignResumeState extends State<ContentDesignResume> with Progress
                                         },
                                         hintLabel: "Contact ที่ 3",
                                         textInputType: TextInputType.text,
-                                        isChecked: isContactThree,
+                                        isChecked: isChecked1,
                                         isCheckedSetState: (bool? value) {
                                           setState(() {
-                                            isContactThree = value ?? false;
+                                            isChecked1 = value ?? false;
                                           });
                                         },
                                       ),
@@ -1172,10 +1087,10 @@ class _ContentDesignResumeState extends State<ContentDesignResume> with Progress
                                         },
                                         hintLabel: "Contact ที่ 4",
                                         textInputType: TextInputType.text,
-                                        isChecked: isContactFour,
+                                        isChecked: isChecked1,
                                         isCheckedSetState: (bool? value) {
                                           setState(() {
-                                            isContactFour = value ?? false;
+                                            isChecked1 = value ?? false;
                                           });
                                         },
                                       ),
@@ -1189,10 +1104,10 @@ class _ContentDesignResumeState extends State<ContentDesignResume> with Progress
                                         },
                                         hintLabel: "Contact ที่ 5",
                                         textInputType: TextInputType.text,
-                                        isChecked: isContactFive ,
+                                        isChecked: isChecked1,
                                         isCheckedSetState: (bool? value) {
                                           setState(() {
-                                            isContactFive  = value ?? false;
+                                            isChecked1 = value ?? false;
                                           });
                                         },
                                       ),
@@ -1274,10 +1189,10 @@ class _ContentDesignResumeState extends State<ContentDesignResume> with Progress
                                             checkColor: Theme.of(context).primaryColor,
                                             fillColor: MaterialStateProperty.resolveWith(
                                                 getColor),
-                                            value: isExperienceTitle ,
+                                            value: isChecked1,
                                             onChanged: (bool? value) {
                                               setState(() {
-                                                isExperienceTitle  = value ?? false;
+                                                isChecked1 = value ?? false;
                                               });
                                             },
                                           ),
@@ -1293,10 +1208,10 @@ class _ContentDesignResumeState extends State<ContentDesignResume> with Progress
                                         },
                                         hintLabel: "ประสบการณ์การทำงานที่ 1",
                                         textInputType: TextInputType.text,
-                                        isChecked: isExperienceOne ,
+                                        isChecked: isChecked1,
                                         isCheckedSetState: (bool? value) {
                                           setState(() {
-                                            isExperienceOne  = value ?? false;
+                                            isChecked1 = value ?? false;
                                           });
                                         },
                                       ),
@@ -1310,10 +1225,10 @@ class _ContentDesignResumeState extends State<ContentDesignResume> with Progress
                                         },
                                         hintLabel: "ประสบการณ์การทำงาน ที่ 2",
                                         textInputType: TextInputType.text,
-                                        isChecked: isExperienceTwo ,
+                                        isChecked: isChecked1,
                                         isCheckedSetState: (bool? value) {
                                           setState(() {
-                                            isExperienceTwo  = value ?? false;
+                                            isChecked1 = value ?? false;
                                           });
                                         },
                                       ),
@@ -1327,10 +1242,10 @@ class _ContentDesignResumeState extends State<ContentDesignResume> with Progress
                                         },
                                         hintLabel: "ประสบการณ์การทำงาน ที่3 ",
                                         textInputType: TextInputType.text,
-                                        isChecked: isExperienceThree ,
+                                        isChecked: isChecked1,
                                         isCheckedSetState: (bool? value) {
                                           setState(() {
-                                            isExperienceThree  = value ?? false;
+                                            isChecked1 = value ?? false;
                                           });
                                         },
                                       ),
@@ -1413,10 +1328,10 @@ class _ContentDesignResumeState extends State<ContentDesignResume> with Progress
                                             checkColor: Theme.of(context).primaryColor,
                                             fillColor: MaterialStateProperty.resolveWith(
                                                 getColor),
-                                            value: isCertTitle ,
+                                            value: isChecked3,
                                             onChanged: (bool? value) {
                                               setState(() {
-                                                isCertTitle  = value ?? false;
+                                                isChecked3 = value ?? false;
                                               });
                                             },
                                           ),
@@ -1432,10 +1347,10 @@ class _ContentDesignResumeState extends State<ContentDesignResume> with Progress
                                         },
                                         hintLabel: "ใบรับรองที่ได้รับ 1",
                                         textInputType: TextInputType.text,
-                                        isChecked: isCertOne ,
+                                        isChecked: isChecked1,
                                         isCheckedSetState: (bool? value) {
                                           setState(() {
-                                            isCertOne  = value ?? false;
+                                            isChecked1 = value ?? false;
                                           });
                                         },
                                       ),
@@ -1449,10 +1364,10 @@ class _ContentDesignResumeState extends State<ContentDesignResume> with Progress
                                         },
                                         hintLabel: "ใบรับรองที่ได้รับ 2 ",
                                         textInputType: TextInputType.text,
-                                        isChecked: isCertTwo,
+                                        isChecked: isChecked1,
                                         isCheckedSetState: (bool? value) {
                                           setState(() {
-                                            isCertTwo=  value ?? false;
+                                            isChecked1 = value ?? false;
                                           });
                                         },
                                       ),
@@ -1466,10 +1381,10 @@ class _ContentDesignResumeState extends State<ContentDesignResume> with Progress
                                         },
                                         hintLabel: "ใบรับรองที่ได้รับ 3 ",
                                         textInputType: TextInputType.text,
-                                        isChecked: isCertThree ,
+                                        isChecked: isChecked1,
                                         isCheckedSetState: (bool? value) {
                                           setState(() {
-                                            isCertThree  = value ?? false;
+                                            isChecked1 = value ?? false;
                                           });
                                         },
                                       ),
@@ -1551,10 +1466,10 @@ class _ContentDesignResumeState extends State<ContentDesignResume> with Progress
                                             checkColor: Theme.of(context).primaryColor,
                                             fillColor: MaterialStateProperty.resolveWith(
                                                 getColor),
-                                            value: isSkillsTitle ,
+                                            value: isChecked4,
                                             onChanged: (bool? value) {
                                               setState(() {
-                                                isSkillsTitle  = value ?? false;
+                                                isChecked4 = value ?? false;
                                               });
                                             },
                                           ),
@@ -1570,10 +1485,10 @@ class _ContentDesignResumeState extends State<ContentDesignResume> with Progress
                                         },
                                         hintLabel: "ทักษะที่ 1 ",
                                         textInputType: TextInputType.text,
-                                        isChecked: isSkillsOne ,
+                                        isChecked: isChecked1,
                                         isCheckedSetState: (bool? value) {
                                           setState(() {
-                                            isSkillsOne  = value ?? false;
+                                            isChecked1 = value ?? false;
                                           });
                                         },
                                       ),
@@ -1587,10 +1502,10 @@ class _ContentDesignResumeState extends State<ContentDesignResume> with Progress
                                         },
                                         hintLabel: "ทักษะที่ 2 ",
                                         textInputType: TextInputType.text,
-                                        isChecked: isSkillsTwo ,
+                                        isChecked: isChecked1,
                                         isCheckedSetState: (bool? value) {
                                           setState(() {
-                                            isSkillsTwo  = value ?? false;
+                                            isChecked1 = value ?? false;
                                           });
                                         },
                                       ),
@@ -1604,10 +1519,10 @@ class _ContentDesignResumeState extends State<ContentDesignResume> with Progress
                                         },
                                         hintLabel: "ทักษะที่ 3 ",
                                         textInputType: TextInputType.text,
-                                        isChecked: isSkillsThree ,
+                                        isChecked: isChecked1,
                                         isCheckedSetState: (bool? value) {
                                           setState(() {
-                                            isSkillsThree  = value ?? false;
+                                            isChecked1 = value ?? false;
                                           });
                                         },
                                       ),
@@ -1722,9 +1637,7 @@ class _ContentDesignResumeState extends State<ContentDesignResume> with Progress
                   colorOfPdfUsSkills: colorOfPdfUsSkills,
                   colorOfPdfUsAbout: colorOfPdfUsAbout,
                   colorOfPdfUsText: colorOfPdfUsText,
-                  colorOfPdfUsTheme: colorOfPdfUsTheme,
-                  widthSizeCM:widthSizeCM,
-                  heightSizeCM:heightSizeCM,),
+                  colorOfPdfUsTheme: colorOfPdfUsTheme,),
                 floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerFloat,
               ));
@@ -1794,9 +1707,7 @@ floatingLineOffice(
       required PdfColor colorOfPdfUsCertifications,
       required PdfColor colorOfPdfUsSkills,
       required PdfColor colorOfPdfUsAbout,
-      required PdfColor colorOfPdfUsText,
-      required double widthSizeCM,
-      required double heightSizeCM,
+      required PdfColor colorOfPdfUsText
     }) {
   return FloatingActionButton.extended(
     backgroundColor:
@@ -1806,20 +1717,18 @@ floatingLineOffice(
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => MyAppResume(
-                colorOfPdfUsButtonTitle: colorOfPdfUsButtonTitle,
-                colorOfPdfUsName: colorOfPdfUsName,
-                colorOfPdfUsPosition: colorOfPdfUsPosition,
-                colorOfPdfUsExperience: colorOfPdfUsExperience,
-                colorOfPdfUsEducations: colorOfPdfUsEducations,
-                colorOfPdfUsContact: colorOfPdfUsContact,
-                colorOfPdfUsCertifications: colorOfPdfUsCertifications,
-                colorOfPdfUsSkills: colorOfPdfUsSkills,
-                colorOfPdfUsAbout: colorOfPdfUsAbout,
-                colorOfPdfUsText: colorOfPdfUsText,
-                colorOfPdfUsTheme: colorOfPdfUsTheme,
-                  widthSizeCM:widthSizeCM,
-                  heightSizeCM:heightSizeCM,
+              builder: (context) => ContentDesignResumeEditScreen(
+                // colorOfPdfUsButtonTitle: colorOfPdfUsButtonTitle,
+                // colorOfPdfUsName: colorOfPdfUsName,
+                // colorOfPdfUsPosition: colorOfPdfUsPosition,
+                // colorOfPdfUsExperience: colorOfPdfUsExperience,
+                // colorOfPdfUsEducations: colorOfPdfUsEducations,
+                // colorOfPdfUsContact: colorOfPdfUsContact,
+                // colorOfPdfUsCertifications: colorOfPdfUsCertifications,
+                // colorOfPdfUsSkills: colorOfPdfUsSkills,
+                // colorOfPdfUsAbout: colorOfPdfUsAbout,
+                // colorOfPdfUsText: colorOfPdfUsText,
+                // colorOfPdfUsTheme: colorOfPdfUsTheme,
 
 
               )));
