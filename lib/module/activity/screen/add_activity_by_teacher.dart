@@ -39,6 +39,7 @@ class AddActivityByTeacherPage extends StatefulWidget {
 class _AddActivityByTeacherPageState extends State<AddActivityByTeacherPage> with ProgressDialog {
   TextEditingController activityNameByTeacher = TextEditingController();
   TextEditingController objectives = TextEditingController();
+  TextEditingController venue = TextEditingController();
   TextEditingController sDate = TextEditingController();
   TextEditingController fDate = TextEditingController();
   AddEditDeleteActivityByTeacherScreen? _addEditDeleteActivityByTeacherScreenApi;
@@ -101,6 +102,7 @@ class _AddActivityByTeacherPageState extends State<AddActivityByTeacherPage> wit
             _addEditDeleteActivityByTeacherScreenApi,
             activityNameByTeacher,
             objectives,
+            venue,
             sDate,
             fDate,
 
@@ -129,6 +131,7 @@ buildAddActivityByTeacherBody(
     AddEditDeleteActivityByTeacherScreen? addEditDeleteActivityScreenByTeacherApi,
   TextEditingController activityNameByTeacher,
   TextEditingController objectives,
+  TextEditingController venue,
   TextEditingController sDate,
   TextEditingController fDate,
 ) {
@@ -195,6 +198,20 @@ buildAddActivityByTeacherBody(
               // iconsFile : Icons.person_rounded,
               iconsFile: FontAwesomeIcons.bullseye,
             ),
+            BuildTextformfieldUnlimitCustom(
+              textEditingController: venue,
+              onChanged: (value) {
+                objectives.text = value;
+                if (kDebugMode) {
+                  print(venue.text);
+                }
+              },
+              hintLabel: addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.textvenue ??
+                  activityEdtActName,
+              textInputType: TextInputType.text,
+              // iconsFile : Icons.person_rounded,
+              iconsFile: FontAwesomeIcons.locationDot,
+            ),
             CustomDatePickerForTeacher(
               textOnTopOfDatePicker: addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.textstartdate??activityEdtStartDate,
               hintLabel: addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.textstartdate ??
@@ -248,6 +265,8 @@ buildAddActivityByTeacherBody(
                         id: 0,
                         activityNameByTeacher: activityNameByTeacher.text,
                         objectives: objectives.text,
+                        // venue: venue.text,
+                        venue: (venue.text.isEmpty)?"-":venue.text,
                         sDate: sDate.text,
                         fDate: fDate.text,
                         isDelete: "false",
@@ -268,6 +287,7 @@ buildAddActivityByTeacherBody(
                   print("------------------ข้อมูล------------------");
                   print(activityNameByTeacher.text);
                   print(objectives.text);
+                  print(venue.text);
                   print(sDate.text);
                   print(fDate.text);
                   print("------------------ข้อมูล------------------");

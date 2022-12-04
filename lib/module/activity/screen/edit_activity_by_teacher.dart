@@ -40,6 +40,7 @@ class EditActivityByTeacherPage extends StatefulWidget {
 class _EditActivityByTeacherPageState extends State<EditActivityByTeacherPage> with ProgressDialog {
   TextEditingController activityNameByTeacher = TextEditingController();
   TextEditingController objectives = TextEditingController();
+  TextEditingController venue = TextEditingController();
   TextEditingController sDate = TextEditingController();
   TextEditingController fDate = TextEditingController();
   AddEditDeleteActivityByTeacherScreen? _addEditDeleteActivityByTeacherScreenApi;
@@ -47,6 +48,7 @@ class _EditActivityByTeacherPageState extends State<EditActivityByTeacherPage> w
   void initState() {
     activityNameByTeacher.text = widget.data.activitynameresponse;
     objectives.text = widget.data.objectivesresponse;
+    venue.text = widget.data.venueresponse;
     sDate.text = widget.data.startdatebyteacherresponse;
     fDate.text = widget.data.finishdatebyteacherresponse;
     super.initState();
@@ -98,6 +100,7 @@ class _EditActivityByTeacherPageState extends State<EditActivityByTeacherPage> w
           int activityNameIdValue = widget.data.activitynameidresponse;
           String activityNameValue = "${widget.data.activitynameresponse}";
           String objectivesValue = "${widget.data.objectivesresponse}";
+          String venueValue = "${widget.data.venueresponse}";
           String sDateValue= "${widget.data.startdatebyteacherresponse}";
           String fDateValue = "${widget.data.finishdatebyteacherresponse}";
           return buildEditActivityByTeacherBody(
@@ -105,11 +108,13 @@ class _EditActivityByTeacherPageState extends State<EditActivityByTeacherPage> w
             _addEditDeleteActivityByTeacherScreenApi,
             activityNameByTeacher,
             objectives,
+              venue,
             sDate,
             fDate,
               activityNameIdValue,
               activityNameValue,
               objectivesValue,
+              venueValue,
               sDateValue,
               fDateValue
 
@@ -138,11 +143,13 @@ buildEditActivityByTeacherBody(
     AddEditDeleteActivityByTeacherScreen? addEditDeleteActivityScreenByTeacherApi,
   TextEditingController activityNameByTeacher,
   TextEditingController objectives,
+  TextEditingController venue,
   TextEditingController sDate,
   TextEditingController fDate,
     int activityNameIdValue,
     String activityNameValue,
     String objectivesValue,
+    String venueValue,
     String sDateValue,
     String fDateValue
 ) {
@@ -215,7 +222,23 @@ buildEditActivityByTeacherBody(
                       // iconsFile : Icons.person_rounded,
                       iconsFile: FontAwesomeIcons.bullseye,
                     ),
+                    BuildTextformfieldUnlimitCustom(
+                      initialvalue: venueValue,
+                      textEditingController: venue,
+                      onChanged: (value) {
+                      venue.text = value;
+                        if (kDebugMode) {
+                          print(objectives.text);
+                        }
+                      },
+                      hintLabel: addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.textvenue ??
+                          activityEdtActName,
+                      textInputType: TextInputType.text,
+                      // iconsFile : Icons.person_rounded,
+                      iconsFile: FontAwesomeIcons.locationDot,
+                    ),
                     customDatePickerForEdit(
+                      textOnTopOfDatePicker: addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.textstartdate??activityEdtStartDate,
                       hintLabel: addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.textstartdate??activityEdtStartDate,
                       dateValue: sDateValue,
                       callbackFromCustomDatePickerForEdit: (String result) {
@@ -226,6 +249,7 @@ buildEditActivityByTeacherBody(
                       },
                     ),
                     customDatePickerForEdit(
+                      textOnTopOfDatePicker: addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.textfinishdate??activityEdtFinishDate,
                       hintLabel: addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.textfinishdate??activityEdtFinishDate,
                       dateValue: fDateValue,
                       callbackFromCustomDatePickerForEdit: (String result) {
@@ -278,6 +302,7 @@ buildEditActivityByTeacherBody(
                             id: activityNameIdValue,
                             activityNameByTeacher: activityNameByTeacher.text,
                             objectives: objectives.text,
+                            venue: (venue.text.isEmpty)?"-":venue.text,
                             sDate: sDate.text,
                             fDate: fDate.text,
                             isDelete: "false"
@@ -332,6 +357,7 @@ buildEditActivityByTeacherBody(
                                             id: activityNameIdValue,
                                             activityNameByTeacher: activityNameByTeacher.text,
                                             objectives: objectives.text,
+                                            venue: venue.text,
                                             sDate: sDate.text,
                                             fDate: fDate.text,
                                             isDelete: "true"

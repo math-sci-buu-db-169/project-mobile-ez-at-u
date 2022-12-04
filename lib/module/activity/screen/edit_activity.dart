@@ -275,6 +275,7 @@ buildEditActivityBody(
             ),
 
             customDatePickerForEdit(
+              textOnTopOfDatePicker: addActivityScreenApi?.body?.screeninfo?.edtstartdate??activityEdtStartDate,
               hintLabel: addActivityScreenApi?.body?.screeninfo?.edtstartdate??activityEdtStartDate,
               dateValue: sDateValue,
               callbackFromCustomDatePickerForEdit: (String result) {
@@ -285,6 +286,7 @@ buildEditActivityBody(
               },
             ),
             customDatePickerForEdit(
+              textOnTopOfDatePicker: addActivityScreenApi?.body?.screeninfo?.edtfinishdate??activityEdtFinishDate,
               hintLabel: addActivityScreenApi?.body?.screeninfo?.edtfinishdate??activityEdtFinishDate,
               dateValue: fDateValue,
               callbackFromCustomDatePickerForEdit: (String result) {

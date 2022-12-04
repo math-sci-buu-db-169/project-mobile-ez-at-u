@@ -318,6 +318,7 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
             id : event.id,
             activityNameByTeacher: event.activityNameByTeacher,
             objectives: event.objectives,
+            venue: event.venue,
             sDate: event.sDate,
             fDate: event.fDate,
           isDelete: event.isDelete,

@@ -1,6 +1,6 @@
 import 'dart:convert';
 /// head : {"status":200,"message":"success","modulename":"activity","timeexpire":false}
-/// body : {"screeninfo":{"titlelistactivityname":"รายชื่อกิจกรรม"},"activitynamelistteacher":[{"activitynameidresponse":7,"activitynameresponse":"ทดลองเพิ่มกิจกรรมโดยอาจารย์ 7","objectivesresponse":"วัตถุประสงค์ที่ 1 เพื่อ... วัตถุประสงค์ที่ 2 เพื่อ... วัตถุประสงค์ที่ 3 เพื่อ...","startdatebyteacherresponse":"29/11/2022","finishdatebyteacherresponse":"29/11/2022"},{"activitynameidresponse":8,"activitynameresponse":"ทดสอบจาก swagger1","objectivesresponse":"1111","startdatebyteacherresponse":"11/11/2011","finishdatebyteacherresponse":"12/12/2012"},{"activitynameidresponse":9,"activitynameresponse":"ทดสอบจาก post man1","objectivesresponse":"1111","startdatebyteacherresponse":"11/11/2011","finishdatebyteacherresponse":"12/12/2012"},{"activitynameidresponse":10,"activitynameresponse":"ทดสอบจากแอป 1 แก้ไขครั้งที่1","objectivesresponse":"1\n2\n3\n4\n5\nแก้ไขครั้งที่1","startdatebyteacherresponse":"29/11/2022","finishdatebyteacherresponse":"1/12/2022"},{"activitynameidresponse":11,"activitynameresponse":"ทดสอบแอป2","objectivesresponse":"ฟฟฟ\nดดด","startdatebyteacherresponse":"1/12/2022","finishdatebyteacherresponse":"1/12/2022"},{"activitynameidresponse":12,"activitynameresponse":"ทดดดดดดดดสอบบบบบบบจากกกกกกแอปปปปปปปปปปป 3","objectivesresponse":"1 ออออออออออออออออออออออออออออออออออ\n2 ดดดดดดดดดดดดดดดดดดดดดดดดดดดดดดดดด","startdatebyteacherresponse":"1/12/2022","finishdatebyteacherresponse":"1/12/2022"},{"activitynameidresponse":14,"activitynameresponse":"ทด\nสอบ\nจาก\nแอป\nครั้ง\nที่\n4","objectivesresponse":"1234","startdatebyteacherresponse":"1/12/2022","finishdatebyteacherresponse":"1/12/2022"}]}
+/// body : {"screeninfo":{"titlelistactivityname":"รายชื่อกิจกรรม"},"activitynamelistteacher":[{"activitynameidresponse":5,"activitynameresponse":"Test add by swagger 2 edit","objectivesresponse":"1.to test add \n 2.to test edit","venueresponse":"Tonsai home","startdatebyteacherresponse":"11/12/2022","finishdatebyteacherresponse":"11/12/2022"},{"activitynameidresponse":4,"activitynameresponse":"Test add by swagger 1","objectivesresponse":"1.to test","venueresponse":"Tonsai home","startdatebyteacherresponse":"11/12/2022","finishdatebyteacherresponse":"11/12/2022"},{"activitynameidresponse":3,"activitynameresponse":"TEST3","objectivesresponse":"0000","venueresponse":"CCC","startdatebyteacherresponse":"12/12/2012","finishdatebyteacherresponse":"12/12/2012"},{"activitynameidresponse":2,"activitynameresponse":"TEST2","objectivesresponse":"67890","venueresponse":"BBB","startdatebyteacherresponse":"11/11/2011","finishdatebyteacherresponse":"11/11/2011"},{"activitynameidresponse":1,"activitynameresponse":"TEST1","objectivesresponse":"12345","venueresponse":"AAA","startdatebyteacherresponse":"10/10/2010","finishdatebyteacherresponse":"10/10/2010"}]}
 
 ActivityNameListByTeacher activityNameListByTeacherFromJson(String str) => ActivityNameListByTeacher.fromJson(json.decode(str));
 String activityNameListByTeacherToJson(ActivityNameListByTeacher data) => json.encode(data.toJson());
@@ -40,7 +40,7 @@ ActivityNameListByTeacher copyWith({  Head? head,
 }
 
 /// screeninfo : {"titlelistactivityname":"รายชื่อกิจกรรม"}
-/// activitynamelistteacher : [{"activitynameidresponse":7,"activitynameresponse":"ทดลองเพิ่มกิจกรรมโดยอาจารย์ 7","objectivesresponse":"วัตถุประสงค์ที่ 1 เพื่อ... วัตถุประสงค์ที่ 2 เพื่อ... วัตถุประสงค์ที่ 3 เพื่อ...","startdatebyteacherresponse":"29/11/2022","finishdatebyteacherresponse":"29/11/2022"},{"activitynameidresponse":8,"activitynameresponse":"ทดสอบจาก swagger1","objectivesresponse":"1111","startdatebyteacherresponse":"11/11/2011","finishdatebyteacherresponse":"12/12/2012"},{"activitynameidresponse":9,"activitynameresponse":"ทดสอบจาก post man1","objectivesresponse":"1111","startdatebyteacherresponse":"11/11/2011","finishdatebyteacherresponse":"12/12/2012"},{"activitynameidresponse":10,"activitynameresponse":"ทดสอบจากแอป 1 แก้ไขครั้งที่1","objectivesresponse":"1\n2\n3\n4\n5\nแก้ไขครั้งที่1","startdatebyteacherresponse":"29/11/2022","finishdatebyteacherresponse":"1/12/2022"},{"activitynameidresponse":11,"activitynameresponse":"ทดสอบแอป2","objectivesresponse":"ฟฟฟ\nดดด","startdatebyteacherresponse":"1/12/2022","finishdatebyteacherresponse":"1/12/2022"},{"activitynameidresponse":12,"activitynameresponse":"ทดดดดดดดดสอบบบบบบบจากกกกกกแอปปปปปปปปปปป 3","objectivesresponse":"1 ออออออออออออออออออออออออออออออออออ\n2 ดดดดดดดดดดดดดดดดดดดดดดดดดดดดดดดดด","startdatebyteacherresponse":"1/12/2022","finishdatebyteacherresponse":"1/12/2022"},{"activitynameidresponse":14,"activitynameresponse":"ทด\nสอบ\nจาก\nแอป\nครั้ง\nที่\n4","objectivesresponse":"1234","startdatebyteacherresponse":"1/12/2022","finishdatebyteacherresponse":"1/12/2022"}]
+/// activitynamelistteacher : [{"activitynameidresponse":5,"activitynameresponse":"Test add by swagger 2 edit","objectivesresponse":"1.to test add \n 2.to test edit","venueresponse":"Tonsai home","startdatebyteacherresponse":"11/12/2022","finishdatebyteacherresponse":"11/12/2022"},{"activitynameidresponse":4,"activitynameresponse":"Test add by swagger 1","objectivesresponse":"1.to test","venueresponse":"Tonsai home","startdatebyteacherresponse":"11/12/2022","finishdatebyteacherresponse":"11/12/2022"},{"activitynameidresponse":3,"activitynameresponse":"TEST3","objectivesresponse":"0000","venueresponse":"CCC","startdatebyteacherresponse":"12/12/2012","finishdatebyteacherresponse":"12/12/2012"},{"activitynameidresponse":2,"activitynameresponse":"TEST2","objectivesresponse":"67890","venueresponse":"BBB","startdatebyteacherresponse":"11/11/2011","finishdatebyteacherresponse":"11/11/2011"},{"activitynameidresponse":1,"activitynameresponse":"TEST1","objectivesresponse":"12345","venueresponse":"AAA","startdatebyteacherresponse":"10/10/2010","finishdatebyteacherresponse":"10/10/2010"}]
 
 Body bodyFromJson(String str) => Body.fromJson(json.decode(str));
 String bodyToJson(Body data) => json.encode(data.toJson());
@@ -84,11 +84,12 @@ Body copyWith({  Screeninfo? screeninfo,
 
 }
 
-/// activitynameidresponse : 7
-/// activitynameresponse : "ทดลองเพิ่มกิจกรรมโดยอาจารย์ 7"
-/// objectivesresponse : "วัตถุประสงค์ที่ 1 เพื่อ... วัตถุประสงค์ที่ 2 เพื่อ... วัตถุประสงค์ที่ 3 เพื่อ..."
-/// startdatebyteacherresponse : "29/11/2022"
-/// finishdatebyteacherresponse : "29/11/2022"
+/// activitynameidresponse : 5
+/// activitynameresponse : "Test add by swagger 2 edit"
+/// objectivesresponse : "1.to test add \n 2.to test edit"
+/// venueresponse : "Tonsai home"
+/// startdatebyteacherresponse : "11/12/2022"
+/// finishdatebyteacherresponse : "11/12/2022"
 
 Activitynamelistteacher activitynamelistteacherFromJson(String str) => Activitynamelistteacher.fromJson(json.decode(str));
 String activitynamelistteacherToJson(Activitynamelistteacher data) => json.encode(data.toJson());
@@ -97,11 +98,13 @@ class Activitynamelistteacher {
       num? activitynameidresponse, 
       String? activitynameresponse, 
       String? objectivesresponse, 
+      String? venueresponse, 
       String? startdatebyteacherresponse, 
       String? finishdatebyteacherresponse,}){
     _activitynameidresponse = activitynameidresponse;
     _activitynameresponse = activitynameresponse;
     _objectivesresponse = objectivesresponse;
+    _venueresponse = venueresponse;
     _startdatebyteacherresponse = startdatebyteacherresponse;
     _finishdatebyteacherresponse = finishdatebyteacherresponse;
 }
@@ -110,28 +113,33 @@ class Activitynamelistteacher {
     _activitynameidresponse = json['activitynameidresponse'];
     _activitynameresponse = json['activitynameresponse'];
     _objectivesresponse = json['objectivesresponse'];
+    _venueresponse = json['venueresponse'];
     _startdatebyteacherresponse = json['startdatebyteacherresponse'];
     _finishdatebyteacherresponse = json['finishdatebyteacherresponse'];
   }
   num? _activitynameidresponse;
   String? _activitynameresponse;
   String? _objectivesresponse;
+  String? _venueresponse;
   String? _startdatebyteacherresponse;
   String? _finishdatebyteacherresponse;
 Activitynamelistteacher copyWith({  num? activitynameidresponse,
   String? activitynameresponse,
   String? objectivesresponse,
+  String? venueresponse,
   String? startdatebyteacherresponse,
   String? finishdatebyteacherresponse,
 }) => Activitynamelistteacher(  activitynameidresponse: activitynameidresponse ?? _activitynameidresponse,
   activitynameresponse: activitynameresponse ?? _activitynameresponse,
   objectivesresponse: objectivesresponse ?? _objectivesresponse,
+  venueresponse: venueresponse ?? _venueresponse,
   startdatebyteacherresponse: startdatebyteacherresponse ?? _startdatebyteacherresponse,
   finishdatebyteacherresponse: finishdatebyteacherresponse ?? _finishdatebyteacherresponse,
 );
   num? get activitynameidresponse => _activitynameidresponse;
   String? get activitynameresponse => _activitynameresponse;
   String? get objectivesresponse => _objectivesresponse;
+  String? get venueresponse => _venueresponse;
   String? get startdatebyteacherresponse => _startdatebyteacherresponse;
   String? get finishdatebyteacherresponse => _finishdatebyteacherresponse;
 
@@ -140,6 +148,7 @@ Activitynamelistteacher copyWith({  num? activitynameidresponse,
     map['activitynameidresponse'] = _activitynameidresponse;
     map['activitynameresponse'] = _activitynameresponse;
     map['objectivesresponse'] = _objectivesresponse;
+    map['venueresponse'] = _venueresponse;
     map['startdatebyteacherresponse'] = _startdatebyteacherresponse;
     map['finishdatebyteacherresponse'] = _finishdatebyteacherresponse;
     return map;

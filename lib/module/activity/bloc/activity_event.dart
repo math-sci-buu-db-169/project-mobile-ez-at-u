@@ -83,6 +83,7 @@ class SubmitAddEditDeleteActivityByTeacherEvent extends ActivityEvent {
   int id;
   String activityNameByTeacher;
   String objectives;
+  String venue;
   String sDate;
   String fDate;
   String isDelete;
@@ -90,6 +91,7 @@ class SubmitAddEditDeleteActivityByTeacherEvent extends ActivityEvent {
     required this.id,
     required this.activityNameByTeacher,
     required this.objectives,
+    required this.venue,
     required this.sDate,
     required this.fDate,
     required this.isDelete,

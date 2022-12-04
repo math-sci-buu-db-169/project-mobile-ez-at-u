@@ -110,6 +110,7 @@ class ActivityRepository  {
       required int id,
     required String activityNameByTeacher,
     required String objectives,
+    required String venue,
     required String sDate,
     required String fDate,
     required String isDelete,
@@ -118,6 +119,8 @@ class ActivityRepository  {
     print(id);
     print(activityNameByTeacher);
     print(objectives);
+    print(venue);
+    print(venue);
     print(sDate);
     print(fDate);
     print("มาถึง API มั้ย");
@@ -126,6 +129,7 @@ class ActivityRepository  {
           "activitynameid": id,
           "activityname": activityNameByTeacher,
           "objectives": objectives,
+          "venue": venue,
           "startdatebyteacher": sDate,
           "finishdatebyteacher": fDate,
           "isdelete": isDelete
