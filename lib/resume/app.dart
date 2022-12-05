@@ -31,6 +31,7 @@ import '../check_token/token_bloc.dart';
 import '../customs/color/pdf_color_const.dart';
 import 'data.dart';
 import 'examples.dart';
+import 'model/response/pre_view_resume_response.dart';
 
 class MyAppResume extends StatefulWidget {
 
@@ -47,7 +48,8 @@ class MyAppResume extends StatefulWidget {
   final PdfColor colorOfPdfUsText;
   final double widthSizeCM;
   final double heightSizeCM;
-  const MyAppResume({Key? key,  required this.colorOfPdfUsTheme, required this.colorOfPdfUsButtonTitle, required this.colorOfPdfUsName, required this.colorOfPdfUsPosition, required this.colorOfPdfUsExperience, required this.colorOfPdfUsEducations, required this.colorOfPdfUsContact, required this.colorOfPdfUsCertifications, required this.colorOfPdfUsSkills, required this.colorOfPdfUsAbout, required this.colorOfPdfUsText, required this.widthSizeCM, required this.heightSizeCM}) : super(key: key);
+  final PreViewResumeResponse isPreViewResumeResponse;
+  const MyAppResume({Key? key,  required this.colorOfPdfUsTheme, required this.colorOfPdfUsButtonTitle, required this.colorOfPdfUsName, required this.colorOfPdfUsPosition, required this.colorOfPdfUsExperience, required this.colorOfPdfUsEducations, required this.colorOfPdfUsContact, required this.colorOfPdfUsCertifications, required this.colorOfPdfUsSkills, required this.colorOfPdfUsAbout, required this.colorOfPdfUsText, required this.widthSizeCM, required this.heightSizeCM, required this.isPreViewResumeResponse}) : super(key: key);
 
   @override
   MyAppResumeState createState() {
@@ -195,7 +197,8 @@ class MyAppResumeState extends State<MyAppResume> with SingleTickerProviderState
             widget. colorOfPdfUsAbout,
             widget.colorOfPdfUsText,
         widget.widthSizeCM,
-        widget.heightSizeCM),
+        widget.heightSizeCM,
+          isPreViewResumeResponse:widget.isPreViewResumeResponse,),
         actions: actions,
         onPrinted: _showPrintedToast,
         onShared: _showSharedToast,

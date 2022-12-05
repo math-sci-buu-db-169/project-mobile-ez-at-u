@@ -58,7 +58,7 @@ class BuildTextformfieldUnlimitCustom extends StatelessWidget {
 
 class BuildTextFormFieldUnLimitCustomNotIconsReadOnly extends StatelessWidget {
   final TextEditingController? textEditingController;
-  final String hintLabel;
+  final String? hintLabel;
   final TextInputType textInputType;
   final ValueChanged<String>? onChanged;
   final String? initialvalue;
@@ -74,13 +74,12 @@ class BuildTextFormFieldUnLimitCustomNotIconsReadOnly extends StatelessWidget {
       // padding: EdgeInsets.all(12),
 
         margin: const EdgeInsets.all(5),
-        // decoration: BoxDecoration(color: Colors.red[50], borderRadius: BorderRadius.circular(16)),
         child: TextFormField(
 
           readOnly: true,
           textInputAction: TextInputAction.newline,
           cursorColor: appBarforegroundColor,
-          style: TextStyle(fontSize: sizeText18, color: appBarforegroundColor // height: 2.0,
+          style: TextStyle(fontSize: 12, color: appBarforegroundColor,  // height: 2.0,
           ),
           keyboardType: TextInputType.multiline,
           maxLines: null,
@@ -144,7 +143,7 @@ class BuildTextFormFieldNotlimitCustomCheckboxReadOnly extends StatelessWidget {
           readOnly: true,
           textInputAction: TextInputAction.newline,
           cursorColor: appBarforegroundColor,
-          style: TextStyle(fontSize: sizeText18, color: appBarforegroundColor // height: 2.0,
+          style: TextStyle(fontSize: 12, color: appBarforegroundColor, // height: 2.0,
           ),
           keyboardType: TextInputType.multiline,
           maxLines: null,

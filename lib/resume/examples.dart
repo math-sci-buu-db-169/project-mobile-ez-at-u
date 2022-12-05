@@ -5,6 +5,7 @@ import 'package:pdf/pdf.dart';
 
 import 'data.dart';
 import 'examples/resume.dart';
+import 'model/response/pre_view_resume_response.dart';
 
 const examples = <Example>[
   Example('RESUME', 'resume.dart', generateResume),
@@ -30,7 +31,8 @@ typedef LayoutCallbackWithData = Future<Uint8List> Function(
     PdfColor colorOfPdfUsAbout,
     PdfColor colorOfPdfUsText,
     double widthSizeCM,
-    double heightSizeCM);
+    double heightSizeCM,
+    {required PreViewResumeResponse isPreViewResumeResponse});
 
 class Example {
   const Example(this.name, this.file, this.builder, [this.needsData = false]);
