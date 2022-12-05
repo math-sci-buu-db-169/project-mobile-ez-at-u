@@ -58,6 +58,10 @@ setUserLanguage(String userLanguage) async {
   prefs = await SharedPreferences.getInstance();
   await prefs.setString('userLanguage', userLanguage);
 }
+setUserLanguageResume(String userLanguageResume) async {
+  prefs = await SharedPreferences.getInstance();
+  await prefs.setString('userLanguageResume', userLanguageResume);
+}
 
 setMyNameUser(String myNameUser) async {
   prefs = await SharedPreferences.getInstance();

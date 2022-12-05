@@ -30,6 +30,7 @@ import '../../check_token/token_bloc.dart';
 import '../../customs/color/pdf_color_const.dart';
 import '../../customs/message/text_demo_resume.dart';
 import '../data.dart';
+import '../model/response/pre_view_resume_response.dart';
 
 const sep = 150.0;
 
@@ -48,7 +49,8 @@ Future<Uint8List> generateResume(
     PdfColor colorOfPdfUsAbout,
     PdfColor colorOfPdfUsText,
     double widthSizeCM,
-    double heightSizeCM
+    double heightSizeCM,
+    {required PreViewResumeResponse isPreViewResumeResponse}
 
 
 
@@ -60,8 +62,52 @@ Future<Uint8List> generateResume(
   final profileImage = pw.MemoryImage(
     (await rootBundle.load(isProfileImage)).buffer.asUint8List(),
   );
-
+  final emoji = await PdfGoogleFonts.notoColorEmoji();
+  // final Uint8List fontData = File('open-sans.ttf').readAsBytesSync();
+  // final ttf = pw.Font.ttf(fontData.buffer.asByteData());
   final pageTheme = await _myPageTheme(format, colorOfPdfUsTheme);
+ String isName = isPreViewResumeResponse.body?.data?.userinfo?.name ?? '';
+ String isLastName = isPreViewResumeResponse.body?.data?.userinfo?.lastname?? '';
+ String isAboutMe = isPreViewResumeResponse.body?.screenInfo?.aboutme ?? '';
+ String isAboutMeValue = isPreViewResumeResponse.body?.data?.aboutme ?? '';
+ String isBachelor = isPreViewResumeResponse.body?.data?.education?[1].placeofstudy  ?? '';
+ String isBachelorValue = isPreViewResumeResponse.body?.data?.education?[1].detail ?? '';
+ String isBachelorValueDate = '${isPreViewResumeResponse.body?.data?.education?[1].startdate??''} - ${isPreViewResumeResponse.body?.data?.education?[1].enddate??''}';
+ String isHighSchool = isPreViewResumeResponse.body?.data?.education?[0].placeofstudy  ?? '';
+ String isHighSchoolValue =isPreViewResumeResponse.body?.data?.education?[0].detail ?? '';
+ String isHighSchoolValueDate = '${isPreViewResumeResponse.body?.data?.education?[0].startdate??''} - ${isPreViewResumeResponse.body?.data?.education?[0].enddate??''}';
+ String isFacebook = isPreViewResumeResponse.body?.screenInfo?.feacbook ?? '';
+ String isFacebookValue = isPreViewResumeResponse.body?.data?.personinfo?.feacbook ?? '';
+ String isLine = isPreViewResumeResponse.body?.screenInfo?.line ?? '';
+ String isLineValue =  isPreViewResumeResponse.body?.data?.personinfo?.line ?? '';
+ String isIG = isPreViewResumeResponse.body?.screenInfo?.instagram ?? '';
+ String isIGValue =  isPreViewResumeResponse.body?.data?.personinfo?.instagram?? '';
+ String isEmail = isPreViewResumeResponse.body?.screenInfo?.email ?? '';
+ String isEmailVAlue =  isPreViewResumeResponse.body?.data?.personinfo?.email?? '';
+ String isAddress = isPreViewResumeResponse.body?.screenInfo?.address ?? '';
+ String isAddressValue =  "${isPreViewResumeResponse.body?.data?.address?.number ?? ''} "
+                          "${isPreViewResumeResponse.body?.data?.address?.moo ?? ''} "
+                          " ${isPreViewResumeResponse.body?.data?.address?.soi ?? ''} "
+                         "${isPreViewResumeResponse.body?.data?.address?.road ?? ''} "
+                         "${isPreViewResumeResponse.body?.data?.address?.subdistrict ?? ''} "
+                         " ${isPreViewResumeResponse.body?.data?.address?.district ?? ''} ";
+                         "${isPreViewResumeResponse.body?.data?.address?.province ?? ''} "
+                         " ${isPreViewResumeResponse.body?.data?.address?.zipcode ?? ''}";
+ String isCertifications = isPreViewResumeResponse.body?.screenInfo?.certificate ?? '';
+  String isCertificationsValue =isPreViewResumeResponse.body?.data?.certificate?[0].title ?? '';
+  String isCertificationsValueDetail =isPreViewResumeResponse.body?.data?.certificate?[0].caption ?? '';
+ String isSKILLS = isPreViewResumeResponse.body?.screenInfo?.skill ?? '';
+ String isWord = isPreViewResumeResponse.body?.data?.skill?[0].skill ?? '';
+ String isExcel = isPreViewResumeResponse.body?.data?.skill?[1].skill ?? '';
+ String isPowerPoint =  'PowerPoint';
+ String isEnglish = isPreViewResumeResponse.body?.data?.languge?[0].language ?? '';
+ String isEducation =  isPreViewResumeResponse.body?.screenInfo?.education ?? 'Education';
+ String isExperience =  isPreViewResumeResponse.body?.screenInfo?.experience ?? 'Experience';
+  String isExperienceValueOne = isPreViewResumeResponse.body?.data?.experience?[0].position ?? '';
+  String isExperienceValueStarDate = isPreViewResumeResponse.body?.data?.experience?[0].startdate ?? '';
+  String isExperienceValueEndDate = isPreViewResumeResponse.body?.data?.experience?[0].enddate ?? '';
+  String isExperienceValueDetailOne = isPreViewResumeResponse.body?.data?.experience?[0].detail ?? '';
+
 
   doc.addPage(
     pw.MultiPage(
@@ -90,7 +136,7 @@ Future<Uint8List> generateResume(
                                           fontWeight: pw.FontWeight.bold)),
                               pw.Padding(
                                   padding: const pw.EdgeInsets.only(top: 5)),
-                              pw.Text(isPosition,
+                              pw.Text(isPreViewResumeResponse.body?.data?.position ??''  ,
                                   textScaleFactor: 1.2,
                                   style: pw.Theme.of(context)
                                       .defaultTextStyle
@@ -122,7 +168,7 @@ Future<Uint8List> generateResume(
                                                           left: 2,
                                                           right: 5),
                                                   decoration: pw.BoxDecoration(
-                                                    color: colorOfPdfUsTheme,
+                                                    color: colorOfPdfUsAbout,
                                                     shape: pw.BoxShape.circle,
                                                   ),
                                                 ),
@@ -133,7 +179,8 @@ Future<Uint8List> generateResume(
                                                             fontWeight: pw
                                                                 .FontWeight
                                                                 .bold,
-                                                            fontSize: 12)),
+                                                            fontSize: 12,
+                                                        color: colorOfPdfUsAbout)),
                                                 pw.Spacer(),
                                                 // if (icon != null) pw.Icon(icon!, color: colorOfPdfUsTwo, size: 18),
                                               ]),
@@ -141,7 +188,7 @@ Future<Uint8List> generateResume(
                                             decoration: pw.BoxDecoration(
                                                 border: pw.Border(
                                                     left: pw.BorderSide(
-                                                        color: colorOfPdfUsTheme,
+                                                        color: colorOfPdfUsAbout,
                                                         width: 2))),
                                             padding: const pw.EdgeInsets.only(
                                                 left: 10, top: 5, bottom: 5),
@@ -248,27 +295,27 @@ Future<Uint8List> generateResume(
                   // ),
 
                   _Category(
-                    title: 'EXPERIENCE',
+                    title: isExperience,
                     colorOfPdfUs: colorOfPdfUsExperience,
                     colorOfPdfUsTwo: colorOfPdfUsExperience,
                     colorOfPdfUsThree: colorOfPdfUsExperience,
                   ),
                   _Block(
-                    title: 'Bachelor Of Commerce',
-                    detail: 'Bachelor Interior Design',
+                    title: "($isExperienceValueStarDate - $isExperienceValueEndDate ) $isExperienceValueOne",
+                    detail:isExperienceValueDetailOne,
                     colorOfPdfUs: colorOfPdfUsExperience,
                     colorOfPdfUsTwo: colorOfPdfUsExperience,
                     colorOfPdfUsThree: colorOfPdfUsExperience,
                   ),
-                  _Block(
-                    title: 'Bachelor Interior Design',
-                    detail: 'Bachelor Interior Design',
-                    colorOfPdfUs: colorOfPdfUsExperience,
-                    colorOfPdfUsTwo: colorOfPdfUsExperience,
-                    colorOfPdfUsThree: colorOfPdfUsExperience,
-                  ),
+                  // _Block(
+                  //   title: 'Bachelor Interior Design',
+                  //   detail: 'Bachelor Interior Design',
+                  //   colorOfPdfUs: colorOfPdfUsExperience,
+                  //   colorOfPdfUsTwo: colorOfPdfUsExperience,
+                  //   colorOfPdfUsThree: colorOfPdfUsExperience,
+                  // ),
                   _Category(
-                    title: 'Education',
+                    title: isEducation,
                     colorOfPdfUs: colorOfPdfUsEducations,
                     colorOfPdfUsTwo: colorOfPdfUsEducations,
                     colorOfPdfUsThree: colorOfPdfUsEducations,
@@ -276,7 +323,7 @@ Future<Uint8List> generateResume(
                   _Block(
                     title: isBachelor,
                     detail: '$isBachelorValue     ( $isBachelorValueDate )',
-                    colorOfPdfUs: colorOfPdfUsTheme,
+                    colorOfPdfUs: colorOfPdfUsEducations,
                     colorOfPdfUsTwo: colorOfPdfUsEducations,
                     colorOfPdfUsThree: colorOfPdfUsEducations,
                   ),
@@ -304,7 +351,7 @@ Future<Uint8List> generateResume(
                           mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                           children: <pw.Widget>[
                             pw.Container(
-                              height: 150,
+                              height: 200,
                             ),
                             _Category(
                               title: 'CONTACT',
@@ -354,15 +401,8 @@ Future<Uint8List> generateResume(
                               colorOfPdfUsThree: colorOfPdfUsCertifications,
                             ),
                             _Block(
-                              title: isBachelorValueDate,
-                              detail: 'Bachelor Interior Design',
-                              colorOfPdfUs: colorOfPdfUsCertifications,
-                              colorOfPdfUsTwo: colorOfPdfUsCertifications,
-                              colorOfPdfUsThree: colorOfPdfUsCertifications,
-                            ),
-                            _Block(
-                              title: isHighSchoolValueDate,
-                              detail: 'Bachelor Interior Design',
+                              title: isCertificationsValue,
+                              detail: isCertificationsValueDetail,
                               colorOfPdfUs: colorOfPdfUsCertifications,
                               colorOfPdfUsTwo: colorOfPdfUsCertifications,
                               colorOfPdfUsThree: colorOfPdfUsCertifications,
@@ -484,8 +524,8 @@ Future<pw.PageTheme> _myPageTheme(
   return pw.PageTheme(
     pageFormat: format,
     theme: pw.ThemeData.withFont(
-      base: await PdfGoogleFonts.openSansRegular(),
-      bold: await PdfGoogleFonts.openSansBold(),
+      base: await PdfGoogleFonts.promptLight(),
+      bold: await PdfGoogleFonts.promptLight(),
       icons: await PdfGoogleFonts.materialIcons(),
     ),
     buildBackground: (pw.Context context) {

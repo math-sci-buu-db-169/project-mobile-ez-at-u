@@ -18,7 +18,7 @@ import '../../customs/message/text_error.dart';
 import '../../customs/progress_dialog.dart';
 import '../../customs/size/size.dart';
 import '../../customs/text_file/build_textformfiled_unlimit_custom.dart';
-import '../../module/home/bloc/resume_bloc.dart';
+import '../bloc_resume/resume_bloc.dart';
 import '../../module/login/screen/login_screen/login_screen.dart';
 import '../../utils/shared_preferences.dart';
 import '../app.dart';
@@ -129,25 +129,22 @@ class _ContentDesignEditResumeState extends State<ContentDesignEditResume> with 
           hideProgressDialog(context);
         }
         if (state is ResumeError) {
-          if (state.message.toString() == 'Unauthorized') {
+          if (state.errorMessage.toString() == 'Unauthorized') {
             dialogSessionExpiredOneBtn(context, textSessionExpired, textSubSessionExpired, _buttonOk, onClickBtn: () {
               cleanDelete();
               Navigator.pushReplacement(
                   context, MaterialPageRoute(builder: (BuildContext context) => const LoginScreen()));
             });
           } else {
-            dialogOneLineOneBtn(context, '${state.message}\n ', _buttonOk, onClickBtn: () {
+            dialogOneLineOneBtn(context, '${state.errorMessage}\n ', _buttonOk, onClickBtn: () {
               Navigator.of(context).pop();
             });
           }
         }
       },
       builder: (context, state) {
-        if (state is ResumeInitialState  || state is ChangPhotoResumeSuccess ) {
+        if (state is ResumeInitialState  ) {
 
-          if (state is ChangPhotoResumeSuccess ){
-            isPhotoResume = state.base64img ;
-          }
           return WillPopScope(
               onWillPop: () async {
                 return false;
@@ -1646,7 +1643,7 @@ class _ContentDesignEditResumeState extends State<ContentDesignEditResume> with 
         }
       },
       buildWhen: (context, state) {
-        return state is ChangPhotoResumeSuccess ||state is ResumeInitialState ;
+        return state is ResumeInitialState ;
       },
     );
   }
