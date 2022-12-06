@@ -13,6 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../customs/color/color_const.dart';
 import '../../customs/color/pdf_color_const.dart';
 import '../../customs/dialog/dialog_widget.dart';
+import '../../customs/image_base_64.dart';
 import '../../customs/message/text_button.dart';
 import '../../customs/message/text_error.dart';
 import '../../customs/progress_dialog.dart';
@@ -336,7 +337,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                                             .isPreViewResumeResponse
                                                             .body
                                                             ?.data
-                                                            ?.image))),
+                                                            ?.image??imageBase64))),
                                                   )), //background color of inner container
                                       ),
                                     ),
@@ -846,7 +847,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                 return buildDetailResumeCustomNotIconsReadOnly(
                                     context: context,
                                     detail:"  ${isPreViewResumeResponse.body?.data?.certificate?[index].title ?? ""} \n"
-                                        "${isPreViewResumeResponse.body?.data?.certificate?[index].caption ?? ""}",
+                                        "${isPreViewResumeResponse.body?.data?.certificate?[index].description ?? ""}",
                                     appBarForeGroundColor: appBarforegroundColor);
                               })),
 

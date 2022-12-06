@@ -15,7 +15,7 @@ import '../../main_route/main_route_bloc_model/refresh_token_response.dart';
 import '../../utils/shared_preferences.dart';
 import '../model/response/image_up_load_resume_response.dart';
 import '../model/response/pre_view_resume_response.dart';
-import '../repository/profile_repository.dart';
+import '../repository/resume_repository.dart';
 
 part 'resume_event.dart';
 part 'resume_state.dart';

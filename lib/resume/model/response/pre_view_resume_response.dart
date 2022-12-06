@@ -1,16 +1,15 @@
 import 'dart:convert';
-/// head : {"status":200,"message":"success","modulename":"home","timeexpire":false}
-/// body : {"screenInfo":{"aboutme":"เกี่ยวกับฉัน","aboutmedetail":"เกี่ยวกับฉัน รายละเอียด","address":"ที่อยู่","appliedposition":"ตำแหน่งที่สมัคร","certificate":"ใบรับรอง","contact":"ติดต่อ","textdefault":"ค่าเริ่มต้น","description":"คำอธิบาย","detail":"รายละเอียด","district":"อำเภอ","editinfomations":"แก้ไขข้อมูล","education":"การศึกษา","educationinfo":"ข้อมูลการศึกษา","email":"อีเมล","enddate":"วันสุดท้าย","experience":"ประสบการณ์","feacbook":"เฟคบุ๊ค","instagram":"อินสตาแกรม","language":"ภาษา","lastname":"นามสกุล","line":"ไลน์","moo":"หมู่","mypositions":"ตำแหน่งของฉัน","n":"เอ็น","name":"ชื่อ","number":"ตัวเลข","phone":"โทรศัพท์","pictuce":"รูปภาพ","placeofstudy":"สถานที่เรียน","position":"ตำแหน่ง","positions":"ตำแหน่ง","prefix":"คำนำหน้า","province":"จังหวัด","ratio":"อัตราส่วนภาพต้องเป็น 3:4","road":"ถนน","select":"เลือก","selectacolor":"โปรดเลือกสี\\nเพื่อใช้ในการสร้างเรซูเม่","selecttheinformation":"โปรดเลือกข้อมูล \\n ที่จะใช้ในการสร้างเรซูเม่","size":"ขนาด","sizepictuce":"ขนาดไฟล์ไม่เกิน 5 MB","skill":"ทักษะ","soi":"ซอย","startdate":"วันที่เริ่มต้น","subdistrict":"ตำบล","themecolor":"ธีม","title":"หัวเรื่อง","titlesetthemecolor":"ตั้งค่าธีมและสี","twitter":"ทวิตเตอร์","type":"พิมพ์","value":"ระดับ","whcm":"(กxส) ซม","zipcode":"รหัสไปรษณีย์","unkhown":"ไม่ทราบ","viewpdf":"PDF"},"data":{"image":null,"userinfo":{"prefix":"นาย","name":"สิทธิพล","lastname":"ชินโน"},"position":"นักพัฒนาซอฟต์แวร์","aboutme":"วิศวกรซอฟต์แวร์มากประสบการณ์ที่มีความกระตือรือร้นในการพัฒนาโปรแกรมนวัตกรรมที่ช่วยเร่งประสิทธิภาพและประสิทธิผลของความสำเร็จขององค์กร เชี่ยวชาญด้านเทคโนโลยีและการเขียนโค้ดเพื่อสร้างระบบที่เชื่อถือได้และเป็นมิตรกับผู้ใช้ ผู้นำที่มีทักษะซึ่งมีความสามารถในการกระตุ้น ให้ความรู้ และจัดการทีมงานมืออาชีพเพื่อสร้างโปรแกรมซอฟต์แวร์และติดตามการเปลี่ยนแปลงได้อย่างมีประสิทธิภาพ นักสื่อสารที่มีความมั่นใจ นักคิดเชิงกลยุทธ์ และผู้สร้างนวัตกรรมเพื่อพัฒนาซอฟต์แวร์ที่ปรับแต่งให้ตรงกับความต้องการขององค์กรของบริษัท เน้นความสามารถหลัก และต่อยอดความสำเร็จ","personinfo":{"email":"sittipon.profile.home@gmail.com","phone":"0830336433","feacbook":"สิทธิพล ชินโน","line":"@0930582335","instagram":null,"twitter":null},"address":{"number":"169","moo":null,"soi":null,"road":"ลงหาดบางแสน","subdistrict":"แสนสุข","district":"เมือง","province":"ชลบุรี","zipcode":"20131"},"experience":[{"startdate":"Jun 2015 ","enddate":"Jun 2018","position":"วิศวกรรมซอฟต์แวร์","detail":"ฟรีวิลล์ โซลูชั่นส์ จํากัด"}],"education":[{"startdate":"Jun 2015","enddate":"Jun 2018","type":"H","placeofstudy":"การศึกษาระดับมัธยมศึกษาตอนปลาย","detail":"วิทย์-คณิต โรงเรียนคำแสนวิทยาสรรค์"},{"startdate":"Jun 2018","enddate":"Jun 2022","type":"B","placeofstudy":"ปริญญาตรี","detail":"สาขาวิชาคณิตศาสตร์ ภาควิชาคณิตศาสตร์ คณะวิทยาศาสตร์ มหาวิทยาลัยบูรพา"}],"skill":[{"skill":"เวิร์ด","value":"70","detail":null},{"skill":"ms excel","value":"60","detail":null}],"certificate":[{"title":"นักพัฒนาแอป","caption":"ทดสอบ"}],"languge":[{"language":"ไทย","value":"70","detail":null}]}}
+
 
 PreViewResumeResponse preViewResumeResponseFromJson(String str) => PreViewResumeResponse.fromJson(json.decode(str));
 String preViewResumeResponseToJson(PreViewResumeResponse data) => json.encode(data.toJson());
 class PreViewResumeResponse {
   PreViewResumeResponse({
-      Head? head, 
-      Body? body,}){
+    Head? head,
+    Body? body,}){
     _head = head;
     _body = body;
-}
+  }
 
   PreViewResumeResponse.fromJson(dynamic json) {
     _head = json['head'] != null ? Head.fromJson(json['head']) : null;
@@ -18,11 +17,11 @@ class PreViewResumeResponse {
   }
   Head? _head;
   Body? _body;
-PreViewResumeResponse copyWith({  Head? head,
-  Body? body,
-}) => PreViewResumeResponse(  head: head ?? _head,
-  body: body ?? _body,
-);
+  PreViewResumeResponse copyWith({  Head? head,
+    Body? body,
+  }) => PreViewResumeResponse(  head: head ?? _head,
+    body: body ?? _body,
+  );
   Head? get head => _head;
   Body? get body => _body;
 
@@ -39,18 +38,16 @@ PreViewResumeResponse copyWith({  Head? head,
 
 }
 
-/// screenInfo : {"aboutme":"เกี่ยวกับฉัน","aboutmedetail":"เกี่ยวกับฉัน รายละเอียด","address":"ที่อยู่","appliedposition":"ตำแหน่งที่สมัคร","certificate":"ใบรับรอง","contact":"ติดต่อ","textdefault":"ค่าเริ่มต้น","description":"คำอธิบาย","detail":"รายละเอียด","district":"อำเภอ","editinfomations":"แก้ไขข้อมูล","education":"การศึกษา","educationinfo":"ข้อมูลการศึกษา","email":"อีเมล","enddate":"วันสุดท้าย","experience":"ประสบการณ์","feacbook":"เฟคบุ๊ค","instagram":"อินสตาแกรม","language":"ภาษา","lastname":"นามสกุล","line":"ไลน์","moo":"หมู่","mypositions":"ตำแหน่งของฉัน","n":"เอ็น","name":"ชื่อ","number":"ตัวเลข","phone":"โทรศัพท์","pictuce":"รูปภาพ","placeofstudy":"สถานที่เรียน","position":"ตำแหน่ง","positions":"ตำแหน่ง","prefix":"คำนำหน้า","province":"จังหวัด","ratio":"อัตราส่วนภาพต้องเป็น 3:4","road":"ถนน","select":"เลือก","selectacolor":"โปรดเลือกสี\\nเพื่อใช้ในการสร้างเรซูเม่","selecttheinformation":"โปรดเลือกข้อมูล \\n ที่จะใช้ในการสร้างเรซูเม่","size":"ขนาด","sizepictuce":"ขนาดไฟล์ไม่เกิน 5 MB","skill":"ทักษะ","soi":"ซอย","startdate":"วันที่เริ่มต้น","subdistrict":"ตำบล","themecolor":"ธีม","title":"หัวเรื่อง","titlesetthemecolor":"ตั้งค่าธีมและสี","twitter":"ทวิตเตอร์","type":"พิมพ์","value":"ระดับ","whcm":"(กxส) ซม","zipcode":"รหัสไปรษณีย์","unkhown":"ไม่ทราบ","viewpdf":"PDF"}
-/// data : {"image":null,"userinfo":{"prefix":"นาย","name":"สิทธิพล","lastname":"ชินโน"},"position":"นักพัฒนาซอฟต์แวร์","aboutme":"วิศวกรซอฟต์แวร์มากประสบการณ์ที่มีความกระตือรือร้นในการพัฒนาโปรแกรมนวัตกรรมที่ช่วยเร่งประสิทธิภาพและประสิทธิผลของความสำเร็จขององค์กร เชี่ยวชาญด้านเทคโนโลยีและการเขียนโค้ดเพื่อสร้างระบบที่เชื่อถือได้และเป็นมิตรกับผู้ใช้ ผู้นำที่มีทักษะซึ่งมีความสามารถในการกระตุ้น ให้ความรู้ และจัดการทีมงานมืออาชีพเพื่อสร้างโปรแกรมซอฟต์แวร์และติดตามการเปลี่ยนแปลงได้อย่างมีประสิทธิภาพ นักสื่อสารที่มีความมั่นใจ นักคิดเชิงกลยุทธ์ และผู้สร้างนวัตกรรมเพื่อพัฒนาซอฟต์แวร์ที่ปรับแต่งให้ตรงกับความต้องการขององค์กรของบริษัท เน้นความสามารถหลัก และต่อยอดความสำเร็จ","personinfo":{"email":"sittipon.profile.home@gmail.com","phone":"0830336433","feacbook":"สิทธิพล ชินโน","line":"@0930582335","instagram":null,"twitter":null},"address":{"number":"169","moo":null,"soi":null,"road":"ลงหาดบางแสน","subdistrict":"แสนสุข","district":"เมือง","province":"ชลบุรี","zipcode":"20131"},"experience":[{"startdate":"Jun 2015 ","enddate":"Jun 2018","position":"วิศวกรรมซอฟต์แวร์","detail":"ฟรีวิลล์ โซลูชั่นส์ จํากัด"}],"education":[{"startdate":"Jun 2015","enddate":"Jun 2018","type":"H","placeofstudy":"การศึกษาระดับมัธยมศึกษาตอนปลาย","detail":"วิทย์-คณิต โรงเรียนคำแสนวิทยาสรรค์"},{"startdate":"Jun 2018","enddate":"Jun 2022","type":"B","placeofstudy":"ปริญญาตรี","detail":"สาขาวิชาคณิตศาสตร์ ภาควิชาคณิตศาสตร์ คณะวิทยาศาสตร์ มหาวิทยาลัยบูรพา"}],"skill":[{"skill":"เวิร์ด","value":"70","detail":null},{"skill":"ms excel","value":"60","detail":null}],"certificate":[{"title":"นักพัฒนาแอป","caption":"ทดสอบ"}],"languge":[{"language":"ไทย","value":"70","detail":null}]}
 
 Body bodyFromJson(String str) => Body.fromJson(json.decode(str));
 String bodyToJson(Body data) => json.encode(data.toJson());
 class Body {
   Body({
-      ScreenInfo? screenInfo, 
-      Data? data,}){
+    ScreenInfo? screenInfo,
+    Data? data,}){
     _screenInfo = screenInfo;
     _data = data;
-}
+  }
 
   Body.fromJson(dynamic json) {
     _screenInfo = json['screenInfo'] != null ? ScreenInfo.fromJson(json['screenInfo']) : null;
@@ -58,11 +55,11 @@ class Body {
   }
   ScreenInfo? _screenInfo;
   Data? _data;
-Body copyWith({  ScreenInfo? screenInfo,
-  Data? data,
-}) => Body(  screenInfo: screenInfo ?? _screenInfo,
-  data: data ?? _data,
-);
+  Body copyWith({  ScreenInfo? screenInfo,
+    Data? data,
+  }) => Body(  screenInfo: screenInfo ?? _screenInfo,
+    data: data ?? _data,
+  );
   ScreenInfo? get screenInfo => _screenInfo;
   Data? get data => _data;
 
@@ -79,33 +76,22 @@ Body copyWith({  ScreenInfo? screenInfo,
 
 }
 
-/// image : null
-/// userinfo : {"prefix":"นาย","name":"สิทธิพล","lastname":"ชินโน"}
-/// position : "นักพัฒนาซอฟต์แวร์"
-/// aboutme : "วิศวกรซอฟต์แวร์มากประสบการณ์ที่มีความกระตือรือร้นในการพัฒนาโปรแกรมนวัตกรรมที่ช่วยเร่งประสิทธิภาพและประสิทธิผลของความสำเร็จขององค์กร เชี่ยวชาญด้านเทคโนโลยีและการเขียนโค้ดเพื่อสร้างระบบที่เชื่อถือได้และเป็นมิตรกับผู้ใช้ ผู้นำที่มีทักษะซึ่งมีความสามารถในการกระตุ้น ให้ความรู้ และจัดการทีมงานมืออาชีพเพื่อสร้างโปรแกรมซอฟต์แวร์และติดตามการเปลี่ยนแปลงได้อย่างมีประสิทธิภาพ นักสื่อสารที่มีความมั่นใจ นักคิดเชิงกลยุทธ์ และผู้สร้างนวัตกรรมเพื่อพัฒนาซอฟต์แวร์ที่ปรับแต่งให้ตรงกับความต้องการขององค์กรของบริษัท เน้นความสามารถหลัก และต่อยอดความสำเร็จ"
-/// personinfo : {"email":"sittipon.profile.home@gmail.com","phone":"0830336433","feacbook":"สิทธิพล ชินโน","line":"@0930582335","instagram":null,"twitter":null}
-/// address : {"number":"169","moo":null,"soi":null,"road":"ลงหาดบางแสน","subdistrict":"แสนสุข","district":"เมือง","province":"ชลบุรี","zipcode":"20131"}
-/// experience : [{"startdate":"Jun 2015 ","enddate":"Jun 2018","position":"วิศวกรรมซอฟต์แวร์","detail":"ฟรีวิลล์ โซลูชั่นส์ จํากัด"}]
-/// education : [{"startdate":"Jun 2015","enddate":"Jun 2018","type":"H","placeofstudy":"การศึกษาระดับมัธยมศึกษาตอนปลาย","detail":"วิทย์-คณิต โรงเรียนคำแสนวิทยาสรรค์"},{"startdate":"Jun 2018","enddate":"Jun 2022","type":"B","placeofstudy":"ปริญญาตรี","detail":"สาขาวิชาคณิตศาสตร์ ภาควิชาคณิตศาสตร์ คณะวิทยาศาสตร์ มหาวิทยาลัยบูรพา"}]
-/// skill : [{"skill":"เวิร์ด","value":"70","detail":null},{"skill":"ms excel","value":"60","detail":null}]
-/// certificate : [{"title":"นักพัฒนาแอป","caption":"ทดสอบ"}]
-/// languge : [{"language":"ไทย","value":"70","detail":null}]
 
 Data dataFromJson(String str) => Data.fromJson(json.decode(str));
 String dataToJson(Data data) => json.encode(data.toJson());
 class Data {
   Data({
-      dynamic image, 
-      Userinfo? userinfo, 
-      String? position, 
-      String? aboutme, 
-      Personinfo? personinfo, 
-      Address? address, 
-      List<Experience>? experience, 
-      List<Education>? education, 
-      List<Skill>? skill, 
-      List<Certificate>? certificate, 
-      List<Languge>? languge,}){
+    String? image,
+    Userinfo? userinfo,
+    String? position,
+    String? aboutme,
+    Personinfo? personinfo,
+    Address? address,
+    List<Experience>? experience,
+    List<Education>? education,
+    List<Skill>? skill,
+    List<Certificate>? certificate,
+    List<Languge>? languge,}){
     _image = image;
     _userinfo = userinfo;
     _position = position;
@@ -117,7 +103,7 @@ class Data {
     _skill = skill;
     _certificate = certificate;
     _languge = languge;
-}
+  }
 
   Data.fromJson(dynamic json) {
     _image = json['image'];
@@ -157,7 +143,7 @@ class Data {
       });
     }
   }
-  dynamic _image;
+  String? _image;
   Userinfo? _userinfo;
   String? _position;
   String? _aboutme;
@@ -168,30 +154,30 @@ class Data {
   List<Skill>? _skill;
   List<Certificate>? _certificate;
   List<Languge>? _languge;
-Data copyWith({  dynamic image,
-  Userinfo? userinfo,
-  String? position,
-  String? aboutme,
-  Personinfo? personinfo,
-  Address? address,
-  List<Experience>? experience,
-  List<Education>? education,
-  List<Skill>? skill,
-  List<Certificate>? certificate,
-  List<Languge>? languge,
-}) => Data(  image: image ?? _image,
-  userinfo: userinfo ?? _userinfo,
-  position: position ?? _position,
-  aboutme: aboutme ?? _aboutme,
-  personinfo: personinfo ?? _personinfo,
-  address: address ?? _address,
-  experience: experience ?? _experience,
-  education: education ?? _education,
-  skill: skill ?? _skill,
-  certificate: certificate ?? _certificate,
-  languge: languge ?? _languge,
-);
-  dynamic get image => _image;
+  Data copyWith({  String? image,
+    Userinfo? userinfo,
+    String? position,
+    String? aboutme,
+    Personinfo? personinfo,
+    Address? address,
+    List<Experience>? experience,
+    List<Education>? education,
+    List<Skill>? skill,
+    List<Certificate>? certificate,
+    List<Languge>? languge,
+  }) => Data(  image: image ?? _image,
+    userinfo: userinfo ?? _userinfo,
+    position: position ?? _position,
+    aboutme: aboutme ?? _aboutme,
+    personinfo: personinfo ?? _personinfo,
+    address: address ?? _address,
+    experience: experience ?? _experience,
+    education: education ?? _education,
+    skill: skill ?? _skill,
+    certificate: certificate ?? _certificate,
+    languge: languge ?? _languge,
+  );
+  String? get image => _image;
   Userinfo? get userinfo => _userinfo;
   String? get position => _position;
   String? get aboutme => _aboutme;
@@ -245,13 +231,13 @@ Languge langugeFromJson(String str) => Languge.fromJson(json.decode(str));
 String langugeToJson(Languge data) => json.encode(data.toJson());
 class Languge {
   Languge({
-      String? language, 
-      String? value, 
-      dynamic detail,}){
+    String? language,
+    String? value,
+    dynamic detail,}){
     _language = language;
     _value = value;
     _detail = detail;
-}
+  }
 
   Languge.fromJson(dynamic json) {
     _language = json['language'];
@@ -261,13 +247,13 @@ class Languge {
   String? _language;
   String? _value;
   dynamic _detail;
-Languge copyWith({  String? language,
-  String? value,
-  dynamic detail,
-}) => Languge(  language: language ?? _language,
-  value: value ?? _value,
-  detail: detail ?? _detail,
-);
+  Languge copyWith({  String? language,
+    String? value,
+    dynamic detail,
+  }) => Languge(  language: language ?? _language,
+    value: value ?? _value,
+    detail: detail ?? _detail,
+  );
   String? get language => _language;
   String? get value => _value;
   dynamic get detail => _detail;
@@ -282,37 +268,37 @@ Languge copyWith({  String? language,
 
 }
 
-/// title : "นักพัฒนาแอป"
-/// caption : "ทดสอบ"
+/// title : "ทดสอบ 1"
+/// description : "รายละเอียด 1"
 
 Certificate certificateFromJson(String str) => Certificate.fromJson(json.decode(str));
 String certificateToJson(Certificate data) => json.encode(data.toJson());
 class Certificate {
   Certificate({
-      String? title, 
-      String? caption,}){
+    String? title,
+    String? description,}){
     _title = title;
-    _caption = caption;
-}
+    _description = description;
+  }
 
   Certificate.fromJson(dynamic json) {
     _title = json['title'];
-    _caption = json['caption'];
+    _description = json['description'];
   }
   String? _title;
-  String? _caption;
-Certificate copyWith({  String? title,
-  String? caption,
-}) => Certificate(  title: title ?? _title,
-  caption: caption ?? _caption,
-);
+  String? _description;
+  Certificate copyWith({  String? title,
+    String? description,
+  }) => Certificate(  title: title ?? _title,
+    description: description ?? _description,
+  );
   String? get title => _title;
-  String? get caption => _caption;
+  String? get description => _description;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['title'] = _title;
-    map['caption'] = _caption;
+    map['description'] = _description;
     return map;
   }
 
@@ -326,13 +312,13 @@ Skill skillFromJson(String str) => Skill.fromJson(json.decode(str));
 String skillToJson(Skill data) => json.encode(data.toJson());
 class Skill {
   Skill({
-      String? skill, 
-      String? value, 
-      dynamic detail,}){
+    String? skill,
+    String? value,
+    dynamic detail,}){
     _skill = skill;
     _value = value;
     _detail = detail;
-}
+  }
 
   Skill.fromJson(dynamic json) {
     _skill = json['skill'];
@@ -342,13 +328,13 @@ class Skill {
   String? _skill;
   String? _value;
   dynamic _detail;
-Skill copyWith({  String? skill,
-  String? value,
-  dynamic detail,
-}) => Skill(  skill: skill ?? _skill,
-  value: value ?? _value,
-  detail: detail ?? _detail,
-);
+  Skill copyWith({  String? skill,
+    String? value,
+    dynamic detail,
+  }) => Skill(  skill: skill ?? _skill,
+    value: value ?? _value,
+    detail: detail ?? _detail,
+  );
   String? get skill => _skill;
   String? get value => _value;
   dynamic get detail => _detail;
@@ -373,17 +359,17 @@ Education educationFromJson(String str) => Education.fromJson(json.decode(str));
 String educationToJson(Education data) => json.encode(data.toJson());
 class Education {
   Education({
-      String? startdate, 
-      String? enddate, 
-      String? type, 
-      String? placeofstudy, 
-      String? detail,}){
+    String? startdate,
+    String? enddate,
+    String? type,
+    String? placeofstudy,
+    String? detail,}){
     _startdate = startdate;
     _enddate = enddate;
     _type = type;
     _placeofstudy = placeofstudy;
     _detail = detail;
-}
+  }
 
   Education.fromJson(dynamic json) {
     _startdate = json['startdate'];
@@ -397,17 +383,17 @@ class Education {
   String? _type;
   String? _placeofstudy;
   String? _detail;
-Education copyWith({  String? startdate,
-  String? enddate,
-  String? type,
-  String? placeofstudy,
-  String? detail,
-}) => Education(  startdate: startdate ?? _startdate,
-  enddate: enddate ?? _enddate,
-  type: type ?? _type,
-  placeofstudy: placeofstudy ?? _placeofstudy,
-  detail: detail ?? _detail,
-);
+  Education copyWith({  String? startdate,
+    String? enddate,
+    String? type,
+    String? placeofstudy,
+    String? detail,
+  }) => Education(  startdate: startdate ?? _startdate,
+    enddate: enddate ?? _enddate,
+    type: type ?? _type,
+    placeofstudy: placeofstudy ?? _placeofstudy,
+    detail: detail ?? _detail,
+  );
   String? get startdate => _startdate;
   String? get enddate => _enddate;
   String? get type => _type;
@@ -435,15 +421,15 @@ Experience experienceFromJson(String str) => Experience.fromJson(json.decode(str
 String experienceToJson(Experience data) => json.encode(data.toJson());
 class Experience {
   Experience({
-      String? startdate, 
-      String? enddate, 
-      String? position, 
-      String? detail,}){
+    String? startdate,
+    String? enddate,
+    String? position,
+    String? detail,}){
     _startdate = startdate;
     _enddate = enddate;
     _position = position;
     _detail = detail;
-}
+  }
 
   Experience.fromJson(dynamic json) {
     _startdate = json['startdate'];
@@ -455,15 +441,15 @@ class Experience {
   String? _enddate;
   String? _position;
   String? _detail;
-Experience copyWith({  String? startdate,
-  String? enddate,
-  String? position,
-  String? detail,
-}) => Experience(  startdate: startdate ?? _startdate,
-  enddate: enddate ?? _enddate,
-  position: position ?? _position,
-  detail: detail ?? _detail,
-);
+  Experience copyWith({  String? startdate,
+    String? enddate,
+    String? position,
+    String? detail,
+  }) => Experience(  startdate: startdate ?? _startdate,
+    enddate: enddate ?? _enddate,
+    position: position ?? _position,
+    detail: detail ?? _detail,
+  );
   String? get startdate => _startdate;
   String? get enddate => _enddate;
   String? get position => _position;
@@ -493,14 +479,14 @@ Address addressFromJson(String str) => Address.fromJson(json.decode(str));
 String addressToJson(Address data) => json.encode(data.toJson());
 class Address {
   Address({
-      String? number, 
-      dynamic moo, 
-      dynamic soi, 
-      String? road, 
-      String? subdistrict, 
-      String? district, 
-      String? province, 
-      String? zipcode,}){
+    String? number,
+    dynamic moo,
+    dynamic soi,
+    String? road,
+    String? subdistrict,
+    String? district,
+    String? province,
+    String? zipcode,}){
     _number = number;
     _moo = moo;
     _soi = soi;
@@ -509,7 +495,7 @@ class Address {
     _district = district;
     _province = province;
     _zipcode = zipcode;
-}
+  }
 
   Address.fromJson(dynamic json) {
     _number = json['number'];
@@ -529,23 +515,23 @@ class Address {
   String? _district;
   String? _province;
   String? _zipcode;
-Address copyWith({  String? number,
-  dynamic moo,
-  dynamic soi,
-  String? road,
-  String? subdistrict,
-  String? district,
-  String? province,
-  String? zipcode,
-}) => Address(  number: number ?? _number,
-  moo: moo ?? _moo,
-  soi: soi ?? _soi,
-  road: road ?? _road,
-  subdistrict: subdistrict ?? _subdistrict,
-  district: district ?? _district,
-  province: province ?? _province,
-  zipcode: zipcode ?? _zipcode,
-);
+  Address copyWith({  String? number,
+    dynamic moo,
+    dynamic soi,
+    String? road,
+    String? subdistrict,
+    String? district,
+    String? province,
+    String? zipcode,
+  }) => Address(  number: number ?? _number,
+    moo: moo ?? _moo,
+    soi: soi ?? _soi,
+    road: road ?? _road,
+    subdistrict: subdistrict ?? _subdistrict,
+    district: district ?? _district,
+    province: province ?? _province,
+    zipcode: zipcode ?? _zipcode,
+  );
   String? get number => _number;
   dynamic get moo => _moo;
   dynamic get soi => _soi;
@@ -570,30 +556,30 @@ Address copyWith({  String? number,
 
 }
 
-/// email : "sittipon.profile.home@gmail.com"
-/// phone : "0830336433"
-/// feacbook : "สิทธิพล ชินโน"
+/// email : "email"
+/// phone : "phone"
+/// feacbook : "feacbook"
 /// line : "@0930582335"
-/// instagram : null
-/// twitter : null
+/// instagram : "instagram"
+/// twitter : "twitter"
 
 Personinfo personinfoFromJson(String str) => Personinfo.fromJson(json.decode(str));
 String personinfoToJson(Personinfo data) => json.encode(data.toJson());
 class Personinfo {
   Personinfo({
-      String? email, 
-      String? phone, 
-      String? feacbook, 
-      String? line, 
-      dynamic instagram, 
-      dynamic twitter,}){
+    String? email,
+    String? phone,
+    String? feacbook,
+    String? line,
+    String? instagram,
+    String? twitter,}){
     _email = email;
     _phone = phone;
     _feacbook = feacbook;
     _line = line;
     _instagram = instagram;
     _twitter = twitter;
-}
+  }
 
   Personinfo.fromJson(dynamic json) {
     _email = json['email'];
@@ -607,27 +593,27 @@ class Personinfo {
   String? _phone;
   String? _feacbook;
   String? _line;
-  dynamic _instagram;
-  dynamic _twitter;
-Personinfo copyWith({  String? email,
-  String? phone,
-  String? feacbook,
-  String? line,
-  dynamic instagram,
-  dynamic twitter,
-}) => Personinfo(  email: email ?? _email,
-  phone: phone ?? _phone,
-  feacbook: feacbook ?? _feacbook,
-  line: line ?? _line,
-  instagram: instagram ?? _instagram,
-  twitter: twitter ?? _twitter,
-);
+  String? _instagram;
+  String? _twitter;
+  Personinfo copyWith({  String? email,
+    String? phone,
+    String? feacbook,
+    String? line,
+    String? instagram,
+    String? twitter,
+  }) => Personinfo(  email: email ?? _email,
+    phone: phone ?? _phone,
+    feacbook: feacbook ?? _feacbook,
+    line: line ?? _line,
+    instagram: instagram ?? _instagram,
+    twitter: twitter ?? _twitter,
+  );
   String? get email => _email;
   String? get phone => _phone;
   String? get feacbook => _feacbook;
   String? get line => _line;
-  dynamic get instagram => _instagram;
-  dynamic get twitter => _twitter;
+  String? get instagram => _instagram;
+  String? get twitter => _twitter;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -650,13 +636,13 @@ Userinfo userinfoFromJson(String str) => Userinfo.fromJson(json.decode(str));
 String userinfoToJson(Userinfo data) => json.encode(data.toJson());
 class Userinfo {
   Userinfo({
-      String? prefix, 
-      String? name, 
-      String? lastname,}){
+    String? prefix,
+    String? name,
+    String? lastname,}){
     _prefix = prefix;
     _name = name;
     _lastname = lastname;
-}
+  }
 
   Userinfo.fromJson(dynamic json) {
     _prefix = json['prefix'];
@@ -666,13 +652,13 @@ class Userinfo {
   String? _prefix;
   String? _name;
   String? _lastname;
-Userinfo copyWith({  String? prefix,
-  String? name,
-  String? lastname,
-}) => Userinfo(  prefix: prefix ?? _prefix,
-  name: name ?? _name,
-  lastname: lastname ?? _lastname,
-);
+  Userinfo copyWith({  String? prefix,
+    String? name,
+    String? lastname,
+  }) => Userinfo(  prefix: prefix ?? _prefix,
+    name: name ?? _name,
+    lastname: lastname ?? _lastname,
+  );
   String? get prefix => _prefix;
   String? get name => _name;
   String? get lastname => _lastname;
@@ -710,7 +696,7 @@ Userinfo copyWith({  String? prefix,
 /// line : "ไลน์"
 /// moo : "หมู่"
 /// mypositions : "ตำแหน่งของฉัน"
-/// n : "เอ็น"
+/// n : "นิ้ว"
 /// name : "ชื่อ"
 /// number : "ตัวเลข"
 /// phone : "โทรศัพท์"
@@ -731,7 +717,7 @@ Userinfo copyWith({  String? prefix,
 /// soi : "ซอย"
 /// startdate : "วันที่เริ่มต้น"
 /// subdistrict : "ตำบล"
-/// themecolor : "ธีม"
+/// themecolor : "สีธีม"
 /// title : "หัวเรื่อง"
 /// titlesetthemecolor : "ตั้งค่าธีมและสี"
 /// twitter : "ทวิตเตอร์"
@@ -746,60 +732,60 @@ ScreenInfo screenInfoFromJson(String str) => ScreenInfo.fromJson(json.decode(str
 String screenInfoToJson(ScreenInfo data) => json.encode(data.toJson());
 class ScreenInfo {
   ScreenInfo({
-      String? aboutme, 
-      String? aboutmedetail, 
-      String? address, 
-      String? appliedposition, 
-      String? certificate, 
-      String? contact, 
-      String? textdefault, 
-      String? description, 
-      String? detail, 
-      String? district, 
-      String? editinfomations, 
-      String? education, 
-      String? educationinfo, 
-      String? email, 
-      String? enddate, 
-      String? experience, 
-      String? feacbook, 
-      String? instagram, 
-      String? language, 
-      String? lastname, 
-      String? line, 
-      String? moo, 
-      String? mypositions, 
-      String? n, 
-      String? name, 
-      String? number, 
-      String? phone, 
-      String? pictuce, 
-      String? placeofstudy, 
-      String? position, 
-      String? positions, 
-      String? prefix, 
-      String? province, 
-      String? ratio, 
-      String? road, 
-      String? select, 
-      String? selectacolor, 
-      String? selecttheinformation, 
-      String? size, 
-      String? sizepictuce, 
-      String? skill, 
-      String? soi, 
-      String? startdate, 
-      String? subdistrict, 
-      String? themecolor, 
-      String? title, 
-      String? titlesetthemecolor, 
-      String? twitter, 
-      String? type, 
-      String? value, 
-      String? whcm, 
-      String? zipcode, 
-      String? unkhown, 
-      String? viewpdf,}){
+    String? aboutme,
+    String? aboutmedetail,
+    String? address,
+    String? appliedposition,
+    String? certificate,
+    String? contact,
+    String? textdefault,
+    String? description,
+    String? detail,
+    String? district,
+    String? editinfomations,
+    String? education,
+    String? educationinfo,
+    String? email,
+    String? enddate,
+    String? experience,
+    String? feacbook,
+    String? instagram,
+    String? language,
+    String? lastname,
+    String? line,
+    String? moo,
+    String? mypositions,
+    String? n,
+    String? name,
+    String? number,
+    String? phone,
+    String? pictuce,
+    String? placeofstudy,
+    String? position,
+    String? positions,
+    String? prefix,
+    String? province,
+    String? ratio,
+    String? road,
+    String? select,
+    String? selectacolor,
+    String? selecttheinformation,
+    String? size,
+    String? sizepictuce,
+    String? skill,
+    String? soi,
+    String? startdate,
+    String? subdistrict,
+    String? themecolor,
+    String? title,
+    String? titlesetthemecolor,
+    String? twitter,
+    String? type,
+    String? value,
+    String? whcm,
+    String? zipcode,
+    String? unkhown,
+    String? viewpdf,}){
     _aboutme = aboutme;
     _aboutmedetail = aboutmedetail;
     _address = address;
@@ -854,7 +840,7 @@ class ScreenInfo {
     _zipcode = zipcode;
     _unkhown = unkhown;
     _viewpdf = viewpdf;
-}
+  }
 
   ScreenInfo.fromJson(dynamic json) {
     _aboutme = json['aboutme'];
@@ -966,115 +952,115 @@ class ScreenInfo {
   String? _zipcode;
   String? _unkhown;
   String? _viewpdf;
-ScreenInfo copyWith({  String? aboutme,
-  String? aboutmedetail,
-  String? address,
-  String? appliedposition,
-  String? certificate,
-  String? contact,
-  String? textdefault,
-  String? description,
-  String? detail,
-  String? district,
-  String? editinfomations,
-  String? education,
-  String? educationinfo,
-  String? email,
-  String? enddate,
-  String? experience,
-  String? feacbook,
-  String? instagram,
-  String? language,
-  String? lastname,
-  String? line,
-  String? moo,
-  String? mypositions,
-  String? n,
-  String? name,
-  String? number,
-  String? phone,
-  String? pictuce,
-  String? placeofstudy,
-  String? position,
-  String? positions,
-  String? prefix,
-  String? province,
-  String? ratio,
-  String? road,
-  String? select,
-  String? selectacolor,
-  String? selecttheinformation,
-  String? size,
-  String? sizepictuce,
-  String? skill,
-  String? soi,
-  String? startdate,
-  String? subdistrict,
-  String? themecolor,
-  String? title,
-  String? titlesetthemecolor,
-  String? twitter,
-  String? type,
-  String? value,
-  String? whcm,
-  String? zipcode,
-  String? unkhown,
-  String? viewpdf,
-}) => ScreenInfo(  aboutme: aboutme ?? _aboutme,
-  aboutmedetail: aboutmedetail ?? _aboutmedetail,
-  address: address ?? _address,
-  appliedposition: appliedposition ?? _appliedposition,
-  certificate: certificate ?? _certificate,
-  contact: contact ?? _contact,
-  textdefault: textdefault ?? _textdefault,
-  description: description ?? _description,
-  detail: detail ?? _detail,
-  district: district ?? _district,
-  editinfomations: editinfomations ?? _editinfomations,
-  education: education ?? _education,
-  educationinfo: educationinfo ?? _educationinfo,
-  email: email ?? _email,
-  enddate: enddate ?? _enddate,
-  experience: experience ?? _experience,
-  feacbook: feacbook ?? _feacbook,
-  instagram: instagram ?? _instagram,
-  language: language ?? _language,
-  lastname: lastname ?? _lastname,
-  line: line ?? _line,
-  moo: moo ?? _moo,
-  mypositions: mypositions ?? _mypositions,
-  n: n ?? _n,
-  name: name ?? _name,
-  number: number ?? _number,
-  phone: phone ?? _phone,
-  pictuce: pictuce ?? _pictuce,
-  placeofstudy: placeofstudy ?? _placeofstudy,
-  position: position ?? _position,
-  positions: positions ?? _positions,
-  prefix: prefix ?? _prefix,
-  province: province ?? _province,
-  ratio: ratio ?? _ratio,
-  road: road ?? _road,
-  select: select ?? _select,
-  selectacolor: selectacolor ?? _selectacolor,
-  selecttheinformation: selecttheinformation ?? _selecttheinformation,
-  size: size ?? _size,
-  sizepictuce: sizepictuce ?? _sizepictuce,
-  skill: skill ?? _skill,
-  soi: soi ?? _soi,
-  startdate: startdate ?? _startdate,
-  subdistrict: subdistrict ?? _subdistrict,
-  themecolor: themecolor ?? _themecolor,
-  title: title ?? _title,
-  titlesetthemecolor: titlesetthemecolor ?? _titlesetthemecolor,
-  twitter: twitter ?? _twitter,
-  type: type ?? _type,
-  value: value ?? _value,
-  whcm: whcm ?? _whcm,
-  zipcode: zipcode ?? _zipcode,
-  unkhown: unkhown ?? _unkhown,
-  viewpdf: viewpdf ?? _viewpdf,
-);
+  ScreenInfo copyWith({  String? aboutme,
+    String? aboutmedetail,
+    String? address,
+    String? appliedposition,
+    String? certificate,
+    String? contact,
+    String? textdefault,
+    String? description,
+    String? detail,
+    String? district,
+    String? editinfomations,
+    String? education,
+    String? educationinfo,
+    String? email,
+    String? enddate,
+    String? experience,
+    String? feacbook,
+    String? instagram,
+    String? language,
+    String? lastname,
+    String? line,
+    String? moo,
+    String? mypositions,
+    String? n,
+    String? name,
+    String? number,
+    String? phone,
+    String? pictuce,
+    String? placeofstudy,
+    String? position,
+    String? positions,
+    String? prefix,
+    String? province,
+    String? ratio,
+    String? road,
+    String? select,
+    String? selectacolor,
+    String? selecttheinformation,
+    String? size,
+    String? sizepictuce,
+    String? skill,
+    String? soi,
+    String? startdate,
+    String? subdistrict,
+    String? themecolor,
+    String? title,
+    String? titlesetthemecolor,
+    String? twitter,
+    String? type,
+    String? value,
+    String? whcm,
+    String? zipcode,
+    String? unkhown,
+    String? viewpdf,
+  }) => ScreenInfo(  aboutme: aboutme ?? _aboutme,
+    aboutmedetail: aboutmedetail ?? _aboutmedetail,
+    address: address ?? _address,
+    appliedposition: appliedposition ?? _appliedposition,
+    certificate: certificate ?? _certificate,
+    contact: contact ?? _contact,
+    textdefault: textdefault ?? _textdefault,
+    description: description ?? _description,
+    detail: detail ?? _detail,
+    district: district ?? _district,
+    editinfomations: editinfomations ?? _editinfomations,
+    education: education ?? _education,
+    educationinfo: educationinfo ?? _educationinfo,
+    email: email ?? _email,
+    enddate: enddate ?? _enddate,
+    experience: experience ?? _experience,
+    feacbook: feacbook ?? _feacbook,
+    instagram: instagram ?? _instagram,
+    language: language ?? _language,
+    lastname: lastname ?? _lastname,
+    line: line ?? _line,
+    moo: moo ?? _moo,
+    mypositions: mypositions ?? _mypositions,
+    n: n ?? _n,
+    name: name ?? _name,
+    number: number ?? _number,
+    phone: phone ?? _phone,
+    pictuce: pictuce ?? _pictuce,
+    placeofstudy: placeofstudy ?? _placeofstudy,
+    position: position ?? _position,
+    positions: positions ?? _positions,
+    prefix: prefix ?? _prefix,
+    province: province ?? _province,
+    ratio: ratio ?? _ratio,
+    road: road ?? _road,
+    select: select ?? _select,
+    selectacolor: selectacolor ?? _selectacolor,
+    selecttheinformation: selecttheinformation ?? _selecttheinformation,
+    size: size ?? _size,
+    sizepictuce: sizepictuce ?? _sizepictuce,
+    skill: skill ?? _skill,
+    soi: soi ?? _soi,
+    startdate: startdate ?? _startdate,
+    subdistrict: subdistrict ?? _subdistrict,
+    themecolor: themecolor ?? _themecolor,
+    title: title ?? _title,
+    titlesetthemecolor: titlesetthemecolor ?? _titlesetthemecolor,
+    twitter: twitter ?? _twitter,
+    type: type ?? _type,
+    value: value ?? _value,
+    whcm: whcm ?? _whcm,
+    zipcode: zipcode ?? _zipcode,
+    unkhown: unkhown ?? _unkhown,
+    viewpdf: viewpdf ?? _viewpdf,
+  );
   String? get aboutme => _aboutme;
   String? get aboutmedetail => _aboutmedetail;
   String? get address => _address;
@@ -1200,15 +1186,15 @@ Head headFromJson(String str) => Head.fromJson(json.decode(str));
 String headToJson(Head data) => json.encode(data.toJson());
 class Head {
   Head({
-      num? status, 
-      String? message, 
-      String? modulename, 
-      bool? timeexpire,}){
+    num? status,
+    String? message,
+    String? modulename,
+    bool? timeexpire,}){
     _status = status;
     _message = message;
     _modulename = modulename;
     _timeexpire = timeexpire;
-}
+  }
 
   Head.fromJson(dynamic json) {
     _status = json['status'];
@@ -1220,15 +1206,15 @@ class Head {
   String? _message;
   String? _modulename;
   bool? _timeexpire;
-Head copyWith({  num? status,
-  String? message,
-  String? modulename,
-  bool? timeexpire,
-}) => Head(  status: status ?? _status,
-  message: message ?? _message,
-  modulename: modulename ?? _modulename,
-  timeexpire: timeexpire ?? _timeexpire,
-);
+  Head copyWith({  num? status,
+    String? message,
+    String? modulename,
+    bool? timeexpire,
+  }) => Head(  status: status ?? _status,
+    message: message ?? _message,
+    modulename: modulename ?? _modulename,
+    timeexpire: timeexpire ?? _timeexpire,
+  );
   num? get status => _status;
   String? get message => _message;
   String? get modulename => _modulename;

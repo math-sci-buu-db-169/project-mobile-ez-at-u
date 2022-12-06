@@ -14,7 +14,7 @@ class ResumeRepository {
     prefs = await SharedPreferences.getInstance();
     String resumeLanguage = prefs.getString('userLanguageResume')??"";
 print("resumeLanguage  getPreviewResumeDataAndScreen ============ $resumeLanguage");
-    return await MyDio.createDioServer().post("/api/home/morepreviewresume",
+    return await MyDio.createDioServer().post("/api/Resume/previewresume",
         data: jsonEncode({
           "userlanguage": resumeLanguage
         })
@@ -32,7 +32,7 @@ print("resumeLanguage  getPreviewResumeDataAndScreen ============ $resumeLanguag
         })
     );
   }Future<Response> sentResumeImage({required String base64Image}) async {
-    return await MyDio.createDioServer().post("/api/home/imageuploadresume",
+    return await MyDio.createDioServer().post("/api/Resume/imageuploadresume",
         data: jsonEncode({
           "base64": base64Image
         })
