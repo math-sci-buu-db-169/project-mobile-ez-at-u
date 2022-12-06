@@ -118,3 +118,19 @@ class SubmitApproveActivityByTeacherErrorState extends ActivityState {
   String message;
   SubmitApproveActivityByTeacherErrorState({required this.message});
 }
+class selectActivityByStudentScreenInfoSuccessState extends ActivityState {
+  SelectActivityByStudentScreenApi response;
+
+  selectActivityByStudentScreenInfoSuccessState({required this.response});
+}
+class SubmitSelectActivityByStudentState extends ActivityState {
+  SelectActivityByStudentSubmit responseSelectActivityByStudentSubmit;
+
+  SubmitSelectActivityByStudentState({required this.responseSelectActivityByStudentSubmit});
+}
+class SubmitSelectActivityByStudentLoadingState extends ActivityState {}
+class SubmitSelectActivityByStudentEndLoadingState extends ActivityState {}
+class SubmitSelectActivityByStudentErrorState extends ActivityState {
+  String message;
+  SubmitSelectActivityByStudentErrorState({required this.message});
+}
