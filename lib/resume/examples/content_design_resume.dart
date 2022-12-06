@@ -1359,7 +1359,7 @@ class _BodyPreviewResumeState extends State<BodyPreviewResume> {
                             if (isPreViewResumeResponse
                                     .body?.data?.personinfo?.twitter !=
                                 null)
-                              BuildTextFormFieldNotlimitCustomCheckboxReadOnly(
+                              BuildTextFormFieldNotLimitCustomCheckboxReadOnly(
                                 textEditingController: resumeName,
                                 onChanged: (value) {
                                   resumeName.text = value;
@@ -1774,10 +1774,10 @@ class _BodyPreviewResumeState extends State<BodyPreviewResume> {
               ],
             ),
           )),
-          floatingActionButton: floatingLineOffice(
+          floatingActionButton: floatingGeneratePDF(
             context: context,
             setState,
-            "PDF",
+            "Generate PDF",
             colorOfPdfUsButtonTitle: colorOfPdfUsButtonTitle,
             colorOfPdfUsName: colorOfPdfUsName,
             colorOfPdfUsPosition: colorOfPdfUsPosition,
@@ -1839,7 +1839,7 @@ selectColorViewPdf(
   );
 }
 
-floatingLineOffice(
+floatingGeneratePDF(
   setState,
   String pdf, {
   required BuildContext context,
@@ -1884,7 +1884,7 @@ floatingLineOffice(
                   )));
     },
     icon: Icon(
-      FontAwesomeIcons.bars,
+      FontAwesomeIcons.filePdf,
       color: Theme.of(context).iconTheme.color,
       size: 20.0,
     ),

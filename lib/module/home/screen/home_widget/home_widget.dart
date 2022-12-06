@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../../resume/app.dart';
 import '../../../../resume/examples/content_design_resume.dart';
+import '../../../../resume/examples/content_design_resume_edit.dart';
 import 'home_body_widget.dart';
 import '../../../../customs/button/button_custom.dart';
 import '../../../../customs/message/text_home.dart';
@@ -207,6 +208,7 @@ buildContentHomeScreen(
                                 builder: (context) => const ProfileScreen()));
                       },
                     )),
+                    if(userRole == "ST")
                     Expanded(
                         child: IconButton(
                       icon: FaIcon(FontAwesomeIcons.solidFilePdf,
@@ -215,7 +217,7 @@ buildContentHomeScreen(
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>  ContentDesignResumeScreen()));
+                                builder: (context) => const ContentDesignResumeEditScreen()));
                       },
                       // icon: const FaIcon(FontAwesomeIcons.house,color: tcBlack, size: 40),
                       // onPressed: () {},

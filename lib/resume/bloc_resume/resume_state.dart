@@ -43,3 +43,27 @@ class ChooseImageUpLoadResumeSuccess extends ResumeState {
   final String base64img;
   ChooseImageUpLoadResumeSuccess({required this.avatarImage,required this.base64img});
 }
+
+class  EditPreviewResumeLoading extends  ResumeState {}
+
+class  EditPreviewResumeEndLoading extends  ResumeState {}
+
+class EditPreviewResumeSuccessState extends  ResumeState {
+  PreViewResumeResponse isPreViewResumeResponse;
+  EditPreviewResumeSuccessState({required this.isPreViewResumeResponse});
+}
+
+class EditChangeLanguagePreviewResumeSuccessState extends  ResumeState {
+  PreViewResumeResponse isPreViewResumeResponse;
+  EditChangeLanguagePreviewResumeSuccessState({required this.isPreViewResumeResponse});
+}
+class EditPreviewResumeError extends  ResumeState {
+  String errorMessage;
+  EditPreviewResumeError({required this.errorMessage});
+}
+
+class EditChooseImageUpLoadResumeSuccess extends ResumeState {
+  final File avatarImage;
+  final String base64img;
+  EditChooseImageUpLoadResumeSuccess({required this.avatarImage,required this.base64img});
+}
