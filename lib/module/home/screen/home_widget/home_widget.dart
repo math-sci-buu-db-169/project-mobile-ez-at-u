@@ -1,6 +1,7 @@
 import 'package:ez_at_u/module/activity/screen/activity_list_for_teacher_role.dart';
 import 'package:ez_at_u/module/activity/screen/activity_name_by_teacher_page.dart';
 import 'package:ez_at_u/module/activity/screen/add_activity_by_teacher.dart';
+import 'package:ez_at_u/module/activity/screen/select_activity_by_student.dart';
 import 'package:ez_at_u/module/home/screen/home_widget/setting_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -137,6 +138,28 @@ buildContentHomeScreen(
               const Expanded(child: SizedBox()),
               (userRole == "ST")
                   ? Center(
+                      // child: ButtonIconsCustom(
+                      //   label: screenHomeResponse?.body?.screenInfo?.btnadd ??
+                      //       homeTextAdd,
+                      //   buttonIcons: Icon(
+                      //     Icons.add,
+                      //     color: Theme.of(context).iconTheme.color,
+                      //     size: 20.0,
+                      //   ),
+                      //   // colortext: Theme.of(context).bottomAppBarColor,
+                      //   colortext: Theme.of(context).bottomAppBarColor,
+                      //   colorbutton: Theme.of(context).scaffoldBackgroundColor,
+                      //   sizetext: 14,
+                      //   colorborder: Theme.of(context).scaffoldBackgroundColor,
+                      //   sizeborder: 3,
+                      //   onPressed: () {
+                      //     Navigator.push(
+                      //         context,
+                      //         MaterialPageRoute(
+                      //             builder: (context) =>
+                      //                 const AddActivityScreen()));
+                      //   },
+                      // ),
                       child: ButtonIconsCustom(
                         label: screenHomeResponse?.body?.screenInfo?.btnadd ??
                             homeTextAdd,
@@ -156,7 +179,7 @@ buildContentHomeScreen(
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      const AddActivityScreen()));
+                                      const SelectActivityByStudentScreen()));
                         },
                       ),
                     )

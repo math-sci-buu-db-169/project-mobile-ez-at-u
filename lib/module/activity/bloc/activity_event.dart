@@ -2,7 +2,7 @@ part of 'activity_bloc.dart';
 
 // @immutable
 abstract class ActivityEvent {}
-
+//---------Student-----------//
 class AddActivityScreenInfoEvent extends ActivityEvent {}
 class EditActivityScreenInfoEvent extends ActivityEvent {}
 class OnClickEditActivityScreenInfoEvent extends ActivityEvent {
@@ -41,6 +41,7 @@ class SubmitDeleteActivityEvent extends ActivityEvent {
     required this.id,
 });
 }
+//---------Teacher-----------//
 class SubmitApproveActivityByTeacherEvent extends ActivityEvent {
   int activityid;
   String status;
@@ -98,3 +99,13 @@ class SubmitAddEditDeleteActivityByTeacherEvent extends ActivityEvent {
   });
 }
 class getDataActivityNameListByTeacherEvent extends ActivityEvent {}
+//---------Student-----------//
+class SelectActivityByStudentScreenInfoEvent extends ActivityEvent {}
+class SubmitSelectActivityByStudentEvent extends ActivityEvent {
+  int activityNameId;
+  String teacherId;
+  SubmitSelectActivityByStudentEvent({
+    required this.activityNameId,
+    required this.teacherId,
+  });
+}
