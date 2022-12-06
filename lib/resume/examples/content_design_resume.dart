@@ -12,6 +12,7 @@ import '../../customs/color/color_const.dart';
 import '../../customs/color/pdf_color_const.dart';
 import 'package:dotted_border/dotted_border.dart';
 import '../../customs/dialog/dialog_widget.dart';
+import '../../customs/image_base_64.dart';
 import '../../customs/message/text_button.dart';
 import '../../customs/message/text_demo_resume.dart';
 import '../../customs/message/text_error.dart';
@@ -595,7 +596,7 @@ class _BodyPreviewResumeState extends State<BodyPreviewResume> {
                                                                     .isPreViewResumeResponse
                                                                     .body
                                                                     ?.data
-                                                                    ?.image))),
+                                                                    ?.image??imageBase64))),
                                                           )), //background color of inner container
                                               ),
                                             ),
@@ -1604,7 +1605,7 @@ class _BodyPreviewResumeState extends State<BodyPreviewResume> {
                               buildDetailResumeCheckboxCustomNotIconsReadOnly(
                                 context: context,
                                 detail:
-                                "${isPreViewResumeResponse.body?.data?.certificate?[0].title ?? ""} - ${isPreViewResumeResponse.body?.data?.certificate?[0].caption ?? ""}",
+                                "${isPreViewResumeResponse.body?.data?.certificate?[0].title ?? ""} - ${isPreViewResumeResponse.body?.data?.certificate?[0].description ?? ""}",
                                 appBarForeGroundColor: appBarforegroundColor,
                                 checkbox: Checkbox(
                                   checkColor: Theme.of(context).primaryColor,

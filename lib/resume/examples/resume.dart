@@ -91,7 +91,7 @@ Future<Uint8List> generateResume(
                          " ${isPreViewResumeResponse.body?.data?.address?.zipcode ?? ''}";
  String isCertifications = isPreViewResumeResponse.body?.screenInfo?.certificate ?? '';
   String isCertificationsValue =isPreViewResumeResponse.body?.data?.certificate?[0].title ?? '';
-  String isCertificationsValueDetail =isPreViewResumeResponse.body?.data?.certificate?[0].caption ?? '';
+  String isCertificationsValueDetail =isPreViewResumeResponse.body?.data?.certificate?[0].description ?? '';
  String isSKILLS = isPreViewResumeResponse.body?.screenInfo?.skill ?? '';
  String isWord = isPreViewResumeResponse.body?.data?.skill?[0].skill ?? '';
  String isExcel = isPreViewResumeResponse.body?.data?.skill?[1].skill ?? '';
