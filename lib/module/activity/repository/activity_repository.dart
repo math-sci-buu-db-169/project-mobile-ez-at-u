@@ -56,19 +56,6 @@ class ActivityRepository  {
     })
     );
   }
-  //----------------------------------------------------------------------------
-  Future<Response> SubmitApproveActivityTeacherEvent(
-      int activityid,
-      String status,
-      ) async {
-    return await MyDio.createDioServer().post("/activity/submitaddeditactivity",
-        data: jsonEncode({
-          "activityid": activityid,
-          "status": status,
-        })
-    );
-  }
-  //----------------------------------------------------------------------------
 
   Future<Response> submitDeleteActivity(
       int id,
@@ -143,4 +130,21 @@ class ActivityRepository  {
         })
     );
   }
+  //----------------------------------------------------------------------------
+  Future<Response> SubmitApproveActivityByTeacher({
+      required int activityid,
+      required String status,
+    }) async {
+    print("-----------------Submit approve test-----------------");
+    print(activityid);
+    print(status);
+    print("-----------------Submit approve test-----------------");
+    return await MyDio.createDioServer().post("/activity/activityapprovesubmit",
+        data: jsonEncode({
+          "activityid": activityid,
+          "status": status,
+        })
+    );
+  }
+//----------------------------------------------------------------------------
 }

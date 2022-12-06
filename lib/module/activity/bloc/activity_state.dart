@@ -106,3 +106,15 @@ class getDataActivityNameListByTeacherSuccessState extends ActivityState {
 
   getDataActivityNameListByTeacherSuccessState({required this.response});
 }
+
+class SubmitApproveActivityByTeacherLoadingState extends ActivityState {}
+class SubmitApproveActivityByTeacherEndLoadingState extends ActivityState {}
+class SubmitApproveActivityByTeacherState extends ActivityState {
+  ApproveActivitySubmit responseApproveActivitySubmitByTeacher;
+
+  SubmitApproveActivityByTeacherState({required this.responseApproveActivitySubmitByTeacher});
+}
+class SubmitApproveActivityByTeacherErrorState extends ActivityState {
+  String message;
+  SubmitApproveActivityByTeacherErrorState({required this.message});
+}

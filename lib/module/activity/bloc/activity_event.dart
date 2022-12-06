@@ -41,11 +41,11 @@ class SubmitDeleteActivityEvent extends ActivityEvent {
     required this.id,
 });
 }
-class SubmitApproveActivityTeacherEvent extends ActivityEvent {
+class SubmitApproveActivityByTeacherEvent extends ActivityEvent {
   int activityid;
   String status;
 
-  SubmitApproveActivityTeacherEvent({
+  SubmitApproveActivityByTeacherEvent({
     required this.activityid,
     required this.status
   });

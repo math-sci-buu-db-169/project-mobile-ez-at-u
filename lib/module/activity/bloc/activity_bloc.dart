@@ -1,6 +1,7 @@
 import 'package:ez_at_u/module/activity/model/response/activity_list_teacher_screen.dart';
 import 'package:ez_at_u/module/activity/model/response/activity_name_list_by_teacher.dart';
 import 'package:ez_at_u/module/activity/model/response/add_edit_delete_activity_by_teacher_screen.dart';
+import 'package:ez_at_u/module/activity/model/response/approve_activity_submit.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
@@ -367,6 +368,33 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
         }
       } on DioError catch (e) {
         emit(ActivityError(message: e.response?.statusMessage ?? ""));
+      }
+    });
+    on<SubmitApproveActivityByTeacherEvent>((event, emit) async {
+      try {
+        emit(SubmitApproveActivityByTeacherLoadingState());
+        print("CheckActivity 12 == SubmitApproveActivityByTeacherEvent");
+        await  checkActivityEventInitial(event, emit) ;
+        Response responseApproveActivityByTeacherSubmit = await SubmitApproveActivityByTeacher(
+          activityid : event.activityid,
+          status: event.status,
+        );
+        print(responseApproveActivityByTeacherSubmit.statusCode);
+        emit(SubmitApproveActivityByTeacherEndLoadingState());
+        if (responseApproveActivityByTeacherSubmit.statusCode == 200) {
+          ApproveActivitySubmit approveActivityByTeacherResponse =
+          ApproveActivitySubmit.fromJson(responseApproveActivityByTeacherSubmit.data);
+          if (approveActivityByTeacherResponse.head?.status == 200) {
+            emit(SubmitApproveActivityByTeacherState(responseApproveActivitySubmitByTeacher: approveActivityByTeacherResponse));
+          } else {
+            emit(SubmitApproveActivityByTeacherErrorState(message: approveActivityByTeacherResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(SubmitApproveActivityByTeacherErrorState(
+              message: responseApproveActivityByTeacherSubmit.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(SubmitApproveActivityByTeacherErrorState(message: e.response?.statusMessage ?? ""));
       }
     });
   }

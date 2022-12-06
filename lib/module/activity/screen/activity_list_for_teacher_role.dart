@@ -4,6 +4,7 @@ import 'package:ez_at_u/customs/message/text_error.dart';
 import 'package:ez_at_u/customs/progress_dialog.dart';
 import 'package:ez_at_u/module/activity/bloc/activity_bloc.dart';
 import 'package:ez_at_u/module/activity/model/response/activity_list_teacher_screen.dart';
+import 'package:ez_at_u/module/activity/screen/approve_activity_screen.dart';
 import 'package:ez_at_u/module/activity/screen/item_activity_for_teacher_role.dart';
 import 'package:ez_at_u/module/login/screen/login_screen/login_screen.dart';
 import 'package:flutter/foundation.dart';
@@ -317,18 +318,22 @@ class _ActivityListForTeacherPageState
                                 title: widget.approveActivityScreenApi?.body
                                     ?.screeninfo,
                                 onTap: () {
-                                  // Navigator.push(context,
-                                  //     MaterialPageRoute(builder: (context) {
-                                  //       return ApproveActivityScreen(
-                                  //           appBarBackgroundColor: appBarBackgroundColor,
-                                  //           appBarForegroundColor: appBarforegroundColor,
-                                  //           activityScreenText: screenstatusActivityResponse?.body?.screeninfo,
-                                  //           alertText: screenstatusActivityResponse?.body?.alertmessage,
-                                  //           buttonText: screenstatusActivityResponse?.body?.errorbutton,
-                                  //           data: screenstatusActivityResponse
-                                  //               ?.body?.activity?[index]);
-                                  //     })).then((value) =>
-                                  // {context.read<HomeBloc>().add(HomeScreenInfoEvent())});
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                        return ApproveActivityScreen(
+                                            appBarBackgroundColor: appBarBackgroundColor,
+                                            appBarForegroundColor: appBarForegroundColor,
+                                            activityScreenText: widget.approveActivityScreenApi?.body?.screeninfo,
+                                            // alertText: widget.approveActivityScreenApi?.body?.alertmessage,
+                                            // buttonText: widget.approveActivityScreenApi?.body?.errorbutton,
+                                            data: widget.approveActivityScreenApi
+                                                ?.body?.activitylist?[index]);
+                                      })).then((value) =>
+                                  {context.read<ActivityBloc>().add(ActivityListTeacherScreenInfoEvent(
+                                      filterstatus: '',
+                                      studentid: null,
+                                      studentname: '',
+                                      activityname: ''))});
                                 },
                               ))),
                     ),

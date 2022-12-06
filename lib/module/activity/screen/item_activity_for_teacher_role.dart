@@ -37,12 +37,6 @@ class ItemActivityForTeacherRole extends StatelessWidget {
                 _buildListActivity(title: title?.student?? "Student", dataDetail: '$name  $lastname'),
                 _buildListEmpty(),
                 _buildListActivity(title: title?.studentcode?? "Student code", dataDetail:data?.stdcode),
-                _buildListEmpty(),
-                _buildListActivity(title: title?.date?? "Date", dataDetail:data?.stdcode),
-                _buildListEmpty(),
-                _buildListActivity(title: title?.studentcode?? "Student", dataDetail:'$sdate - $fdate'),
-                _buildListEmpty(),
-                _buildListActivity(title: title?.studentcode?? "Student", dataDetail:data?.stdcode),
                 // _buildListActivity(title: title?.studentcode?? "Student code" , dataDetail: //"${data?.startdate??'----:--:--'} - ${data?.finishdate??'----:--:--'}\n"
                 //     "${data?.timehours??'--'} : ${data?.timeminutes??'--'} (${title?.textunittime??'-'})" ),
               ],

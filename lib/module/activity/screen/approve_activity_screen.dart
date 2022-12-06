@@ -2,7 +2,9 @@ import 'package:ez_at_u/customs/button/button_custom.dart';
 import 'package:ez_at_u/customs/message/text_activity.dart';
 import 'package:ez_at_u/customs/progress_dialog.dart';
 import 'package:ez_at_u/module/activity/bloc/activity_bloc.dart';
+import 'package:ez_at_u/module/activity/screen/activity_list_for_teacher_role.dart';
 import 'package:ez_at_u/module/activity/screen/edit_activity.dart';
+import 'package:ez_at_u/module/activity/screen/item_activity_for_teacher_role.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,7 +34,7 @@ class ApproveActivityScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ActivityBloc(),
-      child: ActivityDetailPage(
+      child: ApproveActivityPage(
           appBarBackgroundColor: appBarBackgroundColor,
           appBarForegroundColor: appBarForegroundColor,
           activityScreenText: activityScreenText,
@@ -43,7 +45,7 @@ class ApproveActivityScreen extends StatelessWidget {
   }
 }
 
-class ActivityDetailPage extends StatefulWidget {
+class ApproveActivityPage extends StatefulWidget {
   final dynamic activityScreenText;
   final dynamic data;
   final dynamic buttonText;
@@ -51,7 +53,7 @@ class ActivityDetailPage extends StatefulWidget {
   final Color appBarBackgroundColor;
   final Color appBarForegroundColor;
 
-  const ActivityDetailPage(
+  const ApproveActivityPage(
       {Key? key,
       required this.activityScreenText,
       required this.data,
@@ -62,10 +64,10 @@ class ActivityDetailPage extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<ActivityDetailPage> createState() => _ActivityDetailPageState();
+  State<ApproveActivityPage> createState() => _ApproveActivityPageState();
 }
 
-class _ActivityDetailPageState extends State<ActivityDetailPage>
+class _ApproveActivityPageState extends State<ApproveActivityPage>
     with ProgressDialog {
   dynamic activityScreenText;
   dynamic data;
@@ -216,8 +218,8 @@ buildContextActivity(
     }
     showButton = false;
   }
-  String name = data.approvername ?? '-';
-  String lastname = data.approverlastname ?? '-';
+  String name = data.stdname ?? '-';
+  String lastname = data.stdlastname ?? '-';
   return Scaffold(
       appBar: AppBar(
         backgroundColor: appBarBackgroundColor,
@@ -300,50 +302,29 @@ buildContextActivity(
                                 textLeftTable:
                                     activityScreenText.textactivity ??
                                         statusActivityTextActivity,
-                                textRightTableDetail: data.name ?? '-'),
-                            _buildListEmpty(),
-                            buildTableRow(context,
-                                textLeftTable: activityScreenText.textyear ??
-                                    statusActivityTextYear,
-                                textRightTableDetail: data.year ?? '-'),
-                            _buildListEmpty(),
-                            buildTableRow(context,
-                                textLeftTable: activityScreenText.textterm ??
-                                    statusActivityTextTerm,
-                                textRightTableDetail: data.term ?? '-'),
+                                textRightTableDetail: data.acname ?? '-'),
                             _buildListEmpty(),
                             buildTableRow(context,
                                 textLeftTable:
-                                    activityScreenText.textstartdate ??
+                                    activityScreenText.startdate ??
                                         statusActivityTextStartDate,
                                 textRightTableDetail: data.startdate ?? '-'),
                             _buildListEmpty(),
                             buildTableRow(context,
                                 textLeftTable:
-                                    activityScreenText.textfinishdate ??
+                                    activityScreenText.finishdate ??
                                         statusActivityTextFinishDate,
                                 textRightTableDetail: data.finishdate ?? '-'),
                             _buildListEmpty(),
                             buildTableRow(context,
-                                textLeftTable: activityScreenText.texttime ??
-                                    statusActivityTextTime,
-                                textRightTableDetail:
-                                    '${data.timehours ?? '--'} : ${data.timeminutes ?? '--'} ${activityScreenText.textunittime ?? statusActivityTextUnitTime}'),
-                            _buildListEmpty(),
-                            buildTableRow(context,
-                                textLeftTable: activityScreenText.edtapprover ??
+                                textLeftTable: activityScreenText.student ??
                                     statusActivityEdtApprover,
                                 textRightTableDetail: '$name  $lastname'),
                             _buildListEmpty(),
                             buildTableRow(context,
-                                textLeftTable: activityScreenText.textvenue ??
+                                textLeftTable: activityScreenText.venue ??
                                     statusActivityTextVenue,
                                 textRightTableDetail: data.venue ?? '-'),
-                            _buildListEmpty(),
-                            buildTableRow(context,
-                                textLeftTable: activityScreenText.textdetail ??
-                                    statusActivityTextDetail,
-                                textRightTableDetail: data.detail ?? '-')
                           ],
                         ),
                       ),
@@ -368,15 +349,15 @@ buildContextActivity(
                               width: double.infinity,
                               child: ButtonCustom(
                                 onPressed: () {
-                                  // context.read<ActivityBloc>().add(OnClickEditActivityScreenInfoEvent(data: data));
+                                  context.read<ActivityBloc>().add(SubmitApproveActivityByTeacherEvent(activityid: data.acid, status: 'A'));
                                   // context.read<ActivityBloc>().add(EditActivityScreenInfoEvent(data: data));
                                   Navigator.pushReplacement(context,
                                       MaterialPageRoute(builder: (context) {
-                                    return EditActivityScreen(data: data);
+                                    return ActivityListForTeacher();
                                   }));
                                 },
                                 // label: '${activityScreenText.buttonleft}',
-                                label: 'APPROVE',
+                                label: activityScreenText.buttonapprove,
                                 colortext: tcButtonTextBlack,
                                 colorbutton: Color(0xFFC5FEAC),
                                 sizetext: sizeTextSmaller14,
@@ -393,50 +374,50 @@ buildContextActivity(
                               width: double.infinity,
                               child: ButtonCustom(
                                 onPressed: () {
-                                  // context.read<ActivityBloc>().add(OnClickEditActivityScreenInfoEvent(data: data));
+                                  context.read<ActivityBloc>().add(SubmitApproveActivityByTeacherEvent(activityid: data.acid, status: 'R'));
                                   // context.read<ActivityBloc>().add(EditActivityScreenInfoEvent(data: data));
                                   Navigator.pushReplacement(context,
                                       MaterialPageRoute(builder: (context) {
-                                        return EditActivityScreen(data: data);
+                                        return ActivityListForTeacher();
                                       }));
                                 },
                                 // label: '${activityScreenText.buttonleft}',
-                                label: 'UNAPPROVE',
+                                label: activityScreenText.buttondisapprove,
                                 colortext: tcButtonTextBlack,
-                                colorbutton: Color(0xFFF8FEBC),
+                                colorbutton: Color(0xFFF3F6F4),
                                 sizetext: sizeTextSmaller14,
-                                colorborder: Color(0xFFF8FEBC),
+                                colorborder: Color(0xFFF3F6F4),
                                 sizeborder: 10.0,
                               )),
                         ),
                         const SizedBox(
                           width: 50,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 5.0,right: 5.0),
-                          child: SizedBox(
-                              width: double.infinity,
-                              child: ButtonCustom(
-                                onPressed: () {
-                                  // context.read<ActivityBloc>().add(OnClickEditActivityScreenInfoEvent(data: data));
-                                  // context.read<ActivityBloc>().add(EditActivityScreenInfoEvent(data: data));
-                                  Navigator.pushReplacement(context,
-                                      MaterialPageRoute(builder: (context) {
-                                        return EditActivityScreen(data: data);
-                                      }));
-                                },
-                                // label: '${activityScreenText.buttonleft}',
-                                label: 'REJECT',
-                                colortext: tcButtonTextBlack,
-                                colorbutton: Color(0xFFF1F5F2),
-                                sizetext: sizeTextSmaller14,
-                                colorborder: Color(0xFFF1F5F2),
-                                sizeborder: 10.0,
-                              )),
-                        ),
-                        const SizedBox(
-                          width: 50,
-                        ),
+                        // Padding(
+                        //   padding: const EdgeInsets.only(left: 5.0,right: 5.0),
+                        //   child: SizedBox(
+                        //       width: double.infinity,
+                        //       child: ButtonCustom(
+                        //         onPressed: () {
+                        //           // context.read<ActivityBloc>().add(OnClickEditActivityScreenInfoEvent(data: data));
+                        //           // context.read<ActivityBloc>().add(EditActivityScreenInfoEvent(data: data));
+                        //           Navigator.pushReplacement(context,
+                        //               MaterialPageRoute(builder: (context) {
+                        //                 return EditActivityScreen(data: data);
+                        //               }));
+                        //         },
+                        //         // label: '${activityScreenText.buttonleft}',
+                        //         label: 'REJECT',
+                        //         colortext: tcButtonTextBlack,
+                        //         colorbutton: Color(0xFFF1F5F2),
+                        //         sizetext: sizeTextSmaller14,
+                        //         colorborder: Color(0xFFF1F5F2),
+                        //         sizeborder: 10.0,
+                        //       )),
+                        // ),
+                        // const SizedBox(
+                        //   width: 50,
+                        // ),
                       ],
                     ),
                   ),
