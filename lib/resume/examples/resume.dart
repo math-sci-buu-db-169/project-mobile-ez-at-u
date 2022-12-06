@@ -19,7 +19,6 @@ import 'dart:convert';
 import 'dart:math';
 import 'dart:typed_data';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -62,9 +61,6 @@ Future<Uint8List> generateResume(
   final profileImage = pw.MemoryImage(
     (await rootBundle.load(isProfileImage)).buffer.asUint8List(),
   );
-  final emoji = await PdfGoogleFonts.notoColorEmoji();
-  // final Uint8List fontData = File('open-sans.ttf').readAsBytesSync();
-  // final ttf = pw.Font.ttf(fontData.buffer.asByteData());
   final pageTheme = await _myPageTheme(format, colorOfPdfUsTheme);
  String isName = isPreViewResumeResponse.body?.data?.userinfo?.name ?? '';
  String isLastName = isPreViewResumeResponse.body?.data?.userinfo?.lastname?? '';
@@ -90,7 +86,7 @@ Future<Uint8List> generateResume(
                           " ${isPreViewResumeResponse.body?.data?.address?.soi ?? ''} "
                          "${isPreViewResumeResponse.body?.data?.address?.road ?? ''} "
                          "${isPreViewResumeResponse.body?.data?.address?.subdistrict ?? ''} "
-                         " ${isPreViewResumeResponse.body?.data?.address?.district ?? ''} ";
+                         " ${isPreViewResumeResponse.body?.data?.address?.district ?? ''} "
                          "${isPreViewResumeResponse.body?.data?.address?.province ?? ''} "
                          " ${isPreViewResumeResponse.body?.data?.address?.zipcode ?? ''}";
  String isCertifications = isPreViewResumeResponse.body?.screenInfo?.certificate ?? '';

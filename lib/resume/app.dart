@@ -66,7 +66,7 @@ class MyAppResumeState extends State<MyAppResume> with SingleTickerProviderState
   var _data = const CustomData();
   var _hasData = false;
   var _pending = false;
-  String formattedDateDocument = DateFormat('yMd').format(DateTime.now());// 28/03/2020
+  String formattedDateDocument = DateFormat('y.M.d__HH_mm') .format(DateTime.now());// 28/03/2020
 
   late String myNameUser = 'document';
   @override
@@ -79,7 +79,7 @@ class MyAppResumeState extends State<MyAppResume> with SingleTickerProviderState
 
   Future<void> _isGetMyNameUser() async {
     prefs = await SharedPreferences.getInstance();
-    myNameUser = prefs.getString('myNameUser') ?? '';
+    myNameUser = "${prefs.getString('myNameUser') ?? ''} $formattedDateDocument";
     print("myNameUser : $myNameUser");
     setState(() {});
   }
@@ -147,7 +147,7 @@ class MyAppResumeState extends State<MyAppResume> with SingleTickerProviderState
 
     final appDocDir = await getApplicationDocumentsDirectory();
     final appDocPath = appDocDir.path;
-    final file = File('$appDocPath/$myNameUser$formattedDateDocument.pdf');
+    final file = File('$appDocPath/$myNameUser.pdf');
     print('Save as file ${file.path} ...');
     await file.writeAsBytes(bytes);
     await OpenFile.open(file.path);

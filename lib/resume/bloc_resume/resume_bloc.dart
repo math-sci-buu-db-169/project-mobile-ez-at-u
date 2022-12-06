@@ -197,19 +197,92 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository{
     }
     );
 
-
-
-
-
-
-
-
     on<ResumeInnitEvent>((event, emit) async {
       prefs = await SharedPreferences.getInstance();
       var isPhotoResume = prefs.getString('ResumePhoto') ?? '';
       await setResumePhoto(resumePhoto: isPhotoResume);
       emit(ResumeInitialState ());
     });
+
+    on<GetEditScreenPreviewResumeEvent>((event, emit) async{
+      try {
+        emit(EditPreviewResumeLoading());
+        print("CheckProfile 5 == ProfileApiEvent");
+
+        await  checkPreviewResumeEventInitial(event, emit) ;
+        Response responsePreViewResume = await getPreviewResumeDataAndScreen();
+        emit(EditPreviewResumeEndLoading());
+        if (responsePreViewResume.statusCode == 200) {
+          PreViewResumeResponse preViewResumeResponse = PreViewResumeResponse.fromJson(responsePreViewResume.data);
+          if (preViewResumeResponse.head?.status == 200) {
+            emit(EditPreviewResumeSuccessState(isPreViewResumeResponse: preViewResumeResponse));
+          } else {
+            emit(EditPreviewResumeError(errorMessage: preViewResumeResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(EditPreviewResumeError(errorMessage: responsePreViewResume.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(EditPreviewResumeError(errorMessage: e.response?.statusMessage ?? ""));
+      }
+
+    }
+    );
+    on<EditChangePhotoRequest>((event, emit) async{
+
+      if (kDebugMode) {
+        print('Change avatar 999');
+      }
+      final image = await ImagePicker().pickImage(source: ImageSource.gallery,imageQuality: 100);
+      if (image == null) return;
+      final imageTemp = image.path;
+      final cropImage = await ImageCropper().cropImage(sourcePath: imageTemp);
+      if (cropImage == null) return;
+      final imageCroppedTemp = File(cropImage.path);
+      final bytes = File(cropImage.path).readAsBytesSync();
+      String base64Image =  base64Encode(bytes);
+      log("img_pan : $base64Image");
+      emit(EditPreviewResumeLoading());
+      print("CheckProfile 66 == ChangePhotoRequest");
+      await setResumePhoto(resumePhoto: base64Image??'');
+      await  checkPreviewResumeEventInitial(event, emit) ;
+      Response responseBase64Img = await sentResumeImage(base64Image:base64Image);
+      emit(EditPreviewResumeEndLoading());
+      if(responseBase64Img.statusCode == 200){
+        ImageUpLoadResumeResponse imageUpLoadResumeResponse = ImageUpLoadResumeResponse.fromJson(responseBase64Img.data);
+        if(imageUpLoadResumeResponse.head?.status == 200){
+          emit(EditChooseImageUpLoadResumeSuccess(avatarImage: imageCroppedTemp,base64img: base64Image));
+        }
+      }
+
+      // emit(ChangPhotoResumeSuccess(avatarImage: imageCroppedTemp,base64img: base64Image));
+    }
+    );
+    on<EditChangeLanguageResumeRequest>((event, emit) async{
+      try {
+        emit(EditPreviewResumeLoading());
+        print("CheckProfile99 == ProfileApiEvent");
+
+        await  checkPreviewResumeEventInitial(event, emit) ;
+        Response responsePreViewResume = await getPreviewResumeDataAndScreen();
+        emit(EditPreviewResumeEndLoading());
+        if (responsePreViewResume.statusCode == 200) {
+          PreViewResumeResponse preViewResumeResponse = PreViewResumeResponse.fromJson(responsePreViewResume.data);
+          if (preViewResumeResponse.head?.status == 200) {
+            emit(EditChangeLanguagePreviewResumeSuccessState(isPreViewResumeResponse: preViewResumeResponse));
+          } else {
+            emit(EditPreviewResumeError(errorMessage: preViewResumeResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(EditPreviewResumeError(errorMessage: responsePreViewResume.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(EditPreviewResumeError(errorMessage: e.response?.statusMessage ?? ""));
+      }
+
+    }
+    );
+
 
   }
 }
