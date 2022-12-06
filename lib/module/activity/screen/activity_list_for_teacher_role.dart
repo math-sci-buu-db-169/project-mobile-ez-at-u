@@ -6,6 +6,7 @@ import 'package:ez_at_u/module/activity/bloc/activity_bloc.dart';
 import 'package:ez_at_u/module/activity/model/response/activity_list_teacher_screen.dart';
 import 'package:ez_at_u/module/activity/screen/approve_activity_screen.dart';
 import 'package:ez_at_u/module/activity/screen/item_activity_for_teacher_role.dart';
+import 'package:ez_at_u/module/home/screen/home_screen/home_screen.dart';
 import 'package:ez_at_u/module/login/screen/login_screen/login_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -182,7 +183,10 @@ class _ActivityListForTeacherPageState
           elevation: 5,
           leading: IconButton(
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) {
+                    return HomeScreen();
+                  }));
             },
             icon: Icon(
               Icons.arrow_back,
