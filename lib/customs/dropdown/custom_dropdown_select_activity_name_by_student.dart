@@ -8,7 +8,7 @@ class CustomDropdownSelectActivityNameByStudent extends StatefulWidget {
   final List<dynamic> dropdownList;
   final double width;
   final String? dropdownValue;
-  final Function(String result) callbackFromCustomDropdown;
+  final Function(String result) callbackFromCustomDropdownActivityNameId;
   final IconData iconsFile;
   const CustomDropdownSelectActivityNameByStudent(
       {Key? key,
@@ -17,7 +17,7 @@ class CustomDropdownSelectActivityNameByStudent extends StatefulWidget {
       required this.width,
         required this.iconsFile,
       this.dropdownValue
-        , required this.callbackFromCustomDropdown
+        , required this.callbackFromCustomDropdownActivityNameId
       })
       : super(key: key);
 
@@ -28,6 +28,7 @@ class CustomDropdownSelectActivityNameByStudent extends StatefulWidget {
 class _CustomDropdownSelectActivityNameByStudentState extends State<CustomDropdownSelectActivityNameByStudent> {
   String? dropdownValue;
   String? showDropdown;
+  String? teacherIdValue;
   @override
   void initState(){
     dropdownValue = widget.dropdownValue;
@@ -95,7 +96,8 @@ class _CustomDropdownSelectActivityNameByStudentState extends State<CustomDropdo
               print(dropdownValue);
               showDropdown = '${widget.dropdownList[int.parse(value)].activitynameresponse}';
               print(showDropdown);
-              widget.callbackFromCustomDropdown(dropdownValue??"5");
+              teacherIdValue = '${widget.dropdownList[int.parse(value)].teacheridresponse}';
+              widget.callbackFromCustomDropdownActivityNameId(dropdownValue??"5");
             });
 
           },

@@ -103,9 +103,7 @@ class getDataActivityNameListByTeacherEvent extends ActivityEvent {}
 class SelectActivityByStudentScreenInfoEvent extends ActivityEvent {}
 class SubmitSelectActivityByStudentEvent extends ActivityEvent {
   int activityNameId;
-  String teacherId;
   SubmitSelectActivityByStudentEvent({
     required this.activityNameId,
-    required this.teacherId,
   });
 }

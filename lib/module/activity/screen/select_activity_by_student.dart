@@ -41,7 +41,6 @@ class SelectActivityByStudentPage extends StatefulWidget {
 class _SelectActivityByStudentPageState
     extends State<SelectActivityByStudentPage> with ProgressDialog {
   TextEditingController activityNameId = TextEditingController();
-  TextEditingController teacherId = TextEditingController();
   SelectActivityByStudentScreenApi? _selectActivityByStudentScreenApi;
   @override
   void initState() {
@@ -85,7 +84,6 @@ class _SelectActivityByStudentPageState
             context,
             _selectActivityByStudentScreenApi,
             activityNameId,
-            teacherId,
           );
         } else {
           return Container();
@@ -102,7 +100,6 @@ buildAddActivityBody(
   BuildContext context,
   SelectActivityByStudentScreenApi? addActivityScreenApi,
   TextEditingController activityNameId,
-  TextEditingController teacherId,
 ) {
   var activityNameArray = addActivityScreenApi?.body?.activitynamelist ?? [];
   Color? appBarBackgroundColor =
@@ -147,12 +144,13 @@ buildAddActivityBody(
               // hint: addActivityScreenApi?.body?.screeninfo?.edtapprover ??
               hint: "ชื่อกิจกรรม" ??
                   activityEdtApprover,
-              callbackFromCustomDropdown: (String result) {
-                teacherId.text = result;
-                if (kDebugMode) {
-                  print(teacherId.text);
+                callbackFromCustomDropdownActivityNameId:(String result){
+                  activityNameId.text = result;
+                  if (kDebugMode) {
+                    print("activityNameId");
+                    print(activityNameId.text);
+                  }
                 }
-              },
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.05,
@@ -166,7 +164,11 @@ buildAddActivityBody(
                 sizetext: sizeTextBig20,
                 colorborder: tcButtonTextBoarder,
                 sizeborder: 10,
-                onPressed: (){}
+                onPressed: (){
+                  context.read<ActivityBloc>().add(
+                              SubmitSelectActivityByStudentEvent(
+                                  activityNameId: int.parse(activityNameId.text)));
+                }
                 // {
                 //   if (teacherId.text.isNotEmpty &&
                 //       activityNameId.text.isNotEmpty) {

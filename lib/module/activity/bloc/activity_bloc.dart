@@ -427,6 +427,32 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
         emit(ActivityError(message: e.response?.statusMessage ?? ""));
       }
     });
+    on<SubmitSelectActivityByStudentEvent>((event, emit) async {
+      try {
+        Response responseSubmitSelectActivityByStudent = await SubmitSelectActivityByStudent(
+          activityNameId : event.activityNameId,
+        );
+        emit(SubmitSelectActivityByStudentLoadingState());
+        print("CheckActivity 14 == SubmitSelectActivityByStudentEvent");
+        await  checkActivityEventInitial(event, emit) ;
+        print(responseSubmitSelectActivityByStudent.statusCode);
+        emit(SubmitSelectActivityByStudentEndLoadingState());
+        if (responseSubmitSelectActivityByStudent.statusCode == 200) {
+          SelectActivityByStudentSubmit selectActivityByStudentResponse =
+          SelectActivityByStudentSubmit.fromJson(responseSubmitSelectActivityByStudent.data);
+          if (selectActivityByStudentResponse.head?.status == 200) {
+            emit(SubmitSelectActivityByStudentState(responseSelectActivityByStudentSubmit: selectActivityByStudentResponse));
+          } else {
+            emit(SubmitSelectActivityByStudentErrorState(message: selectActivityByStudentResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(SubmitSelectActivityByStudentErrorState(
+              message: responseSubmitSelectActivityByStudent.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(SubmitSelectActivityByStudentErrorState(message: e.response?.statusMessage ?? ""));
+      }
+    });
   }
 }
 
