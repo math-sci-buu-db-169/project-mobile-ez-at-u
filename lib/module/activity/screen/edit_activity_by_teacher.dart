@@ -228,7 +228,7 @@ buildEditActivityByTeacherBody(
                       onChanged: (value) {
                       venue.text = value;
                         if (kDebugMode) {
-                          print(objectives.text);
+                          print(venue.text);
                         }
                       },
                       hintLabel: addEditDeleteActivityScreenByTeacherApi?.body?.screeninfo?.textvenue ??

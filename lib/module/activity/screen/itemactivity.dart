@@ -12,8 +12,8 @@ class ItemActivity extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String name = data?.approvername??'-';
-    String lastname = data?.approverlastname??'-';
+    String name = data?.teachername??'-';
+    String lastname = data?.teacherlastname??'-';
     return GestureDetector(
       onTap: onTap,
       child: Column(
@@ -34,9 +34,6 @@ class ItemActivity extends StatelessWidget {
                     title: title?.textactivity?? statusActivityTextActivity, dataDetail:data?.name ??'-'),
                 _buildListEmpty(),
                 _buildListActivity(title: title?.edtapprover?? statusActivityEdtApprover, dataDetail: '$name  $lastname'),
-                _buildListEmpty(),
-                _buildListActivity(title: title?.texttime?? statusActivityTextTime , dataDetail: //"${data?.startdate??'----:--:--'} - ${data?.finishdate??'----:--:--'}\n"
-                    "${data?.timehours??'--'} : ${data?.timeminutes??'--'} (${title?.textunittime??'-'})" ),
               ],
             ),
           ),

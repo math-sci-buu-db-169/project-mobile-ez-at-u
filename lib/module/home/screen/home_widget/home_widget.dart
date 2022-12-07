@@ -128,7 +128,7 @@ buildContentHomeScreen(
       body: SafeArea(
         child: Stack(children: [
           activityIsEmpty
-              ? homeBodyEntryWidget(
+              ? homeBodyEmptyWidget(
                   context,
                   alertNoActivityResponse,
                 )

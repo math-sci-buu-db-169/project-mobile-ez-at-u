@@ -247,8 +247,8 @@ buildContextActivity(
     );
     showButton = false;
   }
-  String name = data.approvername ?? '-';
-  String lastname = data.approverlastname ?? '-';
+  String name = data.teachername ?? '-';
+  String lastname = data.teacherlastname ?? '-';
   return Scaffold(
       appBar: AppBar(
         backgroundColor: appBarBackgroundColor,
@@ -334,16 +334,6 @@ buildContextActivity(
                                 textRightTableDetail: data.name ?? '-'),
                             _buildListEmpty(),
                             buildTableRow(context,
-                                textLeftTable: activityScreenText.textyear ??
-                                    statusActivityTextYear,
-                                textRightTableDetail: data.year ?? '-'),
-                            _buildListEmpty(),
-                            buildTableRow(context,
-                                textLeftTable: activityScreenText.textterm ??
-                                    statusActivityTextTerm,
-                                textRightTableDetail: data.term ?? '-'),
-                            _buildListEmpty(),
-                            buildTableRow(context,
                                 textLeftTable:
                                     activityScreenText.textstartdate ??
                                         statusActivityTextStartDate,
@@ -356,12 +346,6 @@ buildContextActivity(
                                 textRightTableDetail: data.finishdate ?? '-'),
                             _buildListEmpty(),
                             buildTableRow(context,
-                                textLeftTable: activityScreenText.texttime ??
-                                    statusActivityTextTime,
-                                textRightTableDetail:
-                                    '${data.timehours ?? '--'} : ${data.timeminutes ?? '--'} ${activityScreenText.textunittime ?? statusActivityTextUnitTime}'),
-                            _buildListEmpty(),
-                            buildTableRow(context,
                                 textLeftTable: activityScreenText.edtapprover ??
                                     statusActivityEdtApprover,
                                 textRightTableDetail: '$name  $lastname'),
@@ -372,9 +356,9 @@ buildContextActivity(
                                 textRightTableDetail: data.venue ?? '-'),
                             _buildListEmpty(),
                             buildTableRow(context,
-                                textLeftTable: activityScreenText.textdetail ??
+                                textLeftTable: activityScreenText.textobjectives ??
                                     statusActivityTextDetail,
-                                textRightTableDetail: data.detail ?? '-')
+                                textRightTableDetail: data.objectives ?? '-')
                           ],
                         ),
                       ),

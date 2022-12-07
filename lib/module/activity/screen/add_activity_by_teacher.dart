@@ -201,7 +201,7 @@ buildAddActivityByTeacherBody(
             BuildTextformfieldUnlimitCustom(
               textEditingController: venue,
               onChanged: (value) {
-                objectives.text = value;
+                venue.text = value;
                 if (kDebugMode) {
                   print(venue.text);
                 }

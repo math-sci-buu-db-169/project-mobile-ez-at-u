@@ -28,7 +28,7 @@ homeBodyActivityWidget(
   );
 }
 
-homeBodyEntryWidget(
+homeBodyEmptyWidget(
   BuildContext context,
   AlertNoActivityResponse? alertNoActivityResponse,
 ) {
