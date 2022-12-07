@@ -147,4 +147,21 @@ class ActivityRepository  {
     );
   }
 //----------------------------------------------------------------------------
+  Future<Response> SelectActivityByStudentScreenInfo() async {
+    return await MyDio.createDioServer().post("/activity/selectactivitybystudentscreeninfo",
+        data: jsonEncode({
+        })
+    );
+  }
+//----------------------------------------------------------------------------
+  Future<Response> SubmitSelectActivityByStudent({
+    required int activityNameId,
+  }) async {
+    return await MyDio.createDioServer().post("/activity/selectactivitybystudent",
+        data: jsonEncode({
+          "activitynameid": activityNameId,
+        })
+    );
+  }
+//----------------------------------------------------------------------------
 }

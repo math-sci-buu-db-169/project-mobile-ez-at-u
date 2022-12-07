@@ -2,11 +2,13 @@ import 'package:ez_at_u/customs/button/button_custom.dart';
 import 'package:ez_at_u/customs/color/color_const.dart';
 import 'package:ez_at_u/customs/dialog/dialog_widget.dart';
 import 'package:ez_at_u/customs/dropdown/custom_dropdown_for_approver.dart';
+import 'package:ez_at_u/customs/dropdown/custom_dropdown_select_activity_name_by_student.dart';
 import 'package:ez_at_u/customs/progress_dialog.dart';
 import 'package:ez_at_u/customs/size/size.dart';
 import 'package:ez_at_u/customs/text_file/build_textformfiled_unlimit_custom.dart';
 import 'package:ez_at_u/module/activity/bloc/activity_bloc.dart';
 import 'package:ez_at_u/module/activity/model/response/add_edit_activity_screen_api.dart';
+import 'package:ez_at_u/module/activity/model/response/select_activity_by_student_screen.dart';
 import 'package:ez_at_u/module/home/screen/home_screen/home_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,7 +24,7 @@ class SelectActivityByStudentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ActivityBloc()..add(AddActivityScreenInfoEvent()),
+      create: (context) => ActivityBloc()..add(SelectActivityByStudentScreenInfoEvent()),
       child: const SelectActivityByStudentPage(),
     );
   }
@@ -39,8 +41,7 @@ class SelectActivityByStudentPage extends StatefulWidget {
 class _SelectActivityByStudentPageState
     extends State<SelectActivityByStudentPage> with ProgressDialog {
   TextEditingController activityNameId = TextEditingController();
-  TextEditingController teacherId = TextEditingController();
-  AddEditActivityScreenApi? _addActivityScreenApi;
+  SelectActivityByStudentScreenApi? _selectActivityByStudentScreenApi;
   @override
   void initState() {
     super.initState();
@@ -51,13 +52,13 @@ class _SelectActivityByStudentPageState
     // context.read<ActivityBloc>().add(AddActivityScreenInfoEvent());
     return BlocConsumer<ActivityBloc, ActivityState>(
       listener: (context, state) {
-        if (state is SubmitAddEditActivityLoadingState) {
+        if (state is SubmitSelectActivityByStudentLoadingState) {
           showProgressDialog(context);
         }
-        if (state is SubmitAddEditActivityEndLoadingState) {
+        if (state is SubmitSelectActivityByStudentEndLoadingState) {
           hideProgressDialog(context);
         }
-        if (state is SubmitAddEditActivityError) {
+        if (state is SubmitSelectActivityByStudentErrorState) {
           dialogOneLineOneBtn(context, '${state.message}\n ', "OK",
               onClickBtn: () {
             Navigator.of(context).pop();
@@ -66,7 +67,7 @@ class _SelectActivityByStudentPageState
             print(state.message);
           }
         }
-        if (state is SubmitAddEditActivityState) {
+        if (state is SubmitSelectActivityByStudentState) {
           // print("TEST SubmitAddEditActivityState");
           // print(state.responseAddEdit.toJson());
           // print("TEST SubmitAddEditActivityState");
@@ -76,21 +77,20 @@ class _SelectActivityByStudentPageState
         }
       },
       builder: (context, state) {
-        if (state is ActivityScreenInfoSuccessState) {
-          _addActivityScreenApi = state.response;
+        if (state is selectActivityByStudentScreenInfoSuccessState) {
+          _selectActivityByStudentScreenApi = state.response;
 
           return buildAddActivityBody(
             context,
-            _addActivityScreenApi,
+            _selectActivityByStudentScreenApi,
             activityNameId,
-            teacherId,
           );
         } else {
           return Container();
         }
       },
       buildWhen: (context, state) {
-        return state is ActivityScreenInfoSuccessState;
+        return state is selectActivityByStudentScreenInfoSuccessState;
       },
     );
   }
@@ -98,12 +98,10 @@ class _SelectActivityByStudentPageState
 
 buildAddActivityBody(
   BuildContext context,
-  AddEditActivityScreenApi? addActivityScreenApi,
+  SelectActivityByStudentScreenApi? addActivityScreenApi,
   TextEditingController activityNameId,
-  TextEditingController teacherId,
 ) {
-  // List<String>? approverList = addActivityScreenApi?.body?.approverlist;
-  var approverArray = addActivityScreenApi?.body?.approverlist ?? [];
+  var activityNameArray = addActivityScreenApi?.body?.activitynamelist ?? [];
   Color? appBarBackgroundColor =
       Theme.of(context).appBarTheme.backgroundColor ?? Colors.white;
   Color? appBarforegroundColor =
@@ -123,7 +121,7 @@ buildAddActivityBody(
         ),
       ),
       title: Text(
-        addActivityScreenApi?.body?.screeninfo?.titleaddact ??
+        addActivityScreenApi?.body?.screeninfo?.titleselectactivity ??
             activityTitleAddAct,
         style: TextStyle(
           color: appBarforegroundColor,
@@ -139,77 +137,59 @@ buildAddActivityBody(
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.05,
             ),
-            BuildTextformfieldUnlimitCustom(
-              textEditingController: activityNameId,
-              onChanged: (value) {
-                activityNameId.text = value;
-                if (kDebugMode) {
-                  print(activityNameId.text);
-                }
-              },
-              hintLabel: addActivityScreenApi?.body?.screeninfo?.edtactname ??
-                  activityEdtActName,
-              textInputType: TextInputType.text,
-              // iconsFile : Icons.person_rounded,
-              iconsFile: FontAwesomeIcons.solidPenToSquare,
-            ),
-            // TextFieldCustom(
-            //   textEditingController: venue,
-            //   onChanged: (value) {
-            //     venue.text = value;
-            //     if (kDebugMode) {
-            //       print(venue.text);
-            //     }
-            //   },
-            //   hintLabel:
-            //       addActivityScreenApi?.body?.screeninfo?.edtvenue??activityEdtVenue,
-            //   textInputType: TextInputType.text,
-            //   iconsFile : FontAwesomeIcons.mapLocation,
-            // ),
-            CustomDropdownApprover(
-              iconsFile: FontAwesomeIcons.userGroup,
+            CustomDropdownSelectActivityNameByStudent(
+              iconsFile: FontAwesomeIcons.envelopeOpenText,
               width: MediaQuery.of(context).size.width,
-              dropdownList: approverArray,
-              hint: addActivityScreenApi?.body?.screeninfo?.edtapprover ??
+              dropdownList: activityNameArray,
+              // hint: addActivityScreenApi?.body?.screeninfo?.edtapprover ??
+              hint: "ชื่อกิจกรรม" ??
                   activityEdtApprover,
-              callbackFromCustomDropdown: (String result) {
-                teacherId.text = result;
-                if (kDebugMode) {
-                  print(teacherId.text);
+                callbackFromCustomDropdownActivityNameId:(String result){
+                  activityNameId.text = result;
+                  if (kDebugMode) {
+                    print("activityNameId");
+                    print(activityNameId.text);
+                  }
                 }
-              },
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.05,
             ),
             Center(
               child: ButtonCustom(
-                label: addActivityScreenApi?.body?.screeninfo?.btnconfirm ??
+                label: addActivityScreenApi?.body?.screeninfo?.buttonselectactivity ??
                     activityBtnConfirm,
                 colortext: tcButtonTextBlack,
                 colorbutton: tcButtonTextWhite,
                 sizetext: sizeTextBig20,
                 colorborder: tcButtonTextBoarder,
                 sizeborder: 10,
-                onPressed: () {
-                  if (teacherId.text.isNotEmpty &&
-                      activityNameId.text.isNotEmpty) {
-                    context.read<ActivityBloc>().add(
-                        SubmitSelectActivityByStudentEvent(
-                            teacherId: teacherId.text,
-                            activityNameId: int.parse(activityNameId.text)));
-                  } else {
-                    dialogOneLineOneBtn(
-                        context,
-                        addActivityScreenApi
-                                ?.body?.alertmessage?.alertfillallactivity ??
-                            alertFillAllActivity,
-                        addActivityScreenApi?.body?.errorbutton?.buttonok ??
-                            buttonOK, onClickBtn: () {
-                      Navigator.of(context).pop();
-                    });
-                  }
-                },
+                onPressed: (){
+                  context.read<ActivityBloc>().add(
+                              SubmitSelectActivityByStudentEvent(
+                                  activityNameId: int.parse(activityNameId.text)));
+                }
+                // {
+                //   if (teacherId.text.isNotEmpty &&
+                //       activityNameId.text.isNotEmpty) {
+                //     context.read<ActivityBloc>().add(
+                //         SubmitSelectActivityByStudentEvent(
+                //             teacherId: teacherId.text,
+                //             activityNameId: int.parse(activityNameId.text)));
+                //   } else {
+                //     dialogOneLineOneBtn(
+                //         context,
+                //         // addActivityScreenApi
+                //                 // ?.body?.alertmessage?.alertfillallactivity ??
+                //                 "hc กรอกให้ครย" ??
+                //             alertFillAllActivity,
+                //         // addActivityScreenApi?.body?.errorbutton?.buttonok ??
+                //         "hc OK" ??
+                //             buttonOK, onClickBtn: () {
+                //       Navigator.of(context).pop();
+                //     });
+                //   }
+                // },
               ),
             ),
             SizedBox(

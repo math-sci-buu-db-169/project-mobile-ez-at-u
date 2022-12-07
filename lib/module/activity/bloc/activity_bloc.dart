@@ -2,6 +2,8 @@ import 'package:ez_at_u/module/activity/model/response/activity_list_teacher_scr
 import 'package:ez_at_u/module/activity/model/response/activity_name_list_by_teacher.dart';
 import 'package:ez_at_u/module/activity/model/response/add_edit_delete_activity_by_teacher_screen.dart';
 import 'package:ez_at_u/module/activity/model/response/approve_activity_submit.dart';
+import 'package:ez_at_u/module/activity/model/response/select_activity_by_student_screen.dart';
+import 'package:ez_at_u/module/activity/model/response/select_activity_by_student_submit.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
@@ -395,6 +397,60 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
         }
       } on DioError catch (e) {
         emit(SubmitApproveActivityByTeacherErrorState(message: e.response?.statusMessage ?? ""));
+      }
+    });
+    on<SelectActivityByStudentScreenInfoEvent>((event, emit) async {
+      try {
+        emit(ActivityLoading());
+        print("CheckActivity 13 == AddActivityScreenInfoEvent");
+        await  checkActivityEventInitial(event, emit) ;
+        print("เข้ามั้ยนะ");
+        Response response = await SelectActivityByStudentScreenInfo();
+        emit(ActivityEndLoading());
+        if (response.statusCode == 200) {
+          SelectActivityByStudentScreenApi selectActivityByStudentScreenInfoResponse =
+          SelectActivityByStudentScreenApi.fromJson(response.data);
+          if (selectActivityByStudentScreenInfoResponse.head?.status == 200) {
+            print("เข้า success");
+            emit(selectActivityByStudentScreenInfoSuccessState(
+                response: selectActivityByStudentScreenInfoResponse));
+          } else {
+            print("เข้า error");
+            emit(ActivityError(
+                message: selectActivityByStudentScreenInfoResponse.head?.message ?? ""));
+          }
+        } else {
+          print("เข้า error");
+          emit(ActivityError(message: response.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(ActivityError(message: e.response?.statusMessage ?? ""));
+      }
+    });
+    on<SubmitSelectActivityByStudentEvent>((event, emit) async {
+      try {
+        Response responseSubmitSelectActivityByStudent = await SubmitSelectActivityByStudent(
+          activityNameId : event.activityNameId,
+        );
+        emit(SubmitSelectActivityByStudentLoadingState());
+        print("CheckActivity 14 == SubmitSelectActivityByStudentEvent");
+        await  checkActivityEventInitial(event, emit) ;
+        print(responseSubmitSelectActivityByStudent.statusCode);
+        emit(SubmitSelectActivityByStudentEndLoadingState());
+        if (responseSubmitSelectActivityByStudent.statusCode == 200) {
+          SelectActivityByStudentSubmit selectActivityByStudentResponse =
+          SelectActivityByStudentSubmit.fromJson(responseSubmitSelectActivityByStudent.data);
+          if (selectActivityByStudentResponse.head?.status == 200) {
+            emit(SubmitSelectActivityByStudentState(responseSelectActivityByStudentSubmit: selectActivityByStudentResponse));
+          } else {
+            emit(SubmitSelectActivityByStudentErrorState(message: selectActivityByStudentResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(SubmitSelectActivityByStudentErrorState(
+              message: responseSubmitSelectActivityByStudent.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(SubmitSelectActivityByStudentErrorState(message: e.response?.statusMessage ?? ""));
       }
     });
   }
