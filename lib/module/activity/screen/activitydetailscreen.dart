@@ -135,7 +135,7 @@ class _ActivityDetailPageState extends State<ActivityDetailPage>
             print(state.message);
           }
         }
-        if (state is SubmitDeleteActivityState) {
+        if (state is SubmitDeleteActivityByStudentState) {
           // Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeScreen()));
           Navigator.pop(context);
         }
@@ -392,78 +392,113 @@ buildContextActivity(
                   ),
                 ),
               ),
-              showButton
-                  ? Padding(
-                      padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.transparent,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                                width: MediaQuery.of(context).size.width * 0.35,
-                                child: ButtonCustom(
-                                  onPressed: () {
-                                    // context.read<ActivityBloc>().add(OnClickEditActivityScreenInfoEvent(data: data));
-                                    // context.read<ActivityBloc>().add(EditActivityScreenInfoEvent(data: data));
-                                    Navigator.pushReplacement(context,
-                                        MaterialPageRoute(builder: (context) {
-                                      return EditActivityScreen(data: data);
-                                    }));
-                                  },
-                                  label: '${activityScreenText.buttonleft}',
-                                  colortext: tcButtonTextBlack,
-                                  colorbutton: tcButtonTextWhite,
-                                  sizetext: sizeTextSmaller14,
-                                  colorborder: tcButtonTextBoarder,
-                                  sizeborder: 1.0,
-                                )),
-                            const SizedBox(
-                              width: 50,
-                            ),
-                            SizedBox(
-                                width: MediaQuery.of(context).size.width * 0.35,
-                                child: ButtonCustom(
-                                  colortext: tcButtonTextWhite,
-                                  colorbutton: tcButtonTextRed,
-                                  sizetext: sizeTextSmaller14,
-                                  colorborder: tcButtonTextRedBoarder,
-                                  sizeborder: 10,
-                                  label: '${activityScreenText.buttonright}',
-                                  onPressed: () {
-                                    dialogOneLineTwoBtnWarning(
-                                        context,
-                                        alertText?.alertdeleteactivity ?? "",
-                                        buttonText?.buttonyes ?? "",
-                                        buttonText?.buttonno ?? "",
-                                        onClickBtn: (String result) {
-                                      Navigator.of(context).pop();
-                                      switch (result) {
-                                        case 'Cancel':
-                                          {
-                                            break;
-                                          }
-                                        case 'OK':
-                                          {
-                                            context.read<ActivityBloc>().add(
-                                                SubmitDeleteActivityEvent(
-                                                    id: int.parse(data.id)));
-                                            if (kDebugMode) {
-                                              print('id คือ ${data.id}');
-                                            }
-                                          }
-                                      }
-                                    });
-                                  },
-                                )),
-                          ],
-                        ),
-                      ),
-                    )
-                  : const Text(''),
+              // showButton
+              //     ? Padding(
+              //         padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+              //         child: Container(
+              //           decoration: BoxDecoration(
+              //             color: Colors.transparent,
+              //             borderRadius: BorderRadius.circular(10),
+              //           ),
+              //           child: Row(
+              //             mainAxisAlignment: MainAxisAlignment.center,
+              //             children: [
+              //               SizedBox(
+              //                   width: MediaQuery.of(context).size.width * 0.35,
+              //                   child: ButtonCustom(
+              //                     onPressed: () {
+              //                       // context.read<ActivityBloc>().add(OnClickEditActivityScreenInfoEvent(data: data));
+              //                       // context.read<ActivityBloc>().add(EditActivityScreenInfoEvent(data: data));
+              //                       Navigator.pushReplacement(context,
+              //                           MaterialPageRoute(builder: (context) {
+              //                         return EditActivityScreen(data: data);
+              //                       }));
+              //                     },
+              //                     label: '${activityScreenText.buttonleft}',
+              //                     colortext: tcButtonTextBlack,
+              //                     colorbutton: tcButtonTextWhite,
+              //                     sizetext: sizeTextSmaller14,
+              //                     colorborder: tcButtonTextBoarder,
+              //                     sizeborder: 1.0,
+              //                   )),
+              //               const SizedBox(
+              //                 width: 50,
+              //               ),
+              //               SizedBox(
+              //                   width: MediaQuery.of(context).size.width * 0.35,
+              //                   child: ButtonCustom(
+              //                     colortext: tcButtonTextWhite,
+              //                     colorbutton: tcButtonTextRed,
+              //                     sizetext: sizeTextSmaller14,
+              //                     colorborder: tcButtonTextRedBoarder,
+              //                     sizeborder: 10,
+              //                     label: '${activityScreenText.buttonright}',
+              //                     onPressed: () {
+              //                       dialogOneLineTwoBtnWarning(
+              //                           context,
+              //                           alertText?.alertdeleteactivity ?? "",
+              //                           buttonText?.buttonyes ?? "",
+              //                           buttonText?.buttonno ?? "",
+              //                           onClickBtn: (String result) {
+              //                         Navigator.of(context).pop();
+              //                         switch (result) {
+              //                           case 'Cancel':
+              //                             {
+              //                               break;
+              //                             }
+              //                           case 'OK':
+              //                             {
+              //                               context.read<ActivityBloc>().add(
+              //                                   SubmitDeleteActivityByStudentEvent(
+              //                                       id: int.parse(data.id)));
+              //                               if (kDebugMode) {
+              //                                 print('id คือ ${data.id}');
+              //                               }
+              //                             }
+              //                         }
+              //                       });
+              //                     },
+              //                   )),
+              //             ],
+              //           ),
+              //         ),
+              //       )
+              //     : const Text(''),
+              SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.35,
+                  child: ButtonCustom(
+                    colortext: tcButtonTextWhite,
+                    colorbutton: tcButtonTextRed,
+                    sizetext: sizeTextSmaller14,
+                    colorborder: tcButtonTextRedBoarder,
+                    sizeborder: 10,
+                    label: '${activityScreenText.buttonright}',
+                    onPressed: () {
+                      dialogOneLineTwoBtnWarning(
+                          context,
+                          alertText?.alertdeleteactivity ?? "",
+                          buttonText?.buttonyes ?? "",
+                          buttonText?.buttonno ?? "",
+                          onClickBtn: (String result) {
+                            Navigator.of(context).pop();
+                            switch (result) {
+                              case 'Cancel':
+                                {
+                                  break;
+                                }
+                              case 'OK':
+                                {
+                                  context.read<ActivityBloc>().add(
+                                      SubmitDeleteActivityByStudentEvent(
+                                          activityId: int.parse(data.activityid)));
+                                  if (kDebugMode) {
+                                    print('activity id คือ ${data.activityid}');
+                                  }
+                                }
+                            }
+                          });
+                    },
+                  )),
             ]),
           ),
         ),

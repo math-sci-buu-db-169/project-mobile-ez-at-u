@@ -35,10 +35,10 @@ class SubmitAddEditActivityEvent extends ActivityEvent {
     required this.detail,
 });
 }
-class SubmitDeleteActivityEvent extends ActivityEvent {
-  int id;
-  SubmitDeleteActivityEvent({
-    required this.id,
+class SubmitDeleteActivityByStudentEvent extends ActivityEvent {
+  int activityId;
+  SubmitDeleteActivityByStudentEvent({
+    required this.activityId,
 });
 }
 //---------Teacher-----------//

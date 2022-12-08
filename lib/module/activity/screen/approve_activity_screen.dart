@@ -135,7 +135,7 @@ class _ApproveActivityPageState extends State<ApproveActivityPage>
             print(state.message);
           }
         }
-        if (state is SubmitDeleteActivityState) {
+        if (state is SubmitDeleteActivityByStudentState) {
           // Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeScreen()));
           Navigator.pop(context);
         }

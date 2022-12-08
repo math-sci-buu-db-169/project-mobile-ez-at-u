@@ -2,6 +2,7 @@ import 'package:ez_at_u/module/activity/model/response/activity_list_teacher_scr
 import 'package:ez_at_u/module/activity/model/response/activity_name_list_by_teacher.dart';
 import 'package:ez_at_u/module/activity/model/response/add_edit_delete_activity_by_teacher_screen.dart';
 import 'package:ez_at_u/module/activity/model/response/approve_activity_submit.dart';
+import 'package:ez_at_u/module/activity/model/response/default_submit_response.dart';
 import 'package:ez_at_u/module/activity/model/response/select_activity_by_student_screen.dart';
 import 'package:ez_at_u/module/activity/model/response/select_activity_by_student_submit.dart';
 import 'package:flutter/foundation.dart';
@@ -189,27 +190,27 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
         emit(SubmitAddEditActivityError(message: e.response?.statusMessage ?? ""));
       }
     });
-    on<SubmitDeleteActivityEvent>((event, emit) async {
+    on<SubmitDeleteActivityByStudentEvent>((event, emit) async {
       try {
-        emit(ActivityDetailLoading());
+        emit(ActivityLoading());
         print("CheckActivity 8  == SubmitDeleteActivityEvent");
         await  checkActivityEventInitial(event, emit) ;
-        Response responseDeleteSubmit = await submitDeleteActivity(
-          event.id,
+        Response responseDeleteSubmit = await submitDeleteActivityByStudent(
+          event.activityId,
         );
-        emit(ActivityDetailEndLoading());
+        emit(ActivityEndLoading());
 
         if (responseDeleteSubmit.statusCode == 200) {
           try {
-            DeleteResponse deleteResponse =
-                DeleteResponse.fromJson(responseDeleteSubmit.data);
+            DefaultSubmitResponse deleteResponse =
+            DefaultSubmitResponse.fromJson(responseDeleteSubmit.data);
 
             if (kDebugMode) {
               print("deleteResponse.head?.status is ${deleteResponse.head?.status}");
             }
 
             if (deleteResponse.head?.status == 200) {
-              emit(SubmitDeleteActivityState(responseDelete: deleteResponse));
+              emit(SubmitDeleteActivityByStudentState(responseDelete: deleteResponse));
             } else {
               if (kDebugMode) {
                 print("ActivityError  + 1");

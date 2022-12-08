@@ -54,10 +54,10 @@ class SubmitAddEditActivityError extends ActivityState {
   String message;
   SubmitAddEditActivityError({required this.message});
 }
-class SubmitDeleteActivityState extends ActivityState {
-  DeleteResponse responseDelete;
+class SubmitDeleteActivityByStudentState extends ActivityState {
+  DefaultSubmitResponse responseDelete;
 
-  SubmitDeleteActivityState({required this.responseDelete});
+  SubmitDeleteActivityByStudentState({required this.responseDelete});
 }
 class DefaultState extends ActivityState {}
 class RefreshTokenSuccessState extends ActivityState{

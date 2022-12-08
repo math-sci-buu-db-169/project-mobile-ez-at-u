@@ -57,19 +57,19 @@ class ActivityRepository  {
     );
   }
 
-  Future<Response> submitDeleteActivity(
-      int id,
-      ) async {
-    if (kDebugMode) {
-      print("id ที่จะลบคือ$id");
-    }
-    return await MyDio.createDioServer().post("/activity/submitaddeditactivity",
-    data: jsonEncode({
-      "activityid": id,
-      "isdelete": "true"
-    })
-    );
-  }
+  // Future<Response> submitDeleteActivity(
+  //     int id,
+  //     ) async {
+  //   if (kDebugMode) {
+  //     print("id ที่จะลบคือ$id");
+  //   }
+  //   return await MyDio.createDioServer().post("/activity/submitaddeditactivity",
+  //   data: jsonEncode({
+  //     "activityid": id,
+  //     "isdelete": "true"
+  //   })
+  //   );
+  // }
 
   Future<Response> getRefreshToken({required String refreshToken}) async {
     return await MyDio.createDioServer().post("/login/refresh/token",
@@ -164,4 +164,16 @@ class ActivityRepository  {
     );
   }
 //----------------------------------------------------------------------------
+  Future<Response> submitDeleteActivityByStudent(
+      int activityId,
+      ) async {
+    if (kDebugMode) {
+      print("activity id ที่จะลบคือ $activityId");
+    }
+    return await MyDio.createDioServer().post("/activity/deleteactivitybystudent",
+        data: jsonEncode({
+          "activityid": activityId
+        })
+    );
+  }
 }
