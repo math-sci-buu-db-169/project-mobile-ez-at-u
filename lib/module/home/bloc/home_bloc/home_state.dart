@@ -18,7 +18,7 @@ class HomeError extends HomeState {
 class ScreenInfoHomeSuccessState extends HomeState {
   ScreenHomeResponse responseScreenInfoHome;
   ApiProfileResponse responseProfile;
-  ScreenStatusActivityResponse responseActivity;
+  ScreenStatusActivityStudentResponse responseActivity;
   // AlertNoActivityResponse  responseNoActivity;
   ScreenInfoHomeSuccessState({
     required this.responseScreenInfoHome,
@@ -34,12 +34,12 @@ class ScreenInfoHomeSettingSuccessState extends HomeState {
   });
 }
 
-class ScreenInfoHomeNoActivitySuccessState extends HomeState {
+class ScreenInfoHomeNoActivityStudentSuccessState extends HomeState {
   ScreenHomeResponse responseScreenInfoHome;
   ApiProfileResponse responseProfile;
   // ScreenStatusActivityResponse responseActivity;
-  AlertNoActivityResponse responseNoActivity;
-  ScreenInfoHomeNoActivitySuccessState({
+  AlertNoActivityStudentResponse responseNoActivity;
+  ScreenInfoHomeNoActivityStudentSuccessState({
     required this.responseScreenInfoHome,
     required this.responseProfile,
     required this.responseNoActivity,

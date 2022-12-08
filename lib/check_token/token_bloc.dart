@@ -14,7 +14,6 @@ part 'token_event.dart';
 part 'token_state.dart';
 late SharedPreferences prefs;
 late String? isMainRouteRefresh;
-
 late String? isMainRouteKey;
 class TokenBloc extends Bloc<TokenEvent, TokenState>  with CheckTokenRepository{
   TokenBloc() : super(TokenInitial()) {

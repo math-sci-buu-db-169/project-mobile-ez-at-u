@@ -26,11 +26,13 @@ buildContentHomeScreen(
     ScreenHomeResponse? screenHomeResponse,
     ApiProfileResponse? screenProfileResponse,
     userLanguage,
-    ScreenStatusActivityResponse? screenStatusActivityResponse,
-    AlertNoActivityResponse? alertNoActivityResponse,
+    ScreenStatusActivityStudentResponse? screenStatusActivityResponse,
+    AlertNoActivityStudentResponse? alertNoActivityResponse,
     TextEditingController otpCodeController,
     TextEditingController passwordController,
-    {required bool activityIsEmpty,
+    {
+      required bool activityStudentIsEmpty,
+      required bool activityTeacherIsEmpty,
     required String versionApp,
     required bool isHidden,
     required int intThemeMode,
@@ -127,39 +129,26 @@ buildContentHomeScreen(
                     ]),
       body: SafeArea(
         child: Stack(children: [
-          activityIsEmpty
-              ? homeBodyEmptyWidget(
+          (userRole == "ST")?
+          activityStudentIsEmpty
+              ? homeStudentBodyEmptyActivityWidget(
                   context,
                   alertNoActivityResponse,
                 )
-              : homeBodyActivityWidget(context, screenStatusActivityResponse),
+              : homeBodyActivityWidget(context, screenStatusActivityResponse)
+              : (userRole == "TC")?
+          activityTeacherIsEmpty
+              ? homeStudentBodyEmptyActivityWidget(
+            context,
+            alertNoActivityResponse,
+          )
+              : homeBodyActivityWidget(context, screenStatusActivityResponse)
+              : Text("ไม่พบ Role ของผู้ใช้"),
           Column(
             children: [
               const Expanded(child: SizedBox()),
               (userRole == "ST")
                   ? Center(
-                      // child: ButtonIconsCustom(
-                      //   label: screenHomeResponse?.body?.screenInfo?.btnadd ??
-                      //       homeTextAdd,
-                      //   buttonIcons: Icon(
-                      //     Icons.add,
-                      //     color: Theme.of(context).iconTheme.color,
-                      //     size: 20.0,
-                      //   ),
-                      //   // colortext: Theme.of(context).bottomAppBarColor,
-                      //   colortext: Theme.of(context).bottomAppBarColor,
-                      //   colorbutton: Theme.of(context).scaffoldBackgroundColor,
-                      //   sizetext: 14,
-                      //   colorborder: Theme.of(context).scaffoldBackgroundColor,
-                      //   sizeborder: 3,
-                      //   onPressed: () {
-                      //     Navigator.push(
-                      //         context,
-                      //         MaterialPageRoute(
-                      //             builder: (context) =>
-                      //                 const AddActivityScreen()));
-                      //   },
-                      // ),
                       child: ButtonIconsCustom(
                         label: screenHomeResponse?.body?.screenInfo?.btnadd ??
                             homeTextAdd,

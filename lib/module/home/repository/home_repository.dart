@@ -16,7 +16,7 @@ class HomeRepository {
         .post("/profile/profilescreen", data: jsonEncode({}));
   }
 
-  Future<Response> getApiActivity() async {
+  Future<Response> getApiActivityStudent() async {
     return await MyDio.createDioServer()
         .post("/api/home/activityscreen", data: jsonEncode({}));
   }
@@ -40,7 +40,7 @@ class HomeRepository {
         data: jsonEncode({"password": password, "refreshToken": refreshToken}));
   }
 
-  Future<Response> getApiNoActivity() async {
+  Future<Response> getApiNoActivityStudent() async {
     return await MyDio.createDioServer()
         .post("/api/home/noactivity", data: jsonEncode({}));
   }
@@ -92,4 +92,25 @@ class HomeRepository {
         })
     );
   }
+  Future<Response> getScreenActivityListTeacher(String filterstatus, int? studentid, String studentname, String activityname) async {
+    print(filterstatus);
+    print(studentid);
+    print(studentname);
+    print(activityname);
+    return await MyDio.createDioServer().post("/activity/activitylistteacher",
+        data: jsonEncode({
+          "filterstatus": filterstatus,
+          "studentid": studentid,
+          "studentname": studentname,
+          "activityname": activityname
+        })
+    );
+  }
+  Future<Response> getUserRole() async {
+    return await MyDio.createDioServer().post("/api/home/getuserrole",
+        data: jsonEncode({
+        })
+    );
+  }
+
 }

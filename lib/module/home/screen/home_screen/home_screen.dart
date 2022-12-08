@@ -41,9 +41,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> with ProgressDialog {
   ScreenHomeResponse? _screenHomeResponse;
   ApiProfileResponse? _screenProfileResponse;
-  ScreenStatusActivityResponse? _screenStatusActivityResponse;
+  ScreenStatusActivityStudentResponse? _screenStatusActivityResponse;
 
-  AlertNoActivityResponse? _noActivityResponse;
+  AlertNoActivityStudentResponse? _noActivityResponse;
 
   TextEditingController otpCodeController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -201,11 +201,12 @@ class _HomePageState extends State<HomePage> with ProgressDialog {
               _userLanguage,
               _screenStatusActivityResponse,
               _noActivityResponse,
-              activityIsEmpty: false,
+              activityStudentIsEmpty: false,
+              activityTeacherIsEmpty: false,
               versionApp: _packageInfo.version,
               otpCodeController,
               passwordController);
-        } else if (state is ScreenInfoHomeNoActivitySuccessState) {
+        } else if (state is ScreenInfoHomeNoActivityStudentSuccessState) {
           _screenHomeResponse = state.responseScreenInfoHome;
           _screenProfileResponse = state.responseProfile;
           _noActivityResponse = state.responseNoActivity;
@@ -222,7 +223,8 @@ class _HomePageState extends State<HomePage> with ProgressDialog {
               _userLanguage,
               _screenStatusActivityResponse,
               _noActivityResponse,
-              activityIsEmpty: true,
+              activityStudentIsEmpty: true,
+              activityTeacherIsEmpty: true,
               versionApp: _packageInfo.version,
               otpCodeController,
               passwordController);
@@ -234,7 +236,7 @@ class _HomePageState extends State<HomePage> with ProgressDialog {
         ));
       },
       buildWhen: (context, state) {
-        return state is ScreenInfoHomeSuccessState || state is ScreenInfoHomeNoActivitySuccessState;
+        return state is ScreenInfoHomeSuccessState || state is ScreenInfoHomeNoActivityStudentSuccessState;
       },
     );
   }

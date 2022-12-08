@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../model/response/screen_status_activity_response.dart';
 
 buildListActivity(BuildContext context,
-    ScreenStatusActivityResponse? screenstatusActivityResponse) {
+    ScreenStatusActivityStudentResponse? screenstatusActivityResponse) {
   String? userRole = "ST";
   Color? appBarBackgroundColor = Theme.of(context).appBarTheme.backgroundColor??Colors.white;
   Color? appBarforegroundColor = Theme.of(context).appBarTheme.foregroundColor??Colors.black;

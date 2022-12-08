@@ -2,25 +2,25 @@ import 'dart:convert';
 /// head : {"status":200,"message":"success","modulename":"Activity","timeexpire":false}
 /// body : {"screeninfo":{"titleapproved":"Approved!","titleunapproved":"Waiting!","titlerejected":"Disapproved!","textactivity":"Activity","textyear":"Year","textterm":"Term","textstartdate":"Start date","textfinishdate":"Finish date","textunittime":"hr : min","texttime":"Total time","textvenue":"Venue","textobjectives":"Objectives","edtapprover":"Approver","textdetail":"Detail","buttonleft":"Edit","buttonright":"Delete"},"errorbutton":{"buttonok":"OK","buttonconfirm":"Confirm","buttonyes":"Yes","buttonno":"No","buttoncancel":"Cancel"},"alertmessage":{"alertdeleteactivity":"Do you want to delete this activity?"},"activity":[{"activityid":"9","name":"Test add by swagger 1 and edit to see in approve","startdate":"11/12/2022","finishdate":"11/12/2022","venue":"Tonsai home","objectives":"1.to test","teachername":"เดโมชื่อ","teacherlastname":"เดโมนามสกุล","status":"Unapproved!","color":"#FAFFBE"},{"activityid":"8","name":"TEST2","startdate":"11/11/2011","finishdate":"11/11/2011","venue":"BBB","objectives":"67890","teachername":"เดโมชื่อ","teacherlastname":"เดโมนามสกุล","status":"Unapproved!","color":"#FAFFBE"},{"activityid":"7","name":"testbyphone6","startdate":"4/12/2022","finishdate":"4/12/2022","venue":"-","objectives":"1234567788","teachername":"เดโมชื่อ","teacherlastname":"เดโมนามสกุล","status":"Unapproved!","color":"#FAFFBE"},{"activityid":"6","name":"กิจกรรมเพิ่มโดยอาจารย์1 (Activity that add by teacher 1)","startdate":"6/12/2022","finishdate":"6/12/2022","venue":"BUU","objectives":"55555","teachername":"อารยา","teacherlastname":"วิวัฒน์วานิช","status":"Unapproved!","color":"#FAFFBE"},{"activityid":"5","name":"Test by phone 1","startdate":"4/12/2022","finishdate":"4/12/2022","venue":"","objectives":"1.aaa\n2.bbb\n3.ccc","teachername":"เดโมชื่อ","teacherlastname":"เดโมนามสกุล","status":"Unapproved!","color":"#FAFFBE"},{"activityid":"4","name":"TEST2","startdate":"11/11/2011","finishdate":"11/11/2011","venue":"BBB","objectives":"67890","teachername":"เดโมชื่อ","teacherlastname":"เดโมนามสกุล","status":"Unapproved!","color":"#FAFFBE"},{"activityid":"3","name":"Test add by swagger 1 and edit to see in approve","startdate":"11/12/2022","finishdate":"11/12/2022","venue":"Tonsai home","objectives":"1.to test","teachername":"เดโมชื่อ","teacherlastname":"เดโมนามสกุล","status":"Rejected!","color":"#f3f6f4"},{"activityid":"2","name":"TEST2","startdate":"11/11/2011","finishdate":"11/11/2011","venue":"BBB","objectives":"67890","teachername":"เดโมชื่อ","teacherlastname":"เดโมนามสกุล","status":"Approved!","color":"#C7FFAD"}]}
 
-ScreenStatusActivityResponse screenStatusActivityResponseFromJson(String str) => ScreenStatusActivityResponse.fromJson(json.decode(str));
-String screenStatusActivityResponseToJson(ScreenStatusActivityResponse data) => json.encode(data.toJson());
-class ScreenStatusActivityResponse {
-  ScreenStatusActivityResponse({
+ScreenStatusActivityStudentResponse screenStatusActivityResponseFromJson(String str) => ScreenStatusActivityStudentResponse.fromJson(json.decode(str));
+String screenStatusActivityResponseToJson(ScreenStatusActivityStudentResponse data) => json.encode(data.toJson());
+class ScreenStatusActivityStudentResponse {
+  ScreenStatusActivityStudentResponse({
       Head? head, 
       Body? body,}){
     _head = head;
     _body = body;
 }
 
-  ScreenStatusActivityResponse.fromJson(dynamic json) {
+  ScreenStatusActivityStudentResponse.fromJson(dynamic json) {
     _head = json['head'] != null ? Head.fromJson(json['head']) : null;
     _body = json['body'] != null ? Body.fromJson(json['body']) : null;
   }
   Head? _head;
   Body? _body;
-ScreenStatusActivityResponse copyWith({  Head? head,
+ScreenStatusActivityStudentResponse copyWith({  Head? head,
   Body? body,
-}) => ScreenStatusActivityResponse(  head: head ?? _head,
+}) => ScreenStatusActivityStudentResponse(  head: head ?? _head,
   body: body ?? _body,
 );
   Head? get head => _head;

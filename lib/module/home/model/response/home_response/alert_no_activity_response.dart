@@ -3,27 +3,27 @@ import 'dart:convert';
 /// head : {"status":200,"message":"success","module":"home"}
 /// body : {"noactivity":"ไม่พบกิจกรรมของคุณ","subactlineone":"กดปุ่ม'เพิ่ม'เพื่อบันทึกกิจกรรม","subactlinetwo":"หรือกรุณาตรวจสอบการสถานะกิจกรรมของคุณอีกครั้ง"}
 
-AlertNoActivityResponse alertNoActivityResponseFromJson(String str) =>
-    AlertNoActivityResponse.fromJson(json.decode(str));
-String alertNoActivityResponseToJson(AlertNoActivityResponse data) => json.encode(data.toJson());
+AlertNoActivityStudentResponse alertNoActivityResponseFromJson(String str) =>
+    AlertNoActivityStudentResponse.fromJson(json.decode(str));
+String alertNoActivityResponseToJson(AlertNoActivityStudentResponse data) => json.encode(data.toJson());
 
-class AlertNoActivityResponse {
-  AlertNoActivityResponse({
+class AlertNoActivityStudentResponse {
+  AlertNoActivityStudentResponse({
     Head? head,
     Body? body,}){
     _head = head;
     _body = body;
   }
 
-  AlertNoActivityResponse.fromJson(dynamic json) {
+  AlertNoActivityStudentResponse.fromJson(dynamic json) {
     _head = json['head'] != null ? Head.fromJson(json['head']) : null;
     _body = json['body'] != null ? Body.fromJson(json['body']) : null;
   }
   Head? _head;
   Body? _body;
-  AlertNoActivityResponse copyWith({  Head? head,
+  AlertNoActivityStudentResponse copyWith({  Head? head,
     Body? body,
-  }) => AlertNoActivityResponse(  head: head ?? _head,
+  }) => AlertNoActivityStudentResponse(  head: head ?? _head,
     body: body ?? _body,
   );
   Head? get head => _head;

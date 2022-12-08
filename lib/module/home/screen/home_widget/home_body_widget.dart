@@ -7,7 +7,7 @@ import '../../../../module/home/model/response/home_response/alert_no_activity_r
 
 homeBodyActivityWidget(
   BuildContext context,
-  ScreenStatusActivityResponse? screenStatusActivityResponse,
+  ScreenStatusActivityStudentResponse? screenStatusActivityResponse,
 ) {
   return Container(
     color: Theme.of(context).scaffoldBackgroundColor,
@@ -28,9 +28,9 @@ homeBodyActivityWidget(
   );
 }
 
-homeBodyEmptyWidget(
+homeStudentBodyEmptyActivityWidget(
   BuildContext context,
-  AlertNoActivityResponse? alertNoActivityResponse,
+  AlertNoActivityStudentResponse? alertNoActivityResponse,
 ) {
   return Container(
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: transparent),
