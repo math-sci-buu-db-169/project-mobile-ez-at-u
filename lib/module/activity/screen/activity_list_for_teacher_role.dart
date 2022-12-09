@@ -283,14 +283,14 @@ class _ActivityListForTeacherPageState
                       widget.searchActivityController.text = valuePassword;
                       print(valuePassword);
                       switch(optionSearch) {
-                        case 1: {
+                        case 0: {
                           context.read<ActivityBloc>().add(ActivityListTeacherSearchScreenInfoEvent(filterstatus: searchStatus,
                             studentid: null,
                             studentname: widget.searchActivityController.text,
                             activityname: '',));
                         }
                         break;
-                        case 2: {
+                        case 1: {
                           context.read<ActivityBloc>().add(ActivityListTeacherSearchScreenInfoEvent(filterstatus: searchStatus,
                             studentid: null,
                             studentname:'' ,
@@ -324,7 +324,8 @@ class _ActivityListForTeacherPageState
                                 onTap: () {
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
-                                        return ApproveActivityScreen(
+                                        return
+                                          ApproveActivityScreen(
                                             appBarBackgroundColor: appBarBackgroundColor,
                                             appBarForegroundColor: appBarForegroundColor,
                                             activityScreenText: widget.approveActivityScreenApi?.body?.screeninfo,

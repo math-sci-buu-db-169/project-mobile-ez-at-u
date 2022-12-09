@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 
-class ItemActivity extends StatelessWidget {
+class ItemActivityStudent extends StatelessWidget {
   final dynamic data;
   final dynamic title;
   final GestureTapCallback? onTap;
-  const ItemActivity({Key? key, required this.data, this.onTap, this.title }) : super(key: key);
+  const ItemActivityStudent({Key? key, required this.data, this.onTap, this.title }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +34,49 @@ class ItemActivity extends StatelessWidget {
                     title: title?.textactivity?? statusActivityTextActivity, dataDetail:data?.name ??'-'),
                 _buildListEmpty(),
                 _buildListActivity(title: title?.edtapprover?? statusActivityEdtApprover, dataDetail: '$name  $lastname'),
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+        ],
+      ),
+    );
+  }
+}
+class ItemActivityTeacher extends StatelessWidget {
+  final dynamic data;
+  final dynamic title;
+  final GestureTapCallback? onTap;
+  const ItemActivityTeacher({Key? key, required this.data, this.onTap, this.title }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    String name = data?.stdname??'-';
+    String lastname = data?.stdlastname??'-';
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        children: [
+          Container(
+
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), color: HexColor(data?.color ?? "#e6e8e6")),
+            // margin: EdgeInsets.only(right: 10),
+            padding: const EdgeInsets.all(10),
+            width: MediaQuery.of(context).size.width ,
+            margin:  const EdgeInsets.only(left: 0,top: 3,right: 0 , bottom: 0),
+            child: Table(
+              border: TableBorder.symmetric(outside: const BorderSide(width: 2, color: Colors.transparent)),
+              columnWidths: const {0: FractionColumnWidth(0.3), 1: FractionColumnWidth(0.03), 2: FractionColumnWidth(0.65)},
+              // defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+              children: [
+                _buildListActivity(
+                    title: title?.textactivity?? statusActivityTextActivity, dataDetail:data?.acname ??'-'),
+                _buildListEmpty(),
+                _buildListActivity(title: title?.student?? statusActivityEdtApprover, dataDetail: '$name  $lastname'),
+                _buildListEmpty(),
+                _buildListActivity(title: title?.studentcode?? statusActivityEdtApprover, dataDetail: data?.stdcode ??'-'),
               ],
             ),
           ),

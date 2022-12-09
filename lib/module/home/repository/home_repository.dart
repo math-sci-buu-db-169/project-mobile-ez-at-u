@@ -92,22 +92,25 @@ class HomeRepository {
         })
     );
   }
-  Future<Response> getScreenActivityListTeacher(String filterstatus, int? studentid, String studentname, String activityname) async {
-    print(filterstatus);
-    print(studentid);
-    print(studentname);
-    print(activityname);
+  Future<Response> getScreenActivityListTeacher() async {
+
     return await MyDio.createDioServer().post("/activity/activitylistteacher",
         data: jsonEncode({
-          "filterstatus": filterstatus,
-          "studentid": studentid,
-          "studentname": studentname,
-          "activityname": activityname
+          "filterstatus": 'U',
+          "studentid": null,
+          "studentname": '',
+          "activityname": ''
         })
     );
   }
   Future<Response> getUserRole() async {
     return await MyDio.createDioServer().post("/api/home/getuserrole",
+        data: jsonEncode({
+        })
+    );
+  }
+  Future<Response> getApiNoActivityTeacher() async {
+    return await MyDio.createDioServer().post("/api/home/noactivityteacher",
         data: jsonEncode({
         })
     );

@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:ez_at_u/module/activity/model/response/activity_list_teacher_screen.dart';
 import 'package:ez_at_u/module/activity/model/response/screen_status_activity_response.dart';
 import 'package:ez_at_u/module/home/model/response/home_response/alert_no_activity_response.dart';
 import 'package:ez_at_u/module/home/model/response/home_response/get_user_role_response.dart';
+import 'package:ez_at_u/module/home/model/response/home_response/no_activity_teacher_response.dart';
 import 'package:ez_at_u/module/home/model/response/home_response/submit_delete_account_response.dart';
 import 'package:ez_at_u/module/home/model/response/home_response/submit_logout_response.dart';
 import 'package:ez_at_u/module/profile/model/response/api_profile_response.dart';
@@ -165,7 +167,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> with HomeRepository {
                             emit(ScreenInfoHomeSuccessState(
                                 responseScreenInfoHome: screenHomeResponse,
                                 responseProfile: apiProfileResponse,
-                                responseActivity: apiStatusActivityStudentResponse));
+                                responseActivityStudent: apiStatusActivityStudentResponse));
                           }
                           else if (apiStatusActivityStudentResponse.body?.activity?.length.toInt() == 0) {
                             Response responseAlertNoActivityStudentResponse =
@@ -176,10 +178,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> with HomeRepository {
                                   responseAlertNoActivityStudentResponse.data);
                               if (alertNoActivityStudentResponse.head?.status == 200) {
                                 emit(HomeEndLoading());
-                                emit(ScreenInfoHomeNoActivityStudentSuccessState(
+                                emit(ScreenInfoHomeNoActivityStudentAndTeacherSuccessState(
                                     responseScreenInfoHome: screenHomeResponse,
                                     responseProfile: apiProfileResponse,
-                                    responseNoActivity: alertNoActivityStudentResponse));
+                                    responseNoActivityStudent: alertNoActivityStudentResponse));
                               } else {
                                 emit(HomeError(
                                     message:
@@ -208,58 +210,58 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> with HomeRepository {
                       }
                     } else if (getUserRoleResponse.body?.userrole == "TC"){
                       //--
-                      Response responseActivityStudent = await getApiActivityStudent();
-                      if (responseActivityStudent.statusCode == 200) {
-                        ScreenStatusActivityStudentResponse apiStatusActivityStudentResponse =
-                        ScreenStatusActivityStudentResponse.fromJson(
-                            responseActivityStudent.data);
-                        if (apiStatusActivityStudentResponse.head?.status == 200) {
+                      Response responseActivityTeacher = await getScreenActivityListTeacher();
+                      if (responseActivityTeacher.statusCode == 200) {
+                        ActivityListTeacherScreen apiActivityTeacherResponse =
+                        ActivityListTeacherScreen.fromJson(
+                            responseActivityTeacher.data);
+                        if (apiActivityTeacherResponse.head?.status == 200) {
 
-                          if (apiStatusActivityStudentResponse.body?.activity?.length.toInt() != 0) {
+                          if (apiActivityTeacherResponse.body?.activitylist?.length.toInt() != 0) {
                             emit(HomeEndLoading());
                             emit(ScreenInfoHomeSuccessState(
                                 responseScreenInfoHome: screenHomeResponse,
                                 responseProfile: apiProfileResponse,
-                                responseActivity: apiStatusActivityStudentResponse));
+                                responseActivityTeacher: apiActivityTeacherResponse));
                           }
-                          else if (apiStatusActivityStudentResponse.body?.activity?.length.toInt() == 0) {
-                            Response responseAlertNoActivityStudentResponse =
-                            await getApiNoActivityStudent();
-                            if (responseAlertNoActivityStudentResponse.statusCode == 200) {
-                              AlertNoActivityStudentResponse alertNoActivityStudentResponse =
-                              AlertNoActivityStudentResponse.fromJson(
-                                  responseAlertNoActivityStudentResponse.data);
-                              if (alertNoActivityStudentResponse.head?.status == 200) {
+                          else if (apiActivityTeacherResponse.body?.activitylist?.length.toInt() == 0) {
+                            Response responseNoActivityTeacherResponse =
+                            await getApiNoActivityTeacher();
+                            if (responseNoActivityTeacherResponse.statusCode == 200) {
+                              NoActivityTeacherResponse alertNoActivityTeacherResponse =
+                              NoActivityTeacherResponse.fromJson(
+                                  responseNoActivityTeacherResponse.data);
+                              if (alertNoActivityTeacherResponse.head?.status == 200) {
                                 emit(HomeEndLoading());
-                                emit(ScreenInfoHomeNoActivityStudentSuccessState(
+                                emit(ScreenInfoHomeNoActivityStudentAndTeacherSuccessState(
                                     responseScreenInfoHome: screenHomeResponse,
                                     responseProfile: apiProfileResponse,
-                                    responseNoActivity: alertNoActivityStudentResponse));
+                                    responseNoActivityTeacher: alertNoActivityTeacherResponse));
                               } else {
                                 emit(HomeError(
                                     message:
-                                    alertNoActivityStudentResponse.head?.message ?? ""));
+                                    alertNoActivityTeacherResponse.head?.message ?? ""));
                               }
                             } else {
                               emit(HomeError(
                                   message:
-                                  responseAlertNoActivityStudentResponse.statusMessage ??
+                                  responseNoActivityTeacherResponse.statusMessage ??
                                       ""));
                             }
                           }
                           else {
                             emit(HomeError(
                                 message:
-                                apiStatusActivityStudentResponse.head?.message ?? ""));
+                                apiActivityTeacherResponse.head?.message ?? ""));
                           }
                         } else {
                           emit(HomeError(
                               message:
-                              apiStatusActivityStudentResponse.head?.message ?? ""));
+                              apiActivityTeacherResponse.head?.message ?? ""));
                         }
                       } else {
                         emit(
-                            HomeError(message: responseActivityStudent.statusMessage ?? ""));
+                            HomeError(message: responseActivityTeacher.statusMessage ?? ""));
                       }
                       //--
                     }

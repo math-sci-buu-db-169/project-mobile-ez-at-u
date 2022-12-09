@@ -1,3 +1,5 @@
+import 'package:ez_at_u/module/activity/model/response/activity_list_teacher_screen.dart';
+import 'package:ez_at_u/module/home/model/response/home_response/no_activity_teacher_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_info/package_info.dart';
@@ -41,10 +43,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> with ProgressDialog {
   ScreenHomeResponse? _screenHomeResponse;
   ApiProfileResponse? _screenProfileResponse;
-  ScreenStatusActivityStudentResponse? _screenStatusActivityResponse;
+  ScreenStatusActivityStudentResponse? _screenStatusActivityStudentResponse;
+  ActivityListTeacherScreen? _screenStatusActivityTeacherResponse;
 
-  AlertNoActivityStudentResponse? _noActivityResponse;
-
+  AlertNoActivityStudentResponse? _noActivityStudentResponse;
+  NoActivityTeacherResponse? _noActivityTeacherResponse;
   TextEditingController otpCodeController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -187,7 +190,8 @@ class _HomePageState extends State<HomePage> with ProgressDialog {
         if (state is ScreenInfoHomeSuccessState) {
           _screenHomeResponse = state.responseScreenInfoHome;
           _screenProfileResponse = state.responseProfile;
-          _screenStatusActivityResponse = state.responseActivity;
+          _screenStatusActivityStudentResponse = state.responseActivityStudent;
+          _screenStatusActivityTeacherResponse = state.responseActivityTeacher;
           _userLanguage = _screenProfileResponse?.body?.profileGeneralInfo?.langeuage ?? "TH";
           return buildContentHomeScreen(
               context,
@@ -199,17 +203,20 @@ class _HomePageState extends State<HomePage> with ProgressDialog {
               _screenHomeResponse,
               _screenProfileResponse,
               _userLanguage,
-              _screenStatusActivityResponse,
-              _noActivityResponse,
+              _screenStatusActivityStudentResponse,
+              _screenStatusActivityTeacherResponse,
+              _noActivityStudentResponse,
+              _noActivityTeacherResponse,
               activityStudentIsEmpty: false,
               activityTeacherIsEmpty: false,
               versionApp: _packageInfo.version,
               otpCodeController,
               passwordController);
-        } else if (state is ScreenInfoHomeNoActivityStudentSuccessState) {
+        } else if (state is ScreenInfoHomeNoActivityStudentAndTeacherSuccessState) {
           _screenHomeResponse = state.responseScreenInfoHome;
           _screenProfileResponse = state.responseProfile;
-          _noActivityResponse = state.responseNoActivity;
+          _noActivityStudentResponse = state.responseNoActivityStudent;
+          _noActivityTeacherResponse = state.responseNoActivityTeacher;
           _userLanguage = _screenProfileResponse?.body?.profileGeneralInfo?.langeuage ?? "TH"; //+++
           return buildContentHomeScreen(
               context,
@@ -221,8 +228,10 @@ class _HomePageState extends State<HomePage> with ProgressDialog {
               _screenHomeResponse,
               _screenProfileResponse,
               _userLanguage,
-              _screenStatusActivityResponse,
-              _noActivityResponse,
+              _screenStatusActivityStudentResponse,
+              _screenStatusActivityTeacherResponse,
+              _noActivityStudentResponse,
+              _noActivityTeacherResponse,
               activityStudentIsEmpty: true,
               activityTeacherIsEmpty: true,
               versionApp: _packageInfo.version,
@@ -236,7 +245,7 @@ class _HomePageState extends State<HomePage> with ProgressDialog {
         ));
       },
       buildWhen: (context, state) {
-        return state is ScreenInfoHomeSuccessState || state is ScreenInfoHomeNoActivityStudentSuccessState;
+        return state is ScreenInfoHomeSuccessState || state is ScreenInfoHomeNoActivityStudentAndTeacherSuccessState;
       },
     );
   }

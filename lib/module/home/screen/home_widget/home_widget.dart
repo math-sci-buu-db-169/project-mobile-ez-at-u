@@ -1,7 +1,9 @@
+import 'package:ez_at_u/module/activity/model/response/activity_list_teacher_screen.dart';
 import 'package:ez_at_u/module/activity/screen/activity_list_for_teacher_role.dart';
 import 'package:ez_at_u/module/activity/screen/activity_name_by_teacher_page.dart';
 import 'package:ez_at_u/module/activity/screen/add_activity_by_teacher.dart';
 import 'package:ez_at_u/module/activity/screen/select_activity_by_student.dart';
+import 'package:ez_at_u/module/home/model/response/home_response/no_activity_teacher_response.dart';
 import 'package:ez_at_u/module/home/screen/home_widget/setting_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -26,8 +28,10 @@ buildContentHomeScreen(
     ScreenHomeResponse? screenHomeResponse,
     ApiProfileResponse? screenProfileResponse,
     userLanguage,
-    ScreenStatusActivityStudentResponse? screenStatusActivityResponse,
-    AlertNoActivityStudentResponse? alertNoActivityResponse,
+    ScreenStatusActivityStudentResponse? screenStatusActivityStudentResponse,
+    ActivityListTeacherScreen? screenStatusActivityTeacherResponse,
+    AlertNoActivityStudentResponse? alertNoActivityStudentResponse,
+    NoActivityTeacherResponse? alertNoActivityTeacherResponse,
     TextEditingController otpCodeController,
     TextEditingController passwordController,
     {
@@ -74,13 +78,29 @@ buildContentHomeScreen(
             },
           ),
           title: Center(
-              child: Text(
+              child:
+              (userRole == "ST")?
+              Text(
                   screenHomeResponse?.body?.screenInfo?.titleact ??
                       homeTitleAct,
                   style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w500,
-                      color: Theme.of(context).appBarTheme.foregroundColor))),
+                      color: Theme.of(context).appBarTheme.foregroundColor)):
+              (userRole == "TC")?
+              Text(
+                  "HC ยืนยันกิจกรรม",
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                      color: Theme.of(context).appBarTheme.foregroundColor)):Text(
+                  screenHomeResponse?.body?.screenInfo?.titleact ??
+                      homeTitleAct,
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                      color: Theme.of(context).appBarTheme.foregroundColor))
+          ),
           actions: (userRole == "TC")
               ? <Widget>[
                   // SizedBox(
@@ -130,19 +150,21 @@ buildContentHomeScreen(
       body: SafeArea(
         child: Stack(children: [
           (userRole == "ST")?
-          activityStudentIsEmpty
+          (activityStudentIsEmpty
               ? homeStudentBodyEmptyActivityWidget(
                   context,
-                  alertNoActivityResponse,
+                  alertNoActivityStudentResponse,
                 )
-              : homeBodyActivityWidget(context, screenStatusActivityResponse)
-              : (userRole == "TC")?
-          activityTeacherIsEmpty
-              ? homeStudentBodyEmptyActivityWidget(
-            context,
-            alertNoActivityResponse,
+              : homeBodyActivityWidget(context, screenStatusActivityStudentResponse, screenStatusActivityTeacherResponse, role)
           )
-              : homeBodyActivityWidget(context, screenStatusActivityResponse)
+              : (userRole == "TC")?
+          (activityTeacherIsEmpty
+              ? homeTeacherBodyEmptyActivityWidget(
+            context,
+            alertNoActivityTeacherResponse,
+          )
+              : homeBodyActivityWidget(context, screenStatusActivityStudentResponse, screenStatusActivityTeacherResponse, role)
+          )
               : Text("ไม่พบ Role ของผู้ใช้"),
           Column(
             children: [
