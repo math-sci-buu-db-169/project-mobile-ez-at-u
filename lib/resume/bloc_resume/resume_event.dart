@@ -13,3 +13,8 @@ class GetEditScreenPreviewResumeEvent extends ResumeEvent {
 
 }
 class ResumeInnitEvent extends ResumeEvent {}
+class SentEditAboutResumeEvent extends ResumeEvent {
+   String detailsTH;
+       String detailsEN;
+  SentEditAboutResumeEvent({required this.detailsTH , required this.detailsEN});
+}

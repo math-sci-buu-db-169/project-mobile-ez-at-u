@@ -31,10 +31,22 @@ print("resumeLanguage  getPreviewResumeDataAndScreen ============ $resumeLanguag
         data: jsonEncode({
         })
     );
-  }Future<Response> sentResumeImage({required String base64Image}) async {
+  }
+  Future<Response> sentResumeImage({required String base64Image}) async {
     return await MyDio.createDioServer().post("/api/Resume/imageuploadresume",
         data: jsonEncode({
           "base64": base64Image
+        })
+    );
+  }
+  Future<Response> sentEditAboutResume({required String detailsTH,required String detailsEN,}) async {
+    print("object");
+    print(detailsTH);
+    print(detailsEN);
+    return await MyDio.createDioServer().post("/api/Resume/editaboutmeresume",
+        data: jsonEncode({
+          "detailsth": detailsTH,
+          "detailsen": detailsEN
         })
     );
   }
