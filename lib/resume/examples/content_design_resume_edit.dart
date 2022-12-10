@@ -23,6 +23,7 @@ import '../bloc_resume/resume_bloc.dart';
 import '../../module/login/screen/login_screen/login_screen.dart';
 import '../../utils/shared_preferences.dart';
 import '../model/response/pre_view_resume_response.dart';
+import '../screen_resume/edit_resume_screen.dart';
 import 'content_design_resume.dart';
 
 class ContentDesignResumeEditScreen extends StatelessWidget {
@@ -84,6 +85,10 @@ class _ContentDesignEditResumeState extends State<ContentDesignEditResume>
         }
         if (state is EditPreviewResumeEndLoading) {
           hideProgressDialog(context);
+        }
+        if (state is EditAboutResumeSuccessState) {
+
+          context.read<ResumeBloc>().add(GetEditScreenPreviewResumeEvent());
         }
         if (state is EditPreviewResumeError) {
           if (state.errorMessage.toString() == 'Unauthorized') {
@@ -210,13 +215,14 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
     Color? appBarforegroundColor =
         Theme.of(context).appBarTheme.foregroundColor ?? Colors.black;
     print(widget.isPreViewResumeResponse.body?.data?.image);
-    String isAddressValue =  "${isPreViewResumeResponse.body?.data?.address?.number ?? ''} "
+    String isAddressValue =
+        "${isPreViewResumeResponse.body?.data?.address?.number ?? ''} "
         "${isPreViewResumeResponse.body?.data?.address?.moo ?? ''} "
         " ${isPreViewResumeResponse.body?.data?.address?.soi ?? ''} "
         "${isPreViewResumeResponse.body?.data?.address?.road ?? ''} "
         "${isPreViewResumeResponse.body?.data?.address?.subdistrict ?? ''} "
         " ${isPreViewResumeResponse.body?.data?.address?.district ?? ''} "
-         "${isPreViewResumeResponse.body?.data?.address?.province ?? ''} "
+        "${isPreViewResumeResponse.body?.data?.address?.province ?? ''} "
         " ${isPreViewResumeResponse.body?.data?.address?.zipcode ?? ''}";
     TextEditingController objectives = TextEditingController();
     final myController = TextEditingController();
@@ -287,7 +293,6 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-
                         const Gap(20),
                         GestureDetector(
                             onTap: () {
@@ -334,10 +339,11 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                                 : Image.memory(
                                                     (base64Decode(
                                                         base64.normalize(widget
-                                                            .isPreViewResumeResponse
-                                                            .body
-                                                            ?.data
-                                                            ?.image??imageBase64))),
+                                                                .isPreViewResumeResponse
+                                                                .body
+                                                                ?.data
+                                                                ?.image ??
+                                                            imageBase64))),
                                                   )), //background color of inner container
                                       ),
                                     ),
@@ -492,7 +498,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                     //   textInputType: TextInputType.text,),
                     //
 
-                   Gap(spaceGap),
+                    Gap(spaceGap),
                     Card(
                       color: Theme.of(context).primaryColor.withOpacity(0.9),
                       child: Column(
@@ -508,15 +514,18 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                       "Edit Information"
                                   : "Save",
                               ontap: () {
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //       builder: (context) =>
-                                //       const ContentDesignResumeEditScreen()),
-                                // );
-                                setState(() {
-                                  isClickAbout = !isClickAbout;
-                                });
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                       EditResumeScreen(isResumeData:isPreViewResumeResponse)),
+                                );
+                                // setState(() {
+                                //   isClickAbout = !isClickAbout;
+                                //   if (isClickAbout != true)
+                                //     context.read<ResumeBloc>().add(SentEditAboutResumeEvent(detailsTH:  resumeName.text, detailsEN:  resumeName.text));
+                                // });
+
                                 print(isClickAbout);
                               }),
                           isClickAbout == false
@@ -527,6 +536,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                   appBarForeGroundColor: appBarforegroundColor)
                               : BuildTextFormFieldUnLimitCustomNotIcons(
                                   textEditingController: resumeName,
+                                  maxLength: 255,
                                   onChanged: (value) {
                                     resumeName.text = value;
                                     if (kDebugMode) {
@@ -543,7 +553,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                         ],
                       ),
                     ),
-                   Gap(spaceGap),
+                    Gap(spaceGap),
                     Card(
                       color: Theme.of(context).primaryColor.withOpacity(0.9),
                       child: Column(
@@ -595,7 +605,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                         ],
                       ),
                     ),
-                   Gap(spaceGap),
+                    Gap(spaceGap),
                     Card(
                       color: Theme.of(context).primaryColor.withOpacity(0.9),
                       child: Column(
@@ -629,16 +639,15 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                             return buildDetailResumeCustomNotIconsReadOnly(
                                 context: context,
                                 detail:
-                                "     ${isPreViewResumeResponse.body?.data?.education?[index].startdate ?? ""} - ${isPreViewResumeResponse.body?.data?.education?[index].startdate ?? ""} "
+                                    "     ${isPreViewResumeResponse.body?.data?.education?[index].startdate ?? ""} - ${isPreViewResumeResponse.body?.data?.education?[index].startdate ?? ""} "
                                     "${isPreViewResumeResponse.body?.data?.education?[index].placeofstudy ?? ""} \n"
                                     "${isPreViewResumeResponse.body?.data?.education?[index].detail ?? ""}",
                                 appBarForeGroundColor: appBarforegroundColor);
                           })),
-
                         ],
                       ),
                     ),
-                   Gap(spaceGap),
+                    Gap(spaceGap),
                     Card(
                       color: Theme.of(context).primaryColor.withOpacity(0.9),
                       child: Column(
@@ -661,10 +670,9 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                 //       const ContentDesignResumeEditScreen()),
                                 // );
                                 setState(() {
-                                  isClickContact= !isClickContact;
+                                  isClickContact = !isClickContact;
                                 });
                               }),
-
                           BuildTextFormFieldUnLimitCustomResume(
                             textEditingController: objectives,
                             onChanged: (value) {
@@ -673,8 +681,11 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                 print(objectives.text);
                               }
                             },
-                            hintLabel:isPreViewResumeResponse.body?.screenInfo?.email ?? "email",
-                            initialvalue:isPreViewResumeResponse.body?.data?.personinfo?.email,
+                            hintLabel: isPreViewResumeResponse
+                                    .body?.screenInfo?.email ??
+                                "email",
+                            initialvalue: isPreViewResumeResponse
+                                .body?.data?.personinfo?.email,
                             textInputType: TextInputType.text,
                             // iconsFile : Icons.person_rounded,
                             iconsFile: FontAwesomeIcons.envelope,
@@ -687,8 +698,11 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                 print(objectives.text);
                               }
                             },
-                            hintLabel:isPreViewResumeResponse.body?.screenInfo?.phone ?? "เบอร์โทรศัพท์",
-                            initialvalue:isPreViewResumeResponse.body?.data?.personinfo?.phone,
+                            hintLabel: isPreViewResumeResponse
+                                    .body?.screenInfo?.phone ??
+                                "เบอร์โทรศัพท์",
+                            initialvalue: isPreViewResumeResponse
+                                .body?.data?.personinfo?.phone,
                             textInputType: TextInputType.text,
                             // iconsFile : Icons.person_rounded,
                             iconsFile: FontAwesomeIcons.phone,
@@ -701,8 +715,11 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                 print(objectives.text);
                               }
                             },
-                            hintLabel:isPreViewResumeResponse.body?.screenInfo?.feacbook ?? "เฟสบุ๊ค",
-                            initialvalue:isPreViewResumeResponse.body?.data?.personinfo?.feacbook,
+                            hintLabel: isPreViewResumeResponse
+                                    .body?.screenInfo?.feacbook ??
+                                "เฟสบุ๊ค",
+                            initialvalue: isPreViewResumeResponse
+                                .body?.data?.personinfo?.feacbook,
                             textInputType: TextInputType.text,
                             // iconsFile : Icons.person_rounded,
                             iconsFile: FontAwesomeIcons.facebook,
@@ -715,18 +732,19 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                 print(objectives.text);
                               }
                             },
-                            hintLabel:isPreViewResumeResponse.body?.screenInfo?.line ?? "ไลน์",
-                            initialvalue:isPreViewResumeResponse.body?.data?.personinfo?.line,
+                            hintLabel: isPreViewResumeResponse
+                                    .body?.screenInfo?.line ??
+                                "ไลน์",
+                            initialvalue: isPreViewResumeResponse
+                                .body?.data?.personinfo?.line,
                             textInputType: TextInputType.text,
                             // iconsFile : Icons.person_rounded,
                             iconsFile: FontAwesomeIcons.line,
                           ),
-
-
                         ],
                       ),
                     ),
-                   Gap(spaceGap),
+                    Gap(spaceGap),
                     Card(
                       color: Theme.of(context).primaryColor.withOpacity(0.9),
                       child: Column(
@@ -734,12 +752,12 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                           buildTitleEditDataResume(
                               context: context,
                               isPreViewResumeTitle: isPreViewResumeResponse
-                                  .body?.screenInfo?.address ??
+                                      .body?.screenInfo?.address ??
                                   "ที่อยู่",
                               isPreViewResumeEditData: isClickAddress == false
                                   ? isPreViewResumeResponse
-                                  .body?.screenInfo?.editinfomations ??
-                                  "Edit Information"
+                                          .body?.screenInfo?.editinfomations ??
+                                      "Edit Information"
                                   : "Save",
                               ontap: () {
                                 // Navigator.push(
@@ -749,10 +767,9 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                 //       const ContentDesignResumeEditScreen()),
                                 // );
                                 setState(() {
-                                  isClickAddress= !isClickAddress;
+                                  isClickAddress = !isClickAddress;
                                 });
                               }),
-
                           BuildTextFormFieldUnLimitCustomResume(
                             textEditingController: objectives,
                             onChanged: (value) {
@@ -761,8 +778,8 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                 print(objectives.text);
                               }
                             },
-                            hintLabel:"",
-                            initialvalue:isAddressValue,
+                            hintLabel: "",
+                            initialvalue: isAddressValue,
                             textInputType: TextInputType.text,
                             // iconsFile : Icons.person_rounded,
                             iconsFile: FontAwesomeIcons.locationDot,
@@ -770,7 +787,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                         ],
                       ),
                     ),
-                   Gap(spaceGap),
+                    Gap(spaceGap),
                     Card(
                       color: Theme.of(context).primaryColor.withOpacity(0.9),
                       child: Column(
@@ -778,13 +795,14 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                           buildTitleEditDataResume(
                               context: context,
                               isPreViewResumeTitle: isPreViewResumeResponse
-                                  .body?.screenInfo?.experience ??
+                                      .body?.screenInfo?.experience ??
                                   "ประสบการทำงาน",
-                              isPreViewResumeEditData: isClickExperience == false
-                                  ? isPreViewResumeResponse
-                                  .body?.screenInfo?.editinfomations ??
-                                  "Edit Information"
-                                  : "Save",
+                              isPreViewResumeEditData:
+                                  isClickExperience == false
+                                      ? isPreViewResumeResponse.body?.screenInfo
+                                              ?.editinfomations ??
+                                          "Edit Information"
+                                      : "Save",
                               ontap: () {
                                 // Navigator.push(
                                 //   context,
@@ -799,21 +817,20 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                           Column(
                               children: List.generate(
                                   isPreViewResumeResponse
-                                      .body?.data?.experience?.length ??
+                                          .body?.data?.experience?.length ??
                                       0, (index) {
-                                return buildDetailResumeCustomNotIconsReadOnly(
-                                    context: context,
-                                    detail:
+                            return buildDetailResumeCustomNotIconsReadOnly(
+                                context: context,
+                                detail:
                                     "     ${isPreViewResumeResponse.body?.data?.experience?[index].startdate ?? ""} - ${isPreViewResumeResponse.body?.data?.experience?[index].startdate ?? ""} "
-                                        "${isPreViewResumeResponse.body?.data?.experience?[index].position ?? "High school education"} \n"
-                                        "${isPreViewResumeResponse.body?.data?.experience?[index].detail ?? ""}",
-                                    appBarForeGroundColor: appBarforegroundColor);
-                              })),
-
+                                    "${isPreViewResumeResponse.body?.data?.experience?[index].position ?? "High school education"} \n"
+                                    "${isPreViewResumeResponse.body?.data?.experience?[index].detail ?? ""}",
+                                appBarForeGroundColor: appBarforegroundColor);
+                          })),
                         ],
                       ),
                     ),
-                     Gap(spaceGap),
+                    Gap(spaceGap),
                     Card(
                       color: Theme.of(context).primaryColor.withOpacity(0.9),
                       child: Column(
@@ -821,13 +838,14 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                           buildTitleEditDataResume(
                               context: context,
                               isPreViewResumeTitle: isPreViewResumeResponse
-                                  .body?.screenInfo?.certificate ??
+                                      .body?.screenInfo?.certificate ??
                                   "ประสบการทำงาน",
-                              isPreViewResumeEditData: isClickCertificate == false
-                                  ? isPreViewResumeResponse
-                                  .body?.screenInfo?.editinfomations ??
-                                  "Edit Information"
-                                  : "Save",
+                              isPreViewResumeEditData:
+                                  isClickCertificate == false
+                                      ? isPreViewResumeResponse.body?.screenInfo
+                                              ?.editinfomations ??
+                                          "Edit Information"
+                                      : "Save",
                               ontap: () {
                                 // Navigator.push(
                                 //   context,
@@ -842,19 +860,19 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                           Column(
                               children: List.generate(
                                   isPreViewResumeResponse
-                                      .body?.data?.experience?.length ??
+                                          .body?.data?.experience?.length ??
                                       0, (index) {
-                                return buildDetailResumeCustomNotIconsReadOnly(
-                                    context: context,
-                                    detail:"  ${isPreViewResumeResponse.body?.data?.certificate?[index].title ?? ""} \n"
-                                        "${isPreViewResumeResponse.body?.data?.certificate?[index].description ?? ""}",
-                                    appBarForeGroundColor: appBarforegroundColor);
-                              })),
-
+                            return buildDetailResumeCustomNotIconsReadOnly(
+                                context: context,
+                                detail:
+                                    "  ${isPreViewResumeResponse.body?.data?.certificate?[index].title ?? ""} \n"
+                                    "${isPreViewResumeResponse.body?.data?.certificate?[index].description ?? ""}",
+                                appBarForeGroundColor: appBarforegroundColor);
+                          })),
                         ],
                       ),
                     ),
-                     Gap(spaceGap),
+                    Gap(spaceGap),
                     Card(
                       color: Theme.of(context).primaryColor.withOpacity(0.9),
                       child: Column(
@@ -862,12 +880,12 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                           buildTitleEditDataResume(
                               context: context,
                               isPreViewResumeTitle: isPreViewResumeResponse
-                                  .body?.screenInfo?.skill ??
+                                      .body?.screenInfo?.skill ??
                                   "ประสบการทำงาน",
                               isPreViewResumeEditData: isClickSkill == false
                                   ? isPreViewResumeResponse
-                                  .body?.screenInfo?.editinfomations ??
-                                  "Edit Information"
+                                          .body?.screenInfo?.editinfomations ??
+                                      "Edit Information"
                                   : "Save",
                               ontap: () {
                                 // Navigator.push(
@@ -880,37 +898,60 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                   isClickSkill = !isClickSkill;
                                 });
                               }),
-                      Padding(padding: EdgeInsets.only(bottom: 15),child: Column(
-                          children: List.generate(
-                              isPreViewResumeResponse
-                                  .body?.data?.skill?.length ??
-                                  0, (index) {
-                            return Padding(padding: const EdgeInsets.only(left: 10,right: 10,top: 10),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(isPreViewResumeResponse.body?.data?.skill?[index].skill ?? "",
-                                      style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w500,
-                                          color: Theme.of(context).appBarTheme.foregroundColor)),
-                                  LinearPercentIndicator(
-                                    width: MediaQuery.of(context).size.width - 200,
-                                    animation: true,
-                                    lineHeight: 20.0,
-                                    animationDuration: 2500,
-                                    percent: int. parse("${isPreViewResumeResponse.body?.data?.skill?[index].value??0}")/100.0,
-                                    center: Text("${isPreViewResumeResponse.body?.data?.skill?[index].value??0}.0%"),
-                                    linearStrokeCap: LinearStrokeCap.roundAll,
-                                    progressColor:
-                                    int. parse("${isPreViewResumeResponse.body?.data?.skill?[index].value??0}") <31?Colors.redAccent:
-                                    int. parse("${isPreViewResumeResponse.body?.data?.skill?[index].value??0}") <50?Colors.yellowAccent:
-                                    int. parse("${isPreViewResumeResponse.body?.data?.skill?[index].value??0}") <65?Colors.blueAccent:
-                                    Colors.green,
-                                  ),
-                                ],),);
-                          })),),
-                       ],
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 15),
+                            child: Column(
+                                children: List.generate(
+                                    isPreViewResumeResponse
+                                            .body?.data?.skill?.length ??
+                                        0, (index) {
+                              return Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 10, right: 10, top: 10),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                        isPreViewResumeResponse.body?.data
+                                                ?.skill?[index].skill ??
+                                            "",
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w500,
+                                            color: Theme.of(context)
+                                                .appBarTheme
+                                                .foregroundColor)),
+                                    LinearPercentIndicator(
+                                      width: MediaQuery.of(context).size.width -
+                                          200,
+                                      animation: true,
+                                      lineHeight: 20.0,
+                                      animationDuration: 2500,
+                                      percent: int.parse(
+                                              "${isPreViewResumeResponse.body?.data?.skill?[index].value ?? 0}") /
+                                          100.0,
+                                      center: Text(
+                                          "${isPreViewResumeResponse.body?.data?.skill?[index].value ?? 0}.0%"),
+                                      linearStrokeCap: LinearStrokeCap.roundAll,
+                                      progressColor: int.parse(
+                                                  "${isPreViewResumeResponse.body?.data?.skill?[index].value ?? 0}") <
+                                              31
+                                          ? Colors.redAccent
+                                          : int.parse("${isPreViewResumeResponse.body?.data?.skill?[index].value ?? 0}") <
+                                                  50
+                                              ? Colors.yellowAccent
+                                              : int.parse("${isPreViewResumeResponse.body?.data?.skill?[index].value ?? 0}") <
+                                                      65
+                                                  ? Colors.blueAccent
+                                                  : Colors.green,
+                                    ),
+                                  ],
+                                ),
+                              );
+                            })),
+                          ),
+                        ],
                       ),
                     ),
                     Card(
@@ -920,12 +961,12 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                           buildTitleEditDataResume(
                               context: context,
                               isPreViewResumeTitle: isPreViewResumeResponse
-                                  .body?.screenInfo?.language ??
+                                      .body?.screenInfo?.language ??
                                   "ประสบการทำงาน",
                               isPreViewResumeEditData: isClickLanguage == false
                                   ? isPreViewResumeResponse
-                                  .body?.screenInfo?.editinfomations ??
-                                  "Edit Information"
+                                          .body?.screenInfo?.editinfomations ??
+                                      "Edit Information"
                                   : "Save",
                               ontap: () {
                                 // Navigator.push(
@@ -938,43 +979,62 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                   isClickLanguage = !isClickLanguage;
                                 });
                               }),
-                          Padding(padding: EdgeInsets.only(bottom: 15),child: Column(
-                              children: List.generate(
-                                  isPreViewResumeResponse
-                                      .body?.data?.languge?.length ??
-                                      0, (index) {
-                                return Padding(padding: const EdgeInsets.only(left: 10,right: 10,top: 10),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(isPreViewResumeResponse.body?.data?.languge?[index].language ?? "",
-                                          style: TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w500,
-                                              color: Theme.of(context).appBarTheme.foregroundColor)),
-                                      LinearPercentIndicator(
-                                        width: MediaQuery.of(context).size.width - 200,
-                                        animation: true,
-                                        lineHeight: 20.0,
-                                        animationDuration: 2500,
-                                        percent: int. parse("${isPreViewResumeResponse.body?.data?.languge?[index].value??0}")/100.0,
-                                        center: Text("${isPreViewResumeResponse.body?.data?.languge?[index].value??0}.0%"),
-                                        linearStrokeCap: LinearStrokeCap.roundAll,
-                                        progressColor:
-                                        int. parse("${isPreViewResumeResponse.body?.data?.languge?[index].value??0}") <31?Colors.redAccent:
-                                        int. parse("${isPreViewResumeResponse.body?.data?.languge?[index].value??0}") <50?Colors.yellowAccent:
-                                        int. parse("${isPreViewResumeResponse.body?.data?.languge?[index].value??0}") <65?Colors.blueAccent:
-                                        Colors.green,
-                                      ),
-                                    ],),);
-                              })),),
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 15),
+                            child: Column(
+                                children: List.generate(
+                                    isPreViewResumeResponse
+                                            .body?.data?.languge?.length ??
+                                        0, (index) {
+                              return Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 10, right: 10, top: 10),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                        isPreViewResumeResponse.body?.data
+                                                ?.languge?[index].language ??
+                                            "",
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w500,
+                                            color: Theme.of(context)
+                                                .appBarTheme
+                                                .foregroundColor)),
+                                    LinearPercentIndicator(
+                                      width: MediaQuery.of(context).size.width -
+                                          200,
+                                      animation: true,
+                                      lineHeight: 20.0,
+                                      animationDuration: 2500,
+                                      percent: int.parse(
+                                              "${isPreViewResumeResponse.body?.data?.languge?[index].value ?? 0}") /
+                                          100.0,
+                                      center: Text(
+                                          "${isPreViewResumeResponse.body?.data?.languge?[index].value ?? 0}.0%"),
+                                      linearStrokeCap: LinearStrokeCap.roundAll,
+                                      progressColor: int.parse(
+                                                  "${isPreViewResumeResponse.body?.data?.languge?[index].value ?? 0}") <
+                                              31
+                                          ? Colors.redAccent
+                                          : int.parse("${isPreViewResumeResponse.body?.data?.languge?[index].value ?? 0}") <
+                                                  50
+                                              ? Colors.yellowAccent
+                                              : int.parse("${isPreViewResumeResponse.body?.data?.languge?[index].value ?? 0}") <
+                                                      65
+                                                  ? Colors.blueAccent
+                                                  : Colors.green,
+                                    ),
+                                  ],
+                                ),
+                              );
+                            })),
+                          ),
                         ],
                       ),
                     ),
-
-
-
-
 
                     const SizedBox(
                       height: 50,
@@ -983,32 +1043,32 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                 ),
               ),
             ),
-          )), floatingActionButton: floatingSetThemePDF(
-          context: context,
-          setState,
-          "Set Theme PDF",
-        ),
+          )),
+          floatingActionButton: floatingSetThemePDF(
+            context: context,
+            setState,
+            "Set Theme PDF",
+          ),
           floatingActionButtonLocation:
-          FloatingActionButtonLocation.centerFloat,
+              FloatingActionButtonLocation.centerFloat,
         ));
   }
 }
-floatingSetThemePDF(
-    setState,
-    String pdf, {
-      required BuildContext context,
 
-    }) {
+floatingSetThemePDF(
+  setState,
+  String pdf, {
+  required BuildContext context,
+}) {
   return FloatingActionButton.extended(
     backgroundColor:
-    Theme.of(context).appBarTheme.backgroundColor?.withOpacity(0.9),
+        Theme.of(context).appBarTheme.backgroundColor?.withOpacity(0.9),
     foregroundColor: Colors.black,
     onPressed: () {
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => const ContentDesignResumeScreen(
-              )));
+              builder: (context) => const ContentDesignResumeScreen()));
     },
     icon: Icon(
       FontAwesomeIcons.barsStaggered,

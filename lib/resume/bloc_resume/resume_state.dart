@@ -47,6 +47,7 @@ class ChooseImageUpLoadResumeSuccess extends ResumeState {
 class  EditPreviewResumeLoading extends  ResumeState {}
 
 class  EditPreviewResumeEndLoading extends  ResumeState {}
+class  EditAboutResumeSuccessState extends  ResumeState {}
 
 class EditPreviewResumeSuccessState extends  ResumeState {
   PreViewResumeResponse isPreViewResumeResponse;

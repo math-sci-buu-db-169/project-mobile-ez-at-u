@@ -168,8 +168,10 @@ class BuildTextFormFieldUnLimitCustomNotIcons extends StatelessWidget {
   final TextInputType textInputType;
   final ValueChanged<String>? onChanged;
   final String? initialvalue;
+  final int? maxLength;
   const BuildTextFormFieldUnLimitCustomNotIcons(
-      {Key? key, this.textEditingController, required this.hintLabel, this.onChanged, required this.textInputType, this.initialvalue,})
+      {Key? key, this.textEditingController, required this.hintLabel, this.onChanged, required this.textInputType, this.initialvalue, this.
+  maxLength,})
       : super(key: key);
 
   @override
@@ -181,6 +183,7 @@ class BuildTextFormFieldUnLimitCustomNotIcons extends StatelessWidget {
 
         margin: const EdgeInsets.all(5),
         child: TextFormField(
+          maxLength: maxLength,
           readOnly: false,
           textInputAction: TextInputAction.newline,
           cursorColor: appBarforegroundColor,
