@@ -72,8 +72,8 @@ Future<Uint8List> generateResume(
  String isHighSchool = isPreViewResumeResponse.body?.data?.education?[0].placeofstudy  ?? '';
  String isHighSchoolValue =isPreViewResumeResponse.body?.data?.education?[0].detail ?? '';
  String isHighSchoolValueDate = '${isPreViewResumeResponse.body?.data?.education?[0].startdate??''} - ${isPreViewResumeResponse.body?.data?.education?[0].enddate??''}';
- String isFacebook = isPreViewResumeResponse.body?.screenInfo?.feacbook ?? '';
- String isFacebookValue = isPreViewResumeResponse.body?.data?.personinfo?.feacbook ?? '';
+ String isFacebook = isPreViewResumeResponse.body?.screenInfo?.facebook ?? '';
+ String isFacebookValue = isPreViewResumeResponse.body?.data?.personinfo?.facebook ?? '';
  String isLine = isPreViewResumeResponse.body?.screenInfo?.line ?? '';
  String isLineValue =  isPreViewResumeResponse.body?.data?.personinfo?.line ?? '';
  String isIG = isPreViewResumeResponse.body?.screenInfo?.instagram ?? '';

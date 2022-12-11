@@ -37,7 +37,8 @@ class PreViewResumeResponse {
   }
 
 }
-
+/// screenInfo : {"aboutme":"เกี่ยวกับฉัน","aboutmedetail":"เกี่ยวกับฉัน รายละเอียด","address":"ที่อยู่","appliedposition":"ตำแหน่งที่สมัคร","certificate":"ใบรับรอง","contact":"ติดต่อ","textdefault":"ค่าเริ่มต้น","description":"คำอธิบาย","detail":"รายละเอียด","district":"อำเภอ","editinfomations":"แก้ไขข้อมูล","education":"การศึกษา","educationinfo":"ข้อมูลการศึกษา","email":"อีเมล","enddate":"วันสิ้นสุด","experience":"ประสบการณ์","facebook":"เฟคบุ๊ค","instagram":"อินสตาแกรม","language":"ภาษา","lastname":"นามสกุล","line":"ไลน์","moo":"หมู่","mypositions":"ตำแหน่งของฉัน","n":"นิ้ว","name":"ชื่อ","number":"ตัวเลข","phone":"โทรศัพท์","pictuce":"รูปภาพ","placeofstudy":"สถานศึกษา","position":"ตำแหน่ง","positions":"ตำแหน่ง","prefix":"คำนำหน้า","province":"จังหวัด","ratio":"อัตราส่วนภาพต้องเป็น 3:4","road":"ถนน","select":"เลือก","selectacolor":"โปรดเลือกสี\\nเพื่อใช้ในการสร้างเรซูเม่","selecttheinformation":"โปรดเลือกข้อมูล \\n ที่จะใช้ในการสร้างเรซูเม่","size":"ขนาด","sizepictuce":"ขนาดไฟล์ไม่เกิน 5 MB","skill":"ทักษะ","soi":"ซอย","startdate":"วันเริ่มต้น","subdistrict":"ตำบล","themecolor":"สีธีม","title":"หัวเรื่อง","titlesetthemecolor":"ตั้งค่าธีมและสี","twitter":"ทวิตเตอร์","type":"ประเภทการศึกษา","value":"ระดับ","whcm":"(กxส) ซม","zipcode":"รหัสไปรษณีย์","unkhown":"ไม่ทราบ","viewpdf":"PDF","titleresumeinformation":"ข้อมูลเรซูเม่"}
+/// data : {"image":"CS/DBa7FAAAAAASUVORK5CYII=","userinfo":{"prefix":"นาย 2","name":"สิทธิพล 2","lastname":"ชินโน 2"},"position":"นักพัฒนาซอฟต์แวร์","aboutme":"Experienced software engineer with a passion for developing innovative programs that expedite the efficiency and effectiveness of organizational success. Well-versed in technology and writing code to create systems that are reliable and user-friendly.9999","personinfo":{"email":"email","phone":"phone","facebook":"feacbook","line":"@0930582335","instagram":"instagram","twitter":"twitter"},"address":{"number":"169","moo":"","soi":"","road":"string","subdistrict":"ลงหาดบางแสน แสนสุข","district":"เมือง","province":"ชลบุรี","zipcode":"20131"},"experience":[{"startdate":"Jun 2015 ","enddate":"Jun 2018","position":"วิศวกรรมซอฟต์แวร์","detail":"ฟรีวิลล์ โซลูชั่นส์ จํากัด"}],"education":[{"startdate":"Jun 2015","enddate":"Jun 2018","type":"HSC","placeofstudy":"การศึกษาระดับมัธยมศึกษาตอนปลาย","detail":"วิทย์-คณิต โรงเรียนคำแสนวิทยาสรรค์"},{"startdate":"Jun 2018","enddate":"Jun 2022","type":"BD","placeofstudy":"ปริญญาตรี","detail":"สาขาวิชาคณิตศาสตร์ ภาควิชาคณิตศาสตร์ คณะวิทยาศาสตร์ มหาวิทยาลัยบูรพา"},{"startdate":"Jun 2018","enddate":"Jun 2022","type":"HSC","placeofstudy":"การศึกษาระดับมัธยมศึกษาตอนปลาย","detail":null}],"skill":[{"skill":"เวิร์ด","value":"70","detail":null},{"skill":"ms excel","value":"60","detail":null},{"skill":"ฟลัทเทอร์","value":"30","detail":null},{"skill":"คณิต","value":"60","detail":null},{"skill":"ดอทเนต","value":"80","detail":null},{"skill":"ดาร์ท","value":"60","detail":null}],"certificate":[{"title":"ทดสอบ 1","description":"รายละเอียด 1"}],"languge":[{"language":"ไทย","value":"70","detail":null},{"language":"sffftring","value":"99","detail":null}]}
 
 Body bodyFromJson(String str) => Body.fromJson(json.decode(str));
 String bodyToJson(Body data) => json.encode(data.toJson());
@@ -76,6 +77,17 @@ class Body {
 
 }
 
+/// image : "CS/DBa7FAAAAAASUVORK5CYII="
+/// userinfo : {"prefix":"นาย 2","name":"สิทธิพล 2","lastname":"ชินโน 2"}
+/// position : "นักพัฒนาซอฟต์แวร์"
+/// aboutme : "Experienced software engineer with a passion for developing innovative programs that expedite the efficiency and effectiveness of organizational success. Well-versed in technology and writing code to create systems that are reliable and user-friendly.9999"
+/// personinfo : {"email":"email","phone":"phone","facebook":"feacbook","line":"@0930582335","instagram":"instagram","twitter":"twitter"}
+/// address : {"number":"169","moo":"","soi":"","road":"string","subdistrict":"ลงหาดบางแสน แสนสุข","district":"เมือง","province":"ชลบุรี","zipcode":"20131"}
+/// experience : [{"startdate":"Jun 2015 ","enddate":"Jun 2018","position":"วิศวกรรมซอฟต์แวร์","detail":"ฟรีวิลล์ โซลูชั่นส์ จํากัด"}]
+/// education : [{"startdate":"Jun 2015","enddate":"Jun 2018","type":"HSC","placeofstudy":"การศึกษาระดับมัธยมศึกษาตอนปลาย","detail":"วิทย์-คณิต โรงเรียนคำแสนวิทยาสรรค์"},{"startdate":"Jun 2018","enddate":"Jun 2022","type":"BD","placeofstudy":"ปริญญาตรี","detail":"สาขาวิชาคณิตศาสตร์ ภาควิชาคณิตศาสตร์ คณะวิทยาศาสตร์ มหาวิทยาลัยบูรพา"},{"startdate":"Jun 2018","enddate":"Jun 2022","type":"HSC","placeofstudy":"การศึกษาระดับมัธยมศึกษาตอนปลาย","detail":null}]
+/// skill : [{"skill":"เวิร์ด","value":"70","detail":null},{"skill":"ms excel","value":"60","detail":null},{"skill":"ฟลัทเทอร์","value":"30","detail":null},{"skill":"คณิต","value":"60","detail":null},{"skill":"ดอทเนต","value":"80","detail":null},{"skill":"ดาร์ท","value":"60","detail":null}]
+/// certificate : [{"title":"ทดสอบ 1","description":"รายละเอียด 1"}]
+/// languge : [{"language":"ไทย","value":"70","detail":null},{"language":"sffftring","value":"99","detail":null}]
 
 Data dataFromJson(String str) => Data.fromJson(json.decode(str));
 String dataToJson(Data data) => json.encode(data.toJson());
@@ -351,7 +363,7 @@ class Skill {
 
 /// startdate : "Jun 2015"
 /// enddate : "Jun 2018"
-/// type : "H"
+/// type : "HSC"
 /// placeofstudy : "การศึกษาระดับมัธยมศึกษาตอนปลาย"
 /// detail : "วิทย์-คณิต โรงเรียนคำแสนวิทยาสรรค์"
 
@@ -467,10 +479,10 @@ class Experience {
 }
 
 /// number : "169"
-/// moo : null
-/// soi : null
-/// road : "ลงหาดบางแสน"
-/// subdistrict : "แสนสุข"
+/// moo : ""
+/// soi : ""
+/// road : "string"
+/// subdistrict : "ลงหาดบางแสน แสนสุข"
 /// district : "เมือง"
 /// province : "ชลบุรี"
 /// zipcode : "20131"
@@ -480,8 +492,8 @@ String addressToJson(Address data) => json.encode(data.toJson());
 class Address {
   Address({
     String? number,
-    dynamic moo,
-    dynamic soi,
+    String? moo,
+    String? soi,
     String? road,
     String? subdistrict,
     String? district,
@@ -508,16 +520,16 @@ class Address {
     _zipcode = json['zipcode'];
   }
   String? _number;
-  dynamic _moo;
-  dynamic _soi;
+  String? _moo;
+  String? _soi;
   String? _road;
   String? _subdistrict;
   String? _district;
   String? _province;
   String? _zipcode;
   Address copyWith({  String? number,
-    dynamic moo,
-    dynamic soi,
+    String? moo,
+    String? soi,
     String? road,
     String? subdistrict,
     String? district,
@@ -533,8 +545,8 @@ class Address {
     zipcode: zipcode ?? _zipcode,
   );
   String? get number => _number;
-  dynamic get moo => _moo;
-  dynamic get soi => _soi;
+  String? get moo => _moo;
+  String? get soi => _soi;
   String? get road => _road;
   String? get subdistrict => _subdistrict;
   String? get district => _district;
@@ -558,7 +570,7 @@ class Address {
 
 /// email : "email"
 /// phone : "phone"
-/// feacbook : "feacbook"
+/// facebook : "feacbook"
 /// line : "@0930582335"
 /// instagram : "instagram"
 /// twitter : "twitter"
@@ -569,13 +581,13 @@ class Personinfo {
   Personinfo({
     String? email,
     String? phone,
-    String? feacbook,
+    String? facebook,
     String? line,
     String? instagram,
     String? twitter,}){
     _email = email;
     _phone = phone;
-    _feacbook = feacbook;
+    _facebook = facebook;
     _line = line;
     _instagram = instagram;
     _twitter = twitter;
@@ -584,33 +596,33 @@ class Personinfo {
   Personinfo.fromJson(dynamic json) {
     _email = json['email'];
     _phone = json['phone'];
-    _feacbook = json['feacbook'];
+    _facebook = json['facebook'];
     _line = json['line'];
     _instagram = json['instagram'];
     _twitter = json['twitter'];
   }
   String? _email;
   String? _phone;
-  String? _feacbook;
+  String? _facebook;
   String? _line;
   String? _instagram;
   String? _twitter;
   Personinfo copyWith({  String? email,
     String? phone,
-    String? feacbook,
+    String? facebook,
     String? line,
     String? instagram,
     String? twitter,
   }) => Personinfo(  email: email ?? _email,
     phone: phone ?? _phone,
-    feacbook: feacbook ?? _feacbook,
+    facebook: facebook ?? _facebook,
     line: line ?? _line,
     instagram: instagram ?? _instagram,
     twitter: twitter ?? _twitter,
   );
   String? get email => _email;
   String? get phone => _phone;
-  String? get feacbook => _feacbook;
+  String? get facebook => _facebook;
   String? get line => _line;
   String? get instagram => _instagram;
   String? get twitter => _twitter;
@@ -619,7 +631,7 @@ class Personinfo {
     final map = <String, dynamic>{};
     map['email'] = _email;
     map['phone'] = _phone;
-    map['feacbook'] = _feacbook;
+    map['facebook'] = _facebook;
     map['line'] = _line;
     map['instagram'] = _instagram;
     map['twitter'] = _twitter;
@@ -628,9 +640,9 @@ class Personinfo {
 
 }
 
-/// prefix : "นาย"
-/// name : "สิทธิพล"
-/// lastname : "ชินโน"
+/// prefix : "นาย 2"
+/// name : "สิทธิพล 2"
+/// lastname : "ชินโน 2"
 
 Userinfo userinfoFromJson(String str) => Userinfo.fromJson(json.decode(str));
 String userinfoToJson(Userinfo data) => json.encode(data.toJson());
@@ -687,9 +699,9 @@ class Userinfo {
 /// education : "การศึกษา"
 /// educationinfo : "ข้อมูลการศึกษา"
 /// email : "อีเมล"
-/// enddate : "วันสุดท้าย"
+/// enddate : "วันสิ้นสุด"
 /// experience : "ประสบการณ์"
-/// feacbook : "เฟคบุ๊ค"
+/// facebook : "เฟคบุ๊ค"
 /// instagram : "อินสตาแกรม"
 /// language : "ภาษา"
 /// lastname : "นามสกุล"
@@ -701,7 +713,7 @@ class Userinfo {
 /// number : "ตัวเลข"
 /// phone : "โทรศัพท์"
 /// pictuce : "รูปภาพ"
-/// placeofstudy : "สถานที่เรียน"
+/// placeofstudy : "สถานศึกษา"
 /// position : "ตำแหน่ง"
 /// positions : "ตำแหน่ง"
 /// prefix : "คำนำหน้า"
@@ -715,18 +727,19 @@ class Userinfo {
 /// sizepictuce : "ขนาดไฟล์ไม่เกิน 5 MB"
 /// skill : "ทักษะ"
 /// soi : "ซอย"
-/// startdate : "วันที่เริ่มต้น"
+/// startdate : "วันเริ่มต้น"
 /// subdistrict : "ตำบล"
 /// themecolor : "สีธีม"
 /// title : "หัวเรื่อง"
 /// titlesetthemecolor : "ตั้งค่าธีมและสี"
 /// twitter : "ทวิตเตอร์"
-/// type : "พิมพ์"
+/// type : "ประเภทการศึกษา"
 /// value : "ระดับ"
 /// whcm : "(กxส) ซม"
 /// zipcode : "รหัสไปรษณีย์"
 /// unkhown : "ไม่ทราบ"
 /// viewpdf : "PDF"
+/// titleresumeinformation : "ข้อมูลเรซูเม่"
 
 ScreenInfo screenInfoFromJson(String str) => ScreenInfo.fromJson(json.decode(str));
 String screenInfoToJson(ScreenInfo data) => json.encode(data.toJson());
@@ -748,227 +761,7 @@ class ScreenInfo {
     String? email,
     String? enddate,
     String? experience,
-    String? feacbook,
-    String? instagram,
-    String? language,
-    String? lastname,
-    String? line,
-    String? moo,
-    String? mypositions,
-    String? n,
-    String? name,
-    String? number,
-    String? phone,
-    String? pictuce,
-    String? placeofstudy,
-    String? position,
-    String? positions,
-    String? prefix,
-    String? province,
-    String? ratio,
-    String? road,
-    String? select,
-    String? selectacolor,
-    String? selecttheinformation,
-    String? size,
-    String? sizepictuce,
-    String? skill,
-    String? soi,
-    String? startdate,
-    String? subdistrict,
-    String? themecolor,
-    String? title,
-    String? titlesetthemecolor,
-    String? twitter,
-    String? type,
-    String? value,
-    String? whcm,
-    String? zipcode,
-    String? unkhown,
-    String? viewpdf,}){
-    _aboutme = aboutme;
-    _aboutmedetail = aboutmedetail;
-    _address = address;
-    _appliedposition = appliedposition;
-    _certificate = certificate;
-    _contact = contact;
-    _textdefault = textdefault;
-    _description = description;
-    _detail = detail;
-    _district = district;
-    _editinfomations = editinfomations;
-    _education = education;
-    _educationinfo = educationinfo;
-    _email = email;
-    _enddate = enddate;
-    _experience = experience;
-    _feacbook = feacbook;
-    _instagram = instagram;
-    _language = language;
-    _lastname = lastname;
-    _line = line;
-    _moo = moo;
-    _mypositions = mypositions;
-    _n = n;
-    _name = name;
-    _number = number;
-    _phone = phone;
-    _pictuce = pictuce;
-    _placeofstudy = placeofstudy;
-    _position = position;
-    _positions = positions;
-    _prefix = prefix;
-    _province = province;
-    _ratio = ratio;
-    _road = road;
-    _select = select;
-    _selectacolor = selectacolor;
-    _selecttheinformation = selecttheinformation;
-    _size = size;
-    _sizepictuce = sizepictuce;
-    _skill = skill;
-    _soi = soi;
-    _startdate = startdate;
-    _subdistrict = subdistrict;
-    _themecolor = themecolor;
-    _title = title;
-    _titlesetthemecolor = titlesetthemecolor;
-    _twitter = twitter;
-    _type = type;
-    _value = value;
-    _whcm = whcm;
-    _zipcode = zipcode;
-    _unkhown = unkhown;
-    _viewpdf = viewpdf;
-  }
-
-  ScreenInfo.fromJson(dynamic json) {
-    _aboutme = json['aboutme'];
-    _aboutmedetail = json['aboutmedetail'];
-    _address = json['address'];
-    _appliedposition = json['appliedposition'];
-    _certificate = json['certificate'];
-    _contact = json['contact'];
-    _textdefault = json['textdefault'];
-    _description = json['description'];
-    _detail = json['detail'];
-    _district = json['district'];
-    _editinfomations = json['editinfomations'];
-    _education = json['education'];
-    _educationinfo = json['educationinfo'];
-    _email = json['email'];
-    _enddate = json['enddate'];
-    _experience = json['experience'];
-    _feacbook = json['feacbook'];
-    _instagram = json['instagram'];
-    _language = json['language'];
-    _lastname = json['lastname'];
-    _line = json['line'];
-    _moo = json['moo'];
-    _mypositions = json['mypositions'];
-    _n = json['n'];
-    _name = json['name'];
-    _number = json['number'];
-    _phone = json['phone'];
-    _pictuce = json['pictuce'];
-    _placeofstudy = json['placeofstudy'];
-    _position = json['position'];
-    _positions = json['positions'];
-    _prefix = json['prefix'];
-    _province = json['province'];
-    _ratio = json['ratio'];
-    _road = json['road'];
-    _select = json['select'];
-    _selectacolor = json['selectacolor'];
-    _selecttheinformation = json['selecttheinformation'];
-    _size = json['size'];
-    _sizepictuce = json['sizepictuce'];
-    _skill = json['skill'];
-    _soi = json['soi'];
-    _startdate = json['startdate'];
-    _subdistrict = json['subdistrict'];
-    _themecolor = json['themecolor'];
-    _title = json['title'];
-    _titlesetthemecolor = json['titlesetthemecolor'];
-    _twitter = json['twitter'];
-    _type = json['type'];
-    _value = json['value'];
-    _whcm = json['whcm'];
-    _zipcode = json['zipcode'];
-    _unkhown = json['unkhown'];
-    _viewpdf = json['viewpdf'];
-  }
-  String? _aboutme;
-  String? _aboutmedetail;
-  String? _address;
-  String? _appliedposition;
-  String? _certificate;
-  String? _contact;
-  String? _textdefault;
-  String? _description;
-  String? _detail;
-  String? _district;
-  String? _editinfomations;
-  String? _education;
-  String? _educationinfo;
-  String? _email;
-  String? _enddate;
-  String? _experience;
-  String? _feacbook;
-  String? _instagram;
-  String? _language;
-  String? _lastname;
-  String? _line;
-  String? _moo;
-  String? _mypositions;
-  String? _n;
-  String? _name;
-  String? _number;
-  String? _phone;
-  String? _pictuce;
-  String? _placeofstudy;
-  String? _position;
-  String? _positions;
-  String? _prefix;
-  String? _province;
-  String? _ratio;
-  String? _road;
-  String? _select;
-  String? _selectacolor;
-  String? _selecttheinformation;
-  String? _size;
-  String? _sizepictuce;
-  String? _skill;
-  String? _soi;
-  String? _startdate;
-  String? _subdistrict;
-  String? _themecolor;
-  String? _title;
-  String? _titlesetthemecolor;
-  String? _twitter;
-  String? _type;
-  String? _value;
-  String? _whcm;
-  String? _zipcode;
-  String? _unkhown;
-  String? _viewpdf;
-  ScreenInfo copyWith({  String? aboutme,
-    String? aboutmedetail,
-    String? address,
-    String? appliedposition,
-    String? certificate,
-    String? contact,
-    String? textdefault,
-    String? description,
-    String? detail,
-    String? district,
-    String? editinfomations,
-    String? education,
-    String? educationinfo,
-    String? email,
-    String? enddate,
-    String? experience,
-    String? feacbook,
+    String? facebook,
     String? instagram,
     String? language,
     String? lastname,
@@ -1006,6 +799,231 @@ class ScreenInfo {
     String? zipcode,
     String? unkhown,
     String? viewpdf,
+    String? titleresumeinformation,}){
+    _aboutme = aboutme;
+    _aboutmedetail = aboutmedetail;
+    _address = address;
+    _appliedposition = appliedposition;
+    _certificate = certificate;
+    _contact = contact;
+    _textdefault = textdefault;
+    _description = description;
+    _detail = detail;
+    _district = district;
+    _editinfomations = editinfomations;
+    _education = education;
+    _educationinfo = educationinfo;
+    _email = email;
+    _enddate = enddate;
+    _experience = experience;
+    _facebook = facebook;
+    _instagram = instagram;
+    _language = language;
+    _lastname = lastname;
+    _line = line;
+    _moo = moo;
+    _mypositions = mypositions;
+    _n = n;
+    _name = name;
+    _number = number;
+    _phone = phone;
+    _pictuce = pictuce;
+    _placeofstudy = placeofstudy;
+    _position = position;
+    _positions = positions;
+    _prefix = prefix;
+    _province = province;
+    _ratio = ratio;
+    _road = road;
+    _select = select;
+    _selectacolor = selectacolor;
+    _selecttheinformation = selecttheinformation;
+    _size = size;
+    _sizepictuce = sizepictuce;
+    _skill = skill;
+    _soi = soi;
+    _startdate = startdate;
+    _subdistrict = subdistrict;
+    _themecolor = themecolor;
+    _title = title;
+    _titlesetthemecolor = titlesetthemecolor;
+    _twitter = twitter;
+    _type = type;
+    _value = value;
+    _whcm = whcm;
+    _zipcode = zipcode;
+    _unkhown = unkhown;
+    _viewpdf = viewpdf;
+    _titleresumeinformation = titleresumeinformation;
+  }
+
+  ScreenInfo.fromJson(dynamic json) {
+    _aboutme = json['aboutme'];
+    _aboutmedetail = json['aboutmedetail'];
+    _address = json['address'];
+    _appliedposition = json['appliedposition'];
+    _certificate = json['certificate'];
+    _contact = json['contact'];
+    _textdefault = json['textdefault'];
+    _description = json['description'];
+    _detail = json['detail'];
+    _district = json['district'];
+    _editinfomations = json['editinfomations'];
+    _education = json['education'];
+    _educationinfo = json['educationinfo'];
+    _email = json['email'];
+    _enddate = json['enddate'];
+    _experience = json['experience'];
+    _facebook = json['facebook'];
+    _instagram = json['instagram'];
+    _language = json['language'];
+    _lastname = json['lastname'];
+    _line = json['line'];
+    _moo = json['moo'];
+    _mypositions = json['mypositions'];
+    _n = json['n'];
+    _name = json['name'];
+    _number = json['number'];
+    _phone = json['phone'];
+    _pictuce = json['pictuce'];
+    _placeofstudy = json['placeofstudy'];
+    _position = json['position'];
+    _positions = json['positions'];
+    _prefix = json['prefix'];
+    _province = json['province'];
+    _ratio = json['ratio'];
+    _road = json['road'];
+    _select = json['select'];
+    _selectacolor = json['selectacolor'];
+    _selecttheinformation = json['selecttheinformation'];
+    _size = json['size'];
+    _sizepictuce = json['sizepictuce'];
+    _skill = json['skill'];
+    _soi = json['soi'];
+    _startdate = json['startdate'];
+    _subdistrict = json['subdistrict'];
+    _themecolor = json['themecolor'];
+    _title = json['title'];
+    _titlesetthemecolor = json['titlesetthemecolor'];
+    _twitter = json['twitter'];
+    _type = json['type'];
+    _value = json['value'];
+    _whcm = json['whcm'];
+    _zipcode = json['zipcode'];
+    _unkhown = json['unkhown'];
+    _viewpdf = json['viewpdf'];
+    _titleresumeinformation = json['titleresumeinformation'];
+  }
+  String? _aboutme;
+  String? _aboutmedetail;
+  String? _address;
+  String? _appliedposition;
+  String? _certificate;
+  String? _contact;
+  String? _textdefault;
+  String? _description;
+  String? _detail;
+  String? _district;
+  String? _editinfomations;
+  String? _education;
+  String? _educationinfo;
+  String? _email;
+  String? _enddate;
+  String? _experience;
+  String? _facebook;
+  String? _instagram;
+  String? _language;
+  String? _lastname;
+  String? _line;
+  String? _moo;
+  String? _mypositions;
+  String? _n;
+  String? _name;
+  String? _number;
+  String? _phone;
+  String? _pictuce;
+  String? _placeofstudy;
+  String? _position;
+  String? _positions;
+  String? _prefix;
+  String? _province;
+  String? _ratio;
+  String? _road;
+  String? _select;
+  String? _selectacolor;
+  String? _selecttheinformation;
+  String? _size;
+  String? _sizepictuce;
+  String? _skill;
+  String? _soi;
+  String? _startdate;
+  String? _subdistrict;
+  String? _themecolor;
+  String? _title;
+  String? _titlesetthemecolor;
+  String? _twitter;
+  String? _type;
+  String? _value;
+  String? _whcm;
+  String? _zipcode;
+  String? _unkhown;
+  String? _viewpdf;
+  String? _titleresumeinformation;
+  ScreenInfo copyWith({  String? aboutme,
+    String? aboutmedetail,
+    String? address,
+    String? appliedposition,
+    String? certificate,
+    String? contact,
+    String? textdefault,
+    String? description,
+    String? detail,
+    String? district,
+    String? editinfomations,
+    String? education,
+    String? educationinfo,
+    String? email,
+    String? enddate,
+    String? experience,
+    String? facebook,
+    String? instagram,
+    String? language,
+    String? lastname,
+    String? line,
+    String? moo,
+    String? mypositions,
+    String? n,
+    String? name,
+    String? number,
+    String? phone,
+    String? pictuce,
+    String? placeofstudy,
+    String? position,
+    String? positions,
+    String? prefix,
+    String? province,
+    String? ratio,
+    String? road,
+    String? select,
+    String? selectacolor,
+    String? selecttheinformation,
+    String? size,
+    String? sizepictuce,
+    String? skill,
+    String? soi,
+    String? startdate,
+    String? subdistrict,
+    String? themecolor,
+    String? title,
+    String? titlesetthemecolor,
+    String? twitter,
+    String? type,
+    String? value,
+    String? whcm,
+    String? zipcode,
+    String? unkhown,
+    String? viewpdf,
+    String? titleresumeinformation,
   }) => ScreenInfo(  aboutme: aboutme ?? _aboutme,
     aboutmedetail: aboutmedetail ?? _aboutmedetail,
     address: address ?? _address,
@@ -1022,7 +1040,7 @@ class ScreenInfo {
     email: email ?? _email,
     enddate: enddate ?? _enddate,
     experience: experience ?? _experience,
-    feacbook: feacbook ?? _feacbook,
+    facebook: facebook ?? _facebook,
     instagram: instagram ?? _instagram,
     language: language ?? _language,
     lastname: lastname ?? _lastname,
@@ -1060,6 +1078,7 @@ class ScreenInfo {
     zipcode: zipcode ?? _zipcode,
     unkhown: unkhown ?? _unkhown,
     viewpdf: viewpdf ?? _viewpdf,
+    titleresumeinformation: titleresumeinformation ?? _titleresumeinformation,
   );
   String? get aboutme => _aboutme;
   String? get aboutmedetail => _aboutmedetail;
@@ -1077,7 +1096,7 @@ class ScreenInfo {
   String? get email => _email;
   String? get enddate => _enddate;
   String? get experience => _experience;
-  String? get feacbook => _feacbook;
+  String? get facebook => _facebook;
   String? get instagram => _instagram;
   String? get language => _language;
   String? get lastname => _lastname;
@@ -1115,6 +1134,7 @@ class ScreenInfo {
   String? get zipcode => _zipcode;
   String? get unkhown => _unkhown;
   String? get viewpdf => _viewpdf;
+  String? get titleresumeinformation => _titleresumeinformation;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -1134,7 +1154,7 @@ class ScreenInfo {
     map['email'] = _email;
     map['enddate'] = _enddate;
     map['experience'] = _experience;
-    map['feacbook'] = _feacbook;
+    map['facebook'] = _facebook;
     map['instagram'] = _instagram;
     map['language'] = _language;
     map['lastname'] = _lastname;
@@ -1172,6 +1192,7 @@ class ScreenInfo {
     map['zipcode'] = _zipcode;
     map['unkhown'] = _unkhown;
     map['viewpdf'] = _viewpdf;
+    map['titleresumeinformation'] = _titleresumeinformation;
     return map;
   }
 

@@ -716,10 +716,10 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                               }
                             },
                             hintLabel: isPreViewResumeResponse
-                                    .body?.screenInfo?.feacbook ??
+                                    .body?.screenInfo?.facebook ??
                                 "เฟสบุ๊ค",
                             initialvalue: isPreViewResumeResponse
-                                .body?.data?.personinfo?.feacbook,
+                                .body?.data?.personinfo?.facebook,
                             textInputType: TextInputType.text,
                             // iconsFile : Icons.person_rounded,
                             iconsFile: FontAwesomeIcons.facebook,
@@ -860,7 +860,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                           Column(
                               children: List.generate(
                                   isPreViewResumeResponse
-                                          .body?.data?.experience?.length ??
+                                          .body?.data?.certificate?.length ??
                                       0, (index) {
                             return buildDetailResumeCustomNotIconsReadOnly(
                                 context: context,

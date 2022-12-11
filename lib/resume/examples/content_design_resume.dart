@@ -1318,11 +1318,11 @@ class _BodyPreviewResumeState extends State<BodyPreviewResume> {
                               ),
 
                             if (isPreViewResumeResponse
-                                    .body?.data?.personinfo?.feacbook !=
+                                    .body?.data?.personinfo?.facebook !=
                                 null)buildDetailResumeCheckboxCustomNotIconsReadOnly(
                               context: context,
                               detail:
-                              "${isPreViewResumeResponse.body?.screenInfo?.feacbook ?? "facebook"} : ${isPreViewResumeResponse.body?.data?.personinfo?.feacbook} ",
+                              "${isPreViewResumeResponse.body?.screenInfo?.facebook ?? "facebook"} : ${isPreViewResumeResponse.body?.data?.personinfo?.facebook} ",
                               appBarForeGroundColor: appBarforegroundColor,
                               checkbox: Checkbox(
                                 checkColor: Theme.of(context).primaryColor,
