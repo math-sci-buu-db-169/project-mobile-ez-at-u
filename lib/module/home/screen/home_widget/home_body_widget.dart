@@ -121,6 +121,7 @@ homeTeacherBodyEmptyActivityWidget(
             // Text(textOne + textTwo + textThree,
             //     style:  TextStyle(fontSize: 20, fontWeight: FontWeight.w500,
             //       color:Theme.of(context).bottomAppBarColor.withOpacity(0.8),)),
+            //test commit by personal github
             SizedBox(
               child: Text(NoActivityTeacherResponse?.body?.screeninfo?.noactivity??noActivity,
                   textAlign: TextAlign.center,
