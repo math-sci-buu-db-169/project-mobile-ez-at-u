@@ -238,17 +238,19 @@ buildContextActivity(
             color: appBarForegroundColor,
           ),
         ),
-        title: Center(
-          child: Text(
-            'ยืนยันกิจกรรม',
-            // '${data.status}',
-            // activityHeadStatus,
-            style: TextStyle(
-              color: appBarForegroundColor,
-              fontSize: 22,
-            ),
-          ),
-        ),
+        // title: Center(
+        //   child:
+        //   Text(
+        //     activityScreenText.titleteacheractivity,
+        //     // 'ยืนยันกิจกรรม',
+        //     // '${data.status}',
+        //     // activityHeadStatus,
+        //     style: TextStyle(
+        //       color: appBarForegroundColor,
+        //       fontSize: 22,
+        //     ),
+        //   ),
+        // ),
         actions: <Widget>[
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.1,
