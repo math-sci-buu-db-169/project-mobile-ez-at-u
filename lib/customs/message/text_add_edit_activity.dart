@@ -13,3 +13,5 @@ const String activityBtnConfirm   = 'ยืนยัน';
 const String activityEdtApprover   = 'ผู้ยืนยัน';
 const String alertFillAllActivity   = 'กรุณากรอกข้อมูลให้ครบทุกช่อง';
 const String buttonOK   = 'ตกลง';
+const String textActivityName   = 'ตกลง';
+//teacher

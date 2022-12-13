@@ -1,6 +1,6 @@
 import 'dart:convert';
 /// head : {"status":200,"message":"success","modulename":"activity","timeexpire":false}
-/// body : {"screeninfo":{"titleselectactivity":"Select activity","buttonselectactivity":"Select"},"activitynamelist":[{"activitynameidresponse":12,"activitynameresponse":"กิจกรรมเพิ่มโดยอาจารย์1 (Activity that add by teacher 1)","teacheridresponse":"TCMM16"},{"activitynameidresponse":10,"activitynameresponse":"testbyphone6","teacheridresponse":"DMOTC"},{"activitynameidresponse":9,"activitynameresponse":"testbyphone5","teacheridresponse":"DMOTC"},{"activitynameidresponse":8,"activitynameresponse":"Testbyphone 3","teacheridresponse":"DMOTC"},{"activitynameidresponse":7,"activitynameresponse":"Test by phone 2","teacheridresponse":"DMOTC"},{"activitynameidresponse":6,"activitynameresponse":"Test by phone 1","teacheridresponse":"DMOTC"},{"activitynameidresponse":5,"activitynameresponse":"Test add by swagger 2 edit","teacheridresponse":"DMOTC"},{"activitynameidresponse":4,"activitynameresponse":"Test add by swagger 1 and edit to see in approve","teacheridresponse":"DMOTC"},{"activitynameidresponse":3,"activitynameresponse":"TEST3","teacheridresponse":"DMOTC"},{"activitynameidresponse":2,"activitynameresponse":"TEST2","teacheridresponse":"DMOTC"}]}
+/// body : {"screeninfo":{"titleselectactivity":"Select activity","buttonselectactivity":"Select","textactivityname":"Activity name"},"activitynamelist":[{"activitynameidresponse":10,"activitynameresponse":"เพิ่มใน db","teacheridresponse":"DMOTC"},{"activitynameidresponse":9,"activitynameresponse":"TEST MB3","teacheridresponse":"DMOTC"},{"activitynameidresponse":8,"activitynameresponse":"เพิ่มโดยอาจารย์อภิสิทธิ์","teacheridresponse":"TCMM01"},{"activitynameidresponse":6,"activitynameresponse":"เพิ่มโดยอาจารย์ 2","teacheridresponse":"DMOTC"},{"activitynameidresponse":5,"activitynameresponse":"เพิ่มโดยอาจารย์ 1","teacheridresponse":"DMOTC"},{"activitynameidresponse":4,"activitynameresponse":"Test MB 2","teacheridresponse":"DMOTC"},{"activitynameidresponse":1,"activitynameresponse":"ทดสอบ 1","teacheridresponse":"DMOTC"}]}
 
 SelectActivityByStudentScreenApi selectActivityByStudentScreenFromJson(String str) => SelectActivityByStudentScreenApi.fromJson(json.decode(str));
 String selectActivityByStudentScreenToJson(SelectActivityByStudentScreenApi data) => json.encode(data.toJson());
@@ -39,8 +39,8 @@ SelectActivityByStudentScreenApi copyWith({  Head? head,
 
 }
 
-/// screeninfo : {"titleselectactivity":"Select activity","buttonselectactivity":"Select"}
-/// activitynamelist : [{"activitynameidresponse":12,"activitynameresponse":"กิจกรรมเพิ่มโดยอาจารย์1 (Activity that add by teacher 1)","teacheridresponse":"TCMM16"},{"activitynameidresponse":10,"activitynameresponse":"testbyphone6","teacheridresponse":"DMOTC"},{"activitynameidresponse":9,"activitynameresponse":"testbyphone5","teacheridresponse":"DMOTC"},{"activitynameidresponse":8,"activitynameresponse":"Testbyphone 3","teacheridresponse":"DMOTC"},{"activitynameidresponse":7,"activitynameresponse":"Test by phone 2","teacheridresponse":"DMOTC"},{"activitynameidresponse":6,"activitynameresponse":"Test by phone 1","teacheridresponse":"DMOTC"},{"activitynameidresponse":5,"activitynameresponse":"Test add by swagger 2 edit","teacheridresponse":"DMOTC"},{"activitynameidresponse":4,"activitynameresponse":"Test add by swagger 1 and edit to see in approve","teacheridresponse":"DMOTC"},{"activitynameidresponse":3,"activitynameresponse":"TEST3","teacheridresponse":"DMOTC"},{"activitynameidresponse":2,"activitynameresponse":"TEST2","teacheridresponse":"DMOTC"}]
+/// screeninfo : {"titleselectactivity":"Select activity","buttonselectactivity":"Select","textactivityname":"Activity name"}
+/// activitynamelist : [{"activitynameidresponse":10,"activitynameresponse":"เพิ่มใน db","teacheridresponse":"DMOTC"},{"activitynameidresponse":9,"activitynameresponse":"TEST MB3","teacheridresponse":"DMOTC"},{"activitynameidresponse":8,"activitynameresponse":"เพิ่มโดยอาจารย์อภิสิทธิ์","teacheridresponse":"TCMM01"},{"activitynameidresponse":6,"activitynameresponse":"เพิ่มโดยอาจารย์ 2","teacheridresponse":"DMOTC"},{"activitynameidresponse":5,"activitynameresponse":"เพิ่มโดยอาจารย์ 1","teacheridresponse":"DMOTC"},{"activitynameidresponse":4,"activitynameresponse":"Test MB 2","teacheridresponse":"DMOTC"},{"activitynameidresponse":1,"activitynameresponse":"ทดสอบ 1","teacheridresponse":"DMOTC"}]
 
 Body bodyFromJson(String str) => Body.fromJson(json.decode(str));
 String bodyToJson(Body data) => json.encode(data.toJson());
@@ -84,9 +84,9 @@ Body copyWith({  Screeninfo? screeninfo,
 
 }
 
-/// activitynameidresponse : 12
-/// activitynameresponse : "กิจกรรมเพิ่มโดยอาจารย์1 (Activity that add by teacher 1)"
-/// teacheridresponse : "TCMM16"
+/// activitynameidresponse : 10
+/// activitynameresponse : "เพิ่มใน db"
+/// teacheridresponse : "DMOTC"
 
 Activitynamelist activitynamelistFromJson(String str) => Activitynamelist.fromJson(json.decode(str));
 String activitynamelistToJson(Activitynamelist data) => json.encode(data.toJson());
@@ -131,35 +131,44 @@ Activitynamelist copyWith({  num? activitynameidresponse,
 
 /// titleselectactivity : "Select activity"
 /// buttonselectactivity : "Select"
+/// textactivityname : "Activity name"
 
 Screeninfo screeninfoFromJson(String str) => Screeninfo.fromJson(json.decode(str));
 String screeninfoToJson(Screeninfo data) => json.encode(data.toJson());
 class Screeninfo {
   Screeninfo({
       String? titleselectactivity, 
-      String? buttonselectactivity,}){
+      String? buttonselectactivity, 
+      String? textactivityname,}){
     _titleselectactivity = titleselectactivity;
     _buttonselectactivity = buttonselectactivity;
+    _textactivityname = textactivityname;
 }
 
   Screeninfo.fromJson(dynamic json) {
     _titleselectactivity = json['titleselectactivity'];
     _buttonselectactivity = json['buttonselectactivity'];
+    _textactivityname = json['textactivityname'];
   }
   String? _titleselectactivity;
   String? _buttonselectactivity;
+  String? _textactivityname;
 Screeninfo copyWith({  String? titleselectactivity,
   String? buttonselectactivity,
+  String? textactivityname,
 }) => Screeninfo(  titleselectactivity: titleselectactivity ?? _titleselectactivity,
   buttonselectactivity: buttonselectactivity ?? _buttonselectactivity,
+  textactivityname: textactivityname ?? _textactivityname,
 );
   String? get titleselectactivity => _titleselectactivity;
   String? get buttonselectactivity => _buttonselectactivity;
+  String? get textactivityname => _textactivityname;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['titleselectactivity'] = _titleselectactivity;
     map['buttonselectactivity'] = _buttonselectactivity;
+    map['textactivityname'] = _textactivityname;
     return map;
   }
 

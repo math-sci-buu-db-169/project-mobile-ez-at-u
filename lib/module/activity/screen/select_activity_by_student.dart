@@ -98,10 +98,10 @@ class _SelectActivityByStudentPageState
 
 buildAddActivityBody(
   BuildContext context,
-  SelectActivityByStudentScreenApi? addActivityScreenApi,
+  SelectActivityByStudentScreenApi? selectActivityScreenByStudentApi,
   TextEditingController activityNameId,
 ) {
-  var activityNameArray = addActivityScreenApi?.body?.activitynamelist ?? [];
+  var activityNameArray = selectActivityScreenByStudentApi?.body?.activitynamelist ?? [];
   Color? appBarBackgroundColor =
       Theme.of(context).appBarTheme.backgroundColor ?? Colors.white;
   Color? appBarforegroundColor =
@@ -121,7 +121,7 @@ buildAddActivityBody(
         ),
       ),
       title: Text(
-        addActivityScreenApi?.body?.screeninfo?.titleselectactivity ??
+        selectActivityScreenByStudentApi?.body?.screeninfo?.titleselectactivity ??
             activityTitleAddAct,
         style: TextStyle(
           color: appBarforegroundColor,
@@ -142,8 +142,8 @@ buildAddActivityBody(
               width: MediaQuery.of(context).size.width,
               dropdownList: activityNameArray,
               // hint: addActivityScreenApi?.body?.screeninfo?.edtapprover ??
-              hint: "ชื่อกิจกรรม" ??
-                  activityEdtApprover,
+              hint: selectActivityScreenByStudentApi?.body?.screeninfo?.textactivityname ??
+                  textActivityName,
                 callbackFromCustomDropdownActivityNameId:(String result){
                   activityNameId.text = result;
                   if (kDebugMode) {
@@ -157,7 +157,7 @@ buildAddActivityBody(
             ),
             Center(
               child: ButtonCustom(
-                label: addActivityScreenApi?.body?.screeninfo?.buttonselectactivity ??
+                label: selectActivityScreenByStudentApi?.body?.screeninfo?.buttonselectactivity ??
                     activityBtnConfirm,
                 colortext: tcButtonTextBlack,
                 colorbutton: tcButtonTextWhite,
