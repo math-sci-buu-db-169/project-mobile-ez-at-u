@@ -1,26 +1,26 @@
 import 'dart:convert';
 /// head : {"status":200,"message":"success","modulename":"home/resume","timeexpire":false}
-/// body : {"screeninfo":{"save":"Save/บันทึก","editinfomations":"แก้ไขข้อมูล","position_th":"ตำแหน่ง","office_th":"สถานที่ทำงาน","position_en":"Positions","office_en":"Office","detail_th":"รายละเอียด","detail_en":"Description"},"data":{"position":"นักพัฒนาซอฟต์แวร์","positionen":"software developer","office":null,"officeen":null}}
+/// body : {"screeninfo":{"save":"Save/บันทึก","editinfomations":"แก้ไขข้อมูล","SkillLanguage_th":"ตำแหน่ง","office_th":"สถานที่ทำงาน","SkillLanguage_en":"SkillLanguages","office_en":"Office","detail_th":"รายละเอียด","detail_en":"Description"},"data":{"SkillLanguage":"นักพัฒนาซอฟต์แวร์","SkillLanguageen":"software developer","office":null,"officeen":null}}
 
-GetPositionResumeResumeResponse getPositionResumeResumeResponseFromJson(String str) => GetPositionResumeResumeResponse.fromJson(json.decode(str));
-String getPositionResumeResumeResponseToJson(GetPositionResumeResumeResponse data) => json.encode(data.toJson());
-class GetPositionResumeResumeResponse {
-  GetPositionResumeResumeResponse({
+GetSkillLanguageResumeResponse getSkillLanguageResumeResponseFromJson(String str) => GetSkillLanguageResumeResponse.fromJson(json.decode(str));
+String getSkillLanguageResumeResponseToJson(GetSkillLanguageResumeResponse data) => json.encode(data.toJson());
+class GetSkillLanguageResumeResponse {
+  GetSkillLanguageResumeResponse({
     Head? head,
     Body? body,}){
     _head = head;
     _body = body;
   }
 
-  GetPositionResumeResumeResponse.fromJson(dynamic json) {
+  GetSkillLanguageResumeResponse.fromJson(dynamic json) {
     _head = json['head'] != null ? Head.fromJson(json['head']) : null;
     _body = json['body'] != null ? Body.fromJson(json['body']) : null;
   }
   Head? _head;
   Body? _body;
-  GetPositionResumeResumeResponse copyWith({  Head? head,
+  GetSkillLanguageResumeResponse copyWith({  Head? head,
     Body? body,
-  }) => GetPositionResumeResumeResponse(  head: head ?? _head,
+  }) => GetSkillLanguageResumeResponse(  head: head ?? _head,
     body: body ?? _body,
   );
   Head? get head => _head;
@@ -39,32 +39,37 @@ class GetPositionResumeResumeResponse {
 
 }
 
-/// screeninfo : {"save":"Save/บันทึก","editinfomations":"แก้ไขข้อมูล","position_th":"ตำแหน่ง","office_th":"สถานที่ทำงาน","position_en":"Positions","office_en":"Office","detail_th":"รายละเอียด","detail_en":"Description"}
-/// data : {"position":"นักพัฒนาซอฟต์แวร์","positionen":"software developer","office":null,"officeen":null}
+/// screeninfo : {"save":"Save/บันทึก","editinfomations":"แก้ไขข้อมูล","language_th":"ทักษะทางภาษา","language_en":"Skill Language","level":"ระดับความสามารถ / Skill level","level_th":"ระดับความสามารถ","level_en":"Skill level","description_th":"รายละเอียด","description_en":"Description"}
+/// data : [{"id":1,"orderchoose":0,"language":"ไทย","languageen":"Thai","value":"70","detail":null,"detailen":null},{"id":3,"orderchoose":0,"language":"sffftring","languageen":"stfffring","value":"99","detail":null,"detailen":null}]
 
 Body bodyFromJson(String str) => Body.fromJson(json.decode(str));
 String bodyToJson(Body data) => json.encode(data.toJson());
 class Body {
   Body({
     Screeninfo? screeninfo,
-    Data? data,}){
+    List<Data>? data,}){
     _screeninfo = screeninfo;
     _data = data;
   }
 
   Body.fromJson(dynamic json) {
     _screeninfo = json['screeninfo'] != null ? Screeninfo.fromJson(json['screeninfo']) : null;
-    _data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    if (json['data'] != null) {
+      _data = [];
+      json['data'].forEach((v) {
+        _data?.add(Data.fromJson(v));
+      });
+    }
   }
   Screeninfo? _screeninfo;
-  Data? _data;
+  List<Data>? _data;
   Body copyWith({  Screeninfo? screeninfo,
-    Data? data,
+    List<Data>? data,
   }) => Body(  screeninfo: screeninfo ?? _screeninfo,
     data: data ?? _data,
   );
   Screeninfo? get screeninfo => _screeninfo;
-  Data? get data => _data;
+  List<Data>? get data => _data;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -72,62 +77,89 @@ class Body {
       map['screeninfo'] = _screeninfo?.toJson();
     }
     if (_data != null) {
-      map['data'] = _data?.toJson();
+      map['data'] = _data?.map((v) => v.toJson()).toList();
     }
     return map;
   }
 
 }
 
-/// position : "นักพัฒนาซอฟต์แวร์"
-/// positionen : "software developer"
-/// office : null
-/// officeen : null
+/// id : 1
+/// orderchoose : 0
+/// language : "ไทย"
+/// languageen : "Thai"
+/// value : "70"
+/// detail : null
+/// detailen : null
 
 Data dataFromJson(String str) => Data.fromJson(json.decode(str));
 String dataToJson(Data data) => json.encode(data.toJson());
 class Data {
   Data({
-    String? position,
-    String? positionen,
-    dynamic office,
-    dynamic officeen,}){
-    _position = position;
-    _positionen = positionen;
-    _office = office;
-    _officeen = officeen;
+    num? id,
+    num? orderchoose,
+    String? language,
+    String? languageen,
+    String? value,
+    dynamic detail,
+    dynamic detailen,}){
+    _id = id;
+    _orderchoose = orderchoose;
+    _language = language;
+    _languageen = languageen;
+    _value = value;
+    _detail = detail;
+    _detailen = detailen;
   }
 
   Data.fromJson(dynamic json) {
-    _position = json['position'];
-    _positionen = json['positionen'];
-    _office = json['office'];
-    _officeen = json['officeen'];
+    _id = json['id'];
+    _orderchoose = json['orderchoose'];
+    _language = json['language'];
+    _languageen = json['languageen'];
+    _value = json['value'];
+    _detail = json['detail'];
+    _detailen = json['detailen'];
   }
-  String? _position;
-  String? _positionen;
-  dynamic _office;
-  dynamic _officeen;
-  Data copyWith({  String? position,
-    String? positionen,
-    dynamic office,
-    dynamic officeen,
-  }) => Data(  position: position ?? _position,
-    positionen: positionen ?? _positionen,
-    office: office ?? _office,
-    officeen: officeen ?? _officeen,
+  num? _id;
+  num? _orderchoose;
+  String? _language;
+  String? _languageen;
+  String? _value;
+  dynamic _detail;
+  dynamic _detailen;
+  Data copyWith({  num? id,
+    num? orderchoose,
+    String? language,
+    String? languageen,
+    String? value,
+    dynamic detail,
+    dynamic detailen,
+  }) => Data(  id: id ?? _id,
+    orderchoose: orderchoose ?? _orderchoose,
+    language: language ?? _language,
+    languageen: languageen ?? _languageen,
+    value: value ?? _value,
+    detail: detail ?? _detail,
+    detailen: detailen ?? _detailen,
   );
-  String? get position => _position;
-  String? get positionen => _positionen;
-  dynamic get office => _office;
-  dynamic get officeen => _officeen;
+  num? get id => _id;
+  num? get orderchoose => _orderchoose;
+  String? get language => _language;
+  String? get languageen => _languageen;
+  String? get value => _value;
+  dynamic get detail => _detail;
+  dynamic get detailen => _detailen;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['position'] = _position;
-    map['positionen'] = _positionen;
-    map['office'] = _office;
-    map['officeen'] = _officeen;
+    map['id'] = _id;
+    map['orderchoose'] = _orderchoose;
+    map['language'] = _language;
+    map['languageen'] = _languageen;
+    map['value'] = _value;
+    map['detail'] = _detail;
+    map['detailen'] = _detailen;
     return map;
   }
 
@@ -135,12 +167,13 @@ class Data {
 
 /// save : "Save/บันทึก"
 /// editinfomations : "แก้ไขข้อมูล"
-/// position_th : "ตำแหน่ง"
-/// office_th : "สถานที่ทำงาน"
-/// position_en : "Positions"
-/// office_en : "Office"
-/// detail_th : "รายละเอียด"
-/// detail_en : "Description"
+/// language_th : "ทักษะทางภาษา"
+/// language_en : "Skill Language"
+/// level : "ระดับความสามารถ / Skill level"
+/// level_th : "ระดับความสามารถ"
+/// level_en : "Skill level"
+/// description_th : "รายละเอียด"
+/// description_en : "Description"
 
 Screeninfo screeninfoFromJson(String str) => Screeninfo.fromJson(json.decode(str));
 String screeninfoToJson(Screeninfo data) => json.encode(data.toJson());
@@ -148,76 +181,84 @@ class Screeninfo {
   Screeninfo({
     String? save,
     String? editinfomations,
-    String? positionTh,
-    String? officeTh,
-    String? positionEn,
-    String? officeEn,
-    String? detailTh,
-    String? detailEn,}){
+    String? languageTh,
+    String? languageEn,
+    String? level,
+    String? levelTh,
+    String? levelEn,
+    String? descriptionTh,
+    String? descriptionEn,}){
     _save = save;
     _editinfomations = editinfomations;
-    _positionTh = positionTh;
-    _officeTh = officeTh;
-    _positionEn = positionEn;
-    _officeEn = officeEn;
-    _detailTh = detailTh;
-    _detailEn = detailEn;
+    _languageTh = languageTh;
+    _languageEn = languageEn;
+    _level = level;
+    _levelTh = levelTh;
+    _levelEn = levelEn;
+    _descriptionTh = descriptionTh;
+    _descriptionEn = descriptionEn;
   }
 
   Screeninfo.fromJson(dynamic json) {
     _save = json['save'];
     _editinfomations = json['editinfomations'];
-    _positionTh = json['position_th'];
-    _officeTh = json['office_th'];
-    _positionEn = json['position_en'];
-    _officeEn = json['office_en'];
-    _detailTh = json['detail_th'];
-    _detailEn = json['detail_en'];
+    _languageTh = json['language_th'];
+    _languageEn = json['language_en'];
+    _level = json['level'];
+    _levelTh = json['level_th'];
+    _levelEn = json['level_en'];
+    _descriptionTh = json['description_th'];
+    _descriptionEn = json['description_en'];
   }
   String? _save;
   String? _editinfomations;
-  String? _positionTh;
-  String? _officeTh;
-  String? _positionEn;
-  String? _officeEn;
-  String? _detailTh;
-  String? _detailEn;
+  String? _languageTh;
+  String? _languageEn;
+  String? _level;
+  String? _levelTh;
+  String? _levelEn;
+  String? _descriptionTh;
+  String? _descriptionEn;
   Screeninfo copyWith({  String? save,
     String? editinfomations,
-    String? positionTh,
-    String? officeTh,
-    String? positionEn,
-    String? officeEn,
-    String? detailTh,
-    String? detailEn,
+    String? languageTh,
+    String? languageEn,
+    String? level,
+    String? levelTh,
+    String? levelEn,
+    String? descriptionTh,
+    String? descriptionEn,
   }) => Screeninfo(  save: save ?? _save,
     editinfomations: editinfomations ?? _editinfomations,
-    positionTh: positionTh ?? _positionTh,
-    officeTh: officeTh ?? _officeTh,
-    positionEn: positionEn ?? _positionEn,
-    officeEn: officeEn ?? _officeEn,
-    detailTh: detailTh ?? _detailTh,
-    detailEn: detailEn ?? _detailEn,
+    languageTh: languageTh ?? _languageTh,
+    languageEn: languageEn ?? _languageEn,
+    level: level ?? _level,
+    levelTh: levelTh ?? _levelTh,
+    levelEn: levelEn ?? _levelEn,
+    descriptionTh: descriptionTh ?? _descriptionTh,
+    descriptionEn: descriptionEn ?? _descriptionEn,
   );
   String? get save => _save;
   String? get editinfomations => _editinfomations;
-  String? get positionTh => _positionTh;
-  String? get officeTh => _officeTh;
-  String? get positionEn => _positionEn;
-  String? get officeEn => _officeEn;
-  String? get detailTh => _detailTh;
-  String? get detailEn => _detailEn;
+  String? get languageTh => _languageTh;
+  String? get languageEn => _languageEn;
+  String? get level => _level;
+  String? get levelTh => _levelTh;
+  String? get levelEn => _levelEn;
+  String? get descriptionTh => _descriptionTh;
+  String? get descriptionEn => _descriptionEn;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['save'] = _save;
     map['editinfomations'] = _editinfomations;
-    map['position_th'] = _positionTh;
-    map['office_th'] = _officeTh;
-    map['position_en'] = _positionEn;
-    map['office_en'] = _officeEn;
-    map['detail_th'] = _detailTh;
-    map['detail_en'] = _detailEn;
+    map['language_th'] = _languageTh;
+    map['language_en'] = _languageEn;
+    map['level'] = _level;
+    map['level_th'] = _levelTh;
+    map['level_en'] = _levelEn;
+    map['description_th'] = _descriptionTh;
+    map['description_en'] = _descriptionEn;
     return map;
   }
 

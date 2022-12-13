@@ -39,7 +39,7 @@ print("resumeLanguage  getPreviewResumeDataAndScreen ============ $resumeLanguag
         })
     );
   }
-  Future<Response> sentEditAboutResume({required String detailsTH,required String detailsEN,}) async {
+  Future<Response> sentEditAboutMeResume({required String detailsTH,required String detailsEN,}) async {
     print("object");
     print(detailsTH);
     print(detailsEN);
@@ -50,12 +50,16 @@ print("resumeLanguage  getPreviewResumeDataAndScreen ============ $resumeLanguag
         })
     );
   }
-  Future<Response> sentEditUserInfoResume({required String prefix,
+  Future<Response> sentEditUserInfoResume({
+    required String prefix,
     required String name,
     required String lastName,
     required String prefixEN,
     required String nameEN,
     required String lastNameEN,}) async {
+print("sentEditUserInfoResume");
+    print(" prefix: $prefix ,name: $name,lastName: $lastName,prefixEN: $prefixEN,nameEN: $nameEN,lastNameEN: $lastNameEN");
+
     return await MyDio.createDioServer().post("/api/Resume/edituserinforesume",
         data: jsonEncode({
           "prefix": prefix,
@@ -68,12 +72,15 @@ print("resumeLanguage  getPreviewResumeDataAndScreen ============ $resumeLanguag
     );
   }
 
-  Future<Response> sentEditPositionResume({required String positionTH,required String positionEN,}) async {
+  Future<Response> sentEditPositionResume({required String positionTH,required String positionEN,
+    required String officeTH,required String officeEN,}) async {
     return await MyDio.createDioServer().post("/api/Resume/editpositionresume",
         data: jsonEncode({
 
             "position": positionTH,
-            "positionen": positionEN
+            "positionen": positionEN,
+            "office": officeTH,
+            "officeen":officeEN
 
         })
     );
@@ -84,7 +91,8 @@ print("resumeLanguage  getPreviewResumeDataAndScreen ============ $resumeLanguag
     required String facebook,
     required String line,
     required String instagram,
-    required String twitter,}) async {
+    required String twitter,
+    required String youtube,}) async {
     return await MyDio.createDioServer().post("/api/Resume/editcontactresume",
         data: jsonEncode({
 
@@ -93,7 +101,8 @@ print("resumeLanguage  getPreviewResumeDataAndScreen ============ $resumeLanguag
           "facebook": facebook,
           "line": line,
           "instagram": instagram,
-          "twitter": twitter
+          "twitter": twitter,
+          "youtube": youtube
 
         })
     );
@@ -157,6 +166,8 @@ print("resumeLanguage  getPreviewResumeDataAndScreen ============ $resumeLanguag
     required int orderChoose,
     required String skill,
     required String skillEN,
+    required String descriptionTH,
+    required String descriptionEN,
     required String value}) async {
     return await MyDio.createDioServer().post("/api/Resume/editskillresume",
         data: jsonEncode({
@@ -165,7 +176,9 @@ print("resumeLanguage  getPreviewResumeDataAndScreen ============ $resumeLanguag
           "skill": skill,
           "skillen": skillEN,
           "value": value,
-          "orderchoose": orderChoose
+          "orderchoose": orderChoose,
+          "description": descriptionTH,
+          "descriptionEN": descriptionEN
 
         })
     );
@@ -174,6 +187,8 @@ print("resumeLanguage  getPreviewResumeDataAndScreen ============ $resumeLanguag
     required int orderChoose,
     required String language,
     required String languageEN,
+    required String descriptionTH,
+    required String descriptionEN,
     required String value}) async {
     return await MyDio.createDioServer().post("/api/Resume/editskilllanguageresume",
         data: jsonEncode({
@@ -182,7 +197,9 @@ print("resumeLanguage  getPreviewResumeDataAndScreen ============ $resumeLanguag
           "language": language,
           "languageen": languageEN,
           "value": value,
-          "orderchoose": orderChoose
+          "orderchoose": orderChoose,
+          "description": descriptionTH,
+          "descriptionEN": descriptionEN
 
         })
     );
@@ -235,78 +252,104 @@ print("resumeLanguage  getPreviewResumeDataAndScreen ============ $resumeLanguag
         })
     );
   }Future<Response> sentScreenAboutResume() async {
+    prefs = await SharedPreferences.getInstance();
+    String? userLanguage = prefs.getString('userLanguageResume');
+
     return await MyDio.createDioServer().post("/api/Resume/aboutmeresume",
         data: jsonEncode({
-          "languageresume": "string"
+          "languageresume": userLanguage
         })
     );
   }
   Future<Response> sentScreenUserInfoResume() async {
+    prefs = await SharedPreferences.getInstance();
+    String? userLanguage = prefs.getString('userLanguageResume');
+
     return await MyDio.createDioServer().post("/api/Resume/userinforesume",
         data: jsonEncode({
-          "languageresume": "string"
+          "languageresume": userLanguage
         })
     );
   }
 
   Future<Response> sentScreenPositionResume() async {
+    prefs = await SharedPreferences.getInstance();
+    String? userLanguage = prefs.getString('userLanguageResume');
+
     return await MyDio.createDioServer().post("/api/Resume/positionresume",
         data: jsonEncode({
-          "languageresume": "string"
+          "languageresume": userLanguage
 
         })
     );
   }
   Future<Response> sentScreenContactResume() async {
+    prefs = await SharedPreferences.getInstance();
+    String? userLanguage = prefs.getString('userLanguageResume');
+
     return await MyDio.createDioServer().post("/api/Resume/contactresume",
         data: jsonEncode({
-          "languageresume": "string"
+          "languageresume": userLanguage
 
         })
     );
   }
   Future<Response> sentScreenEducationResume() async {
+    prefs = await SharedPreferences.getInstance();
+    String? userLanguage = prefs.getString('userLanguageResume');
+
     return await MyDio.createDioServer().post("/api/Resume/educationresume",
         data: jsonEncode({
-          "languageresume": "string"
+          "languageresume": userLanguage
 
         })
     );
   }
   Future<Response> sentScreenAddressResume() async {
+    prefs = await SharedPreferences.getInstance();
+    String? userLanguage = prefs.getString('userLanguageResume');
+
     return await MyDio.createDioServer().post("/api/Resume/addressresume",
         data: jsonEncode({
-
-          "languageresume": "string"
+          "languageresume": userLanguage
 
         })
     );
   }Future<Response> sentScreenCertificateResume() async {
+    prefs = await SharedPreferences.getInstance();
+    String? userLanguage = prefs.getString('userLanguageResume');
+
     return await MyDio.createDioServer().post("/api/Resume/certificateresume",
         data: jsonEncode({
-
-          "languageresume": "string"
-
+          "languageresume": userLanguage
         })
     );
   }Future<Response> sentScreenSkillResume() async {
+    prefs = await SharedPreferences.getInstance();
+    String? userLanguage = prefs.getString('userLanguageResume');
+
     return await MyDio.createDioServer().post("/api/Resume/skillresume",
         data: jsonEncode({
-
-          "languageresume": "string"
+          "languageresume": userLanguage
         })
     );
   }Future<Response> sentScreenSkillLanguageResume() async {
+    prefs = await SharedPreferences.getInstance();
+    String? userLanguage = prefs.getString('userLanguageResume');
+
     return await MyDio.createDioServer().post("/api/Resume/skilllanguageresume",
         data: jsonEncode({
-          "languageresume": "string"
+          "languageresume": userLanguage
 
         })
     );
   }Future<Response> sentScreenExperienceResume() async {
+    prefs = await SharedPreferences.getInstance();
+    String? userLanguage = prefs.getString('userLanguageResume');
+
     return await MyDio.createDioServer().post("/api/Resume/experienceresume",
         data: jsonEncode({
-          "languageresume": "string"
+          "languageresume": userLanguage
 
         })
     );

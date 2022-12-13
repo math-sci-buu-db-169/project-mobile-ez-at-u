@@ -243,35 +243,51 @@ Languge langugeFromJson(String str) => Languge.fromJson(json.decode(str));
 String langugeToJson(Languge data) => json.encode(data.toJson());
 class Languge {
   Languge({
+    int? id,
+    int? orderchoose,
     String? language,
     String? value,
     dynamic detail,}){
+    _id = id;
+    _orderchoose = orderchoose;
     _language = language;
     _value = value;
     _detail = detail;
   }
 
   Languge.fromJson(dynamic json) {
+    _id = json['id'];
+    _orderchoose = json['orderchoose'];
     _language = json['language'];
     _value = json['value'];
     _detail = json['detail'];
   }
+  int? _id;
+  int? _orderchoose;
   String? _language;
   String? _value;
   dynamic _detail;
-  Languge copyWith({  String? language,
+  Languge copyWith({   int? id,
+    int? orderchoose,
+    String? language,
     String? value,
     dynamic detail,
-  }) => Languge(  language: language ?? _language,
+  }) => Languge(   id: id ?? _id,
+    orderchoose: orderchoose ?? _orderchoose,
+    language: language ?? _language,
     value: value ?? _value,
     detail: detail ?? _detail,
   );
+  int? get id => _id;
+  int? get orderchoose => _orderchoose;
   String? get language => _language;
   String? get value => _value;
   dynamic get detail => _detail;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
+    map['id'] = _id;
+    map['orderchoose'] = _orderchoose;
     map['language'] = _language;
     map['value'] = _value;
     map['detail'] = _detail;
@@ -287,28 +303,44 @@ Certificate certificateFromJson(String str) => Certificate.fromJson(json.decode(
 String certificateToJson(Certificate data) => json.encode(data.toJson());
 class Certificate {
   Certificate({
+    int? id,
+    int? orderchoose,
     String? title,
     String? description,}){
+    _id = id;
+    _orderchoose = orderchoose;
     _title = title;
     _description = description;
   }
 
   Certificate.fromJson(dynamic json) {
+    _id = json['id'];
+    _orderchoose = json['orderchoose'];
     _title = json['title'];
     _description = json['description'];
   }
+  int? _id;
+  int? _orderchoose;
   String? _title;
   String? _description;
-  Certificate copyWith({  String? title,
+  Certificate copyWith({   int? id,
+    int? orderchoose,
+    String? title,
     String? description,
-  }) => Certificate(  title: title ?? _title,
+  }) => Certificate(    id: id ?? _id,
+    orderchoose: orderchoose ?? _orderchoose,
+    title: title ?? _title,
     description: description ?? _description,
   );
+  int? get id => _id;
+  int? get orderchoose => _orderchoose;
   String? get title => _title;
   String? get description => _description;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
+    map['id'] = _id;
+    map['orderchoose'] = _orderchoose;
     map['title'] = _title;
     map['description'] = _description;
     return map;
@@ -433,10 +465,14 @@ Experience experienceFromJson(String str) => Experience.fromJson(json.decode(str
 String experienceToJson(Experience data) => json.encode(data.toJson());
 class Experience {
   Experience({
+    num? id,
+    num? orderchoose,
     String? startdate,
     String? enddate,
     String? position,
     String? detail,}){
+    _id = id;
+    _orderchoose = orderchoose;
     _startdate = startdate;
     _enddate = enddate;
     _position = position;
@@ -444,24 +480,35 @@ class Experience {
   }
 
   Experience.fromJson(dynamic json) {
+    _id = json['id'];
+    _orderchoose = json['orderchoose'];
     _startdate = json['startdate'];
     _enddate = json['enddate'];
     _position = json['position'];
     _detail = json['detail'];
   }
+  num? _id;
+  num? _orderchoose;
   String? _startdate;
   String? _enddate;
   String? _position;
   String? _detail;
-  Experience copyWith({  String? startdate,
+  Experience copyWith({   num? id,
+    num? orderchoose,
+    String? startdate,
     String? enddate,
     String? position,
     String? detail,
-  }) => Experience(  startdate: startdate ?? _startdate,
+  }) => Experience(   id: id ?? _id,
+    orderchoose: orderchoose ?? _orderchoose,
+    startdate: startdate ?? _startdate,
     enddate: enddate ?? _enddate,
     position: position ?? _position,
     detail: detail ?? _detail,
   );
+
+  num? get id => _id;
+  num? get orderchoose => _orderchoose;
   String? get startdate => _startdate;
   String? get enddate => _enddate;
   String? get position => _position;
@@ -469,6 +516,8 @@ class Experience {
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
+    map['id'] = _id;
+    map['orderchoose'] = _orderchoose;
     map['startdate'] = _startdate;
     map['enddate'] = _enddate;
     map['position'] = _position;
@@ -584,13 +633,15 @@ class Personinfo {
     String? facebook,
     String? line,
     String? instagram,
-    String? twitter,}){
+    String? twitter,
+    String? youtube,}){
     _email = email;
     _phone = phone;
     _facebook = facebook;
     _line = line;
     _instagram = instagram;
     _twitter = twitter;
+    _youtube = youtube;
   }
 
   Personinfo.fromJson(dynamic json) {
@@ -600,6 +651,7 @@ class Personinfo {
     _line = json['line'];
     _instagram = json['instagram'];
     _twitter = json['twitter'];
+    _youtube = json['youtube'];
   }
   String? _email;
   String? _phone;
@@ -607,18 +659,21 @@ class Personinfo {
   String? _line;
   String? _instagram;
   String? _twitter;
+  String? _youtube;
   Personinfo copyWith({  String? email,
     String? phone,
     String? facebook,
     String? line,
     String? instagram,
     String? twitter,
+    String? youtube,
   }) => Personinfo(  email: email ?? _email,
     phone: phone ?? _phone,
     facebook: facebook ?? _facebook,
     line: line ?? _line,
     instagram: instagram ?? _instagram,
     twitter: twitter ?? _twitter,
+    youtube: youtube ?? _youtube,
   );
   String? get email => _email;
   String? get phone => _phone;
@@ -626,6 +681,7 @@ class Personinfo {
   String? get line => _line;
   String? get instagram => _instagram;
   String? get twitter => _twitter;
+  String? get youtube => _youtube;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -635,6 +691,7 @@ class Personinfo {
     map['line'] = _line;
     map['instagram'] = _instagram;
     map['twitter'] = _twitter;
+    map['youtube'] = _youtube;
     return map;
   }
 
@@ -799,7 +856,8 @@ class ScreenInfo {
     String? zipcode,
     String? unkhown,
     String? viewpdf,
-    String? titleresumeinformation,}){
+    String? titleresumeinformation,
+    String? youtube,}){
     _aboutme = aboutme;
     _aboutmedetail = aboutmedetail;
     _address = address;
@@ -855,6 +913,7 @@ class ScreenInfo {
     _unkhown = unkhown;
     _viewpdf = viewpdf;
     _titleresumeinformation = titleresumeinformation;
+    _youtube = youtube;
   }
 
   ScreenInfo.fromJson(dynamic json) {
@@ -913,6 +972,7 @@ class ScreenInfo {
     _unkhown = json['unkhown'];
     _viewpdf = json['viewpdf'];
     _titleresumeinformation = json['titleresumeinformation'];
+    _youtube = json['youtube'];
   }
   String? _aboutme;
   String? _aboutmedetail;
@@ -969,6 +1029,7 @@ class ScreenInfo {
   String? _unkhown;
   String? _viewpdf;
   String? _titleresumeinformation;
+  String? _youtube;
   ScreenInfo copyWith({  String? aboutme,
     String? aboutmedetail,
     String? address,
@@ -1024,6 +1085,7 @@ class ScreenInfo {
     String? unkhown,
     String? viewpdf,
     String? titleresumeinformation,
+    String? youtube,
   }) => ScreenInfo(  aboutme: aboutme ?? _aboutme,
     aboutmedetail: aboutmedetail ?? _aboutmedetail,
     address: address ?? _address,
@@ -1079,6 +1141,7 @@ class ScreenInfo {
     unkhown: unkhown ?? _unkhown,
     viewpdf: viewpdf ?? _viewpdf,
     titleresumeinformation: titleresumeinformation ?? _titleresumeinformation,
+    youtube: youtube ?? _youtube,
   );
   String? get aboutme => _aboutme;
   String? get aboutmedetail => _aboutmedetail;
@@ -1135,6 +1198,7 @@ class ScreenInfo {
   String? get unkhown => _unkhown;
   String? get viewpdf => _viewpdf;
   String? get titleresumeinformation => _titleresumeinformation;
+  String? get youtube => _youtube;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -1193,6 +1257,7 @@ class ScreenInfo {
     map['unkhown'] = _unkhown;
     map['viewpdf'] = _viewpdf;
     map['titleresumeinformation'] = _titleresumeinformation;
+    map['youtube'] = _youtube;
     return map;
   }
 

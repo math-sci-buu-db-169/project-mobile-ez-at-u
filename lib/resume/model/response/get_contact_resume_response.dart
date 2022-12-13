@@ -40,7 +40,7 @@ class GetContactResumeResponse {
 }
 
 /// screeninfo : {"save":"Save/บันทึก","editinfomations":"แก้ไขข้อมูล","email":"อีเมล","phone":"โทรศัพท์","facebook":"เฟคบุ๊ค","line":"ไลน์","instagram":"อินสตาแกรม","twitter":"ทวิตเตอร์","youtube":"ยูทูป"}
-/// data : {"email":"email","phone":"phone","facebook":"feacbook","line":"@0930582335","instagram":"instagram","twitter":"twitter","youtube":"twitter"}
+/// data : {"email":"email","phone":"phone","facebook":"feacbook","line":"@0930582335","instagram":"instagram","twitter":"twitter","youtube":null}
 
 Body bodyFromJson(String str) => Body.fromJson(json.decode(str));
 String bodyToJson(Body data) => json.encode(data.toJson());
@@ -85,7 +85,7 @@ class Body {
 /// line : "@0930582335"
 /// instagram : "instagram"
 /// twitter : "twitter"
-/// youtube : "twitter"
+/// youtube : null
 
 Data dataFromJson(String str) => Data.fromJson(json.decode(str));
 String dataToJson(Data data) => json.encode(data.toJson());
@@ -97,7 +97,7 @@ class Data {
     String? line,
     String? instagram,
     String? twitter,
-    String? youtube,}){
+    dynamic youtube,}){
     _email = email;
     _phone = phone;
     _facebook = facebook;
@@ -122,14 +122,14 @@ class Data {
   String? _line;
   String? _instagram;
   String? _twitter;
-  String? _youtube;
+  dynamic _youtube;
   Data copyWith({  String? email,
     String? phone,
     String? facebook,
     String? line,
     String? instagram,
     String? twitter,
-    String? youtube,
+    dynamic youtube,
   }) => Data(  email: email ?? _email,
     phone: phone ?? _phone,
     facebook: facebook ?? _facebook,
@@ -144,7 +144,7 @@ class Data {
   String? get line => _line;
   String? get instagram => _instagram;
   String? get twitter => _twitter;
-  String? get youtube => _youtube;
+  dynamic get youtube => _youtube;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
