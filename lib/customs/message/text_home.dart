@@ -29,3 +29,6 @@ const String textAlertDeleteAccountPDPA = " การลบบัญชี จ�
 const String noActivity   = " คไม่พบกิจกรรมของคุณ ";
 const String subNoActivityLineOne = " กดปุ่ม'เพิ่ม'เพื่อบันทึกกิจกรรม ";
 const String subNoActivityLineTwo = " หรือกรุณาตรวจสอบสถานะกิจกรรมของคุณอีกครั้ง ";
+//teacher
+const String homeTitleActTeacher   = 'ยืนยันกิจกรรม';
+const String homeTextSeeAll = 'เพิ่ม';
