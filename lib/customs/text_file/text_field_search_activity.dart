@@ -49,8 +49,8 @@ class _TextFieldSearchActivityCustomState extends State<TextFieldSearchActivityC
   }
   @override
   Widget build(BuildContext context) {
-    String search = 'ค้นหา';//widget.activityListTeacherScreen?.body?.screeninfo?.search?? 'ค้นหา';
-    String here ='ที่นี';// widget.activityListTeacherScreen?.body?.screeninfo?.here?? 'ที่นี';
+    String search = widget.activityListTeacherScreen?.body?.screeninfo?.textsearch ?? "aaa";//widget.activityListTeacherScreen?.body?.screeninfo?.search?? 'ค้นหา';
+    String here =widget.activityListTeacherScreen?.body?.screeninfo?.texthere ?? "bbb";// widget.activityListTeacherScreen?.body?.screeninfo?.here?? 'ที่นี';
 
     return Container(
         // padding: EdgeInsets.all(12),

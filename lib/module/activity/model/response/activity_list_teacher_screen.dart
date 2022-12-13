@@ -1,6 +1,6 @@
 import 'dart:convert';
 /// head : {"status":200,"message":"success","modulename":"activity","timeexpire":false}
-/// body : {"screeninfo":{"titleteacheractivity":"กิจกรรม","textactivity":"กิจกรรม","studentcode":"รหัสนิสิต","student":"นิสิต","startdate":"วันที่เริ่มทำ","time":"ระยะเวลา","venue":"สถานที่","year":"ปี","term":"เทอม","detail":"รายละเอียด","finishdate":"วันที่ทำเสร็จ","date":"วันที่","buttonapprove":"ยืนยัน","buttondisapprove":"ปฏิเสธ"},"activitylist":[{"acid":3,"acname":"Test add by swagger 1","startdate":"11/12/2022","finishdate":"11/12/2022","venue":"Tonsai home","stdname":"คุณต้นสาย","stdlastname":"ตรีถัน","stdcode":"62030080","status":"U","color":"#FAFFBE"},{"acid":2,"acname":"TEST2","startdate":"11/11/2011","finishdate":"11/11/2011","venue":"BBB","stdname":"คุณต้นสาย","stdlastname":"ตรีถัน","stdcode":"62030080","status":"R","color":"#f3f6f4"},{"acid":1,"acname":"TEST1","startdate":"10/10/2010","finishdate":"10/10/2010","venue":"AAA","stdname":"คุณต้นสาย","stdlastname":"ตรีถัน","stdcode":"62030080","status":"A","color":"#C7FFAD"}],"options":[{"title":"ชื่อนิสิต","value":"1"},{"title":"ชื่อกิจกรรม","value":"2"}],"options_status":[{"status":"ล้างทั้งหมด","value":"0"},{"status":"รอรับการยืนยัน","value":"1"},{"status":"ยืนยันแล้ว","value":"2"},{"status":"ถูกปฏิเสธ","value":"3"}]}
+/// body : {"screeninfo":{"titleteacheractivity":"Activity","textactivity":"Activity","studentcode":"Code","student":"Student","startdate":"Start date","time":"Period","venue":"Venue","year":"Year","term":"Term","detail":"Detail","finishdate":"Finish date","date":"Date","buttonapprove":"Approve","buttondisapprove":"Disapprove","textsearch":"Search","texthere":"here"},"activitylist":[{"acid":23,"acname":"ทดสอบ 1","startdate":"7/12/2022","finishdate":"7/12/2022","venue":"Tonsai home","stdname":"คุณต้นสาย","stdlastname":"ตรีถัน","stdcode":"62030080","status":"U","color":"#FAFFBE"},{"acid":22,"acname":"เพิ่มใน db","startdate":"30/01/2024","finishdate":"30/01/2025","venue":"Home ton","stdname":"คุณต้นสาย","stdlastname":"ตรีถัน","stdcode":"62030080","status":"U","color":"#FAFFBE"},{"acid":21,"acname":"เพิ่มโดยอาจารย์ 1","startdate":"8/12/2022","finishdate":"10/12/2022","venue":"Tonsai Homeee","stdname":"คุณสิทธิพล","stdlastname":"ชินโน","stdcode":"62030340","status":"A","color":"#C7FFAD"},{"acid":20,"acname":"เพิ่มใน db","startdate":"30/01/2024","finishdate":"30/01/2025","venue":"Home ton","stdname":"คุณสิทธิพล","stdlastname":"ชินโน","stdcode":"62030340","status":"A","color":"#C7FFAD"},{"acid":19,"acname":"เพิ่มโดยอาจารย์ 1","startdate":"8/12/2022","finishdate":"10/12/2022","venue":"Tonsai Homeee","stdname":"คุณสิทธิพล","stdlastname":"ชินโน","stdcode":"62030340","status":"A","color":"#C7FFAD"}],"options":[{"title":"Student name","value":"1"},{"title":"Activity name","value":"2"}],"options_status":[{"status":"clear all","value":"0"},{"status":"Unapproved","value":"1"},{"status":"Approved","value":"2"},{"status":"Rejected","value":"3"}]}
 
 ActivityListTeacherScreen activityListTeacherScreenFromJson(String str) => ActivityListTeacherScreen.fromJson(json.decode(str));
 String activityListTeacherScreenToJson(ActivityListTeacherScreen data) => json.encode(data.toJson());
@@ -39,10 +39,10 @@ ActivityListTeacherScreen copyWith({  Head? head,
 
 }
 
-/// screeninfo : {"titleteacheractivity":"กิจกรรม","textactivity":"กิจกรรม","studentcode":"รหัสนิสิต","student":"นิสิต","startdate":"วันที่เริ่มทำ","time":"ระยะเวลา","venue":"สถานที่","year":"ปี","term":"เทอม","detail":"รายละเอียด","finishdate":"วันที่ทำเสร็จ","date":"วันที่","buttonapprove":"ยืนยัน","buttondisapprove":"ปฏิเสธ"}
-/// activitylist : [{"acid":3,"acname":"Test add by swagger 1","startdate":"11/12/2022","finishdate":"11/12/2022","venue":"Tonsai home","stdname":"คุณต้นสาย","stdlastname":"ตรีถัน","stdcode":"62030080","status":"U","color":"#FAFFBE"},{"acid":2,"acname":"TEST2","startdate":"11/11/2011","finishdate":"11/11/2011","venue":"BBB","stdname":"คุณต้นสาย","stdlastname":"ตรีถัน","stdcode":"62030080","status":"R","color":"#f3f6f4"},{"acid":1,"acname":"TEST1","startdate":"10/10/2010","finishdate":"10/10/2010","venue":"AAA","stdname":"คุณต้นสาย","stdlastname":"ตรีถัน","stdcode":"62030080","status":"A","color":"#C7FFAD"}]
-/// options : [{"title":"ชื่อนิสิต","value":"1"},{"title":"ชื่อกิจกรรม","value":"2"}]
-/// options_status : [{"status":"ล้างทั้งหมด","value":"0"},{"status":"รอรับการยืนยัน","value":"1"},{"status":"ยืนยันแล้ว","value":"2"},{"status":"ถูกปฏิเสธ","value":"3"}]
+/// screeninfo : {"titleteacheractivity":"Activity","textactivity":"Activity","studentcode":"Code","student":"Student","startdate":"Start date","time":"Period","venue":"Venue","year":"Year","term":"Term","detail":"Detail","finishdate":"Finish date","date":"Date","buttonapprove":"Approve","buttondisapprove":"Disapprove","textsearch":"Search","texthere":"here"}
+/// activitylist : [{"acid":23,"acname":"ทดสอบ 1","startdate":"7/12/2022","finishdate":"7/12/2022","venue":"Tonsai home","stdname":"คุณต้นสาย","stdlastname":"ตรีถัน","stdcode":"62030080","status":"U","color":"#FAFFBE"},{"acid":22,"acname":"เพิ่มใน db","startdate":"30/01/2024","finishdate":"30/01/2025","venue":"Home ton","stdname":"คุณต้นสาย","stdlastname":"ตรีถัน","stdcode":"62030080","status":"U","color":"#FAFFBE"},{"acid":21,"acname":"เพิ่มโดยอาจารย์ 1","startdate":"8/12/2022","finishdate":"10/12/2022","venue":"Tonsai Homeee","stdname":"คุณสิทธิพล","stdlastname":"ชินโน","stdcode":"62030340","status":"A","color":"#C7FFAD"},{"acid":20,"acname":"เพิ่มใน db","startdate":"30/01/2024","finishdate":"30/01/2025","venue":"Home ton","stdname":"คุณสิทธิพล","stdlastname":"ชินโน","stdcode":"62030340","status":"A","color":"#C7FFAD"},{"acid":19,"acname":"เพิ่มโดยอาจารย์ 1","startdate":"8/12/2022","finishdate":"10/12/2022","venue":"Tonsai Homeee","stdname":"คุณสิทธิพล","stdlastname":"ชินโน","stdcode":"62030340","status":"A","color":"#C7FFAD"}]
+/// options : [{"title":"Student name","value":"1"},{"title":"Activity name","value":"2"}]
+/// options_status : [{"status":"clear all","value":"0"},{"status":"Unapproved","value":"1"},{"status":"Approved","value":"2"},{"status":"Rejected","value":"3"}]
 
 Body bodyFromJson(String str) => Body.fromJson(json.decode(str));
 String bodyToJson(Body data) => json.encode(data.toJson());
@@ -116,7 +116,7 @@ Body copyWith({  Screeninfo? screeninfo,
 
 }
 
-/// status : "ล้างทั้งหมด"
+/// status : "clear all"
 /// value : "0"
 
 OptionsStatus optionsStatusFromJson(String str) => OptionsStatus.fromJson(json.decode(str));
@@ -152,7 +152,7 @@ OptionsStatus copyWith({  String? status,
 
 }
 
-/// title : "ชื่อนิสิต"
+/// title : "Student name"
 /// value : "1"
 
 Options optionsFromJson(String str) => Options.fromJson(json.decode(str));
@@ -188,10 +188,10 @@ Options copyWith({  String? title,
 
 }
 
-/// acid : 3
-/// acname : "Test add by swagger 1"
-/// startdate : "11/12/2022"
-/// finishdate : "11/12/2022"
+/// acid : 23
+/// acname : "ทดสอบ 1"
+/// startdate : "7/12/2022"
+/// finishdate : "7/12/2022"
 /// venue : "Tonsai home"
 /// stdname : "คุณต้นสาย"
 /// stdlastname : "ตรีถัน"
@@ -296,20 +296,22 @@ Activitylist copyWith({  num? acid,
 
 }
 
-/// titleteacheractivity : "กิจกรรม"
-/// textactivity : "กิจกรรม"
-/// studentcode : "รหัสนิสิต"
-/// student : "นิสิต"
-/// startdate : "วันที่เริ่มทำ"
-/// time : "ระยะเวลา"
-/// venue : "สถานที่"
-/// year : "ปี"
-/// term : "เทอม"
-/// detail : "รายละเอียด"
-/// finishdate : "วันที่ทำเสร็จ"
-/// date : "วันที่"
-/// buttonapprove : "ยืนยัน"
-/// buttondisapprove : "ปฏิเสธ"
+/// titleteacheractivity : "Activity"
+/// textactivity : "Activity"
+/// studentcode : "Code"
+/// student : "Student"
+/// startdate : "Start date"
+/// time : "Period"
+/// venue : "Venue"
+/// year : "Year"
+/// term : "Term"
+/// detail : "Detail"
+/// finishdate : "Finish date"
+/// date : "Date"
+/// buttonapprove : "Approve"
+/// buttondisapprove : "Disapprove"
+/// textsearch : "Search"
+/// texthere : "here"
 
 Screeninfo screeninfoFromJson(String str) => Screeninfo.fromJson(json.decode(str));
 String screeninfoToJson(Screeninfo data) => json.encode(data.toJson());
@@ -328,7 +330,9 @@ class Screeninfo {
       String? finishdate, 
       String? date, 
       String? buttonapprove, 
-      String? buttondisapprove,}){
+      String? buttondisapprove, 
+      String? textsearch, 
+      String? texthere,}){
     _titleteacheractivity = titleteacheractivity;
     _textactivity = textactivity;
     _studentcode = studentcode;
@@ -343,6 +347,8 @@ class Screeninfo {
     _date = date;
     _buttonapprove = buttonapprove;
     _buttondisapprove = buttondisapprove;
+    _textsearch = textsearch;
+    _texthere = texthere;
 }
 
   Screeninfo.fromJson(dynamic json) {
@@ -360,6 +366,8 @@ class Screeninfo {
     _date = json['date'];
     _buttonapprove = json['buttonapprove'];
     _buttondisapprove = json['buttondisapprove'];
+    _textsearch = json['textsearch'];
+    _texthere = json['texthere'];
   }
   String? _titleteacheractivity;
   String? _textactivity;
@@ -375,6 +383,8 @@ class Screeninfo {
   String? _date;
   String? _buttonapprove;
   String? _buttondisapprove;
+  String? _textsearch;
+  String? _texthere;
 Screeninfo copyWith({  String? titleteacheractivity,
   String? textactivity,
   String? studentcode,
@@ -389,6 +399,8 @@ Screeninfo copyWith({  String? titleteacheractivity,
   String? date,
   String? buttonapprove,
   String? buttondisapprove,
+  String? textsearch,
+  String? texthere,
 }) => Screeninfo(  titleteacheractivity: titleteacheractivity ?? _titleteacheractivity,
   textactivity: textactivity ?? _textactivity,
   studentcode: studentcode ?? _studentcode,
@@ -403,6 +415,8 @@ Screeninfo copyWith({  String? titleteacheractivity,
   date: date ?? _date,
   buttonapprove: buttonapprove ?? _buttonapprove,
   buttondisapprove: buttondisapprove ?? _buttondisapprove,
+  textsearch: textsearch ?? _textsearch,
+  texthere: texthere ?? _texthere,
 );
   String? get titleteacheractivity => _titleteacheractivity;
   String? get textactivity => _textactivity;
@@ -418,6 +432,8 @@ Screeninfo copyWith({  String? titleteacheractivity,
   String? get date => _date;
   String? get buttonapprove => _buttonapprove;
   String? get buttondisapprove => _buttondisapprove;
+  String? get textsearch => _textsearch;
+  String? get texthere => _texthere;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -435,6 +451,8 @@ Screeninfo copyWith({  String? titleteacheractivity,
     map['date'] = _date;
     map['buttonapprove'] = _buttonapprove;
     map['buttondisapprove'] = _buttondisapprove;
+    map['textsearch'] = _textsearch;
+    map['texthere'] = _texthere;
     return map;
   }
 
