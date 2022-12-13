@@ -89,7 +89,7 @@ buildContentHomeScreen(
                       color: Theme.of(context).appBarTheme.foregroundColor)):
               (userRole == "TC")?
               Text(
-                  "HC ยืนยันกิจกรรม",
+                  screenHomeResponse?.body?.screenInfo?.titleactteacher ?? homeTitleActTeacher,
                   style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w500,
@@ -198,8 +198,8 @@ buildContentHomeScreen(
                   : (userRole == "TC")
                       ? Center(
                           child: ButtonIconsCustom(
-                            // label: screenHomeResponse?.body?.screenInfo?.btnadd ?? homeTextAdd,
-                            label: "ดูทั้งหมด",
+                            label: screenHomeResponse?.body?.screenInfo?.btnseeall ?? homeTextSeeAll,
+                            // label: "ดูทั้งหมด",
                             buttonIcons: Icon(
                               FontAwesomeIcons.bars,
                               color: Theme.of(context).iconTheme.color,
