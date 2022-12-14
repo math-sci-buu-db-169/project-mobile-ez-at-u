@@ -52,6 +52,9 @@ class _SelectActivityByStudentPageState
   setFilterResultValue(String filterResultValueSet){
     setState(() {
       filterResultValue = filterResultValueSet;
+      context.read<ActivityBloc>().add(
+          SelectActivityByStudentFilterDateScreenInfoEvent(
+              dateBetween: filterResultValueSet));
     });
   }
   @override
@@ -87,7 +90,16 @@ class _SelectActivityByStudentPageState
         if (state is selectActivityByStudentScreenInfoSuccessState) {
           _selectActivityByStudentScreenApi = state.response;
 
-          return buildAddActivityBody(
+          return buildSelectActivityBody(
+            context,
+            _selectActivityByStudentScreenApi,
+            activityNameId,
+              setFilterResultValue,
+          );
+        }if (state is selectActivityByStudentFilterDateScreenInfoSuccessState) {
+          _selectActivityByStudentScreenApi = state.response;
+
+          return buildSelectActivityBody(
             context,
             _selectActivityByStudentScreenApi,
             activityNameId,
@@ -98,13 +110,13 @@ class _SelectActivityByStudentPageState
         }
       },
       buildWhen: (context, state) {
-        return state is selectActivityByStudentScreenInfoSuccessState;
+        return state is selectActivityByStudentScreenInfoSuccessState|| state is selectActivityByStudentFilterDateScreenInfoSuccessState;
       },
     );
   }
 }
 
-buildAddActivityBody(
+buildSelectActivityBody(
   BuildContext context,
   SelectActivityByStudentScreenApi? selectActivityScreenByStudentApi,
   TextEditingController activityNameId,
@@ -138,10 +150,15 @@ buildAddActivityBody(
         ),
       ),
       actions: [
-        Icon(
-          Icons.refresh,
-          size: sizeTitle24,
-          color: appBarforegroundColor,
+        InkWell(
+          onTap: (){
+            setFilterResultValue("");
+          },
+          child: Icon(
+            Icons.refresh,
+            size: sizeTitle24,
+            color: appBarforegroundColor,
+          ),
         ),
         SizedBox(width: MediaQuery.of(context).size.width * 0.02,),
       //   Icon(
@@ -168,6 +185,7 @@ buildAddActivityBody(
               iconsFile: FontAwesomeIcons.envelopeOpenText,
               width: MediaQuery.of(context).size.width,
               dropdownList: activityNameArray,
+              dropdownValue: null,
               // hint: addActivityScreenApi?.body?.screeninfo?.edtapprover ??
               hint: selectActivityScreenByStudentApi?.body?.screeninfo?.textactivityname ??
                   textActivityName,

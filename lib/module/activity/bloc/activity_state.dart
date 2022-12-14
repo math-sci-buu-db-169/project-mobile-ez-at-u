@@ -106,7 +106,6 @@ class getDataActivityNameListByTeacherSuccessState extends ActivityState {
 
   getDataActivityNameListByTeacherSuccessState({required this.response});
 }
-
 class SubmitApproveActivityByTeacherLoadingState extends ActivityState {}
 class SubmitApproveActivityByTeacherEndLoadingState extends ActivityState {}
 class SubmitApproveActivityByTeacherState extends ActivityState {
@@ -133,4 +132,9 @@ class SubmitSelectActivityByStudentEndLoadingState extends ActivityState {}
 class SubmitSelectActivityByStudentErrorState extends ActivityState {
   String message;
   SubmitSelectActivityByStudentErrorState({required this.message});
+}
+class selectActivityByStudentFilterDateScreenInfoSuccessState extends ActivityState {
+  SelectActivityByStudentScreenApi response;
+
+  selectActivityByStudentFilterDateScreenInfoSuccessState({required this.response});
 }

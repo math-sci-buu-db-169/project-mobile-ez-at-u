@@ -148,6 +148,9 @@ class ActivityRepository  {
   }
 //----------------------------------------------------------------------------
   Future<Response> SelectActivityByStudentScreenInfo({required String dateBetween}) async {
+    print("date filter คือ");
+    print(dateBetween);
+    print("date filter end");
     return await MyDio.createDioServer().post("/activity/selectactivitybystudentscreeninfo",
         data: jsonEncode({
           "datebetween": dateBetween

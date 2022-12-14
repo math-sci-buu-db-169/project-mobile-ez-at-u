@@ -402,14 +402,14 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
     });
     on<SelectActivityByStudentScreenInfoEvent>((event, emit) async {
       try {
-        emit(ActivityLoading());
+        emit(SubmitSelectActivityByStudentLoadingState());
         print("CheckActivity 13 == AddActivityScreenInfoEvent");
         await  checkActivityEventInitial(event, emit) ;
         print("เข้ามั้ยนะ");
         Response response = await SelectActivityByStudentScreenInfo(
           dateBetween: event.dateBetween
         );
-        emit(ActivityEndLoading());
+        emit(SubmitSelectActivityByStudentEndLoadingState());
         if (response.statusCode == 200) {
           SelectActivityByStudentScreenApi selectActivityByStudentScreenInfoResponse =
           SelectActivityByStudentScreenApi.fromJson(response.data);
@@ -419,15 +419,45 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
                 response: selectActivityByStudentScreenInfoResponse));
           } else {
             print("เข้า error");
-            emit(ActivityError(
+            emit(SubmitSelectActivityByStudentErrorState(
                 message: selectActivityByStudentScreenInfoResponse.head?.message ?? ""));
           }
         } else {
           print("เข้า error");
-          emit(ActivityError(message: response.statusMessage ?? ""));
+          emit(SubmitSelectActivityByStudentErrorState(message: response.statusMessage ?? ""));
         }
       } on DioError catch (e) {
-        emit(ActivityError(message: e.response?.statusMessage ?? ""));
+        emit(SubmitSelectActivityByStudentErrorState(message: e.response?.statusMessage ?? ""));
+      }
+    });
+    on<SelectActivityByStudentFilterDateScreenInfoEvent>((event, emit) async {
+      try {
+        // emit(SubmitSelectActivityByStudentLoadingState());
+        print("CheckActivity 13 == AddActivityScreenInfoEvent");
+        await  checkActivityEventInitial(event, emit) ;
+        print("เข้ามั้ยนะ");
+        Response response = await SelectActivityByStudentScreenInfo(
+          dateBetween: event.dateBetween
+        );
+        // emit(SubmitSelectActivityByStudentEndLoadingState());
+        if (response.statusCode == 200) {
+          SelectActivityByStudentScreenApi selectActivityByStudentScreenInfoResponse =
+          SelectActivityByStudentScreenApi.fromJson(response.data);
+          if (selectActivityByStudentScreenInfoResponse.head?.status == 200) {
+            print("เข้า success");
+            emit(selectActivityByStudentFilterDateScreenInfoSuccessState(
+                response: selectActivityByStudentScreenInfoResponse));
+          } else {
+            print("เข้า error");
+            emit(SubmitSelectActivityByStudentErrorState(
+                message: selectActivityByStudentScreenInfoResponse.head?.message ?? ""));
+          }
+        } else {
+          print("เข้า error");
+          emit(SubmitSelectActivityByStudentErrorState(message: response.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(SubmitSelectActivityByStudentErrorState(message: e.response?.statusMessage ?? ""));
       }
     });
     on<SubmitSelectActivityByStudentEvent>((event, emit) async {

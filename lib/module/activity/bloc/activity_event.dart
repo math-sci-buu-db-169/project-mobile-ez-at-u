@@ -112,3 +112,10 @@ class SubmitSelectActivityByStudentEvent extends ActivityEvent {
     required this.activityNameId,
   });
 }
+class SelectActivityByStudentFilterDateScreenInfoEvent extends ActivityEvent {
+  String dateBetween;
+
+  SelectActivityByStudentFilterDateScreenInfoEvent({
+    required this.dateBetween,
+  });
+}

@@ -1,4 +1,5 @@
 import 'package:ez_at_u/customs/dialog/dialog_widget.dart';
+import 'package:ez_at_u/customs/message/text_add_edit_activity.dart';
 import 'package:ez_at_u/customs/message/text_button.dart';
 import 'package:ez_at_u/customs/message/text_error.dart';
 import 'package:ez_at_u/customs/progress_dialog.dart';
@@ -196,7 +197,7 @@ class _ActivityListForTeacherPageState
           ),
           title: Text(
             // "กิจกรรมที่รอรับการยืนยัน",
-            titleaprroveactivity ?? "กิจกรรม",
+            titleaprroveactivity ?? textActivityName,
             style: TextStyle(
               color: appBarForegroundColor,
               fontSize: sizeTitle24,
