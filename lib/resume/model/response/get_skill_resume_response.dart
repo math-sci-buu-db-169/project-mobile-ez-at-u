@@ -6,11 +6,11 @@ GetSkillResumeResponse getSkillResumeResponseFromJson(String str) => GetSkillRes
 String getSkillResumeResponseToJson(GetSkillResumeResponse data) => json.encode(data.toJson());
 class GetSkillResumeResponse {
   GetSkillResumeResponse({
-      Head? head, 
-      Body? body,}){
+    Head? head,
+    Body? body,}){
     _head = head;
     _body = body;
-}
+  }
 
   GetSkillResumeResponse.fromJson(dynamic json) {
     _head = json['head'] != null ? Head.fromJson(json['head']) : null;
@@ -18,11 +18,11 @@ class GetSkillResumeResponse {
   }
   Head? _head;
   Body? _body;
-GetSkillResumeResponse copyWith({  Head? head,
-  Body? body,
-}) => GetSkillResumeResponse(  head: head ?? _head,
-  body: body ?? _body,
-);
+  GetSkillResumeResponse copyWith({  Head? head,
+    Body? body,
+  }) => GetSkillResumeResponse(  head: head ?? _head,
+    body: body ?? _body,
+  );
   Head? get head => _head;
   Body? get body => _body;
 
@@ -39,37 +39,32 @@ GetSkillResumeResponse copyWith({  Head? head,
 
 }
 
-/// screeninfo : {"save":"Save/บันทึก","editinfomations":"แก้ไขข้อมูล","skill_th":"ทักษะ","skill_en":"Skill","level":"ระดับความสามารถ / Skill level","level_th":"ระดับความสามารถ","level_en":"Skill level","description_th":"รายละเอียด","description_en":"Description"}
-/// data : [{"id":1,"orderchoose":0,"skill":"เวิร์ด","skillen":"ms word","value":"70","detail":null,"detailen":null},{"id":2,"orderchoose":0,"skill":"ms excel","skillen":"ms excel","value":"60","detail":null,"detailen":null},{"id":3,"orderchoose":0,"skill":"ฟลัทเทอร์","skillen":"Flutter","value":"30","detail":null,"detailen":null},{"id":4,"orderchoose":0,"skill":"คณิต","skillen":"Math","value":"60","detail":null,"detailen":null},{"id":5,"orderchoose":0,"skill":"ดอทเนต","skillen":"Dotnet","value":"80","detail":null,"detailen":null},{"id":6,"orderchoose":0,"skill":"ดาร์ท","skillen":"Dart","value":"60","detail":null,"detailen":null}]
+/// screeninfo : {"save":"บันทึก","editinfomations":"แก้ไขข้อมูล","skill_th":"ทักษะ","skill_en":"Skill","level":"ระดับความสามารถ / Skill level","level_th":"ระดับความสามารถ","level_en":"Skill level","description_th":"รายละเอียด","description_en":"Description","deleteor":"Delete/ลบ","delete":"ลบ"}
+/// data : {"id":1,"orderchoose":0,"skill":"เวิร์ด 2016","skillen":"ms word 2016","value":"71","detail":null,"detailen":null}
 
 Body bodyFromJson(String str) => Body.fromJson(json.decode(str));
 String bodyToJson(Body data) => json.encode(data.toJson());
 class Body {
   Body({
-      Screeninfo? screeninfo, 
-      List<Data>? data,}){
+    Screeninfo? screeninfo,
+    Data? data,}){
     _screeninfo = screeninfo;
     _data = data;
-}
+  }
 
   Body.fromJson(dynamic json) {
     _screeninfo = json['screeninfo'] != null ? Screeninfo.fromJson(json['screeninfo']) : null;
-    if (json['data'] != null) {
-      _data = [];
-      json['data'].forEach((v) {
-        _data?.add(Data.fromJson(v));
-      });
-    }
+    _data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
   Screeninfo? _screeninfo;
-  List<Data>? _data;
-Body copyWith({  Screeninfo? screeninfo,
-  List<Data>? data,
-}) => Body(  screeninfo: screeninfo ?? _screeninfo,
-  data: data ?? _data,
-);
+  Data? _data;
+  Body copyWith({  Screeninfo? screeninfo,
+    Data? data,
+  }) => Body(  screeninfo: screeninfo ?? _screeninfo,
+    data: data ?? _data,
+  );
   Screeninfo? get screeninfo => _screeninfo;
-  List<Data>? get data => _data;
+  Data? get data => _data;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -77,7 +72,7 @@ Body copyWith({  Screeninfo? screeninfo,
       map['screeninfo'] = _screeninfo?.toJson();
     }
     if (_data != null) {
-      map['data'] = _data?.map((v) => v.toJson()).toList();
+      map['data'] = _data?.toJson();
     }
     return map;
   }
@@ -86,9 +81,9 @@ Body copyWith({  Screeninfo? screeninfo,
 
 /// id : 1
 /// orderchoose : 0
-/// skill : "เวิร์ด"
-/// skillen : "ms word"
-/// value : "70"
+/// skill : "เวิร์ด 2016"
+/// skillen : "ms word 2016"
+/// value : "71"
 /// detail : null
 /// detailen : null
 
@@ -96,13 +91,13 @@ Data dataFromJson(String str) => Data.fromJson(json.decode(str));
 String dataToJson(Data data) => json.encode(data.toJson());
 class Data {
   Data({
-      num? id, 
-      num? orderchoose, 
-      String? skill, 
-      String? skillen, 
-      String? value, 
-      dynamic detail, 
-      dynamic detailen,}){
+    num? id,
+    num? orderchoose,
+    String? skill,
+    String? skillen,
+    String? value,
+    dynamic detail,
+    dynamic detailen,}){
     _id = id;
     _orderchoose = orderchoose;
     _skill = skill;
@@ -110,7 +105,7 @@ class Data {
     _value = value;
     _detail = detail;
     _detailen = detailen;
-}
+  }
 
   Data.fromJson(dynamic json) {
     _id = json['id'];
@@ -128,21 +123,21 @@ class Data {
   String? _value;
   dynamic _detail;
   dynamic _detailen;
-Data copyWith({  num? id,
-  num? orderchoose,
-  String? skill,
-  String? skillen,
-  String? value,
-  dynamic detail,
-  dynamic detailen,
-}) => Data(  id: id ?? _id,
-  orderchoose: orderchoose ?? _orderchoose,
-  skill: skill ?? _skill,
-  skillen: skillen ?? _skillen,
-  value: value ?? _value,
-  detail: detail ?? _detail,
-  detailen: detailen ?? _detailen,
-);
+  Data copyWith({  num? id,
+    num? orderchoose,
+    String? skill,
+    String? skillen,
+    String? value,
+    dynamic detail,
+    dynamic detailen,
+  }) => Data(  id: id ?? _id,
+    orderchoose: orderchoose ?? _orderchoose,
+    skill: skill ?? _skill,
+    skillen: skillen ?? _skillen,
+    value: value ?? _value,
+    detail: detail ?? _detail,
+    detailen: detailen ?? _detailen,
+  );
   num? get id => _id;
   num? get orderchoose => _orderchoose;
   String? get skill => _skill;
@@ -165,7 +160,7 @@ Data copyWith({  num? id,
 
 }
 
-/// save : "Save/บันทึก"
+/// save : "บันทึก"
 /// editinfomations : "แก้ไขข้อมูล"
 /// skill_th : "ทักษะ"
 /// skill_en : "Skill"
@@ -174,20 +169,24 @@ Data copyWith({  num? id,
 /// level_en : "Skill level"
 /// description_th : "รายละเอียด"
 /// description_en : "Description"
+/// deleteor : "Delete/ลบ"
+/// delete : "ลบ"
 
 Screeninfo screeninfoFromJson(String str) => Screeninfo.fromJson(json.decode(str));
 String screeninfoToJson(Screeninfo data) => json.encode(data.toJson());
 class Screeninfo {
   Screeninfo({
-      String? save, 
-      String? editinfomations, 
-      String? skillTh, 
-      String? skillEn, 
-      String? level, 
-      String? levelTh, 
-      String? levelEn, 
-      String? descriptionTh, 
-      String? descriptionEn,}){
+    String? save,
+    String? editinfomations,
+    String? skillTh,
+    String? skillEn,
+    String? level,
+    String? levelTh,
+    String? levelEn,
+    String? descriptionTh,
+    String? descriptionEn,
+    String? deleteor,
+    String? delete,}){
     _save = save;
     _editinfomations = editinfomations;
     _skillTh = skillTh;
@@ -197,7 +196,9 @@ class Screeninfo {
     _levelEn = levelEn;
     _descriptionTh = descriptionTh;
     _descriptionEn = descriptionEn;
-}
+    _deleteor = deleteor;
+    _delete = delete;
+  }
 
   Screeninfo.fromJson(dynamic json) {
     _save = json['save'];
@@ -209,6 +210,8 @@ class Screeninfo {
     _levelEn = json['level_en'];
     _descriptionTh = json['description_th'];
     _descriptionEn = json['description_en'];
+    _deleteor = json['deleteor'];
+    _delete = json['delete'];
   }
   String? _save;
   String? _editinfomations;
@@ -219,25 +222,31 @@ class Screeninfo {
   String? _levelEn;
   String? _descriptionTh;
   String? _descriptionEn;
-Screeninfo copyWith({  String? save,
-  String? editinfomations,
-  String? skillTh,
-  String? skillEn,
-  String? level,
-  String? levelTh,
-  String? levelEn,
-  String? descriptionTh,
-  String? descriptionEn,
-}) => Screeninfo(  save: save ?? _save,
-  editinfomations: editinfomations ?? _editinfomations,
-  skillTh: skillTh ?? _skillTh,
-  skillEn: skillEn ?? _skillEn,
-  level: level ?? _level,
-  levelTh: levelTh ?? _levelTh,
-  levelEn: levelEn ?? _levelEn,
-  descriptionTh: descriptionTh ?? _descriptionTh,
-  descriptionEn: descriptionEn ?? _descriptionEn,
-);
+  String? _deleteor;
+  String? _delete;
+  Screeninfo copyWith({  String? save,
+    String? editinfomations,
+    String? skillTh,
+    String? skillEn,
+    String? level,
+    String? levelTh,
+    String? levelEn,
+    String? descriptionTh,
+    String? descriptionEn,
+    String? deleteor,
+    String? delete,
+  }) => Screeninfo(  save: save ?? _save,
+    editinfomations: editinfomations ?? _editinfomations,
+    skillTh: skillTh ?? _skillTh,
+    skillEn: skillEn ?? _skillEn,
+    level: level ?? _level,
+    levelTh: levelTh ?? _levelTh,
+    levelEn: levelEn ?? _levelEn,
+    descriptionTh: descriptionTh ?? _descriptionTh,
+    descriptionEn: descriptionEn ?? _descriptionEn,
+    deleteor: deleteor ?? _deleteor,
+    delete: delete ?? _delete,
+  );
   String? get save => _save;
   String? get editinfomations => _editinfomations;
   String? get skillTh => _skillTh;
@@ -247,6 +256,8 @@ Screeninfo copyWith({  String? save,
   String? get levelEn => _levelEn;
   String? get descriptionTh => _descriptionTh;
   String? get descriptionEn => _descriptionEn;
+  String? get deleteor => _deleteor;
+  String? get delete => _delete;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -259,6 +270,8 @@ Screeninfo copyWith({  String? save,
     map['level_en'] = _levelEn;
     map['description_th'] = _descriptionTh;
     map['description_en'] = _descriptionEn;
+    map['deleteor'] = _deleteor;
+    map['delete'] = _delete;
     return map;
   }
 
@@ -273,15 +286,15 @@ Head headFromJson(String str) => Head.fromJson(json.decode(str));
 String headToJson(Head data) => json.encode(data.toJson());
 class Head {
   Head({
-      num? status, 
-      String? message, 
-      String? modulename, 
-      bool? timeexpire,}){
+    num? status,
+    String? message,
+    String? modulename,
+    bool? timeexpire,}){
     _status = status;
     _message = message;
     _modulename = modulename;
     _timeexpire = timeexpire;
-}
+  }
 
   Head.fromJson(dynamic json) {
     _status = json['status'];
@@ -293,15 +306,15 @@ class Head {
   String? _message;
   String? _modulename;
   bool? _timeexpire;
-Head copyWith({  num? status,
-  String? message,
-  String? modulename,
-  bool? timeexpire,
-}) => Head(  status: status ?? _status,
-  message: message ?? _message,
-  modulename: modulename ?? _modulename,
-  timeexpire: timeexpire ?? _timeexpire,
-);
+  Head copyWith({  num? status,
+    String? message,
+    String? modulename,
+    bool? timeexpire,
+  }) => Head(  status: status ?? _status,
+    message: message ?? _message,
+    modulename: modulename ?? _modulename,
+    timeexpire: timeexpire ?? _timeexpire,
+  );
   num? get status => _status;
   String? get message => _message;
   String? get modulename => _modulename;

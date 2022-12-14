@@ -28,7 +28,7 @@ class EditSkillResumeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
         create: (context) =>
-        ResumeBloc()..add(GetEditScreenSkillResumeEvent()),
+        ResumeBloc()..add(GetEditScreenSkillResumeEvent(id: id)),
         // child: const GenerativeWidget());
         child: EditSkillResumePage(id: id));
   }
@@ -64,7 +64,7 @@ class _EditSkillResumePageState
     getUserLanguage();
     widgetPointerValue = 50;
     _isSessionUnauthorized();
-    context.read<ResumeBloc>().add(GetEditScreenSkillResumeEvent());
+    context.read<ResumeBloc>().add(GetEditScreenSkillResumeEvent(id: widget.id));
     super.initState();
   }
 
@@ -162,13 +162,13 @@ class _EditSkillResumePageState
           String? textSave =
               isGetSkillResumeResponse?.body?.screeninfo?.save;
           String? skillTh =
-              isGetSkillResumeResponse?.body?.data?[widget.id].skill;
+              isGetSkillResumeResponse?.body?.data?.skill;
           String? skillEn =
-              isGetSkillResumeResponse?.body?.data?[widget.id].skillen;
+              isGetSkillResumeResponse?.body?.data?.skillen;
           String? detailTh =
-              isGetSkillResumeResponse?.body?.data?[widget.id].detail;
+              isGetSkillResumeResponse?.body?.data?.detail;
           String? detailEn =
-              isGetSkillResumeResponse?.body?.data?[widget.id].detailen;
+              isGetSkillResumeResponse?.body?.data?.detailen;
 
           String? textValueTh =
               '${isGetSkillResumeResponse?.body?.screeninfo?.levelTh} *';
@@ -463,7 +463,7 @@ floatingSetThemePDF(
     foregroundColor: Colors.black,
     onPressed: () {
       context.read<ResumeBloc>().add(SentEditSkillResumeEvent(
-        id: id +1,
+        id: id,
         orderChoose: orderChoose,
         skillTH: skillControllerTH,
         skillEN: skillControllerEN,

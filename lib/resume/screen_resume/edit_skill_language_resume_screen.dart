@@ -27,7 +27,7 @@ class EditSkillLanguageResumeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
         create: (context) =>
-            ResumeBloc()..add(GetEditScreenSkillLanguageResumeEvent()),
+            ResumeBloc()..add(GetEditScreenSkillLanguageResumeEvent(id: id)),
         // child: const GenerativeWidget());
         child: EditSkillLanguageResumePage(id: id));
   }
@@ -63,7 +63,7 @@ class _EditSkillLanguageResumePageState
     getUserLanguage();
     widgetPointerValue = 50;
     _isSessionUnauthorized();
-    context.read<ResumeBloc>().add(GetEditScreenSkillLanguageResumeEvent());
+    context.read<ResumeBloc>().add(GetEditScreenSkillLanguageResumeEvent(id: widget.id));
     super.initState();
   }
 
@@ -161,13 +161,13 @@ class _EditSkillLanguageResumePageState
           String? textSave =
               isGetSkillLanguageResumeResponse?.body?.screeninfo?.save;
           String? languageTh =
-              isGetSkillLanguageResumeResponse?.body?.data?[widget.id].language;
+              isGetSkillLanguageResumeResponse?.body?.data?.language;
           String? languageEn =
-              isGetSkillLanguageResumeResponse?.body?.data?[widget.id].languageen;
+              isGetSkillLanguageResumeResponse?.body?.data?.languageen;
           String? detailTh =
-              isGetSkillLanguageResumeResponse?.body?.data?[widget.id].detail;
+              isGetSkillLanguageResumeResponse?.body?.data?.detail;
           String? detailEn =
-              isGetSkillLanguageResumeResponse?.body?.data?[widget.id].detailen;
+              isGetSkillLanguageResumeResponse?.body?.data?.detailen;
 
           String? textValueTh =
               '${isGetSkillLanguageResumeResponse?.body?.screeninfo?.levelTh} *';
@@ -175,6 +175,8 @@ class _EditSkillLanguageResumePageState
               '${isGetSkillLanguageResumeResponse?.body?.screeninfo?.languageEn} *';
           String? textValue =
               '${isGetSkillLanguageResumeResponse?.body?.screeninfo?.level} *';
+          print("id: widget.id");
+          print("id: ${widget.id}");
           return Scaffold(
             appBar: AppBar(
                 backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
@@ -462,7 +464,7 @@ floatingSetThemePDF(
     foregroundColor: Colors.black,
     onPressed: () {
       context.read<ResumeBloc>().add(SentEditSkillLanguageResumeEvent(
-            id: id +1,
+            id: id,
             orderChoose: orderChoose,
             languageTH: languageControllerTH,
             languageEN: languageControllerEN,

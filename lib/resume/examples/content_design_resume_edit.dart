@@ -10,7 +10,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:syncfusion_flutter_gauges/gauges.dart';
 import '../../customs/color/color_const.dart';
 import '../../customs/dialog/dialog_widget.dart';
 import '../../customs/image_base_64.dart';
@@ -23,7 +22,6 @@ import '../bloc_resume/resume_bloc.dart';
 import '../../module/login/screen/login_screen/login_screen.dart';
 import '../../utils/shared_preferences.dart';
 import '../model/response/pre_view_resume_response.dart';
-import '../screen_resume/SfLinearGauge.dart';
 import '../screen_resume/edit_about_me_resume_screen.dart';
 import '../screen_resume/edit_certificate_resume_screen.dart';
 import '../screen_resume/edit_education_resume_screen.dart';
@@ -680,14 +678,14 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                           Column(
                               children: List.generate(
                                   isPreViewResumeResponse
-                                          .body?.data?.education?.length ??
+                                          .body?.data?.education?.hsc?.length ??
                                       0, (index) {
                             return buildDetailResumeCustomNotIconsReadOnly(
                                 context: context,
                                 detail:
-                                    "     ${isPreViewResumeResponse.body?.data?.education?[index].startdate ?? ""} - ${isPreViewResumeResponse.body?.data?.education?[index].startdate ?? ""} "
-                                    "${isPreViewResumeResponse.body?.data?.education?[index].placeofstudy ?? ""} \n"
-                                    "${isPreViewResumeResponse.body?.data?.education?[index].detail ?? ""}",
+                                    "     ${isPreViewResumeResponse.body?.data?.education?.hsc?[index].startdate ?? ""} - ${isPreViewResumeResponse.body?.data?.education?.hsc?[index].startdate ?? ""} "
+                                    "${isPreViewResumeResponse.body?.data?.education?.hsc?[index].placeofstudy ?? ""} \n"
+                                    "${isPreViewResumeResponse.body?.data?.education?.hsc?[index].detail ?? ""}",
                                 appBarForeGroundColor: appBarforegroundColor);
                           })),
                         ],
@@ -1165,7 +1163,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                   onTap: (){
                                     Navigator.push(context,
                                         MaterialPageRoute(builder: (context) {
-                                          return  EditSkillResumeScreen(id: isPreViewResumeResponse.body?.data?.languge?[index].id??0 ,);
+                                          return  EditSkillResumeScreen(id: isPreViewResumeResponse.body?.data?.skill?[index].id ??0 ,);
                                         })).then((value) =>setState(() {
                                       context.read<ResumeBloc>().add(GetPreviewResumeEvent());
                                     }),

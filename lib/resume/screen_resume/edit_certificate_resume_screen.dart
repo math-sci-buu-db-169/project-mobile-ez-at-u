@@ -1,4 +1,3 @@
-import 'package:ez_at_u/resume/model/response/pre_view_resume_response.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
@@ -9,19 +8,12 @@ import '../../../../../customs/message/text_button.dart';
 import '../../../../../customs/message/text_error.dart';
 import '../../../../../customs/progress_dialog.dart';
 import '../../../../../utils/shared_preferences.dart';
-import '../../customs/color/color_const.dart';
-import '../../customs/datepicker/custom_date_picker_for_resume.dart';
-import '../../customs/datepicker/custom_date_picker_for_teacher.dart';
 import '../../customs/size/size.dart';
 import '../../customs/text_file/build_textformfiled_unlimit_custom.dart';
 import '../../module/login/screen/login_screen/login_screen.dart';
 import '../bloc_resume/resume_bloc.dart';
-import '../examples/content_design_resume.dart';
 import '../examples/content_design_resume_edit.dart';
-import '../model/response/get_about_me_resume_response.dart';
-import '../model/response/get_education_resume_response.dart';
-import '../model/response/get_Certificate_resume_response.dart';
-import '../model/response/get_user_infomartion_resume_response.dart';
+import '../model/response/get_certificate_resume_response.dart';
 
 class EditCertificateResumeScreen extends StatelessWidget {
   final int  id;
@@ -33,7 +25,7 @@ class EditCertificateResumeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
         create: (context) =>
-        ResumeBloc()..add(GetEditScreenCertificateResumeEvent()),
+        ResumeBloc()..add(GetEditScreenCertificateResumeEvent(id: id)),
         // child: const GenerativeWidget());
         child:  EditCertificateResumePage(id:id));
   }
@@ -66,7 +58,7 @@ class _EditCertificateResumePageState extends State<EditCertificateResumePage>
     isSearchStatus   = 0 ;
     getUserLanguage();
     _isSessionUnauthorized();
-    context.read<ResumeBloc>().add(GetEditScreenCertificateResumeEvent());
+    context.read<ResumeBloc>().add(GetEditScreenCertificateResumeEvent(id: widget.id));
     super.initState();
   }
 
@@ -157,10 +149,10 @@ class _EditCertificateResumePageState extends State<EditCertificateResumePage>
               isGetCertificateResumeResponse?.body?.screeninfo?.editinfomations;
           String? textSave =
               isGetCertificateResumeResponse?.body?.screeninfo?.save;
-          String? titleTh = isGetCertificateResumeResponse?.body?.data?[0].title;
-          String? titleEn = isGetCertificateResumeResponse?.body?.data?[0].titleen;
-          String? detailTh = isGetCertificateResumeResponse?.body?.data?[0].description;
-          String? detailEn = isGetCertificateResumeResponse?.body?.data?[0].descriptionen;
+          String? titleTh = isGetCertificateResumeResponse?.body?.data?.title;
+          String? titleEn = isGetCertificateResumeResponse?.body?.data?.titleen;
+          String? detailTh = isGetCertificateResumeResponse?.body?.data?.description;
+          String? detailEn = isGetCertificateResumeResponse?.body?.data?.descriptionen;
 
           return Scaffold(
             appBar: AppBar(

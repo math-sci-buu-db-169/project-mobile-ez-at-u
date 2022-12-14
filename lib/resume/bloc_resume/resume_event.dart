@@ -138,7 +138,12 @@ class SentEditExperienceResumeEvent extends ResumeEvent {
       required this.detailEN});
 }
 
-class GetEditScreenCertificateResumeEvent extends ResumeEvent {}
+class GetEditScreenCertificateResumeEvent extends ResumeEvent {
+  int id;
+  GetEditScreenCertificateResumeEvent(
+      {required this.id,});
+}
+
 
 class SentEditCertificateResumeEvent extends ResumeEvent {
   int id;
@@ -157,7 +162,11 @@ class SentEditCertificateResumeEvent extends ResumeEvent {
       required this.detailEN});
 }
 
-class GetEditScreenSkillLanguageResumeEvent extends ResumeEvent {}
+class GetEditScreenSkillLanguageResumeEvent extends ResumeEvent {
+  int id;
+  GetEditScreenSkillLanguageResumeEvent(
+      {required this.id,});
+}
 
 class SentEditSkillLanguageResumeEvent extends ResumeEvent {
   int id;
@@ -177,7 +186,11 @@ class SentEditSkillLanguageResumeEvent extends ResumeEvent {
       required this.detailEN,
       required this.valueLanguage});
 }
-class GetEditScreenSkillResumeEvent extends ResumeEvent {}
+class GetEditScreenSkillResumeEvent extends ResumeEvent {
+  int id;
+  GetEditScreenSkillResumeEvent(
+      {required this.id,});
+}
 
 class SentEditSkillResumeEvent extends ResumeEvent {
   int id;

@@ -14,7 +14,7 @@ import '../../main_route/main_route_bloc_model/check_token_expired_response.dart
 import '../../main_route/main_route_bloc_model/refresh_token_response.dart';
 import '../../utils/shared_preferences.dart';
 import '../model/response/api_edit_resume_response_head.dart';
-import '../model/response/get_Certificate_resume_response.dart';
+import '../model/response/get_certificate_resume_response.dart';
 import '../model/response/get_about_me_resume_response.dart';
 import '../model/response/get_education_resume_response.dart';
 import '../model/response/get_experience_resume_response.dart';
@@ -24,7 +24,6 @@ import '../model/response/get_skill_resume_response.dart';
 import '../model/response/get_user_infomartion_resume_response.dart';
 import '../model/response/image_up_load_resume_response.dart';
 import '../model/response/pre_view_resume_response.dart';
-import '../model/response/sent_edit_about_resume_response.dart';
 import '../repository/resume_repository.dart';
 
 part 'resume_event.dart';
@@ -495,7 +494,7 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
         print("CheckProfile 5 == ProfileApiEvent");
 
         await checkPreviewResumeEventInitial(event, emit);
-        Response responseGetCertificateResumeResponse = await sentScreenCertificateResume();
+        Response responseGetCertificateResumeResponse = await sentScreenCertificateResume(certificateId :event.id);
         emit(EditPreviewResumeEndLoading());
         if (responseGetCertificateResumeResponse.statusCode == 200) {
           GetCertificateResumeResponse getCertificateResumeResponse =
@@ -521,7 +520,7 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
         print("CheckProfile 5 == ProfileApiEvent");
 
         await checkPreviewResumeEventInitial(event, emit);
-        Response responseGetSkillLanguageResumeResponse = await sentScreenSkillLanguageResume();
+        Response responseGetSkillLanguageResumeResponse = await sentScreenSkillLanguageResume(skillLanguageId :event.id);
         emit(EditPreviewResumeEndLoading());
         if (responseGetSkillLanguageResumeResponse.statusCode == 200) {
           GetSkillLanguageResumeResponse getSkillLanguageResumeResponse =
@@ -548,7 +547,7 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
         print("CheckProfile 5 == ProfileApiEvent");
 
         await checkPreviewResumeEventInitial(event, emit);
-        Response responseGetSkillResumeResponse = await sentScreenSkillResume();
+        Response responseGetSkillResumeResponse = await sentScreenSkillResume(skillId:event.id);
         emit(EditPreviewResumeEndLoading());
         if (responseGetSkillResumeResponse.statusCode == 200) {
           GetSkillResumeResponse getSkillResumeResponse =
@@ -730,8 +729,8 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
           orderChoose: event.orderChoose,
           title: event.titleTH,
           titleEN: event.titleEN,
-          description: event.titleTH,
-          descriptionEN: event.titleEN,
+          description: event.detailTH,
+          descriptionEN: event.detailEN,
         );
         if (responseSentEditCertificateResume.statusCode == 200) {
           ApiEditResumeResponseHead sentEditContactResumeResponse =
