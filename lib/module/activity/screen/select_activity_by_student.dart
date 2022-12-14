@@ -44,9 +44,11 @@ class _SelectActivityByStudentPageState
   TextEditingController activityNameId = TextEditingController();
   SelectActivityByStudentScreenApi? _selectActivityByStudentScreenApi;
   late String filterResultValue;
+  late String? DropdownValue;
   @override
   void initState() {
     filterResultValue = "";
+    DropdownValue = null;
     super.initState();
   }
   setFilterResultValue(String filterResultValueSet){
@@ -55,6 +57,13 @@ class _SelectActivityByStudentPageState
       context.read<ActivityBloc>().add(
           SelectActivityByStudentFilterDateScreenInfoEvent(
               dateBetween: filterResultValueSet));
+      setDropdownResultValue(null);
+      activityNameId.text = "";
+    });
+  }
+  setDropdownResultValue(String? DropdownValueSet){
+    setState(() {
+      DropdownValue = DropdownValueSet;
     });
   }
   @override
@@ -95,6 +104,8 @@ class _SelectActivityByStudentPageState
             _selectActivityByStudentScreenApi,
             activityNameId,
               setFilterResultValue,
+              DropdownValue,
+              setDropdownResultValue
           );
         }if (state is selectActivityByStudentFilterDateScreenInfoSuccessState) {
           _selectActivityByStudentScreenApi = state.response;
@@ -104,6 +115,8 @@ class _SelectActivityByStudentPageState
             _selectActivityByStudentScreenApi,
             activityNameId,
               setFilterResultValue,
+              DropdownValue,
+              setDropdownResultValue
           );
         } else {
           return Container();
@@ -121,6 +134,8 @@ buildSelectActivityBody(
   SelectActivityByStudentScreenApi? selectActivityScreenByStudentApi,
   TextEditingController activityNameId,
     setFilterResultValue,
+    DropdownValue,
+    setDropdownResultValue
 ) {
   var activityNameArray = selectActivityScreenByStudentApi?.body?.activitynamelist ?? [];
   Color? appBarBackgroundColor =
@@ -187,10 +202,12 @@ buildSelectActivityBody(
               dropdownList: activityNameArray,
               dropdownValue: null,
               // hint: addActivityScreenApi?.body?.screeninfo?.edtapprover ??
-              hint: selectActivityScreenByStudentApi?.body?.screeninfo?.textactivityname ??
-                  textActivityName,
-                callbackFromCustomDropdownActivityNameId:(String result){
+              // hint: selectActivityScreenByStudentApi?.body?.screeninfo?.textactivityname ??
+              //     textActivityName,
+                hint: DropdownValue??selectActivityScreenByStudentApi?.body?.screeninfo?.textactivityname ?? textActivityName,
+                callbackFromCustomDropdownActivityNameId:(String result, String? result2){
                   activityNameId.text = result;
+                  setDropdownResultValue(result2);
                   if (kDebugMode) {
                     print("activityNameId");
                     print(activityNameId.text);
@@ -210,9 +227,23 @@ buildSelectActivityBody(
                 colorborder: tcButtonTextBoarder,
                 sizeborder: 10,
                 onPressed: (){
+                  if(activityNameId.text.isNotEmpty){
                   context.read<ActivityBloc>().add(
                               SubmitSelectActivityByStudentEvent(
                                   activityNameId: int.parse(activityNameId.text)));
+                }else {
+      dialogOneLineOneBtn(
+          context,
+          // addActivityScreenApi
+                  // ?.body?.alertmessage?.alertfillallactivity ??
+                  "hc กรอกให้ครย" ??
+              alertFillAllActivity,
+          // addActivityScreenApi?.body?.errorbutton?.buttonok ??
+          "hc OK" ??
+              buttonOK, onClickBtn: () {
+        Navigator.of(context).pop();
+      });
+    }
                 }
                 // {
                 //   if (teacherId.text.isNotEmpty &&

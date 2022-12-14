@@ -8,7 +8,7 @@ class CustomDropdownSelectActivityNameByStudent extends StatefulWidget {
   final List<dynamic> dropdownList;
   final double width;
   final String? dropdownValue;
-  final Function(String result) callbackFromCustomDropdownActivityNameId;
+  final Function(String result, String? result2) callbackFromCustomDropdownActivityNameId;
   final IconData iconsFile;
   const CustomDropdownSelectActivityNameByStudent(
       {Key? key,
@@ -66,7 +66,8 @@ class _CustomDropdownSelectActivityNameByStudentState extends State<CustomDropdo
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Text(
-                        showDropdown??hint,
+                        // showDropdown??
+                        hint,
                         style:
                         (dropdownValue == null)?
                         TextStyle(fontSize: sizeText18, color: appBarforegroundColor.withOpacity(0.5))
@@ -97,7 +98,7 @@ class _CustomDropdownSelectActivityNameByStudentState extends State<CustomDropdo
               showDropdown = '${widget.dropdownList[int.parse(value)].activitynameresponse}';
               print(showDropdown);
               teacherIdValue = '${widget.dropdownList[int.parse(value)].teacheridresponse}';
-              widget.callbackFromCustomDropdownActivityNameId(dropdownValue??"5");
+              widget.callbackFromCustomDropdownActivityNameId(dropdownValue??"100", showDropdown);
             });
 
           },
