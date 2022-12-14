@@ -69,9 +69,9 @@ class _CustomDropdownSelectActivityNameByStudentState extends State<CustomDropdo
                         // showDropdown??
                         hint,
                         style:
-                        (dropdownValue == null)?
-                        TextStyle(fontSize: sizeText18, color: appBarforegroundColor.withOpacity(0.5))
-                              :
+                        // (dropdownValue == "")?
+                        // TextStyle(fontSize: sizeText18, color: appBarforegroundColor.withOpacity(0.5))
+                        //       :
                           TextStyle(fontSize: sizeText18, color: appBarforegroundColor),
                         textAlign: TextAlign.start,
                         overflow: TextOverflow.fade,
