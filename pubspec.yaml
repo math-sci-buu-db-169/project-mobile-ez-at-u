@@ -67,7 +67,7 @@ dependencies:
   printing: ^5.9.3
   pdf: ^3.8.4
   dotted_border: ^2.0.0+3
-  syncfusion_flutter_gauges: ^20.3.59
+  syncfusion_flutter_gauges: ^20.3.61
   percent_indicator: ^4.2.2
   gap: ^2.0.1
 
