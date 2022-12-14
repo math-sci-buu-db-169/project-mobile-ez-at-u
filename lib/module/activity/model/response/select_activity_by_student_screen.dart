@@ -1,6 +1,6 @@
 import 'dart:convert';
 /// head : {"status":200,"message":"success","modulename":"activity","timeexpire":false}
-/// body : {"screeninfo":{"titleselectactivity":"Select activity","buttonselectactivity":"Select","textactivityname":"Activity name"},"activitynamelist":[{"activitynameidresponse":10,"activitynameresponse":"เพิ่มใน db","teacheridresponse":"DMOTC"},{"activitynameidresponse":9,"activitynameresponse":"TEST MB3","teacheridresponse":"DMOTC"},{"activitynameidresponse":8,"activitynameresponse":"เพิ่มโดยอาจารย์อภิสิทธิ์","teacheridresponse":"TCMM01"},{"activitynameidresponse":6,"activitynameresponse":"เพิ่มโดยอาจารย์ 2","teacheridresponse":"DMOTC"},{"activitynameidresponse":5,"activitynameresponse":"เพิ่มโดยอาจารย์ 1","teacheridresponse":"DMOTC"},{"activitynameidresponse":4,"activitynameresponse":"Test MB 2","teacheridresponse":"DMOTC"},{"activitynameidresponse":1,"activitynameresponse":"ทดสอบ 1","teacheridresponse":"DMOTC"}]}
+/// body : {"screeninfo":{"titleselectactivity":"เลือกกิจกรรม","buttonselectactivity":"เลือก","textactivityname":"ชื่อกิจกรรม"},"activitynamelist":[{"activitynameidresponse":9,"activitynameresponse":"TEST MB3","teacheridresponse":"DMOTC"},{"activitynameidresponse":11,"activitynameresponse":"test query date","teacheridresponse":"DMOTC"}]}
 
 SelectActivityByStudentScreenApi selectActivityByStudentScreenFromJson(String str) => SelectActivityByStudentScreenApi.fromJson(json.decode(str));
 String selectActivityByStudentScreenToJson(SelectActivityByStudentScreenApi data) => json.encode(data.toJson());
@@ -39,8 +39,8 @@ SelectActivityByStudentScreenApi copyWith({  Head? head,
 
 }
 
-/// screeninfo : {"titleselectactivity":"Select activity","buttonselectactivity":"Select","textactivityname":"Activity name"}
-/// activitynamelist : [{"activitynameidresponse":10,"activitynameresponse":"เพิ่มใน db","teacheridresponse":"DMOTC"},{"activitynameidresponse":9,"activitynameresponse":"TEST MB3","teacheridresponse":"DMOTC"},{"activitynameidresponse":8,"activitynameresponse":"เพิ่มโดยอาจารย์อภิสิทธิ์","teacheridresponse":"TCMM01"},{"activitynameidresponse":6,"activitynameresponse":"เพิ่มโดยอาจารย์ 2","teacheridresponse":"DMOTC"},{"activitynameidresponse":5,"activitynameresponse":"เพิ่มโดยอาจารย์ 1","teacheridresponse":"DMOTC"},{"activitynameidresponse":4,"activitynameresponse":"Test MB 2","teacheridresponse":"DMOTC"},{"activitynameidresponse":1,"activitynameresponse":"ทดสอบ 1","teacheridresponse":"DMOTC"}]
+/// screeninfo : {"titleselectactivity":"เลือกกิจกรรม","buttonselectactivity":"เลือก","textactivityname":"ชื่อกิจกรรม"}
+/// activitynamelist : [{"activitynameidresponse":9,"activitynameresponse":"TEST MB3","teacheridresponse":"DMOTC"},{"activitynameidresponse":11,"activitynameresponse":"test query date","teacheridresponse":"DMOTC"}]
 
 Body bodyFromJson(String str) => Body.fromJson(json.decode(str));
 String bodyToJson(Body data) => json.encode(data.toJson());
@@ -84,8 +84,8 @@ Body copyWith({  Screeninfo? screeninfo,
 
 }
 
-/// activitynameidresponse : 10
-/// activitynameresponse : "เพิ่มใน db"
+/// activitynameidresponse : 9
+/// activitynameresponse : "TEST MB3"
 /// teacheridresponse : "DMOTC"
 
 Activitynamelist activitynamelistFromJson(String str) => Activitynamelist.fromJson(json.decode(str));
@@ -129,9 +129,9 @@ Activitynamelist copyWith({  num? activitynameidresponse,
 
 }
 
-/// titleselectactivity : "Select activity"
-/// buttonselectactivity : "Select"
-/// textactivityname : "Activity name"
+/// titleselectactivity : "เลือกกิจกรรม"
+/// buttonselectactivity : "เลือก"
+/// textactivityname : "ชื่อกิจกรรม"
 
 Screeninfo screeninfoFromJson(String str) => Screeninfo.fromJson(json.decode(str));
 String screeninfoToJson(Screeninfo data) => json.encode(data.toJson());

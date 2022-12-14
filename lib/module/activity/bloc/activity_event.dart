@@ -100,7 +100,12 @@ class SubmitAddEditDeleteActivityByTeacherEvent extends ActivityEvent {
 }
 class getDataActivityNameListByTeacherEvent extends ActivityEvent {}
 //---------Student-----------//
-class SelectActivityByStudentScreenInfoEvent extends ActivityEvent {}
+class SelectActivityByStudentScreenInfoEvent extends ActivityEvent {
+  String dateBetween;
+  SelectActivityByStudentScreenInfoEvent({
+    required this.dateBetween,
+});
+}
 class SubmitSelectActivityByStudentEvent extends ActivityEvent {
   int activityNameId;
   SubmitSelectActivityByStudentEvent({

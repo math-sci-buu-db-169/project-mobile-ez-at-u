@@ -1,5 +1,6 @@
 import 'package:ez_at_u/customs/button/button_custom.dart';
 import 'package:ez_at_u/customs/color/color_const.dart';
+import 'package:ez_at_u/customs/datepicker/custom_date_picker_for_student_filter.dart';
 import 'package:ez_at_u/customs/dialog/dialog_widget.dart';
 import 'package:ez_at_u/customs/dropdown/custom_dropdown_for_approver.dart';
 import 'package:ez_at_u/customs/dropdown/custom_dropdown_select_activity_name_by_student.dart';
@@ -24,7 +25,7 @@ class SelectActivityByStudentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ActivityBloc()..add(SelectActivityByStudentScreenInfoEvent()),
+      create: (context) => ActivityBloc()..add(SelectActivityByStudentScreenInfoEvent(dateBetween: "")),
       child: const SelectActivityByStudentPage(),
     );
   }
@@ -42,11 +43,17 @@ class _SelectActivityByStudentPageState
     extends State<SelectActivityByStudentPage> with ProgressDialog {
   TextEditingController activityNameId = TextEditingController();
   SelectActivityByStudentScreenApi? _selectActivityByStudentScreenApi;
+  late String filterResultValue;
   @override
   void initState() {
+    filterResultValue = "";
     super.initState();
   }
-
+  setFilterResultValue(String filterResultValueSet){
+    setState(() {
+      filterResultValue = filterResultValueSet;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     // context.read<ActivityBloc>().add(AddActivityScreenInfoEvent());
@@ -84,6 +91,7 @@ class _SelectActivityByStudentPageState
             context,
             _selectActivityByStudentScreenApi,
             activityNameId,
+              setFilterResultValue,
           );
         } else {
           return Container();
@@ -100,6 +108,7 @@ buildAddActivityBody(
   BuildContext context,
   SelectActivityByStudentScreenApi? selectActivityScreenByStudentApi,
   TextEditingController activityNameId,
+    setFilterResultValue,
 ) {
   var activityNameArray = selectActivityScreenByStudentApi?.body?.activitynamelist ?? [];
   Color? appBarBackgroundColor =
@@ -128,6 +137,23 @@ buildAddActivityBody(
           fontSize: sizeTitle24,
         ),
       ),
+      actions: [
+        Icon(
+          Icons.refresh,
+          size: sizeTitle24,
+          color: appBarforegroundColor,
+        ),
+        SizedBox(width: MediaQuery.of(context).size.width * 0.02,),
+      //   Icon(
+      //   Icons.filter_alt,
+      //   size: sizeTitle24,
+      //   color: appBarforegroundColor,
+      // ),
+        CustomDatePickerStudentFilter(callbackFromCustomDatePickerForStudentFilter: (String filterResult){
+          setFilterResultValue(filterResult);
+        },),
+        SizedBox(width: MediaQuery.of(context).size.width * 0.03,)
+      ],
     ),
     body: SafeArea(
       // height: MediaQuery.of(context).size.height,
@@ -137,6 +163,7 @@ buildAddActivityBody(
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.05,
             ),
+
             CustomDropdownSelectActivityNameByStudent(
               iconsFile: FontAwesomeIcons.envelopeOpenText,
               width: MediaQuery.of(context).size.width,

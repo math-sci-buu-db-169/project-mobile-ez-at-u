@@ -406,7 +406,9 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
         print("CheckActivity 13 == AddActivityScreenInfoEvent");
         await  checkActivityEventInitial(event, emit) ;
         print("เข้ามั้ยนะ");
-        Response response = await SelectActivityByStudentScreenInfo();
+        Response response = await SelectActivityByStudentScreenInfo(
+          dateBetween: event.dateBetween
+        );
         emit(ActivityEndLoading());
         if (response.statusCode == 200) {
           SelectActivityByStudentScreenApi selectActivityByStudentScreenInfoResponse =
