@@ -1150,9 +1150,9 @@ class _BodyPreviewResumeState extends State<BodyPreviewResume> {
                             buildDetailResumeCheckboxCustomNotIconsReadOnly(
                               context: context,
                               detail:
-                                  "${isPreViewResumeResponse.body?.data?.education?[0].startdate ?? ""} - ${isPreViewResumeResponse.body?.data?.education?[0].startdate ?? ""}\n"
-                                  "${isPreViewResumeResponse.body?.data?.education?[0].placeofstudy ?? "High school education"} \n"
-                                  "     ${isPreViewResumeResponse.body?.data?.education?[0].detail ?? ""}",
+                                  "${isPreViewResumeResponse.body?.data?.education?.hsc?[0].startdate ?? ""} - ${isPreViewResumeResponse.body?.data?.education?.hsc?[0].startdate ?? ""}\n"
+                                  "${isPreViewResumeResponse.body?.data?.education?.hsc?[0].placeofstudy ?? "High school education"} \n"
+                                  "     ${isPreViewResumeResponse.body?.data?.education?.hsc?[0].detail ?? ""}",
                               appBarForeGroundColor: appBarforegroundColor,
                               checkbox: Checkbox(
                                 checkColor: Theme.of(context).primaryColor,
@@ -1170,9 +1170,9 @@ class _BodyPreviewResumeState extends State<BodyPreviewResume> {
                             buildDetailResumeCheckboxCustomNotIconsReadOnly(
                               context: context,
                               detail:
-                                  "${isPreViewResumeResponse.body?.data?.education?[1].startdate ?? ""} - ${isPreViewResumeResponse.body?.data?.education?[1].startdate ?? ""}\n"
-                                  "${isPreViewResumeResponse.body?.data?.education?[1].placeofstudy ?? "High school education"} \n"
-                                  "     ${isPreViewResumeResponse.body?.data?.education?[1].detail ?? ""}",
+                                  "${isPreViewResumeResponse.body?.data?.education?.hsc?[1].startdate ?? ""} - ${isPreViewResumeResponse.body?.data?.education?.hsc?[1].startdate ?? ""}\n"
+                                  "${isPreViewResumeResponse.body?.data?.education?.hsc?[1].placeofstudy ?? "High school education"} \n"
+                                  "     ${isPreViewResumeResponse.body?.data?.education?.hsc?[1].detail ?? ""}",
                               appBarForeGroundColor: appBarforegroundColor,
                               checkbox: Checkbox(
                                 checkColor: Theme.of(context).primaryColor,
@@ -1318,11 +1318,11 @@ class _BodyPreviewResumeState extends State<BodyPreviewResume> {
                               ),
 
                             if (isPreViewResumeResponse
-                                    .body?.data?.personinfo?.feacbook !=
+                                    .body?.data?.personinfo?.facebook !=
                                 null)buildDetailResumeCheckboxCustomNotIconsReadOnly(
                               context: context,
                               detail:
-                              "${isPreViewResumeResponse.body?.screenInfo?.feacbook ?? "facebook"} : ${isPreViewResumeResponse.body?.data?.personinfo?.feacbook} ",
+                              "${isPreViewResumeResponse.body?.screenInfo?.facebook ?? "facebook"} : ${isPreViewResumeResponse.body?.data?.personinfo?.facebook} ",
                               appBarForeGroundColor: appBarforegroundColor,
                               checkbox: Checkbox(
                                 checkColor: Theme.of(context).primaryColor,
@@ -1480,7 +1480,7 @@ class _BodyPreviewResumeState extends State<BodyPreviewResume> {
                                 ],
                               ),
                             if (isPreViewResumeResponse
-                                    .body?.data?.education?.length !=
+                                    .body?.data?.experience?.length !=
                                 0)
                               buildDetailResumeCheckboxCustomNotIconsReadOnly(
                                 context: context,

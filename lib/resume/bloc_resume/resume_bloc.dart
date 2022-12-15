@@ -13,9 +13,17 @@ import '../../check_token/token_bloc.dart';
 import '../../main_route/main_route_bloc_model/check_token_expired_response.dart';
 import '../../main_route/main_route_bloc_model/refresh_token_response.dart';
 import '../../utils/shared_preferences.dart';
+import '../model/response/api_edit_resume_response_head.dart';
+import '../model/response/get_certificate_resume_response.dart';
+import '../model/response/get_about_me_resume_response.dart';
+import '../model/response/get_education_resume_response.dart';
+import '../model/response/get_experience_resume_response.dart';
+import '../model/response/get_position_resume_response.dart';
+import '../model/response/get_skill_language_resume_response.dart';
+import '../model/response/get_skill_resume_response.dart';
+import '../model/response/get_user_infomartion_resume_response.dart';
 import '../model/response/image_up_load_resume_response.dart';
 import '../model/response/pre_view_resume_response.dart';
-import '../model/response/sent_edit_about_resume_response.dart';
 import '../repository/resume_repository.dart';
 
 part 'resume_event.dart';
@@ -148,7 +156,32 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
         emit(PreviewResumeError(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
+    on<GetSetPreviewResumeEvent>((event, emit) async {
+      try {
+        emit(PreviewResumeLoading());
+        print("CheckProfile 5 == ProfileApiEvent");
 
+        await checkPreviewResumeEventInitial(event, emit);
+        Response responsePreViewResume = await getPreviewResumeDataAndScreen();
+        emit(PreviewResumeEndLoading());
+        if (responsePreViewResume.statusCode == 200) {
+          PreViewResumeResponse preViewResumeResponse =
+          PreViewResumeResponse.fromJson(responsePreViewResume.data);
+          if (preViewResumeResponse.head?.status == 200) {
+            emit(PreviewResumeSuccessState(
+                isPreViewResumeResponse: preViewResumeResponse));
+          } else {
+            emit(PreviewResumeError(
+                errorMessage: preViewResumeResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(PreviewResumeError(
+              errorMessage: responsePreViewResume.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(PreviewResumeError(errorMessage: e.response?.statusMessage ?? ""));
+      }
+    });
     on<ChangeLanguageResumeRequest>((event, emit) async {
       try {
         emit(PreviewResumeLoading());
@@ -301,17 +334,17 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
             errorMessage: e.response?.statusMessage ?? ""));
       }
     });
-    on<SentEditAboutResumeEvent>((event, emit) async {
+    on<SentEditAboutMeResumeEvent>((event, emit) async {
       try {
         print("CheckProfile 5 == ProfileApiEvent");
 
         await checkPreviewResumeEventInitial(event, emit);
-        Response responseSentEditAboutResume = await sentEditAboutResume(detailsTH: event.detailsTH, detailsEN: event.detailsEN);
+        Response responseSentEditAboutResume = await sentEditAboutMeResume(detailsTH: event.aboutMeControllerTH, detailsEN: event.aboutMeControllerEN);
         if (responseSentEditAboutResume.statusCode == 200) {
-          SentEditAboutResumeResponse sentEditAboutResumeResponse =
-          SentEditAboutResumeResponse.fromJson(responseSentEditAboutResume.data);
+          ApiEditResumeResponseHead sentEditAboutResumeResponse =
+          ApiEditResumeResponseHead.fromJson(responseSentEditAboutResume.data);
           if (sentEditAboutResumeResponse.head?.status == 200) {
-            emit(EditAboutResumeSuccessState());
+            emit(SentEditAboutMeResumeSuccessState(apiEditResumeResponseHead: sentEditAboutResumeResponse));
           } else {
             emit(PreviewResumeError(
                 errorMessage: sentEditAboutResumeResponse.head?.message ?? ""));
@@ -319,6 +352,462 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
         } else {
           emit(PreviewResumeError(
               errorMessage: responseSentEditAboutResume.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(PreviewResumeError(errorMessage: e.response?.statusMessage ?? ""));
+      }
+    });
+    on<GetEditScreenAboutMeResumeEvent>((event, emit) async {
+      try {
+        emit(EditPreviewResumeLoading());
+        print("CheckProfile 5 == ProfileApiEvent");
+
+        await checkPreviewResumeEventInitial(event, emit);
+        Response responseGetAboutMeResumeResponse = await sentScreenAboutResume();
+        emit(EditPreviewResumeEndLoading());
+        if (responseGetAboutMeResumeResponse.statusCode == 200) {
+          GetAboutMeResumeResponse getAboutMeResumeResponse =
+          GetAboutMeResumeResponse.fromJson(responseGetAboutMeResumeResponse.data);
+          if (getAboutMeResumeResponse.head?.status == 200) {
+            emit(GetEditScreenAboutMeResumeSuccessState( isGetEducationResumeResponse: getAboutMeResumeResponse));
+          } else {
+            emit(EditPreviewResumeError(
+                errorMessage: getAboutMeResumeResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(EditPreviewResumeError(
+              errorMessage: responseGetAboutMeResumeResponse.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(EditPreviewResumeError(
+            errorMessage: e.response?.statusMessage ?? ""));
+      }
+    });
+    on<GetEditScreenUserInfoResumeEvent>((event, emit) async {
+      try {
+        emit(EditPreviewResumeLoading());
+        print("CheckProfile 5 == ProfileApiEvent");
+
+        await checkPreviewResumeEventInitial(event, emit);
+        Response responseGetUserInformationResume = await sentScreenUserInfoResume();
+        emit(EditPreviewResumeEndLoading());
+        if (responseGetUserInformationResume.statusCode == 200) {
+          GetUserInformationResumeResponse getUserInformationResumeResponse =
+          GetUserInformationResumeResponse.fromJson(responseGetUserInformationResume.data);
+          if (getUserInformationResumeResponse.head?.status == 200) {
+            emit(GetEditScreenUserInfoResumeSuccessState( isGetUserInformationResumeResponse: getUserInformationResumeResponse));
+          } else {
+            emit(EditPreviewResumeError(
+                errorMessage: getUserInformationResumeResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(EditPreviewResumeError(
+              errorMessage: responseGetUserInformationResume.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(EditPreviewResumeError(
+            errorMessage: e.response?.statusMessage ?? ""));
+      }
+    });
+    on<GetEditScreenPositionsResumeEvent>((event, emit) async {
+      try {
+        emit(EditPreviewResumeLoading());
+        print("CheckProfile 5 == ProfileApiEvent");
+
+        await checkPreviewResumeEventInitial(event, emit);
+        Response responseGetAboutMeResumeResponse = await sentScreenPositionResume();
+        emit(EditPreviewResumeEndLoading());
+        if (responseGetAboutMeResumeResponse.statusCode == 200) {
+          GetPositionResumeResponse getPositionResumeResponse =
+          GetPositionResumeResponse.fromJson(responseGetAboutMeResumeResponse.data);
+          if (getPositionResumeResponse.head?.status == 200) {
+            emit(GetEditScreenPositionResumeSuccessState( isGetPositionResumeResponse: getPositionResumeResponse));
+          } else {
+            emit(EditPreviewResumeError(
+                errorMessage: getPositionResumeResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(EditPreviewResumeError(
+              errorMessage: responseGetAboutMeResumeResponse.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(EditPreviewResumeError(
+            errorMessage: e.response?.statusMessage ?? ""));
+      }
+    });
+    on<GetEditScreenEducationResumeEvent>((event, emit) async {
+      try {
+        emit(EditPreviewResumeLoading());
+        print("CheckProfile 5 == ProfileApiEvent");
+
+        await checkPreviewResumeEventInitial(event, emit);
+        Response responseGetAboutMeResumeResponse = await sentScreenEducationResume(eduId: event.eduId, type: event.type);
+        emit(EditPreviewResumeEndLoading());
+        if (responseGetAboutMeResumeResponse.statusCode == 200) {
+          GetEducationResumeResponse getEducationResumeResponse =
+          GetEducationResumeResponse.fromJson(responseGetAboutMeResumeResponse.data);
+          if (getEducationResumeResponse.head?.status == 200) {
+            emit(GetEditScreenEducationResumeSuccessState( isGetEducationResumeResponse: getEducationResumeResponse));
+          } else {
+            emit(EditPreviewResumeError(
+                errorMessage: getEducationResumeResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(EditPreviewResumeError(
+              errorMessage: responseGetAboutMeResumeResponse.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(EditPreviewResumeError(
+            errorMessage: e.response?.statusMessage ?? ""));
+      }
+    });
+    on<GetEditScreenExperienceResumeEvent>((event, emit) async {
+      try {
+        emit(EditPreviewResumeLoading());
+        print("CheckProfile 5 == ProfileApiEvent");
+
+        await checkPreviewResumeEventInitial(event, emit);
+        Response responseGetAboutMeResumeResponse = await sentScreenExperienceResume(experienceId: event.id);
+        emit(EditPreviewResumeEndLoading());
+        if (responseGetAboutMeResumeResponse.statusCode == 200) {
+          GetExperienceResumeResponse getExperienceResumeResponse =
+          GetExperienceResumeResponse.fromJson(responseGetAboutMeResumeResponse.data);
+          if (getExperienceResumeResponse.head?.status == 200) {
+            emit(GetEditScreenExperienceResumeSuccessState(isGetExperienceResumeResponse: getExperienceResumeResponse ));
+          } else {
+            emit(EditPreviewResumeError(
+                errorMessage: getExperienceResumeResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(EditPreviewResumeError(
+              errorMessage: responseGetAboutMeResumeResponse.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(EditPreviewResumeError(
+            errorMessage: e.response?.statusMessage ?? ""));
+      }
+    });
+
+    on<GetEditScreenCertificateResumeEvent>((event, emit) async {
+      try {
+        emit(EditPreviewResumeLoading());
+        print("CheckProfile 5 == ProfileApiEvent");
+
+        await checkPreviewResumeEventInitial(event, emit);
+        Response responseGetCertificateResumeResponse = await sentScreenCertificateResume(certificateId :event.id);
+        emit(EditPreviewResumeEndLoading());
+        if (responseGetCertificateResumeResponse.statusCode == 200) {
+          GetCertificateResumeResponse getCertificateResumeResponse =
+          GetCertificateResumeResponse.fromJson(responseGetCertificateResumeResponse.data);
+          if (getCertificateResumeResponse.head?.status == 200) {
+            emit(GetEditScreenCertificateResumeSuccessState(isGetCertificateResumeResponse: getCertificateResumeResponse ));
+          } else {
+            emit(EditPreviewResumeError(
+                errorMessage: getCertificateResumeResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(EditPreviewResumeError(
+              errorMessage: responseGetCertificateResumeResponse.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(EditPreviewResumeError(
+            errorMessage: e.response?.statusMessage ?? ""));
+      }
+    });
+    on<GetEditScreenSkillLanguageResumeEvent>((event, emit) async {
+      try {
+        emit(SkillLanguageResumeLoading());
+        print("CheckProfile 5 == ProfileApiEvent");
+
+        await checkPreviewResumeEventInitial(event, emit);
+        Response responseGetSkillLanguageResumeResponse = await sentScreenSkillLanguageResume(skillLanguageId :event.id);
+        emit(SkillLanguageResumeEndLoading());
+        if (responseGetSkillLanguageResumeResponse.statusCode == 200) {
+          GetSkillLanguageResumeResponse getSkillLanguageResumeResponse =
+          GetSkillLanguageResumeResponse.fromJson(responseGetSkillLanguageResumeResponse.data);
+          if (getSkillLanguageResumeResponse.head?.status == 200) {
+            emit(GetEditScreenSkillLanguageResumeSuccessState(isGetSkillLanguageResumeResponse: getSkillLanguageResumeResponse ));
+          } else {
+            emit(SkillLanguageResumeError(
+                errorMessage: getSkillLanguageResumeResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(SkillLanguageResumeError(
+              errorMessage: responseGetSkillLanguageResumeResponse.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(SkillLanguageResumeError(
+            errorMessage: e.response?.statusMessage ?? ""));
+      }
+    });
+
+    on<GetEditScreenSkillResumeEvent>((event, emit) async {
+      try {
+        emit(EditPreviewResumeLoading());
+        print("CheckProfile 5 == ProfileApiEvent");
+
+        await checkPreviewResumeEventInitial(event, emit);
+        Response responseGetSkillResumeResponse = await sentScreenSkillResume(skillId:event.id);
+        emit(EditPreviewResumeEndLoading());
+        if (responseGetSkillResumeResponse.statusCode == 200) {
+          GetSkillResumeResponse getSkillResumeResponse =
+          GetSkillResumeResponse.fromJson(responseGetSkillResumeResponse.data);
+          if (getSkillResumeResponse.head?.status == 200) {
+            emit(GetEditScreenSkillResumeSuccessState(isGetSkillResumeResponse: getSkillResumeResponse ));
+          } else {
+            emit(EditPreviewResumeError(
+                errorMessage: getSkillResumeResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(EditPreviewResumeError(
+              errorMessage: responseGetSkillResumeResponse.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(EditPreviewResumeError(
+            errorMessage: e.response?.statusMessage ?? ""));
+      }
+    });
+    // on<SentEditEducationResumeEvent>((event, emit) async {
+    //   try {
+    //     print("CheckProfile 5 == ProfileApiEvent");
+    //
+    //     await checkPreviewResumeEventInitial(event, emit);
+    //     Response responseSentEditPositionsResume = await sentEditPositionResume(
+    //         positionTH: event.positionControllerTH,
+    //         positionEN: event.positionControllerEN,
+    //        officeTH: event.officeControllerTH,
+    //         officeEN: event.officeControllerEN,
+    //     );
+    //     if (responseSentEditPositionsResume.statusCode == 200) {
+    //       ApiEditResumeResponseHead sentEditAboutResumeResponse =
+    //       ApiEditResumeResponseHead.fromJson(responseSentEditPositionsResume.data);
+    //       if (sentEditAboutResumeResponse.head?.status == 200) {
+    //         emit(SentEditPositionResumeSuccessState(apiEditResumeResponseHead: sentEditAboutResumeResponse));
+    //       } else {
+    //         emit(PreviewResumeError(
+    //             errorMessage: sentEditAboutResumeResponse.head?.message ?? ""));
+    //       }
+    //     } else {
+    //       emit(PreviewResumeError(
+    //           errorMessage: responseSentEditPositionsResume.statusMessage ?? ""));
+    //     }
+    //   } on DioError catch (e) {
+    //     emit(PreviewResumeError(errorMessage: e.response?.statusMessage ?? ""));
+    //   }
+    // });
+
+
+    on<SentEditContactResumeEvent>((event, emit) async {
+      try {
+        print("CheckProfile 5 == ProfileApiEvent");
+
+        await checkPreviewResumeEventInitial(event, emit);
+        Response responseSentEditPositionsResume = await sentEditContactResume(
+          email: event.email,
+          phone: event.phone,
+          facebook: event.facebook,
+          line: event.line,
+          instagram: event.instagram,
+          twitter: event.twitter,
+          youtube: event.youtube,
+        );
+        if (responseSentEditPositionsResume.statusCode == 200) {
+          ApiEditResumeResponseHead sentEditContactResumeResponse =
+          ApiEditResumeResponseHead.fromJson(responseSentEditPositionsResume.data);
+          if (sentEditContactResumeResponse.head?.status == 200) {
+            emit(SentEditContactResumeSuccessState(apiEditResumeResponseHead: sentEditContactResumeResponse));
+          } else {
+            emit(PreviewResumeError(
+                errorMessage: sentEditContactResumeResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(PreviewResumeError(
+              errorMessage: responseSentEditPositionsResume.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(PreviewResumeError(errorMessage: e.response?.statusMessage ?? ""));
+      }
+    });
+    on<SentEditExperienceResumeEvent>((event, emit) async {
+      try {
+        print("CheckProfile 5 == ProfileApiEvent");
+
+        await checkPreviewResumeEventInitial(event, emit);
+        Response responseSentEditPositionsResume = await sentEditExperienceResume(
+          id: event.id,
+          orderChoose: event.orderChoose,
+          startDate: event.startDate,
+          endDate: event.endDate,
+          positionTH: event.positionTH,
+          positionEN: event.positionEN,
+          detailTH: event.detailTH,
+          detailEN: event.detailEN,
+        );
+        if (responseSentEditPositionsResume.statusCode == 200) {
+          ApiEditResumeResponseHead sentEditContactResumeResponse =
+          ApiEditResumeResponseHead.fromJson(responseSentEditPositionsResume.data);
+          if (sentEditContactResumeResponse.head?.status == 200) {
+            emit(SentEditExperienceResumeSuccessState(apiEditResumeResponseHead: sentEditContactResumeResponse));
+          } else {
+            emit(PreviewResumeError(
+                errorMessage: sentEditContactResumeResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(PreviewResumeError(
+              errorMessage: responseSentEditPositionsResume.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(PreviewResumeError(errorMessage: e.response?.statusMessage ?? ""));
+      }
+    });
+    on<SentEditPositionsResumeEvent>((event, emit) async {
+      try {
+        print("CheckProfile 5 == ProfileApiEvent");
+
+        await checkPreviewResumeEventInitial(event, emit);
+        Response responseSentEditPositionsResume = await sentEditPositionResume(
+          positionTH: event.positionControllerTH,
+          positionEN: event.positionControllerEN,
+          officeTH: event.officeControllerTH,
+          officeEN: event.officeControllerEN,
+        );
+        if (responseSentEditPositionsResume.statusCode == 200) {
+          ApiEditResumeResponseHead sentEditAboutResumeResponse =
+          ApiEditResumeResponseHead.fromJson(responseSentEditPositionsResume.data);
+          if (sentEditAboutResumeResponse.head?.status == 200) {
+            emit(SentEditPositionResumeSuccessState(apiEditResumeResponseHead: sentEditAboutResumeResponse));
+          } else {
+            emit(PreviewResumeError(
+                errorMessage: sentEditAboutResumeResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(PreviewResumeError(
+              errorMessage: responseSentEditPositionsResume.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(PreviewResumeError(errorMessage: e.response?.statusMessage ?? ""));
+      }
+    });
+    on<SentEditUserInfoResumeEvent>((event, emit) async {
+      try {
+        emit(EditPreviewResumeLoading());
+        print("CheckProfile 5 == ProfileApiEvent");
+
+        await checkPreviewResumeEventInitial(event, emit);
+
+        print(" prefix: ${event.prefixId} ,name:  ${event.name} ,lastName: ${event.lastName}  ,nameEN:${event.nameEN} ,lastNameEN: ${event.lastNameEN} ");
+
+        Response responseSentEditUserInfoResume = await sentEditUserInfoResume(
+            prefixId: event.prefixId, name: event.name, lastName: event.lastName, nameEN: event.nameEN, lastNameEN: event.lastNameEN);
+        emit(EditPreviewResumeEndLoading());
+        if (responseSentEditUserInfoResume.statusCode == 200) {
+          ApiEditResumeResponseHead apiEditResumeResponseHead =
+          ApiEditResumeResponseHead.fromJson(responseSentEditUserInfoResume.data);
+          if (apiEditResumeResponseHead.head?.status == 200) {
+            emit(SentEditUserInfoResumeSuccessState( apiEditResumeResponseHead: apiEditResumeResponseHead));
+          } else {
+            emit(EditPreviewResumeError(
+                errorMessage: apiEditResumeResponseHead.head?.message ?? ""));
+          }
+        } else {
+          emit(EditPreviewResumeError(
+              errorMessage: responseSentEditUserInfoResume.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(EditPreviewResumeError(
+            errorMessage: e.response?.statusMessage ?? ""));
+      }
+    });
+
+    on<SentEditCertificateResumeEvent>((event, emit) async {
+      try {
+        print("CheckProfile 5 == ProfileApiEvent");
+
+        await checkPreviewResumeEventInitial(event, emit);
+        Response responseSentEditCertificateResume = await sentEditCertificateResume(
+          id: event.id,
+          orderChoose: event.orderChoose,
+          title: event.titleTH,
+          titleEN: event.titleEN,
+          description: event.detailTH,
+          descriptionEN: event.detailEN,
+        );
+        if (responseSentEditCertificateResume.statusCode == 200) {
+          ApiEditResumeResponseHead sentEditContactResumeResponse =
+          ApiEditResumeResponseHead.fromJson(responseSentEditCertificateResume.data);
+          if (sentEditContactResumeResponse.head?.status == 200) {
+            emit(SentEditCertificateResumeSuccessState(apiEditResumeResponseHead: sentEditContactResumeResponse));
+          } else {
+            emit(PreviewResumeError(
+                errorMessage: sentEditContactResumeResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(PreviewResumeError(
+              errorMessage: responseSentEditCertificateResume.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(PreviewResumeError(errorMessage: e.response?.statusMessage ?? ""));
+      }
+    });
+
+    on<SentEditSkillLanguageResumeEvent>((event, emit) async {
+      try {
+        print("CheckProfile 5 == ProfileApiEvent");
+
+        await checkPreviewResumeEventInitial(event, emit);
+        Response responseSentEditSkillLanguageResume = await sentEditSkillLanguageResume(
+          id: event.id,
+          orderChoose: event.orderChoose,
+          language: event.languageTH,
+          languageEN: event.languageEN,
+          descriptionTH: event.detailTH,
+          descriptionEN: event.detailEN,
+          value: event.valueLanguage,
+        );
+        if (responseSentEditSkillLanguageResume.statusCode == 200) {
+          ApiEditResumeResponseHead sentEditContactResumeResponse =
+          ApiEditResumeResponseHead.fromJson(responseSentEditSkillLanguageResume.data);
+          if (sentEditContactResumeResponse.head?.status == 200) {
+            emit(SentEditSkillLanguageResumeSuccessState(apiEditResumeResponseHead: sentEditContactResumeResponse));
+          } else {
+            emit(PreviewResumeError(
+                errorMessage: sentEditContactResumeResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(PreviewResumeError(
+              errorMessage: responseSentEditSkillLanguageResume.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(PreviewResumeError(errorMessage: e.response?.statusMessage ?? ""));
+      }
+    });
+
+    on<SentEditSkillResumeEvent>((event, emit) async {
+      try {
+        print("CheckProfile 5 == ProfileApiEvent");
+
+        await checkPreviewResumeEventInitial(event, emit);
+        Response responseSentEditSkillResume = await sentEditSkillResume(
+          id: event.id,
+          orderChoose: event.orderChoose,
+          skill: event.skillTH,
+          skillEN: event.skillEN,
+          descriptionTH: event.detailTH,
+          descriptionEN: event.detailEN,
+          value: event.valueSkill,
+        );
+        if (responseSentEditSkillResume.statusCode == 200) {
+          ApiEditResumeResponseHead sentEditContactResumeResponse =
+          ApiEditResumeResponseHead.fromJson(responseSentEditSkillResume.data);
+          if (sentEditContactResumeResponse.head?.status == 200) {
+            emit(SentEditSkillResumeSuccessState(apiEditResumeResponseHead: sentEditContactResumeResponse));
+          } else {
+            emit(PreviewResumeError(
+                errorMessage: sentEditContactResumeResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(PreviewResumeError(
+              errorMessage: responseSentEditSkillResume.statusMessage ?? ""));
         }
       } on DioError catch (e) {
         emit(PreviewResumeError(errorMessage: e.response?.statusMessage ?? ""));

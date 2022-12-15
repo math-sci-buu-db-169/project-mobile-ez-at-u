@@ -38,6 +38,8 @@ class PreViewResumeResponse {
 
 }
 
+/// screenInfo : {"aboutme":"เกี่ยวกับฉัน","aboutmedetail":"เกี่ยวกับฉัน รายละเอียด","address":"ที่อยู่","appliedposition":"ตำแหน่งที่สมัคร","certificate":"ใบรับรอง","contact":"ติดต่อ","textdefault":"ค่าเริ่มต้น","description":"คำอธิบาย","detail":"รายละเอียด","district":"อำเภอ","editinfomations":"แก้ไขข้อมูล","education":"การศึกษา","educationinfo":"ข้อมูลการศึกษา","email":"อีเมล","enddate":"วันสิ้นสุด","experience":"ประสบการณ์","facebook":"เฟคบุ๊ค","instagram":"อินสตาแกรม","language":"ภาษา","lastname":"นามสกุล","line":"ไลน์","moo":"หมู่","mypositions":"ตำแหน่งของฉัน","n":"นิ้ว","name":"ชื่อ","number":"ตัวเลข","phone":"โทรศัพท์","pictuce":"รูปภาพ","placeofstudy":"สถานศึกษา","position":"ตำแหน่ง","positions":"ตำแหน่ง","prefix":"คำนำหน้า","province":"จังหวัด","ratio":"อัตราส่วนภาพต้องเป็น 3:4","road":"ถนน","select":"เลือก","selectacolor":"โปรดเลือกสี","selecttheinformation":"โปรดเลือกข้อมูล ","size":"ขนาด","sizepictuce":"ขนาดไฟล์ไม่เกิน 5 MB","skill":"ทักษะ","soi":"ซอย","startdate":"วันเริ่มต้น","subdistrict":"ตำบล","themecolor":"สีธีม","title":"หัวเรื่อง","titlesetthemecolor":"ตั้งค่าธีมและสี","twitter":"ทวิตเตอร์","type":"ประเภทการศึกษา","value":"ระดับ","whcm":"(กxส) ซม","zipcode":"รหัสไปรษณีย์","unkhown":"ไม่ทราบ","viewpdf":"PDF","titleresumeinformation":"ข้อมูลเรซูเม่","hsc":"ประกาศนียบัตรมัธยมศึกษาตอนปลาย","bd":"ระดับปริญญาตรี","md":"ปริญญาโท    ","dd":"ปริญญาเอก","hdd":"ปริญญาดุษฎีบัณฑิตกิตติมศักดิ์","tapedit":"แตะเพื่อแก้ไข้ข้อมูล","save":"บันทึก","saveor":"Save/บันทึก","youtube":"ยูทูป"}
+/// data : {"userinfo":{"prefixid":"P3","prefix":"นาย","name":"สิทธิพล","lastname":"ชินโน"},"position":"stringas","aboutme":"วิศวกรซอฟต์แวร์มากประสบการณ์ที่มีความกระตือรือร้นในการพัฒนาโปรแกรมนวัตกรรมที่ช่วยเร่งประสิทธิภาพและประสิทธิผลของความสำเร็จขององค์กร เชี่ยวชาญด้านเทคโนโลยีและการเขียนโค้ดเพื่อสร้างระบบที่เชื่อถือได้และเป็นมิตรกับผู้ใ","personinfo":{"email":"emaill3","phone":"phonel3","facebook":"feacbookl3","line":"@0930582335l3","instagram":"instagraml3","twitter":"twitterl3","youtube":"you"},"address":{"number":"169","moo":"","soi":"","road":"string","subdistrict":"ลงหาดบางแสน แสนสุข","district":"เมือง","province":"ชลบุรี","zipcode":"20131"},"experience":[{"id":1,"orderchoose":22,"startdate":"Jun 2015 ","enddate":"Jun 2018","position":"วิศวกรรมซอฟต์แวร์+3","detail":"ฟรีวิลล์ โซลูชั่นส์ จํากัด-22"},{"id":2,"orderchoose":0,"startdate":"Jun 2015 ","enddate":"Jun 2018","position":"วิศวกรรมซอฟต์แวร์","detail":"ฟรีวิลล์ โซลูชั่นส์ จํากัด"},{"id":4,"orderchoose":0,"startdate":"Jun 2015 ","enddate":"Jun 2018","position":"วิศวกรรมซอฟต์แวร์+3.3","detail":"ฟรีวิลล์ โซลูชั่นส์ จํากัด.3"}],"education":{"hsc":[{"id":7,"orderchoose":0,"startdate":"Jun 2015","enddate":"Jun 2018","type":"HSC","placeofstudy":null,"detail":null},{"id":1,"orderchoose":1,"startdate":"Jun 2015","enddate":"Jun 2018","type":"HSC","placeofstudy":"การศึกษาระดับมัธยมศึกษาตอนปลาย","detail":"วิทย์-คณิต โรงเรียนคำแสนวิทยาสรรค์"},{"id":3,"orderchoose":2,"startdate":"Jun 2018","enddate":"Jun 2022","type":"HSC","placeofstudy":"การศึกษาระดับมัธยมศึกษาตอนปลาย","detail":null}],"bd":[{"id":2,"orderchoose":1,"startdate":"Jun 2018","enddate":"Jun 2022","type":"BD","placeofstudy":"ปริญญาตรี","detail":"สาขาวิชาคณิตศาสตร์ ภาควิชาคณิตศาสตร์ คณะวิทยาศาสตร์ มหาวิทยาลัยบูรพา"}],"md":[{"id":2,"orderchoose":1,"startdate":"Jun 2018","enddate":"Jun 2022","type":"BD","placeofstudy":"ปริญญาตรี","detail":"สาขาวิชาคณิตศาสตร์ ภาควิชาคณิตศาสตร์ คณะวิทยาศาสตร์ มหาวิทยาลัยบูรพา"}],"dd":[{"id":2,"orderchoose":1,"startdate":"Jun 2018","enddate":"Jun 2022","type":"BD","placeofstudy":"ปริญญาตรี","detail":"สาขาวิชาคณิตศาสตร์ ภาควิชาคณิตศาสตร์ คณะวิทยาศาสตร์ มหาวิทยาลัยบูรพา"}],"hdd":[{"id":2,"orderchoose":1,"startdate":"Jun 2018","enddate":"Jun 2022","type":"BD","placeofstudy":"ปริญญาตรี","detail":"สาขาวิชาคณิตศาสตร์ ภาควิชาคณิตศาสตร์ คณะวิทยาศาสตร์ มหาวิทยาลัยบูรพา"}]},"skill":[{"id":2,"orderchoose":0,"skill":"ทักษะกิน","value":"83","detail":"wine "},{"id":3,"orderchoose":0,"skill":"skill_thde","value":"50","detail":"description_thgood"},{"id":4,"orderchoose":0,"skill":"good","value":"88","detail":"depp"}],"certificate":[{"id":1,"orderchoose":0,"title":"go","description":"go"},{"id":2,"orderchoose":66,"title":"string16","description":"string36"},{"id":3,"orderchoose":0,"title":"we","description":"go"},{"id":4,"orderchoose":0,"title":"o","description":"k"}],"languge":[{"id":1,"orderchoose":0,"language":"language_thd","value":"1","detail":"description_thg"}],"image":"/"}
 
 Body bodyFromJson(String str) => Body.fromJson(json.decode(str));
 String bodyToJson(Body data) => json.encode(data.toJson());
@@ -76,23 +78,33 @@ class Body {
 
 }
 
+/// userinfo : {"prefixid":"P3","prefix":"นาย","name":"สิทธิพล","lastname":"ชินโน"}
+/// position : "stringas"
+/// aboutme : "วิศวกรซอฟต์แวร์มากประสบการณ์ที่มีความกระตือรือร้นในการพัฒนาโปรแกรมนวัตกรรมที่ช่วยเร่งประสิทธิภาพและประสิทธิผลของความสำเร็จขององค์กร เชี่ยวชาญด้านเทคโนโลยีและการเขียนโค้ดเพื่อสร้างระบบที่เชื่อถือได้และเป็นมิตรกับผู้ใ"
+/// personinfo : {"email":"emaill3","phone":"phonel3","facebook":"feacbookl3","line":"@0930582335l3","instagram":"instagraml3","twitter":"twitterl3","youtube":"you"}
+/// address : {"number":"169","moo":"","soi":"","road":"string","subdistrict":"ลงหาดบางแสน แสนสุข","district":"เมือง","province":"ชลบุรี","zipcode":"20131"}
+/// experience : [{"id":1,"orderchoose":22,"startdate":"Jun 2015 ","enddate":"Jun 2018","position":"วิศวกรรมซอฟต์แวร์+3","detail":"ฟรีวิลล์ โซลูชั่นส์ จํากัด-22"},{"id":2,"orderchoose":0,"startdate":"Jun 2015 ","enddate":"Jun 2018","position":"วิศวกรรมซอฟต์แวร์","detail":"ฟรีวิลล์ โซลูชั่นส์ จํากัด"},{"id":4,"orderchoose":0,"startdate":"Jun 2015 ","enddate":"Jun 2018","position":"วิศวกรรมซอฟต์แวร์+3.3","detail":"ฟรีวิลล์ โซลูชั่นส์ จํากัด.3"}]
+/// education : {"hsc":[{"id":7,"orderchoose":0,"startdate":"Jun 2015","enddate":"Jun 2018","type":"HSC","placeofstudy":null,"detail":null},{"id":1,"orderchoose":1,"startdate":"Jun 2015","enddate":"Jun 2018","type":"HSC","placeofstudy":"การศึกษาระดับมัธยมศึกษาตอนปลาย","detail":"วิทย์-คณิต โรงเรียนคำแสนวิทยาสรรค์"},{"id":3,"orderchoose":2,"startdate":"Jun 2018","enddate":"Jun 2022","type":"HSC","placeofstudy":"การศึกษาระดับมัธยมศึกษาตอนปลาย","detail":null}],"bd":[{"id":2,"orderchoose":1,"startdate":"Jun 2018","enddate":"Jun 2022","type":"BD","placeofstudy":"ปริญญาตรี","detail":"สาขาวิชาคณิตศาสตร์ ภาควิชาคณิตศาสตร์ คณะวิทยาศาสตร์ มหาวิทยาลัยบูรพา"}],"md":[{"id":2,"orderchoose":1,"startdate":"Jun 2018","enddate":"Jun 2022","type":"BD","placeofstudy":"ปริญญาตรี","detail":"สาขาวิชาคณิตศาสตร์ ภาควิชาคณิตศาสตร์ คณะวิทยาศาสตร์ มหาวิทยาลัยบูรพา"}],"dd":[{"id":2,"orderchoose":1,"startdate":"Jun 2018","enddate":"Jun 2022","type":"BD","placeofstudy":"ปริญญาตรี","detail":"สาขาวิชาคณิตศาสตร์ ภาควิชาคณิตศาสตร์ คณะวิทยาศาสตร์ มหาวิทยาลัยบูรพา"}],"hdd":[{"id":2,"orderchoose":1,"startdate":"Jun 2018","enddate":"Jun 2022","type":"BD","placeofstudy":"ปริญญาตรี","detail":"สาขาวิชาคณิตศาสตร์ ภาควิชาคณิตศาสตร์ คณะวิทยาศาสตร์ มหาวิทยาลัยบูรพา"}]}
+/// skill : [{"id":2,"orderchoose":0,"skill":"ทักษะกิน","value":"83","detail":"wine "},{"id":3,"orderchoose":0,"skill":"skill_thde","value":"50","detail":"description_thgood"},{"id":4,"orderchoose":0,"skill":"good","value":"88","detail":"depp"}]
+/// certificate : [{"id":1,"orderchoose":0,"title":"go","description":"go"},{"id":2,"orderchoose":66,"title":"string16","description":"string36"},{"id":3,"orderchoose":0,"title":"we","description":"go"},{"id":4,"orderchoose":0,"title":"o","description":"k"}]
+/// languge : [{"id":1,"orderchoose":0,"language":"language_thd","value":"1","detail":"description_thg"}]
+/// image : "/"
 
 Data dataFromJson(String str) => Data.fromJson(json.decode(str));
 String dataToJson(Data data) => json.encode(data.toJson());
 class Data {
   Data({
-    String? image,
     Userinfo? userinfo,
     String? position,
     String? aboutme,
     Personinfo? personinfo,
     Address? address,
     List<Experience>? experience,
-    List<Education>? education,
+    Education? education,
     List<Skill>? skill,
     List<Certificate>? certificate,
-    List<Languge>? languge,}){
-    _image = image;
+    List<Languge>? languge,
+    String? image,}){
     _userinfo = userinfo;
     _position = position;
     _aboutme = aboutme;
@@ -103,10 +115,10 @@ class Data {
     _skill = skill;
     _certificate = certificate;
     _languge = languge;
+    _image = image;
   }
 
   Data.fromJson(dynamic json) {
-    _image = json['image'];
     _userinfo = json['userinfo'] != null ? Userinfo.fromJson(json['userinfo']) : null;
     _position = json['position'];
     _aboutme = json['aboutme'];
@@ -118,12 +130,7 @@ class Data {
         _experience?.add(Experience.fromJson(v));
       });
     }
-    if (json['education'] != null) {
-      _education = [];
-      json['education'].forEach((v) {
-        _education?.add(Education.fromJson(v));
-      });
-    }
+    _education = json['education'] != null ? Education.fromJson(json['education']) : null;
     if (json['skill'] != null) {
       _skill = [];
       json['skill'].forEach((v) {
@@ -142,31 +149,31 @@ class Data {
         _languge?.add(Languge.fromJson(v));
       });
     }
+    _image = json['image'];
   }
-  String? _image;
   Userinfo? _userinfo;
   String? _position;
   String? _aboutme;
   Personinfo? _personinfo;
   Address? _address;
   List<Experience>? _experience;
-  List<Education>? _education;
+  Education? _education;
   List<Skill>? _skill;
   List<Certificate>? _certificate;
   List<Languge>? _languge;
-  Data copyWith({  String? image,
-    Userinfo? userinfo,
+  String? _image;
+  Data copyWith({  Userinfo? userinfo,
     String? position,
     String? aboutme,
     Personinfo? personinfo,
     Address? address,
     List<Experience>? experience,
-    List<Education>? education,
+    Education? education,
     List<Skill>? skill,
     List<Certificate>? certificate,
     List<Languge>? languge,
-  }) => Data(  image: image ?? _image,
-    userinfo: userinfo ?? _userinfo,
+    String? image,
+  }) => Data(  userinfo: userinfo ?? _userinfo,
     position: position ?? _position,
     aboutme: aboutme ?? _aboutme,
     personinfo: personinfo ?? _personinfo,
@@ -176,22 +183,22 @@ class Data {
     skill: skill ?? _skill,
     certificate: certificate ?? _certificate,
     languge: languge ?? _languge,
+    image: image ?? _image,
   );
-  String? get image => _image;
   Userinfo? get userinfo => _userinfo;
   String? get position => _position;
   String? get aboutme => _aboutme;
   Personinfo? get personinfo => _personinfo;
   Address? get address => _address;
   List<Experience>? get experience => _experience;
-  List<Education>? get education => _education;
+  Education? get education => _education;
   List<Skill>? get skill => _skill;
   List<Certificate>? get certificate => _certificate;
   List<Languge>? get languge => _languge;
+  String? get image => _image;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['image'] = _image;
     if (_userinfo != null) {
       map['userinfo'] = _userinfo?.toJson();
     }
@@ -207,7 +214,7 @@ class Data {
       map['experience'] = _experience?.map((v) => v.toJson()).toList();
     }
     if (_education != null) {
-      map['education'] = _education?.map((v) => v.toJson()).toList();
+      map['education'] = _education?.toJson();
     }
     if (_skill != null) {
       map['skill'] = _skill?.map((v) => v.toJson()).toList();
@@ -218,48 +225,67 @@ class Data {
     if (_languge != null) {
       map['languge'] = _languge?.map((v) => v.toJson()).toList();
     }
+    map['image'] = _image;
     return map;
   }
 
 }
 
-/// language : "ไทย"
-/// value : "70"
-/// detail : null
+/// id : 1
+/// orderchoose : 0
+/// language : "language_thd"
+/// value : "1"
+/// detail : "description_thg"
 
 Languge langugeFromJson(String str) => Languge.fromJson(json.decode(str));
 String langugeToJson(Languge data) => json.encode(data.toJson());
 class Languge {
   Languge({
+    int? id,
+    int? orderchoose,
     String? language,
     String? value,
-    dynamic detail,}){
+    String? detail,}){
+    _id = id;
+    _orderchoose = orderchoose;
     _language = language;
     _value = value;
     _detail = detail;
   }
 
   Languge.fromJson(dynamic json) {
+    _id = json['id'];
+    _orderchoose = json['orderchoose'];
     _language = json['language'];
     _value = json['value'];
     _detail = json['detail'];
   }
+  int? _id;
+  int? _orderchoose;
   String? _language;
   String? _value;
-  dynamic _detail;
-  Languge copyWith({  String? language,
+  String? _detail;
+  Languge copyWith({  int? id,
+    int? orderchoose,
+    String? language,
     String? value,
-    dynamic detail,
-  }) => Languge(  language: language ?? _language,
+    String? detail,
+  }) => Languge(  id: id ?? _id,
+    orderchoose: orderchoose ?? _orderchoose,
+    language: language ?? _language,
     value: value ?? _value,
     detail: detail ?? _detail,
   );
+  int? get id => _id;
+  int? get orderchoose => _orderchoose;
   String? get language => _language;
   String? get value => _value;
-  dynamic get detail => _detail;
+  String? get detail => _detail;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
+    map['id'] = _id;
+    map['orderchoose'] = _orderchoose;
     map['language'] = _language;
     map['value'] = _value;
     map['detail'] = _detail;
@@ -268,35 +294,53 @@ class Languge {
 
 }
 
-/// title : "ทดสอบ 1"
-/// description : "รายละเอียด 1"
+/// id : 1
+/// orderchoose : 0
+/// title : "go"
+/// description : "go"
 
 Certificate certificateFromJson(String str) => Certificate.fromJson(json.decode(str));
 String certificateToJson(Certificate data) => json.encode(data.toJson());
 class Certificate {
   Certificate({
+    int? id,
+    int? orderchoose,
     String? title,
     String? description,}){
+    _id = id;
+    _orderchoose = orderchoose;
     _title = title;
     _description = description;
   }
 
   Certificate.fromJson(dynamic json) {
+    _id = json['id'];
+    _orderchoose = json['orderchoose'];
     _title = json['title'];
     _description = json['description'];
   }
+  int? _id;
+  int? _orderchoose;
   String? _title;
   String? _description;
-  Certificate copyWith({  String? title,
+  Certificate copyWith({  int? id,
+    int? orderchoose,
+    String? title,
     String? description,
-  }) => Certificate(  title: title ?? _title,
+  }) => Certificate(  id: id ?? _id,
+    orderchoose: orderchoose ?? _orderchoose,
+    title: title ?? _title,
     description: description ?? _description,
   );
+  int? get id => _id;
+  int? get orderchoose => _orderchoose;
   String? get title => _title;
   String? get description => _description;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
+    map['id'] = _id;
+    map['orderchoose'] = _orderchoose;
     map['title'] = _title;
     map['description'] = _description;
     return map;
@@ -304,43 +348,61 @@ class Certificate {
 
 }
 
-/// skill : "เวิร์ด"
-/// value : "70"
-/// detail : null
+/// id : 2
+/// orderchoose : 0
+/// skill : "ทักษะกิน"
+/// value : "83"
+/// detail : "wine "
 
 Skill skillFromJson(String str) => Skill.fromJson(json.decode(str));
 String skillToJson(Skill data) => json.encode(data.toJson());
 class Skill {
   Skill({
+    int? id,
+    int? orderchoose,
     String? skill,
     String? value,
-    dynamic detail,}){
+    String? detail,}){
+    _id = id;
+    _orderchoose = orderchoose;
     _skill = skill;
     _value = value;
     _detail = detail;
   }
 
   Skill.fromJson(dynamic json) {
+    _id = json['id'];
+    _orderchoose = json['orderchoose'];
     _skill = json['skill'];
     _value = json['value'];
     _detail = json['detail'];
   }
+  int? _id;
+  int? _orderchoose;
   String? _skill;
   String? _value;
-  dynamic _detail;
-  Skill copyWith({  String? skill,
+  String? _detail;
+  Skill copyWith({  int? id,
+    int? orderchoose,
+    String? skill,
     String? value,
-    dynamic detail,
-  }) => Skill(  skill: skill ?? _skill,
+    String? detail,
+  }) => Skill(  id: id ?? _id,
+    orderchoose: orderchoose ?? _orderchoose,
+    skill: skill ?? _skill,
     value: value ?? _value,
     detail: detail ?? _detail,
   );
+  int? get id => _id;
+  int? get orderchoose => _orderchoose;
   String? get skill => _skill;
   String? get value => _value;
-  dynamic get detail => _detail;
+  String? get detail => _detail;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
+    map['id'] = _id;
+    map['orderchoose'] = _orderchoose;
     map['skill'] = _skill;
     map['value'] = _value;
     map['detail'] = _detail;
@@ -349,21 +411,125 @@ class Skill {
 
 }
 
-/// startdate : "Jun 2015"
-/// enddate : "Jun 2018"
-/// type : "H"
-/// placeofstudy : "การศึกษาระดับมัธยมศึกษาตอนปลาย"
-/// detail : "วิทย์-คณิต โรงเรียนคำแสนวิทยาสรรค์"
+/// hsc : [{"id":7,"orderchoose":0,"startdate":"Jun 2015","enddate":"Jun 2018","type":"HSC","placeofstudy":null,"detail":null},{"id":1,"orderchoose":1,"startdate":"Jun 2015","enddate":"Jun 2018","type":"HSC","placeofstudy":"การศึกษาระดับมัธยมศึกษาตอนปลาย","detail":"วิทย์-คณิต โรงเรียนคำแสนวิทยาสรรค์"},{"id":3,"orderchoose":2,"startdate":"Jun 2018","enddate":"Jun 2022","type":"HSC","placeofstudy":"การศึกษาระดับมัธยมศึกษาตอนปลาย","detail":null}]
+/// bd : [{"id":2,"orderchoose":1,"startdate":"Jun 2018","enddate":"Jun 2022","type":"BD","placeofstudy":"ปริญญาตรี","detail":"สาขาวิชาคณิตศาสตร์ ภาควิชาคณิตศาสตร์ คณะวิทยาศาสตร์ มหาวิทยาลัยบูรพา"}]
+/// md : [{"id":2,"orderchoose":1,"startdate":"Jun 2018","enddate":"Jun 2022","type":"BD","placeofstudy":"ปริญญาตรี","detail":"สาขาวิชาคณิตศาสตร์ ภาควิชาคณิตศาสตร์ คณะวิทยาศาสตร์ มหาวิทยาลัยบูรพา"}]
+/// dd : [{"id":2,"orderchoose":1,"startdate":"Jun 2018","enddate":"Jun 2022","type":"BD","placeofstudy":"ปริญญาตรี","detail":"สาขาวิชาคณิตศาสตร์ ภาควิชาคณิตศาสตร์ คณะวิทยาศาสตร์ มหาวิทยาลัยบูรพา"}]
+/// hdd : [{"id":2,"orderchoose":1,"startdate":"Jun 2018","enddate":"Jun 2022","type":"BD","placeofstudy":"ปริญญาตรี","detail":"สาขาวิชาคณิตศาสตร์ ภาควิชาคณิตศาสตร์ คณะวิทยาศาสตร์ มหาวิทยาลัยบูรพา"}]
 
 Education educationFromJson(String str) => Education.fromJson(json.decode(str));
 String educationToJson(Education data) => json.encode(data.toJson());
 class Education {
   Education({
+    List<Hsc>? hsc,
+    List<Bd>? bd,
+    List<Md>? md,
+    List<Dd>? dd,
+    List<Hdd>? hdd,}){
+    _hsc = hsc;
+    _bd = bd;
+    _md = md;
+    _dd = dd;
+    _hdd = hdd;
+  }
+
+  Education.fromJson(dynamic json) {
+    if (json['hsc'] != null) {
+      _hsc = [];
+      json['hsc'].forEach((v) {
+        _hsc?.add(Hsc.fromJson(v));
+      });
+    }
+    if (json['bd'] != null) {
+      _bd = [];
+      json['bd'].forEach((v) {
+        _bd?.add(Bd.fromJson(v));
+      });
+    }
+    if (json['md'] != null) {
+      _md = [];
+      json['md'].forEach((v) {
+        _md?.add(Md.fromJson(v));
+      });
+    }
+    if (json['dd'] != null) {
+      _dd = [];
+      json['dd'].forEach((v) {
+        _dd?.add(Dd.fromJson(v));
+      });
+    }
+    if (json['hdd'] != null) {
+      _hdd = [];
+      json['hdd'].forEach((v) {
+        _hdd?.add(Hdd.fromJson(v));
+      });
+    }
+  }
+  List<Hsc>? _hsc;
+  List<Bd>? _bd;
+  List<Md>? _md;
+  List<Dd>? _dd;
+  List<Hdd>? _hdd;
+  Education copyWith({  List<Hsc>? hsc,
+    List<Bd>? bd,
+    List<Md>? md,
+    List<Dd>? dd,
+    List<Hdd>? hdd,
+  }) => Education(  hsc: hsc ?? _hsc,
+    bd: bd ?? _bd,
+    md: md ?? _md,
+    dd: dd ?? _dd,
+    hdd: hdd ?? _hdd,
+  );
+  List<Hsc>? get hsc => _hsc;
+  List<Bd>? get bd => _bd;
+  List<Md>? get md => _md;
+  List<Dd>? get dd => _dd;
+  List<Hdd>? get hdd => _hdd;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    if (_hsc != null) {
+      map['hsc'] = _hsc?.map((v) => v.toJson()).toList();
+    }
+    if (_bd != null) {
+      map['bd'] = _bd?.map((v) => v.toJson()).toList();
+    }
+    if (_md != null) {
+      map['md'] = _md?.map((v) => v.toJson()).toList();
+    }
+    if (_dd != null) {
+      map['dd'] = _dd?.map((v) => v.toJson()).toList();
+    }
+    if (_hdd != null) {
+      map['hdd'] = _hdd?.map((v) => v.toJson()).toList();
+    }
+    return map;
+  }
+
+}
+
+/// id : 2
+/// orderchoose : 1
+/// startdate : "Jun 2018"
+/// enddate : "Jun 2022"
+/// type : "BD"
+/// placeofstudy : "ปริญญาตรี"
+/// detail : "สาขาวิชาคณิตศาสตร์ ภาควิชาคณิตศาสตร์ คณะวิทยาศาสตร์ มหาวิทยาลัยบูรพา"
+
+Hdd hddFromJson(String str) => Hdd.fromJson(json.decode(str));
+String hddToJson(Hdd data) => json.encode(data.toJson());
+class Hdd {
+  Hdd({
+    int? id,
+    int? orderchoose,
     String? startdate,
     String? enddate,
     String? type,
     String? placeofstudy,
     String? detail,}){
+    _id = id;
+    _orderchoose = orderchoose;
     _startdate = startdate;
     _enddate = enddate;
     _type = type;
@@ -371,29 +537,39 @@ class Education {
     _detail = detail;
   }
 
-  Education.fromJson(dynamic json) {
+  Hdd.fromJson(dynamic json) {
+    _id = json['id'];
+    _orderchoose = json['orderchoose'];
     _startdate = json['startdate'];
     _enddate = json['enddate'];
     _type = json['type'];
     _placeofstudy = json['placeofstudy'];
     _detail = json['detail'];
   }
+  int? _id;
+  int? _orderchoose;
   String? _startdate;
   String? _enddate;
   String? _type;
   String? _placeofstudy;
   String? _detail;
-  Education copyWith({  String? startdate,
+  Hdd copyWith({  int? id,
+    int? orderchoose,
+    String? startdate,
     String? enddate,
     String? type,
     String? placeofstudy,
     String? detail,
-  }) => Education(  startdate: startdate ?? _startdate,
+  }) => Hdd(  id: id ?? _id,
+    orderchoose: orderchoose ?? _orderchoose,
+    startdate: startdate ?? _startdate,
     enddate: enddate ?? _enddate,
     type: type ?? _type,
     placeofstudy: placeofstudy ?? _placeofstudy,
     detail: detail ?? _detail,
   );
+  int? get id => _id;
+  int? get orderchoose => _orderchoose;
   String? get startdate => _startdate;
   String? get enddate => _enddate;
   String? get type => _type;
@@ -402,6 +578,8 @@ class Education {
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
+    map['id'] = _id;
+    map['orderchoose'] = _orderchoose;
     map['startdate'] = _startdate;
     map['enddate'] = _enddate;
     map['type'] = _type;
@@ -412,19 +590,349 @@ class Education {
 
 }
 
+/// id : 2
+/// orderchoose : 1
+/// startdate : "Jun 2018"
+/// enddate : "Jun 2022"
+/// type : "BD"
+/// placeofstudy : "ปริญญาตรี"
+/// detail : "สาขาวิชาคณิตศาสตร์ ภาควิชาคณิตศาสตร์ คณะวิทยาศาสตร์ มหาวิทยาลัยบูรพา"
+
+Dd ddFromJson(String str) => Dd.fromJson(json.decode(str));
+String ddToJson(Dd data) => json.encode(data.toJson());
+class Dd {
+  Dd({
+    int? id,
+    int? orderchoose,
+    String? startdate,
+    String? enddate,
+    String? type,
+    String? placeofstudy,
+    String? detail,}){
+    _id = id;
+    _orderchoose = orderchoose;
+    _startdate = startdate;
+    _enddate = enddate;
+    _type = type;
+    _placeofstudy = placeofstudy;
+    _detail = detail;
+  }
+
+  Dd.fromJson(dynamic json) {
+    _id = json['id'];
+    _orderchoose = json['orderchoose'];
+    _startdate = json['startdate'];
+    _enddate = json['enddate'];
+    _type = json['type'];
+    _placeofstudy = json['placeofstudy'];
+    _detail = json['detail'];
+  }
+  int? _id;
+  int? _orderchoose;
+  String? _startdate;
+  String? _enddate;
+  String? _type;
+  String? _placeofstudy;
+  String? _detail;
+  Dd copyWith({  int? id,
+    int? orderchoose,
+    String? startdate,
+    String? enddate,
+    String? type,
+    String? placeofstudy,
+    String? detail,
+  }) => Dd(  id: id ?? _id,
+    orderchoose: orderchoose ?? _orderchoose,
+    startdate: startdate ?? _startdate,
+    enddate: enddate ?? _enddate,
+    type: type ?? _type,
+    placeofstudy: placeofstudy ?? _placeofstudy,
+    detail: detail ?? _detail,
+  );
+  int? get id => _id;
+  int? get orderchoose => _orderchoose;
+  String? get startdate => _startdate;
+  String? get enddate => _enddate;
+  String? get type => _type;
+  String? get placeofstudy => _placeofstudy;
+  String? get detail => _detail;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['id'] = _id;
+    map['orderchoose'] = _orderchoose;
+    map['startdate'] = _startdate;
+    map['enddate'] = _enddate;
+    map['type'] = _type;
+    map['placeofstudy'] = _placeofstudy;
+    map['detail'] = _detail;
+    return map;
+  }
+
+}
+
+/// id : 2
+/// orderchoose : 1
+/// startdate : "Jun 2018"
+/// enddate : "Jun 2022"
+/// type : "BD"
+/// placeofstudy : "ปริญญาตรี"
+/// detail : "สาขาวิชาคณิตศาสตร์ ภาควิชาคณิตศาสตร์ คณะวิทยาศาสตร์ มหาวิทยาลัยบูรพา"
+
+Md mdFromJson(String str) => Md.fromJson(json.decode(str));
+String mdToJson(Md data) => json.encode(data.toJson());
+class Md {
+  Md({
+    int? id,
+    int? orderchoose,
+    String? startdate,
+    String? enddate,
+    String? type,
+    String? placeofstudy,
+    String? detail,}){
+    _id = id;
+    _orderchoose = orderchoose;
+    _startdate = startdate;
+    _enddate = enddate;
+    _type = type;
+    _placeofstudy = placeofstudy;
+    _detail = detail;
+  }
+
+  Md.fromJson(dynamic json) {
+    _id = json['id'];
+    _orderchoose = json['orderchoose'];
+    _startdate = json['startdate'];
+    _enddate = json['enddate'];
+    _type = json['type'];
+    _placeofstudy = json['placeofstudy'];
+    _detail = json['detail'];
+  }
+  int? _id;
+  int? _orderchoose;
+  String? _startdate;
+  String? _enddate;
+  String? _type;
+  String? _placeofstudy;
+  String? _detail;
+  Md copyWith({  int? id,
+    int? orderchoose,
+    String? startdate,
+    String? enddate,
+    String? type,
+    String? placeofstudy,
+    String? detail,
+  }) => Md(  id: id ?? _id,
+    orderchoose: orderchoose ?? _orderchoose,
+    startdate: startdate ?? _startdate,
+    enddate: enddate ?? _enddate,
+    type: type ?? _type,
+    placeofstudy: placeofstudy ?? _placeofstudy,
+    detail: detail ?? _detail,
+  );
+  int? get id => _id;
+  int? get orderchoose => _orderchoose;
+  String? get startdate => _startdate;
+  String? get enddate => _enddate;
+  String? get type => _type;
+  String? get placeofstudy => _placeofstudy;
+  String? get detail => _detail;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['id'] = _id;
+    map['orderchoose'] = _orderchoose;
+    map['startdate'] = _startdate;
+    map['enddate'] = _enddate;
+    map['type'] = _type;
+    map['placeofstudy'] = _placeofstudy;
+    map['detail'] = _detail;
+    return map;
+  }
+
+}
+
+/// id : 2
+/// orderchoose : 1
+/// startdate : "Jun 2018"
+/// enddate : "Jun 2022"
+/// type : "BD"
+/// placeofstudy : "ปริญญาตรี"
+/// detail : "สาขาวิชาคณิตศาสตร์ ภาควิชาคณิตศาสตร์ คณะวิทยาศาสตร์ มหาวิทยาลัยบูรพา"
+
+Bd bdFromJson(String str) => Bd.fromJson(json.decode(str));
+String bdToJson(Bd data) => json.encode(data.toJson());
+class Bd {
+  Bd({
+    int? id,
+    int? orderchoose,
+    String? startdate,
+    String? enddate,
+    String? type,
+    String? placeofstudy,
+    String? detail,}){
+    _id = id;
+    _orderchoose = orderchoose;
+    _startdate = startdate;
+    _enddate = enddate;
+    _type = type;
+    _placeofstudy = placeofstudy;
+    _detail = detail;
+  }
+
+  Bd.fromJson(dynamic json) {
+    _id = json['id'];
+    _orderchoose = json['orderchoose'];
+    _startdate = json['startdate'];
+    _enddate = json['enddate'];
+    _type = json['type'];
+    _placeofstudy = json['placeofstudy'];
+    _detail = json['detail'];
+  }
+  int? _id;
+  int? _orderchoose;
+  String? _startdate;
+  String? _enddate;
+  String? _type;
+  String? _placeofstudy;
+  String? _detail;
+  Bd copyWith({  int? id,
+    int? orderchoose,
+    String? startdate,
+    String? enddate,
+    String? type,
+    String? placeofstudy,
+    String? detail,
+  }) => Bd(  id: id ?? _id,
+    orderchoose: orderchoose ?? _orderchoose,
+    startdate: startdate ?? _startdate,
+    enddate: enddate ?? _enddate,
+    type: type ?? _type,
+    placeofstudy: placeofstudy ?? _placeofstudy,
+    detail: detail ?? _detail,
+  );
+  int? get id => _id;
+  int? get orderchoose => _orderchoose;
+  String? get startdate => _startdate;
+  String? get enddate => _enddate;
+  String? get type => _type;
+  String? get placeofstudy => _placeofstudy;
+  String? get detail => _detail;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['id'] = _id;
+    map['orderchoose'] = _orderchoose;
+    map['startdate'] = _startdate;
+    map['enddate'] = _enddate;
+    map['type'] = _type;
+    map['placeofstudy'] = _placeofstudy;
+    map['detail'] = _detail;
+    return map;
+  }
+
+}
+
+/// id : 7
+/// orderchoose : 0
+/// startdate : "Jun 2015"
+/// enddate : "Jun 2018"
+/// type : "HSC"
+/// placeofstudy : null
+/// detail : null
+
+Hsc hscFromJson(String str) => Hsc.fromJson(json.decode(str));
+String hscToJson(Hsc data) => json.encode(data.toJson());
+class Hsc {
+  Hsc({
+    int? id,
+    int? orderchoose,
+    String? startdate,
+    String? enddate,
+    String? type,
+    dynamic placeofstudy,
+    dynamic detail,}){
+    _id = id;
+    _orderchoose = orderchoose;
+    _startdate = startdate;
+    _enddate = enddate;
+    _type = type;
+    _placeofstudy = placeofstudy;
+    _detail = detail;
+  }
+
+  Hsc.fromJson(dynamic json) {
+    _id = json['id'];
+    _orderchoose = json['orderchoose'];
+    _startdate = json['startdate'];
+    _enddate = json['enddate'];
+    _type = json['type'];
+    _placeofstudy = json['placeofstudy'];
+    _detail = json['detail'];
+  }
+  int? _id;
+  int? _orderchoose;
+  String? _startdate;
+  String? _enddate;
+  String? _type;
+  dynamic _placeofstudy;
+  dynamic _detail;
+  Hsc copyWith({  int? id,
+    int? orderchoose,
+    String? startdate,
+    String? enddate,
+    String? type,
+    dynamic placeofstudy,
+    dynamic detail,
+  }) => Hsc(  id: id ?? _id,
+    orderchoose: orderchoose ?? _orderchoose,
+    startdate: startdate ?? _startdate,
+    enddate: enddate ?? _enddate,
+    type: type ?? _type,
+    placeofstudy: placeofstudy ?? _placeofstudy,
+    detail: detail ?? _detail,
+  );
+  int? get id => _id;
+  int? get orderchoose => _orderchoose;
+  String? get startdate => _startdate;
+  String? get enddate => _enddate;
+  String? get type => _type;
+  dynamic get placeofstudy => _placeofstudy;
+  dynamic get detail => _detail;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['id'] = _id;
+    map['orderchoose'] = _orderchoose;
+    map['startdate'] = _startdate;
+    map['enddate'] = _enddate;
+    map['type'] = _type;
+    map['placeofstudy'] = _placeofstudy;
+    map['detail'] = _detail;
+    return map;
+  }
+
+}
+
+/// id : 1
+/// orderchoose : 22
 /// startdate : "Jun 2015 "
 /// enddate : "Jun 2018"
-/// position : "วิศวกรรมซอฟต์แวร์"
-/// detail : "ฟรีวิลล์ โซลูชั่นส์ จํากัด"
+/// position : "วิศวกรรมซอฟต์แวร์+3"
+/// detail : "ฟรีวิลล์ โซลูชั่นส์ จํากัด-22"
 
 Experience experienceFromJson(String str) => Experience.fromJson(json.decode(str));
 String experienceToJson(Experience data) => json.encode(data.toJson());
 class Experience {
   Experience({
+    int? id,
+    int? orderchoose,
     String? startdate,
     String? enddate,
     String? position,
     String? detail,}){
+    _id = id;
+    _orderchoose = orderchoose;
     _startdate = startdate;
     _enddate = enddate;
     _position = position;
@@ -432,24 +940,34 @@ class Experience {
   }
 
   Experience.fromJson(dynamic json) {
+    _id = json['id'];
+    _orderchoose = json['orderchoose'];
     _startdate = json['startdate'];
     _enddate = json['enddate'];
     _position = json['position'];
     _detail = json['detail'];
   }
+  int? _id;
+  int? _orderchoose;
   String? _startdate;
   String? _enddate;
   String? _position;
   String? _detail;
-  Experience copyWith({  String? startdate,
+  Experience copyWith({  int? id,
+    int? orderchoose,
+    String? startdate,
     String? enddate,
     String? position,
     String? detail,
-  }) => Experience(  startdate: startdate ?? _startdate,
+  }) => Experience(  id: id ?? _id,
+    orderchoose: orderchoose ?? _orderchoose,
+    startdate: startdate ?? _startdate,
     enddate: enddate ?? _enddate,
     position: position ?? _position,
     detail: detail ?? _detail,
   );
+  int? get id => _id;
+  int? get orderchoose => _orderchoose;
   String? get startdate => _startdate;
   String? get enddate => _enddate;
   String? get position => _position;
@@ -457,6 +975,8 @@ class Experience {
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
+    map['id'] = _id;
+    map['orderchoose'] = _orderchoose;
     map['startdate'] = _startdate;
     map['enddate'] = _enddate;
     map['position'] = _position;
@@ -467,10 +987,10 @@ class Experience {
 }
 
 /// number : "169"
-/// moo : null
-/// soi : null
-/// road : "ลงหาดบางแสน"
-/// subdistrict : "แสนสุข"
+/// moo : ""
+/// soi : ""
+/// road : "string"
+/// subdistrict : "ลงหาดบางแสน แสนสุข"
 /// district : "เมือง"
 /// province : "ชลบุรี"
 /// zipcode : "20131"
@@ -480,8 +1000,8 @@ String addressToJson(Address data) => json.encode(data.toJson());
 class Address {
   Address({
     String? number,
-    dynamic moo,
-    dynamic soi,
+    String? moo,
+    String? soi,
     String? road,
     String? subdistrict,
     String? district,
@@ -508,16 +1028,16 @@ class Address {
     _zipcode = json['zipcode'];
   }
   String? _number;
-  dynamic _moo;
-  dynamic _soi;
+  String? _moo;
+  String? _soi;
   String? _road;
   String? _subdistrict;
   String? _district;
   String? _province;
   String? _zipcode;
   Address copyWith({  String? number,
-    dynamic moo,
-    dynamic soi,
+    String? moo,
+    String? soi,
     String? road,
     String? subdistrict,
     String? district,
@@ -533,8 +1053,8 @@ class Address {
     zipcode: zipcode ?? _zipcode,
   );
   String? get number => _number;
-  dynamic get moo => _moo;
-  dynamic get soi => _soi;
+  String? get moo => _moo;
+  String? get soi => _soi;
   String? get road => _road;
   String? get subdistrict => _subdistrict;
   String? get district => _district;
@@ -556,12 +1076,13 @@ class Address {
 
 }
 
-/// email : "email"
-/// phone : "phone"
-/// feacbook : "feacbook"
-/// line : "@0930582335"
-/// instagram : "instagram"
-/// twitter : "twitter"
+/// email : "emaill3"
+/// phone : "phonel3"
+/// facebook : "feacbookl3"
+/// line : "@0930582335l3"
+/// instagram : "instagraml3"
+/// twitter : "twitterl3"
+/// youtube : "you"
 
 Personinfo personinfoFromJson(String str) => Personinfo.fromJson(json.decode(str));
 String personinfoToJson(Personinfo data) => json.encode(data.toJson());
@@ -569,65 +1090,74 @@ class Personinfo {
   Personinfo({
     String? email,
     String? phone,
-    String? feacbook,
+    String? facebook,
     String? line,
     String? instagram,
-    String? twitter,}){
+    String? twitter,
+    String? youtube,}){
     _email = email;
     _phone = phone;
-    _feacbook = feacbook;
+    _facebook = facebook;
     _line = line;
     _instagram = instagram;
     _twitter = twitter;
+    _youtube = youtube;
   }
 
   Personinfo.fromJson(dynamic json) {
     _email = json['email'];
     _phone = json['phone'];
-    _feacbook = json['feacbook'];
+    _facebook = json['facebook'];
     _line = json['line'];
     _instagram = json['instagram'];
     _twitter = json['twitter'];
+    _youtube = json['youtube'];
   }
   String? _email;
   String? _phone;
-  String? _feacbook;
+  String? _facebook;
   String? _line;
   String? _instagram;
   String? _twitter;
+  String? _youtube;
   Personinfo copyWith({  String? email,
     String? phone,
-    String? feacbook,
+    String? facebook,
     String? line,
     String? instagram,
     String? twitter,
+    String? youtube,
   }) => Personinfo(  email: email ?? _email,
     phone: phone ?? _phone,
-    feacbook: feacbook ?? _feacbook,
+    facebook: facebook ?? _facebook,
     line: line ?? _line,
     instagram: instagram ?? _instagram,
     twitter: twitter ?? _twitter,
+    youtube: youtube ?? _youtube,
   );
   String? get email => _email;
   String? get phone => _phone;
-  String? get feacbook => _feacbook;
+  String? get facebook => _facebook;
   String? get line => _line;
   String? get instagram => _instagram;
   String? get twitter => _twitter;
+  String? get youtube => _youtube;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['email'] = _email;
     map['phone'] = _phone;
-    map['feacbook'] = _feacbook;
+    map['facebook'] = _facebook;
     map['line'] = _line;
     map['instagram'] = _instagram;
     map['twitter'] = _twitter;
+    map['youtube'] = _youtube;
     return map;
   }
 
 }
 
+/// prefixid : "P3"
 /// prefix : "นาย"
 /// name : "สิทธิพล"
 /// lastname : "ชินโน"
@@ -636,35 +1166,43 @@ Userinfo userinfoFromJson(String str) => Userinfo.fromJson(json.decode(str));
 String userinfoToJson(Userinfo data) => json.encode(data.toJson());
 class Userinfo {
   Userinfo({
+    String? prefixid,
     String? prefix,
     String? name,
     String? lastname,}){
+    _prefixid = prefixid;
     _prefix = prefix;
     _name = name;
     _lastname = lastname;
   }
 
   Userinfo.fromJson(dynamic json) {
+    _prefixid = json['prefixid'];
     _prefix = json['prefix'];
     _name = json['name'];
     _lastname = json['lastname'];
   }
+  String? _prefixid;
   String? _prefix;
   String? _name;
   String? _lastname;
-  Userinfo copyWith({  String? prefix,
+  Userinfo copyWith({  String? prefixid,
+    String? prefix,
     String? name,
     String? lastname,
-  }) => Userinfo(  prefix: prefix ?? _prefix,
+  }) => Userinfo(  prefixid: prefixid ?? _prefixid,
+    prefix: prefix ?? _prefix,
     name: name ?? _name,
     lastname: lastname ?? _lastname,
   );
+  String? get prefixid => _prefixid;
   String? get prefix => _prefix;
   String? get name => _name;
   String? get lastname => _lastname;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
+    map['prefixid'] = _prefixid;
     map['prefix'] = _prefix;
     map['name'] = _name;
     map['lastname'] = _lastname;
@@ -687,9 +1225,9 @@ class Userinfo {
 /// education : "การศึกษา"
 /// educationinfo : "ข้อมูลการศึกษา"
 /// email : "อีเมล"
-/// enddate : "วันสุดท้าย"
+/// enddate : "วันสิ้นสุด"
 /// experience : "ประสบการณ์"
-/// feacbook : "เฟคบุ๊ค"
+/// facebook : "เฟคบุ๊ค"
 /// instagram : "อินสตาแกรม"
 /// language : "ภาษา"
 /// lastname : "นามสกุล"
@@ -701,7 +1239,7 @@ class Userinfo {
 /// number : "ตัวเลข"
 /// phone : "โทรศัพท์"
 /// pictuce : "รูปภาพ"
-/// placeofstudy : "สถานที่เรียน"
+/// placeofstudy : "สถานศึกษา"
 /// position : "ตำแหน่ง"
 /// positions : "ตำแหน่ง"
 /// prefix : "คำนำหน้า"
@@ -709,24 +1247,34 @@ class Userinfo {
 /// ratio : "อัตราส่วนภาพต้องเป็น 3:4"
 /// road : "ถนน"
 /// select : "เลือก"
-/// selectacolor : "โปรดเลือกสี\\nเพื่อใช้ในการสร้างเรซูเม่"
-/// selecttheinformation : "โปรดเลือกข้อมูล \\n ที่จะใช้ในการสร้างเรซูเม่"
+/// selectacolor : "โปรดเลือกสี"
+/// selecttheinformation : "โปรดเลือกข้อมูล "
 /// size : "ขนาด"
 /// sizepictuce : "ขนาดไฟล์ไม่เกิน 5 MB"
 /// skill : "ทักษะ"
 /// soi : "ซอย"
-/// startdate : "วันที่เริ่มต้น"
+/// startdate : "วันเริ่มต้น"
 /// subdistrict : "ตำบล"
 /// themecolor : "สีธีม"
 /// title : "หัวเรื่อง"
 /// titlesetthemecolor : "ตั้งค่าธีมและสี"
 /// twitter : "ทวิตเตอร์"
-/// type : "พิมพ์"
+/// type : "ประเภทการศึกษา"
 /// value : "ระดับ"
 /// whcm : "(กxส) ซม"
 /// zipcode : "รหัสไปรษณีย์"
 /// unkhown : "ไม่ทราบ"
 /// viewpdf : "PDF"
+/// titleresumeinformation : "ข้อมูลเรซูเม่"
+/// hsc : "ประกาศนียบัตรมัธยมศึกษาตอนปลาย"
+/// bd : "ระดับปริญญาตรี"
+/// md : "ปริญญาโท    "
+/// dd : "ปริญญาเอก"
+/// hdd : "ปริญญาดุษฎีบัณฑิตกิตติมศักดิ์"
+/// tapedit : "แตะเพื่อแก้ไข้ข้อมูล"
+/// save : "บันทึก"
+/// saveor : "Save/บันทึก"
+/// youtube : "ยูทูป"
 
 ScreenInfo screenInfoFromJson(String str) => ScreenInfo.fromJson(json.decode(str));
 String screenInfoToJson(ScreenInfo data) => json.encode(data.toJson());
@@ -748,227 +1296,7 @@ class ScreenInfo {
     String? email,
     String? enddate,
     String? experience,
-    String? feacbook,
-    String? instagram,
-    String? language,
-    String? lastname,
-    String? line,
-    String? moo,
-    String? mypositions,
-    String? n,
-    String? name,
-    String? number,
-    String? phone,
-    String? pictuce,
-    String? placeofstudy,
-    String? position,
-    String? positions,
-    String? prefix,
-    String? province,
-    String? ratio,
-    String? road,
-    String? select,
-    String? selectacolor,
-    String? selecttheinformation,
-    String? size,
-    String? sizepictuce,
-    String? skill,
-    String? soi,
-    String? startdate,
-    String? subdistrict,
-    String? themecolor,
-    String? title,
-    String? titlesetthemecolor,
-    String? twitter,
-    String? type,
-    String? value,
-    String? whcm,
-    String? zipcode,
-    String? unkhown,
-    String? viewpdf,}){
-    _aboutme = aboutme;
-    _aboutmedetail = aboutmedetail;
-    _address = address;
-    _appliedposition = appliedposition;
-    _certificate = certificate;
-    _contact = contact;
-    _textdefault = textdefault;
-    _description = description;
-    _detail = detail;
-    _district = district;
-    _editinfomations = editinfomations;
-    _education = education;
-    _educationinfo = educationinfo;
-    _email = email;
-    _enddate = enddate;
-    _experience = experience;
-    _feacbook = feacbook;
-    _instagram = instagram;
-    _language = language;
-    _lastname = lastname;
-    _line = line;
-    _moo = moo;
-    _mypositions = mypositions;
-    _n = n;
-    _name = name;
-    _number = number;
-    _phone = phone;
-    _pictuce = pictuce;
-    _placeofstudy = placeofstudy;
-    _position = position;
-    _positions = positions;
-    _prefix = prefix;
-    _province = province;
-    _ratio = ratio;
-    _road = road;
-    _select = select;
-    _selectacolor = selectacolor;
-    _selecttheinformation = selecttheinformation;
-    _size = size;
-    _sizepictuce = sizepictuce;
-    _skill = skill;
-    _soi = soi;
-    _startdate = startdate;
-    _subdistrict = subdistrict;
-    _themecolor = themecolor;
-    _title = title;
-    _titlesetthemecolor = titlesetthemecolor;
-    _twitter = twitter;
-    _type = type;
-    _value = value;
-    _whcm = whcm;
-    _zipcode = zipcode;
-    _unkhown = unkhown;
-    _viewpdf = viewpdf;
-  }
-
-  ScreenInfo.fromJson(dynamic json) {
-    _aboutme = json['aboutme'];
-    _aboutmedetail = json['aboutmedetail'];
-    _address = json['address'];
-    _appliedposition = json['appliedposition'];
-    _certificate = json['certificate'];
-    _contact = json['contact'];
-    _textdefault = json['textdefault'];
-    _description = json['description'];
-    _detail = json['detail'];
-    _district = json['district'];
-    _editinfomations = json['editinfomations'];
-    _education = json['education'];
-    _educationinfo = json['educationinfo'];
-    _email = json['email'];
-    _enddate = json['enddate'];
-    _experience = json['experience'];
-    _feacbook = json['feacbook'];
-    _instagram = json['instagram'];
-    _language = json['language'];
-    _lastname = json['lastname'];
-    _line = json['line'];
-    _moo = json['moo'];
-    _mypositions = json['mypositions'];
-    _n = json['n'];
-    _name = json['name'];
-    _number = json['number'];
-    _phone = json['phone'];
-    _pictuce = json['pictuce'];
-    _placeofstudy = json['placeofstudy'];
-    _position = json['position'];
-    _positions = json['positions'];
-    _prefix = json['prefix'];
-    _province = json['province'];
-    _ratio = json['ratio'];
-    _road = json['road'];
-    _select = json['select'];
-    _selectacolor = json['selectacolor'];
-    _selecttheinformation = json['selecttheinformation'];
-    _size = json['size'];
-    _sizepictuce = json['sizepictuce'];
-    _skill = json['skill'];
-    _soi = json['soi'];
-    _startdate = json['startdate'];
-    _subdistrict = json['subdistrict'];
-    _themecolor = json['themecolor'];
-    _title = json['title'];
-    _titlesetthemecolor = json['titlesetthemecolor'];
-    _twitter = json['twitter'];
-    _type = json['type'];
-    _value = json['value'];
-    _whcm = json['whcm'];
-    _zipcode = json['zipcode'];
-    _unkhown = json['unkhown'];
-    _viewpdf = json['viewpdf'];
-  }
-  String? _aboutme;
-  String? _aboutmedetail;
-  String? _address;
-  String? _appliedposition;
-  String? _certificate;
-  String? _contact;
-  String? _textdefault;
-  String? _description;
-  String? _detail;
-  String? _district;
-  String? _editinfomations;
-  String? _education;
-  String? _educationinfo;
-  String? _email;
-  String? _enddate;
-  String? _experience;
-  String? _feacbook;
-  String? _instagram;
-  String? _language;
-  String? _lastname;
-  String? _line;
-  String? _moo;
-  String? _mypositions;
-  String? _n;
-  String? _name;
-  String? _number;
-  String? _phone;
-  String? _pictuce;
-  String? _placeofstudy;
-  String? _position;
-  String? _positions;
-  String? _prefix;
-  String? _province;
-  String? _ratio;
-  String? _road;
-  String? _select;
-  String? _selectacolor;
-  String? _selecttheinformation;
-  String? _size;
-  String? _sizepictuce;
-  String? _skill;
-  String? _soi;
-  String? _startdate;
-  String? _subdistrict;
-  String? _themecolor;
-  String? _title;
-  String? _titlesetthemecolor;
-  String? _twitter;
-  String? _type;
-  String? _value;
-  String? _whcm;
-  String? _zipcode;
-  String? _unkhown;
-  String? _viewpdf;
-  ScreenInfo copyWith({  String? aboutme,
-    String? aboutmedetail,
-    String? address,
-    String? appliedposition,
-    String? certificate,
-    String? contact,
-    String? textdefault,
-    String? description,
-    String? detail,
-    String? district,
-    String? editinfomations,
-    String? education,
-    String? educationinfo,
-    String? email,
-    String? enddate,
-    String? experience,
-    String? feacbook,
+    String? facebook,
     String? instagram,
     String? language,
     String? lastname,
@@ -1006,6 +1334,276 @@ class ScreenInfo {
     String? zipcode,
     String? unkhown,
     String? viewpdf,
+    String? titleresumeinformation,
+    String? hsc,
+    String? bd,
+    String? md,
+    String? dd,
+    String? hdd,
+    String? tapedit,
+    String? save,
+    String? saveor,
+    String? youtube,}){
+    _aboutme = aboutme;
+    _aboutmedetail = aboutmedetail;
+    _address = address;
+    _appliedposition = appliedposition;
+    _certificate = certificate;
+    _contact = contact;
+    _textdefault = textdefault;
+    _description = description;
+    _detail = detail;
+    _district = district;
+    _editinfomations = editinfomations;
+    _education = education;
+    _educationinfo = educationinfo;
+    _email = email;
+    _enddate = enddate;
+    _experience = experience;
+    _facebook = facebook;
+    _instagram = instagram;
+    _language = language;
+    _lastname = lastname;
+    _line = line;
+    _moo = moo;
+    _mypositions = mypositions;
+    _n = n;
+    _name = name;
+    _number = number;
+    _phone = phone;
+    _pictuce = pictuce;
+    _placeofstudy = placeofstudy;
+    _position = position;
+    _positions = positions;
+    _prefix = prefix;
+    _province = province;
+    _ratio = ratio;
+    _road = road;
+    _select = select;
+    _selectacolor = selectacolor;
+    _selecttheinformation = selecttheinformation;
+    _size = size;
+    _sizepictuce = sizepictuce;
+    _skill = skill;
+    _soi = soi;
+    _startdate = startdate;
+    _subdistrict = subdistrict;
+    _themecolor = themecolor;
+    _title = title;
+    _titlesetthemecolor = titlesetthemecolor;
+    _twitter = twitter;
+    _type = type;
+    _value = value;
+    _whcm = whcm;
+    _zipcode = zipcode;
+    _unkhown = unkhown;
+    _viewpdf = viewpdf;
+    _titleresumeinformation = titleresumeinformation;
+    _hsc = hsc;
+    _bd = bd;
+    _md = md;
+    _dd = dd;
+    _hdd = hdd;
+    _tapedit = tapedit;
+    _save = save;
+    _saveor = saveor;
+    _youtube = youtube;
+  }
+
+  ScreenInfo.fromJson(dynamic json) {
+    _aboutme = json['aboutme'];
+    _aboutmedetail = json['aboutmedetail'];
+    _address = json['address'];
+    _appliedposition = json['appliedposition'];
+    _certificate = json['certificate'];
+    _contact = json['contact'];
+    _textdefault = json['textdefault'];
+    _description = json['description'];
+    _detail = json['detail'];
+    _district = json['district'];
+    _editinfomations = json['editinfomations'];
+    _education = json['education'];
+    _educationinfo = json['educationinfo'];
+    _email = json['email'];
+    _enddate = json['enddate'];
+    _experience = json['experience'];
+    _facebook = json['facebook'];
+    _instagram = json['instagram'];
+    _language = json['language'];
+    _lastname = json['lastname'];
+    _line = json['line'];
+    _moo = json['moo'];
+    _mypositions = json['mypositions'];
+    _n = json['n'];
+    _name = json['name'];
+    _number = json['number'];
+    _phone = json['phone'];
+    _pictuce = json['pictuce'];
+    _placeofstudy = json['placeofstudy'];
+    _position = json['position'];
+    _positions = json['positions'];
+    _prefix = json['prefix'];
+    _province = json['province'];
+    _ratio = json['ratio'];
+    _road = json['road'];
+    _select = json['select'];
+    _selectacolor = json['selectacolor'];
+    _selecttheinformation = json['selecttheinformation'];
+    _size = json['size'];
+    _sizepictuce = json['sizepictuce'];
+    _skill = json['skill'];
+    _soi = json['soi'];
+    _startdate = json['startdate'];
+    _subdistrict = json['subdistrict'];
+    _themecolor = json['themecolor'];
+    _title = json['title'];
+    _titlesetthemecolor = json['titlesetthemecolor'];
+    _twitter = json['twitter'];
+    _type = json['type'];
+    _value = json['value'];
+    _whcm = json['whcm'];
+    _zipcode = json['zipcode'];
+    _unkhown = json['unkhown'];
+    _viewpdf = json['viewpdf'];
+    _titleresumeinformation = json['titleresumeinformation'];
+    _hsc = json['hsc'];
+    _bd = json['bd'];
+    _md = json['md'];
+    _dd = json['dd'];
+    _hdd = json['hdd'];
+    _tapedit = json['tapedit'];
+    _save = json['save'];
+    _saveor = json['saveor'];
+    _youtube = json['youtube'];
+  }
+  String? _aboutme;
+  String? _aboutmedetail;
+  String? _address;
+  String? _appliedposition;
+  String? _certificate;
+  String? _contact;
+  String? _textdefault;
+  String? _description;
+  String? _detail;
+  String? _district;
+  String? _editinfomations;
+  String? _education;
+  String? _educationinfo;
+  String? _email;
+  String? _enddate;
+  String? _experience;
+  String? _facebook;
+  String? _instagram;
+  String? _language;
+  String? _lastname;
+  String? _line;
+  String? _moo;
+  String? _mypositions;
+  String? _n;
+  String? _name;
+  String? _number;
+  String? _phone;
+  String? _pictuce;
+  String? _placeofstudy;
+  String? _position;
+  String? _positions;
+  String? _prefix;
+  String? _province;
+  String? _ratio;
+  String? _road;
+  String? _select;
+  String? _selectacolor;
+  String? _selecttheinformation;
+  String? _size;
+  String? _sizepictuce;
+  String? _skill;
+  String? _soi;
+  String? _startdate;
+  String? _subdistrict;
+  String? _themecolor;
+  String? _title;
+  String? _titlesetthemecolor;
+  String? _twitter;
+  String? _type;
+  String? _value;
+  String? _whcm;
+  String? _zipcode;
+  String? _unkhown;
+  String? _viewpdf;
+  String? _titleresumeinformation;
+  String? _hsc;
+  String? _bd;
+  String? _md;
+  String? _dd;
+  String? _hdd;
+  String? _tapedit;
+  String? _save;
+  String? _saveor;
+  String? _youtube;
+  ScreenInfo copyWith({  String? aboutme,
+    String? aboutmedetail,
+    String? address,
+    String? appliedposition,
+    String? certificate,
+    String? contact,
+    String? textdefault,
+    String? description,
+    String? detail,
+    String? district,
+    String? editinfomations,
+    String? education,
+    String? educationinfo,
+    String? email,
+    String? enddate,
+    String? experience,
+    String? facebook,
+    String? instagram,
+    String? language,
+    String? lastname,
+    String? line,
+    String? moo,
+    String? mypositions,
+    String? n,
+    String? name,
+    String? number,
+    String? phone,
+    String? pictuce,
+    String? placeofstudy,
+    String? position,
+    String? positions,
+    String? prefix,
+    String? province,
+    String? ratio,
+    String? road,
+    String? select,
+    String? selectacolor,
+    String? selecttheinformation,
+    String? size,
+    String? sizepictuce,
+    String? skill,
+    String? soi,
+    String? startdate,
+    String? subdistrict,
+    String? themecolor,
+    String? title,
+    String? titlesetthemecolor,
+    String? twitter,
+    String? type,
+    String? value,
+    String? whcm,
+    String? zipcode,
+    String? unkhown,
+    String? viewpdf,
+    String? titleresumeinformation,
+    String? hsc,
+    String? bd,
+    String? md,
+    String? dd,
+    String? hdd,
+    String? tapedit,
+    String? save,
+    String? saveor,
+    String? youtube,
   }) => ScreenInfo(  aboutme: aboutme ?? _aboutme,
     aboutmedetail: aboutmedetail ?? _aboutmedetail,
     address: address ?? _address,
@@ -1022,7 +1620,7 @@ class ScreenInfo {
     email: email ?? _email,
     enddate: enddate ?? _enddate,
     experience: experience ?? _experience,
-    feacbook: feacbook ?? _feacbook,
+    facebook: facebook ?? _facebook,
     instagram: instagram ?? _instagram,
     language: language ?? _language,
     lastname: lastname ?? _lastname,
@@ -1060,6 +1658,16 @@ class ScreenInfo {
     zipcode: zipcode ?? _zipcode,
     unkhown: unkhown ?? _unkhown,
     viewpdf: viewpdf ?? _viewpdf,
+    titleresumeinformation: titleresumeinformation ?? _titleresumeinformation,
+    hsc: hsc ?? _hsc,
+    bd: bd ?? _bd,
+    md: md ?? _md,
+    dd: dd ?? _dd,
+    hdd: hdd ?? _hdd,
+    tapedit: tapedit ?? _tapedit,
+    save: save ?? _save,
+    saveor: saveor ?? _saveor,
+    youtube: youtube ?? _youtube,
   );
   String? get aboutme => _aboutme;
   String? get aboutmedetail => _aboutmedetail;
@@ -1077,7 +1685,7 @@ class ScreenInfo {
   String? get email => _email;
   String? get enddate => _enddate;
   String? get experience => _experience;
-  String? get feacbook => _feacbook;
+  String? get facebook => _facebook;
   String? get instagram => _instagram;
   String? get language => _language;
   String? get lastname => _lastname;
@@ -1115,6 +1723,16 @@ class ScreenInfo {
   String? get zipcode => _zipcode;
   String? get unkhown => _unkhown;
   String? get viewpdf => _viewpdf;
+  String? get titleresumeinformation => _titleresumeinformation;
+  String? get hsc => _hsc;
+  String? get bd => _bd;
+  String? get md => _md;
+  String? get dd => _dd;
+  String? get hdd => _hdd;
+  String? get tapedit => _tapedit;
+  String? get save => _save;
+  String? get saveor => _saveor;
+  String? get youtube => _youtube;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -1134,7 +1752,7 @@ class ScreenInfo {
     map['email'] = _email;
     map['enddate'] = _enddate;
     map['experience'] = _experience;
-    map['feacbook'] = _feacbook;
+    map['facebook'] = _facebook;
     map['instagram'] = _instagram;
     map['language'] = _language;
     map['lastname'] = _lastname;
@@ -1172,6 +1790,16 @@ class ScreenInfo {
     map['zipcode'] = _zipcode;
     map['unkhown'] = _unkhown;
     map['viewpdf'] = _viewpdf;
+    map['titleresumeinformation'] = _titleresumeinformation;
+    map['hsc'] = _hsc;
+    map['bd'] = _bd;
+    map['md'] = _md;
+    map['dd'] = _dd;
+    map['hdd'] = _hdd;
+    map['tapedit'] = _tapedit;
+    map['save'] = _save;
+    map['saveor'] = _saveor;
+    map['youtube'] = _youtube;
     return map;
   }
 
@@ -1179,14 +1807,14 @@ class ScreenInfo {
 
 /// status : 200
 /// message : "success"
-/// modulename : "home"
+/// modulename : "home/resume"
 /// timeexpire : false
 
 Head headFromJson(String str) => Head.fromJson(json.decode(str));
 String headToJson(Head data) => json.encode(data.toJson());
 class Head {
   Head({
-    num? status,
+    int? status,
     String? message,
     String? modulename,
     bool? timeexpire,}){
@@ -1202,11 +1830,11 @@ class Head {
     _modulename = json['modulename'];
     _timeexpire = json['timeexpire'];
   }
-  num? _status;
+  int? _status;
   String? _message;
   String? _modulename;
   bool? _timeexpire;
-  Head copyWith({  num? status,
+  Head copyWith({  int? status,
     String? message,
     String? modulename,
     bool? timeexpire,
@@ -1215,7 +1843,7 @@ class Head {
     modulename: modulename ?? _modulename,
     timeexpire: timeexpire ?? _timeexpire,
   );
-  num? get status => _status;
+  int? get status => _status;
   String? get message => _message;
   String? get modulename => _modulename;
   bool? get timeexpire => _timeexpire;
