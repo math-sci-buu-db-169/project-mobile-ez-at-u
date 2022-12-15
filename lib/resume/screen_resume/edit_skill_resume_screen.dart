@@ -106,7 +106,10 @@ class _EditSkillResumePageState
         if (state is GetEditScreenSkillResumeSuccessState) {
           isGetSkillResumeResponse =
               state.isGetSkillResumeResponse;
-          setState(() {});
+          setState(() {
+            widgetPointerValue = double.parse(isGetSkillResumeResponse?.body?.data?.value??'50') ;
+
+          });
         }
         if (state is SentEditSkillResumeSuccessState) {
           Navigator.pushReplacement(

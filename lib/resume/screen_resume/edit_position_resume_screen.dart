@@ -161,10 +161,10 @@ class _EditPositionsResumePageState extends State<EditPositionsResumePage>
               isGetPositionResumeResponse?.body?.screeninfo?.editinfomations;
           String? textSave =
               isGetPositionResumeResponse?.body?.screeninfo?.save;
-          String? positionTh = isGetPositionResumeResponse?.body?.data?.position;
-          String? positionEn = isGetPositionResumeResponse?.body?.data?.positionen;
-          String? officeTh = isGetPositionResumeResponse?.body?.data?.office;
-          String? officeEn = isGetPositionResumeResponse?.body?.data?.officeen;
+          String? positionTh = isGetPositionResumeResponse?.body?.data?.positionTh;
+          String? positionEn = isGetPositionResumeResponse?.body?.data?.positionEn;
+          String? officeTh = isGetPositionResumeResponse?.body?.data?.officeTh;
+          String? officeEn = isGetPositionResumeResponse?.body?.data?.officeEn;
 
           return Scaffold(
             appBar: AppBar(
@@ -314,8 +314,8 @@ floatingSetThemePDF(
       context.read<ResumeBloc>().add(SentEditPositionsResumeEvent(
           positionControllerTH: positionControllerTH,
           positionControllerEN: positionControllerEN,
-          officeControllerTH: '',
-          officeControllerEN: ''));
+          officeControllerTH: officeControllerTH,
+          officeControllerEN: officeControllerEN));
       // Navigator.push(
       //     context,
       //     MaterialPageRoute(

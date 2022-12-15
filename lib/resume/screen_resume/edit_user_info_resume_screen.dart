@@ -52,6 +52,9 @@ class _EditUserInfoResumePageState extends State<EditUserInfoResumePage>
   late String _pinValueString;
   late bool _isHiddenPin;
   late bool _isHiddenBio;
+  late String searchStatus;
+  late String isPrefixController;
+  late String typeStatus;
   GetUserInformationResumeResponse? isGetUserInformationResumeResponse;
   @override
   void initState() {
@@ -59,6 +62,9 @@ class _EditUserInfoResumePageState extends State<EditUserInfoResumePage>
     getUserLanguage();
     _isSessionUnauthorized();
     _isSessionPin();
+    searchStatus   = '' ;
+    isPrefixController  ='P1';
+    typeStatus = '' ;
     // localAuth(context);
     context.read<ResumeBloc>().add(GetEditScreenUserInfoResumeEvent());
     super.initState();
@@ -173,9 +179,10 @@ class _EditUserInfoResumePageState extends State<EditUserInfoResumePage>
           String? lastNameEn =
               isGetUserInformationResumeResponse?.body?.data?.lastnameen;
           String? prefixTH =
-              isGetUserInformationResumeResponse?.body?.data?.prefix;
+              isGetUserInformationResumeResponse?.body?.data?.prefixTh??'';
           String? prefixEn =
-              isGetUserInformationResumeResponse?.body?.data?.prefixen;
+              isGetUserInformationResumeResponse?.body?.data?.prefixEn??'';
+          String? pals ='โปรดเลือกลำดับการแสดง';
           // nameControllerTH.text = nameTh??'';
           // nameControllerEN.text = nameEn??'';
           // lastNameControllerTH.text = lastNameTh??'';
@@ -215,6 +222,79 @@ class _EditUserInfoResumePageState extends State<EditUserInfoResumePage>
                     children: [
                       const SizedBox(
                         height: 10,
+                      ),
+                      PopupMenuButton(
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Container(
+                                padding: EdgeInsets.only(right: 5,left: 5,top: 20,bottom: 20),
+                                decoration: BoxDecoration(
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(10),
+                                  ),
+                                  color: Theme.of(context).primaryColor == Colors.black
+                                      ? Color(0xFF1F222A)
+                                      : Colors.transparent.withOpacity(0.03),
+                                ),
+                                child: Padding(padding: EdgeInsets.only(left: 10,right: 10),child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      searchStatus == ''?
+                                      (prefixTH.toString() =='null' || prefixEn.toString() =='null'  )?
+                                      pals:
+                                      "$prefixTH / $prefixEn":searchStatus,
+                                      style: TextStyle(
+                                        // decoration: TextDecoration.underline,
+                                          decorationThickness: 2,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500,
+                                          color: Theme.of(context).appBarTheme.foregroundColor),
+                                    ), Text(
+                                      'เลือก',
+                                      style: TextStyle(
+                                          decoration: TextDecoration.underline,
+                                          decorationThickness: 2,
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.w500,
+                                          color: Theme.of(context).appBarTheme.foregroundColor),
+                                    ),
+
+                                  ],
+                                ),)
+                            ),
+
+                          ),
+                        ),
+                        itemBuilder: (context) {
+                          return List.generate(
+                              (isGetUserInformationResumeResponse?.body?.prefix?.length??0)
+                              , (index) {
+
+                            return  PopupMenuItem(
+                              value:index ,
+                              child: Text("${isGetUserInformationResumeResponse?.body?.prefix?[index].th} / ${isGetUserInformationResumeResponse?.body?.prefix?[index].en}" ??'Settings',
+                                style: TextStyle(color: Theme.of(context).appBarTheme.foregroundColor),),
+                            );
+
+                          }
+                          );
+                        },
+                        onSelected: (value) {
+
+                          isPrefixController = isGetUserInformationResumeResponse?.body?.prefix?[value].specifically??"P1";
+
+                          searchStatus= "${isGetUserInformationResumeResponse?.body?.prefix?[value].th} / ${isGetUserInformationResumeResponse?.body?.prefix?[value].en}";
+                          setState(() {
+                            isPrefixController= isGetUserInformationResumeResponse?.body?.prefix?[value].specifically??"P1";
+                            searchStatus= "${isGetUserInformationResumeResponse?.body?.prefix?[value].th} / ${isGetUserInformationResumeResponse?.body?.prefix?[value].en}";
+                          }
+                          );
+
+                        },
+
                       ),
                       BuildTextFormFieldUnLimitCustomNotIconsNotContainer(
                         textEditingController: nameControllerTH,
@@ -293,10 +373,7 @@ class _EditUserInfoResumePageState extends State<EditUserInfoResumePage>
                       ? lastNameTh
                       : lastNameControllerTH.text) ??
                   '',
-              prefixControllerTH: (prefixControllerTH.text == ''
-                      ? prefixTH
-                      : prefixControllerTH.text) ??
-                  '',
+              isPrefixController: isPrefixController,
               nameControllerEN: (nameControllerEN.text == ''
                       ? nameEn
                       : nameControllerEN.text) ??
@@ -329,23 +406,22 @@ floatingSetThemePDF(
   required BuildContext context,
   required String nameControllerTH,
   required String lastNameControllerTH,
-  required String prefixControllerTH,
+  required String isPrefixController,
   required String nameControllerEN,
   required String lastNameControllerEN,
   required String prefixControllerEN,
 }) {
   print(
-      " prefix: $prefixControllerTH ,name: $nameControllerTH,lastName: $lastNameControllerTH,prefixEN: $prefixControllerEN,nameEN: $nameControllerEN,lastNameEN: $lastNameControllerEN");
+      " prefix: $isPrefixController ,name: $nameControllerTH,lastName: $lastNameControllerTH,prefixEN: $prefixControllerEN,nameEN: $nameControllerEN,lastNameEN: $lastNameControllerEN");
   return FloatingActionButton.extended(
     backgroundColor:
         Theme.of(context).appBarTheme.backgroundColor?.withOpacity(0.9),
     foregroundColor: Colors.black,
     onPressed: () {
       context.read<ResumeBloc>().add(SentEditUserInfoResumeEvent(
-          prefix: prefixControllerTH,
+          prefixId: isPrefixController,
           name: nameControllerTH,
           lastName: lastNameControllerTH,
-          prefixEN: prefixControllerEN,
           nameEN: nameControllerEN,
           lastNameEN: lastNameControllerEN));
       // Navigator.push(

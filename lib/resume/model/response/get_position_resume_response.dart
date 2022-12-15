@@ -39,8 +39,8 @@ class GetPositionResumeResponse {
 
 }
 
-/// screeninfo : {"save":"Save/บันทึก","editinfomations":"แก้ไขข้อมูล","position_th":"ตำแหน่ง","office_th":"สถานที่ทำงาน","position_en":"Positions","office_en":"Office","detail_th":"รายละเอียด","detail_en":"Description"}
-/// data : {"position":"นักพัฒนาซอฟต์แวร์","positionen":"software developer","office":null,"officeen":null}
+/// screeninfo : {"save":"บันทึก","editinfomations":"แก้ไขข้อมูล","position_th":"ตำแหน่ง","office_th":"สถานที่ทำงาน","position_en":"Positions","office_en":"Office","detail_th":"รายละเอียด","detail_en":"Description"}
+/// data : {"id":0,"orderchoose":0,"position_th":"1","position_en":"2","office_th":"9","office_en":"8","detail_th":"5","detail_en":"6"}
 
 Body bodyFromJson(String str) => Body.fromJson(json.decode(str));
 String bodyToJson(Body data) => json.encode(data.toJson());
@@ -79,61 +79,97 @@ class Body {
 
 }
 
-/// position : "นักพัฒนาซอฟต์แวร์"
-/// positionen : "software developer"
-/// office : null
-/// officeen : null
+/// id : 0
+/// orderchoose : 0
+/// position_th : "1"
+/// position_en : "2"
+/// office_th : "9"
+/// office_en : "8"
+/// detail_th : "5"
+/// detail_en : "6"
 
 Data dataFromJson(String str) => Data.fromJson(json.decode(str));
 String dataToJson(Data data) => json.encode(data.toJson());
 class Data {
   Data({
-    String? position,
-    String? positionen,
-    dynamic office,
-    dynamic officeen,}){
-    _position = position;
-    _positionen = positionen;
-    _office = office;
-    _officeen = officeen;
+    int? id,
+    int? orderchoose,
+    String? positionTh,
+    String? positionEn,
+    String? officeTh,
+    String? officeEn,
+    String? detailTh,
+    String? detailEn,}){
+    _id = id;
+    _orderchoose = orderchoose;
+    _positionTh = positionTh;
+    _positionEn = positionEn;
+    _officeTh = officeTh;
+    _officeEn = officeEn;
+    _detailTh = detailTh;
+    _detailEn = detailEn;
   }
 
   Data.fromJson(dynamic json) {
-    _position = json['position'];
-    _positionen = json['positionen'];
-    _office = json['office'];
-    _officeen = json['officeen'];
+    _id = json['id'];
+    _orderchoose = json['orderchoose'];
+    _positionTh = json['position_th'];
+    _positionEn = json['position_en'];
+    _officeTh = json['office_th'];
+    _officeEn = json['office_en'];
+    _detailTh = json['detail_th'];
+    _detailEn = json['detail_en'];
   }
-  String? _position;
-  String? _positionen;
-  dynamic _office;
-  dynamic _officeen;
-  Data copyWith({  String? position,
-    String? positionen,
-    dynamic office,
-    dynamic officeen,
-  }) => Data(  position: position ?? _position,
-    positionen: positionen ?? _positionen,
-    office: office ?? _office,
-    officeen: officeen ?? _officeen,
+  int? _id;
+  int? _orderchoose;
+  String? _positionTh;
+  String? _positionEn;
+  String? _officeTh;
+  String? _officeEn;
+  String? _detailTh;
+  String? _detailEn;
+  Data copyWith({  int? id,
+    int? orderchoose,
+    String? positionTh,
+    String? positionEn,
+    String? officeTh,
+    String? officeEn,
+    String? detailTh,
+    String? detailEn,
+  }) => Data(  id: id ?? _id,
+    orderchoose: orderchoose ?? _orderchoose,
+    positionTh: positionTh ?? _positionTh,
+    positionEn: positionEn ?? _positionEn,
+    officeTh: officeTh ?? _officeTh,
+    officeEn: officeEn ?? _officeEn,
+    detailTh: detailTh ?? _detailTh,
+    detailEn: detailEn ?? _detailEn,
   );
-  String? get position => _position;
-  String? get positionen => _positionen;
-  dynamic get office => _office;
-  dynamic get officeen => _officeen;
+  int? get id => _id;
+  int? get orderchoose => _orderchoose;
+  String? get positionTh => _positionTh;
+  String? get positionEn => _positionEn;
+  String? get officeTh => _officeTh;
+  String? get officeEn => _officeEn;
+  String? get detailTh => _detailTh;
+  String? get detailEn => _detailEn;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['position'] = _position;
-    map['positionen'] = _positionen;
-    map['office'] = _office;
-    map['officeen'] = _officeen;
+    map['id'] = _id;
+    map['orderchoose'] = _orderchoose;
+    map['position_th'] = _positionTh;
+    map['position_en'] = _positionEn;
+    map['office_th'] = _officeTh;
+    map['office_en'] = _officeEn;
+    map['detail_th'] = _detailTh;
+    map['detail_en'] = _detailEn;
     return map;
   }
 
 }
 
-/// save : "Save/บันทึก"
+/// save : "บันทึก"
 /// editinfomations : "แก้ไขข้อมูล"
 /// position_th : "ตำแหน่ง"
 /// office_th : "สถานที่ทำงาน"
@@ -232,7 +268,7 @@ Head headFromJson(String str) => Head.fromJson(json.decode(str));
 String headToJson(Head data) => json.encode(data.toJson());
 class Head {
   Head({
-    num? status,
+    int? status,
     String? message,
     String? modulename,
     bool? timeexpire,}){
@@ -248,11 +284,11 @@ class Head {
     _modulename = json['modulename'];
     _timeexpire = json['timeexpire'];
   }
-  num? _status;
+  int? _status;
   String? _message;
   String? _modulename;
   bool? _timeexpire;
-  Head copyWith({  num? status,
+  Head copyWith({  int? status,
     String? message,
     String? modulename,
     bool? timeexpire,
@@ -261,7 +297,7 @@ class Head {
     modulename: modulename ?? _modulename,
     timeexpire: timeexpire ?? _timeexpire,
   );
-  num? get status => _status;
+  int? get status => _status;
   String? get message => _message;
   String? get modulename => _modulename;
   bool? get timeexpire => _timeexpire;

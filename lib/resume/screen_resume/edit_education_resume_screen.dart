@@ -22,23 +22,27 @@ import '../model/response/get_education_resume_response.dart';
 import '../model/response/get_user_infomartion_resume_response.dart';
 
 class EditEducationResumeScreen extends StatelessWidget {
+  final int id;
+  final String type;
   const EditEducationResumeScreen({
-    Key? key,
+    Key? key, required this.id, required this.type,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
         create: (context) =>
-            ResumeBloc()..add(GetEditScreenEducationResumeEvent()),
+            ResumeBloc()..add(GetEditScreenEducationResumeEvent(eduId: id, type: type)),
         // child: const GenerativeWidget());
-        child: const EditEducationResumePage());
+        child:  EditEducationResumePage(id: id, type: type,));
   }
 }
 
 class EditEducationResumePage extends StatefulWidget {
+  final int id;
+final String type;
   const EditEducationResumePage({
-    Key? key,
+    Key? key, required this.id, required this.type,
   }) : super(key: key);
 
   @override
@@ -52,35 +56,23 @@ class _EditEducationResumePageState extends State<EditEducationResumePage>
   late String textSessionExpired;
   late String textSubSessionExpired;
   late String _buttonOk;
-  late String _pinValueString;
-  late bool _isHiddenPin;
-  late bool _isHiddenBio;
-  late String searchStatus;
+  late int orderChoose;
   late String typeStatus;
+  late String typeShow;
   GetEducationResumeResponse? isGetEducationResumeResponse;
   @override
   void initState() {
     valueLanguage = "TH";
-    searchStatus   = 'bd' ;
-    typeStatus = '' ;
+    typeStatus   = 'bd' ;
+    typeShow = '' ;
+    orderChoose = 0 ;
     getUserLanguage();
     _isSessionUnauthorized();
-    _isSessionPin();
-    // localAuth(context);
-    context.read<ResumeBloc>().add(GetEditScreenAboutMeResumeEvent());
+    // context.read<ResumeBloc>().add(GetEditScreenEducationResumeEvent(eduId:widget.id, type:widget.type));
     super.initState();
   }
 
-  Future<void> _isSessionPin() async {
-    prefs = await SharedPreferences.getInstance();
-    String pinStringToBool = prefs.getString('pinStatus') ?? 'false';
-    String bioStringToBool = prefs.getString('bioStatus') ?? 'false';
-    _isHiddenPin = pinStringToBool == 'true' ? true : false;
-    _isHiddenBio = bioStringToBool == 'true' ? true : false;
-    _pinValueString = prefs.getString('pinValue') ?? '...';
 
-    setState(() {});
-  }
 
   getUserLanguage() async {
     prefs = await SharedPreferences.getInstance();
@@ -98,10 +90,13 @@ class _EditEducationResumePageState extends State<EditEducationResumePage>
     setState(() {});
   }
 
-  TextEditingController aboutMeControllerTH = TextEditingController();
-  TextEditingController aboutMeControllerEN = TextEditingController();
-  TextEditingController fDate = TextEditingController();
-  TextEditingController sDate = TextEditingController();
+  TextEditingController placeOfStudyControllerTH = TextEditingController();
+  TextEditingController placeOfStudyControllerEN = TextEditingController();
+  TextEditingController detailControllerTH = TextEditingController();
+  TextEditingController detailControllerEN = TextEditingController();
+  TextEditingController startDateController = TextEditingController();
+  TextEditingController endDateController = TextEditingController();
+  TextEditingController typeController = TextEditingController();
    List<String> lengthPopupMenuItem =["High School Certificate","Bachelor Degrees","Master Degrees","Doctor Degrees","Honorary Doctorate Degree"];
 
   @override
@@ -113,7 +108,10 @@ class _EditEducationResumePageState extends State<EditEducationResumePage>
         if (state is GetEditScreenEducationResumeSuccessState) {
           isGetEducationResumeResponse =
               state.isGetEducationResumeResponse;
-          setState(() {});
+          setState(() {
+
+            typeShow =isGetEducationResumeResponse?.body?.data?.type??'';
+          });
         }
         if (state is SentEditAboutMeResumeSuccessState) {
           Navigator.pushReplacement(
@@ -167,8 +165,15 @@ class _EditEducationResumePageState extends State<EditEducationResumePage>
           String? textStartDateEn =isGetEducationResumeResponse?.body?.screeninfo?.startdateEn;
           String? textEndDateTh =isGetEducationResumeResponse?.body?.screeninfo?.enddateTh;
           String? textEndDateEn =isGetEducationResumeResponse?.body?.screeninfo?.enddateEn;
-          String? placeOfStudyTh = isGetEducationResumeResponse?.body?.data?.hsc?.detail;
-          String? placeOfStudyEn = isGetEducationResumeResponse?.body?.data?.hsc?.detailen;
+          String? textDetailTh =isGetEducationResumeResponse?.body?.screeninfo?.detailTh;
+          String? textDetailEn =isGetEducationResumeResponse?.body?.screeninfo?.detailEn;
+          String? placeOfStudyTh = isGetEducationResumeResponse?.body?.data?.placeofstudyTh;
+          String? placeOfStudyEn = isGetEducationResumeResponse?.body?.data?.placeofstudyEn;
+          String? detailTh = isGetEducationResumeResponse?.body?.data?.detailTh;
+          String? detailEn = isGetEducationResumeResponse?.body?.data?.detailEn;
+          String? startDate = isGetEducationResumeResponse?.body?.data?.startdate;
+          String? endDate = isGetEducationResumeResponse?.body?.data?.enddate;
+          String? type = isGetEducationResumeResponse?.body?.data?.type;
 
           return Scaffold(
             appBar: AppBar(
@@ -206,9 +211,9 @@ class _EditEducationResumePageState extends State<EditEducationResumePage>
                         textOnTopOfDatePicker: '$textStartDateTh / $textStartDateEn  *',
                         hintLabel:'$textStartDateTh / $textStartDateEn  *',
                         callbackFromCustomDatePicker: (String result) {
-                          sDate.text = result;
+                          startDateController.text = result;
                           if (kDebugMode) {
-                            print(sDate.text);
+                            print(startDateController.text);
                           }
                         },
                       ),
@@ -217,9 +222,9 @@ class _EditEducationResumePageState extends State<EditEducationResumePage>
                         textOnTopOfDatePicker: '$textEndDateTh / $textEndDateEn  *',
                         hintLabel:'$textEndDateTh / $textEndDateEn  *',
                         callbackFromCustomDatePicker: (String result) {
-                          fDate.text = result;
+                          endDateController.text = result;
                           if (kDebugMode) {
-                            print(fDate.text);
+                            print(endDateController.text);
                           }
                         },
                       ),
@@ -242,7 +247,7 @@ class _EditEducationResumePageState extends State<EditEducationResumePage>
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    typeStatus,
+                                    typeShow,
                                     style: TextStyle(
                                       // decoration: TextDecoration.underline,
                                         decorationThickness: 2,
@@ -267,12 +272,12 @@ class _EditEducationResumePageState extends State<EditEducationResumePage>
                         ),
                         itemBuilder: (context) {
                           return List.generate(
-                              (lengthPopupMenuItem.length)
+                              (isGetEducationResumeResponse?.body?.type?.length??0)
                               , (index) {
 
                             return  PopupMenuItem(
                               value: index,
-                              child: Text(lengthPopupMenuItem[index] ??'Settings',style: TextStyle(color: Theme.of(context).appBarTheme.foregroundColor),),
+                              child: Text(isGetEducationResumeResponse?.body?.type?[index].typeEn ??'',style: TextStyle(fontSize:12,color: Theme.of(context).appBarTheme.foregroundColor),),
                             );
 
                           }
@@ -281,35 +286,11 @@ class _EditEducationResumePageState extends State<EditEducationResumePage>
                         onSelected: (value) {
                           var isSearchStatus = 'bd';
 
-                            // switch(int.parse(value)){
-                            switch(value){
-                              case 0 :{
-                                isSearchStatus = 'hsc';
-                              }break;
-                              case 1 :{
-                                isSearchStatus = 'bd';
-                              }break;
-                              case 2 :{
-                                isSearchStatus = 'md';
-                              }break;
-                              case 3 :{
-                                isSearchStatus = 'dd';
-                              }break;
-
-                              case 4 :{
-                                isSearchStatus = 'hdd';
-                              }break;
-
-                              default :{
-                                isSearchStatus = '';
-                              }break;
-
-                            }
-
                           setState(() {
 
-                            searchStatus = isSearchStatus;
-                            typeStatus = lengthPopupMenuItem[value] ;
+                            typeStatus = isGetEducationResumeResponse?.body?.type?[value].typeid?? "bd";
+                            typeController.text  = isGetEducationResumeResponse?.body?.type?[value].typeid?? "bd";
+                            typeShow = lengthPopupMenuItem[value] ;
                           }
                           );
 
@@ -319,13 +300,13 @@ class _EditEducationResumePageState extends State<EditEducationResumePage>
 
 
                       BuildTextFormFieldUnLimitCustomNotIconsNotContainer(
-                        textEditingController: aboutMeControllerTH,
-                        onChanged: (valueNameControllerTH) {
+                        textEditingController: placeOfStudyControllerTH,
+                        onChanged: (valuePlaceOfStudyControllerTH) {
                           setState(() {
-                            aboutMeControllerTH.text = valueNameControllerTH;
+                            placeOfStudyControllerTH.text = valuePlaceOfStudyControllerTH;
                           });
                           if (kDebugMode) {
-                            print(aboutMeControllerTH.text);
+                            print(placeOfStudyControllerTH.text);
                           }
                         },
                         hintLabel: textPlaceOfStudyTh,
@@ -334,18 +315,49 @@ class _EditEducationResumePageState extends State<EditEducationResumePage>
                       ),
 
                       BuildTextFormFieldUnLimitCustomNotIconsNotContainer(
-                        textEditingController: aboutMeControllerEN,
-                        onChanged: (valueNameControllerEN) {
+                        textEditingController: placeOfStudyControllerEN,
+                        onChanged: (valuePlaceOfStudyControllerEN) {
                           setState(() {
-                            aboutMeControllerEN.text = valueNameControllerEN;
+                            placeOfStudyControllerEN.text = valuePlaceOfStudyControllerEN;
                           });
 
                           if (kDebugMode) {
-                            print(aboutMeControllerEN.text);
+                            print(placeOfStudyControllerEN.text);
                           }
                         },
                         hintLabel: textPlaceOfStudyEn,
                         initialvalue: placeOfStudyEn,
+                        textInputType: TextInputType.text,
+                      ),
+
+                      BuildTextFormFieldUnLimitCustomNotIconsNotContainer(
+                        textEditingController: detailControllerTH,
+                        onChanged: (valueDetailControllerTH) {
+                          setState(() {
+                            detailControllerTH.text = valueDetailControllerTH;
+                          });
+                          if (kDebugMode) {
+                            print( detailControllerTH.text);
+                          }
+                        },
+                        hintLabel: textDetailTh,
+                        initialvalue:  detailTh,
+                        textInputType: TextInputType.text,
+                      ),
+
+                      BuildTextFormFieldUnLimitCustomNotIconsNotContainer(
+                        textEditingController: detailControllerEN,
+                        onChanged: (valueDetailControllerEN) {
+                          setState(() {
+                            detailControllerEN.text = valueDetailControllerEN;
+                          });
+
+                          if (kDebugMode) {
+                            print(detailControllerEN.text);
+                          }
+                        },
+                        hintLabel: textDetailEn,
+                        initialvalue: detailEn,
                         textInputType: TextInputType.text,
                       ),
 
@@ -358,13 +370,35 @@ class _EditEducationResumePageState extends State<EditEducationResumePage>
               context: context,
               setState,
               textSave ?? 'Save',
-              aboutMeControllerTH: (aboutMeControllerTH.text == ''
-                      ? placeOfStudyTh
-                      : aboutMeControllerTH.text) ??
+              id:widget.id,
+              orderChoose:orderChoose,
+              startDate: (startDateController.text == ''
+                  ? startDate
+                  : startDateController.text) ??
                   '',
-              aboutMeControllerEN: (aboutMeControllerEN.text == ''
-                      ? placeOfStudyEn
-                      : aboutMeControllerEN.text) ??
+              endDate:  (endDateController.text == ''
+                  ? endDate
+                  : endDateController.text) ??
+                  '',
+              type:  (typeController.text == ''
+                  ? type
+                  : typeController.text) ??
+                  '',
+              placeOfStudy: (placeOfStudyControllerTH.text == ''
+                  ? placeOfStudyTh
+                  : placeOfStudyControllerTH.text) ??
+                  '',
+              placeOfStudyEN: (placeOfStudyControllerEN.text == ''
+                  ? placeOfStudyEn
+                  : placeOfStudyControllerEN.text) ??
+                  '',
+              detailTH: (detailControllerTH.text == ''
+                  ?detailTh
+                  : detailControllerTH.text) ??
+                  '',
+              detailEN: (detailControllerTH.text == ''
+                  ? detailEn
+                  : detailControllerTH.text) ??
                   '',
             ),
             floatingActionButtonLocation:
@@ -384,16 +418,31 @@ floatingSetThemePDF(
   setState,
   String pdf, {
   required BuildContext context,
-  required String aboutMeControllerTH,
-  required String aboutMeControllerEN,
+  required int id,
+  required int orderChoose,
+  required String startDate,
+  required String endDate,
+  required String type,
+  required String placeOfStudy,
+  required String placeOfStudyEN,
+  required String detailTH,
+  required String detailEN,
 }) {return FloatingActionButton.extended(
     backgroundColor:
         Theme.of(context).appBarTheme.backgroundColor?.withOpacity(0.9),
     foregroundColor: Colors.black,
     onPressed: () {
-      context.read<ResumeBloc>().add(SentEditAboutMeResumeEvent(
-          aboutMeControllerTH: aboutMeControllerTH,
-          aboutMeControllerEN: aboutMeControllerEN));
+      context.read<ResumeBloc>().add(SentEditEducationResumeEvent(
+          id:id,
+          orderChoose:orderChoose,
+          startDate:startDate,
+          endDate:endDate,
+          type:type,
+          placeOfStudy:placeOfStudy,
+          placeOfStudyEN:placeOfStudyEN,
+          detailTH:detailTH,
+          detailEN:detailEN,
+          ));
       // Navigator.push(
       //     context,
       //     MaterialPageRoute(

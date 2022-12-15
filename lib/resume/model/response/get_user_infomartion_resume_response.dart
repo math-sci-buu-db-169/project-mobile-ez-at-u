@@ -39,37 +39,53 @@ class GetUserInformationResumeResponse {
 
 }
 
-/// screeninfo : {"textprefix_th":"คำนำหน้า","textprefix_en":"prefix","textname_th":"ชื่อ","textname_en":"Name","textlastname_th":"นามสกุล","textlastname_en":"Last name","save":"Save/บันทึก","editinfomations":"แก้ไขข้อมูล"}
-/// data : {"prefix":"นาย 2","name":"สิทธิพล 2","lastname":"ชินโน 2","prefixen":"Mr 2","nameen":"Sittipon 2","lastnameen":"Chinno 2"}
+/// screeninfo : {"textprefix_th":"คำนำหน้า","textprefix_en":"prefix","textname_th":"ชื่อ","textname_en":"Name","textlastname_th":"นามสกุล","textlastname_en":"Last name","save":"บันทึก","editinfomations":"แก้ไขข้อมูล"}
+/// prefix : [{"specifically":"P1","th":"นาง","en":"MRS"},{"specifically":"P2","th":"นางสาว","en":"MISS"},{"specifically":"P3","th":"นาย","en":"MR"}]
+/// data : {"prefixid":"P3","prefix_th":"นาย","prefix_en":"MR","name":"สิทธิพล","lastname":"ชินโน","nameen":"sittipon","lastnameen":"chinno"}
 
 Body bodyFromJson(String str) => Body.fromJson(json.decode(str));
 String bodyToJson(Body data) => json.encode(data.toJson());
 class Body {
   Body({
     Screeninfo? screeninfo,
+    List<Prefix>? prefix,
     Data? data,}){
     _screeninfo = screeninfo;
+    _prefix = prefix;
     _data = data;
   }
 
   Body.fromJson(dynamic json) {
     _screeninfo = json['screeninfo'] != null ? Screeninfo.fromJson(json['screeninfo']) : null;
+    if (json['prefix'] != null) {
+      _prefix = [];
+      json['prefix'].forEach((v) {
+        _prefix?.add(Prefix.fromJson(v));
+      });
+    }
     _data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
   Screeninfo? _screeninfo;
+  List<Prefix>? _prefix;
   Data? _data;
   Body copyWith({  Screeninfo? screeninfo,
+    List<Prefix>? prefix,
     Data? data,
   }) => Body(  screeninfo: screeninfo ?? _screeninfo,
+    prefix: prefix ?? _prefix,
     data: data ?? _data,
   );
   Screeninfo? get screeninfo => _screeninfo;
+  List<Prefix>? get prefix => _prefix;
   Data? get data => _data;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     if (_screeninfo != null) {
       map['screeninfo'] = _screeninfo?.toJson();
+    }
+    if (_prefix != null) {
+      map['prefix'] = _prefix?.map((v) => v.toJson()).toList();
     }
     if (_data != null) {
       map['data'] = _data?.toJson();
@@ -79,73 +95,127 @@ class Body {
 
 }
 
-/// prefix : "นาย 2"
-/// name : "สิทธิพล 2"
-/// lastname : "ชินโน 2"
-/// prefixen : "Mr 2"
-/// nameen : "Sittipon 2"
-/// lastnameen : "Chinno 2"
+/// prefixid : "P3"
+/// prefix_th : "นาย"
+/// prefix_en : "MR"
+/// name : "สิทธิพล"
+/// lastname : "ชินโน"
+/// nameen : "sittipon"
+/// lastnameen : "chinno"
 
 Data dataFromJson(String str) => Data.fromJson(json.decode(str));
 String dataToJson(Data data) => json.encode(data.toJson());
 class Data {
   Data({
-    String? prefix,
+    String? prefixid,
+    String? prefixTh,
+    String? prefixEn,
     String? name,
     String? lastname,
-    String? prefixen,
     String? nameen,
     String? lastnameen,}){
-    _prefix = prefix;
+    _prefixid = prefixid;
+    _prefixTh = prefixTh;
+    _prefixEn = prefixEn;
     _name = name;
     _lastname = lastname;
-    _prefixen = prefixen;
     _nameen = nameen;
     _lastnameen = lastnameen;
   }
 
   Data.fromJson(dynamic json) {
-    _prefix = json['prefix'];
+    _prefixid = json['prefixid'];
+    _prefixTh = json['prefix_th'];
+    _prefixEn = json['prefix_en'];
     _name = json['name'];
     _lastname = json['lastname'];
-    _prefixen = json['prefixen'];
     _nameen = json['nameen'];
     _lastnameen = json['lastnameen'];
   }
-  String? _prefix;
+  String? _prefixid;
+  String? _prefixTh;
+  String? _prefixEn;
   String? _name;
   String? _lastname;
-  String? _prefixen;
   String? _nameen;
   String? _lastnameen;
-  Data copyWith({  String? prefix,
+  Data copyWith({  String? prefixid,
+    String? prefixTh,
+    String? prefixEn,
     String? name,
     String? lastname,
-    String? prefixen,
     String? nameen,
     String? lastnameen,
-  }) => Data(  prefix: prefix ?? _prefix,
+  }) => Data(  prefixid: prefixid ?? _prefixid,
+    prefixTh: prefixTh ?? _prefixTh,
+    prefixEn: prefixEn ?? _prefixEn,
     name: name ?? _name,
     lastname: lastname ?? _lastname,
-    prefixen: prefixen ?? _prefixen,
     nameen: nameen ?? _nameen,
     lastnameen: lastnameen ?? _lastnameen,
   );
-  String? get prefix => _prefix;
+  String? get prefixid => _prefixid;
+  String? get prefixTh => _prefixTh;
+  String? get prefixEn => _prefixEn;
   String? get name => _name;
   String? get lastname => _lastname;
-  String? get prefixen => _prefixen;
   String? get nameen => _nameen;
   String? get lastnameen => _lastnameen;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['prefix'] = _prefix;
+    map['prefixid'] = _prefixid;
+    map['prefix_th'] = _prefixTh;
+    map['prefix_en'] = _prefixEn;
     map['name'] = _name;
     map['lastname'] = _lastname;
-    map['prefixen'] = _prefixen;
     map['nameen'] = _nameen;
     map['lastnameen'] = _lastnameen;
+    return map;
+  }
+
+}
+
+/// specifically : "P1"
+/// th : "นาง"
+/// en : "MRS"
+
+Prefix prefixFromJson(String str) => Prefix.fromJson(json.decode(str));
+String prefixToJson(Prefix data) => json.encode(data.toJson());
+class Prefix {
+  Prefix({
+    String? specifically,
+    String? th,
+    String? en,}){
+    _specifically = specifically;
+    _th = th;
+    _en = en;
+  }
+
+  Prefix.fromJson(dynamic json) {
+    _specifically = json['specifically'];
+    _th = json['th'];
+    _en = json['en'];
+  }
+  String? _specifically;
+  String? _th;
+  String? _en;
+  Prefix copyWith({  String? specifically,
+    String? th,
+    String? en,
+  }) => Prefix(  specifically: specifically ?? _specifically,
+    th: th ?? _th,
+    en: en ?? _en,
+  );
+  String? get specifically => _specifically;
+  String? get th => _th;
+  String? get en => _en;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['specifically'] = _specifically;
+    map['th'] = _th;
+    map['en'] = _en;
     return map;
   }
 
@@ -157,7 +227,7 @@ class Data {
 /// textname_en : "Name"
 /// textlastname_th : "นามสกุล"
 /// textlastname_en : "Last name"
-/// save : "Save/บันทึก"
+/// save : "บันทึก"
 /// editinfomations : "แก้ไขข้อมูล"
 
 Screeninfo screeninfoFromJson(String str) => Screeninfo.fromJson(json.decode(str));
@@ -250,7 +320,7 @@ Head headFromJson(String str) => Head.fromJson(json.decode(str));
 String headToJson(Head data) => json.encode(data.toJson());
 class Head {
   Head({
-    num? status,
+    int? status,
     String? message,
     String? modulename,
     bool? timeexpire,}){
@@ -266,11 +336,11 @@ class Head {
     _modulename = json['modulename'];
     _timeexpire = json['timeexpire'];
   }
-  num? _status;
+  int? _status;
   String? _message;
   String? _modulename;
   bool? _timeexpire;
-  Head copyWith({  num? status,
+  Head copyWith({  int? status,
     String? message,
     String? modulename,
     bool? timeexpire,
@@ -279,7 +349,7 @@ class Head {
     modulename: modulename ?? _modulename,
     timeexpire: timeexpire ?? _timeexpire,
   );
-  num? get status => _status;
+  int? get status => _status;
   String? get message => _message;
   String? get modulename => _modulename;
   bool? get timeexpire => _timeexpire;

@@ -37,8 +37,9 @@ class PreViewResumeResponse {
   }
 
 }
+
 /// screenInfo : {"aboutme":"เกี่ยวกับฉัน","aboutmedetail":"เกี่ยวกับฉัน รายละเอียด","address":"ที่อยู่","appliedposition":"ตำแหน่งที่สมัคร","certificate":"ใบรับรอง","contact":"ติดต่อ","textdefault":"ค่าเริ่มต้น","description":"คำอธิบาย","detail":"รายละเอียด","district":"อำเภอ","editinfomations":"แก้ไขข้อมูล","education":"การศึกษา","educationinfo":"ข้อมูลการศึกษา","email":"อีเมล","enddate":"วันสิ้นสุด","experience":"ประสบการณ์","facebook":"เฟคบุ๊ค","instagram":"อินสตาแกรม","language":"ภาษา","lastname":"นามสกุล","line":"ไลน์","moo":"หมู่","mypositions":"ตำแหน่งของฉัน","n":"นิ้ว","name":"ชื่อ","number":"ตัวเลข","phone":"โทรศัพท์","pictuce":"รูปภาพ","placeofstudy":"สถานศึกษา","position":"ตำแหน่ง","positions":"ตำแหน่ง","prefix":"คำนำหน้า","province":"จังหวัด","ratio":"อัตราส่วนภาพต้องเป็น 3:4","road":"ถนน","select":"เลือก","selectacolor":"โปรดเลือกสี","selecttheinformation":"โปรดเลือกข้อมูล ","size":"ขนาด","sizepictuce":"ขนาดไฟล์ไม่เกิน 5 MB","skill":"ทักษะ","soi":"ซอย","startdate":"วันเริ่มต้น","subdistrict":"ตำบล","themecolor":"สีธีม","title":"หัวเรื่อง","titlesetthemecolor":"ตั้งค่าธีมและสี","twitter":"ทวิตเตอร์","type":"ประเภทการศึกษา","value":"ระดับ","whcm":"(กxส) ซม","zipcode":"รหัสไปรษณีย์","unkhown":"ไม่ทราบ","viewpdf":"PDF","titleresumeinformation":"ข้อมูลเรซูเม่","hsc":"ประกาศนียบัตรมัธยมศึกษาตอนปลาย","bd":"ระดับปริญญาตรี","md":"ปริญญาโท    ","dd":"ปริญญาเอก","hdd":"ปริญญาดุษฎีบัณฑิตกิตติมศักดิ์","tapedit":"แตะเพื่อแก้ไข้ข้อมูล","save":"บันทึก","saveor":"Save/บันทึก","youtube":"ยูทูป"}
-/// data : {"userinfo":{"prefixid":"P3","prefix":"นาย","name":"สิทธิพล","lastname":"ชินโน"},"position":"aaa","aboutme":"วิศวกรซอฟต์แวร์มากประสบการณ์ที่มีความกระตือรือร้นในการพัฒนาโปรแกรมนวัตกรรมที่ช่วยเร่งประสิทธิภาพและประสิทธิผลของความสำเร็จขององค์กร เชี่ยวชาญด้านเทคโนโลยีและการเขียนโค้ดเพื่อสร้างระบบที่เชื่อถือได้และเป็นมิตรกับผู้ใช้66","personinfo":{"email":"emaill","phone":"phonel","facebook":"feacbookl","line":"@0930582335l","instagram":"instagraml","twitter":"twitterl","youtube":null},"address":{"number":"169","moo":"","soi":"","road":"string","subdistrict":"ลงหาดบางแสน แสนสุข","district":"เมือง","province":"ชลบุรี","zipcode":"20131"},"experience":[{"id":1,"orderchoose":10,"startdate":"12/2022","enddate":"12/2022","position":"ฟรีวิลล์ โซลูชั่นส์ จํ ดP","detail":"ฟรีวิลล์ โซลูชั่นส์ จําดdetailD"},{"id":2,"orderchoose":0,"startdate":"Jun 2015 ","enddate":"Jun 2018","position":"วิศวกรรมซอฟต์แวร์","detail":"ฟรีวิลล์ โซลูชั่นส์ จํากัด"},{"id":4,"orderchoose":20,"startdate":"Jun 2015 ","enddate":"Jun 2018","position":"วิศวกรรมซอฟต์แวร์","detail":"ฟรีวิลล์ โซลูชั่นส์ จํากัด"}],"education":{"hsc":[{"id":7,"orderchoose":0,"startdate":"Jun 2015","enddate":"Jun 2018","type":"HSC","placeofstudy":null,"detail":null},{"id":1,"orderchoose":1,"startdate":"Jun 2015","enddate":"Jun 2018","type":"HSC","placeofstudy":"การศึกษาระดับมัธยมศึกษาตอนปลาย","detail":"วิทย์-คณิต โรงเรียนคำแสนวิทยาสรรค์"},{"id":3,"orderchoose":2,"startdate":"Jun 2018","enddate":"Jun 2022","type":"HSC","placeofstudy":"การศึกษาระดับมัธยมศึกษาตอนปลาย","detail":null}],"bd":[{"id":2,"orderchoose":1,"startdate":"Jun 2018","enddate":"Jun 2022","type":"BD","placeofstudy":"ปริญญาตรี","detail":"สาขาวิชาคณิตศาสตร์ ภาควิชาคณิตศาสตร์ คณะวิทยาศาสตร์ มหาวิทยาลัยบูรพา"}],"md":[{"id":2,"orderchoose":1,"startdate":"Jun 2018","enddate":"Jun 2022","type":"BD","placeofstudy":"ปริญญาตรี","detail":"สาขาวิชาคณิตศาสตร์ ภาควิชาคณิตศาสตร์ คณะวิทยาศาสตร์ มหาวิทยาลัยบูรพา"}],"dd":[{"id":2,"orderchoose":1,"startdate":"Jun 2018","enddate":"Jun 2022","type":"BD","placeofstudy":"ปริญญาตรี","detail":"สาขาวิชาคณิตศาสตร์ ภาควิชาคณิตศาสตร์ คณะวิทยาศาสตร์ มหาวิทยาลัยบูรพา"}],"hdd":[{"id":2,"orderchoose":1,"startdate":"Jun 2018","enddate":"Jun 2022","type":"BD","placeofstudy":"ปริญญาตรี","detail":"สาขาวิชาคณิตศาสตร์ ภาควิชาคณิตศาสตร์ คณะวิทยาศาสตร์ มหาวิทยาลัยบูรพา"}]},"skill":[{"id":1,"orderchoose":0,"skill":"เวิร์ด 2016","value":"71","detail":null},{"id":2,"orderchoose":0,"skill":"ms excel","value":"60","detail":null},{"id":3,"orderchoose":0,"skill":"ฟลัทเทอร์","value":"30","detail":null},{"id":4,"orderchoose":0,"skill":"คณิต","value":"60","detail":null},{"id":5,"orderchoose":0,"skill":"ดอทเนต","value":"80","detail":null}],"certificate":[{"id":1,"orderchoose":0,"title":"ทดสอบ [[[","description":"ทดสอบ [[["},{"id":2,"orderchoose":0,"title":"ทดสอบ","description":"ทดสอบ"},{"id":3,"orderchoose":0,"title":"ทดสอบ [[[","description":"ทดสอบ [[["},{"id":4,"orderchoose":0,"title":"ทดสอบ [[[","description":"ทดสอบ [[["},{"id":5,"orderchoose":0,"title":"ทดสอบ [[[","description":"ทดสอบ [[["}],"languge":[{"id":1,"orderchoose":0,"language":"sffftring","value":"52","detail":null},{"id":3,"orderchoose":0,"language":"sffftring","value":"99","detail":null},{"id":4,"orderchoose":0,"language":"สสสสสสdfddddd","value":"50","detail":null}],"image":"/"}
+/// data : {"userinfo":{"prefixid":"P3","prefix":"นาย","name":"สิทธิพล","lastname":"ชินโน"},"position":"stringas","aboutme":"วิศวกรซอฟต์แวร์มากประสบการณ์ที่มีความกระตือรือร้นในการพัฒนาโปรแกรมนวัตกรรมที่ช่วยเร่งประสิทธิภาพและประสิทธิผลของความสำเร็จขององค์กร เชี่ยวชาญด้านเทคโนโลยีและการเขียนโค้ดเพื่อสร้างระบบที่เชื่อถือได้และเป็นมิตรกับผู้ใ","personinfo":{"email":"emaill3","phone":"phonel3","facebook":"feacbookl3","line":"@0930582335l3","instagram":"instagraml3","twitter":"twitterl3","youtube":"you"},"address":{"number":"169","moo":"","soi":"","road":"string","subdistrict":"ลงหาดบางแสน แสนสุข","district":"เมือง","province":"ชลบุรี","zipcode":"20131"},"experience":[{"id":1,"orderchoose":22,"startdate":"Jun 2015 ","enddate":"Jun 2018","position":"วิศวกรรมซอฟต์แวร์+3","detail":"ฟรีวิลล์ โซลูชั่นส์ จํากัด-22"},{"id":2,"orderchoose":0,"startdate":"Jun 2015 ","enddate":"Jun 2018","position":"วิศวกรรมซอฟต์แวร์","detail":"ฟรีวิลล์ โซลูชั่นส์ จํากัด"},{"id":4,"orderchoose":0,"startdate":"Jun 2015 ","enddate":"Jun 2018","position":"วิศวกรรมซอฟต์แวร์+3.3","detail":"ฟรีวิลล์ โซลูชั่นส์ จํากัด.3"}],"education":{"hsc":[{"id":7,"orderchoose":0,"startdate":"Jun 2015","enddate":"Jun 2018","type":"HSC","placeofstudy":null,"detail":null},{"id":1,"orderchoose":1,"startdate":"Jun 2015","enddate":"Jun 2018","type":"HSC","placeofstudy":"การศึกษาระดับมัธยมศึกษาตอนปลาย","detail":"วิทย์-คณิต โรงเรียนคำแสนวิทยาสรรค์"},{"id":3,"orderchoose":2,"startdate":"Jun 2018","enddate":"Jun 2022","type":"HSC","placeofstudy":"การศึกษาระดับมัธยมศึกษาตอนปลาย","detail":null}],"bd":[{"id":2,"orderchoose":1,"startdate":"Jun 2018","enddate":"Jun 2022","type":"BD","placeofstudy":"ปริญญาตรี","detail":"สาขาวิชาคณิตศาสตร์ ภาควิชาคณิตศาสตร์ คณะวิทยาศาสตร์ มหาวิทยาลัยบูรพา"}],"md":[{"id":2,"orderchoose":1,"startdate":"Jun 2018","enddate":"Jun 2022","type":"BD","placeofstudy":"ปริญญาตรี","detail":"สาขาวิชาคณิตศาสตร์ ภาควิชาคณิตศาสตร์ คณะวิทยาศาสตร์ มหาวิทยาลัยบูรพา"}],"dd":[{"id":2,"orderchoose":1,"startdate":"Jun 2018","enddate":"Jun 2022","type":"BD","placeofstudy":"ปริญญาตรี","detail":"สาขาวิชาคณิตศาสตร์ ภาควิชาคณิตศาสตร์ คณะวิทยาศาสตร์ มหาวิทยาลัยบูรพา"}],"hdd":[{"id":2,"orderchoose":1,"startdate":"Jun 2018","enddate":"Jun 2022","type":"BD","placeofstudy":"ปริญญาตรี","detail":"สาขาวิชาคณิตศาสตร์ ภาควิชาคณิตศาสตร์ คณะวิทยาศาสตร์ มหาวิทยาลัยบูรพา"}]},"skill":[{"id":2,"orderchoose":0,"skill":"ทักษะกิน","value":"83","detail":"wine "},{"id":3,"orderchoose":0,"skill":"skill_thde","value":"50","detail":"description_thgood"},{"id":4,"orderchoose":0,"skill":"good","value":"88","detail":"depp"}],"certificate":[{"id":1,"orderchoose":0,"title":"go","description":"go"},{"id":2,"orderchoose":66,"title":"string16","description":"string36"},{"id":3,"orderchoose":0,"title":"we","description":"go"},{"id":4,"orderchoose":0,"title":"o","description":"k"}],"languge":[{"id":1,"orderchoose":0,"language":"language_thd","value":"1","detail":"description_thg"}],"image":"/"}
 
 Body bodyFromJson(String str) => Body.fromJson(json.decode(str));
 String bodyToJson(Body data) => json.encode(data.toJson());
@@ -78,15 +79,15 @@ class Body {
 }
 
 /// userinfo : {"prefixid":"P3","prefix":"นาย","name":"สิทธิพล","lastname":"ชินโน"}
-/// position : "aaa"
-/// aboutme : "วิศวกรซอฟต์แวร์มากประสบการณ์ที่มีความกระตือรือร้นในการพัฒนาโปรแกรมนวัตกรรมที่ช่วยเร่งประสิทธิภาพและประสิทธิผลของความสำเร็จขององค์กร เชี่ยวชาญด้านเทคโนโลยีและการเขียนโค้ดเพื่อสร้างระบบที่เชื่อถือได้และเป็นมิตรกับผู้ใช้66"
-/// personinfo : {"email":"emaill","phone":"phonel","facebook":"feacbookl","line":"@0930582335l","instagram":"instagraml","twitter":"twitterl","youtube":null}
+/// position : "stringas"
+/// aboutme : "วิศวกรซอฟต์แวร์มากประสบการณ์ที่มีความกระตือรือร้นในการพัฒนาโปรแกรมนวัตกรรมที่ช่วยเร่งประสิทธิภาพและประสิทธิผลของความสำเร็จขององค์กร เชี่ยวชาญด้านเทคโนโลยีและการเขียนโค้ดเพื่อสร้างระบบที่เชื่อถือได้และเป็นมิตรกับผู้ใ"
+/// personinfo : {"email":"emaill3","phone":"phonel3","facebook":"feacbookl3","line":"@0930582335l3","instagram":"instagraml3","twitter":"twitterl3","youtube":"you"}
 /// address : {"number":"169","moo":"","soi":"","road":"string","subdistrict":"ลงหาดบางแสน แสนสุข","district":"เมือง","province":"ชลบุรี","zipcode":"20131"}
-/// experience : [{"id":1,"orderchoose":10,"startdate":"12/2022","enddate":"12/2022","position":"ฟรีวิลล์ โซลูชั่นส์ จํ ดP","detail":"ฟรีวิลล์ โซลูชั่นส์ จําดdetailD"},{"id":2,"orderchoose":0,"startdate":"Jun 2015 ","enddate":"Jun 2018","position":"วิศวกรรมซอฟต์แวร์","detail":"ฟรีวิลล์ โซลูชั่นส์ จํากัด"},{"id":4,"orderchoose":20,"startdate":"Jun 2015 ","enddate":"Jun 2018","position":"วิศวกรรมซอฟต์แวร์","detail":"ฟรีวิลล์ โซลูชั่นส์ จํากัด"}]
+/// experience : [{"id":1,"orderchoose":22,"startdate":"Jun 2015 ","enddate":"Jun 2018","position":"วิศวกรรมซอฟต์แวร์+3","detail":"ฟรีวิลล์ โซลูชั่นส์ จํากัด-22"},{"id":2,"orderchoose":0,"startdate":"Jun 2015 ","enddate":"Jun 2018","position":"วิศวกรรมซอฟต์แวร์","detail":"ฟรีวิลล์ โซลูชั่นส์ จํากัด"},{"id":4,"orderchoose":0,"startdate":"Jun 2015 ","enddate":"Jun 2018","position":"วิศวกรรมซอฟต์แวร์+3.3","detail":"ฟรีวิลล์ โซลูชั่นส์ จํากัด.3"}]
 /// education : {"hsc":[{"id":7,"orderchoose":0,"startdate":"Jun 2015","enddate":"Jun 2018","type":"HSC","placeofstudy":null,"detail":null},{"id":1,"orderchoose":1,"startdate":"Jun 2015","enddate":"Jun 2018","type":"HSC","placeofstudy":"การศึกษาระดับมัธยมศึกษาตอนปลาย","detail":"วิทย์-คณิต โรงเรียนคำแสนวิทยาสรรค์"},{"id":3,"orderchoose":2,"startdate":"Jun 2018","enddate":"Jun 2022","type":"HSC","placeofstudy":"การศึกษาระดับมัธยมศึกษาตอนปลาย","detail":null}],"bd":[{"id":2,"orderchoose":1,"startdate":"Jun 2018","enddate":"Jun 2022","type":"BD","placeofstudy":"ปริญญาตรี","detail":"สาขาวิชาคณิตศาสตร์ ภาควิชาคณิตศาสตร์ คณะวิทยาศาสตร์ มหาวิทยาลัยบูรพา"}],"md":[{"id":2,"orderchoose":1,"startdate":"Jun 2018","enddate":"Jun 2022","type":"BD","placeofstudy":"ปริญญาตรี","detail":"สาขาวิชาคณิตศาสตร์ ภาควิชาคณิตศาสตร์ คณะวิทยาศาสตร์ มหาวิทยาลัยบูรพา"}],"dd":[{"id":2,"orderchoose":1,"startdate":"Jun 2018","enddate":"Jun 2022","type":"BD","placeofstudy":"ปริญญาตรี","detail":"สาขาวิชาคณิตศาสตร์ ภาควิชาคณิตศาสตร์ คณะวิทยาศาสตร์ มหาวิทยาลัยบูรพา"}],"hdd":[{"id":2,"orderchoose":1,"startdate":"Jun 2018","enddate":"Jun 2022","type":"BD","placeofstudy":"ปริญญาตรี","detail":"สาขาวิชาคณิตศาสตร์ ภาควิชาคณิตศาสตร์ คณะวิทยาศาสตร์ มหาวิทยาลัยบูรพา"}]}
-/// skill : [{"id":1,"orderchoose":0,"skill":"เวิร์ด 2016","value":"71","detail":null},{"id":2,"orderchoose":0,"skill":"ms excel","value":"60","detail":null},{"id":3,"orderchoose":0,"skill":"ฟลัทเทอร์","value":"30","detail":null},{"id":4,"orderchoose":0,"skill":"คณิต","value":"60","detail":null},{"id":5,"orderchoose":0,"skill":"ดอทเนต","value":"80","detail":null}]
-/// certificate : [{"id":1,"orderchoose":0,"title":"ทดสอบ [[[","description":"ทดสอบ [[["},{"id":2,"orderchoose":0,"title":"ทดสอบ","description":"ทดสอบ"},{"id":3,"orderchoose":0,"title":"ทดสอบ [[[","description":"ทดสอบ [[["},{"id":4,"orderchoose":0,"title":"ทดสอบ [[[","description":"ทดสอบ [[["},{"id":5,"orderchoose":0,"title":"ทดสอบ [[[","description":"ทดสอบ [[["}]
-/// languge : [{"id":1,"orderchoose":0,"language":"sffftring","value":"52","detail":null},{"id":3,"orderchoose":0,"language":"sffftring","value":"99","detail":null},{"id":4,"orderchoose":0,"language":"สสสสสสdfddddd","value":"50","detail":null}]
+/// skill : [{"id":2,"orderchoose":0,"skill":"ทักษะกิน","value":"83","detail":"wine "},{"id":3,"orderchoose":0,"skill":"skill_thde","value":"50","detail":"description_thgood"},{"id":4,"orderchoose":0,"skill":"good","value":"88","detail":"depp"}]
+/// certificate : [{"id":1,"orderchoose":0,"title":"go","description":"go"},{"id":2,"orderchoose":66,"title":"string16","description":"string36"},{"id":3,"orderchoose":0,"title":"we","description":"go"},{"id":4,"orderchoose":0,"title":"o","description":"k"}]
+/// languge : [{"id":1,"orderchoose":0,"language":"language_thd","value":"1","detail":"description_thg"}]
 /// image : "/"
 
 Data dataFromJson(String str) => Data.fromJson(json.decode(str));
@@ -232,9 +233,9 @@ class Data {
 
 /// id : 1
 /// orderchoose : 0
-/// language : "sffftring"
-/// value : "52"
-/// detail : null
+/// language : "language_thd"
+/// value : "1"
+/// detail : "description_thg"
 
 Languge langugeFromJson(String str) => Languge.fromJson(json.decode(str));
 String langugeToJson(Languge data) => json.encode(data.toJson());
@@ -244,7 +245,7 @@ class Languge {
     int? orderchoose,
     String? language,
     String? value,
-    dynamic detail,}){
+    String? detail,}){
     _id = id;
     _orderchoose = orderchoose;
     _language = language;
@@ -263,12 +264,12 @@ class Languge {
   int? _orderchoose;
   String? _language;
   String? _value;
-  dynamic _detail;
+  String? _detail;
   Languge copyWith({  int? id,
     int? orderchoose,
     String? language,
     String? value,
-    dynamic detail,
+    String? detail,
   }) => Languge(  id: id ?? _id,
     orderchoose: orderchoose ?? _orderchoose,
     language: language ?? _language,
@@ -279,7 +280,7 @@ class Languge {
   int? get orderchoose => _orderchoose;
   String? get language => _language;
   String? get value => _value;
-  dynamic get detail => _detail;
+  String? get detail => _detail;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -295,8 +296,8 @@ class Languge {
 
 /// id : 1
 /// orderchoose : 0
-/// title : "ทดสอบ [[["
-/// description : "ทดสอบ [[["
+/// title : "go"
+/// description : "go"
 
 Certificate certificateFromJson(String str) => Certificate.fromJson(json.decode(str));
 String certificateToJson(Certificate data) => json.encode(data.toJson());
@@ -347,11 +348,11 @@ class Certificate {
 
 }
 
-/// id : 1
+/// id : 2
 /// orderchoose : 0
-/// skill : "เวิร์ด 2016"
-/// value : "71"
-/// detail : null
+/// skill : "ทักษะกิน"
+/// value : "83"
+/// detail : "wine "
 
 Skill skillFromJson(String str) => Skill.fromJson(json.decode(str));
 String skillToJson(Skill data) => json.encode(data.toJson());
@@ -361,7 +362,7 @@ class Skill {
     int? orderchoose,
     String? skill,
     String? value,
-    dynamic detail,}){
+    String? detail,}){
     _id = id;
     _orderchoose = orderchoose;
     _skill = skill;
@@ -380,12 +381,12 @@ class Skill {
   int? _orderchoose;
   String? _skill;
   String? _value;
-  dynamic _detail;
+  String? _detail;
   Skill copyWith({  int? id,
     int? orderchoose,
     String? skill,
     String? value,
-    dynamic detail,
+    String? detail,
   }) => Skill(  id: id ?? _id,
     orderchoose: orderchoose ?? _orderchoose,
     skill: skill ?? _skill,
@@ -396,7 +397,7 @@ class Skill {
   int? get orderchoose => _orderchoose;
   String? get skill => _skill;
   String? get value => _value;
-  dynamic get detail => _detail;
+  String? get detail => _detail;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -914,11 +915,11 @@ class Hsc {
 }
 
 /// id : 1
-/// orderchoose : 10
-/// startdate : "12/2022"
-/// enddate : "12/2022"
-/// position : "ฟรีวิลล์ โซลูชั่นส์ จํ ดP"
-/// detail : "ฟรีวิลล์ โซลูชั่นส์ จําดdetailD"
+/// orderchoose : 22
+/// startdate : "Jun 2015 "
+/// enddate : "Jun 2018"
+/// position : "วิศวกรรมซอฟต์แวร์+3"
+/// detail : "ฟรีวิลล์ โซลูชั่นส์ จํากัด-22"
 
 Experience experienceFromJson(String str) => Experience.fromJson(json.decode(str));
 String experienceToJson(Experience data) => json.encode(data.toJson());
@@ -1075,13 +1076,13 @@ class Address {
 
 }
 
-/// email : "emaill"
-/// phone : "phonel"
-/// facebook : "feacbookl"
-/// line : "@0930582335l"
-/// instagram : "instagraml"
-/// twitter : "twitterl"
-/// youtube : null
+/// email : "emaill3"
+/// phone : "phonel3"
+/// facebook : "feacbookl3"
+/// line : "@0930582335l3"
+/// instagram : "instagraml3"
+/// twitter : "twitterl3"
+/// youtube : "you"
 
 Personinfo personinfoFromJson(String str) => Personinfo.fromJson(json.decode(str));
 String personinfoToJson(Personinfo data) => json.encode(data.toJson());
@@ -1093,7 +1094,7 @@ class Personinfo {
     String? line,
     String? instagram,
     String? twitter,
-    dynamic youtube,}){
+    String? youtube,}){
     _email = email;
     _phone = phone;
     _facebook = facebook;
@@ -1118,14 +1119,14 @@ class Personinfo {
   String? _line;
   String? _instagram;
   String? _twitter;
-  dynamic _youtube;
+  String? _youtube;
   Personinfo copyWith({  String? email,
     String? phone,
     String? facebook,
     String? line,
     String? instagram,
     String? twitter,
-    dynamic youtube,
+    String? youtube,
   }) => Personinfo(  email: email ?? _email,
     phone: phone ?? _phone,
     facebook: facebook ?? _facebook,
@@ -1140,7 +1141,7 @@ class Personinfo {
   String? get line => _line;
   String? get instagram => _instagram;
   String? get twitter => _twitter;
-  dynamic get youtube => _youtube;
+  String? get youtube => _youtube;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

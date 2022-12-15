@@ -28,18 +28,16 @@ class SentEditAboutResumeEvent extends ResumeEvent {
 class GetEditScreenUserInfoResumeEvent extends ResumeEvent {}
 
 class SentEditUserInfoResumeEvent extends ResumeEvent {
-  String prefix;
+  String prefixId;
   String name;
   String lastName;
-  String prefixEN;
   String nameEN;
   String lastNameEN;
 
   SentEditUserInfoResumeEvent(
-      {required this.prefix,
+      {required this.prefixId,
       required this.name,
       required this.lastName,
-      required this.prefixEN,
       required this.nameEN,
       required this.lastNameEN});
 }
@@ -69,7 +67,15 @@ class SentEditPositionsResumeEvent extends ResumeEvent {
       required this.officeControllerEN});
 }
 
-class GetEditScreenEducationResumeEvent extends ResumeEvent {}
+class GetEditScreenEducationResumeEvent extends ResumeEvent {
+int eduId;
+String type;
+
+GetEditScreenEducationResumeEvent({
+  required this.eduId,
+  required this.type,
+});
+}
 
 class SentEditEducationResumeEvent extends ResumeEvent {
   int id;
@@ -115,7 +121,11 @@ class SentEditContactResumeEvent extends ResumeEvent {
   });
 }
 
-class GetEditScreenExperienceResumeEvent extends ResumeEvent {}
+class GetEditScreenExperienceResumeEvent extends ResumeEvent {
+  int id;
+  GetEditScreenExperienceResumeEvent(
+      {required this.id,});
+}
 
 class SentEditExperienceResumeEvent extends ResumeEvent {
   int id;

@@ -38,37 +38,32 @@ class GetExperienceResumeResponse {
   }
 
 }
-/// screeninfo : {"save":"Save/บันทึก","editinfomations":"แก้ไขข้อมูล","startdate_th":"วันเริ่มต้น","enddate_th":"วันสิ้นสุด","startdate_en":"Start date","enddate_en":"End date","position_th":"ตำแหน่ง","position_en":"Position","description_th":"รายละเอียด","description_en":"Description"}
-/// data : [{"id":1,"orderchoose":0,"startdate":"Jun 2015 ","enddate":"Jun 2018","position_th":"วิศวกรรมซอฟต์แวร์","position_en":"Software Engineer","detail_th":"ฟรีวิลล์ โซลูชั่นส์ จํากัด","detail_en":"Freewill Solutions"},{"id":2,"orderchoose":0,"startdate":"Jun 2015 ","enddate":"Jun 2018","position_th":"วิศวกรรมซอฟต์แวร์","position_en":"Software Engineer","detail_th":"ฟรีวิลล์ โซลูชั่นส์ จํากัด","detail_en":"Freewill Solutions"}]
+/// screeninfo : {"save":"บันทึก","editinfomations":"แก้ไขข้อมูล","startdate_th":"วันเริ่มต้น","enddate_th":"วันสิ้นสุด","startdate_en":"Start date","enddate_en":"End date","position_th":"ตำแหน่ง","position_en":"Position","description_th":"รายละเอียด","description_en":"Description","deleteor":"Delete/ลบ","delete":"ลบ"}
+/// data : {"id":4,"orderchoose":0,"startdate":"Jun 2015 ","enddate":"Jun 2018","position_th":"วิศวกรรมซอฟต์แวร์","position_en":"Software Engineer","detail_th":"ฟรีวิลล์ โซลูชั่นส์ จํากัด","detail_en":"Freewill Solutions"}
 
 Body bodyFromJson(String str) => Body.fromJson(json.decode(str));
 String bodyToJson(Body data) => json.encode(data.toJson());
 class Body {
   Body({
     Screeninfo? screeninfo,
-    List<Data>? data,}){
+    Data? data,}){
     _screeninfo = screeninfo;
     _data = data;
   }
 
   Body.fromJson(dynamic json) {
     _screeninfo = json['screeninfo'] != null ? Screeninfo.fromJson(json['screeninfo']) : null;
-    if (json['data'] != null) {
-      _data = [];
-      json['data'].forEach((v) {
-        _data?.add(Data.fromJson(v));
-      });
-    }
+    _data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
   Screeninfo? _screeninfo;
-  List<Data>? _data;
+  Data? _data;
   Body copyWith({  Screeninfo? screeninfo,
-    List<Data>? data,
+    Data? data,
   }) => Body(  screeninfo: screeninfo ?? _screeninfo,
     data: data ?? _data,
   );
   Screeninfo? get screeninfo => _screeninfo;
-  List<Data>? get data => _data;
+  Data? get data => _data;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -76,14 +71,14 @@ class Body {
       map['screeninfo'] = _screeninfo?.toJson();
     }
     if (_data != null) {
-      map['data'] = _data?.map((v) => v.toJson()).toList();
+      map['data'] = _data?.toJson();
     }
     return map;
   }
 
 }
 
-/// id : 1
+/// id : 4
 /// orderchoose : 0
 /// startdate : "Jun 2015 "
 /// enddate : "Jun 2018"
@@ -173,7 +168,7 @@ class Data {
 
 }
 
-/// save : "Save/บันทึก"
+/// save : "บันทึก"
 /// editinfomations : "แก้ไขข้อมูล"
 /// startdate_th : "วันเริ่มต้น"
 /// enddate_th : "วันสิ้นสุด"
@@ -183,6 +178,8 @@ class Data {
 /// position_en : "Position"
 /// description_th : "รายละเอียด"
 /// description_en : "Description"
+/// deleteor : "Delete/ลบ"
+/// delete : "ลบ"
 
 Screeninfo screeninfoFromJson(String str) => Screeninfo.fromJson(json.decode(str));
 String screeninfoToJson(Screeninfo data) => json.encode(data.toJson());
@@ -197,7 +194,9 @@ class Screeninfo {
     String? positionTh,
     String? positionEn,
     String? descriptionTh,
-    String? descriptionEn,}){
+    String? descriptionEn,
+    String? deleteor,
+    String? delete,}){
     _save = save;
     _editinfomations = editinfomations;
     _startdateTh = startdateTh;
@@ -208,6 +207,8 @@ class Screeninfo {
     _positionEn = positionEn;
     _descriptionTh = descriptionTh;
     _descriptionEn = descriptionEn;
+    _deleteor = deleteor;
+    _delete = delete;
   }
 
   Screeninfo.fromJson(dynamic json) {
@@ -221,6 +222,8 @@ class Screeninfo {
     _positionEn = json['position_en'];
     _descriptionTh = json['description_th'];
     _descriptionEn = json['description_en'];
+    _deleteor = json['deleteor'];
+    _delete = json['delete'];
   }
   String? _save;
   String? _editinfomations;
@@ -232,6 +235,8 @@ class Screeninfo {
   String? _positionEn;
   String? _descriptionTh;
   String? _descriptionEn;
+  String? _deleteor;
+  String? _delete;
   Screeninfo copyWith({  String? save,
     String? editinfomations,
     String? startdateTh,
@@ -242,6 +247,8 @@ class Screeninfo {
     String? positionEn,
     String? descriptionTh,
     String? descriptionEn,
+    String? deleteor,
+    String? delete,
   }) => Screeninfo(  save: save ?? _save,
     editinfomations: editinfomations ?? _editinfomations,
     startdateTh: startdateTh ?? _startdateTh,
@@ -252,6 +259,8 @@ class Screeninfo {
     positionEn: positionEn ?? _positionEn,
     descriptionTh: descriptionTh ?? _descriptionTh,
     descriptionEn: descriptionEn ?? _descriptionEn,
+    deleteor: deleteor ?? _deleteor,
+    delete: delete ?? _delete,
   );
   String? get save => _save;
   String? get editinfomations => _editinfomations;
@@ -263,6 +272,8 @@ class Screeninfo {
   String? get positionEn => _positionEn;
   String? get descriptionTh => _descriptionTh;
   String? get descriptionEn => _descriptionEn;
+  String? get deleteor => _deleteor;
+  String? get delete => _delete;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -276,6 +287,8 @@ class Screeninfo {
     map['position_en'] = _positionEn;
     map['description_th'] = _descriptionTh;
     map['description_en'] = _descriptionEn;
+    map['deleteor'] = _deleteor;
+    map['delete'] = _delete;
     return map;
   }
 
@@ -290,7 +303,7 @@ Head headFromJson(String str) => Head.fromJson(json.decode(str));
 String headToJson(Head data) => json.encode(data.toJson());
 class Head {
   Head({
-    num? status,
+    int? status,
     String? message,
     String? modulename,
     bool? timeexpire,}){
@@ -306,11 +319,11 @@ class Head {
     _modulename = json['modulename'];
     _timeexpire = json['timeexpire'];
   }
-  num? _status;
+  int? _status;
   String? _message;
   String? _modulename;
   bool? _timeexpire;
-  Head copyWith({  num? status,
+  Head copyWith({  int? status,
     String? message,
     String? modulename,
     bool? timeexpire,
@@ -319,7 +332,7 @@ class Head {
     modulename: modulename ?? _modulename,
     timeexpire: timeexpire ?? _timeexpire,
   );
-  num? get status => _status;
+  int? get status => _status;
   String? get message => _message;
   String? get modulename => _modulename;
   bool? get timeexpire => _timeexpire;

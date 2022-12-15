@@ -105,7 +105,10 @@ class _EditSkillLanguageResumePageState
         if (state is GetEditScreenSkillLanguageResumeSuccessState) {
           isGetSkillLanguageResumeResponse =
               state.isGetSkillLanguageResumeResponse;
-          setState(() {});
+          setState(() {
+            widgetPointerValue = double.parse(isGetSkillLanguageResumeResponse?.body?.data?.value??'50') ;
+
+          });
         }
         if (state is SentEditSkillLanguageResumeSuccessState) {
           Navigator.pushReplacement(
@@ -114,13 +117,13 @@ class _EditSkillLanguageResumePageState
                   builder: (BuildContext context) =>
                       const ContentDesignResumeEditScreen()));
         }
-        if (state is ResumeLoading) {
+        if (state is SkillLanguageResumeLoading) {
           showProgressDialog(context);
         }
-        if (state is ResumeEndLoading) {
+        if (state is SkillLanguageResumeEndLoading) {
           hideProgressDialog(context);
         }
-        if (state is ResumeError) {
+        if (state is SkillLanguageResumeError) {
           if (state.errorMessage.toString() == 'Unauthorized') {
             dialogSessionExpiredOneBtn(
                 context, textSessionExpired, textSubSessionExpired, _buttonOk,

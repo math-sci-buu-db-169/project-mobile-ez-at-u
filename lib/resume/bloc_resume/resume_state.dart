@@ -22,12 +22,18 @@ class  ResumeEndLoading extends  ResumeState {}
 class PreviewResumeError extends  ResumeState {
   String errorMessage;
   PreviewResumeError({required this.errorMessage});
+}class SkillLanguageResumeError extends  ResumeState {
+  String errorMessage;
+  SkillLanguageResumeError({required this.errorMessage});
 }
 
 class  PreviewResumeLoading extends  ResumeState {}
 
 class  PreviewResumeEndLoading extends  ResumeState {}
 
+class  SkillLanguageResumeLoading extends  ResumeState {}
+
+class  SkillLanguageResumeEndLoading extends  ResumeState {}
 class PreviewResumeSuccessState extends  ResumeState {
   PreViewResumeResponse isPreViewResumeResponse;
   PreviewResumeSuccessState({required this.isPreViewResumeResponse});

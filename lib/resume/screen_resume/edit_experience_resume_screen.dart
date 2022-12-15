@@ -33,7 +33,7 @@ class EditExperienceResumeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
         create: (context) =>
-            ResumeBloc()..add(GetEditScreenExperienceResumeEvent()),
+            ResumeBloc()..add(GetEditScreenExperienceResumeEvent(id:id)),
         // child: const GenerativeWidget());
         child:  EditExperienceResumePage(id:id));
   }
@@ -73,7 +73,7 @@ class _EditExperienceResumePageState extends State<EditExperienceResumePage>
     _isSessionUnauthorized();
     _isSessionPin();
     // localAuth(context);
-    context.read<ResumeBloc>().add(GetEditScreenExperienceResumeEvent());
+    context.read<ResumeBloc>().add(GetEditScreenExperienceResumeEvent(id:widget.id));
     super.initState();
   }
 
@@ -179,14 +179,14 @@ class _EditExperienceResumePageState extends State<EditExperienceResumePage>
           String? textStartDateEn =isGetExperienceResumeResponse?.body?.screeninfo?.startdateEn;
           String? textEndDateTh =isGetExperienceResumeResponse?.body?.screeninfo?.enddateTh;
           String? textEndDateEn =isGetExperienceResumeResponse?.body?.screeninfo?.enddateEn;
-          String? positionTh = isGetExperienceResumeResponse?.body?.data?[0].positionTh;
-          String? positionEn = isGetExperienceResumeResponse?.body?.data?[0].positionEn;
-          String? detailTh = isGetExperienceResumeResponse?.body?.data?[0].detailTh;
-          String? detailEn = isGetExperienceResumeResponse?.body?.data?[0].detailEn;
-          String? startDate = isGetExperienceResumeResponse?.body?.data?[0].startdate;
-          String? endDate = isGetExperienceResumeResponse?.body?.data?[0].enddate;
+          String? positionTh = isGetExperienceResumeResponse?.body?.data?.positionTh;
+          String? positionEn = isGetExperienceResumeResponse?.body?.data?.positionEn;
+          String? detailTh = isGetExperienceResumeResponse?.body?.data?.detailTh;
+          String? detailEn = isGetExperienceResumeResponse?.body?.data?.detailEn;
+          String? startDate = isGetExperienceResumeResponse?.body?.data?.startdate;
+          String? endDate = isGetExperienceResumeResponse?.body?.data?.enddate;
 
-          isSearchStatus = isGetExperienceResumeResponse?.body?.data?[0].orderchoose??0;
+          isSearchStatus = isGetExperienceResumeResponse?.body?.data?.orderchoose??0;
           return Scaffold(
             appBar: AppBar(
               backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
@@ -442,8 +442,8 @@ floatingSetThemePDF(
     foregroundColor: Colors.black,
     onPressed: () {
       context.read<ResumeBloc>().add(SentEditExperienceResumeEvent(
-          id: 1,
-          orderChoose: 22,
+          id: id,
+          orderChoose: orderChoose,
         positionTH :positionControllerTH ,
         positionEN : positionControllerEN ,
         detailTH :detailControllerTH ,
