@@ -1,6 +1,7 @@
 import 'package:ez_at_u/module/activity/model/response/activity_list_teacher_screen.dart';
 import 'package:ez_at_u/module/home/model/response/home_response/no_activity_teacher_response.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../../customs/color/color_const.dart';
 import '../../../../customs/message/text_home.dart';
 import '../../../../module/activity/model/response/screen_status_activity_response.dart';
@@ -110,11 +111,14 @@ homeTeacherBodyEmptyActivityWidget(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.running_with_errors_outlined,
-              color:Theme.of(context).bottomAppBarColor.withOpacity(0.8),
-              size: 100,
-            ),
+            FaIcon(FontAwesomeIcons.bars,
+              color:Theme.of(context).bottomAppBarColor.withOpacity(0.8)
+              ,size: 100,),
+            // Icon(
+            //   Icons.running_with_errors_outlined,
+            //   color:Theme.of(context).bottomAppBarColor.withOpacity(0.8),
+            //   size: 100,
+            // ),
             const SizedBox(
               height: 10,
             ),
@@ -132,14 +136,16 @@ homeTeacherBodyEmptyActivityWidget(
               height: 5,
             ),
             Text(NoActivityTeacherResponse?.body?.screeninfo?.subactlineone??subNoActivityLineOne,
+                textAlign: TextAlign.center,
                 style:  TextStyle(fontSize: 15, fontWeight: FontWeight.w500,
                   color:Theme.of(context).bottomAppBarColor.withOpacity(0.8),)),
             const SizedBox(
               height: 5,
             ),
-            Text(NoActivityTeacherResponse?.body?.screeninfo?.subactlinetwo??subNoActivityLineTwo,
-                style:  TextStyle(fontSize: 15, fontWeight: FontWeight.w500,
-                  color:Theme.of(context).bottomAppBarColor.withOpacity(0.8),)),
+            // Text(NoActivityTeacherResponse?.body?.screeninfo?.subactlinetwo??subNoActivityLineTwo,
+            //     textAlign: TextAlign.center,
+            //     style:  TextStyle(fontSize: 15, fontWeight: FontWeight.w500,
+            //       color:Theme.of(context).bottomAppBarColor.withOpacity(0.8),)),
             const SizedBox(
               height: 100,
             ),
