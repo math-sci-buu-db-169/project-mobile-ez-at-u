@@ -1,4 +1,4 @@
-import 'package:ez_at_u/resume/model/response/pre_view_resume_response.dart';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
@@ -9,17 +9,15 @@ import '../../../../../customs/message/text_button.dart';
 import '../../../../../customs/message/text_error.dart';
 import '../../../../../customs/progress_dialog.dart';
 import '../../../../../utils/shared_preferences.dart';
+import '../../customs/button/button_custom.dart';
 import '../../customs/color/color_const.dart';
 import '../../customs/datepicker/custom_date_picker_for_teacher.dart';
 import '../../customs/size/size.dart';
 import '../../customs/text_file/build_textformfiled_unlimit_custom.dart';
 import '../../module/login/screen/login_screen/login_screen.dart';
 import '../bloc_resume/resume_bloc.dart';
-import '../examples/content_design_resume.dart';
 import '../examples/content_design_resume_edit.dart';
-import '../model/response/get_about_me_resume_response.dart';
 import '../model/response/get_education_resume_response.dart';
-import '../model/response/get_user_infomartion_resume_response.dart';
 
 class EditEducationResumeScreen extends StatelessWidget {
   final int id;
@@ -110,10 +108,10 @@ class _EditEducationResumePageState extends State<EditEducationResumePage>
               state.isGetEducationResumeResponse;
           setState(() {
 
-            typeShow =isGetEducationResumeResponse?.body?.data?.type??'';
+            typeShow = "${isGetEducationResumeResponse?.body?.data?.typeTh ?? ''} \n${isGetEducationResumeResponse?.body?.data?.typeEn ?? ''}";
           });
         }
-        if (state is SentEditAboutMeResumeSuccessState) {
+        if (state is SentEditEducationResumeSuccessState) {
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
@@ -173,7 +171,9 @@ class _EditEducationResumePageState extends State<EditEducationResumePage>
           String? detailEn = isGetEducationResumeResponse?.body?.data?.detailEn;
           String? startDate = isGetEducationResumeResponse?.body?.data?.startdate;
           String? endDate = isGetEducationResumeResponse?.body?.data?.enddate;
-          String? type = isGetEducationResumeResponse?.body?.data?.type;
+          String? typeid = isGetEducationResumeResponse?.body?.data?.typeid;
+          String? typeTh = isGetEducationResumeResponse?.body?.data?.typeTh??'';
+          String? typeEn = isGetEducationResumeResponse?.body?.data?.typeEn??'';
 
           return Scaffold(
             appBar: AppBar(
@@ -277,20 +277,26 @@ class _EditEducationResumePageState extends State<EditEducationResumePage>
 
                             return  PopupMenuItem(
                               value: index,
-                              child: Text(isGetEducationResumeResponse?.body?.type?[index].typeEn ??'',style: TextStyle(fontSize:12,color: Theme.of(context).appBarTheme.foregroundColor),),
+                              child: Text(
+                                "${isGetEducationResumeResponse?.body?.type?[index].typeTh ?? ''} \n${isGetEducationResumeResponse?.body?.type?[index].typeEn ?? ''}",
+
+
+
+                                style: TextStyle(fontSize:12,color: Theme.of(context).appBarTheme.foregroundColor),),
                             );
 
                           }
                           );
                         },
                         onSelected: (value) {
-                          var isSearchStatus = 'bd';
 
                           setState(() {
 
                             typeStatus = isGetEducationResumeResponse?.body?.type?[value].typeid?? "bd";
                             typeController.text  = isGetEducationResumeResponse?.body?.type?[value].typeid?? "bd";
-                            typeShow = lengthPopupMenuItem[value] ;
+                            typeid  = isGetEducationResumeResponse?.body?.type?[value].typeid?? "bd";
+                            typeShow ="${isGetEducationResumeResponse?.body?.type?[value].typeTh ?? ''}"
+                                "\n${isGetEducationResumeResponse?.body?.type?[value].typeEn ?? ''}";
                           }
                           );
 
@@ -361,48 +367,131 @@ class _EditEducationResumePageState extends State<EditEducationResumePage>
                         textInputType: TextInputType.text,
                       ),
 
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+
+                          Container(
+
+                            width: widget.id >0 ? null:MediaQuery.of(context).size.width-50,
+                            child: ButtonIconsCustomLimit(
+                              label:  widget.id >0 ?
+                              isGetEducationResumeResponse?.body?.screeninfo?.editinfomations??"แก้ไขข้อมูล" :
+                              isGetEducationResumeResponse?.body?.screeninfo?.save??"บันทึก",
+                              buttonIcons: Icon(
+                                FontAwesomeIcons.paperPlane,
+                                color: Theme.of(context).iconTheme.color,
+                                size: 20.0,
+                              ),
+                              colortext: Theme.of(context).bottomAppBarColor,
+                              colorbutton:
+                              Theme.of(context).scaffoldBackgroundColor,
+                              sizetext: 14,
+                              colorborder: Theme.of(context).bottomAppBarColor.withOpacity(0.65),
+                              sizeborder: 3,
+                              onPressed: () {
+                                context.read<ResumeBloc>().add(SentEditEducationResumeEvent(
+                                  edit: true,
+                                  id:widget.id,
+                                  orderChoose:orderChoose,
+                                  startDate: (endDateController.text == ''
+                                      ? endDate
+                                      : endDateController.text) ??
+                                      '',
+                                  endDate: (endDateController.text == ''
+                                      ? endDate
+                                      : endDateController.text) ??
+                                      '',
+                                  type: typeid??widget.type,
+                                  placeOfStudy: (placeOfStudyControllerTH.text == ''
+                                      ? placeOfStudyTh
+                                      : placeOfStudyControllerTH.text) ??
+                                      '',
+                                  placeOfStudyEN:(placeOfStudyControllerEN.text == ''
+                                      ? placeOfStudyEn
+                                      : placeOfStudyControllerEN.text) ??
+                                      '',
+                                  detailTH:(detailControllerTH.text == ''
+                                      ?detailTh
+                                      : detailControllerTH.text) ??
+                                      '',
+                                  detailEN:(detailControllerTH.text == ''
+                                      ? detailEn
+                                      : detailControllerTH.text) ??
+                                      '',
+                                ));
+                              },
+                            ),
+                          )
+                          ,
+                          if(widget.id >0)
+                          Container(
+                            child: ButtonIconsCustomLimit(
+                              label:  isGetEducationResumeResponse?.body?.screeninfo?.deleteor??"Delete/ลบ",
+                              // label: "ดูทั้งหมด",
+                              buttonIcons: Icon(
+                                FontAwesomeIcons.trashCan,
+                                color:bcButtonDelete.withOpacity(0.8),
+                                size: 20.0,
+                              ),
+                              colortext:bcButtonDelete.withOpacity(0.8),
+                              colorbutton:
+                              Theme.of(context).scaffoldBackgroundColor,
+                              sizetext: 14,
+                              colorborder:bcButtonDelete.withOpacity(0.8),
+                              sizeborder: 3,
+                              onPressed: () {
+                                context.read<ResumeBloc>().add(SentEditEducationResumeEvent(
+                                  edit: false,
+                                  id:widget.id,
+                                  orderChoose:orderChoose,
+                                  startDate: (endDateController.text == ''
+                                      ? endDate
+                                      : endDateController.text) ??
+                                      '',
+                                  endDate: (endDateController.text == ''
+                                      ? endDate
+                                      : endDateController.text) ??
+                                      '',
+                                  type:(typeController.text == ''
+                                      ? typeid
+                                      : typeController.text) ??
+                                      '',
+                                  placeOfStudy: (placeOfStudyControllerTH.text == ''
+                                      ? placeOfStudyTh
+                                      : placeOfStudyControllerTH.text) ??
+                                      '',
+                                  placeOfStudyEN:(placeOfStudyControllerEN.text == ''
+                                      ? placeOfStudyEn
+                                      : placeOfStudyControllerEN.text) ??
+                                      '',
+                                  detailTH:(detailControllerTH.text == ''
+                                      ?detailTh
+                                      : detailControllerTH.text) ??
+                                      '',
+                                  detailEN:(detailControllerTH.text == ''
+                                      ? detailEn
+                                      : detailControllerTH.text) ??
+                                      '',
+                                ));
+                              },
+                            ),
+                          )
+                        ],
+                      ),
+
+                      const SizedBox(
+                        height: 150,
+                      ),
                     ],
                   ),
                 ),
               ),
             ),
-            floatingActionButton: floatingSetThemePDF(
-              context: context,
-              setState,
-              textSave ?? 'Save',
-              id:widget.id,
-              orderChoose:orderChoose,
-              startDate: (startDateController.text == ''
-                  ? startDate
-                  : startDateController.text) ??
-                  '',
-              endDate:  (endDateController.text == ''
-                  ? endDate
-                  : endDateController.text) ??
-                  '',
-              type:  (typeController.text == ''
-                  ? type
-                  : typeController.text) ??
-                  '',
-              placeOfStudy: (placeOfStudyControllerTH.text == ''
-                  ? placeOfStudyTh
-                  : placeOfStudyControllerTH.text) ??
-                  '',
-              placeOfStudyEN: (placeOfStudyControllerEN.text == ''
-                  ? placeOfStudyEn
-                  : placeOfStudyControllerEN.text) ??
-                  '',
-              detailTH: (detailControllerTH.text == ''
-                  ?detailTh
-                  : detailControllerTH.text) ??
-                  '',
-              detailEN: (detailControllerTH.text == ''
-                  ? detailEn
-                  : detailControllerTH.text) ??
-                  '',
-            ),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerFloat,
+
           );
         }
         return Container();
@@ -414,49 +503,3 @@ class _EditEducationResumePageState extends State<EditEducationResumePage>
   }
 }
 
-floatingSetThemePDF(
-  setState,
-  String pdf, {
-  required BuildContext context,
-  required int id,
-  required int orderChoose,
-  required String startDate,
-  required String endDate,
-  required String type,
-  required String placeOfStudy,
-  required String placeOfStudyEN,
-  required String detailTH,
-  required String detailEN,
-}) {return FloatingActionButton.extended(
-    backgroundColor:
-        Theme.of(context).appBarTheme.backgroundColor?.withOpacity(0.9),
-    foregroundColor: Colors.black,
-    onPressed: () {
-      context.read<ResumeBloc>().add(SentEditEducationResumeEvent(
-          id:id,
-          orderChoose:orderChoose,
-          startDate:startDate,
-          endDate:endDate,
-          type:type,
-          placeOfStudy:placeOfStudy,
-          placeOfStudyEN:placeOfStudyEN,
-          detailTH:detailTH,
-          detailEN:detailEN,
-          ));
-      // Navigator.push(
-      //     context,
-      //     MaterialPageRoute(
-      //         builder: (context) => const ContentDesignResumeScreen()));
-    },
-    icon: Icon(
-      FontAwesomeIcons.barsStaggered,
-      color: Theme.of(context).iconTheme.color,
-      size: 20.0,
-    ),
-    label: Text('   ${pdf ?? 'PDF'}',
-        style: TextStyle(
-          fontSize: sizeTextSmaller14,
-          color: Theme.of(context).iconTheme.color,
-        )),
-  );
-}

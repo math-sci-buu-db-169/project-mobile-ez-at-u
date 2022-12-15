@@ -95,8 +95,8 @@ class _EditPositionsResumePageState extends State<EditPositionsResumePage>
 
   TextEditingController positionControllerTH = TextEditingController();
   TextEditingController positionControllerEN = TextEditingController();
-  TextEditingController officeControllerTH = TextEditingController();
   TextEditingController officeControllerEN = TextEditingController();
+  TextEditingController officeControllerTH = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -230,9 +230,9 @@ class _EditPositionsResumePageState extends State<EditPositionsResumePage>
                       ),
                       BuildTextFormFieldUnLimitCustomNotIconsNotContainer(
                         textEditingController: officeControllerTH,
-                        onChanged: (valueNameControllerTH) {
+                        onChanged: (valueOfficeControllerTH) {
                           setState(() {
-                            officeControllerTH.text = valueNameControllerTH;
+                            officeControllerTH.text = valueOfficeControllerTH;
                           });
                           if (kDebugMode) {
                             print(officeControllerTH.text);
@@ -245,9 +245,9 @@ class _EditPositionsResumePageState extends State<EditPositionsResumePage>
 
                       BuildTextFormFieldUnLimitCustomNotIconsNotContainer(
                         textEditingController: officeControllerEN,
-                        onChanged: (valueNameControllerEN) {
+                        onChanged: (valueOfficeControllerEN) {
                           setState(() {
-                            officeControllerEN.text = valueNameControllerEN;
+                            officeControllerEN.text = valueOfficeControllerEN;
                           });
 
                           if (kDebugMode) {
@@ -278,7 +278,7 @@ class _EditPositionsResumePageState extends State<EditPositionsResumePage>
                   '',
               officeControllerTH: (officeControllerTH.text == ''
                       ? officeTh
-                      : positionControllerTH.text) ??
+                      : officeControllerTH.text) ??
                   '',
               officeControllerEN: (officeControllerEN.text == ''
                       ? officeEn

@@ -40,8 +40,8 @@ class GetEducationResumeResponse {
 }
 
 /// screeninfo : {"save":"บันทึก","editinfomations":"แก้ไขข้อมูล","startdate_th":"วันเริ่มต้น","enddate_th":"วันสิ้นสุด","startdate_en":"Start date","enddate_en":"End date","type_th":"ประเภทการศึกษา","type_en":"Education type","placeofstudy_th":"สถานศึกษา","placeofstudy_en":"Place name","detail_th":"รายละเอียด","detail_en":"Description","deleteor":"Delete/ลบ","delete":"ลบ"}
-/// data : {"id":1,"orderchoose":1,"startdate":"Jun 2015","enddate":"Jun 2018","type":"HSC","placeofstudy_th":"การศึกษาระดับมัธยมศึกษาตอนปลาย","placeofstudy_en":"High school education","detail_th":"วิทย์-คณิต โรงเรียนคำแสนวิทยาสรรค์","detail_en":"cience-mathematics Khamsaen Wittayasan School"}
-/// type : [{"typeid":"hsc       ","type_th":"High School Certificate","type_en":"ประกาศนียบัตรมัธยมศึกษาตอนปลาย"},{"typeid":"bd        ","type_th":"Bachelor Degrees","type_en":"ระดับปริญญาตรี"},{"typeid":"md        ","type_th":"Master Degrees","type_en":"ปริญญาโท    "},{"typeid":"dd        ","type_th":"Doctor Degrees","type_en":"ปริญญาเอก"},{"typeid":"hdd       ","type_th":"Honorary Doctorate Degree ","type_en":"ปริญญาดุษฎีบัณฑิตกิตติมศักดิ์"}]
+/// data : {"id":1,"orderchoose":1,"startdate":"string","enddate":"string","typeid":"HDD","type_th":"Honorary Doctorate Degree ","type_en":"ปริญญาดุษฎีบัณฑิตกิตติมศักดิ์","placeofstudy_th":"DD","placeofstudy_en":"DD2","detail_th":"DD3","detail_en":"DD3"}
+/// type : [{"typeid":"HSC","type_th":"High School Certificate","type_en":"ประกาศนียบัตรมัธยมศึกษาตอนปลาย"},{"typeid":"DB","type_th":"Bachelor Degrees","type_en":"ระดับปริญญาตรี"},{"typeid":"MD","type_th":"Master Degrees","type_en":"ปริญญาโท    "},{"typeid":"DD","type_th":"Doctor Degrees","type_en":"ปริญญาเอก"},{"typeid":"HDD","type_th":"Honorary Doctorate Degree ","type_en":"ปริญญาดุษฎีบัณฑิตกิตติมศักดิ์"}]
 
 Body bodyFromJson(String str) => Body.fromJson(json.decode(str));
 String bodyToJson(Body data) => json.encode(data.toJson());
@@ -95,7 +95,7 @@ class Body {
 
 }
 
-/// typeid : "hsc       "
+/// typeid : "HSC"
 /// type_th : "High School Certificate"
 /// type_en : "ประกาศนียบัตรมัธยมศึกษาตอนปลาย"
 
@@ -142,13 +142,15 @@ class Type {
 
 /// id : 1
 /// orderchoose : 1
-/// startdate : "Jun 2015"
-/// enddate : "Jun 2018"
-/// type : "HSC"
-/// placeofstudy_th : "การศึกษาระดับมัธยมศึกษาตอนปลาย"
-/// placeofstudy_en : "High school education"
-/// detail_th : "วิทย์-คณิต โรงเรียนคำแสนวิทยาสรรค์"
-/// detail_en : "cience-mathematics Khamsaen Wittayasan School"
+/// startdate : "string"
+/// enddate : "string"
+/// typeid : "HDD"
+/// type_th : "Honorary Doctorate Degree "
+/// type_en : "ปริญญาดุษฎีบัณฑิตกิตติมศักดิ์"
+/// placeofstudy_th : "DD"
+/// placeofstudy_en : "DD2"
+/// detail_th : "DD3"
+/// detail_en : "DD3"
 
 Data dataFromJson(String str) => Data.fromJson(json.decode(str));
 String dataToJson(Data data) => json.encode(data.toJson());
@@ -158,7 +160,9 @@ class Data {
     int? orderchoose,
     String? startdate,
     String? enddate,
-    String? type,
+    String? typeid,
+    String? typeTh,
+    String? typeEn,
     String? placeofstudyTh,
     String? placeofstudyEn,
     String? detailTh,
@@ -167,7 +171,9 @@ class Data {
     _orderchoose = orderchoose;
     _startdate = startdate;
     _enddate = enddate;
-    _type = type;
+    _typeid = typeid;
+    _typeTh = typeTh;
+    _typeEn = typeEn;
     _placeofstudyTh = placeofstudyTh;
     _placeofstudyEn = placeofstudyEn;
     _detailTh = detailTh;
@@ -179,7 +185,9 @@ class Data {
     _orderchoose = json['orderchoose'];
     _startdate = json['startdate'];
     _enddate = json['enddate'];
-    _type = json['type'];
+    _typeid = json['typeid'];
+    _typeTh = json['type_th'];
+    _typeEn = json['type_en'];
     _placeofstudyTh = json['placeofstudy_th'];
     _placeofstudyEn = json['placeofstudy_en'];
     _detailTh = json['detail_th'];
@@ -189,7 +197,9 @@ class Data {
   int? _orderchoose;
   String? _startdate;
   String? _enddate;
-  String? _type;
+  String? _typeid;
+  String? _typeTh;
+  String? _typeEn;
   String? _placeofstudyTh;
   String? _placeofstudyEn;
   String? _detailTh;
@@ -198,7 +208,9 @@ class Data {
     int? orderchoose,
     String? startdate,
     String? enddate,
-    String? type,
+    String? typeid,
+    String? typeTh,
+    String? typeEn,
     String? placeofstudyTh,
     String? placeofstudyEn,
     String? detailTh,
@@ -207,7 +219,9 @@ class Data {
     orderchoose: orderchoose ?? _orderchoose,
     startdate: startdate ?? _startdate,
     enddate: enddate ?? _enddate,
-    type: type ?? _type,
+    typeid: typeid ?? _typeid,
+    typeTh: typeTh ?? _typeTh,
+    typeEn: typeEn ?? _typeEn,
     placeofstudyTh: placeofstudyTh ?? _placeofstudyTh,
     placeofstudyEn: placeofstudyEn ?? _placeofstudyEn,
     detailTh: detailTh ?? _detailTh,
@@ -217,7 +231,9 @@ class Data {
   int? get orderchoose => _orderchoose;
   String? get startdate => _startdate;
   String? get enddate => _enddate;
-  String? get type => _type;
+  String? get typeid => _typeid;
+  String? get typeTh => _typeTh;
+  String? get typeEn => _typeEn;
   String? get placeofstudyTh => _placeofstudyTh;
   String? get placeofstudyEn => _placeofstudyEn;
   String? get detailTh => _detailTh;
@@ -229,7 +245,9 @@ class Data {
     map['orderchoose'] = _orderchoose;
     map['startdate'] = _startdate;
     map['enddate'] = _enddate;
-    map['type'] = _type;
+    map['typeid'] = _typeid;
+    map['type_th'] = _typeTh;
+    map['type_en'] = _typeEn;
     map['placeofstudy_th'] = _placeofstudyTh;
     map['placeofstudy_en'] = _placeofstudyEn;
     map['detail_th'] = _detailTh;

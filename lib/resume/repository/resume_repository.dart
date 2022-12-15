@@ -75,10 +75,15 @@ print("sentEditUserInfoResume");
     return await MyDio.createDioServer().post("/api/Resume/editpositionresume",
         data: jsonEncode({
 
+          "edit": true,
+            "id": 0,
+            "orderchoose": 0,
             "position_th": positionTH,
             "position_en": positionEN,
             "office_th": officeTH,
-            "office_en":officeEN
+            "office_en":officeEN,
+            "detail_th": "string",
+             "detail_en": "string"
 
         })
     );
@@ -141,6 +146,7 @@ print("sentEditUserInfoResume");
         })
     );
   }Future<Response> sentEditCertificateResume({
+    required bool edit,
     required int id,
     required int orderChoose,
     required String title,
@@ -149,7 +155,7 @@ print("sentEditUserInfoResume");
     required String descriptionEN}) async {
     return await MyDio.createDioServer().post("/api/Resume/editcertificateresume",
         data: jsonEncode({
-          "edit": true,
+          "edit": edit,
           "id": id ,
           "orderchoose": orderChoose,
           "title_th": title,
@@ -160,6 +166,7 @@ print("sentEditUserInfoResume");
         })
     );
   }Future<Response> sentEditSkillResume({
+    required bool edit,
     required int id,
     required int orderChoose,
     required String skill,
@@ -170,7 +177,7 @@ print("sentEditUserInfoResume");
     return await MyDio.createDioServer().post("/api/Resume/editskillresume",
         data: jsonEncode({
 
-          "edit": true,
+          "edit": edit,
           "id": id,
           "orderchoose": orderChoose,
           "value": value,
@@ -182,6 +189,7 @@ print("sentEditUserInfoResume");
         })
     );
   }Future<Response> sentEditSkillLanguageResume({
+    required bool edit,
     required int id,
     required int orderChoose,
     required String language,
@@ -192,7 +200,7 @@ print("sentEditUserInfoResume");
     return await MyDio.createDioServer().post("/api/Resume/editskilllanguageresume",
         data: jsonEncode({
 
-          "edit": true,
+          "edit": edit,
           "id": id,
           "orderchoose": orderChoose,
           "value": value,
@@ -204,6 +212,7 @@ print("sentEditUserInfoResume");
         })
     );
   }Future<Response> sentEditExperienceResume({
+    required bool edit,
     required int id,
     required int orderChoose,
     required String startDate,
@@ -215,7 +224,7 @@ print("sentEditUserInfoResume");
     return await MyDio.createDioServer().post("/api/Resume/editexperienceresume",
         data: jsonEncode({
 
-          "edit": true,
+          "edit": edit,
           "id": id,
           "orderchoose": orderChoose,
           "startdate": startDate,
@@ -227,7 +236,9 @@ print("sentEditUserInfoResume");
 
         })
     );
-  }Future<Response> sentEditEducationResume({
+  }
+  Future<Response> sentEditEducationResume({
+    required bool edit,
     required int id,
     required int orderChoose,
     required String startDate,
@@ -240,7 +251,7 @@ print("sentEditUserInfoResume");
     return await MyDio.createDioServer().post("/api/Resume/editeducationresume",
         data: jsonEncode({
 
-          "edit": true,
+          "edit": edit,
           "id": id,
           "orderchoose": orderChoose,
           "startdate": startDate,
@@ -253,7 +264,10 @@ print("sentEditUserInfoResume");
 
         })
     );
-  }Future<Response> sentScreenAboutResume() async {
+  }
+
+
+  Future<Response> sentScreenAboutResume() async {
     prefs = await SharedPreferences.getInstance();
     String? userLanguage = prefs.getString('userLanguageResume');
 

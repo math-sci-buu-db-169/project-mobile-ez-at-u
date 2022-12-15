@@ -8,6 +8,8 @@ import '../../../../../customs/message/text_button.dart';
 import '../../../../../customs/message/text_error.dart';
 import '../../../../../customs/progress_dialog.dart';
 import '../../../../../utils/shared_preferences.dart';
+import '../../customs/button/button_custom.dart';
+import '../../customs/color/color_const.dart';
 import '../../customs/size/size.dart';
 import '../../customs/text_file/build_textformfiled_unlimit_custom.dart';
 import '../../module/login/screen/login_screen/login_screen.dart';
@@ -95,7 +97,10 @@ class _EditCertificateResumePageState extends State<EditCertificateResumePage>
         if (state is GetEditScreenCertificateResumeSuccessState) {
           isGetCertificateResumeResponse =
               state.isGetCertificateResumeResponse;
-          setState(() {});
+          setState(() {
+
+            searchStatus = isGetCertificateResumeResponse?.body?.data?.orderchoose??0 ;
+          });
         }
         if (state is SentEditCertificateResumeSuccessState) {
           Navigator.pushReplacement(
@@ -208,7 +213,8 @@ class _EditCertificateResumePageState extends State<EditCertificateResumePage>
                                       searchStatus == 0?
                                       isSearchStatus == 0?
                                       "โปรดเลือกลำดับการแสดง":
-                                      "$isSearchStatus":"$searchStatus",
+                                      "การแสดงอันดับที่  $isSearchStatus"
+                                          :"การแสดงอันดับที่  $searchStatus",
                                       style: TextStyle(
                                         // decoration: TextDecoration.underline,
                                           decorationThickness: 2,
@@ -319,37 +325,112 @@ class _EditCertificateResumePageState extends State<EditCertificateResumePage>
                       ),
 
 
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+
+                          Container(
+
+                            width: widget.id >0 ? null:MediaQuery.of(context).size.width-50,
+                            child: ButtonIconsCustomLimit(
+                              label:  widget.id >0 ?
+                              isGetCertificateResumeResponse?.body?.screeninfo?.editinfomations??"แก้ไขข้อมูล" :
+                              isGetCertificateResumeResponse?.body?.screeninfo?.save??"บันทึก",
+
+                              buttonIcons: Icon(
+                                FontAwesomeIcons.paperPlane,
+                                color: Theme.of(context).iconTheme.color,
+                                size: 20.0,
+                              ),
+                              colortext: Theme.of(context).bottomAppBarColor,
+                              colorbutton:
+                              Theme.of(context).scaffoldBackgroundColor,
+                              sizetext: 14,
+                              colorborder: Theme.of(context).bottomAppBarColor.withOpacity(0.65),
+                              sizeborder: 3,
+                              onPressed: () {
+                                context.read<ResumeBloc>().add(SentEditCertificateResumeEvent(
+                                  edit: true,
+                                  id:widget.id,
+                                  orderChoose: searchStatus,
+                                  titleTH :(titleControllerTH.text == ''
+                                      ? titleTh
+                                      : titleControllerTH.text) ??
+                                      '',
+                                  titleEN : (titleControllerEN.text == ''
+                                      ? titleEn
+                                      : titleControllerEN.text) ??
+                                      '' ,
+                                  detailTH :(detailControllerTH.text == ''
+                                      ? detailTh
+                                      : detailControllerTH.text) ??
+                                      '' ,
+                                  detailEN : (detailControllerEN.text == ''
+                                      ? detailEn
+                                      : detailControllerEN.text) ??
+                                      '' ,
+                                ));
+                              },
+                            ),
+                          )
+                          ,
+                          if(widget.id >0)
+                          Container(
+                            child: ButtonIconsCustomLimit(
+                              label:  isGetCertificateResumeResponse?.body?.screeninfo?.deleteor??"Delete/ลบ",
+                              // label: "ดูทั้งหมด",
+                              buttonIcons: Icon(
+                                FontAwesomeIcons.trashCan,
+                                color:bcButtonDelete.withOpacity(0.8),
+                                size: 20.0,
+                              ),
+                              colortext:bcButtonDelete.withOpacity(0.8),
+                              colorbutton:
+                              Theme.of(context).scaffoldBackgroundColor,
+                              sizetext: 14,
+                              colorborder:bcButtonDelete.withOpacity(0.8),
+                              sizeborder: 3,
+                              onPressed: () {
+                                context.read<ResumeBloc>().add(SentEditCertificateResumeEvent(
+                                  edit: false,
+                                  id:widget.id,
+                                  orderChoose: searchStatus,
+                                  titleTH :(titleControllerTH.text == ''
+                                      ? titleTh
+                                      : titleControllerTH.text) ??
+                                      '',
+                                  titleEN : (titleControllerEN.text == ''
+                                      ? titleEn
+                                      : titleControllerEN.text) ??
+                                      '' ,
+                                  detailTH :(detailControllerTH.text == ''
+                                      ? detailTh
+                                      : detailControllerTH.text) ??
+                                      '' ,
+                                  detailEN : (detailControllerEN.text == ''
+                                      ? detailEn
+                                      : detailControllerEN.text) ??
+                                      '' ,
+                                ));
+                              },
+                            ),
+                          )
+                        ],
+                      ),
+
+                      const SizedBox(
+                        height: 150,
+                      ),
 
                     ],
                   ),
                 ),
               ),
             ),
-            floatingActionButton: floatingSetThemePDF(
-              context: context,
-              setState,
-              textSave ?? 'Save',
-              id: widget.id,
-              orderChoose: searchStatus,
-              titleControllerTH: (titleControllerTH.text == ''
-                  ? titleTh
-                  : titleControllerTH.text) ??
-                  '',
-              titleControllerEN: (titleControllerEN.text == ''
-                  ? titleEn
-                  : titleControllerEN.text) ??
-                  '',
-              detailControllerTH: (detailControllerTH.text == ''
-                  ? detailTh
-                  : detailControllerTH.text) ??
-                  '',
-              detailControllerEN: (detailControllerEN.text == ''
-                  ? detailEn
-                  : detailControllerEN.text) ??
-                  '',
-            ),
-            floatingActionButtonLocation:
-            FloatingActionButtonLocation.centerFloat,
+
           );
         }
         return Container();
@@ -359,49 +440,4 @@ class _EditCertificateResumePageState extends State<EditCertificateResumePage>
       },
     );
   }
-}
-
-floatingSetThemePDF(
-    setState,
-    String pdf, {
-      required BuildContext context,
-      required int id ,
-      required int orderChoose ,
-      required String titleControllerTH ,
-      required String titleControllerEN ,
-      required String detailControllerTH ,
-      required String detailControllerEN ,
-
-    }) {return FloatingActionButton.extended(
-  backgroundColor:
-  Theme.of(context).appBarTheme.backgroundColor?.withOpacity(0.9),
-  foregroundColor: Colors.black,
-  onPressed: () {
-    context.read<ResumeBloc>().add(SentEditCertificateResumeEvent(
-      id: id,
-      orderChoose: orderChoose,
-      titleTH :titleControllerTH ,
-      titleEN : titleControllerEN ,
-      detailTH :detailControllerTH ,
-      detailEN :detailControllerEN ,
-
-
-
-    ));
-    // Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //         builder: (context) => const ContentDesignResumeScreen()));
-  },
-  icon: Icon(
-    FontAwesomeIcons.barsStaggered,
-    color: Theme.of(context).iconTheme.color,
-    size: 20.0,
-  ),
-  label: Text('   ${pdf ?? 'PDF'}',
-      style: TextStyle(
-        fontSize: sizeTextSmaller14,
-        color: Theme.of(context).iconTheme.color,
-      )),
-);
 }
