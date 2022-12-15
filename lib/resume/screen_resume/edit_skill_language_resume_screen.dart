@@ -9,6 +9,8 @@ import '../../../../../customs/message/text_button.dart';
 import '../../../../../customs/message/text_error.dart';
 import '../../../../../customs/progress_dialog.dart';
 import '../../../../../utils/shared_preferences.dart';
+import '../../customs/button/button_custom.dart';
+import '../../customs/color/color_const.dart';
 import '../../customs/size/size.dart';
 import '../../customs/text_file/build_textformfiled_unlimit_custom.dart';
 import '../../module/login/screen/login_screen/login_screen.dart';
@@ -107,6 +109,7 @@ class _EditSkillLanguageResumePageState
               state.isGetSkillLanguageResumeResponse;
           setState(() {
             widgetPointerValue = double.parse(isGetSkillLanguageResumeResponse?.body?.data?.value??'50') ;
+            searchStatus = isGetSkillLanguageResumeResponse?.body?.data?.orderchoose??0 ;
 
           });
         }
@@ -236,8 +239,8 @@ class _EditSkillLanguageResumePageState
                                         searchStatus == 0
                                             ? isSearchStatus == 0
                                                 ? "โปรดเลือกลำดับการแสดง"
-                                                : "$isSearchStatus"
-                                            : "$searchStatus",
+                                                : "การแสดงอันดับที่ $isSearchStatus"
+                                            : "การแสดงอันดับที่ $searchStatus",
                                         style: TextStyle(
                                             // decoration: TextDecoration.underline,
                                             decorationThickness: 2,
@@ -407,37 +410,112 @@ class _EditSkillLanguageResumePageState
                         ],
                       ),
                       SizedBox(height: 10,),
-                      Text(textValue),
+                      Text(textValue),    const SizedBox(
+                        height: 50,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+
+                          Container(
+
+                            width: widget.id >0 ? null:MediaQuery.of(context).size.width-50,
+                            child: ButtonIconsCustomLimit(
+                              label:  widget.id >0 ?
+                              isGetSkillLanguageResumeResponse?.body?.screeninfo?.editinfomations??"แก้ไขข้อมูล" :
+                              isGetSkillLanguageResumeResponse?.body?.screeninfo?.save??"บันทึก",
+                              buttonIcons: Icon(
+                                FontAwesomeIcons.paperPlane,
+                                color: Theme.of(context).iconTheme.color,
+                                size: 20.0,
+                              ),
+                              colortext: Theme.of(context).bottomAppBarColor,
+                              colorbutton:
+                              Theme.of(context).scaffoldBackgroundColor,
+                              sizetext: 14,
+                              colorborder: Theme.of(context).bottomAppBarColor.withOpacity(0.65),
+                              sizeborder: 3,
+                              onPressed: () {
+                                context.read<ResumeBloc>().add(SentEditSkillLanguageResumeEvent(
+                                  edit: true,
+                                  id:widget.id,
+                                  orderChoose: searchStatus,
+                                  languageTH:  (languageControllerTH.text == ''
+                                      ? languageTh
+                                      : languageControllerTH.text) ??
+                                      '',
+                                  languageEN:   (languageControllerEN.text == ''
+                                      ? languageEn
+                                      : languageControllerEN.text) ??
+                                      '',
+                                  detailTH:  (detailControllerTH.text == ''
+                                      ? detailTh
+                                      : detailControllerTH.text) ??
+                                      '',
+                                  detailEN: (detailControllerEN.text == ''
+                                      ? detailEn
+                                      : detailControllerEN.text) ??
+                                      '',
+                                  valueLanguage:widgetPointerValue.toStringAsFixed(0),
+                                ));
+                              },
+                            ),
+                          )
+                          ,
+                          if(widget.id >0)
+                            Container(
+                              child: ButtonIconsCustomLimit(
+                                label: isGetSkillLanguageResumeResponse?.body?.screeninfo?.deleteor??" Delete/ลบ",
+                                buttonIcons: Icon(
+                                  FontAwesomeIcons.trashCan,
+                                  color:bcButtonDelete.withOpacity(0.8),
+                                  size: 20.0,
+                                ),
+                                colortext:bcButtonDelete.withOpacity(0.8),
+                                colorbutton:
+                                Theme.of(context).scaffoldBackgroundColor,
+                                sizetext: 14,
+                                colorborder:bcButtonDelete.withOpacity(0.8),
+                                sizeborder: 3,
+                                onPressed: () {
+                                  context.read<ResumeBloc>().add(SentEditSkillLanguageResumeEvent(
+                                    edit: true,
+                                    id:widget.id,
+                                    orderChoose: searchStatus,
+                                    languageTH:  (languageControllerTH.text == ''
+                                        ? languageTh
+                                        : languageControllerTH.text) ??
+                                        '',
+                                    languageEN:   (languageControllerEN.text == ''
+                                        ? languageEn
+                                        : languageControllerEN.text) ??
+                                        '',
+                                    detailTH:  (detailControllerTH.text == ''
+                                        ? detailTh
+                                        : detailControllerTH.text) ??
+                                        '',
+                                    detailEN: (detailControllerEN.text == ''
+                                        ? detailEn
+                                        : detailControllerEN.text) ??
+                                        '',
+                                    valueLanguage:widgetPointerValue.toStringAsFixed(0),
+                                  ));
+                                },
+                              ),
+                            )
+                        ],
+                      ),
+
+                      const SizedBox(
+                        height: 150,
+                      ),
+
                     ],
                   ),
                 ),
               ),
             ),
-            floatingActionButton: floatingSetThemePDF(
-              context: context,
-              setState,
-              textSave ?? 'Save',
-              id: widget.id,
-              orderChoose: searchStatus,
-              languageControllerTH: (languageControllerTH.text == ''
-                      ? languageTh
-                      : languageControllerTH.text) ??
-                  '',
-              languageControllerEN: (languageControllerEN.text == ''
-                      ? languageEn
-                      : languageControllerEN.text) ??
-                  '',
-              detailControllerTH: (detailControllerTH.text == ''
-                      ? detailTh
-                      : detailControllerTH.text) ??
-                  '',
-              detailControllerEN: (detailControllerEN.text == ''
-                      ? detailEn
-                      : detailControllerEN.text) ??
-                  '', widgetPointerValue:widgetPointerValue.toStringAsFixed(0),
-            ),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerFloat,
+
           );
         }
         return Container();
@@ -447,48 +525,4 @@ class _EditSkillLanguageResumePageState
       },
     );
   }
-}
-
-floatingSetThemePDF(
-  setState,
-  String pdf, {
-  required BuildContext context,
-  required int id,
-  required int orderChoose,
-  required String languageControllerTH,
-  required String languageControllerEN,
-  required String detailControllerTH,
-  required String detailControllerEN,
-  required String widgetPointerValue,
-}) {
-  return FloatingActionButton.extended(
-    backgroundColor:
-        Theme.of(context).appBarTheme.backgroundColor?.withOpacity(0.9),
-    foregroundColor: Colors.black,
-    onPressed: () {
-      context.read<ResumeBloc>().add(SentEditSkillLanguageResumeEvent(
-            id: id,
-            orderChoose: orderChoose,
-            languageTH: languageControllerTH,
-            languageEN: languageControllerEN,
-            detailTH: detailControllerTH,
-            detailEN: detailControllerEN,
-        valueLanguage: widgetPointerValue,
-          ));
-      // Navigator.push(
-      //     context,
-      //     MaterialPageRoute(
-      //         builder: (context) => const ContentDesignResumeScreen()));
-    },
-    icon: Icon(
-      FontAwesomeIcons.barsStaggered,
-      color: Theme.of(context).iconTheme.color,
-      size: 20.0,
-    ),
-    label: Text('   ${pdf ?? 'PDF'}',
-        style: TextStyle(
-          fontSize: sizeTextSmaller14,
-          color: Theme.of(context).iconTheme.color,
-        )),
-  );
 }

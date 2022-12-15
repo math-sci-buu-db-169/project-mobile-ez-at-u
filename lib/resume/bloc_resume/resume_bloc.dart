@@ -241,6 +241,38 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
       // emit(ChangPhotoResumeSuccess(avatarImage: imageCroppedTemp,base64img: base64Image));
     });
 
+    on<EditChangePhotoRequest>((event, emit) async {
+      if (kDebugMode) {
+        print('Change avatar 999');
+      }
+      final image = await ImagePicker()
+          .pickImage(source: ImageSource.gallery, imageQuality: 100);
+      if (image == null) return;
+      final imageTemp = image.path;
+      final cropImage = await ImageCropper().cropImage(sourcePath: imageTemp);
+      if (cropImage == null) return;
+      final imageCroppedTemp = File(cropImage.path);
+      final bytes = File(cropImage.path).readAsBytesSync();
+      String base64Image = base64Encode(bytes);
+      log("img_pan : $base64Image");
+      emit(EditPreviewResumeLoading());
+      print("CheckProfile 66 == ChangePhotoRequest");
+      await setResumePhoto(resumePhoto: base64Image ?? '');
+      await checkPreviewResumeEventInitial(event, emit);
+      Response responseBase64Img =
+      await sentResumeImage(base64Image: base64Image);
+      emit(EditPreviewResumeEndLoading());
+      if (responseBase64Img.statusCode == 200) {
+        ImageUpLoadResumeResponse imageUpLoadResumeResponse =
+        ImageUpLoadResumeResponse.fromJson(responseBase64Img.data);
+        if (imageUpLoadResumeResponse.head?.status == 200) {
+          emit(EditChooseImageUpLoadResumeSuccess(
+              avatarImage: imageCroppedTemp, base64img: base64Image));
+        }
+      }
+
+      // emit(ChangPhotoResumeSuccess(avatarImage: imageCroppedTemp,base64img: base64Image));
+    });
     on<ResumeInnitEvent>((event, emit) async {
       prefs = await SharedPreferences.getInstance();
       var isPhotoResume = prefs.getString('ResumePhoto') ?? '';
@@ -274,38 +306,6 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
         emit(EditPreviewResumeError(
             errorMessage: e.response?.statusMessage ?? ""));
       }
-    });
-    on<EditChangePhotoRequest>((event, emit) async {
-      if (kDebugMode) {
-        print('Change avatar 999');
-      }
-      final image = await ImagePicker()
-          .pickImage(source: ImageSource.gallery, imageQuality: 100);
-      if (image == null) return;
-      final imageTemp = image.path;
-      final cropImage = await ImageCropper().cropImage(sourcePath: imageTemp);
-      if (cropImage == null) return;
-      final imageCroppedTemp = File(cropImage.path);
-      final bytes = File(cropImage.path).readAsBytesSync();
-      String base64Image = base64Encode(bytes);
-      log("img_pan : $base64Image");
-      emit(EditPreviewResumeLoading());
-      print("CheckProfile 66 == ChangePhotoRequest");
-      await setResumePhoto(resumePhoto: base64Image ?? '');
-      await checkPreviewResumeEventInitial(event, emit);
-      Response responseBase64Img =
-          await sentResumeImage(base64Image: base64Image);
-      emit(EditPreviewResumeEndLoading());
-      if (responseBase64Img.statusCode == 200) {
-        ImageUpLoadResumeResponse imageUpLoadResumeResponse =
-            ImageUpLoadResumeResponse.fromJson(responseBase64Img.data);
-        if (imageUpLoadResumeResponse.head?.status == 200) {
-          emit(EditChooseImageUpLoadResumeSuccess(
-              avatarImage: imageCroppedTemp, base64img: base64Image));
-        }
-      }
-
-      // emit(ChangPhotoResumeSuccess(avatarImage: imageCroppedTemp,base64img: base64Image));
     });
     on<EditChangeLanguageResumeRequest>((event, emit) async {
       try {
@@ -567,34 +567,40 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
             errorMessage: e.response?.statusMessage ?? ""));
       }
     });
-    // on<SentEditEducationResumeEvent>((event, emit) async {
-    //   try {
-    //     print("CheckProfile 5 == ProfileApiEvent");
-    //
-    //     await checkPreviewResumeEventInitial(event, emit);
-    //     Response responseSentEditPositionsResume = await sentEditPositionResume(
-    //         positionTH: event.positionControllerTH,
-    //         positionEN: event.positionControllerEN,
-    //        officeTH: event.officeControllerTH,
-    //         officeEN: event.officeControllerEN,
-    //     );
-    //     if (responseSentEditPositionsResume.statusCode == 200) {
-    //       ApiEditResumeResponseHead sentEditAboutResumeResponse =
-    //       ApiEditResumeResponseHead.fromJson(responseSentEditPositionsResume.data);
-    //       if (sentEditAboutResumeResponse.head?.status == 200) {
-    //         emit(SentEditPositionResumeSuccessState(apiEditResumeResponseHead: sentEditAboutResumeResponse));
-    //       } else {
-    //         emit(PreviewResumeError(
-    //             errorMessage: sentEditAboutResumeResponse.head?.message ?? ""));
-    //       }
-    //     } else {
-    //       emit(PreviewResumeError(
-    //           errorMessage: responseSentEditPositionsResume.statusMessage ?? ""));
-    //     }
-    //   } on DioError catch (e) {
-    //     emit(PreviewResumeError(errorMessage: e.response?.statusMessage ?? ""));
-    //   }
-    // });
+    on<SentEditEducationResumeEvent>((event, emit) async {
+      try {
+        print("CheckProfile 5 == ProfileApiEvent");
+
+        await checkPreviewResumeEventInitial(event, emit);
+        Response responseSentEditEducationResume = await sentEditEducationResume(
+            edit:event.edit,
+            id:event.id,
+            orderChoose:event. orderChoose,
+            startDate:event.startDate,
+            endDate:event.endDate,
+            type:event.type,
+            placeOfStudy:event.placeOfStudy,
+            placeOfStudyEN:event.placeOfStudyEN,
+            detailTH:event.detailTH,
+            detailEN:event.detailEN,
+        );
+        if (responseSentEditEducationResume.statusCode == 200) {
+          ApiEditResumeResponseHead sentEditAboutResumeResponse =
+          ApiEditResumeResponseHead.fromJson(responseSentEditEducationResume.data);
+          if (sentEditAboutResumeResponse.head?.status == 200) {
+            emit(SentEditEducationResumeSuccessState(apiEditResumeResponseHead: sentEditAboutResumeResponse));
+          } else {
+            emit(PreviewResumeError(
+                errorMessage: sentEditAboutResumeResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(PreviewResumeError(
+              errorMessage: responseSentEditEducationResume.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(PreviewResumeError(errorMessage: e.response?.statusMessage ?? ""));
+      }
+    });
 
 
     on<SentEditContactResumeEvent>((event, emit) async {
@@ -634,6 +640,7 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
 
         await checkPreviewResumeEventInitial(event, emit);
         Response responseSentEditPositionsResume = await sentEditExperienceResume(
+          edit: event.edit,
           id: event.id,
           orderChoose: event.orderChoose,
           startDate: event.startDate,
@@ -718,13 +725,13 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
             errorMessage: e.response?.statusMessage ?? ""));
       }
     });
-
     on<SentEditCertificateResumeEvent>((event, emit) async {
       try {
         print("CheckProfile 5 == ProfileApiEvent");
 
         await checkPreviewResumeEventInitial(event, emit);
         Response responseSentEditCertificateResume = await sentEditCertificateResume(
+          edit: event.edit,
           id: event.id,
           orderChoose: event.orderChoose,
           title: event.titleTH,
@@ -749,13 +756,13 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
         emit(PreviewResumeError(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
-
     on<SentEditSkillLanguageResumeEvent>((event, emit) async {
       try {
         print("CheckProfile 5 == ProfileApiEvent");
 
         await checkPreviewResumeEventInitial(event, emit);
         Response responseSentEditSkillLanguageResume = await sentEditSkillLanguageResume(
+          edit: event.edit,
           id: event.id,
           orderChoose: event.orderChoose,
           language: event.languageTH,
@@ -781,13 +788,13 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
         emit(PreviewResumeError(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
-
     on<SentEditSkillResumeEvent>((event, emit) async {
       try {
         print("CheckProfile 5 == ProfileApiEvent");
 
         await checkPreviewResumeEventInitial(event, emit);
         Response responseSentEditSkillResume = await sentEditSkillResume(
+          edit: event.edit,
           id: event.id,
           orderChoose: event.orderChoose,
           skill: event.skillTH,

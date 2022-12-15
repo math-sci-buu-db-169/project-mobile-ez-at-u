@@ -26,6 +26,7 @@ const tcButtonTextRed = Color(0xFFFF8F8F);
 const tcButtonTextBoarder = Color(0xFF4F4F4F);
 const tcButtonTextRedBoarder = Color(0xFFFCA6A6);
 const bcButtonLogout = Color(0xFFFA6C6C);
+const bcButtonDelete = Color(0xFFFA6C6C);
 const bscBlack = Color(0xFF6F6C7A);
 const bscTransparent = Color(0x00000000);
 const tcTextfile = Color(0xFFFFFFFF);

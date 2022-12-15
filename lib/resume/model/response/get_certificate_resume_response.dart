@@ -6,11 +6,11 @@ GetCertificateResumeResponse getCertificateResumeResponseFromJson(String str) =>
 String getCertificateResumeResponseToJson(GetCertificateResumeResponse data) => json.encode(data.toJson());
 class GetCertificateResumeResponse {
   GetCertificateResumeResponse({
-      Head? head, 
-      Body? body,}){
+    Head? head,
+    Body? body,}){
     _head = head;
     _body = body;
-}
+  }
 
   GetCertificateResumeResponse.fromJson(dynamic json) {
     _head = json['head'] != null ? Head.fromJson(json['head']) : null;
@@ -18,11 +18,11 @@ class GetCertificateResumeResponse {
   }
   Head? _head;
   Body? _body;
-GetCertificateResumeResponse copyWith({  Head? head,
-  Body? body,
-}) => GetCertificateResumeResponse(  head: head ?? _head,
-  body: body ?? _body,
-);
+  GetCertificateResumeResponse copyWith({  Head? head,
+    Body? body,
+  }) => GetCertificateResumeResponse(  head: head ?? _head,
+    body: body ?? _body,
+  );
   Head? get head => _head;
   Body? get body => _body;
 
@@ -46,11 +46,11 @@ Body bodyFromJson(String str) => Body.fromJson(json.decode(str));
 String bodyToJson(Body data) => json.encode(data.toJson());
 class Body {
   Body({
-      Screeninfo? screeninfo, 
-      Data? data,}){
+    Screeninfo? screeninfo,
+    Data? data,}){
     _screeninfo = screeninfo;
     _data = data;
-}
+  }
 
   Body.fromJson(dynamic json) {
     _screeninfo = json['screeninfo'] != null ? Screeninfo.fromJson(json['screeninfo']) : null;
@@ -58,11 +58,11 @@ class Body {
   }
   Screeninfo? _screeninfo;
   Data? _data;
-Body copyWith({  Screeninfo? screeninfo,
-  Data? data,
-}) => Body(  screeninfo: screeninfo ?? _screeninfo,
-  data: data ?? _data,
-);
+  Body copyWith({  Screeninfo? screeninfo,
+    Data? data,
+  }) => Body(  screeninfo: screeninfo ?? _screeninfo,
+    data: data ?? _data,
+  );
   Screeninfo? get screeninfo => _screeninfo;
   Data? get data => _data;
 
@@ -90,19 +90,19 @@ Data dataFromJson(String str) => Data.fromJson(json.decode(str));
 String dataToJson(Data data) => json.encode(data.toJson());
 class Data {
   Data({
-      num? id, 
-      num? orderchoose, 
-      String? title, 
-      String? titleen, 
-      String? description, 
-      String? descriptionen,}){
+    int? id,
+    int? orderchoose,
+    String? title,
+    String? titleen,
+    String? description,
+    String? descriptionen,}){
     _id = id;
     _orderchoose = orderchoose;
     _title = title;
     _titleen = titleen;
     _description = description;
     _descriptionen = descriptionen;
-}
+  }
 
   Data.fromJson(dynamic json) {
     _id = json['id'];
@@ -112,27 +112,27 @@ class Data {
     _description = json['description'];
     _descriptionen = json['descriptionen'];
   }
-  num? _id;
-  num? _orderchoose;
+  int? _id;
+  int? _orderchoose;
   String? _title;
   String? _titleen;
   String? _description;
   String? _descriptionen;
-Data copyWith({  num? id,
-  num? orderchoose,
-  String? title,
-  String? titleen,
-  String? description,
-  String? descriptionen,
-}) => Data(  id: id ?? _id,
-  orderchoose: orderchoose ?? _orderchoose,
-  title: title ?? _title,
-  titleen: titleen ?? _titleen,
-  description: description ?? _description,
-  descriptionen: descriptionen ?? _descriptionen,
-);
-  num? get id => _id;
-  num? get orderchoose => _orderchoose;
+  Data copyWith({  int? id,
+    int? orderchoose,
+    String? title,
+    String? titleen,
+    String? description,
+    String? descriptionen,
+  }) => Data(  id: id ?? _id,
+    orderchoose: orderchoose ?? _orderchoose,
+    title: title ?? _title,
+    titleen: titleen ?? _titleen,
+    description: description ?? _description,
+    descriptionen: descriptionen ?? _descriptionen,
+  );
+  int? get id => _id;
+  int? get orderchoose => _orderchoose;
   String? get title => _title;
   String? get titleen => _titleen;
   String? get description => _description;
@@ -164,14 +164,14 @@ Screeninfo screeninfoFromJson(String str) => Screeninfo.fromJson(json.decode(str
 String screeninfoToJson(Screeninfo data) => json.encode(data.toJson());
 class Screeninfo {
   Screeninfo({
-      String? save, 
-      String? editinfomations, 
-      String? titleTh, 
-      String? titleEn, 
-      String? descriptionTh, 
-      String? descriptionEn, 
-      String? deleteor, 
-      String? delete,}){
+    String? save,
+    String? editinfomations,
+    String? titleTh,
+    String? titleEn,
+    String? descriptionTh,
+    String? descriptionEn,
+    String? deleteor,
+    String? delete,}){
     _save = save;
     _editinfomations = editinfomations;
     _titleTh = titleTh;
@@ -180,7 +180,7 @@ class Screeninfo {
     _descriptionEn = descriptionEn;
     _deleteor = deleteor;
     _delete = delete;
-}
+  }
 
   Screeninfo.fromJson(dynamic json) {
     _save = json['save'];
@@ -200,23 +200,23 @@ class Screeninfo {
   String? _descriptionEn;
   String? _deleteor;
   String? _delete;
-Screeninfo copyWith({  String? save,
-  String? editinfomations,
-  String? titleTh,
-  String? titleEn,
-  String? descriptionTh,
-  String? descriptionEn,
-  String? deleteor,
-  String? delete,
-}) => Screeninfo(  save: save ?? _save,
-  editinfomations: editinfomations ?? _editinfomations,
-  titleTh: titleTh ?? _titleTh,
-  titleEn: titleEn ?? _titleEn,
-  descriptionTh: descriptionTh ?? _descriptionTh,
-  descriptionEn: descriptionEn ?? _descriptionEn,
-  deleteor: deleteor ?? _deleteor,
-  delete: delete ?? _delete,
-);
+  Screeninfo copyWith({  String? save,
+    String? editinfomations,
+    String? titleTh,
+    String? titleEn,
+    String? descriptionTh,
+    String? descriptionEn,
+    String? deleteor,
+    String? delete,
+  }) => Screeninfo(  save: save ?? _save,
+    editinfomations: editinfomations ?? _editinfomations,
+    titleTh: titleTh ?? _titleTh,
+    titleEn: titleEn ?? _titleEn,
+    descriptionTh: descriptionTh ?? _descriptionTh,
+    descriptionEn: descriptionEn ?? _descriptionEn,
+    deleteor: deleteor ?? _deleteor,
+    delete: delete ?? _delete,
+  );
   String? get save => _save;
   String? get editinfomations => _editinfomations;
   String? get titleTh => _titleTh;
@@ -250,15 +250,15 @@ Head headFromJson(String str) => Head.fromJson(json.decode(str));
 String headToJson(Head data) => json.encode(data.toJson());
 class Head {
   Head({
-      num? status, 
-      String? message, 
-      String? modulename, 
-      bool? timeexpire,}){
+    int? status,
+    String? message,
+    String? modulename,
+    bool? timeexpire,}){
     _status = status;
     _message = message;
     _modulename = modulename;
     _timeexpire = timeexpire;
-}
+  }
 
   Head.fromJson(dynamic json) {
     _status = json['status'];
@@ -266,20 +266,20 @@ class Head {
     _modulename = json['modulename'];
     _timeexpire = json['timeexpire'];
   }
-  num? _status;
+  int? _status;
   String? _message;
   String? _modulename;
   bool? _timeexpire;
-Head copyWith({  num? status,
-  String? message,
-  String? modulename,
-  bool? timeexpire,
-}) => Head(  status: status ?? _status,
-  message: message ?? _message,
-  modulename: modulename ?? _modulename,
-  timeexpire: timeexpire ?? _timeexpire,
-);
-  num? get status => _status;
+  Head copyWith({  int? status,
+    String? message,
+    String? modulename,
+    bool? timeexpire,
+  }) => Head(  status: status ?? _status,
+    message: message ?? _message,
+    modulename: modulename ?? _modulename,
+    timeexpire: timeexpire ?? _timeexpire,
+  );
+  int? get status => _status;
   String? get message => _message;
   String? get modulename => _modulename;
   bool? get timeexpire => _timeexpire;

@@ -1,4 +1,4 @@
-import 'package:ez_at_u/resume/model/response/pre_view_resume_response.dart';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
@@ -9,19 +9,15 @@ import '../../../../../customs/message/text_button.dart';
 import '../../../../../customs/message/text_error.dart';
 import '../../../../../customs/progress_dialog.dart';
 import '../../../../../utils/shared_preferences.dart';
+import '../../customs/button/button_custom.dart';
 import '../../customs/color/color_const.dart';
 import '../../customs/datepicker/custom_date_picker_for_resume.dart';
-import '../../customs/datepicker/custom_date_picker_for_teacher.dart';
 import '../../customs/size/size.dart';
 import '../../customs/text_file/build_textformfiled_unlimit_custom.dart';
 import '../../module/login/screen/login_screen/login_screen.dart';
 import '../bloc_resume/resume_bloc.dart';
-import '../examples/content_design_resume.dart';
 import '../examples/content_design_resume_edit.dart';
-import '../model/response/get_about_me_resume_response.dart';
-import '../model/response/get_education_resume_response.dart';
 import '../model/response/get_experience_resume_response.dart';
-import '../model/response/get_user_infomartion_resume_response.dart';
 
 class EditExperienceResumeScreen extends StatelessWidget {
   final int  id;
@@ -121,7 +117,9 @@ class _EditExperienceResumePageState extends State<EditExperienceResumePage>
         if (state is GetEditScreenExperienceResumeSuccessState) {
           isGetExperienceResumeResponse =
               state.isGetExperienceResumeResponse;
-          setState(() {});
+          setState(() {
+            searchStatus = isGetExperienceResumeResponse?.body?.data?.orderchoose??0 ;
+          });
         }
         if (state is SentEditExperienceResumeSuccessState) {
           Navigator.pushReplacement(
@@ -129,13 +127,13 @@ class _EditExperienceResumePageState extends State<EditExperienceResumePage>
               MaterialPageRoute(
                   builder: (BuildContext context) => const ContentDesignResumeEditScreen()));
         }
-        if (state is ResumeLoading) {
+        if (state is EditPreviewResumeLoading) {
           showProgressDialog(context);
         }
-        if (state is ResumeEndLoading) {
+        if (state is EditPreviewResumeEndLoading) {
           hideProgressDialog(context);
         }
-        if (state is ResumeError) {
+        if (state is EditPreviewResumeError) {
           if (state.errorMessage.toString() == 'Unauthorized') {
             dialogSessionExpiredOneBtn(
                 context, textSessionExpired, textSubSessionExpired, _buttonOk,
@@ -262,7 +260,8 @@ class _EditExperienceResumePageState extends State<EditExperienceResumePage>
                                     searchStatus == 0?
                                     isSearchStatus == 0?
                                     "โปรดเลือกลำดับการแสดง":
-                                    "$isSearchStatus":"$searchStatus",
+                                    "การแสดงอันดับที่  $isSearchStatus"
+                                        :"การแสดงอันดับที่  $searchStatus",
                                     style: TextStyle(
                                       // decoration: TextDecoration.underline,
                                         decorationThickness: 2,
@@ -372,6 +371,119 @@ class _EditExperienceResumePageState extends State<EditExperienceResumePage>
                         textInputType: TextInputType.text,
                       ),
 
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+
+                          Container(
+
+                            width: widget.id >0 ? null:MediaQuery.of(context).size.width-50,
+                            child: ButtonIconsCustomLimit(
+                              label:  widget.id >0 ?
+                              isGetExperienceResumeResponse?.body?.screeninfo?.editinfomations??"แก้ไขข้อมูล" :
+                              isGetExperienceResumeResponse?.body?.screeninfo?.save??"บันทึก",
+                              buttonIcons: Icon(
+                                FontAwesomeIcons.paperPlane,
+                                color: Theme.of(context).iconTheme.color,
+                                size: 20.0,
+                              ),
+                              colortext: Theme.of(context).bottomAppBarColor,
+                              colorbutton:
+                              Theme.of(context).scaffoldBackgroundColor,
+                              sizetext: 14,
+                              colorborder: Theme.of(context).bottomAppBarColor.withOpacity(0.65),
+                              sizeborder: 3,
+                              onPressed: () {
+                                context.read<ResumeBloc>().add(SentEditExperienceResumeEvent(
+                                  edit: true,
+                                  id:widget.id,
+                                  orderChoose: searchStatus,
+                                  positionTH :(positionControllerTH.text == ''
+                                      ? positionTh
+                                      : positionControllerTH.text) ??
+                                      '',
+                                  positionEN : (positionControllerEN.text == ''
+                                      ? positionEn
+                                      : positionControllerEN.text) ??
+                                      '',
+                                  detailTH :(detailControllerTH.text == ''
+                                      ? detailTh
+                                      : detailControllerTH.text) ??
+                                      '',
+                                  detailEN :(detailControllerEN.text == ''
+                                      ? detailEn
+                                      : detailControllerEN.text) ??
+                                      '',
+                                  startDate :  (startDateController.text == ''
+                                      ? startDate
+                                      : startDateController.text) ??
+                                      '',
+                                  endDate: (endDateController.text == ''
+                                      ? endDate
+                                      : endDateController.text) ??
+                                      '',
+                                ));
+                              },
+                            ),
+                          )
+                          ,
+                          if(widget.id >0)
+                          Container(
+                            child: ButtonIconsCustomLimit(
+                              label: isGetExperienceResumeResponse?.body?.screeninfo?.deleteor??" Delete/ลบ",
+                              buttonIcons: Icon(
+                                FontAwesomeIcons.trashCan,
+                                color:bcButtonDelete.withOpacity(0.8),
+                                size: 20.0,
+                              ),
+                              colortext:bcButtonDelete.withOpacity(0.8),
+                              colorbutton:
+                              Theme.of(context).scaffoldBackgroundColor,
+                              sizetext: 14,
+                              colorborder:bcButtonDelete.withOpacity(0.8),
+                              sizeborder: 3,
+                              onPressed: () {
+                                context.read<ResumeBloc>().add(SentEditExperienceResumeEvent(
+                                  edit: false,
+                                  id:widget.id,
+                                  orderChoose: searchStatus,
+                                  positionTH :(positionControllerTH.text == ''
+                                      ? positionTh
+                                      : positionControllerTH.text) ??
+                                      '',
+                                  positionEN : (positionControllerEN.text == ''
+                                      ? positionEn
+                                      : positionControllerEN.text) ??
+                                      '',
+                                  detailTH :(detailControllerTH.text == ''
+                                      ? detailTh
+                                      : detailControllerTH.text) ??
+                                      '',
+                                  detailEN :(detailControllerEN.text == ''
+                                      ? detailEn
+                                      : detailControllerEN.text) ??
+                                      '',
+                                  startDate :  (startDateController.text == ''
+                                      ? startDate
+                                      : startDateController.text) ??
+                                      '',
+                                  endDate: (endDateController.text == ''
+                                      ? endDate
+                                      : endDateController.text) ??
+                                      '',
+                                ));
+                              },
+                            ),
+                          )
+                        ],
+                      ),
+
+                      const SizedBox(
+                        height: 150,
+                      ),
 
 
                     ],
@@ -379,39 +491,39 @@ class _EditExperienceResumePageState extends State<EditExperienceResumePage>
                 ),
               ),
             ),
-            floatingActionButton: floatingSetThemePDF(
-              context: context,
-              setState,
-              textSave ?? 'Save',
-              id: widget.id,
-              orderChoose: searchStatus,
-              positionControllerTH: (positionControllerTH.text == ''
-                      ? positionTh
-                      : positionControllerTH.text) ??
-                  '',
-              positionControllerEN: (positionControllerEN.text == ''
-                      ? positionEn
-                      : positionControllerEN.text) ??
-                  '',
-              detailControllerTH: (detailControllerTH.text == ''
-                      ? detailTh
-                      : detailControllerTH.text) ??
-                  '',
-              detailControllerEN: (detailControllerEN.text == ''
-                      ? detailEn
-                      : detailControllerEN.text) ??
-                  '',
-              startDateController:  (startDateController.text == ''
-                  ? startDate
-                  : startDateController.text) ??
-                  '',
-              endDateController:  (endDateController.text == ''
-                  ? endDate
-                  : endDateController.text) ??
-                  '',
-            ),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerFloat,
+            // floatingActionButton: floatingSetThemePDF(
+            //   context: context,
+            //   setState,
+            //   textSave ?? 'Save',
+            //   id: widget.id,
+            //   orderChoose: searchStatus,
+            //   positionControllerTH: (positionControllerTH.text == ''
+            //           ? positionTh
+            //           : positionControllerTH.text) ??
+            //       '',
+            //   positionControllerEN: (positionControllerEN.text == ''
+            //           ? positionEn
+            //           : positionControllerEN.text) ??
+            //       '',
+            //   detailControllerTH: (detailControllerTH.text == ''
+            //           ? detailTh
+            //           : detailControllerTH.text) ??
+            //       '',
+            //   detailControllerEN: (detailControllerEN.text == ''
+            //           ? detailEn
+            //           : detailControllerEN.text) ??
+            //       '',
+            //   startDateController:  (startDateController.text == ''
+            //       ? startDate
+            //       : startDateController.text) ??
+            //       '',
+            //   endDateController:  (endDateController.text == ''
+            //       ? endDate
+            //       : endDateController.text) ??
+            //       '',
+            // ),
+            // floatingActionButtonLocation:
+            //     FloatingActionButtonLocation.centerFloat,
           );
         }
         return Container();
@@ -423,51 +535,51 @@ class _EditExperienceResumePageState extends State<EditExperienceResumePage>
   }
 }
 
-floatingSetThemePDF(
-  setState,
-  String pdf, {
-  required BuildContext context,
-      required int id ,
-      required int orderChoose ,
-      required String positionControllerTH ,
-      required String positionControllerEN ,
-      required String detailControllerTH ,
-      required String detailControllerEN ,
-      required String startDateController ,
-      required String endDateController ,
-
-    }) {return FloatingActionButton.extended(
-    backgroundColor:
-        Theme.of(context).appBarTheme.backgroundColor?.withOpacity(0.9),
-    foregroundColor: Colors.black,
-    onPressed: () {
-      context.read<ResumeBloc>().add(SentEditExperienceResumeEvent(
-          id: id,
-          orderChoose: orderChoose,
-        positionTH :positionControllerTH ,
-        positionEN : positionControllerEN ,
-        detailTH :detailControllerTH ,
-        detailEN :detailControllerEN ,
-        startDate :startDateController ,
-        endDate:endDateController ,
-
-
-
-      ));
-      // Navigator.push(
-      //     context,
-      //     MaterialPageRoute(
-      //         builder: (context) => const ContentDesignResumeScreen()));
-    },
-    icon: Icon(
-      FontAwesomeIcons.barsStaggered,
-      color: Theme.of(context).iconTheme.color,
-      size: 20.0,
-    ),
-    label: Text('   ${pdf ?? 'PDF'}',
-        style: TextStyle(
-          fontSize: sizeTextSmaller14,
-          color: Theme.of(context).iconTheme.color,
-        )),
-  );
-}
+// floatingSetThemePDF(
+//   setState,
+//   String pdf, {
+//   required BuildContext context,
+//       required int id ,
+//       required int orderChoose ,
+//       required String positionControllerTH ,
+//       required String positionControllerEN ,
+//       required String detailControllerTH ,
+//       required String detailControllerEN ,
+//       required String startDateController ,
+//       required String endDateController ,
+//
+//     }) {return FloatingActionButton.extended(
+//     backgroundColor:
+//         Theme.of(context).appBarTheme.backgroundColor?.withOpacity(0.9),
+//     foregroundColor: Colors.black,
+//     onPressed: () {
+//       context.read<ResumeBloc>().add(SentEditExperienceResumeEvent(
+//           id: id,
+//           orderChoose: orderChoose,
+//         positionTH :positionControllerTH ,
+//         positionEN : positionControllerEN ,
+//         detailTH :detailControllerTH ,
+//         detailEN :detailControllerEN ,
+//         startDate :startDateController ,
+//         endDate:endDateController ,
+//
+//
+//
+//       ));
+//       // Navigator.push(
+//       //     context,
+//       //     MaterialPageRoute(
+//       //         builder: (context) => const ContentDesignResumeScreen()));
+//     },
+//     icon: Icon(
+//       FontAwesomeIcons.barsStaggered,
+//       color: Theme.of(context).iconTheme.color,
+//       size: 20.0,
+//     ),
+//     label: Text('   ${pdf ?? 'PDF'}',
+//         style: TextStyle(
+//           fontSize: sizeTextSmaller14,
+//           color: Theme.of(context).iconTheme.color,
+//         )),
+//   );
+// }

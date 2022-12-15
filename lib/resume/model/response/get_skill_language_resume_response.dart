@@ -90,8 +90,8 @@ Data dataFromJson(String str) => Data.fromJson(json.decode(str));
 String dataToJson(Data data) => json.encode(data.toJson());
 class Data {
   Data({
-    num? id,
-    num? orderchoose,
+    int? id,
+    int? orderchoose,
     String? language,
     String? languageen,
     String? value,
@@ -115,15 +115,15 @@ class Data {
     _detail = json['detail'];
     _detailen = json['detailen'];
   }
-  num? _id;
-  num? _orderchoose;
+  int? _id;
+  int? _orderchoose;
   String? _language;
   String? _languageen;
   String? _value;
   dynamic _detail;
   dynamic _detailen;
-  Data copyWith({  num? id,
-    num? orderchoose,
+  Data copyWith({  int? id,
+    int? orderchoose,
     String? language,
     String? languageen,
     String? value,
@@ -137,8 +137,8 @@ class Data {
     detail: detail ?? _detail,
     detailen: detailen ?? _detailen,
   );
-  num? get id => _id;
-  num? get orderchoose => _orderchoose;
+  int? get id => _id;
+  int? get orderchoose => _orderchoose;
   String? get language => _language;
   String? get languageen => _languageen;
   String? get value => _value;
@@ -285,7 +285,7 @@ Head headFromJson(String str) => Head.fromJson(json.decode(str));
 String headToJson(Head data) => json.encode(data.toJson());
 class Head {
   Head({
-    num? status,
+    int? status,
     String? message,
     String? modulename,
     bool? timeexpire,}){
@@ -301,11 +301,11 @@ class Head {
     _modulename = json['modulename'];
     _timeexpire = json['timeexpire'];
   }
-  num? _status;
+  int? _status;
   String? _message;
   String? _modulename;
   bool? _timeexpire;
-  Head copyWith({  num? status,
+  Head copyWith({  int? status,
     String? message,
     String? modulename,
     bool? timeexpire,
@@ -314,7 +314,7 @@ class Head {
     modulename: modulename ?? _modulename,
     timeexpire: timeexpire ?? _timeexpire,
   );
-  num? get status => _status;
+  int? get status => _status;
   String? get message => _message;
   String? get modulename => _modulename;
   bool? get timeexpire => _timeexpire;

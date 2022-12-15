@@ -78,6 +78,7 @@ GetEditScreenEducationResumeEvent({
 }
 
 class SentEditEducationResumeEvent extends ResumeEvent {
+  bool edit;
   int id;
   int orderChoose;
   String startDate;
@@ -89,6 +90,7 @@ class SentEditEducationResumeEvent extends ResumeEvent {
   String detailEN;
 
   SentEditEducationResumeEvent({
+    required this.edit,
     required this.id,
     required this.orderChoose,
     required this.startDate,
@@ -128,6 +130,7 @@ class GetEditScreenExperienceResumeEvent extends ResumeEvent {
 }
 
 class SentEditExperienceResumeEvent extends ResumeEvent {
+  bool edit;
   int id;
   int orderChoose;
   String startDate;
@@ -138,7 +141,8 @@ class SentEditExperienceResumeEvent extends ResumeEvent {
   String detailEN;
 
   SentEditExperienceResumeEvent(
-      {required this.id,
+      {required this.edit,
+      required this.id,
       required this.orderChoose,
       required this.startDate,
       required this.endDate,
@@ -156,6 +160,7 @@ class GetEditScreenCertificateResumeEvent extends ResumeEvent {
 
 
 class SentEditCertificateResumeEvent extends ResumeEvent {
+  bool edit;
   int id;
   int orderChoose;
   String titleTH;
@@ -164,7 +169,8 @@ class SentEditCertificateResumeEvent extends ResumeEvent {
   String detailEN;
 
   SentEditCertificateResumeEvent(
-      {required this.id,
+      {required this.edit,
+        required this.id,
       required this.orderChoose,
       required this.titleTH,
       required this.titleEN,
@@ -179,6 +185,7 @@ class GetEditScreenSkillLanguageResumeEvent extends ResumeEvent {
 }
 
 class SentEditSkillLanguageResumeEvent extends ResumeEvent {
+  bool edit;
   int id;
   int orderChoose;
   String languageTH;
@@ -188,7 +195,8 @@ class SentEditSkillLanguageResumeEvent extends ResumeEvent {
   String valueLanguage;
 
   SentEditSkillLanguageResumeEvent(
-      {required this.id,
+      {required this.edit,
+        required this.id,
       required this.orderChoose,
       required this.languageTH,
       required this.languageEN,
@@ -203,6 +211,7 @@ class GetEditScreenSkillResumeEvent extends ResumeEvent {
 }
 
 class SentEditSkillResumeEvent extends ResumeEvent {
+  bool edit;
   int id;
   int orderChoose;
   String skillTH;
@@ -212,7 +221,8 @@ class SentEditSkillResumeEvent extends ResumeEvent {
   String valueSkill;
 
   SentEditSkillResumeEvent(
-      {required this.id,
+      {required this.edit,
+        required this.id,
         required this.orderChoose,
         required this.skillTH,
         required this.skillEN,
