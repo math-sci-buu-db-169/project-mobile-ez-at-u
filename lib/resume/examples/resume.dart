@@ -132,7 +132,7 @@ Future<Uint8List> generateResume(
                                           fontWeight: pw.FontWeight.bold)),
                               pw.Padding(
                                   padding: const pw.EdgeInsets.only(top: 5)),
-                              pw.Text(isPreViewResumeResponse.body?.data?.position ??''  ,
+                              pw.Text(isPreViewResumeResponse.body?.data?.position?[0].position ??''  ,
                                   textScaleFactor: 1.2,
                                   style: pw.Theme.of(context)
                                       .defaultTextStyle

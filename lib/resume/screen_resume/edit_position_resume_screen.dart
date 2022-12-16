@@ -9,6 +9,7 @@ import '../../../../../customs/message/text_button.dart';
 import '../../../../../customs/message/text_error.dart';
 import '../../../../../customs/progress_dialog.dart';
 import '../../../../../utils/shared_preferences.dart';
+import '../../customs/button/button_custom.dart';
 import '../../customs/color/color_const.dart';
 import '../../customs/size/size.dart';
 import '../../customs/text_file/build_textformfiled_unlimit_custom.dart';
@@ -21,23 +22,25 @@ import '../model/response/get_position_resume_response.dart';
 import '../model/response/get_user_infomartion_resume_response.dart';
 
 class EditPositionsResumeScreen extends StatelessWidget {
+  final int id;
   const EditPositionsResumeScreen({
-    Key? key,
+    Key? key, required this.id,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
         create: (context) =>
-            ResumeBloc()..add(GetEditScreenPositionsResumeEvent()),
+            ResumeBloc()..add(GetEditScreenPositionsResumeEvent(positionID: id)),
         // child: const GenerativeWidget());
-        child: const EditPositionsResumePage());
+        child:  EditPositionsResumePage(id:id));
   }
 }
 
 class EditPositionsResumePage extends StatefulWidget {
+  final int id;
   const EditPositionsResumePage({
-    Key? key,
+    Key? key, required this.id,
   }) : super(key: key);
 
   @override
@@ -51,30 +54,19 @@ class _EditPositionsResumePageState extends State<EditPositionsResumePage>
   late String textSessionExpired;
   late String textSubSessionExpired;
   late String _buttonOk;
-  late String _pinValueString;
-  late bool _isHiddenPin;
-  late bool _isHiddenBio;
+
+  late int searchStatus;
+  late int isSearchStatus;
   GetPositionResumeResponse? isGetPositionResumeResponse;
   @override
   void initState() {
     valueLanguage = "TH";
     getUserLanguage();
     _isSessionUnauthorized();
-    _isSessionPin();
-    // localAuth(context);
-    context.read<ResumeBloc>().add(GetEditScreenPositionsResumeEvent());
+    searchStatus = 0;
+    isSearchStatus = 0;
+    context.read<ResumeBloc>().add(GetEditScreenPositionsResumeEvent(positionID: widget.id));
     super.initState();
-  }
-
-  Future<void> _isSessionPin() async {
-    prefs = await SharedPreferences.getInstance();
-    String pinStringToBool = prefs.getString('pinStatus') ?? 'false';
-    String bioStringToBool = prefs.getString('bioStatus') ?? 'false';
-    _isHiddenPin = pinStringToBool == 'true' ? true : false;
-    _isHiddenBio = bioStringToBool == 'true' ? true : false;
-    _pinValueString = prefs.getString('pinValue') ?? '...';
-
-    setState(() {});
   }
 
   getUserLanguage() async {
@@ -107,7 +99,7 @@ class _EditPositionsResumePageState extends State<EditPositionsResumePage>
         if (state is GetEditScreenPositionResumeSuccessState) {
           isGetPositionResumeResponse =
               state.isGetPositionResumeResponse;
-          setState(() {});
+          setState(() {        searchStatus = isGetPositionResumeResponse?.body?.data?.orderchoose??0 ;});
         }
         if (state is SentEditPositionResumeSuccessState) {
           Navigator.pushReplacement(
@@ -257,36 +249,188 @@ class _EditPositionsResumePageState extends State<EditPositionsResumePage>
                         hintLabel: textOfficeEn,
                         initialvalue: officeEn,
                         textInputType: TextInputType.text,
+                      ),PopupMenuButton(
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Container(
+                                padding: EdgeInsets.only(
+                                    right: 5, left: 5, top: 20, bottom: 20),
+                                decoration: BoxDecoration(
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(10),
+                                  ),
+                                  color: Theme.of(context).primaryColor ==
+                                      Colors.black
+                                      ? Color(0xFF1F222A)
+                                      : Colors.transparent.withOpacity(0.03),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.only(left: 10, right: 10),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        searchStatus == 0
+                                            ? isSearchStatus == 0
+                                            ? "โปรดเลือกลำดับการแสดง"
+                                            : "การแสดงอันดับที่ $isSearchStatus"
+                                            : "การแสดงอันดับที่ $searchStatus",
+                                        style: TextStyle(
+                                          // decoration: TextDecoration.underline,
+                                            decorationThickness: 2,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w500,
+                                            color: Theme.of(context)
+                                                .appBarTheme
+                                                .foregroundColor),
+                                      ),
+                                      Text(
+                                        'เลือก',
+                                        style: TextStyle(
+                                            decoration:
+                                            TextDecoration.underline,
+                                            decorationThickness: 2,
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.w500,
+                                            color: Theme.of(context)
+                                                .appBarTheme
+                                                .foregroundColor),
+                                      ),
+                                    ],
+                                  ),
+                                )),
+                          ),
+                        ),
+                        itemBuilder: (context) {
+                          return List.generate(10,
+                                  (index) {
+                                return PopupMenuItem(
+                                  value: index + 1,
+                                  child: Text(
+                                    "${index + 1}" ?? 'Settings',
+                                    style: TextStyle(
+                                        color: Theme.of(context)
+                                            .appBarTheme
+                                            .foregroundColor),
+                                  ),
+                                );
+                              });
+                        },
+                        onSelected: (value) {
+                          isSearchStatus = value;
+                          searchStatus = value;
+                          setState(() {
+                            isSearchStatus = value;
+                            searchStatus = value;
+                          });
+                        },
+                      ),
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+
+                          Container(
+
+                            width: widget.id >0 ? null:MediaQuery.of(context).size.width-50,
+                            child: ButtonIconsCustomLimit(
+                              label:  widget.id >0 ?
+                              isGetPositionResumeResponse?.body?.screeninfo?.editinfomations??"แก้ไขข้อมูล" :
+                              isGetPositionResumeResponse?.body?.screeninfo?.save??"บันทึก",
+                              buttonIcons: Icon(
+                                FontAwesomeIcons.paperPlane,
+                                color: Theme.of(context).iconTheme.color,
+                                size: 20.0,
+                              ),
+                              colortext: Theme.of(context).bottomAppBarColor,
+                              colorbutton:
+                              Theme.of(context).scaffoldBackgroundColor,
+                              sizetext: 14,
+                              colorborder: Theme.of(context).bottomAppBarColor.withOpacity(0.65),
+                              sizeborder: 3,
+                              onPressed: () {
+                                context.read<ResumeBloc>().add(SentEditPositionsResumeEvent(
+                                  edit: true,
+                                  positionsId:widget.id,
+                                  orderChoose: searchStatus,
+                                  positionControllerTH:(positionControllerTH.text == ''
+                                      ? positionTh
+                                      : positionControllerTH.text) ??
+                                      '',
+                                  positionControllerEN: (positionControllerEN.text == ''
+                                      ? positionEn
+                                      : positionControllerEN.text) ??
+                                      '',
+                                  officeControllerTH:  (officeControllerTH.text == ''
+                                      ? officeTh
+                                      : officeControllerTH.text) ??
+                                      '',
+                                  officeControllerEN:  (officeControllerEN.text == ''
+                                      ? officeEn
+                                      : officeControllerEN.text) ??
+                                      '',
+                                ));
+                              },
+                            ),
+                          )
+                          ,
+                          if(widget.id >0)
+                            Container(
+                              child: ButtonIconsCustomLimit(
+                                label: isGetPositionResumeResponse?.body?.screeninfo?.deleteor??" Delete/ลบ",
+                                buttonIcons: Icon(
+                                  FontAwesomeIcons.trashCan,
+                                  color:bcButtonDelete.withOpacity(0.8),
+                                  size: 20.0,
+                                ),
+                                colortext:bcButtonDelete.withOpacity(0.8),
+                                colorbutton:
+                                Theme.of(context).scaffoldBackgroundColor,
+                                sizetext: 14,
+                                colorborder:bcButtonDelete.withOpacity(0.8),
+                                sizeborder: 3,
+                                onPressed: () {
+                                  context.read<ResumeBloc>().add(SentEditPositionsResumeEvent(
+                                    edit: false,
+                                    positionsId:widget.id,
+                                    orderChoose: searchStatus,
+                                      positionControllerTH:(positionControllerTH.text == ''
+                                          ? positionTh
+                                          : positionControllerTH.text) ??
+                                          '',
+                                      positionControllerEN: (positionControllerEN.text == ''
+                                          ? positionEn
+                                          : positionControllerEN.text) ??
+                                          '',
+                                      officeControllerTH:  (officeControllerTH.text == ''
+                                          ? officeTh
+                                          : officeControllerTH.text) ??
+                                          '',
+                                      officeControllerEN:  (officeControllerEN.text == ''
+                                          ? officeEn
+                                          : officeControllerEN.text) ??
+                                          '',
+                                  ));
+                                },
+                              ),
+                            )
+                        ],
                       ),
 
+                      const SizedBox(
+                        height: 150,
+                      ),
                     ],
                   ),
                 ),
               ),
             ),
-            floatingActionButton: floatingSetThemePDF(
-              context: context,
-              setState,
-              textSave ?? 'Save',
-              positionControllerTH: (positionControllerTH.text == ''
-                      ? positionTh
-                      : positionControllerTH.text) ??
-                  '',
-              positionControllerEN: (positionControllerEN.text == ''
-                      ? positionEn
-                      : positionControllerEN.text) ??
-                  '',
-              officeControllerTH: (officeControllerTH.text == ''
-                      ? officeTh
-                      : officeControllerTH.text) ??
-                  '',
-              officeControllerEN: (officeControllerEN.text == ''
-                      ? officeEn
-                      : officeControllerEN.text) ??
-                  '',
-            ),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerFloat,
+
           );
         }
         return Container();
@@ -296,40 +440,4 @@ class _EditPositionsResumePageState extends State<EditPositionsResumePage>
       },
     );
   }
-}
-
-floatingSetThemePDF(
-  setState,
-  String pdf, {
-  required BuildContext context,
-  required String positionControllerTH,
-  required String positionControllerEN,
-  required String officeControllerTH,
-  required String officeControllerEN,
-}) {return FloatingActionButton.extended(
-    backgroundColor:
-        Theme.of(context).appBarTheme.backgroundColor?.withOpacity(0.9),
-    foregroundColor: Colors.black,
-    onPressed: () {
-      context.read<ResumeBloc>().add(SentEditPositionsResumeEvent(
-          positionControllerTH: positionControllerTH,
-          positionControllerEN: positionControllerEN,
-          officeControllerTH: officeControllerTH,
-          officeControllerEN: officeControllerEN));
-      // Navigator.push(
-      //     context,
-      //     MaterialPageRoute(
-      //         builder: (context) => const ContentDesignResumeScreen()));
-    },
-    icon: Icon(
-      FontAwesomeIcons.barsStaggered,
-      color: Theme.of(context).iconTheme.color,
-      size: 20.0,
-    ),
-    label: Text('   ${pdf ?? 'PDF'}',
-        style: TextStyle(
-          fontSize: sizeTextSmaller14,
-          color: Theme.of(context).iconTheme.color,
-        )),
-  );
 }

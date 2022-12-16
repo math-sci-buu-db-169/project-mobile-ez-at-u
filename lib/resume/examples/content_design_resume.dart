@@ -104,7 +104,7 @@ class _ContentDesignResumeState extends State<ContentDesignResume>
           }
         }
 
-        if (state is ChooseImageUpLoadResumeSuccess) {
+        if (state is EditChooseImageUpLoadResumeSuccess) {
           context.read<ResumeBloc>().add(GetPreviewResumeEvent());
         }
       },
@@ -545,7 +545,7 @@ class _BodyPreviewResumeState extends State<BodyPreviewResume> {
                                           "Container clicked ChangePhotoRequest");
                                       context
                                           .read<ResumeBloc>()
-                                          .add(ChangePhotoRequest());
+                                          .add(ChangeLanguageResumeRequest());
                                     },
                                     child: Stack(
                                       children: [
@@ -1051,7 +1051,7 @@ class _BodyPreviewResumeState extends State<BodyPreviewResume> {
                             buildDetailResumeCustomNotIconsReadOnly(
                                 context: context,
                                 detail: widget.isPreViewResumeResponse.body
-                                        ?.data?.position ??
+                                        ?.data?.position?[0].position ??
                                     "ต่ำแหน่งงาน",
                                 appBarForeGroundColor: appBarforegroundColor),
 
@@ -1147,45 +1147,45 @@ class _BodyPreviewResumeState extends State<BodyPreviewResume> {
                                 ),
                               ],
                             ),
-                            buildDetailResumeCheckboxCustomNotIconsReadOnly(
-                              context: context,
-                              detail:
-                                  "${isPreViewResumeResponse.body?.data?.education?.hsc?[0].startdate ?? ""} - ${isPreViewResumeResponse.body?.data?.education?.hsc?[0].startdate ?? ""}\n"
-                                  "${isPreViewResumeResponse.body?.data?.education?.hsc?[0].placeofstudy ?? "High school education"} \n"
-                                  "     ${isPreViewResumeResponse.body?.data?.education?.hsc?[0].detail ?? ""}",
-                              appBarForeGroundColor: appBarforegroundColor,
-                              checkbox: Checkbox(
-                                checkColor: Theme.of(context).primaryColor,
-                                fillColor:
-                                    MaterialStateProperty.resolveWith(getColor),
-                                value: isEducationsOne,
-                                onChanged: (bool? value) {
-                                  setState(() {
-                                    isEducationsOne = value ?? false;
-                                  });
-                                },
-                              ),
-                            ),
-
-                            buildDetailResumeCheckboxCustomNotIconsReadOnly(
-                              context: context,
-                              detail:
-                                  "${isPreViewResumeResponse.body?.data?.education?.hsc?[1].startdate ?? ""} - ${isPreViewResumeResponse.body?.data?.education?.hsc?[1].startdate ?? ""}\n"
-                                  "${isPreViewResumeResponse.body?.data?.education?.hsc?[1].placeofstudy ?? "High school education"} \n"
-                                  "     ${isPreViewResumeResponse.body?.data?.education?.hsc?[1].detail ?? ""}",
-                              appBarForeGroundColor: appBarforegroundColor,
-                              checkbox: Checkbox(
-                                checkColor: Theme.of(context).primaryColor,
-                                fillColor:
-                                    MaterialStateProperty.resolveWith(getColor),
-                                value: isEducationsTwo,
-                                onChanged: (bool? value) {
-                                  setState(() {
-                                    isEducationsTwo = value ?? false;
-                                  });
-                                },
-                              ),
-                            ),
+                            // buildDetailResumeCheckboxCustomNotIconsReadOnly(
+                            //   context: context,
+                            //   detail:
+                            //       "${isPreViewResumeResponse.body?.data?.education?.hsc?[0].startdate ?? ""} - ${isPreViewResumeResponse.body?.data?.education?.hsc?[0].startdate ?? ""}\n"
+                            //       "${isPreViewResumeResponse.body?.data?.education?.hsc?[0].placeofstudy ?? "High school education"} \n"
+                            //       "     ${isPreViewResumeResponse.body?.data?.education?.hsc?[0].detail ?? ""}",
+                            //   appBarForeGroundColor: appBarforegroundColor,
+                            //   checkbox: Checkbox(
+                            //     checkColor: Theme.of(context).primaryColor,
+                            //     fillColor:
+                            //         MaterialStateProperty.resolveWith(getColor),
+                            //     value: isEducationsOne,
+                            //     onChanged: (bool? value) {
+                            //       setState(() {
+                            //         isEducationsOne = value ?? false;
+                            //       });
+                            //     },
+                            //   ),
+                            // ),
+                            //
+                            // buildDetailResumeCheckboxCustomNotIconsReadOnly(
+                            //   context: context,
+                            //   detail:
+                            //       "${isPreViewResumeResponse.body?.data?.education?.hsc?[1].startdate ?? ""} - ${isPreViewResumeResponse.body?.data?.education?.hsc?[1].startdate ?? ""}\n"
+                            //       "${isPreViewResumeResponse.body?.data?.education?.hsc?[1].placeofstudy ?? "High school education"} \n"
+                            //       "     ${isPreViewResumeResponse.body?.data?.education?.hsc?[1].detail ?? ""}",
+                            //   appBarForeGroundColor: appBarforegroundColor,
+                            //   checkbox: Checkbox(
+                            //     checkColor: Theme.of(context).primaryColor,
+                            //     fillColor:
+                            //         MaterialStateProperty.resolveWith(getColor),
+                            //     value: isEducationsTwo,
+                            //     onChanged: (bool? value) {
+                            //       setState(() {
+                            //         isEducationsTwo = value ?? false;
+                            //       });
+                            //     },
+                            //   ),
+                            // ),
 
                             Row(
                               children: [

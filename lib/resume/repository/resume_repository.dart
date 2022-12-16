@@ -71,13 +71,23 @@ print("sentEditUserInfoResume");
   }
 
   Future<Response> sentEditPositionResume({required String positionTH,required String positionEN,
+  required bool edit,
+  required int id,
+  required int orderChoose,
+
     required String officeTH,required String officeEN,}) async {
+    print(edit);
+    print(id);
+    print(orderChoose);
+    print(positionTH);
+    print(positionTH);
+    print(officeTH);
+    print(officeEN);
     return await MyDio.createDioServer().post("/api/Resume/editpositionresume",
         data: jsonEncode({
-
-          "edit": true,
-            "id": 0,
-            "orderchoose": 0,
+            "edit": edit,
+            "id": id,
+            "orderchoose": orderChoose,
             "position_th": positionTH,
             "position_en": positionEN,
             "office_th": officeTH,
@@ -288,12 +298,13 @@ print("sentEditUserInfoResume");
     );
   }
 
-  Future<Response> sentScreenPositionResume() async {
+  Future<Response> sentScreenPositionResume({required int positionID }) async {
     prefs = await SharedPreferences.getInstance();
     String? userLanguage = prefs.getString('userLanguageResume');
 
     return await MyDio.createDioServer().post("/api/Resume/positionresume",
         data: jsonEncode({
+          "position_id":positionID,
           "languageresume": userLanguage
 
         })

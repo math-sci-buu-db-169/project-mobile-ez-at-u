@@ -3,7 +3,7 @@ part of 'resume_bloc.dart';
 // @immutable
 abstract class ResumeEvent {}
 
-class ChangePhotoRequest extends ResumeEvent {}
+// class ChangePhotoRequest extends ResumeEvent {}
 
 class ChangeLanguageResumeRequest extends ResumeEvent {}
 
@@ -52,16 +52,28 @@ class SentEditAboutMeResumeEvent extends ResumeEvent {
       {required this.aboutMeControllerTH, required this.aboutMeControllerEN});
 }
 
-class GetEditScreenPositionsResumeEvent extends ResumeEvent {}
+class GetEditScreenPositionsResumeEvent extends ResumeEvent {
+
+  int positionID;
+
+  GetEditScreenPositionsResumeEvent(
+      {required this.positionID});
+}
 
 class SentEditPositionsResumeEvent extends ResumeEvent {
+  bool edit;
+  int positionsId;
+  int orderChoose;
   String positionControllerTH;
   String positionControllerEN;
   String officeControllerTH;
   String officeControllerEN;
 
   SentEditPositionsResumeEvent(
-      {required this.positionControllerTH,
+      {required this.edit,
+        required this.positionsId,
+        required this.orderChoose,
+        required this.positionControllerTH,
       required this.positionControllerEN,
       required this.officeControllerTH,
       required this.officeControllerEN});

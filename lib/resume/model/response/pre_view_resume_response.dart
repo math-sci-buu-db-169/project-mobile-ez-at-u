@@ -95,7 +95,7 @@ String dataToJson(Data data) => json.encode(data.toJson());
 class Data {
   Data({
     Userinfo? userinfo,
-    String? position,
+    List<Position>? position,
     String? aboutme,
     Personinfo? personinfo,
     Address? address,
@@ -120,7 +120,12 @@ class Data {
 
   Data.fromJson(dynamic json) {
     _userinfo = json['userinfo'] != null ? Userinfo.fromJson(json['userinfo']) : null;
-    _position = json['position'];
+    if (json['position'] != null) {
+      _position = [];
+      json['position'].forEach((v) {
+        _position?.add(Position.fromJson(v));
+      });
+    }
     _aboutme = json['aboutme'];
     _personinfo = json['personinfo'] != null ? Personinfo.fromJson(json['personinfo']) : null;
     _address = json['address'] != null ? Address.fromJson(json['address']) : null;
@@ -152,7 +157,7 @@ class Data {
     _image = json['image'];
   }
   Userinfo? _userinfo;
-  String? _position;
+  List<Position>? _position;
   String? _aboutme;
   Personinfo? _personinfo;
   Address? _address;
@@ -163,7 +168,7 @@ class Data {
   List<Languge>? _languge;
   String? _image;
   Data copyWith({  Userinfo? userinfo,
-    String? position,
+    List<Position>? position,
     String? aboutme,
     Personinfo? personinfo,
     Address? address,
@@ -186,7 +191,7 @@ class Data {
     image: image ?? _image,
   );
   Userinfo? get userinfo => _userinfo;
-  String? get position => _position;
+  List<Position>? get position => _position;
   String? get aboutme => _aboutme;
   Personinfo? get personinfo => _personinfo;
   Address? get address => _address;
@@ -202,7 +207,9 @@ class Data {
     if (_userinfo != null) {
       map['userinfo'] = _userinfo?.toJson();
     }
-    map['position'] = _position;
+    if (_position != null) {
+      map['position'] = _position?.map((v) => v.toJson()).toList();
+    }
     map['aboutme'] = _aboutme;
     if (_personinfo != null) {
       map['personinfo'] = _personinfo?.toJson();
@@ -1160,6 +1167,68 @@ class Personinfo {
 /// prefixid : "P3"
 /// prefix : "นาย"
 /// name : "สิทธิพล"
+/// lastname : "ชินโน"
+
+Position positionFromJson(String str) => Position.fromJson(json.decode(str));
+String positionToJson(Position data) => json.encode(data.toJson());
+class Position {
+  Position({
+    int? id,
+    int? orderchoose,
+    String? position,
+    String? office,
+    String? detail,}){
+    _id = id;
+    _orderchoose = orderchoose;
+    _position = position;
+    _office = office;
+    _detail = detail;
+  }
+
+  Position.fromJson(dynamic json) {
+    _id = json['id'];
+    _orderchoose = json['orderchoose'];
+    _position = json['position'];
+    _office = json['office'];
+    _detail = json['detail'];
+  }
+  int? _id;
+  int? _orderchoose;
+  String? _position;
+  String? _office;
+  String? _detail;
+  Position copyWith({  int? id,
+    int? orderchoose,
+    String? position,
+    String? office,
+    String? detail,
+  }) => Position(  id: id ?? _id,
+    orderchoose: orderchoose ?? _orderchoose,
+    position: position ?? _position,
+    office: office ?? _office,
+    detail: detail ?? _detail,
+  );
+  int? get id => _id;
+  int? get orderchoose => _orderchoose;
+  String? get position => _position;
+  String? get office => _office;
+  String? get detail => _detail;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['id'] = _id;
+    map['orderchoose'] = _orderchoose;
+    map['position'] = _position;
+    map['office'] = _office;
+    map['detail'] = _detail;
+    return map;
+  }
+
+}
+
+/// prefixid : "P1"
+/// prefix : "นาง"
+/// name : "ธาราดล"
 /// lastname : "ชินโน"
 
 Userinfo userinfoFromJson(String str) => Userinfo.fromJson(json.decode(str));

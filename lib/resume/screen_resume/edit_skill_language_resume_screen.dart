@@ -410,7 +410,8 @@ class _EditSkillLanguageResumePageState
                         ],
                       ),
                       SizedBox(height: 10,),
-                      Text(textValue),    const SizedBox(
+                      Text(textValue),
+                      const SizedBox(
                         height: 50,
                       ),
                       Row(
@@ -479,7 +480,7 @@ class _EditSkillLanguageResumePageState
                                 sizeborder: 3,
                                 onPressed: () {
                                   context.read<ResumeBloc>().add(SentEditSkillLanguageResumeEvent(
-                                    edit: true,
+                                    edit: false,
                                     id:widget.id,
                                     orderChoose: searchStatus,
                                     languageTH:  (languageControllerTH.text == ''

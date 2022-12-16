@@ -194,18 +194,18 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
   late String textSubSessionExpired;
   late String _buttonOk;
   late double widgetPointerValue ;
-  bool isClickAbout = false;
-  bool isClickPosition = false;
-  bool isClickInformation = false;
-  bool isClickName = false;
-  bool isClickEducation = false;
+  // bool isClickAbout = false;
+  // bool isClickPosition = false;
+  // bool isClickInformation = false;
+  // bool isClickName = false;
+  // bool isClickEducation = false;
   bool isClickContactReadOnly = true;
-  int isCountClickContactReadOnly = 0;
-  bool isClickAddress = false;
-  bool isClickExperience = false;
-  bool isClickCertificate = false;
-  bool isClickSkill = false;
-  bool isClickLanguage = false;
+  // int isCountClickContactReadOnly = 0;
+  // bool isClickAddress = false;
+  // bool isClickExperience = false;
+  // bool isClickCertificate = false;
+  // bool isClickSkill = false;
+  // bool isClickLanguage = false;
   Future<void> _isSelectLanguageThai() async {
     prefs = await SharedPreferences.getInstance();
     isSelectLanguageThai =
@@ -341,7 +341,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                               print("Container clicked ChangePhotoRequest");
                               context
                                   .read<ResumeBloc>()
-                                  .add(ChangePhotoRequest());
+                                  .add(EditChangePhotoRequest());
                             },
                             child: Stack(
                               children: [
@@ -553,11 +553,9 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                               isPreViewResumeTitle: isPreViewResumeResponse
                                       .body?.screenInfo?.aboutme ??
                                   "About me",
-                              isPreViewResumeEditData: isClickAbout == false
-                                  ? isPreViewResumeResponse
+                              isPreViewResumeEditData:  isPreViewResumeResponse
                                           .body?.screenInfo?.editinfomations ??
-                                      "Edit Information"
-                                  : "Save",
+                                      "Edit Information",
                               ontap: () {
                                 // Navigator.push(
                                 //   context,
@@ -574,30 +572,13 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                   }),
                                   );
 
-                                print(isClickAbout);
+
                               }),
-                          isClickAbout == false
-                              ? buildDetailResumeCustomNotIconsReadOnly(
-                                  context: context,
-                                  detail:
-                                      "         ${isPreViewResumeResponse.body?.data?.aboutme ?? "About me"}",
-                                  appBarForeGroundColor: appBarForegroundColor)
-                              : BuildTextFormFieldUnLimitCustomNotIcons(
-                                  textEditingController: resumeName,
-                                  maxLength: 255,
-                                  onChanged: (value) {
-                                    resumeName.text = value;
-                                    if (kDebugMode) {
-                                      print(resumeName.text);
-                                    }
-                                  },
-                                  hintLabel:
-                                      "   ${widget.isPreViewResumeResponse.body?.data?.aboutme ?? "รายละเอียดเกี่ยวกับฉัน"}",
-                                  initialvalue: widget.isPreViewResumeResponse
-                                          .body?.data?.aboutme ??
-                                      "รายละเอียดเกี่ยวกับฉัน",
-                                  textInputType: TextInputType.text,
-                                ),
+                          buildDetailResumeCustomNotIconsReadOnly(
+                              context: context,
+                              detail:
+                              "         ${isPreViewResumeResponse.body?.data?.aboutme ?? "About me"}",
+                              appBarForeGroundColor: appBarForegroundColor)
                         ],
                       ),
                     ),
@@ -611,86 +592,69 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                               isPreViewResumeTitle: isPreViewResumeResponse
                                       .body?.screenInfo?.position ??
                                   "ตำแหน่งที่สนใจ",
-                              isPreViewResumeEditData: isClickPosition == false
-                                  ? isPreViewResumeResponse
-                                          .body?.screenInfo?.editinfomations ??
-                                      "Edit Information"
-                                  : "Save",
+                              isPreViewResumeEditData:  '',
                               ontap: () {
 
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                      return const EditPositionsResumeScreen();
-                                    })).then((value) =>setState(() {
-                                  context.read<ResumeBloc>().add(GetPreviewResumeEvent());
-                                }),
-                                );
                               }),
-                          isClickPosition == false
-                              ? buildDetailResumeCustomNotIconsReadOnly(
-                                  context: context,
-                                  detail: isPreViewResumeResponse
-                                          .body?.data?.position ??
-                                      "ตำแหน่งที่สนใจ",
-                                  appBarForeGroundColor: appBarForegroundColor)
-                              : BuildTextFormFieldUnLimitCustomNotIcons(
-                                  textEditingController: resumeName,
-                                  onChanged: (value) {
-                                    resumeName.text = value;
-                                    if (kDebugMode) {
-                                      print(resumeName.text);
-                                    }
-                                  },
-                                  hintLabel: isPreViewResumeResponse
-                                          .body?.data?.position ??
-                                      "ตำแหน่งที่สนใจ",
-                                  initialvalue: isPreViewResumeResponse
-                                          .body?.data?.position ??
-                                      "ตำแหน่งที่สนใจ",
-                                  textInputType: TextInputType.text,
-                                ),
-                          GestureDetector(
-                            onTap: (){
-
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                    return  const EditPositionsResumePage();
-                                  })).then((value) =>setState(() {
-                                context.read<ResumeBloc>().add(GetPreviewResumeEvent());
-                              }),
-                              );},
-                            child:
-                            Container(
-                              padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50),
-                              ),
-                              child: DottedBorder(
-                                color: (Theme.of(context).iconTheme.color?? Colors.grey).withOpacity(0.5),
-                                borderType: BorderType.RRect,
-                                radius: Radius.circular(12),
-                                padding: EdgeInsets.all(2),
-                                child: ClipRRect(
-                                  borderRadius:
-                                  BorderRadius.all(Radius.circular(12)),
-                                  child: Container(
-                                    //inner container
-
-                                    height: 30, //height of inner container
-                                    width:MediaQuery.of(context).size.width,
-
-                                    child: Center(
-                                      child: Icon(
-                                        FontAwesomeIcons.plus,
-                                        color: (Theme.of(context).iconTheme.color?? Colors.grey).withOpacity(0.5),
-                                        size: 20.0,
-                                      ),
-                                    ), //background color of inner container
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
+                          buildPositionCard(
+                              context: context,
+                              type: '',
+                              editInFormations:
+                              isPreViewResumeResponse.body?.screenInfo
+                                  ?.editinfomations ??
+                                  "Edit Information",
+                              title: '',
+                              positionData: isPreViewResumeResponse.body?.data?.position,
+                              appBarForegroundColor: appBarForegroundColor,
+                              returnResumeEdit:returnResumeEdit),
+                          // buildDetailResumeCustomNotIconsReadOnly(
+                          //     context: context,
+                          //     detail: isPreViewResumeResponse
+                          //         .body?.data?.position ??
+                          //         "ตำแหน่งที่สนใจ",
+                          //     appBarForeGroundColor: appBarForegroundColor),
+                          // GestureDetector(
+                          //   onTap: (){
+                          //
+                          //     Navigator.push(context,
+                          //         MaterialPageRoute(builder: (context) {
+                          //           return  const EditPositionsResumePage();
+                          //         })).then((value) =>setState(() {
+                          //       context.read<ResumeBloc>().add(GetPreviewResumeEvent());
+                          //     }),
+                          //     );},
+                          //   child:
+                          //   Container(
+                          //     padding: EdgeInsets.all(10),
+                          //     decoration: BoxDecoration(
+                          //       borderRadius: BorderRadius.circular(50),
+                          //     ),
+                          //     child: DottedBorder(
+                          //       color: (Theme.of(context).iconTheme.color?? Colors.grey).withOpacity(0.5),
+                          //       borderType: BorderType.RRect,
+                          //       radius: Radius.circular(12),
+                          //       padding: EdgeInsets.all(2),
+                          //       child: ClipRRect(
+                          //         borderRadius:
+                          //         BorderRadius.all(Radius.circular(12)),
+                          //         child: Container(
+                          //           //inner container
+                          //
+                          //           height: 30, //height of inner container
+                          //           width:MediaQuery.of(context).size.width,
+                          //
+                          //           child: Center(
+                          //             child: Icon(
+                          //               FontAwesomeIcons.plus,
+                          //               color: (Theme.of(context).iconTheme.color?? Colors.grey).withOpacity(0.5),
+                          //               size: 20.0,
+                          //             ),
+                          //           ), //background color of inner container
+                          //         ),
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),
@@ -781,11 +745,9 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                               isPreViewResumeTitle: isPreViewResumeResponse
                                       .body?.screenInfo?.contact ??
                                   "ช่องทางการติดต่อ",
-                              isPreViewResumeEditData: isClickContactReadOnly == true
-                                  ? isPreViewResumeResponse
+                              isPreViewResumeEditData:  isPreViewResumeResponse
                                           .body?.screenInfo?.editinfomations ??
-                                      "Edit Information"
-                                  : "Save",
+                                      "Edit Information",
                               ontap: () {
                                 // Navigator.push(
                                 //   context,
@@ -967,22 +929,10 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                               isPreViewResumeTitle: isPreViewResumeResponse
                                       .body?.screenInfo?.address ??
                                   "ที่อยู่",
-                              isPreViewResumeEditData: isClickAddress == false
-                                  ? isPreViewResumeResponse
+                              isPreViewResumeEditData: isPreViewResumeResponse
                                           .body?.screenInfo?.editinfomations ??
-                                      "Edit Information"
-                                  : "Save",
-                              ontap: () {
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //       builder: (context) =>
-                                //       const ContentDesignResumeEditScreen()),
-                                // );
-                                setState(() {
-                                  isClickAddress = !isClickAddress;
-                                });
-                              }),
+                                      "Edit Information",
+                              ontap: () {}),
                           BuildTextFormFieldUnLimitCustomResume(
                             readOnly:true,
                             textEditingController: objectives,
@@ -1484,6 +1434,101 @@ buildTitleEditDataResume(
         ),
       ],
     ),
+  );
+}
+
+buildPositionCard( {
+  required BuildContext context,
+  required String editInFormations,
+  required String title,
+  required String type,
+  required positionData,
+  required Color appBarForegroundColor,
+  required Function() returnResumeEdit}){
+  return Column(
+    children: [
+      Column(
+          children: List.generate(
+              positionData?.length ??
+                  0, (index) {
+            return
+              Stack(
+                children: [
+                  buildDetailResumeCustomNotIconsReadOnly(
+                      context: context,
+                      detail:positionData[index].position ?? "",
+                      appBarForeGroundColor: appBarForegroundColor),
+                  Positioned(
+                    // height: 0,
+                    // width: 0,
+                    // left: 0,
+                    right: MediaQuery.of(context).padding.right+10,
+                    bottom:  MediaQuery.of(context).padding.bottom+5,
+                    child: InkWell(
+                      onTap: (){
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                              return  EditPositionsResumeScreen(id:positionData?[index].id??0);
+                            })).then((value) =>returnResumeEdit,
+                        );},
+                      child: Text(editInFormations ??
+                          "Edit Information",
+                        style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            decorationThickness: 2,
+                            fontSize: 10,
+                            fontWeight: FontWeight.w500,
+                            color: Theme.of(context).appBarTheme.foregroundColor),
+                      ),
+                    ),)
+                ],
+              );
+
+
+          })),
+      GestureDetector(
+        onTap: (){
+
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) {
+                return  const EditPositionsResumeScreen(id:0);
+                //
+
+              })).then((value) =>returnResumeEdit,
+          );},
+        child:
+        Container(
+          padding: EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(50),
+          ),
+          child: DottedBorder(
+            color: (Theme.of(context).iconTheme.color?? Colors.grey).withOpacity(0.5),
+            borderType: BorderType.RRect,
+            radius: Radius.circular(12),
+            padding: EdgeInsets.all(2),
+            child: ClipRRect(
+              borderRadius:
+              BorderRadius.all(Radius.circular(12)),
+              child: Container(
+                //inner container
+
+                height: 30, //height of inner container
+                width:MediaQuery.of(context).size.width,
+
+                child: Center(
+                  child: Icon(
+                    FontAwesomeIcons.plus,
+                    color: (Theme.of(context).iconTheme.color?? Colors.grey).withOpacity(0.5),
+                    size: 20.0,
+                  ),
+                ), //background color of inner container
+              ),
+            ),
+          ),
+        ),
+      ),
+    ],
   );
 }
 

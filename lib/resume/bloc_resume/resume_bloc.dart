@@ -208,38 +208,38 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
         emit(PreviewResumeError(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
-    on<ChangePhotoRequest>((event, emit) async {
-      if (kDebugMode) {
-        print('Change avatar 999');
-      }
-      final image = await ImagePicker()
-          .pickImage(source: ImageSource.gallery, imageQuality: 100);
-      if (image == null) return;
-      final imageTemp = image.path;
-      final cropImage = await ImageCropper().cropImage(sourcePath: imageTemp);
-      if (cropImage == null) return;
-      final imageCroppedTemp = File(cropImage.path);
-      final bytes = File(cropImage.path).readAsBytesSync();
-      String base64Image = base64Encode(bytes);
-      log("img_pan : $base64Image");
-      emit(PreviewResumeLoading());
-      print("CheckProfile 66 == ChangePhotoRequest");
-      await setResumePhoto(resumePhoto: base64Image ?? '');
-      await checkPreviewResumeEventInitial(event, emit);
-      Response responseBase64Img =
-          await sentResumeImage(base64Image: base64Image);
-      emit(PreviewResumeEndLoading());
-      if (responseBase64Img.statusCode == 200) {
-        ImageUpLoadResumeResponse imageUpLoadResumeResponse =
-            ImageUpLoadResumeResponse.fromJson(responseBase64Img.data);
-        if (imageUpLoadResumeResponse.head?.status == 200) {
-          emit(ChooseImageUpLoadResumeSuccess(
-              avatarImage: imageCroppedTemp, base64img: base64Image));
-        }
-      }
-
-      // emit(ChangPhotoResumeSuccess(avatarImage: imageCroppedTemp,base64img: base64Image));
-    });
+    // on<ChangePhotoRequest>((event, emit) async {
+    //   if (kDebugMode) {
+    //     print('Change avatar 999');
+    //   }
+    //   final image = await ImagePicker()
+    //       .pickImage(source: ImageSource.gallery, imageQuality: 100);
+    //   if (image == null) return;
+    //   final imageTemp = image.path;
+    //   final cropImage = await ImageCropper().cropImage(sourcePath: imageTemp);
+    //   if (cropImage == null) return;
+    //   final imageCroppedTemp = File(cropImage.path);
+    //   final bytes = File(cropImage.path).readAsBytesSync();
+    //   String base64Image = base64Encode(bytes);
+    //   log("img_pan : $base64Image");
+    //   emit(PreviewResumeLoading());
+    //   print("CheckProfile 66 == ChangePhotoRequest");
+    //   await setResumePhoto(resumePhoto: base64Image ?? '');
+    //   await checkPreviewResumeEventInitial(event, emit);
+    //   Response responseBase64Img =
+    //       await sentResumeImage(base64Image: base64Image);
+    //   emit(PreviewResumeEndLoading());
+    //   if (responseBase64Img.statusCode == 200) {
+    //     ImageUpLoadResumeResponse imageUpLoadResumeResponse =
+    //         ImageUpLoadResumeResponse.fromJson(responseBase64Img.data);
+    //     if (imageUpLoadResumeResponse.head?.status == 200) {
+    //       emit(ChooseImageUpLoadResumeSuccess(
+    //           avatarImage: imageCroppedTemp, base64img: base64Image));
+    //     }
+    //   }
+    //
+    //   // emit(ChangPhotoResumeSuccess(avatarImage: imageCroppedTemp,base64img: base64Image));
+    // });
 
     on<EditChangePhotoRequest>((event, emit) async {
       if (kDebugMode) {
@@ -415,7 +415,7 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
         print("CheckProfile 5 == ProfileApiEvent");
 
         await checkPreviewResumeEventInitial(event, emit);
-        Response responseGetAboutMeResumeResponse = await sentScreenPositionResume();
+        Response responseGetAboutMeResumeResponse = await sentScreenPositionResume(positionID: event.positionID);
         emit(EditPreviewResumeEndLoading());
         if (responseGetAboutMeResumeResponse.statusCode == 200) {
           GetPositionResumeResponse getPositionResumeResponse =
@@ -673,6 +673,9 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
 
         await checkPreviewResumeEventInitial(event, emit);
         Response responseSentEditPositionsResume = await sentEditPositionResume(
+          id: event.positionsId,
+          orderChoose: event.orderChoose,
+          edit: event.edit,
           positionTH: event.positionControllerTH,
           positionEN: event.positionControllerEN,
           officeTH: event.officeControllerTH,

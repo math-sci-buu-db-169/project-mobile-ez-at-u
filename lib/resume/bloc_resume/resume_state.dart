@@ -49,11 +49,11 @@ class ChangeLanguagePreviewResumeSuccessState extends  ResumeState {
   ChangeLanguagePreviewResumeSuccessState({required this.isPreViewResumeResponse});
 }
 
-class ChooseImageUpLoadResumeSuccess extends ResumeState {
-  final File avatarImage;
-  final String base64img;
-  ChooseImageUpLoadResumeSuccess({required this.avatarImage,required this.base64img});
-}
+// class ChooseImageUpLoadResumeSuccess extends ResumeState {
+//   final File avatarImage;
+//   final String base64img;
+//   ChooseImageUpLoadResumeSuccess({required this.avatarImage,required this.base64img});
+// }
 
 class  EditPreviewResumeLoading extends  ResumeState {}
 

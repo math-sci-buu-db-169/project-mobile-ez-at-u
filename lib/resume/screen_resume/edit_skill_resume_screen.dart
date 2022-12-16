@@ -479,7 +479,7 @@ class _EditSkillResumePageState
                                 sizeborder: 3,
                                 onPressed: () {
                                   context.read<ResumeBloc>().add(SentEditSkillResumeEvent(
-                                    edit: true,
+                                    edit: false,
                                     id:widget.id,
                                     orderChoose: searchStatus,
                                     skillTH:  (skillControllerTH.text == ''

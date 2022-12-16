@@ -168,7 +168,6 @@ class Data {
   }
 
 }
-
 /// save : "บันทึก"
 /// editinfomations : "แก้ไขข้อมูล"
 /// position_th : "ตำแหน่ง"
@@ -177,6 +176,8 @@ class Data {
 /// office_en : "Office"
 /// detail_th : "รายละเอียด"
 /// detail_en : "Description"
+/// deleteor : "Delete/ลบ"
+/// delete : "ลบ"
 
 Screeninfo screeninfoFromJson(String str) => Screeninfo.fromJson(json.decode(str));
 String screeninfoToJson(Screeninfo data) => json.encode(data.toJson());
@@ -189,7 +190,9 @@ class Screeninfo {
     String? positionEn,
     String? officeEn,
     String? detailTh,
-    String? detailEn,}){
+    String? detailEn,
+    String? deleteor,
+    String? delete,}){
     _save = save;
     _editinfomations = editinfomations;
     _positionTh = positionTh;
@@ -198,6 +201,8 @@ class Screeninfo {
     _officeEn = officeEn;
     _detailTh = detailTh;
     _detailEn = detailEn;
+    _deleteor = deleteor;
+    _delete = delete;
   }
 
   Screeninfo.fromJson(dynamic json) {
@@ -209,6 +214,8 @@ class Screeninfo {
     _officeEn = json['office_en'];
     _detailTh = json['detail_th'];
     _detailEn = json['detail_en'];
+    _deleteor = json['deleteor'];
+    _delete = json['delete'];
   }
   String? _save;
   String? _editinfomations;
@@ -218,6 +225,8 @@ class Screeninfo {
   String? _officeEn;
   String? _detailTh;
   String? _detailEn;
+  String? _deleteor;
+  String? _delete;
   Screeninfo copyWith({  String? save,
     String? editinfomations,
     String? positionTh,
@@ -226,6 +235,8 @@ class Screeninfo {
     String? officeEn,
     String? detailTh,
     String? detailEn,
+    String? deleteor,
+    String? delete,
   }) => Screeninfo(  save: save ?? _save,
     editinfomations: editinfomations ?? _editinfomations,
     positionTh: positionTh ?? _positionTh,
@@ -234,6 +245,8 @@ class Screeninfo {
     officeEn: officeEn ?? _officeEn,
     detailTh: detailTh ?? _detailTh,
     detailEn: detailEn ?? _detailEn,
+    deleteor: deleteor ?? _deleteor,
+    delete: delete ?? _delete,
   );
   String? get save => _save;
   String? get editinfomations => _editinfomations;
@@ -243,6 +256,8 @@ class Screeninfo {
   String? get officeEn => _officeEn;
   String? get detailTh => _detailTh;
   String? get detailEn => _detailEn;
+  String? get deleteor => _deleteor;
+  String? get delete => _delete;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -254,10 +269,13 @@ class Screeninfo {
     map['office_en'] = _officeEn;
     map['detail_th'] = _detailTh;
     map['detail_en'] = _detailEn;
+    map['deleteor'] = _deleteor;
+    map['delete'] = _delete;
     return map;
   }
 
 }
+
 
 /// status : 200
 /// message : "success"
