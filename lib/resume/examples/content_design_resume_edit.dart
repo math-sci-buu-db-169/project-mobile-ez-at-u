@@ -233,10 +233,12 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
   Widget build(BuildContext context) {
     var isPreViewResumeResponse = widget.isPreViewResumeResponse;
     String prefix = isPreViewResumeResponse.body?.data?.userinfo?.prefix ?? '';
-    String name =
-        isPreViewResumeResponse.body?.data?.userinfo?.name ?? 'ชื่อ -';
-    String lastname =
-        isPreViewResumeResponse.body?.data?.userinfo?.lastname ?? 'นามสกุล';
+    String name =  isPreViewResumeResponse.body?.data?.userinfo?.name == ""?
+    isPreViewResumeResponse.body?.screenInfo?.name ??'ชื่อ ':  isPreViewResumeResponse.body?.data?.userinfo?.name ??isPreViewResumeResponse.body?.screenInfo?.name ??'ชื่อ';
+
+
+    String lastname =isPreViewResumeResponse.body?.data?.userinfo?.lastname == ""?
+    isPreViewResumeResponse.body?.screenInfo?.lastname ??'นามสกุล':  isPreViewResumeResponse.body?.data?.userinfo?.lastname ??isPreViewResumeResponse.body?.screenInfo?.lastname ??'นามสกุล';
 
     Color? appBarBackgroundColor =
         Theme.of(context).appBarTheme.backgroundColor ?? Colors.white;
@@ -577,7 +579,8 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                           buildDetailResumeCustomNotIconsReadOnly(
                               context: context,
                               detail:
-                              "         ${isPreViewResumeResponse.body?.data?.aboutme ?? "About me"}",
+                              "         ${isPreViewResumeResponse.body?.data?.aboutme ?? isPreViewResumeResponse
+                                  .body?.screenInfo?.aboutme ??"About me ..."}",
                               appBarForeGroundColor: appBarForegroundColor)
                         ],
                       ),
