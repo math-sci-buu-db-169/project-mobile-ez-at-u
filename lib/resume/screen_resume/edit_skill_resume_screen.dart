@@ -211,6 +211,64 @@ class _EditSkillResumePageState
                       const SizedBox(
                         height: 10,
                       ),
+                      BuildTextFormFieldUnLimitCustomNotIconsNotContainer(
+                        textEditingController: skillControllerTH,
+                        onChanged: (valueNameControllerTH) {
+                          setState(() {
+                            skillControllerTH.text = valueNameControllerTH;
+                          });
+                          if (kDebugMode) {
+                            print(skillControllerTH.text);
+                          }
+                        },
+                        hintLabel: textskillTh,
+                        initialvalue: skillTh,
+                        textInputType: TextInputType.text,
+                      ),
+                      BuildTextFormFieldUnLimitCustomNotIconsNotContainer(
+                        textEditingController: skillControllerEN,
+                        onChanged: (valueNameControllerEN) {
+                          setState(() {
+                            skillControllerEN.text = valueNameControllerEN;
+                          });
+
+                          if (kDebugMode) {
+                            print(skillControllerEN.text);
+                          }
+                        },
+                        hintLabel: textskillEn,
+                        initialvalue: skillEn,
+                        textInputType: TextInputType.text,
+                      ),
+                      BuildTextFormFieldUnLimitCustomNotIconsNotContainer(
+                        textEditingController: detailControllerTH,
+                        onChanged: (valueDetailControllerTH) {
+                          setState(() {
+                            detailControllerTH.text = valueDetailControllerTH;
+                          });
+                          if (kDebugMode) {
+                            print(detailControllerTH.text);
+                          }
+                        },
+                        hintLabel: textDetailTh,
+                        initialvalue: detailTh,
+                        textInputType: TextInputType.text,
+                      ),
+                      BuildTextFormFieldUnLimitCustomNotIconsNotContainer(
+                        textEditingController: detailControllerEN,
+                        onChanged: (valueDetailControllerEN) {
+                          setState(() {
+                            detailControllerEN.text = valueDetailControllerEN;
+                          });
+
+                          if (kDebugMode) {
+                            print(detailControllerEN.text);
+                          }
+                        },
+                        hintLabel: textDetailEn,
+                        initialvalue: detailEn,
+                        textInputType: TextInputType.text,
+                      ),
                       PopupMenuButton(
                         child: Align(
                           alignment: Alignment.centerRight,
@@ -290,64 +348,6 @@ class _EditSkillResumePageState
                           });
                         },
                       ),
-                      BuildTextFormFieldUnLimitCustomNotIconsNotContainer(
-                        textEditingController: skillControllerTH,
-                        onChanged: (valueNameControllerTH) {
-                          setState(() {
-                            skillControllerTH.text = valueNameControllerTH;
-                          });
-                          if (kDebugMode) {
-                            print(skillControllerTH.text);
-                          }
-                        },
-                        hintLabel: textskillTh,
-                        initialvalue: skillTh,
-                        textInputType: TextInputType.text,
-                      ),
-                      BuildTextFormFieldUnLimitCustomNotIconsNotContainer(
-                        textEditingController: skillControllerEN,
-                        onChanged: (valueNameControllerEN) {
-                          setState(() {
-                            skillControllerEN.text = valueNameControllerEN;
-                          });
-
-                          if (kDebugMode) {
-                            print(skillControllerEN.text);
-                          }
-                        },
-                        hintLabel: textskillEn,
-                        initialvalue: skillEn,
-                        textInputType: TextInputType.text,
-                      ),
-                      BuildTextFormFieldUnLimitCustomNotIconsNotContainer(
-                        textEditingController: detailControllerTH,
-                        onChanged: (valueDetailControllerTH) {
-                          setState(() {
-                            detailControllerTH.text = valueDetailControllerTH;
-                          });
-                          if (kDebugMode) {
-                            print(detailControllerTH.text);
-                          }
-                        },
-                        hintLabel: textDetailTh,
-                        initialvalue: detailTh,
-                        textInputType: TextInputType.text,
-                      ),
-                      BuildTextFormFieldUnLimitCustomNotIconsNotContainer(
-                        textEditingController: detailControllerEN,
-                        onChanged: (valueDetailControllerEN) {
-                          setState(() {
-                            detailControllerEN.text = valueDetailControllerEN;
-                          });
-
-                          if (kDebugMode) {
-                            print(detailControllerEN.text);
-                          }
-                        },
-                        hintLabel: textDetailEn,
-                        initialvalue: detailEn,
-                        textInputType: TextInputType.text,
-                      ),
                       SizedBox(height: 10,),
                       SfLinearGauge(
                         axisTrackStyle: LinearAxisTrackStyle(
@@ -363,11 +363,7 @@ class _EditSkillResumePageState
                                   widgetPointerValue = value;
                                 });
                               },
-                              color: widgetPointerValue < 40
-                                  ?  Colors.red
-                                  : widgetPointerValue < 80
-                                  ? Colors.orange
-                                  :Colors.green
+                              color:widgetPointerValueColor(widgetPointerValue),
                           ),
                           LinearWidgetPointer(
                             value: widgetPointerValue,
@@ -385,11 +381,7 @@ class _EditSkillResumePageState
                                   style: TextStyle(
                                       fontWeight: FontWeight.w500,
                                       fontSize: 20,
-                                      color: widgetPointerValue < 40
-                                          ? Colors.red
-                                          : widgetPointerValue < 80
-                                          ? Colors.orange
-                                          : Colors.green
+                                      color: widgetPointerValueColor(widgetPointerValue)
                                   ),
                                 ),
                               ),
@@ -400,16 +392,16 @@ class _EditSkillResumePageState
                         ranges: [
                           LinearGaugeRange(
                               endValue: widgetPointerValue,
-                              color: widgetPointerValue < 40
-                                  ? Colors.red
-                                  : widgetPointerValue < 80
-                                  ? Colors.orange
-                                  : Colors.green,
+                              color: widgetPointerValueColor(widgetPointerValue),
                               position: LinearElementPosition.cross)
                         ],
                       ),
                       SizedBox(height: 10,),
-                      Text(textValue),
+                      Text(textValue,
+                          style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w500,
+                              color: Theme.of(context).appBarTheme.foregroundColor)),
                       const SizedBox(
                         height: 50,
                       ),

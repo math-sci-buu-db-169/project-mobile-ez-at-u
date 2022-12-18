@@ -25,7 +25,7 @@ class CustomDatePickerForTeacherState
   late String? dateFormated;
   @override
   void initState() {
-    dateFormated = DateFormat('d/M/y').format(date);
+    dateFormated = DateFormat('M/y').format(date);
     // date = DateTime.now();
     super.initState();
   }

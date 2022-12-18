@@ -21,7 +21,6 @@ version: 1.0.0
 
 environment:
   sdk: '>=2.18.0 <3.0.0'
-  flutter: ">=1.16.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -41,7 +40,7 @@ dependencies:
   font_awesome_flutter: ^10.2.1
   http: ^0.13.5
   flutter_svg: ^1.1.6
-  syncfusion_flutter_pdfviewer: ^20.3.56
+  syncfusion_flutter_pdfviewer: ^20.3.59
   image_picker: ^0.8.6
   google_fonts: ^3.0.1
   url_launcher: ^6.1.6
@@ -69,7 +68,6 @@ dependencies:
   dotted_border: ^2.0.0+3
   syncfusion_flutter_gauges: ^20.3.61
   percent_indicator: ^4.2.2
-  gap: ^2.0.1
 
 
 

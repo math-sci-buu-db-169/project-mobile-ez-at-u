@@ -96,7 +96,7 @@ Future<Uint8List> generateResume(
  String isWord = isPreViewResumeResponse.body?.data?.skill?[0].skill ?? '';
  String isExcel = isPreViewResumeResponse.body?.data?.skill?[1].skill ?? '';
  String isPowerPoint =  'PowerPoint';
- String isEnglish = isPreViewResumeResponse.body?.data?.languge?[0].language ?? '';
+ String isEnglish = isPreViewResumeResponse.body?.data?.language?[0].language ?? '';
  String isEducation =  isPreViewResumeResponse.body?.screenInfo?.education ?? 'Education';
  String isExperience =  isPreViewResumeResponse.body?.screenInfo?.experience ?? 'Experience';
   String isExperienceValueOne = isPreViewResumeResponse.body?.data?.experience?[0].position ?? '';

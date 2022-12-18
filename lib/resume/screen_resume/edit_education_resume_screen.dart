@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../../customs/dialog/dialog_widget.dart';
 import '../../../../../customs/message/text_button.dart';
@@ -11,8 +12,7 @@ import '../../../../../customs/progress_dialog.dart';
 import '../../../../../utils/shared_preferences.dart';
 import '../../customs/button/button_custom.dart';
 import '../../customs/color/color_const.dart';
-import '../../customs/datepicker/custom_date_picker_for_teacher.dart';
-import '../../customs/size/size.dart';
+import '../../customs/datepicker/custom_date_picker_for_resume.dart';
 import '../../customs/text_file/build_textformfiled_unlimit_custom.dart';
 import '../../module/login/screen/login_screen/login_screen.dart';
 import '../bloc_resume/resume_bloc.dart';
@@ -54,18 +54,23 @@ class _EditEducationResumePageState extends State<EditEducationResumePage>
   late String textSessionExpired;
   late String textSubSessionExpired;
   late String _buttonOk;
-  late int orderChoose;
-  late String typeStatus;
+  late String typeid;
   late String typeShow;
+  late int orderChoose;
+  late int isOrderChoose;
   GetEducationResumeResponse? isGetEducationResumeResponse;
   @override
   void initState() {
     valueLanguage = "TH";
-    typeStatus   = 'bd' ;
+    typeid   = widget.type ;
+    orderChoose   = 0 ;
+    isOrderChoose   = 0 ;
     typeShow = '' ;
-    orderChoose = 0 ;
     getUserLanguage();
     _isSessionUnauthorized();
+    startDateController.text = DateFormat('M/y').format( DateTime.now());
+    endDateController.text = DateFormat('M/y').format( DateTime.now());
+    // endDateController.text = DateFormat('M/y').format( DateTime.now().add(const Duration(days: 1)));
     // context.read<ResumeBloc>().add(GetEditScreenEducationResumeEvent(eduId:widget.id, type:widget.type));
     super.initState();
   }
@@ -94,7 +99,6 @@ class _EditEducationResumePageState extends State<EditEducationResumePage>
   TextEditingController detailControllerEN = TextEditingController();
   TextEditingController startDateController = TextEditingController();
   TextEditingController endDateController = TextEditingController();
-  TextEditingController typeController = TextEditingController();
    List<String> lengthPopupMenuItem =["High School Certificate","Bachelor Degrees","Master Degrees","Doctor Degrees","Honorary Doctorate Degree"];
 
   @override
@@ -108,6 +112,7 @@ class _EditEducationResumePageState extends State<EditEducationResumePage>
               state.isGetEducationResumeResponse;
           setState(() {
 
+            orderChoose = isGetEducationResumeResponse?.body?.data?.orderchoose??0 ;
             typeShow = "${isGetEducationResumeResponse?.body?.data?.typeTh ?? ''} \n${isGetEducationResumeResponse?.body?.data?.typeEn ?? ''}";
           });
         }
@@ -171,7 +176,7 @@ class _EditEducationResumePageState extends State<EditEducationResumePage>
           String? detailEn = isGetEducationResumeResponse?.body?.data?.detailEn;
           String? startDate = isGetEducationResumeResponse?.body?.data?.startdate;
           String? endDate = isGetEducationResumeResponse?.body?.data?.enddate;
-          String? typeid = isGetEducationResumeResponse?.body?.data?.typeid;
+          // String? typeid = isGetEducationResumeResponse?.body?.data?.typeid;
           String? typeTh = isGetEducationResumeResponse?.body?.data?.typeTh??'';
           String? typeEn = isGetEducationResumeResponse?.body?.data?.typeEn??'';
 
@@ -207,7 +212,7 @@ class _EditEducationResumePageState extends State<EditEducationResumePage>
                         height: 10,
                       ),
 
-                      CustomDatePickerForTeacher(
+                      CustomDatePickerForResumeMMYY(
                         textOnTopOfDatePicker: '$textStartDateTh / $textStartDateEn  *',
                         hintLabel:'$textStartDateTh / $textStartDateEn  *',
                         callbackFromCustomDatePicker: (String result) {
@@ -218,7 +223,7 @@ class _EditEducationResumePageState extends State<EditEducationResumePage>
                         },
                       ),
 
-                      CustomDatePickerForTeacher(
+                      CustomDatePickerForResumeMMYY(
                         textOnTopOfDatePicker: '$textEndDateTh / $textEndDateEn  *',
                         hintLabel:'$textEndDateTh / $textEndDateEn  *',
                         callbackFromCustomDatePicker: (String result) {
@@ -227,81 +232,6 @@ class _EditEducationResumePageState extends State<EditEducationResumePage>
                             print(endDateController.text);
                           }
                         },
-                      ),
-                      PopupMenuButton(
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Container(
-                              padding: EdgeInsets.only(right: 5,left: 5,top: 20,bottom: 20),
-                              decoration: BoxDecoration(
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(10),
-                                ),
-                                color: Theme.of(context).primaryColor == Colors.black
-                                    ? Color(0xFF1F222A)
-                                    : Colors.transparent.withOpacity(0.03),
-                              ),
-                              child: Padding(padding: EdgeInsets.only(left: 10,right: 10),child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    typeShow,
-                                    style: TextStyle(
-                                      // decoration: TextDecoration.underline,
-                                        decorationThickness: 2,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w500,
-                                        color: Theme.of(context).appBarTheme.foregroundColor),
-                                  ), Text(
-                                    'เลือก',
-                                    style: TextStyle(
-                                        decoration: TextDecoration.underline,
-                                        decorationThickness: 2,
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.w500,
-                                        color: Theme.of(context).appBarTheme.foregroundColor),
-                                  ),
-
-                                ],
-                              ),)
-                            ),
-
-                          ),
-                        ),
-                        itemBuilder: (context) {
-                          return List.generate(
-                              (isGetEducationResumeResponse?.body?.type?.length??0)
-                              , (index) {
-
-                            return  PopupMenuItem(
-                              value: index,
-                              child: Text(
-                                "${isGetEducationResumeResponse?.body?.type?[index].typeTh ?? ''} \n${isGetEducationResumeResponse?.body?.type?[index].typeEn ?? ''}",
-
-
-
-                                style: TextStyle(fontSize:12,color: Theme.of(context).appBarTheme.foregroundColor),),
-                            );
-
-                          }
-                          );
-                        },
-                        onSelected: (value) {
-
-                          setState(() {
-
-                            typeStatus = isGetEducationResumeResponse?.body?.type?[value].typeid?? "bd";
-                            typeController.text  = isGetEducationResumeResponse?.body?.type?[value].typeid?? "bd";
-                            typeid  = isGetEducationResumeResponse?.body?.type?[value].typeid?? "bd";
-                            typeShow ="${isGetEducationResumeResponse?.body?.type?[value].typeTh ?? ''}"
-                                "\n${isGetEducationResumeResponse?.body?.type?[value].typeEn ?? ''}";
-                          }
-                          );
-
-                        },
-
                       ),
 
 
@@ -365,6 +295,151 @@ class _EditEducationResumePageState extends State<EditEducationResumePage>
                         hintLabel: textDetailEn,
                         initialvalue: detailEn,
                         textInputType: TextInputType.text,
+                      ),
+
+                      PopupMenuButton(
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Container(
+                                padding: EdgeInsets.only(right: 5,left: 5,top: 20,bottom: 20),
+                                decoration: BoxDecoration(
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(10),
+                                  ),
+                                  color: Theme.of(context).primaryColor == Colors.black
+                                      ? Color(0xFF1F222A)
+                                      : Colors.transparent.withOpacity(0.03),
+                                ),
+                                child: Padding(padding: EdgeInsets.only(left: 10,right: 10),child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      typeShow,
+                                      style: TextStyle(
+                                        // decoration: TextDecoration.underline,
+                                          decorationThickness: 2,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500,
+                                          color: Theme.of(context).appBarTheme.foregroundColor),
+                                    ), Text(
+                                      'เลือก',
+                                      style: TextStyle(
+                                          decoration: TextDecoration.underline,
+                                          decorationThickness: 2,
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.w500,
+                                          color: Theme.of(context).appBarTheme.foregroundColor),
+                                    ),
+
+                                  ],
+                                ),)
+                            ),
+
+                          ),
+                        ),
+                        itemBuilder: (context) {
+                          return List.generate(
+                              (isGetEducationResumeResponse?.body?.type?.length??0)
+                              , (index) {
+
+                            return  PopupMenuItem(
+                              value: index,
+                              child: Text(
+                                "${isGetEducationResumeResponse?.body?.type?[index].typeTh ?? ''} \n${isGetEducationResumeResponse?.body?.type?[index].typeEn ?? ''}",
+
+
+
+                                style: TextStyle(fontSize:12,color: Theme.of(context).appBarTheme.foregroundColor),),
+                            );
+
+                          }
+                          );
+                        },
+                        onSelected: (value) {
+
+                          setState(() {
+                            typeid  = isGetEducationResumeResponse?.body?.type?[value].typeid?? "bd";
+                            typeShow ="${isGetEducationResumeResponse?.body?.type?[value].typeTh ?? ''}"
+                                "\n${isGetEducationResumeResponse?.body?.type?[value].typeEn ?? ''}";
+                          }
+                          );
+
+                        },
+
+                      ),
+
+                      PopupMenuButton(
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Container(
+                                padding: EdgeInsets.only(right: 5,left: 5,top: 20,bottom: 20),
+                                decoration: BoxDecoration(
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(10),
+                                  ),
+                                  color: Theme.of(context).primaryColor == Colors.black
+                                      ? Color(0xFF1F222A)
+                                      : Colors.transparent.withOpacity(0.03),
+                                ),
+                                child: Padding(padding: EdgeInsets.only(left: 10,right: 10),child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      orderChoose == 0?
+                                      isOrderChoose == 0?
+                                      "โปรดเลือกลำดับการแสดง":
+                                      "การแสดงอันดับที่  $isOrderChoose"
+                                          :"การแสดงอันดับที่  $orderChoose",
+                                      style: TextStyle(
+                                        // decoration: TextDecoration.underline,
+                                          decorationThickness: 2,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500,
+                                          color: Theme.of(context).appBarTheme.foregroundColor),
+                                    ), Text(
+                                      'เลือก',
+                                      style: TextStyle(
+                                          decoration: TextDecoration.underline,
+                                          decorationThickness: 2,
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.w500,
+                                          color: Theme.of(context).appBarTheme.foregroundColor),
+                                    ),
+
+                                  ],
+                                ),)
+                            ),
+
+                          ),
+                        ),
+                        itemBuilder: (context) {
+                          return List.generate(
+                              (lengthPopupMenuItem.length)
+                              , (index) {
+
+                            return  PopupMenuItem(
+                              value: index + 1,
+                              child: Text("${index + 1}" ??'Settings',style: TextStyle(color: Theme.of(context).appBarTheme.foregroundColor),),
+                            );
+
+                          }
+                          );
+                        },
+                        onSelected: (value) {
+                          isOrderChoose = value ;
+                          orderChoose = value ;
+                          setState(() {
+                            isOrderChoose = value ;
+                            orderChoose = value ;
+                          }
+                          );
+
+                        },
+
                       ),
 
                       const SizedBox(
@@ -456,10 +531,7 @@ class _EditEducationResumePageState extends State<EditEducationResumePage>
                                       ? endDate
                                       : endDateController.text) ??
                                       '',
-                                  type:(typeController.text == ''
-                                      ? typeid
-                                      : typeController.text) ??
-                                      '',
+                                  type:typeid,
                                   placeOfStudy: (placeOfStudyControllerTH.text == ''
                                       ? placeOfStudyTh
                                       : placeOfStudyControllerTH.text) ??

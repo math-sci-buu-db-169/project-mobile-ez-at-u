@@ -11,7 +11,8 @@ class EditChangePhotoRequest extends ResumeEvent {}
 
 class EditChangeLanguageResumeRequest extends ResumeEvent {}
 
-class GetPreviewResumeEvent extends ResumeEvent {}
+// class GetPreviewResumeEvent extends ResumeEvent {}
+class GetOnSelectedAndPreviewResumeEvent extends ResumeEvent {}
 
 class GetSetPreviewResumeEvent extends ResumeEvent {}
 

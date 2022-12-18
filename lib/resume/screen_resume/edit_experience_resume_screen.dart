@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../../customs/dialog/dialog_widget.dart';
 import '../../../../../customs/message/text_button.dart';
@@ -52,9 +53,6 @@ class _EditExperienceResumePageState extends State<EditExperienceResumePage>
   late String textSessionExpired;
   late String textSubSessionExpired;
   late String _buttonOk;
-  late String _pinValueString;
-  late bool _isHiddenPin;
-  late bool _isHiddenBio;
   late int searchStatus;
   late int isSearchStatus;
   late String typeStatus;
@@ -67,22 +65,12 @@ class _EditExperienceResumePageState extends State<EditExperienceResumePage>
     typeStatus = '' ;
     getUserLanguage();
     _isSessionUnauthorized();
-    _isSessionPin();
-    // localAuth(context);
+    startDateController.text = DateFormat('M/y').format( DateTime.now());
+    endDateController.text = DateFormat('M/y').format( DateTime.now());
     context.read<ResumeBloc>().add(GetEditScreenExperienceResumeEvent(id:widget.id));
     super.initState();
   }
 
-  Future<void> _isSessionPin() async {
-    prefs = await SharedPreferences.getInstance();
-    String pinStringToBool = prefs.getString('pinStatus') ?? 'false';
-    String bioStringToBool = prefs.getString('bioStatus') ?? 'false';
-    _isHiddenPin = pinStringToBool == 'true' ? true : false;
-    _isHiddenBio = bioStringToBool == 'true' ? true : false;
-    _pinValueString = prefs.getString('pinValue') ?? '...';
-
-    setState(() {});
-  }
 
   getUserLanguage() async {
     prefs = await SharedPreferences.getInstance();

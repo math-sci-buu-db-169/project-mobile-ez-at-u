@@ -43,3 +43,28 @@ const contactUsFaulty = Color(0xFFFFEA11);
 const fillColorDark = Color(0xFF1F222A);
 const fillColorLight = Color(0xFFFAFAFA);
 const fillColorLight2 = Colors;
+List<int>  pointerColorList =[0xFFCC2C32,0xFFE54B2F,0xFFEB552A,0xFFF2AB3C, 0xFFF1C249, 0xFFEFCE45,0xFFF8E64D,0xFFE6CF45,0xFFC3D846,0xFF69B434];
+widgetPointerValueColor(double pointerValue)  {
+  Color colorP;
+
+  colorP = pointerValue < 10
+      ? Color(pointerColorList[0])
+      : pointerValue < 20
+      ? Color(pointerColorList[1])
+      : pointerValue < 30
+      ? Color(pointerColorList[2])
+      : pointerValue < 40
+      ? Color(pointerColorList[3])
+      : pointerValue < 50
+      ? Color(pointerColorList[4])
+      :pointerValue < 60
+      ? Color(pointerColorList[5])
+      :pointerValue < 70
+      ? Color(pointerColorList[6])
+      :pointerValue < 80
+      ? Color(pointerColorList[7])
+      :pointerValue < 90
+      ? Color(pointerColorList[8])
+      :  Color(pointerColorList[9]);
+  return colorP;
+}

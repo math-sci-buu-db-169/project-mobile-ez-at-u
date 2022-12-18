@@ -18,6 +18,7 @@ import '../model/response/get_certificate_resume_response.dart';
 import '../model/response/get_about_me_resume_response.dart';
 import '../model/response/get_education_resume_response.dart';
 import '../model/response/get_experience_resume_response.dart';
+import '../model/response/get_on_selected_resume.dart';
 import '../model/response/get_position_resume_response.dart';
 import '../model/response/get_skill_language_resume_response.dart';
 import '../model/response/get_skill_resume_response.dart';
@@ -130,20 +131,58 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
       }
     }
 
-    on<GetPreviewResumeEvent>((event, emit) async {
+    // on<GetPreviewResumeEvent>((event, emit) async {
+    //   try {
+    //     emit(PreviewResumeLoading());
+    //     print("CheckProfile 5 == ProfileApiEvent");
+    //
+    //     await checkPreviewResumeEventInitial(event, emit);
+    //     Response responsePreViewResume = await getPreviewResumeDataAndScreen();
+    //     emit(PreviewResumeEndLoading());
+    //     if (responsePreViewResume.statusCode == 200) {
+    //       PreViewResumeResponse preViewResumeResponse =
+    //           PreViewResumeResponse.fromJson(responsePreViewResume.data);
+    //       if (preViewResumeResponse.head?.status == 200) {
+    //         emit(PreviewResumeSuccessState(
+    //             isPreViewResumeResponse: preViewResumeResponse));
+    //       } else {
+    //         emit(PreviewResumeError(
+    //             errorMessage: preViewResumeResponse.head?.message ?? ""));
+    //       }
+    //     } else {
+    //       emit(PreviewResumeError(
+    //           errorMessage: responsePreViewResume.statusMessage ?? ""));
+    //     }
+    //   } on DioError catch (e) {
+    //     emit(PreviewResumeError(errorMessage: e.response?.statusMessage ?? ""));
+    //   }
+    // });
+    on<GetOnSelectedAndPreviewResumeEvent>((event, emit) async {
       try {
         emit(PreviewResumeLoading());
-        print("CheckProfile 5 == ProfileApiEvent");
+        print("GetOnSelectedAndPreviewResumeEvent 56 == GetOnSelectedAndPreviewResumeEvent");
 
         await checkPreviewResumeEventInitial(event, emit);
         Response responsePreViewResume = await getPreviewResumeDataAndScreen();
+        Response responseOnSelectedResume = await getOnSelectedResume();
         emit(PreviewResumeEndLoading());
         if (responsePreViewResume.statusCode == 200) {
           PreViewResumeResponse preViewResumeResponse =
               PreViewResumeResponse.fromJson(responsePreViewResume.data);
           if (preViewResumeResponse.head?.status == 200) {
-            emit(PreviewResumeSuccessState(
-                isPreViewResumeResponse: preViewResumeResponse));
+            if (responseOnSelectedResume.statusCode == 200) {
+              GetOnSelectedResume getOnSelectedResume =
+              GetOnSelectedResume.fromJson(responseOnSelectedResume.data);
+              if (getOnSelectedResume.head?.status == 200) {
+                emit(OnSelectedAndPreviewResumeSuccessState(
+                    isPreViewResumeResponse: preViewResumeResponse,
+                    isGetOnSelectedResume: getOnSelectedResume,
+                ));
+              } else {
+                emit(PreviewResumeError(
+                    errorMessage: preViewResumeResponse.head?.message ?? ""));
+              }
+            }
           } else {
             emit(PreviewResumeError(
                 errorMessage: preViewResumeResponse.head?.message ?? ""));
@@ -669,7 +708,7 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
     });
     on<SentEditPositionsResumeEvent>((event, emit) async {
       try {
-        print("CheckProfile 5 == ProfileApiEvent");
+        print("SentEditPositionsResumeEvent 5 == SentEditPositionsResumeEvent");
 
         await checkPreviewResumeEventInitial(event, emit);
         Response responseSentEditPositionsResume = await sentEditPositionResume(

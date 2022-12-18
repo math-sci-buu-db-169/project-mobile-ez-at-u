@@ -50,13 +50,13 @@ class _EditCertificateResumePageState extends State<EditCertificateResumePage>
   late String textSessionExpired;
   late String textSubSessionExpired;
   late String _buttonOk;
-  late int searchStatus;
+  late int orderChoose;
   late int isSearchStatus;
   GetCertificateResumeResponse? isGetCertificateResumeResponse;
   @override
   void initState() {
     valueLanguage = "TH";
-    searchStatus   = 0 ;
+    orderChoose   = 0 ;
     isSearchStatus   = 0 ;
     getUserLanguage();
     _isSessionUnauthorized();
@@ -99,7 +99,7 @@ class _EditCertificateResumePageState extends State<EditCertificateResumePage>
               state.isGetCertificateResumeResponse;
           setState(() {
 
-            searchStatus = isGetCertificateResumeResponse?.body?.data?.orderchoose??0 ;
+            orderChoose = isGetCertificateResumeResponse?.body?.data?.orderchoose??0 ;
           });
         }
         if (state is SentEditCertificateResumeSuccessState) {
@@ -190,80 +190,6 @@ class _EditCertificateResumePageState extends State<EditCertificateResumePage>
                       const SizedBox(
                         height: 10,
                       ),
-
-                      PopupMenuButton(
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Container(
-                                padding: EdgeInsets.only(right: 5,left: 5,top: 20,bottom: 20),
-                                decoration: BoxDecoration(
-                                  borderRadius: const BorderRadius.all(
-                                    Radius.circular(10),
-                                  ),
-                                  color: Theme.of(context).primaryColor == Colors.black
-                                      ? Color(0xFF1F222A)
-                                      : Colors.transparent.withOpacity(0.03),
-                                ),
-                                child: Padding(padding: EdgeInsets.only(left: 10,right: 10),child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      searchStatus == 0?
-                                      isSearchStatus == 0?
-                                      "โปรดเลือกลำดับการแสดง":
-                                      "การแสดงอันดับที่  $isSearchStatus"
-                                          :"การแสดงอันดับที่  $searchStatus",
-                                      style: TextStyle(
-                                        // decoration: TextDecoration.underline,
-                                          decorationThickness: 2,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500,
-                                          color: Theme.of(context).appBarTheme.foregroundColor),
-                                    ), Text(
-                                      'เลือก',
-                                      style: TextStyle(
-                                          decoration: TextDecoration.underline,
-                                          decorationThickness: 2,
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.w500,
-                                          color: Theme.of(context).appBarTheme.foregroundColor),
-                                    ),
-
-                                  ],
-                                ),)
-                            ),
-
-                          ),
-                        ),
-                        itemBuilder: (context) {
-                          return List.generate(
-                              (lengthPopupMenuItem.length)
-                              , (index) {
-
-                            return  PopupMenuItem(
-                              value: index + 1,
-                              child: Text("${index + 1}" ??'Settings',style: TextStyle(color: Theme.of(context).appBarTheme.foregroundColor),),
-                            );
-
-                          }
-                          );
-                        },
-                        onSelected: (value) {
-                          isSearchStatus = value ;
-                          searchStatus = value ;
-                          setState(() {
-                            isSearchStatus = value ;
-                            searchStatus = value ;
-                          }
-                          );
-
-                        },
-
-                      ),
-
-
                       BuildTextFormFieldUnLimitCustomNotIconsNotContainer(
                         textEditingController: titleControllerTH,
                         onChanged: (valueNameControllerTH) {
@@ -325,6 +251,80 @@ class _EditCertificateResumePageState extends State<EditCertificateResumePage>
                       ),
 
 
+
+                      PopupMenuButton(
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Container(
+                                padding: EdgeInsets.only(right: 5,left: 5,top: 20,bottom: 20),
+                                decoration: BoxDecoration(
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(10),
+                                  ),
+                                  color: Theme.of(context).primaryColor == Colors.black
+                                      ? Color(0xFF1F222A)
+                                      : Colors.transparent.withOpacity(0.03),
+                                ),
+                                child: Padding(padding: EdgeInsets.only(left: 10,right: 10),child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      orderChoose == 0?
+                                      isSearchStatus == 0?
+                                      "โปรดเลือกลำดับการแสดง":
+                                      "การแสดงอันดับที่  $isSearchStatus"
+                                          :"การแสดงอันดับที่  $orderChoose",
+                                      style: TextStyle(
+                                        // decoration: TextDecoration.underline,
+                                          decorationThickness: 2,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500,
+                                          color: Theme.of(context).appBarTheme.foregroundColor),
+                                    ), Text(
+                                      'เลือก',
+                                      style: TextStyle(
+                                          decoration: TextDecoration.underline,
+                                          decorationThickness: 2,
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.w500,
+                                          color: Theme.of(context).appBarTheme.foregroundColor),
+                                    ),
+
+                                  ],
+                                ),)
+                            ),
+
+                          ),
+                        ),
+                        itemBuilder: (context) {
+                          return List.generate(
+                              (lengthPopupMenuItem.length)
+                              , (index) {
+
+                            return  PopupMenuItem(
+                              value: index + 1,
+                              child: Text("${index + 1}" ??'Settings',style: TextStyle(color: Theme.of(context).appBarTheme.foregroundColor),),
+                            );
+
+                          }
+                          );
+                        },
+                        onSelected: (value) {
+                          isSearchStatus = value ;
+                          orderChoose = value ;
+                          setState(() {
+                            isSearchStatus = value ;
+                            orderChoose = value ;
+                          }
+                          );
+
+                        },
+
+                      ),
+
+
                       const SizedBox(
                         height: 50,
                       ),
@@ -355,7 +355,7 @@ class _EditCertificateResumePageState extends State<EditCertificateResumePage>
                                 context.read<ResumeBloc>().add(SentEditCertificateResumeEvent(
                                   edit: true,
                                   id:widget.id,
-                                  orderChoose: searchStatus,
+                                  orderChoose: orderChoose,
                                   titleTH :(titleControllerTH.text == ''
                                       ? titleTh
                                       : titleControllerTH.text) ??
@@ -397,7 +397,7 @@ class _EditCertificateResumePageState extends State<EditCertificateResumePage>
                                 context.read<ResumeBloc>().add(SentEditCertificateResumeEvent(
                                   edit: false,
                                   id:widget.id,
-                                  orderChoose: searchStatus,
+                                  orderChoose: orderChoose,
                                   titleTH :(titleControllerTH.text == ''
                                       ? titleTh
                                       : titleControllerTH.text) ??

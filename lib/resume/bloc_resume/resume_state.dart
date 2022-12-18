@@ -38,6 +38,12 @@ class PreviewResumeSuccessState extends  ResumeState {
   PreViewResumeResponse isPreViewResumeResponse;
   PreviewResumeSuccessState({required this.isPreViewResumeResponse});
 }
+class OnSelectedAndPreviewResumeSuccessState extends  ResumeState {
+  PreViewResumeResponse isPreViewResumeResponse;
+  GetOnSelectedResume isGetOnSelectedResume;
+
+  OnSelectedAndPreviewResumeSuccessState({required this.isPreViewResumeResponse , required this.isGetOnSelectedResume});
+}
 
 class SetPreviewResumeSuccessState extends  ResumeState {
   PreViewResumeResponse isPreViewResumeResponse;
