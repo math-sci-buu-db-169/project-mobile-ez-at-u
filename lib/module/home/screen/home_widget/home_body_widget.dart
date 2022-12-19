@@ -111,8 +111,9 @@ homeTeacherBodyEmptyActivityWidget(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            FaIcon(FontAwesomeIcons.bars,
-              color:Theme.of(context).bottomAppBarColor.withOpacity(0.8)
+            FaIcon(FontAwesomeIcons.faceSmile,
+              color: Colors.green.withOpacity(0.8)
+              // color:Theme.of(context).bottomAppBarColor.withOpacity(0.8)
               ,size: 100,),
             // Icon(
             //   Icons.running_with_errors_outlined,
