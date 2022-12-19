@@ -156,3 +156,7 @@ class GetEditScreenSkillResumeSuccessState extends  ResumeState {
   GetEditScreenSkillResumeSuccessState(
       {required this.isGetSkillResumeResponse});
 }
+class SetOnSelectedResumeSuccessState extends  ResumeState {
+  SetOnSelectedResume isSetOnSelectedResume;
+  SetOnSelectedResumeSuccessState({required this.isSetOnSelectedResume});
+}

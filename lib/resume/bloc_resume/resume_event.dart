@@ -13,6 +13,33 @@ class EditChangeLanguageResumeRequest extends ResumeEvent {}
 
 // class GetPreviewResumeEvent extends ResumeEvent {}
 class GetOnSelectedAndPreviewResumeEvent extends ResumeEvent {}
+class SetOnSelectedAndPreviewResumeEvent extends ResumeEvent {
+  List<OnSelect> positionOnSelect;
+  List<OnSelect> educationHSCOnSelect;
+  List<OnSelect> educationBDOnSelect ;
+  List<OnSelect> educationMDOnSelect ;
+  List<OnSelect> educationDDOnSelect ;
+  List<OnSelect> educationHDDOnSelect ;
+  List<OnSelect> socialOnSelect ;
+  List<OnSelect> addressOnSelect;
+  List<OnSelect> experienceOnSelect ;
+  List<OnSelect> certificateOnSelect ;
+  List<OnSelect> skillOnSelect ;
+  List<OnSelect> languageOnSelect ;
+  SetOnSelectedAndPreviewResumeEvent({
+    required  this.positionOnSelect,
+    required  this.educationHSCOnSelect,
+    required  this.educationBDOnSelect ,
+    required  this.educationMDOnSelect ,
+    required  this.educationDDOnSelect ,
+    required  this.educationHDDOnSelect ,
+    required  this.socialOnSelect ,
+    required  this.addressOnSelect,
+    required  this.experienceOnSelect ,
+    required  this.certificateOnSelect ,
+    required  this.skillOnSelect ,
+    required  this.languageOnSelect ,});
+}
 
 class GetSetPreviewResumeEvent extends ResumeEvent {}
 

@@ -7,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pdf/pdf.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../customs/button/button_custom.dart';
 import '../../customs/color/color_const.dart';
 import '../../customs/color/pdf_color_const.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -111,6 +112,9 @@ class _ContentDesignResumeState extends State<ContentDesignResume>
               Navigator.of(context).pop();
             });
           }
+        }
+        if (state is SetOnSelectedAndPreviewResumeEvent) {
+          context.read<ResumeBloc>().add(GetOnSelectedAndPreviewResumeEvent());
         }
       },
       builder: (context, state) {
@@ -1705,6 +1709,39 @@ class _BodyPreviewResumeState extends State<BodyPreviewResume> {
                     ),
                   ),
                   spaceGap(gap),
+
+                  Container(
+                    child: ButtonIconsCustomLimit(
+                      label: isPreViewResumeResponse.body?.screenInfo?.saveor??" Delete/ลบ",
+                      buttonIcons: Icon(
+                        FontAwesomeIcons.trashCan,
+                        color:bcButtonDelete.withOpacity(0.8),
+                        size: 20.0,
+                      ),
+                      colortext:bcButtonDelete.withOpacity(0.8),
+                      colorbutton:
+                      Theme.of(context).scaffoldBackgroundColor,
+                      sizetext: 14,
+                      colorborder:bcButtonDelete.withOpacity(0.8),
+                      sizeborder: 3,
+                      onPressed: () {
+                        context.read<ResumeBloc>().add(SetOnSelectedAndPreviewResumeEvent(
+                          positionOnSelect : positionOnSelect ,
+                          educationHSCOnSelect:   educationHSCOnSelect ,
+                          educationBDOnSelect :  educationBDOnSelect  ,
+                          educationMDOnSelect: educationMDOnSelect  ,
+                          educationDDOnSelect :  educationDDOnSelect  ,
+                          educationHDDOnSelect:  educationHDDOnSelect  ,
+                          socialOnSelect:  socialOnSelect  ,
+                          addressOnSelect: addressOnSelect ,
+                          experienceOnSelect: experienceOnSelect  ,
+                          certificateOnSelect: certificateOnSelect  ,
+                          skillOnSelect:  skillOnSelect  ,
+                          languageOnSelect : languageOnSelect  ,
+                        ));
+                      },
+                    ),
+                  )
                 ],
               ),
             ),
@@ -2393,6 +2430,6 @@ class OnSelect {
     required  this.id,
     required   this.onselect,
   });
-  Map<String, dynamic> toJson() => {"id": id, "select": onselect};
+  Map<String, dynamic> toJson() => {"id": id, "onselect": onselect};
 
 }

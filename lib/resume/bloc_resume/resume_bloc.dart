@@ -13,6 +13,7 @@ import '../../check_token/token_bloc.dart';
 import '../../main_route/main_route_bloc_model/check_token_expired_response.dart';
 import '../../main_route/main_route_bloc_model/refresh_token_response.dart';
 import '../../utils/shared_preferences.dart';
+import '../examples/content_design_resume.dart';
 import '../model/response/api_edit_resume_response_head.dart';
 import '../model/response/get_certificate_resume_response.dart';
 import '../model/response/get_about_me_resume_response.dart';
@@ -25,6 +26,7 @@ import '../model/response/get_skill_resume_response.dart';
 import '../model/response/get_user_infomartion_resume_response.dart';
 import '../model/response/image_up_load_resume_response.dart';
 import '../model/response/pre_view_resume_response.dart';
+import '../model/response/set_on_selected_resume.dart';
 import '../repository/resume_repository.dart';
 
 part 'resume_event.dart';
@@ -216,6 +218,46 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
         } else {
           emit(PreviewResumeError(
               errorMessage: responsePreViewResume.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(PreviewResumeError(errorMessage: e.response?.statusMessage ?? ""));
+      }
+    });
+    on<SetOnSelectedAndPreviewResumeEvent>((event, emit) async {
+      try {
+        emit(PreviewResumeLoading());
+        print("CheckProfile 5 == ProfileApiEvent");
+
+        await checkPreviewResumeEventInitial(event, emit);
+        Response responseSetOnSelectedResume= await setOnSelectedResume(
+          positionOnSelect : event.positionOnSelect ,
+          educationHSCOnSelect:   event.educationHSCOnSelect ,
+          educationBDOnSelect :  event.educationBDOnSelect  ,
+          educationMDOnSelect:  event.educationMDOnSelect  ,
+          educationDDOnSelect :  event.educationDDOnSelect  ,
+          educationHDDOnSelect:  event.educationHDDOnSelect  ,
+          socialOnSelect:  event.socialOnSelect  ,
+          addressOnSelect:  event.addressOnSelect ,
+          experienceOnSelect:  event.experienceOnSelect  ,
+          certificateOnSelect: event.certificateOnSelect  ,
+          skillOnSelect:  event.skillOnSelect  ,
+          languageOnSelect : event.languageOnSelect  ,
+
+        );
+        emit(PreviewResumeEndLoading());
+        if (responseSetOnSelectedResume.statusCode == 200) {
+          SetOnSelectedResume setOnSelectedResume =
+          SetOnSelectedResume.fromJson(responseSetOnSelectedResume.data);
+          if (setOnSelectedResume.head?.status == 200) {
+            emit(SetOnSelectedResumeSuccessState(
+                isSetOnSelectedResume: setOnSelectedResume));
+          } else {
+            emit(PreviewResumeError(
+                errorMessage: setOnSelectedResume.head?.message ?? ""));
+          }
+        } else {
+          emit(PreviewResumeError(
+              errorMessage: responseSetOnSelectedResume.statusMessage ?? ""));
         }
       } on DioError catch (e) {
         emit(PreviewResumeError(errorMessage: e.response?.statusMessage ?? ""));

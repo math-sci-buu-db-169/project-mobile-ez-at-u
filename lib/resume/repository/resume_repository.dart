@@ -4,6 +4,8 @@ import 'package:ez_at_u/utils/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../examples/content_design_resume.dart';
+
 
 
 late SharedPreferences prefs;
@@ -24,12 +26,6 @@ class ResumeRepository {
     return await MyDio.createDioServer().post("/login/refresh/token",
         data: jsonEncode({
           "refreshToken": refreshToken
-        })
-    );
-  }
-  Future<Response> getOnSelectedResume() async {
-    return await MyDio.createDioServer().post("/api/resume/onselectresume",
-        data: jsonEncode({
         })
     );
   }
@@ -394,6 +390,103 @@ class ResumeRepository {
           "languageresume": userLanguage
 
         })
+    );
+  }
+  Future<Response> getOnSelectedResume() async {
+    return await MyDio.createDioServer().post("/api/resume/onselectresume",
+        data: jsonEncode({
+        })
+    );
+  }
+  Future<Response> setOnSelectedResume({
+  required List<OnSelect> positionOnSelect,
+  required List<OnSelect> educationHSCOnSelect,
+  required List<OnSelect> educationBDOnSelect ,
+  required List<OnSelect> educationMDOnSelect ,
+  required List<OnSelect> educationDDOnSelect ,
+  required List<OnSelect> educationHDDOnSelect ,
+  required List<OnSelect> socialOnSelect ,
+  required List<OnSelect> addressOnSelect,
+  required List<OnSelect> experienceOnSelect ,
+  required List<OnSelect> certificateOnSelect ,
+  required List<OnSelect> skillOnSelect ,
+  required List<OnSelect> languageOnSelect ,
+
+}) async {
+    print(jsonEncode({
+      "data_on_select": {
+        "position_on_select": positionOnSelect,
+        "experience_on_select": experienceOnSelect,
+        "education_on_select": {
+          "hsc_on_select": educationHSCOnSelect,
+          "bd_on_select": educationBDOnSelect,
+          "md_on_select": educationMDOnSelect,
+          "dd_on_select":educationDDOnSelect,
+          "hdd_on_select": educationHDDOnSelect
+        },
+        "skill_on_select": skillOnSelect,
+        "certificate_on_select": certificateOnSelect,
+        "language_on_select": languageOnSelect,
+        "social_on_select": {
+          "onselected_email": socialOnSelect[0].onselect,
+          "onselected_phone":  socialOnSelect[1].onselect,
+          "onselected_facebook":  socialOnSelect[2].onselect,
+          "onselected_line": socialOnSelect[3].onselect,
+          "onselected_instagram":  socialOnSelect[4].onselect,
+          "onselected_twitter": socialOnSelect[5].onselect,
+          "onselected_youtube":  socialOnSelect[6].onselect,
+        },
+        "address_on_select": {
+          "onselected_number": addressOnSelect[0].onselect,
+          "onselected_moo":  addressOnSelect[1].onselect,
+          "onselected_soi":  addressOnSelect[2].onselect,
+          "onselected_road": addressOnSelect[3].onselect,
+          "onselected_subdistrict":  addressOnSelect[4].onselect,
+          "onselected_district": addressOnSelect[5].onselect,
+          "onselected_province":  addressOnSelect[6].onselect,
+          "onselected_zipcode": addressOnSelect[7].onselect,
+        }
+      }
+    }
+    ));
+    return await MyDio.createDioServer().post("/api/resume/setonselectresume",
+
+        data: jsonEncode({
+          "data_on_select": {
+            "position_on_select": positionOnSelect,
+            "experience_on_select": experienceOnSelect,
+            "education_on_select": {
+              "hsc_on_select": educationHSCOnSelect,
+              "bd_on_select": educationBDOnSelect,
+              "md_on_select": educationMDOnSelect,
+              "dd_on_select":educationDDOnSelect,
+              "hdd_on_select": educationHDDOnSelect
+            },
+            "skill_on_select": skillOnSelect,
+            "certificate_on_select": certificateOnSelect,
+            "language_on_select": languageOnSelect,
+            "social_on_select": {
+              "onselected_email": socialOnSelect[0].onselect,
+              "onselected_phone":  socialOnSelect[1].onselect,
+              "onselected_facebook":  socialOnSelect[2].onselect,
+              "onselected_line": socialOnSelect[3].onselect,
+              "onselected_instagram":  socialOnSelect[4].onselect,
+              "onselected_twitter": socialOnSelect[5].onselect,
+              "onselected_youtube":  socialOnSelect[6].onselect,
+            },
+            "address_on_select": {
+              "onselected_number": addressOnSelect[0].onselect,
+              "onselected_moo":  addressOnSelect[1].onselect,
+              "onselected_soi":  addressOnSelect[2].onselect,
+              "onselected_road": addressOnSelect[3].onselect,
+              "onselected_subdistrict":  addressOnSelect[4].onselect,
+              "onselected_district": addressOnSelect[5].onselect,
+              "onselected_province":  addressOnSelect[6].onselect,
+              "onselected_zipcode": addressOnSelect[7].onselect,
+            }
+          }
+        }
+        )
     );
   }
 }
