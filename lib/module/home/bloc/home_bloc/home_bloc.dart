@@ -124,9 +124,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> with HomeRepository {
         emit(HomeLoading());
         print("CheckHome 6 == HomeScreenInfoEvent");
         await checkHomeEventInitial(event, emit);
+        print("here 1  == getScreenHome");
         Response responseHome = await getScreenHome();
 
+        print("here out 1  == getScreenHome");
         if (responseHome.statusCode == 200) {
+
+          print("here 1  == getScreenHome 200");
           ScreenHomeResponse screenHomeResponse =
               ScreenHomeResponse.fromJson(responseHome.data);
           if (screenHomeResponse.head?.status == 200) {
@@ -138,22 +142,31 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> with HomeRepository {
                 buttonNoAPI: screenHomeResponse.body?.errorbutton?.buttonno,
                 buttonCancelAPI:
                     screenHomeResponse.body?.errorbutton?.buttoncancel);
+
+            print("here 2  == getApiProfile");
             Response responseProfile = await getApiProfile();
+            print("here out 2  == getApiProfile");
             if (responseProfile.statusCode == 200) {
+              print("here out 2  == statusCode 200");
               ApiProfileResponse apiProfileResponse =
                   ApiProfileResponse.fromJson(responseProfile.data);
               if (apiProfileResponse.head?.status == 200) {
+                print("here 2  == status 200");
                 prefs = await SharedPreferences.getInstance();
                 await setUserLanguage(
                     apiProfileResponse.body?.profileGeneralInfo?.langeuage ??
                         'TH');
                 await setMyNameUser(
                     apiProfileResponse.body?.profileGeneralInfo?.name ?? '');
+                print("here 3  == getUserRole");
                 Response responseGetUserRole = await getUserRole();
+                print("here out 3  == getUserRole");
                 if (responseGetUserRole.statusCode == 200){
+                  print("here 2  == getUserRole 200");
                   GetUserRoleResponse getUserRoleResponse =
                   GetUserRoleResponse.fromJson(responseGetUserRole.data);
                   if (getUserRoleResponse.head?.status == 200) {
+
                     if (getUserRoleResponse.body?.userrole == "ST"){
                       Response responseActivityStudent = await getApiActivityStudent();
                       if (responseActivityStudent.statusCode == 200) {

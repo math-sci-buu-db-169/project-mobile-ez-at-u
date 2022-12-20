@@ -66,20 +66,20 @@ Future<Uint8List> generateResume(
  String isLastName = isPreViewResumeResponse.body?.data?.userinfo?.lastname?? '';
  String isAboutMe = isPreViewResumeResponse.body?.screenInfo?.aboutme ?? '';
  String isAboutMeValue = isPreViewResumeResponse.body?.data?.aboutme ?? '';
- String isBachelor = isPreViewResumeResponse.body?.data?.education?.hsc?[1].placeofstudy  ?? '';
- String isBachelorValue = isPreViewResumeResponse.body?.data?.education?.hsc?[1].detail ?? '';
- String isBachelorValueDate = '${isPreViewResumeResponse.body?.data?.education?.hsc?[1].startdate??''} - ${isPreViewResumeResponse.body?.data?.education?.hsc?[1].enddate??''}';
+ String isBachelor = isPreViewResumeResponse.body?.data?.education?.hsc?[0].placeofstudy  ?? '';
+ String isBachelorValue = isPreViewResumeResponse.body?.data?.education?.hsc?[0].detail ?? '';
+ String isBachelorValueDate = '${isPreViewResumeResponse.body?.data?.education?.hsc?[0].startdate??''} - ${isPreViewResumeResponse.body?.data?.education?.hsc?[0].enddate??''}';
  String isHighSchool = isPreViewResumeResponse.body?.data?.education?.hsc?[0].placeofstudy  ?? '';
  String isHighSchoolValue =isPreViewResumeResponse.body?.data?.education?.hsc?[0].detail ?? '';
  String isHighSchoolValueDate = '${isPreViewResumeResponse.body?.data?.education?.hsc?[0].startdate??''} - ${isPreViewResumeResponse.body?.data?.education?.hsc?[0].enddate??''}';
  String isFacebook = isPreViewResumeResponse.body?.screenInfo?.facebook ?? '';
- String isFacebookValue = isPreViewResumeResponse.body?.data?.personinfo?.facebook ?? '';
+ String isFacebookValue = isPreViewResumeResponse.body?.data?.contactinfo?.facebook ?? '';
  String isLine = isPreViewResumeResponse.body?.screenInfo?.line ?? '';
- String isLineValue =  isPreViewResumeResponse.body?.data?.personinfo?.line ?? '';
+ String isLineValue =  isPreViewResumeResponse.body?.data?.contactinfo?.line ?? '';
  String isIG = isPreViewResumeResponse.body?.screenInfo?.instagram ?? '';
- String isIGValue =  isPreViewResumeResponse.body?.data?.personinfo?.instagram?? '';
+ String isIGValue =  isPreViewResumeResponse.body?.data?.contactinfo?.instagram?? '';
  String isEmail = isPreViewResumeResponse.body?.screenInfo?.email ?? '';
- String isEmailVAlue =  isPreViewResumeResponse.body?.data?.personinfo?.email?? '';
+ String isEmailVAlue =  isPreViewResumeResponse.body?.data?.contactinfo?.email?? '';
  String isAddress = isPreViewResumeResponse.body?.screenInfo?.address ?? '';
  String isAddressValue =  "${isPreViewResumeResponse.body?.data?.address?.number ?? ''} "
                           "${isPreViewResumeResponse.body?.data?.address?.moo ?? ''} "
@@ -94,7 +94,7 @@ Future<Uint8List> generateResume(
   String isCertificationsValueDetail =isPreViewResumeResponse.body?.data?.certificate?[0].description ?? '';
  String isSKILLS = isPreViewResumeResponse.body?.screenInfo?.skill ?? '';
  String isWord = isPreViewResumeResponse.body?.data?.skill?[0].skill ?? '';
- String isExcel = isPreViewResumeResponse.body?.data?.skill?[1].skill ?? '';
+ String isExcel = isPreViewResumeResponse.body?.data?.skill?[0].skill ?? '';
  String isPowerPoint =  'PowerPoint';
  String isEnglish = isPreViewResumeResponse.body?.data?.language?[0].language ?? '';
  String isEducation =  isPreViewResumeResponse.body?.screenInfo?.education ?? 'Education';

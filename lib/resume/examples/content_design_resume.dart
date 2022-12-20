@@ -23,7 +23,6 @@ import '../bloc_resume/resume_bloc.dart';
 import '../../module/login/screen/login_screen/login_screen.dart';
 import '../../utils/shared_preferences.dart';
 import '../app.dart';
-import '../model/response/get_on_selected_resume.dart';
 import '../model/response/pre_view_resume_response.dart';
 import 'content_design_resume_edit.dart';
 
@@ -33,7 +32,8 @@ class ContentDesignResumeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => ResumeBloc()..add(GetOnSelectedAndPreviewResumeEvent()),
+        create: (context) =>
+            ResumeBloc()..add(GetOnSelectedAndPreviewResumeEvent()),
         child: const ContentDesignResume());
   }
 }
@@ -55,7 +55,6 @@ class _ContentDesignResumeState extends State<ContentDesignResume>
   late String isPhotoResume;
 
   late PreViewResumeResponse _preViewResumeResponse;
-  late GetOnSelectedResume _isGetOnSelectedResume;
 
   @override
   void initState() {
@@ -77,7 +76,6 @@ class _ContentDesignResumeState extends State<ContentDesignResume>
     setState(() {});
   }
 
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ResumeBloc, ResumeState>(
@@ -90,10 +88,9 @@ class _ContentDesignResumeState extends State<ContentDesignResume>
         }
         if (state is OnSelectedAndPreviewResumeSuccessState) {
           _preViewResumeResponse = state.isPreViewResumeResponse;
-          _isGetOnSelectedResume = state.isGetOnSelectedResume;
-           BodyPreviewResume(
-              isPreViewResumeResponse: _preViewResumeResponse,
-              isGetOnSelectedResume: _isGetOnSelectedResume);
+          BodyPreviewResume(
+            isPreViewResumeResponse: _preViewResumeResponse,
+          );
         }
         if (state is PreviewResumeError) {
           if (state.errorMessage.toString() == 'Unauthorized') {
@@ -120,10 +117,9 @@ class _ContentDesignResumeState extends State<ContentDesignResume>
       builder: (context, state) {
         if (state is OnSelectedAndPreviewResumeSuccessState) {
           _preViewResumeResponse = state.isPreViewResumeResponse;
-          _isGetOnSelectedResume = state.isGetOnSelectedResume;
           return BodyPreviewResume(
-              isPreViewResumeResponse: _preViewResumeResponse,
-              isGetOnSelectedResume: _isGetOnSelectedResume);
+            isPreViewResumeResponse: _preViewResumeResponse,
+          );
         } else {
           return Container();
         }
@@ -135,25 +131,9 @@ class _ContentDesignResumeState extends State<ContentDesignResume>
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class BodyPreviewResume extends StatefulWidget {
   final PreViewResumeResponse isPreViewResumeResponse;
-  final GetOnSelectedResume isGetOnSelectedResume;
-  const BodyPreviewResume({Key? key, required this.isPreViewResumeResponse, required this.isGetOnSelectedResume})
+  const BodyPreviewResume({Key? key, required this.isPreViewResumeResponse})
       : super(key: key);
 
   @override
@@ -161,8 +141,6 @@ class BodyPreviewResume extends StatefulWidget {
 }
 
 class _BodyPreviewResumeState extends State<BodyPreviewResume> {
-
-  late GetOnSelectedResume _isGetOnSelectedResume;
   late PreViewResumeResponse isPreViewResumeResponse;
   bool isSelectLanguageThai = true;
   int colorInt = 8;
@@ -222,30 +200,30 @@ class _BodyPreviewResumeState extends State<BodyPreviewResume> {
   late String textSubSessionExpired;
   late String _buttonOk;
   late String isAddressValue;
-  late List<OnSelect> positionOnSelect =[];
-  late List<OnSelect> educationHSCOnSelect =[];
-  late List<OnSelect> educationBDOnSelect =[];
-  late List<OnSelect> educationMDOnSelect =[];
-  late List<OnSelect> educationDDOnSelect =[];
-  late List<OnSelect> educationHDDOnSelect =[];
-  late List<OnSelect> socialOnSelect =[];
-  late List<OnSelect> addressOnSelect =[];
-  late List<OnSelect> experienceOnSelect =[];
-  late List<OnSelect> certificateOnSelect =[];
-  late List<OnSelect> skillOnSelect =[];
-  late List<OnSelect> languageOnSelect =[];
-  double gap =15.0;
+  late List<OnSelect> positionOnSelect = [];
+  late List<OnSelect> educationHSCOnSelect = [];
+  late List<OnSelect> educationBDOnSelect = [];
+  late List<OnSelect> educationMDOnSelect = [];
+  late List<OnSelect> educationDDOnSelect = [];
+  late List<OnSelect> educationHDDOnSelect = [];
+  late List<OnSelect> socialOnSelect = [];
+  late List<OnSelect> addressOnSelect = [];
+  late List<OnSelect> experienceOnSelect = [];
+  late List<OnSelect> certificateOnSelect = [];
+  late List<OnSelect> skillOnSelect = [];
+  late List<OnSelect> languageOnSelect = [];
+  double gap = 5.0;
   Future<void> _isSelectLanguageThai() async {
     prefs = await SharedPreferences.getInstance();
     isSelectLanguageThai =
         (prefs.getString('ResumePhoto') ?? '') == 'EN' ? false : true;
     setState(() {});
   }
-  onChangedSetState(){
-    setState(() {
 
-    });
+  onChangedSetState() {
+    setState(() {});
   }
+
   Future<void> _isSessionUnauthorized() async {
     prefs = await SharedPreferences.getInstance();
     _userLanguage = prefs.getString('userLanguage') ?? 'TH';
@@ -257,84 +235,103 @@ class _BodyPreviewResumeState extends State<BodyPreviewResume> {
     setState(() {});
   }
 
-
   @override
   void initState() {
     _isSelectLanguageThai();
     _isSessionUnauthorized();
-    _isGetOnSelectedResume= widget.isGetOnSelectedResume;
-
-     isPreViewResumeResponse = widget.isPreViewResumeResponse;
+    isPreViewResumeResponse = widget.isPreViewResumeResponse;
     positionOnSelectSet();
-    isAddressValue ='';
+    isAddressValue = '';
     super.initState();
   }
-  positionOnSelectSet(){
+
+  positionOnSelectSet() {
     print(jsonEncode(isPreViewResumeResponse.body?.data?.position?.length));
     print(jsonEncode(isPreViewResumeResponse.body?.data?.position));
-    print(jsonEncode(_isGetOnSelectedResume.body?.dataOnSelect?.positionOnSelect?.length));
-    print(jsonEncode(_isGetOnSelectedResume.body?.dataOnSelect?.positionOnSelect));
+    // print(jsonEncode(_isGetOnSelectedResume.body?.dataOnSelect?.positionOnSelect?.length));
+    // print(jsonEncode(_isGetOnSelectedResume.body?.dataOnSelect?.positionOnSelect));
     setState(() {
-      _isGetOnSelectedResume.body?.dataOnSelect?.positionOnSelect?.forEach((element) {
-        positionOnSelect.add(OnSelect(id:element.id??0,onselect:element.onselect??true));
-      }) ;
+      isPreViewResumeResponse.body?.data?.position?.forEach((element) {
+        positionOnSelect.add(
+            OnSelect(id: element.id ?? 0, onselect: element.onselect ?? true));
+      });
 
-      _isGetOnSelectedResume.body?.dataOnSelect?.experienceOnSelect?.forEach((element) {
-        experienceOnSelect.add(OnSelect(id:element.id??0,onselect:element.onselect??true));
-      }) ;
+      isPreViewResumeResponse.body?.data?.experience?.forEach((element) {
+        experienceOnSelect.add(
+            OnSelect(id: element.id ?? 0, onselect: element.onselect ?? true));
+      });
 
-      _isGetOnSelectedResume.body?.dataOnSelect?.certificateOnSelect?.forEach((element) {
-        certificateOnSelect.add(OnSelect(id:element.id??0,onselect:element.onselect??true));
-      }) ;
+      isPreViewResumeResponse.body?.data?.certificate?.forEach((element) {
+        certificateOnSelect.add(
+            OnSelect(id: element.id ?? 0, onselect: element.onselect ?? true));
+      });
 
-      _isGetOnSelectedResume.body?.dataOnSelect?.skillOnSelect?.forEach((element) {
-        skillOnSelect.add(OnSelect(id:element.id??0,onselect:element.onselect??true));
-      }) ;
+      isPreViewResumeResponse.body?.data?.skill?.forEach((element) {
+        skillOnSelect.add(
+            OnSelect(id: element.id ?? 0, onselect: element.onselect ?? true));
+      });
 
-      _isGetOnSelectedResume.body?.dataOnSelect?.languageOnSelect?.forEach((element) {
-        languageOnSelect.add(OnSelect(id:element.id??0,onselect:element.onselect??true));
-      }) ;
+      isPreViewResumeResponse.body?.data?.language?.forEach((element) {
+        languageOnSelect.add(
+            OnSelect(id: element.id ?? 0, onselect: element.onselect ?? true));
+      });
 
-      _isGetOnSelectedResume.body?.dataOnSelect?.educationOnSelect?.hscOnSelect?.forEach((element) {
-        educationHSCOnSelect.add(OnSelect(id:element.id??0,onselect:element.onselect??true));
-      }) ;
-      _isGetOnSelectedResume.body?.dataOnSelect?.educationOnSelect?.bdOnSelect?.forEach((element) {
-        educationBDOnSelect.add(OnSelect(id:element.id??0,onselect:element.onselect??true));
-      }) ;
-      _isGetOnSelectedResume.body?.dataOnSelect?.educationOnSelect?.mdOnSelect?.forEach((element) {
-        educationMDOnSelect.add(OnSelect(id:element.id??0,onselect:element.onselect??true));
-      }) ;
-      _isGetOnSelectedResume.body?.dataOnSelect?.educationOnSelect?.ddOnSelect?.forEach((element) {
-        educationDDOnSelect.add(OnSelect(id:element.id??0,onselect:element.onselect??true));
-      }) ;
-      var varSocialOnSelect = _isGetOnSelectedResume.body?.dataOnSelect?.socialOnSelect;
-      socialOnSelect=[
-          OnSelect(id:1,onselect:varSocialOnSelect?.onselectedEmail??false),
-          OnSelect(id:2,onselect:varSocialOnSelect?.onselectedPhone??false),
-          OnSelect(id:3,onselect:varSocialOnSelect?.onselectedFacebook??false),
-          OnSelect(id:4,onselect:varSocialOnSelect?.onselectedLine??false),
-          OnSelect(id:5,onselect:varSocialOnSelect?.onselectedInstagram??false),
-          OnSelect(id:6,onselect:varSocialOnSelect?.onselectedTwitter??false),
-          OnSelect(id:7,onselect:varSocialOnSelect?.onselectedYoutube??false),
-
+      isPreViewResumeResponse.body?.data?.education?.hsc?.forEach((element) {
+        educationHSCOnSelect.add(
+            OnSelect(id: element.id ?? 0, onselect: element.onselect ?? true));
+      });
+      isPreViewResumeResponse.body?.data?.education?.bd?.forEach((element) {
+        educationBDOnSelect.add(
+            OnSelect(id: element.id ?? 0, onselect: element.onselect ?? true));
+      });
+      isPreViewResumeResponse.body?.data?.education?.md?.forEach((element) {
+        educationMDOnSelect.add(
+            OnSelect(id: element.id ?? 0, onselect: element.onselect ?? true));
+      });
+      isPreViewResumeResponse.body?.data?.education?.dd?.forEach((element) {
+        educationDDOnSelect.add(
+            OnSelect(id: element.id ?? 0, onselect: element.onselect ?? true));
+      });
+      isPreViewResumeResponse.body?.data?.education?.hdd?.forEach((element) {
+        educationHDDOnSelect.add(
+            OnSelect(id: element.id ?? 0, onselect: element.onselect ?? true));
+      });
+      var varSocialOnSelect = isPreViewResumeResponse.body?.data?.contactinfo;
+      socialOnSelect = [
+        OnSelect(id: 1, onselect: varSocialOnSelect?.onselectedEmail ?? false),
+        OnSelect(id: 2, onselect: varSocialOnSelect?.onselectedPhone ?? false),
+        OnSelect(
+            id: 3, onselect: varSocialOnSelect?.onselectedFacebook ?? false),
+        OnSelect(id: 4, onselect: varSocialOnSelect?.onselectedLine ?? false),
+        OnSelect(
+            id: 5, onselect: varSocialOnSelect?.onselectedInstagram ?? false),
+        OnSelect(
+            id: 6, onselect: varSocialOnSelect?.onselectedTwitter ?? false),
+        OnSelect(
+            id: 7, onselect: varSocialOnSelect?.onselectedYoutube ?? false),
       ];
-      var varAddressOnSelect = _isGetOnSelectedResume.body?.dataOnSelect?.addressOnSelect;
-      addressOnSelect=[
-          OnSelect(id:1,onselect:varAddressOnSelect?.onselectedNumber??false),
-          OnSelect(id:2,onselect:varAddressOnSelect?.onselectedMoo??false),
-          OnSelect(id:3,onselect:varAddressOnSelect?.onselectedSoi??false),
-          OnSelect(id:4,onselect:varAddressOnSelect?.onselectedRoad??false),
-          OnSelect(id:5,onselect:varAddressOnSelect?.onselectedSubdistrict??false),
-          OnSelect(id:5,onselect:varAddressOnSelect?.onselectedDistrict??false),
-          OnSelect(id:6,onselect:varAddressOnSelect?.onselectedProvince??false),
-          OnSelect(id:7,onselect:varAddressOnSelect?.onselectedZipcode??false),
-
+      var varAddressOnSelect = isPreViewResumeResponse.body?.data?.address;
+      addressOnSelect = [
+        OnSelect(
+            id: 1, onselect: varAddressOnSelect?.onselectedNumber ?? false),
+        OnSelect(id: 2, onselect: varAddressOnSelect?.onselectedMoo ?? false),
+        OnSelect(id: 3, onselect: varAddressOnSelect?.onselectedSoi ?? false),
+        OnSelect(id: 4, onselect: varAddressOnSelect?.onselectedRoad ?? false),
+        OnSelect(
+            id: 5,
+            onselect: varAddressOnSelect?.onselectedSubdistrict ?? false),
+        OnSelect(
+            id: 5, onselect: varAddressOnSelect?.onselectedDistrict ?? false),
+        OnSelect(
+            id: 6, onselect: varAddressOnSelect?.onselectedProvince ?? false),
+        OnSelect(
+            id: 7, onselect: varAddressOnSelect?.onselectedZipcode ?? false),
       ];
       // _isGetOnSelectedResume.body?.dataOnSelect?.socialOnSelect?.hddOnSelect?.forEach((element) {
       //   socialOnSelect.add(OnSelect(id:element.id??0,onselect:element.onselect??true));
       // }) ;
 
-       isAddressValue =
+      isAddressValue =
           "${isPreViewResumeResponse.body?.data?.address?.number ?? ''} "
           "${isPreViewResumeResponse.body?.data?.address?.moo ?? ''} "
           " ${isPreViewResumeResponse.body?.data?.address?.soi ?? ''} "
@@ -350,9 +347,6 @@ class _BodyPreviewResumeState extends State<BodyPreviewResume> {
 
   @override
   Widget build(BuildContext context) {
-
-    _isGetOnSelectedResume= widget.isGetOnSelectedResume;
-
     isPreViewResumeResponse = widget.isPreViewResumeResponse;
     String prefix = isPreViewResumeResponse.body?.data?.userinfo?.prefix ?? '';
     String name =
@@ -415,9 +409,10 @@ class _BodyPreviewResumeState extends State<BodyPreviewResume> {
                     setState(() {
                       isSelectLanguageThai = !isSelectLanguageThai;
                       isSelectLanguageThai == true ? "TH" : "EN";
-
-
-                    }); context.read<ResumeBloc>().add(GetOnSelectedAndPreviewResumeEvent());
+                    });
+                    context
+                        .read<ResumeBloc>()
+                        .add(GetOnSelectedAndPreviewResumeEvent());
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -589,85 +584,49 @@ class _BodyPreviewResumeState extends State<BodyPreviewResume> {
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            GestureDetector(
-                                onTap: () {
-                                  print("Container clicked ChangePhotoRequest");
-                                  context
-                                      .read<ResumeBloc>()
-                                      .add(ChangeLanguageResumeRequest());
-                                },
-                                child: Stack(
-                                  children: [
-                                    Container(
-                                      padding: EdgeInsets.all(10),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(50),
-                                      ),
-                                      child: DottedBorder(
-                                        borderType: BorderType.RRect,
-                                        radius: Radius.circular(12),
-                                        padding: EdgeInsets.all(2),
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(12)),
-                                          child: Container(
-                                            //inner container
+                            Container(
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                              ),
+                              child: DottedBorder(
+                                borderType: BorderType.RRect,
+                                radius: Radius.circular(12),
+                                padding: EdgeInsets.all(2),
+                                child: ClipRRect(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(12)),
+                                  child: Container(
+                                    //inner container
 
-                                            height:
-                                                120, //height of inner container
-                                            width:
-                                                80, //width to 100% match to parent container.
-                                            color: colorBoxDotted,
+                                    height: 120, //height of inner container
+                                    width:
+                                        80, //width to 100% match to parent container.
+                                    color: colorBoxDotted,
 
-                                            child: Center(
-                                                child: (widget
-                                                                .isPreViewResumeResponse
-                                                                .body
-                                                                ?.data
-                                                                ?.image ==
-                                                            '' ||
-                                                        widget
-                                                                .isPreViewResumeResponse
-                                                                .body
-                                                                ?.data
-                                                                ?.image ==
-                                                            null)
-                                                    ? Image.asset(
-                                                        "assets/profile.jpg",
-                                                        width: 600.0,
-                                                        height: 240.0,
-                                                        fit: BoxFit.cover,
-                                                      )
-                                                    : Image.memory(
-                                                        (base64Decode(base64
-                                                            .normalize(widget
-                                                                    .isPreViewResumeResponse
-                                                                    .body
-                                                                    ?.data
-                                                                    ?.image ??
-                                                                imageBase64))),
-                                                      )), //background color of inner container
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      left: 15,
-                                      top: 15,
-                                      child: Icon(
-                                        FontAwesomeIcons.image,
-                                        color:
-                                            Theme.of(context).iconTheme.color,
-                                        size: 20,
-                                        shadows: <Shadow>[
-                                          Shadow(
-                                              color: Colors.white,
-                                              blurRadius: 15.0)
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                )),
+                                    child: Center(
+                                        child: (widget.isPreViewResumeResponse
+                                                        .body?.data?.image ==
+                                                    '' ||
+                                                widget.isPreViewResumeResponse
+                                                        .body?.data?.image ==
+                                                    null)
+                                            ? Image.asset(
+                                                "assets/profile.jpg",
+                                                width: 600.0,
+                                                height: 240.0,
+                                                fit: BoxFit.cover,
+                                              )
+                                            : Image.memory(
+                                                (base64Decode(base64.normalize(
+                                                    widget.isPreViewResumeResponse
+                                                            .body?.data?.image ??
+                                                        imageBase64))),
+                                              )), //background color of inner container
+                                  ),
+                                ),
+                              ),
+                            ),
                             Row(
                               children: [
                                 Column(
@@ -789,7 +748,7 @@ class _BodyPreviewResumeState extends State<BodyPreviewResume> {
                                               );
                                             }));
                                       },
-                                      child: Row(
+                                      child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
@@ -871,12 +830,13 @@ class _BodyPreviewResumeState extends State<BodyPreviewResume> {
                             isPreViewResumeEditData: '',
                             ontap: () {}),
                         buildPositionOnSelectCard(
-                            positionOnSelect:positionOnSelect,
+                            positionOnSelect: positionOnSelect,
                             context: context,
                             getColor: getColor,
                             onChangedSetState: onChangedSetState,
                             positionData:
-                                isPreViewResumeResponse.body?.data?.position??[],
+                                isPreViewResumeResponse.body?.data?.position ??
+                                    [],
                             appBarForegroundColor: appBarForegroundColor,
                             returnResumeEdit: () {}),
                       ],
@@ -895,60 +855,72 @@ class _BodyPreviewResumeState extends State<BodyPreviewResume> {
                             isPreViewResumeEditData: '',
                             ontap: () {}),
                         buildEducationOnSelectCard(
-                            educationOnSelect:educationHSCOnSelect,
-                          title: isPreViewResumeResponse
-                              .body?.screenInfo?.hsc ??"ระดับประกาศนียบัตรมัธยมศึกษาตอนปลาย",
-                            context: context,
-                            getColor: getColor,
-                            onChangedSetState: onChangedSetState,
-                          educationData:
-                                isPreViewResumeResponse.body?.data?.education?.hsc??[],
-                            appBarForegroundColor: appBarForegroundColor,
-                            returnResumeEdit: () {}, ),
+                          educationOnSelect: educationHSCOnSelect,
+                          title:
+                              isPreViewResumeResponse.body?.screenInfo?.hsc ??
+                                  "ระดับประกาศนียบัตรมัธยมศึกษาตอนปลาย",
+                          context: context,
+                          getColor: getColor,
+                          onChangedSetState: onChangedSetState,
+                          educationData: isPreViewResumeResponse
+                                  .body?.data?.education?.hsc ??
+                              [],
+                          appBarForegroundColor: appBarForegroundColor,
+                          returnResumeEdit: () {},
+                        ),
                         buildEducationOnSelectCard(
-                            educationOnSelect:educationBDOnSelect,
-                          title: isPreViewResumeResponse
-                              .body?.screenInfo?.bd ??"ระดับปริญญาตรี",
-                            context: context,
-                            getColor: getColor,
-                            onChangedSetState: onChangedSetState,
-                          educationData:
-                                isPreViewResumeResponse.body?.data?.education?.bd??[],
-                            appBarForegroundColor: appBarForegroundColor,
-                            returnResumeEdit: () {}, ),
+                          educationOnSelect: educationBDOnSelect,
+                          title: isPreViewResumeResponse.body?.screenInfo?.bd ??
+                              "ระดับปริญญาตรี",
+                          context: context,
+                          getColor: getColor,
+                          onChangedSetState: onChangedSetState,
+                          educationData: isPreViewResumeResponse
+                                  .body?.data?.education?.bd ??
+                              [],
+                          appBarForegroundColor: appBarForegroundColor,
+                          returnResumeEdit: () {},
+                        ),
                         buildEducationOnSelectCard(
-                            educationOnSelect:educationMDOnSelect,
-                          title: isPreViewResumeResponse
-                              .body?.screenInfo?.md ??"ระดับปริญญาโท",
-                            context: context,
-                            getColor: getColor,
-                            onChangedSetState: onChangedSetState,
-                          educationData:
-                                isPreViewResumeResponse.body?.data?.education?.md??[],
-                            appBarForegroundColor: appBarForegroundColor,
-                            returnResumeEdit: () {}, ),
+                          educationOnSelect: educationMDOnSelect,
+                          title: isPreViewResumeResponse.body?.screenInfo?.md ??
+                              "ระดับปริญญาโท",
+                          context: context,
+                          getColor: getColor,
+                          onChangedSetState: onChangedSetState,
+                          educationData: isPreViewResumeResponse
+                                  .body?.data?.education?.md ??
+                              [],
+                          appBarForegroundColor: appBarForegroundColor,
+                          returnResumeEdit: () {},
+                        ),
                         buildEducationOnSelectCard(
-                            educationOnSelect:educationDDOnSelect,
-                          title: isPreViewResumeResponse
-                              .body?.screenInfo?.dd ??"ระดับปริญญาเอก",
-                            context: context,
-                            getColor: getColor,
-                            onChangedSetState: onChangedSetState,
-                          educationData:
-                                isPreViewResumeResponse.body?.data?.education?.dd??[],
-                            appBarForegroundColor: appBarForegroundColor,
-                            returnResumeEdit: () {}, ),
+                          educationOnSelect: educationDDOnSelect,
+                          title: isPreViewResumeResponse.body?.screenInfo?.dd ??
+                              "ระดับปริญญาเอก",
+                          context: context,
+                          getColor: getColor,
+                          onChangedSetState: onChangedSetState,
+                          educationData: isPreViewResumeResponse
+                                  .body?.data?.education?.dd ??
+                              [],
+                          appBarForegroundColor: appBarForegroundColor,
+                          returnResumeEdit: () {},
+                        ),
                         buildEducationOnSelectCard(
-                            educationOnSelect:educationHDDOnSelect,
-                          title: isPreViewResumeResponse
-                              .body?.screenInfo?.hdd ??"ระดับปริญญาดุษฎีบัณฑิตกิตติมศักดิ์",
-                            context: context,
-                            getColor: getColor,
-                            onChangedSetState: onChangedSetState,
-                          educationData:
-                                isPreViewResumeResponse.body?.data?.education?.hdd??[],
-                            appBarForegroundColor: appBarForegroundColor,
-                            returnResumeEdit: () {}, ),
+                          educationOnSelect: educationHDDOnSelect,
+                          title:
+                              isPreViewResumeResponse.body?.screenInfo?.hdd ??
+                                  "ระดับปริญญาดุษฎีบัณฑิตกิตติมศักดิ์",
+                          context: context,
+                          getColor: getColor,
+                          onChangedSetState: onChangedSetState,
+                          educationData: isPreViewResumeResponse
+                                  .body?.data?.education?.hdd ??
+                              [],
+                          appBarForegroundColor: appBarForegroundColor,
+                          returnResumeEdit: () {},
+                        ),
                       ],
                     ),
                   ),
@@ -960,299 +932,339 @@ class _BodyPreviewResumeState extends State<BodyPreviewResume> {
                         buildTitleEditDataResume(
                             context: context,
                             isPreViewResumeTitle: isPreViewResumeResponse
-                                .body?.screenInfo?.contact ??
+                                    .body?.screenInfo?.contact ??
                                 "ช่องทางการติดต่อ",
-                            isPreViewResumeEditData:'',
-                            ontap: () {
-
-                            }),
+                            isPreViewResumeEditData: '',
+                            ontap: () {}),
                         Stack(
                           children: [
                             BuildTextFormFieldUnLimitSocialCustomResume(
-                              readOnly:true,
-
-                              hintLabel: isPreViewResumeResponse
-                                  .body?.screenInfo?.email ??
-                                  "email",
-                              initialvalue: isPreViewResumeResponse
-                                  .body?.data?.personinfo?.email??
-                                  ">> คุณยังไม่มีข้อมูลส่วนนี้ <<",
-                              textInputType: TextInputType.text,
-                              // iconsFile : Icons.person_rounded,
-                              iconsFile: FontAwesomeIcons.envelope,
-                                checkbox:Checkbox(
+                                readOnly: true,
+                                hintLabel: isPreViewResumeResponse
+                                        .body?.screenInfo?.email ??
+                                    "email",
+                                initialvalue: isPreViewResumeResponse
+                                        .body?.data?.contactinfo?.email ??
+                                    ">> คุณยังไม่มีข้อมูลส่วนนี้ <<",
+                                textInputType: TextInputType.text,
+                                // iconsFile : Icons.person_rounded,
+                                iconsFile: FontAwesomeIcons.envelope,
+                                checkbox: Checkbox(
                                   checkColor: Theme.of(context).primaryColor,
-                                  fillColor: MaterialStateProperty.resolveWith(getColor),
-                                  value:  isPreViewResumeResponse
-                                      .body?.data?.personinfo?.email ==null ?
-                                  false: socialOnSelect[0].onselect,
+                                  fillColor: MaterialStateProperty.resolveWith(
+                                      getColor),
+                                  value: isPreViewResumeResponse
+                                              .body?.data?.contactinfo?.email ==
+                                          null
+                                      ? false
+                                      : socialOnSelect[0].onselect,
                                   onChanged: (bool? value) {
-                                    if( isPreViewResumeResponse.body?.data?.personinfo?.phone !=null){
-                                      socialOnSelect[0].onselect= value!;
-                                    }else {
-                                      var textSnack =  'คุณยังไม่มีข้อมูลส่วนนี้ ไม่สามารถเลือกได้';
-                                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                    if (isPreViewResumeResponse
+                                            .body?.data?.contactinfo?.phone !=
+                                        null) {
+                                      socialOnSelect[0].onselect = value!;
+                                    } else {
+                                      var textSnack =
+                                          'คุณยังไม่มีข้อมูลส่วนนี้ ไม่สามารถเลือกได้';
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
                                         content: Text(textSnack,
-                                            style: const TextStyle(fontSize: sizeTextSmaller14, color: Colors.black)),
+                                            style: const TextStyle(
+                                                fontSize: sizeTextSmaller14,
+                                                color: Colors.black)),
                                         duration: const Duration(seconds: 1),
-                                        backgroundColor: const Color(0xFFFFF9D1),
+                                        backgroundColor:
+                                            const Color(0xFFFFF9D1),
                                       ));
                                     }
                                     onChangedSetState();
                                     print(value);
-                                    print(socialOnSelect[0].onselect .toString());
+                                    print(
+                                        socialOnSelect[0].onselect.toString());
                                     print(socialOnSelect[0]);
                                     print(jsonEncode(socialOnSelect[1]));
                                     print(jsonEncode(socialOnSelect));
-
                                   },
-                                )
-                            ),
+                                )),
                           ],
-                        )
-                        ,
+                        ),
                         BuildTextFormFieldUnLimitSocialCustomResume(
-                          readOnly:true,
-                          hintLabel: isPreViewResumeResponse
-                              .body?.screenInfo?.phone ??
-                              "เบอร์โทรศัพท์",
-                          initialvalue: isPreViewResumeResponse
-                              .body?.data?.personinfo?.phone??
-                              ">> คุณยังไม่มีข้อมูลส่วนนี้ <<",
-                          textInputType: TextInputType.number,
-                          // iconsFile : Icons.person_rounded,
-                          iconsFile: FontAwesomeIcons.phone,
-                            checkbox:Checkbox(
+                            readOnly: true,
+                            hintLabel: isPreViewResumeResponse
+                                    .body?.screenInfo?.phone ??
+                                "เบอร์โทรศัพท์",
+                            initialvalue: isPreViewResumeResponse
+                                    .body?.data?.contactinfo?.phone ??
+                                ">> คุณยังไม่มีข้อมูลส่วนนี้ <<",
+                            textInputType: TextInputType.number,
+                            // iconsFile : Icons.person_rounded,
+                            iconsFile: FontAwesomeIcons.phone,
+                            checkbox: Checkbox(
                               checkColor: Theme.of(context).primaryColor,
-                              fillColor: MaterialStateProperty.resolveWith(getColor),
-                              value:  isPreViewResumeResponse
-                                  .body?.data?.personinfo?.phone ==null ?
-                              false: socialOnSelect[2].onselect,
+                              fillColor:
+                                  MaterialStateProperty.resolveWith(getColor),
+                              value: isPreViewResumeResponse
+                                          .body?.data?.contactinfo?.phone ==
+                                      null
+                                  ? false
+                                  : socialOnSelect[2].onselect,
                               onChanged: (bool? value) {
-                                if( isPreViewResumeResponse.body?.data?.personinfo?.phone !=null){
-                                  socialOnSelect[1].onselect= value!;
-                                }else {
-                                  var textSnack =  'คุณยังไม่มีข้อมูลส่วนนี้ ไม่สามารถเลือกได้';
-                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                if (isPreViewResumeResponse
+                                        .body?.data?.contactinfo?.phone !=
+                                    null) {
+                                  socialOnSelect[1].onselect = value!;
+                                } else {
+                                  var textSnack =
+                                      'คุณยังไม่มีข้อมูลส่วนนี้ ไม่สามารถเลือกได้';
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(SnackBar(
                                     content: Text(textSnack,
-                                        style: const TextStyle(fontSize: sizeTextSmaller14, color: Colors.black)),
+                                        style: const TextStyle(
+                                            fontSize: sizeTextSmaller14,
+                                            color: Colors.black)),
                                     duration: const Duration(seconds: 1),
                                     backgroundColor: const Color(0xFFFFF9D1),
                                   ));
                                 }
                                 onChangedSetState();
                                 print(value);
-                                print(socialOnSelect[1].onselect .toString());
+                                print(socialOnSelect[1].onselect.toString());
                                 print(socialOnSelect[1]);
                                 print(jsonEncode(socialOnSelect[2]));
                                 print(jsonEncode(socialOnSelect));
-
                               },
-                            )
-                        ),
+                            )),
                         BuildTextFormFieldUnLimitSocialCustomResume(
-                          readOnly:true,
-                          hintLabel: isPreViewResumeResponse
-                              .body?.screenInfo?.facebook ??
-                              "เฟสบุ๊ค",
-                          initialvalue: isPreViewResumeResponse
-                              .body?.data?.personinfo?.facebook??
-                              ">> คุณยังไม่มีข้อมูลส่วนนี้ <<",
-                          textInputType: TextInputType.text,
-                          // iconsFile : Icons.person_rounded,
-                          iconsFile: FontAwesomeIcons.facebook,
-                            checkbox:Checkbox(
+                            readOnly: true,
+                            hintLabel: isPreViewResumeResponse
+                                    .body?.screenInfo?.facebook ??
+                                "เฟสบุ๊ค",
+                            initialvalue: isPreViewResumeResponse
+                                    .body?.data?.contactinfo?.facebook ??
+                                ">> คุณยังไม่มีข้อมูลส่วนนี้ <<",
+                            textInputType: TextInputType.text,
+                            // iconsFile : Icons.person_rounded,
+                            iconsFile: FontAwesomeIcons.facebook,
+                            checkbox: Checkbox(
                               checkColor: Theme.of(context).primaryColor,
-                              fillColor: MaterialStateProperty.resolveWith(getColor),
-                              value:  isPreViewResumeResponse
-                                  .body?.data?.personinfo?.facebook ==null ?
-                              false: socialOnSelect[2].onselect,
+                              fillColor:
+                                  MaterialStateProperty.resolveWith(getColor),
+                              value: isPreViewResumeResponse
+                                          .body?.data?.contactinfo?.facebook ==
+                                      null
+                                  ? false
+                                  : socialOnSelect[2].onselect,
                               onChanged: (bool? value) {
-                                if( isPreViewResumeResponse.body?.data?.personinfo?.facebook !=null){
-                                  socialOnSelect[2].onselect= value!;
-                                }else {
-                                  var textSnack =  'คุณยังไม่มีข้อมูลส่วนนี้ ไม่สามารถเลือกได้';
-                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                if (isPreViewResumeResponse
+                                        .body?.data?.contactinfo?.facebook !=
+                                    null) {
+                                  socialOnSelect[2].onselect = value!;
+                                } else {
+                                  var textSnack =
+                                      'คุณยังไม่มีข้อมูลส่วนนี้ ไม่สามารถเลือกได้';
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(SnackBar(
                                     content: Text(textSnack,
-                                        style: const TextStyle(fontSize: sizeTextSmaller14, color: Colors.black)),
+                                        style: const TextStyle(
+                                            fontSize: sizeTextSmaller14,
+                                            color: Colors.black)),
                                     duration: const Duration(seconds: 1),
                                     backgroundColor: const Color(0xFFFFF9D1),
                                   ));
                                 }
                                 onChangedSetState();
                                 print(value);
-                                print(socialOnSelect[2].onselect .toString());
+                                print(socialOnSelect[2].onselect.toString());
                                 print(socialOnSelect[2]);
                                 print(jsonEncode(socialOnSelect[1]));
                                 print(jsonEncode(socialOnSelect));
-
                               },
-                            )
-                        ),
+                            )),
                         BuildTextFormFieldUnLimitSocialCustomResume(
-                          readOnly:true,
-                          hintLabel: isPreViewResumeResponse
-                              .body?.screenInfo?.line ??
-                              "ไลน์",
-                          initialvalue: isPreViewResumeResponse
-                              .body?.data?.personinfo?.line??
-                              ">> คุณยังไม่มีข้อมูลส่วนนี้ <<",
-                          textInputType: TextInputType.text,
-                          // iconsFile : Icons.person_rounded,
-                          iconsFile: FontAwesomeIcons.line,
-                            checkbox:Checkbox(
+                            readOnly: true,
+                            hintLabel: isPreViewResumeResponse
+                                    .body?.screenInfo?.line ??
+                                "ไลน์",
+                            initialvalue: isPreViewResumeResponse
+                                    .body?.data?.contactinfo?.line ??
+                                ">> คุณยังไม่มีข้อมูลส่วนนี้ <<",
+                            textInputType: TextInputType.text,
+                            // iconsFile : Icons.person_rounded,
+                            iconsFile: FontAwesomeIcons.line,
+                            checkbox: Checkbox(
                               checkColor: Theme.of(context).primaryColor,
-                              fillColor: MaterialStateProperty.resolveWith(getColor),
-                              value:  isPreViewResumeResponse
-                                  .body?.data?.personinfo?.line ==null ?
-                              false: socialOnSelect[3].onselect,
+                              fillColor:
+                                  MaterialStateProperty.resolveWith(getColor),
+                              value: isPreViewResumeResponse
+                                          .body?.data?.contactinfo?.line ==
+                                      null
+                                  ? false
+                                  : socialOnSelect[3].onselect,
                               onChanged: (bool? value) {
-                                if( isPreViewResumeResponse.body?.data?.personinfo?.line !=null){
-                                  socialOnSelect[3].onselect= value!;
-                                }else {
-                                  var textSnack =  'คุณยังไม่มีข้อมูลส่วนนี้ ไม่สามารถเลือกได้';
-                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                if (isPreViewResumeResponse
+                                        .body?.data?.contactinfo?.line !=
+                                    null) {
+                                  socialOnSelect[3].onselect = value!;
+                                } else {
+                                  var textSnack =
+                                      'คุณยังไม่มีข้อมูลส่วนนี้ ไม่สามารถเลือกได้';
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(SnackBar(
                                     content: Text(textSnack,
-                                        style: const TextStyle(fontSize: sizeTextSmaller14, color: Colors.black)),
+                                        style: const TextStyle(
+                                            fontSize: sizeTextSmaller14,
+                                            color: Colors.black)),
                                     duration: const Duration(seconds: 1),
                                     backgroundColor: const Color(0xFFFFF9D1),
                                   ));
                                 }
                                 onChangedSetState();
                                 print(value);
-                                print(socialOnSelect[3].onselect .toString());
+                                print(socialOnSelect[3].onselect.toString());
                                 print(socialOnSelect[3]);
                                 print(jsonEncode(socialOnSelect[3]));
                                 print(jsonEncode(socialOnSelect));
-
                               },
-                            )
-                        ),
+                            )),
                         BuildTextFormFieldUnLimitSocialCustomResume(
-                          readOnly:true,
-
-                          hintLabel: isPreViewResumeResponse
-                              .body?.screenInfo?.instagram ??
-                              "instagram",
-                          initialvalue: isPreViewResumeResponse
-                              .body?.data?.personinfo?.instagram??
-                              ">> คุณยังไม่มีข้อมูลส่วนนี้ <<",
-                          textInputType: TextInputType.text,
-                          // iconsFile : Icons.person_rounded,
-                          iconsFile: FontAwesomeIcons.instagram,
-                            checkbox:Checkbox(
+                            readOnly: true,
+                            hintLabel: isPreViewResumeResponse
+                                    .body?.screenInfo?.instagram ??
+                                "instagram",
+                            initialvalue: isPreViewResumeResponse
+                                    .body?.data?.contactinfo?.instagram ??
+                                ">> คุณยังไม่มีข้อมูลส่วนนี้ <<",
+                            textInputType: TextInputType.text,
+                            // iconsFile : Icons.person_rounded,
+                            iconsFile: FontAwesomeIcons.instagram,
+                            checkbox: Checkbox(
                               checkColor: Theme.of(context).primaryColor,
-                              fillColor: MaterialStateProperty.resolveWith(getColor),
-                              value:  isPreViewResumeResponse
-                                  .body?.data?.personinfo?.instagram ==null ?
-                              false: socialOnSelect[4].onselect,
+                              fillColor:
+                                  MaterialStateProperty.resolveWith(getColor),
+                              value: isPreViewResumeResponse
+                                          .body?.data?.contactinfo?.instagram ==
+                                      null
+                                  ? false
+                                  : socialOnSelect[4].onselect,
                               onChanged: (bool? value) {
-                                if( isPreViewResumeResponse.body?.data?.personinfo?.instagram !=null){
-                                  socialOnSelect[4].onselect= value!;
-                                }else {
-                                  var textSnack =  'คุณยังไม่มีข้อมูลส่วนนี้ ไม่สามารถเลือกได้';
-                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                if (isPreViewResumeResponse
+                                        .body?.data?.contactinfo?.instagram !=
+                                    null) {
+                                  socialOnSelect[4].onselect = value!;
+                                } else {
+                                  var textSnack =
+                                      'คุณยังไม่มีข้อมูลส่วนนี้ ไม่สามารถเลือกได้';
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(SnackBar(
                                     content: Text(textSnack,
-                                        style: const TextStyle(fontSize: sizeTextSmaller14, color: Colors.black)),
+                                        style: const TextStyle(
+                                            fontSize: sizeTextSmaller14,
+                                            color: Colors.black)),
                                     duration: const Duration(seconds: 1),
                                     backgroundColor: const Color(0xFFFFF9D1),
                                   ));
                                 }
                                 onChangedSetState();
                                 print(value);
-                                print(socialOnSelect[4].onselect .toString());
+                                print(socialOnSelect[4].onselect.toString());
                                 print(socialOnSelect[4]);
                                 print(jsonEncode(socialOnSelect[4]));
                                 print(jsonEncode(socialOnSelect));
-
                               },
-                            )
-                        ),
+                            )),
                         BuildTextFormFieldUnLimitSocialCustomResume(
-                          readOnly:true,
-
-                          hintLabel: isPreViewResumeResponse
-                              .body?.screenInfo?.twitter ??
-                              "twitter",
-                          initialvalue: isPreViewResumeResponse
-                              .body?.data?.personinfo?.twitter??
-                              ">> คุณยังไม่มีข้อมูลส่วนนี้ <<",
-                          textInputType: TextInputType.text,
-                          // iconsFile : Icons.person_rounded,
-                          iconsFile: FontAwesomeIcons.twitter,
-                            checkbox:Checkbox(
+                            readOnly: true,
+                            hintLabel: isPreViewResumeResponse
+                                    .body?.screenInfo?.twitter ??
+                                "twitter",
+                            initialvalue: isPreViewResumeResponse
+                                    .body?.data?.contactinfo?.twitter ??
+                                ">> คุณยังไม่มีข้อมูลส่วนนี้ <<",
+                            textInputType: TextInputType.text,
+                            // iconsFile : Icons.person_rounded,
+                            iconsFile: FontAwesomeIcons.twitter,
+                            checkbox: Checkbox(
                               checkColor: Theme.of(context).primaryColor,
-                              fillColor: MaterialStateProperty.resolveWith(getColor),
-                              value:  isPreViewResumeResponse
-                                  .body?.data?.personinfo?.twitter ==null ?
-                              false: socialOnSelect[5].onselect,
+                              fillColor:
+                                  MaterialStateProperty.resolveWith(getColor),
+                              value: isPreViewResumeResponse
+                                          .body?.data?.contactinfo?.twitter ==
+                                      null
+                                  ? false
+                                  : socialOnSelect[5].onselect,
                               onChanged: (bool? value) {
-                                if( isPreViewResumeResponse.body?.data?.personinfo?.twitter !=null){
-                                  socialOnSelect[5].onselect= value!;
-                                }else {
-                                  var textSnack =  'คุณยังไม่มีข้อมูลส่วนนี้ ไม่สามารถเลือกได้';
-                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                if (isPreViewResumeResponse
+                                        .body?.data?.contactinfo?.twitter !=
+                                    null) {
+                                  socialOnSelect[5].onselect = value!;
+                                } else {
+                                  var textSnack =
+                                      'คุณยังไม่มีข้อมูลส่วนนี้ ไม่สามารถเลือกได้';
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(SnackBar(
                                     content: Text(textSnack,
-                                        style: const TextStyle(fontSize: sizeTextSmaller14, color: Colors.black)),
+                                        style: const TextStyle(
+                                            fontSize: sizeTextSmaller14,
+                                            color: Colors.black)),
                                     duration: const Duration(seconds: 1),
                                     backgroundColor: const Color(0xFFFFF9D1),
                                   ));
                                 }
                                 onChangedSetState();
                                 print(value);
-                                print(socialOnSelect[5].onselect .toString());
+                                print(socialOnSelect[5].onselect.toString());
                                 print(socialOnSelect[5]);
                                 print(jsonEncode(socialOnSelect[5]));
                                 print(jsonEncode(socialOnSelect));
-
                               },
-                            )
-                        ),
-
+                            )),
                         BuildTextFormFieldUnLimitSocialCustomResume(
-                          readOnly:true,
+                            readOnly: true,
+                            hintLabel: isPreViewResumeResponse
+                                    .body?.screenInfo?.youtube ??
+                                "youtube",
+                            initialvalue: isPreViewResumeResponse
+                                    .body?.data?.contactinfo?.youtube ??
+                                ">> คุณยังไม่มีข้อมูลส่วนนี้ <<",
+                            textInputType: TextInputType.text,
+                            // iconsFile : Icons.person_rounded,
+                            iconsFile: FontAwesomeIcons.youtube,
+                            checkbox: Checkbox(
+                              checkColor: Theme.of(context).primaryColor,
+                              fillColor:
+                                  MaterialStateProperty.resolveWith(getColor),
+                              value: isPreViewResumeResponse
+                                          .body?.data?.contactinfo?.youtube ==
+                                      null
+                                  ? false
+                                  : socialOnSelect[6].onselect,
+                              onChanged: (bool? value) {
+                                if (isPreViewResumeResponse
+                                        .body?.data?.contactinfo?.youtube !=
+                                    null) {
+                                  socialOnSelect[6].onselect = value!;
+                                } else {
+                                  var textSnack =
+                                      'คุณยังไม่มีข้อมูลส่วนนี้ ไม่สามารถเลือกได้';
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(SnackBar(
+                                    content: Text(textSnack,
+                                        style: const TextStyle(
+                                            fontSize: sizeTextSmaller14,
+                                            color: Colors.black)),
+                                    duration: const Duration(seconds: 1),
+                                    backgroundColor: const Color(0xFFFFF9D1),
+                                  ));
+                                }
 
-                          hintLabel: isPreViewResumeResponse
-                              .body?.screenInfo?.youtube ??
-                              "youtube",
-                          initialvalue: isPreViewResumeResponse
-                              .body?.data?.personinfo?.youtube??
-                              ">> คุณยังไม่มีข้อมูลส่วนนี้ <<",
-                          textInputType: TextInputType.text,
-                          // iconsFile : Icons.person_rounded,
-                          iconsFile: FontAwesomeIcons.youtube,
-
-
-                            checkbox:Checkbox(
-                        checkColor: Theme.of(context).primaryColor,
-                    fillColor: MaterialStateProperty.resolveWith(getColor),
-                    value:  isPreViewResumeResponse
-                        .body?.data?.personinfo?.youtube ==null ?
-                    false: socialOnSelect[6].onselect,
-                    onChanged: (bool? value) {
-                          if( isPreViewResumeResponse.body?.data?.personinfo?.youtube !=null){
-                            socialOnSelect[6].onselect= value!;
-                          }else {
-                            var textSnack =  'คุณยังไม่มีข้อมูลส่วนนี้ ไม่สามารถเลือกได้';
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text(textSnack,
-                                  style: const TextStyle(fontSize: sizeTextSmaller14, color: Colors.black)),
-                              duration: const Duration(seconds: 1),
-                              backgroundColor: const Color(0xFFFFF9D1),
-                            ));
-                          }
-
-                      onChangedSetState();
-                      print(value);
-                      print(socialOnSelect[6].onselect .toString());
-                      print(socialOnSelect[6]);
-                      print(jsonEncode(socialOnSelect[6]));
-                      print(jsonEncode(socialOnSelect));
-
-                    },
-                  )
-                        ),
-
+                                onChangedSetState();
+                                print(value);
+                                print(socialOnSelect[6].onselect.toString());
+                                print(socialOnSelect[6]);
+                                print(jsonEncode(socialOnSelect[6]));
+                                print(jsonEncode(socialOnSelect));
+                              },
+                            )),
                       ],
                     ),
                   ),
@@ -1264,351 +1276,398 @@ class _BodyPreviewResumeState extends State<BodyPreviewResume> {
                         buildTitleEditDataResume(
                             context: context,
                             isPreViewResumeTitle: isPreViewResumeResponse
-                                .body?.screenInfo?.address ??
+                                    .body?.screenInfo?.address ??
                                 "ที่อยู่ปัจจุบัน",
                             isPreViewResumeEditData: "",
-                            ontap: () {
-
-
-                            }),
+                            ontap: () {}),
                         Column(
                           children: [
                             BuildTextFormFieldUnLimitSocialCustomResume(
-                                readOnly:true,
-
+                                readOnly: true,
                                 hintLabel: isPreViewResumeResponse
-                                    .body?.screenInfo?.number ??
+                                        .body?.screenInfo?.number ??
                                     "บ้านเลขที่",
                                 initialvalue: isPreViewResumeResponse
-                                    .body?.data?.address?.number??
+                                        .body?.data?.address?.number ??
                                     ">> คุณยังไม่มีข้อมูลส่วนนี้ <<",
                                 textInputType: TextInputType.text,
                                 // iconsFile : Icons.person_rounded,
                                 iconsFile: FontAwesomeIcons.solidMap,
-                                checkbox:Checkbox(
+                                checkbox: Checkbox(
                                   checkColor: Theme.of(context).primaryColor,
-                                  fillColor: MaterialStateProperty.resolveWith(getColor),
-                                  value:  isPreViewResumeResponse
-                                      .body?.data?.address?.number ==null ?
-                                  false: addressOnSelect[0].onselect,
+                                  fillColor: MaterialStateProperty.resolveWith(
+                                      getColor),
+                                  value: isPreViewResumeResponse
+                                              .body?.data?.address?.number ==
+                                          null
+                                      ? false
+                                      : addressOnSelect[0].onselect,
                                   onChanged: (bool? value) {
-                                    if( isPreViewResumeResponse.body?.data?.address?.number !=null){
-                                      addressOnSelect[0].onselect= value!;
-                                    }else {
-                                      var textSnack =  'คุณยังไม่มีข้อมูลส่วนนี้ ไม่สามารถเลือกได้';
-                                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                    if (isPreViewResumeResponse
+                                            .body?.data?.address?.number !=
+                                        null) {
+                                      addressOnSelect[0].onselect = value!;
+                                    } else {
+                                      var textSnack =
+                                          'คุณยังไม่มีข้อมูลส่วนนี้ ไม่สามารถเลือกได้';
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
                                         content: Text(textSnack,
-                                            style: const TextStyle(fontSize: sizeTextSmaller14, color: Colors.black)),
+                                            style: const TextStyle(
+                                                fontSize: sizeTextSmaller14,
+                                                color: Colors.black)),
                                         duration: const Duration(seconds: 1),
-                                        backgroundColor: const Color(0xFFFFF9D1),
+                                        backgroundColor:
+                                            const Color(0xFFFFF9D1),
                                       ));
                                     }
                                     onChangedSetState();
                                     print(value);
-                                    print(addressOnSelect[0].onselect .toString());
+                                    print(
+                                        addressOnSelect[0].onselect.toString());
                                     print(addressOnSelect[0]);
                                     print(jsonEncode(addressOnSelect[1]));
                                     print(jsonEncode(addressOnSelect));
-
                                   },
-                                )
-                            ),
-
+                                )),
                             BuildTextFormFieldUnLimitSocialCustomResume(
-                                readOnly:true,
-
+                                readOnly: true,
                                 hintLabel: isPreViewResumeResponse
-                                    .body?.screenInfo?.moo ??
+                                        .body?.screenInfo?.moo ??
                                     "หมู่",
                                 initialvalue: isPreViewResumeResponse
-                                    .body?.data?.address?.moo??
+                                        .body?.data?.address?.moo ??
                                     ">> คุณยังไม่มีข้อมูลส่วนนี้ <<",
                                 textInputType: TextInputType.text,
                                 // iconsFile : Icons.person_rounded,
                                 iconsFile: FontAwesomeIcons.signsPost,
-                                checkbox:Checkbox(
+                                checkbox: Checkbox(
                                   checkColor: Theme.of(context).primaryColor,
-                                  fillColor: MaterialStateProperty.resolveWith(getColor),
-                                  value:  isPreViewResumeResponse
-                                      .body?.data?.address?.moo ==null ?
-                                  false: addressOnSelect[1].onselect,
+                                  fillColor: MaterialStateProperty.resolveWith(
+                                      getColor),
+                                  value: isPreViewResumeResponse
+                                              .body?.data?.address?.moo ==
+                                          null
+                                      ? false
+                                      : addressOnSelect[1].onselect,
                                   onChanged: (bool? value) {
-                                    if( isPreViewResumeResponse.body?.data?.address?.moo !=null){
-                                      addressOnSelect[1].onselect= value!;
-                                    }else {
-                                      var textSnack =  'คุณยังไม่มีข้อมูลส่วนนี้ ไม่สามารถเลือกได้';
-                                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                    if (isPreViewResumeResponse
+                                            .body?.data?.address?.moo !=
+                                        null) {
+                                      addressOnSelect[1].onselect = value!;
+                                    } else {
+                                      var textSnack =
+                                          'คุณยังไม่มีข้อมูลส่วนนี้ ไม่สามารถเลือกได้';
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
                                         content: Text(textSnack,
-                                            style: const TextStyle(fontSize: sizeTextSmaller14, color: Colors.black)),
+                                            style: const TextStyle(
+                                                fontSize: sizeTextSmaller14,
+                                                color: Colors.black)),
                                         duration: const Duration(seconds: 1),
-                                        backgroundColor: const Color(0xFFFFF9D1),
+                                        backgroundColor:
+                                            const Color(0xFFFFF9D1),
                                       ));
                                     }
                                     onChangedSetState();
                                     print(value);
-                                    print(addressOnSelect[1].onselect .toString());
+                                    print(
+                                        addressOnSelect[1].onselect.toString());
                                     print(addressOnSelect[1]);
                                     print(jsonEncode(addressOnSelect[1]));
                                     print(jsonEncode(addressOnSelect));
-
                                   },
-                                )
-                            ),
-
+                                )),
                             BuildTextFormFieldUnLimitSocialCustomResume(
-                                readOnly:true,
-
+                                readOnly: true,
                                 hintLabel: isPreViewResumeResponse
-                                    .body?.screenInfo?.soi ??
+                                        .body?.screenInfo?.soi ??
                                     "ซอย",
                                 initialvalue: isPreViewResumeResponse
-                                    .body?.data?.address?.soi??
+                                        .body?.data?.address?.soi ??
                                     ">> คุณยังไม่มีข้อมูลส่วนนี้ <<",
                                 textInputType: TextInputType.text,
                                 // iconsFile : Icons.person_rounded,
                                 iconsFile: FontAwesomeIcons.trafficLight,
-                                checkbox:Checkbox(
+                                checkbox: Checkbox(
                                   checkColor: Theme.of(context).primaryColor,
-                                  fillColor: MaterialStateProperty.resolveWith(getColor),
-                                  value:  isPreViewResumeResponse
-                                      .body?.data?.address?.soi ==null ?
-                                  false: addressOnSelect[2].onselect,
+                                  fillColor: MaterialStateProperty.resolveWith(
+                                      getColor),
+                                  value: isPreViewResumeResponse
+                                              .body?.data?.address?.soi ==
+                                          null
+                                      ? false
+                                      : addressOnSelect[2].onselect,
                                   onChanged: (bool? value) {
-                                    if( isPreViewResumeResponse.body?.data?.address?.soi !=null){
-                                      addressOnSelect[2].onselect= value!;
-                                    }else {
-                                      var textSnack =  'คุณยังไม่มีข้อมูลส่วนนี้ ไม่สามารถเลือกได้';
-                                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                    if (isPreViewResumeResponse
+                                            .body?.data?.address?.soi !=
+                                        null) {
+                                      addressOnSelect[2].onselect = value!;
+                                    } else {
+                                      var textSnack =
+                                          'คุณยังไม่มีข้อมูลส่วนนี้ ไม่สามารถเลือกได้';
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
                                         content: Text(textSnack,
-                                            style: const TextStyle(fontSize: sizeTextSmaller14, color: Colors.black)),
+                                            style: const TextStyle(
+                                                fontSize: sizeTextSmaller14,
+                                                color: Colors.black)),
                                         duration: const Duration(seconds: 1),
-                                        backgroundColor: const Color(0xFFFFF9D1),
+                                        backgroundColor:
+                                            const Color(0xFFFFF9D1),
                                       ));
                                     }
                                     onChangedSetState();
                                     print(value);
-                                    print(addressOnSelect[2].onselect .toString());
+                                    print(
+                                        addressOnSelect[2].onselect.toString());
                                     print(addressOnSelect[2]);
                                     print(jsonEncode(addressOnSelect[1]));
                                     print(jsonEncode(addressOnSelect));
-
                                   },
-                                )
-                            ),
-
-
+                                )),
                             BuildTextFormFieldUnLimitSocialCustomResume(
-                                readOnly:true,
-
+                                readOnly: true,
                                 hintLabel: isPreViewResumeResponse
-                                    .body?.screenInfo?.road ??
+                                        .body?.screenInfo?.road ??
                                     "ถนน",
                                 initialvalue: isPreViewResumeResponse
-                                    .body?.data?.address?.road??
+                                        .body?.data?.address?.road ??
                                     ">> คุณยังไม่มีข้อมูลส่วนนี้ <<",
                                 textInputType: TextInputType.text,
                                 // iconsFile : Icons.person_rounded,
                                 iconsFile: FontAwesomeIcons.road,
-                                checkbox:Checkbox(
+                                checkbox: Checkbox(
                                   checkColor: Theme.of(context).primaryColor,
-                                  fillColor: MaterialStateProperty.resolveWith(getColor),
-                                  value:  isPreViewResumeResponse
-                                      .body?.data?.address?.road ==null ?
-                                  false: addressOnSelect[3].onselect,
+                                  fillColor: MaterialStateProperty.resolveWith(
+                                      getColor),
+                                  value: isPreViewResumeResponse
+                                              .body?.data?.address?.road ==
+                                          null
+                                      ? false
+                                      : addressOnSelect[3].onselect,
                                   onChanged: (bool? value) {
-                                    if( isPreViewResumeResponse.body?.data?.address?.road !=null){
-                                      addressOnSelect[3].onselect= value!;
-                                    }else {
-                                      var textSnack =  'คุณยังไม่มีข้อมูลส่วนนี้ ไม่สามารถเลือกได้';
-                                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                    if (isPreViewResumeResponse
+                                            .body?.data?.address?.road !=
+                                        null) {
+                                      addressOnSelect[3].onselect = value!;
+                                    } else {
+                                      var textSnack =
+                                          'คุณยังไม่มีข้อมูลส่วนนี้ ไม่สามารถเลือกได้';
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
                                         content: Text(textSnack,
-                                            style: const TextStyle(fontSize: sizeTextSmaller14, color: Colors.black)),
+                                            style: const TextStyle(
+                                                fontSize: sizeTextSmaller14,
+                                                color: Colors.black)),
                                         duration: const Duration(seconds: 1),
-                                        backgroundColor: const Color(0xFFFFF9D1),
+                                        backgroundColor:
+                                            const Color(0xFFFFF9D1),
                                       ));
                                     }
                                     onChangedSetState();
                                     print(value);
-                                    print(addressOnSelect[3].onselect .toString());
+                                    print(
+                                        addressOnSelect[3].onselect.toString());
                                     print(addressOnSelect[3]);
                                     print(jsonEncode(addressOnSelect[3]));
                                     print(jsonEncode(addressOnSelect));
-
                                   },
-                                )
-                            ),
-
-
+                                )),
                             BuildTextFormFieldUnLimitSocialCustomResume(
-                                readOnly:true,
-
+                                readOnly: true,
                                 hintLabel: isPreViewResumeResponse
-                                    .body?.screenInfo?.subdistrict ??
+                                        .body?.screenInfo?.subdistrict ??
                                     "ตำบล",
                                 initialvalue: isPreViewResumeResponse
-                                    .body?.data?.address?.subdistrict??
+                                        .body?.data?.address?.subdistrict ??
                                     ">> คุณยังไม่มีข้อมูลส่วนนี้ <<",
                                 textInputType: TextInputType.text,
                                 // iconsFile : Icons.person_rounded,
                                 iconsFile: FontAwesomeIcons.treeCity,
-                                checkbox:Checkbox(
+                                checkbox: Checkbox(
                                   checkColor: Theme.of(context).primaryColor,
-                                  fillColor: MaterialStateProperty.resolveWith(getColor),
-                                  value:  isPreViewResumeResponse
-                                      .body?.data?.address?.subdistrict ==null ?
-                                  false: addressOnSelect[4].onselect,
+                                  fillColor: MaterialStateProperty.resolveWith(
+                                      getColor),
+                                  value: isPreViewResumeResponse.body?.data
+                                              ?.address?.subdistrict ==
+                                          null
+                                      ? false
+                                      : addressOnSelect[4].onselect,
                                   onChanged: (bool? value) {
-                                    if( isPreViewResumeResponse.body?.data?.address?.subdistrict !=null){
-                                      addressOnSelect[4].onselect= value!;
-                                    }else {
-                                      var textSnack =  'คุณยังไม่มีข้อมูลส่วนนี้ ไม่สามารถเลือกได้';
-                                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                    if (isPreViewResumeResponse
+                                            .body?.data?.address?.subdistrict !=
+                                        null) {
+                                      addressOnSelect[4].onselect = value!;
+                                    } else {
+                                      var textSnack =
+                                          'คุณยังไม่มีข้อมูลส่วนนี้ ไม่สามารถเลือกได้';
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
                                         content: Text(textSnack,
-                                            style: const TextStyle(fontSize: sizeTextSmaller14, color: Colors.black)),
+                                            style: const TextStyle(
+                                                fontSize: sizeTextSmaller14,
+                                                color: Colors.black)),
                                         duration: const Duration(seconds: 1),
-                                        backgroundColor: const Color(0xFFFFF9D1),
+                                        backgroundColor:
+                                            const Color(0xFFFFF9D1),
                                       ));
                                     }
                                     onChangedSetState();
                                     print(value);
-                                    print(addressOnSelect[4].onselect .toString());
+                                    print(
+                                        addressOnSelect[4].onselect.toString());
                                     print(addressOnSelect[4]);
                                     print(jsonEncode(addressOnSelect[4]));
                                     print(jsonEncode(addressOnSelect));
-
                                   },
-                                )
-                            ),
-
-
+                                )),
                             BuildTextFormFieldUnLimitSocialCustomResume(
-                                readOnly:true,
-
+                                readOnly: true,
                                 hintLabel: isPreViewResumeResponse
-                                    .body?.screenInfo?.district ??
+                                        .body?.screenInfo?.district ??
                                     "หมู่",
                                 initialvalue: isPreViewResumeResponse
-                                    .body?.data?.address?.district??
+                                        .body?.data?.address?.district ??
                                     ">> คุณยังไม่มีข้อมูลส่วนนี้ <<",
                                 textInputType: TextInputType.text,
                                 // iconsFile : Icons.person_rounded,
                                 iconsFile: FontAwesomeIcons.city,
-                                checkbox:Checkbox(
+                                checkbox: Checkbox(
                                   checkColor: Theme.of(context).primaryColor,
-                                  fillColor: MaterialStateProperty.resolveWith(getColor),
-                                  value:  isPreViewResumeResponse
-                                      .body?.data?.address?.district ==null ?
-                                  false: addressOnSelect[5].onselect,
+                                  fillColor: MaterialStateProperty.resolveWith(
+                                      getColor),
+                                  value: isPreViewResumeResponse
+                                              .body?.data?.address?.district ==
+                                          null
+                                      ? false
+                                      : addressOnSelect[5].onselect,
                                   onChanged: (bool? value) {
-                                    if( isPreViewResumeResponse.body?.data?.address?.district !=null){
-                                      addressOnSelect[5].onselect= value!;
-                                    }else {
-                                      var textSnack =  'คุณยังไม่มีข้อมูลส่วนนี้ ไม่สามารถเลือกได้';
-                                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                    if (isPreViewResumeResponse
+                                            .body?.data?.address?.district !=
+                                        null) {
+                                      addressOnSelect[5].onselect = value!;
+                                    } else {
+                                      var textSnack =
+                                          'คุณยังไม่มีข้อมูลส่วนนี้ ไม่สามารถเลือกได้';
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
                                         content: Text(textSnack,
-                                            style: const TextStyle(fontSize: sizeTextSmaller14, color: Colors.black)),
+                                            style: const TextStyle(
+                                                fontSize: sizeTextSmaller14,
+                                                color: Colors.black)),
                                         duration: const Duration(seconds: 1),
-                                        backgroundColor: const Color(0xFFFFF9D1),
+                                        backgroundColor:
+                                            const Color(0xFFFFF9D1),
                                       ));
                                     }
                                     onChangedSetState();
                                     print(value);
-                                    print(addressOnSelect[5].onselect .toString());
+                                    print(
+                                        addressOnSelect[5].onselect.toString());
                                     print(addressOnSelect[5]);
                                     print(jsonEncode(addressOnSelect[5]));
                                     print(jsonEncode(addressOnSelect));
-
                                   },
-                                )
-                            ),
-
-
+                                )),
                             BuildTextFormFieldUnLimitSocialCustomResume(
-                                readOnly:true,
-
+                                readOnly: true,
                                 hintLabel: isPreViewResumeResponse
-                                    .body?.screenInfo?.province ??
+                                        .body?.screenInfo?.province ??
                                     "จังหวัด",
                                 initialvalue: isPreViewResumeResponse
-                                    .body?.data?.address?.province??
+                                        .body?.data?.address?.province ??
                                     ">> คุณยังไม่มีข้อมูลส่วนนี้ <<",
                                 textInputType: TextInputType.text,
                                 // iconsFile : Icons.person_rounded,
                                 iconsFile: FontAwesomeIcons.earthAsia,
-                                checkbox:Checkbox(
+                                checkbox: Checkbox(
                                   checkColor: Theme.of(context).primaryColor,
-                                  fillColor: MaterialStateProperty.resolveWith(getColor),
-                                  value:  isPreViewResumeResponse
-                                      .body?.data?.address?.province ==null ?
-                                  false: addressOnSelect[6].onselect,
+                                  fillColor: MaterialStateProperty.resolveWith(
+                                      getColor),
+                                  value: isPreViewResumeResponse
+                                              .body?.data?.address?.province ==
+                                          null
+                                      ? false
+                                      : addressOnSelect[6].onselect,
                                   onChanged: (bool? value) {
-                                    if( isPreViewResumeResponse.body?.data?.address?.province !=null){
-                                      addressOnSelect[6].onselect= value!;
-                                    }else {
-                                      var textSnack =  'คุณยังไม่มีข้อมูลส่วนนี้ ไม่สามารถเลือกได้';
-                                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                    if (isPreViewResumeResponse
+                                            .body?.data?.address?.province !=
+                                        null) {
+                                      addressOnSelect[6].onselect = value!;
+                                    } else {
+                                      var textSnack =
+                                          'คุณยังไม่มีข้อมูลส่วนนี้ ไม่สามารถเลือกได้';
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
                                         content: Text(textSnack,
-                                            style: const TextStyle(fontSize: sizeTextSmaller14, color: Colors.black)),
+                                            style: const TextStyle(
+                                                fontSize: sizeTextSmaller14,
+                                                color: Colors.black)),
                                         duration: const Duration(seconds: 1),
-                                        backgroundColor: const Color(0xFFFFF9D1),
+                                        backgroundColor:
+                                            const Color(0xFFFFF9D1),
                                       ));
                                     }
                                     onChangedSetState();
                                     print(value);
-                                    print(addressOnSelect[6].onselect .toString());
+                                    print(
+                                        addressOnSelect[6].onselect.toString());
                                     print(addressOnSelect[6]);
                                     print(jsonEncode(addressOnSelect[6]));
                                     print(jsonEncode(addressOnSelect));
-
                                   },
-                                )
-                            ),
-
-
+                                )),
                             BuildTextFormFieldUnLimitSocialCustomResume(
-                                readOnly:true,
-
+                                readOnly: true,
                                 hintLabel: isPreViewResumeResponse
-                                    .body?.screenInfo?.zipcode??
+                                        .body?.screenInfo?.zipcode ??
                                     "รหัสไปรษณีย์",
                                 initialvalue: isPreViewResumeResponse
-                                    .body?.data?.address?.zipcode??
+                                        .body?.data?.address?.zipcode ??
                                     ">> คุณยังไม่มีข้อมูลส่วนนี้ <<",
                                 textInputType: TextInputType.text,
                                 // iconsFile : Icons.person_rounded,
                                 iconsFile: FontAwesomeIcons.mapPin,
-                                checkbox:Checkbox(
+                                checkbox: Checkbox(
                                   checkColor: Theme.of(context).primaryColor,
-                                  fillColor: MaterialStateProperty.resolveWith(getColor),
-                                  value:  isPreViewResumeResponse
-                                      .body?.data?.address?.zipcode==null ?
-                                  false: addressOnSelect[6].onselect,
+                                  fillColor: MaterialStateProperty.resolveWith(
+                                      getColor),
+                                  value: isPreViewResumeResponse
+                                              .body?.data?.address?.zipcode ==
+                                          null
+                                      ? false
+                                      : addressOnSelect[6].onselect,
                                   onChanged: (bool? value) {
-                                    if( isPreViewResumeResponse.body?.data?.address?.zipcode!=null){
-                                      addressOnSelect[6].onselect= value!;
-                                    }else {
-                                      var textSnack =  'คุณยังไม่มีข้อมูลส่วนนี้ ไม่สามารถเลือกได้';
-                                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                    if (isPreViewResumeResponse
+                                            .body?.data?.address?.zipcode !=
+                                        null) {
+                                      addressOnSelect[6].onselect = value!;
+                                    } else {
+                                      var textSnack =
+                                          'คุณยังไม่มีข้อมูลส่วนนี้ ไม่สามารถเลือกได้';
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
                                         content: Text(textSnack,
-                                            style: const TextStyle(fontSize: sizeTextSmaller14, color: Colors.black)),
+                                            style: const TextStyle(
+                                                fontSize: sizeTextSmaller14,
+                                                color: Colors.black)),
                                         duration: const Duration(seconds: 1),
-                                        backgroundColor: const Color(0xFFFFF9D1),
+                                        backgroundColor:
+                                            const Color(0xFFFFF9D1),
                                       ));
                                     }
                                     onChangedSetState();
                                     print(value);
-                                    print(addressOnSelect[6].onselect .toString());
+                                    print(
+                                        addressOnSelect[6].onselect.toString());
                                     print(addressOnSelect[6]);
                                     print(jsonEncode(addressOnSelect[6]));
                                     print(jsonEncode(addressOnSelect));
-
                                   },
-                                )
-                            ),
+                                )),
                           ],
-                        )
-                        ,
-
+                        ),
                       ],
                     ),
                   ),
@@ -1620,17 +1679,18 @@ class _BodyPreviewResumeState extends State<BodyPreviewResume> {
                         buildTitleEditDataResume(
                             context: context,
                             isPreViewResumeTitle: isPreViewResumeResponse
-                                .body?.screenInfo?.experience ??
+                                    .body?.screenInfo?.experience ??
                                 "ตำแหน่งที่สนใจ",
                             isPreViewResumeEditData: '',
                             ontap: () {}),
                         buildExperienceOnSelectCard(
-                            experienceOnSelect:experienceOnSelect,
+                            experienceOnSelect: experienceOnSelect,
                             context: context,
                             getColor: getColor,
                             onChangedSetState: onChangedSetState,
-                            experienceData:
-                            isPreViewResumeResponse.body?.data?.experience??[],
+                            experienceData: isPreViewResumeResponse
+                                    .body?.data?.experience ??
+                                [],
                             appBarForegroundColor: appBarForegroundColor,
                             returnResumeEdit: () {}),
                       ],
@@ -1644,17 +1704,18 @@ class _BodyPreviewResumeState extends State<BodyPreviewResume> {
                         buildTitleEditDataResume(
                             context: context,
                             isPreViewResumeTitle: isPreViewResumeResponse
-                                .body?.screenInfo?.certificate ??
+                                    .body?.screenInfo?.certificate ??
                                 "ใบรับรอง",
                             isPreViewResumeEditData: '',
                             ontap: () {}),
                         buildCertificateOnSelectCard(
-                            certificateOnSelect:certificateOnSelect,
+                            certificateOnSelect: certificateOnSelect,
                             context: context,
                             getColor: getColor,
                             onChangedSetState: onChangedSetState,
-                            certificateData:
-                            isPreViewResumeResponse.body?.data?.certificate??[],
+                            certificateData: isPreViewResumeResponse
+                                    .body?.data?.certificate ??
+                                [],
                             appBarForegroundColor: appBarForegroundColor,
                             returnResumeEdit: () {}),
                       ],
@@ -1668,17 +1729,17 @@ class _BodyPreviewResumeState extends State<BodyPreviewResume> {
                         buildTitleEditDataResume(
                             context: context,
                             isPreViewResumeTitle: isPreViewResumeResponse
-                                .body?.screenInfo?.skill ??
+                                    .body?.screenInfo?.skill ??
                                 "ทักษะความสามารถ",
                             isPreViewResumeEditData: '',
                             ontap: () {}),
                         buildSkillOnSelectCard(
-                            skillOnSelect:skillOnSelect,
+                            skillOnSelect: skillOnSelect,
                             context: context,
                             getColor: getColor,
                             onChangedSetState: onChangedSetState,
                             skillData:
-                            isPreViewResumeResponse.body?.data?.skill??[],
+                                isPreViewResumeResponse.body?.data?.skill ?? [],
                             appBarForegroundColor: appBarForegroundColor,
                             returnResumeEdit: () {}),
                       ],
@@ -1692,81 +1753,97 @@ class _BodyPreviewResumeState extends State<BodyPreviewResume> {
                         buildTitleEditDataResume(
                             context: context,
                             isPreViewResumeTitle: isPreViewResumeResponse
-                                .body?.screenInfo?.language ??
+                                    .body?.screenInfo?.language ??
                                 "ทักษะทางภาษา",
                             isPreViewResumeEditData: '',
                             ontap: () {}),
                         buildLanguageOnSelectCard(
-                            languageOnSelect:languageOnSelect,
+                            languageOnSelect: languageOnSelect,
                             context: context,
                             getColor: getColor,
                             onChangedSetState: onChangedSetState,
                             languageData:
-                            isPreViewResumeResponse.body?.data?.language??[],
+                                isPreViewResumeResponse.body?.data?.language ??
+                                    [],
                             appBarForegroundColor: appBarForegroundColor,
                             returnResumeEdit: () {}),
                       ],
                     ),
                   ),
-                  spaceGap(gap),
-
-                  Container(
-                    child: ButtonIconsCustomLimit(
-                      label: isPreViewResumeResponse.body?.screenInfo?.saveor??" Delete/ลบ",
-                      buttonIcons: Icon(
-                        FontAwesomeIcons.trashCan,
-                        color:bcButtonDelete.withOpacity(0.8),
-                        size: 20.0,
-                      ),
-                      colortext:bcButtonDelete.withOpacity(0.8),
-                      colorbutton:
-                      Theme.of(context).scaffoldBackgroundColor,
-                      sizetext: 14,
-                      colorborder:bcButtonDelete.withOpacity(0.8),
-                      sizeborder: 3,
-                      onPressed: () {
-                        context.read<ResumeBloc>().add(SetOnSelectedAndPreviewResumeEvent(
-                          positionOnSelect : positionOnSelect ,
-                          educationHSCOnSelect:   educationHSCOnSelect ,
-                          educationBDOnSelect :  educationBDOnSelect  ,
-                          educationMDOnSelect: educationMDOnSelect  ,
-                          educationDDOnSelect :  educationDDOnSelect  ,
-                          educationHDDOnSelect:  educationHDDOnSelect  ,
-                          socialOnSelect:  socialOnSelect  ,
-                          addressOnSelect: addressOnSelect ,
-                          experienceOnSelect: experienceOnSelect  ,
-                          certificateOnSelect: certificateOnSelect  ,
-                          skillOnSelect:  skillOnSelect  ,
-                          languageOnSelect : languageOnSelect  ,
-                        ));
-                      },
-                    ),
-                  )
+                  spaceGap(gap*20),
+                  // Container(
+                  //   child: ButtonIconsCustomLimit(
+                  //     label: isPreViewResumeResponse.body?.screenInfo?.saveor ??
+                  //         " Delete/ลบ",
+                  //     buttonIcons: Icon(
+                  //       FontAwesomeIcons.trashCan,
+                  //       color: bcButtonDelete.withOpacity(0.8),
+                  //       size: 20.0,
+                  //     ),
+                  //     colortext: bcButtonDelete.withOpacity(0.8),
+                  //     colorbutton: Theme.of(context).scaffoldBackgroundColor,
+                  //     sizetext: 14,
+                  //     colorborder: bcButtonDelete.withOpacity(0.8),
+                  //     sizeborder: 3,
+                  //     onPressed: () {
+                  //       context
+                  //           .read<ResumeBloc>()
+                  //           .add(SetOnSelectedAndPreviewResumeEvent(
+                  //             positionOnSelect: positionOnSelect,
+                  //             educationHSCOnSelect: educationHSCOnSelect,
+                  //             educationBDOnSelect: educationBDOnSelect,
+                  //             educationMDOnSelect: educationMDOnSelect,
+                  //             educationDDOnSelect: educationDDOnSelect,
+                  //             educationHDDOnSelect: educationHDDOnSelect,
+                  //             socialOnSelect: socialOnSelect,
+                  //             addressOnSelect: addressOnSelect,
+                  //             experienceOnSelect: experienceOnSelect,
+                  //             certificateOnSelect: certificateOnSelect,
+                  //             skillOnSelect: skillOnSelect,
+                  //             languageOnSelect: languageOnSelect,
+                  //           ));
+                  //     },
+                  //   ),
+                  // )
                 ],
               ),
             ),
           )),
-          // floatingActionButton: floatingGeneratePDF(
-          //   context: context,
-          //   setState,
-          //   "Generate PDF",
-          //   colorOfPdfUsButtonTitle: colorOfPdfUsButtonTitle,
-          //   colorOfPdfUsName: colorOfPdfUsName,
-          //   colorOfPdfUsPosition: colorOfPdfUsPosition,
-          //   colorOfPdfUsExperience: colorOfPdfUsExperience,
-          //   colorOfPdfUsEducations: colorOfPdfUsEducations,
-          //   colorOfPdfUsContact: colorOfPdfUsContact,
-          //   colorOfPdfUsCertifications: colorOfPdfUsCertifications,
-          //   colorOfPdfUsSkills: colorOfPdfUsSkills,
-          //   colorOfPdfUsAbout: colorOfPdfUsAbout,
-          //   colorOfPdfUsText: colorOfPdfUsText,
-          //   colorOfPdfUsTheme: colorOfPdfUsTheme,
-          //   widthSizeCM: widthSizeCM,
-          //   heightSizeCM: heightSizeCM,
-          //   isPreViewResumeResponse: isPreViewResumeResponse,
-          // ),
-          // floatingActionButtonLocation:
-          //     FloatingActionButtonLocation.centerFloat,
+          floatingActionButton: floatingGeneratePDF(
+            context: context,
+            setState,
+            "Generate PDF",
+            isPreViewResumeResponse.body?.screenInfo?.saveor ??
+              " Delete/ลบ",
+            colorOfPdfUsButtonTitle: colorOfPdfUsButtonTitle,
+            colorOfPdfUsName: colorOfPdfUsName,
+            colorOfPdfUsPosition: colorOfPdfUsPosition,
+            colorOfPdfUsExperience: colorOfPdfUsExperience,
+            colorOfPdfUsEducations: colorOfPdfUsEducations,
+            colorOfPdfUsContact: colorOfPdfUsContact,
+            colorOfPdfUsCertifications: colorOfPdfUsCertifications,
+            colorOfPdfUsSkills: colorOfPdfUsSkills,
+            colorOfPdfUsAbout: colorOfPdfUsAbout,
+            colorOfPdfUsText: colorOfPdfUsText,
+            colorOfPdfUsTheme: colorOfPdfUsTheme,
+            widthSizeCM: widthSizeCM,
+            heightSizeCM: heightSizeCM,
+            isPreViewResumeResponse: isPreViewResumeResponse,
+            positionOnSelect: positionOnSelect,
+            educationHSCOnSelect: educationHSCOnSelect,
+            educationBDOnSelect: educationBDOnSelect,
+            educationMDOnSelect: educationMDOnSelect,
+            educationDDOnSelect: educationDDOnSelect,
+            educationHDDOnSelect: educationHDDOnSelect,
+            socialOnSelect: socialOnSelect,
+            addressOnSelect: addressOnSelect,
+            experienceOnSelect: experienceOnSelect,
+            certificateOnSelect: certificateOnSelect,
+            skillOnSelect: skillOnSelect,
+            languageOnSelect: languageOnSelect,
+          ),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
         ));
   }
 }
@@ -1813,7 +1890,8 @@ selectColorViewPdf(
 
 floatingGeneratePDF(
   setState,
-  String pdf, {
+  String pdf,
+  String save, {
   required BuildContext context,
   required PdfColor colorOfPdfUsTheme,
   required PdfColor colorOfPdfUsButtonTitle,
@@ -1829,42 +1907,92 @@ floatingGeneratePDF(
   required double widthSizeCM,
   required double heightSizeCM,
   required isPreViewResumeResponse,
-}) {
-  return FloatingActionButton.extended(
-    backgroundColor:
-        Theme.of(context).appBarTheme.backgroundColor?.withOpacity(0.9),
-    foregroundColor: Colors.black,
-    onPressed: () {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => MyAppResume(
-                    colorOfPdfUsButtonTitle: colorOfPdfUsButtonTitle,
-                    colorOfPdfUsName: colorOfPdfUsName,
-                    colorOfPdfUsPosition: colorOfPdfUsPosition,
-                    colorOfPdfUsExperience: colorOfPdfUsExperience,
-                    colorOfPdfUsEducations: colorOfPdfUsEducations,
-                    colorOfPdfUsContact: colorOfPdfUsContact,
-                    colorOfPdfUsCertifications: colorOfPdfUsCertifications,
-                    colorOfPdfUsSkills: colorOfPdfUsSkills,
-                    colorOfPdfUsAbout: colorOfPdfUsAbout,
-                    colorOfPdfUsText: colorOfPdfUsText,
-                    colorOfPdfUsTheme: colorOfPdfUsTheme,
-                    widthSizeCM: widthSizeCM,
-                    heightSizeCM: heightSizeCM,
-                    isPreViewResumeResponse: isPreViewResumeResponse,
-                  )));
-    },
-    icon: Icon(
-      FontAwesomeIcons.filePdf,
-      color: Theme.of(context).iconTheme.color,
-      size: 20.0,
-    ),
-    label: Text('   ${pdf ?? 'PDF'}',
-        style: TextStyle(
-          fontSize: sizeTextSmaller14,
+      required List<OnSelect> positionOnSelect,
+      required   List<OnSelect> educationHSCOnSelect,
+      required   List<OnSelect> educationBDOnSelect ,
+      required    List<OnSelect> educationMDOnSelect ,
+      required  List<OnSelect> educationDDOnSelect ,
+      required  List<OnSelect> educationHDDOnSelect ,
+      required   List<OnSelect> socialOnSelect ,
+      required   List<OnSelect> addressOnSelect,
+      required  List<OnSelect> experienceOnSelect ,
+      required   List<OnSelect> certificateOnSelect ,
+      required  List<OnSelect> skillOnSelect ,
+      required  List<OnSelect> languageOnSelect ,
+    }) {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
+      FloatingActionButton.extended(
+        backgroundColor:
+            Theme.of(context).appBarTheme.backgroundColor?.withOpacity(0.9),
+        foregroundColor: Colors.black,
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => MyAppResume(
+                        colorOfPdfUsButtonTitle: colorOfPdfUsButtonTitle,
+                        colorOfPdfUsName: colorOfPdfUsName,
+                        colorOfPdfUsPosition: colorOfPdfUsPosition,
+                        colorOfPdfUsExperience: colorOfPdfUsExperience,
+                        colorOfPdfUsEducations: colorOfPdfUsEducations,
+                        colorOfPdfUsContact: colorOfPdfUsContact,
+                        colorOfPdfUsCertifications: colorOfPdfUsCertifications,
+                        colorOfPdfUsSkills: colorOfPdfUsSkills,
+                        colorOfPdfUsAbout: colorOfPdfUsAbout,
+                        colorOfPdfUsText: colorOfPdfUsText,
+                        colorOfPdfUsTheme: colorOfPdfUsTheme,
+                        widthSizeCM: widthSizeCM,
+                        heightSizeCM: heightSizeCM,
+                        isPreViewResumeResponse: isPreViewResumeResponse,
+                      )));
+        },
+        icon: Icon(
+          FontAwesomeIcons.filePdf,
           color: Theme.of(context).iconTheme.color,
-        )),
+          size: 20.0,
+        ),
+        label: Text('   ${pdf ?? 'PDF'}',
+            style: TextStyle(
+              fontSize: sizeTextSmaller14,
+              color: Theme.of(context).iconTheme.color,
+            )),
+      ),
+      FloatingActionButton.extended(
+        backgroundColor:
+            Theme.of(context).appBarTheme.backgroundColor?.withOpacity(0.9),
+        foregroundColor: Colors.black,
+        onPressed: () {
+      context
+          .read<ResumeBloc>()
+          .add(SetOnSelectedAndPreviewResumeEvent(
+      positionOnSelect: positionOnSelect,
+      educationHSCOnSelect: educationHSCOnSelect,
+      educationBDOnSelect: educationBDOnSelect,
+      educationMDOnSelect: educationMDOnSelect,
+      educationDDOnSelect: educationDDOnSelect,
+      educationHDDOnSelect: educationHDDOnSelect,
+      socialOnSelect: socialOnSelect,
+      addressOnSelect: addressOnSelect,
+      experienceOnSelect: experienceOnSelect,
+      certificateOnSelect: certificateOnSelect,
+      skillOnSelect: skillOnSelect,
+      languageOnSelect: languageOnSelect,
+      ));
+      },
+        icon:Icon(
+          FontAwesomeIcons.paperPlane,
+          color: tcButtonGreen.withOpacity(0.8),
+          size: 20.0,
+        ),
+        label: Text('   $save',
+            style: TextStyle(
+              fontSize: sizeTextSmaller14,
+              color: Theme.of(context).iconTheme.color,
+            )),
+      ),
+    ],
   );
 }
 
@@ -1951,10 +2079,10 @@ buildPositionOnSelectCard(
     {required BuildContext context,
     required Color appBarForegroundColor,
     required Function() returnResumeEdit,
-      required Color Function(Set<MaterialState> states) getColor,
-      required onChangedSetState,
-      required List<OnSelect> positionOnSelect,
-      required List<Position> positionData}) {
+    required Color Function(Set<MaterialState> states) getColor,
+    required onChangedSetState,
+    required List<OnSelect> positionOnSelect,
+    required List<Position> positionData}) {
   return Column(
     children: [
       Column(
@@ -1963,53 +2091,53 @@ buildPositionOnSelectCard(
           children: [
             buildDetailResumeCheckboxCustomNotIconsReadOnly(
                 context: context,
-                detail:positionData[index].position?? "",
+                detail: positionData[index].position ?? "",
                 appBarForeGroundColor: appBarForegroundColor,
                 checkbox: Checkbox(
                   checkColor: Theme.of(context).primaryColor,
                   fillColor: MaterialStateProperty.resolveWith(getColor),
-                  value: positionOnSelect[index].onselect ,
+                  value: positionOnSelect[index].onselect,
                   onChanged: (bool? value) {
                     positionOnSelect[index].onselect = value!;
                     onChangedSetState();
                     print(value);
                     print(!value);
-                    print(positionOnSelect[index].onselect .toString());
+                    print(positionOnSelect[index].onselect.toString());
                     print(positionOnSelect[index]);
                     print(jsonEncode(positionOnSelect[index]));
                     print(jsonEncode(positionOnSelect));
                   },
                 )),
-             Positioned(
-
-                 left: -5,
-                 top: -5,
-                 child: Card(
-
-                 elevation: 0,
-                 shadowColor: Theme.of(context).appBarTheme.backgroundColor,
-                 color:Theme.of(context).appBarTheme.foregroundColor,
-                 shape: const RoundedRectangleBorder(
-                   borderRadius: BorderRadius.only(
-                     bottomRight: Radius.circular(30),
-                   ),
-                 ),
-                 child: SizedBox(
-
-                   width:30.0,
-                   child: Center(
-                     child: Text(positionData[index].orderchoose.toString(),
-                       style: TextStyle(
-                         fontSize: 12,
-                         color: Theme.of(context).appBarTheme.backgroundColor, // height: 2.0,
-                       ),),
-                   )
-                 ),
-            ))
+            Positioned(
+                left: -5,
+                top: -5,
+                child: Card(
+                  elevation: 0,
+                  shadowColor: Theme.of(context).appBarTheme.backgroundColor,
+                  color: Theme.of(context).appBarTheme.foregroundColor,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(30),
+                    ),
+                  ),
+                  child: SizedBox(
+                      width: 30.0,
+                      child: Center(
+                        child: Text(
+                          positionData[index].orderchoose.toString(),
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Theme.of(context)
+                                .appBarTheme
+                                .backgroundColor, // height: 2.0,
+                          ),
+                        ),
+                      )),
+                ))
           ],
         );
       })),
-      if (positionData?.length == 0)
+      if (positionData.length == 0)
         Text(
           // editInFormations ??
           ">> คุณยังไม่มีข้อมูลส่วนนี้ <<",
@@ -2023,74 +2151,75 @@ buildPositionOnSelectCard(
     ],
   );
 }
+
 buildExperienceOnSelectCard(
     {required BuildContext context,
-      required Color appBarForegroundColor,
-      required Function() returnResumeEdit,
-      required Color Function(Set<MaterialState> states) getColor,
-      required onChangedSetState,
-      required List<OnSelect> experienceOnSelect,
-      required  experienceData}) {
+    required Color appBarForegroundColor,
+    required Function() returnResumeEdit,
+    required Color Function(Set<MaterialState> states) getColor,
+    required onChangedSetState,
+    required List<OnSelect> experienceOnSelect,
+    required experienceData}) {
   return Column(
     children: [
       Column(
           children: List.generate(experienceData.length ?? 0, (index) {
-            return Stack(
-              children: [
-                buildDetailResumeCheckboxCustomNotIconsReadOnly(
-                    context: context,
-                    detail:experienceData[index].position?? "",
-                    appBarForeGroundColor: appBarForegroundColor,
-                    checkbox: Checkbox(
-                      checkColor: Theme.of(context).primaryColor,
-                      fillColor: MaterialStateProperty.resolveWith(getColor),
-                      value: experienceOnSelect[index].onselect ,
-                      onChanged: (bool? value) {
-                        experienceOnSelect[index].onselect = value!;
-                        onChangedSetState();
-                        print(value);
-                        print(!value);
-                        print(experienceOnSelect[index].onselect .toString());
-                        print(experienceOnSelect[index]);
-                        print(jsonEncode(experienceOnSelect[index]));
-                        print(jsonEncode(experienceOnSelect));
-                      },
-                    )),
-                Positioned(
-
-                    left: -5,
-                    top: -5,
-                    child: Card(
-
-                      elevation: 0,
-                      shadowColor: Theme.of(context).appBarTheme.backgroundColor,
-                      color:Theme.of(context).appBarTheme.foregroundColor,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(30),
+        return Stack(
+          children: [
+            buildDetailResumeCheckboxCustomNotIconsReadOnly(
+                context: context,
+                detail: experienceData[index].position ?? "",
+                appBarForeGroundColor: appBarForegroundColor,
+                checkbox: Checkbox(
+                  checkColor: Theme.of(context).primaryColor,
+                  fillColor: MaterialStateProperty.resolveWith(getColor),
+                  value: experienceOnSelect[index].onselect,
+                  onChanged: (bool? value) {
+                    experienceOnSelect[index].onselect = value!;
+                    onChangedSetState();
+                    print(value);
+                    print(!value);
+                    print(experienceOnSelect[index].onselect.toString());
+                    print(experienceOnSelect[index]);
+                    print(jsonEncode(experienceOnSelect[index]));
+                    print(jsonEncode(experienceOnSelect));
+                  },
+                )),
+            Positioned(
+                left: -5,
+                top: -5,
+                child: Card(
+                  elevation: 0,
+                  shadowColor: Theme.of(context).appBarTheme.backgroundColor,
+                  color: Theme.of(context).appBarTheme.foregroundColor,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(30),
+                    ),
+                  ),
+                  child: SizedBox(
+                      width: 30.0,
+                      child: Center(
+                        child: Text(
+                          experienceData[index].orderchoose.toString(),
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Theme.of(context)
+                                .appBarTheme
+                                .backgroundColor, // height: 2.0,
+                          ),
                         ),
-                      ),
-                      child: SizedBox(
-
-                          width:30.0,
-                          child: Center(
-                            child: Text(experienceData[index].orderchoose.toString(),
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Theme.of(context).appBarTheme.backgroundColor, // height: 2.0,
-                              ),),
-                          )
-                      ),
-                    ))
-              ],
-            );
-          })),
-      if (experienceOnSelect?.length == 0)
+                      )),
+                ))
+          ],
+        );
+      })),
+      if (experienceOnSelect.length == 0)
         Text(
           // editInFormations ??
           ">> คุณยังไม่มีข้อมูลส่วนนี้ <<",
           style: TextStyle(
-            // decoration: TextDecoration.underline,
+              // decoration: TextDecoration.underline,
               decorationThickness: 2,
               fontSize: 10,
               fontWeight: FontWeight.w500,
@@ -2102,72 +2231,72 @@ buildExperienceOnSelectCard(
 
 buildCertificateOnSelectCard(
     {required BuildContext context,
-      required Color appBarForegroundColor,
-      required Function() returnResumeEdit,
-      required Color Function(Set<MaterialState> states) getColor,
-      required onChangedSetState,
-      required List<OnSelect> certificateOnSelect,
-      required  certificateData}) {
+    required Color appBarForegroundColor,
+    required Function() returnResumeEdit,
+    required Color Function(Set<MaterialState> states) getColor,
+    required onChangedSetState,
+    required List<OnSelect> certificateOnSelect,
+    required certificateData}) {
   return Column(
     children: [
       Column(
           children: List.generate(certificateData.length ?? 0, (index) {
-            return Stack(
-              children: [
-                buildDetailResumeCheckboxCustomNotIconsReadOnly(
-                    context: context,
-                    detail:certificateData[index].title?? "",
-                    appBarForeGroundColor: appBarForegroundColor,
-                    checkbox: Checkbox(
-                      checkColor: Theme.of(context).primaryColor,
-                      fillColor: MaterialStateProperty.resolveWith(getColor),
-                      value: certificateOnSelect[index].onselect ,
-                      onChanged: (bool? value) {
-                        certificateOnSelect[index].onselect = value!;
-                        onChangedSetState();
-                        print(value);
-                        print(!value);
-                        print(certificateOnSelect[index].onselect .toString());
-                        print(certificateOnSelect[index]);
-                        print(jsonEncode(certificateOnSelect[index]));
-                        print(jsonEncode(certificateOnSelect));
-                      },
-                    )),
-                Positioned(
-
-                    left: -5,
-                    top: -5,
-                    child: Card(
-
-                      elevation: 0,
-                      shadowColor: Theme.of(context).appBarTheme.backgroundColor,
-                      color:Theme.of(context).appBarTheme.foregroundColor,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(30),
+        return Stack(
+          children: [
+            buildDetailResumeCheckboxCustomNotIconsReadOnly(
+                context: context,
+                detail: certificateData[index].title ?? "",
+                appBarForeGroundColor: appBarForegroundColor,
+                checkbox: Checkbox(
+                  checkColor: Theme.of(context).primaryColor,
+                  fillColor: MaterialStateProperty.resolveWith(getColor),
+                  value: certificateOnSelect[index].onselect,
+                  onChanged: (bool? value) {
+                    certificateOnSelect[index].onselect = value!;
+                    onChangedSetState();
+                    print(value);
+                    print(!value);
+                    print(certificateOnSelect[index].onselect.toString());
+                    print(certificateOnSelect[index]);
+                    print(jsonEncode(certificateOnSelect[index]));
+                    print(jsonEncode(certificateOnSelect));
+                  },
+                )),
+            Positioned(
+                left: -5,
+                top: -5,
+                child: Card(
+                  elevation: 0,
+                  shadowColor: Theme.of(context).appBarTheme.backgroundColor,
+                  color: Theme.of(context).appBarTheme.foregroundColor,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(30),
+                    ),
+                  ),
+                  child: SizedBox(
+                      width: 30.0,
+                      child: Center(
+                        child: Text(
+                          certificateData[index].orderchoose.toString(),
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Theme.of(context)
+                                .appBarTheme
+                                .backgroundColor, // height: 2.0,
+                          ),
                         ),
-                      ),
-                      child: SizedBox(
-
-                          width:30.0,
-                          child: Center(
-                            child: Text(certificateData[index].orderchoose.toString(),
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Theme.of(context).appBarTheme.backgroundColor, // height: 2.0,
-                              ),),
-                          )
-                      ),
-                    ))
-              ],
-            );
-          })),
+                      )),
+                ))
+          ],
+        );
+      })),
       if (certificateOnSelect.isEmpty)
         Text(
           // editInFormations ??
           ">> คุณยังไม่มีข้อมูลส่วนนี้ <<",
           style: TextStyle(
-            // decoration: TextDecoration.underline,
+              // decoration: TextDecoration.underline,
               decorationThickness: 2,
               fontSize: 10,
               fontWeight: FontWeight.w500,
@@ -2179,72 +2308,72 @@ buildCertificateOnSelectCard(
 
 buildLanguageOnSelectCard(
     {required BuildContext context,
-      required Color appBarForegroundColor,
-      required Function() returnResumeEdit,
-      required Color Function(Set<MaterialState> states) getColor,
-      required onChangedSetState,
-      required List<OnSelect> languageOnSelect,
-      required  languageData}) {
+    required Color appBarForegroundColor,
+    required Function() returnResumeEdit,
+    required Color Function(Set<MaterialState> states) getColor,
+    required onChangedSetState,
+    required List<OnSelect> languageOnSelect,
+    required languageData}) {
   return Column(
     children: [
       Column(
           children: List.generate(languageData.length ?? 0, (index) {
-            return Stack(
-              children: [
-                buildDetailResumeCheckboxCustomNotIconsReadOnly(
-                    context: context,
-                    detail:languageData[index].language?? "",
-                    appBarForeGroundColor: appBarForegroundColor,
-                    checkbox: Checkbox(
-                      checkColor: Theme.of(context).primaryColor,
-                      fillColor: MaterialStateProperty.resolveWith(getColor),
-                      value: languageOnSelect[index].onselect ,
-                      onChanged: (bool? value) {
-                        languageOnSelect[index].onselect = value!;
-                        onChangedSetState();
-                        print(value);
-                        print(!value);
-                        print(languageOnSelect[index].onselect .toString());
-                        print(languageOnSelect[index]);
-                        print(jsonEncode(languageOnSelect[index]));
-                        print(jsonEncode(languageOnSelect));
-                      },
-                    )),
-                Positioned(
-
-                    left: -5,
-                    top: -5,
-                    child: Card(
-
-                      elevation: 0,
-                      shadowColor: Theme.of(context).appBarTheme.backgroundColor,
-                      color:Theme.of(context).appBarTheme.foregroundColor,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(30),
+        return Stack(
+          children: [
+            buildDetailResumeCheckboxCustomNotIconsReadOnly(
+                context: context,
+                detail: languageData[index].language ?? "",
+                appBarForeGroundColor: appBarForegroundColor,
+                checkbox: Checkbox(
+                  checkColor: Theme.of(context).primaryColor,
+                  fillColor: MaterialStateProperty.resolveWith(getColor),
+                  value: languageOnSelect[index].onselect,
+                  onChanged: (bool? value) {
+                    languageOnSelect[index].onselect = value!;
+                    onChangedSetState();
+                    print(value);
+                    print(!value);
+                    print(languageOnSelect[index].onselect.toString());
+                    print(languageOnSelect[index]);
+                    print(jsonEncode(languageOnSelect[index]));
+                    print(jsonEncode(languageOnSelect));
+                  },
+                )),
+            Positioned(
+                left: -5,
+                top: -5,
+                child: Card(
+                  elevation: 0,
+                  shadowColor: Theme.of(context).appBarTheme.backgroundColor,
+                  color: Theme.of(context).appBarTheme.foregroundColor,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(30),
+                    ),
+                  ),
+                  child: SizedBox(
+                      width: 30.0,
+                      child: Center(
+                        child: Text(
+                          languageData[index].orderchoose.toString(),
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Theme.of(context)
+                                .appBarTheme
+                                .backgroundColor, // height: 2.0,
+                          ),
                         ),
-                      ),
-                      child: SizedBox(
-
-                          width:30.0,
-                          child: Center(
-                            child: Text(languageData[index].orderchoose.toString(),
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Theme.of(context).appBarTheme.backgroundColor, // height: 2.0,
-                              ),),
-                          )
-                      ),
-                    ))
-              ],
-            );
-          })),
+                      )),
+                ))
+          ],
+        );
+      })),
       if (languageOnSelect.isEmpty)
         Text(
           // editInFormations ??
           ">> คุณยังไม่มีข้อมูลส่วนนี้ <<",
           style: TextStyle(
-            // decoration: TextDecoration.underline,
+              // decoration: TextDecoration.underline,
               decorationThickness: 2,
               fontSize: 10,
               fontWeight: FontWeight.w500,
@@ -2256,72 +2385,72 @@ buildLanguageOnSelectCard(
 
 buildSkillOnSelectCard(
     {required BuildContext context,
-      required Color appBarForegroundColor,
-      required Function() returnResumeEdit,
-      required Color Function(Set<MaterialState> states) getColor,
-      required onChangedSetState,
-      required List<OnSelect> skillOnSelect,
-      required  skillData}) {
+    required Color appBarForegroundColor,
+    required Function() returnResumeEdit,
+    required Color Function(Set<MaterialState> states) getColor,
+    required onChangedSetState,
+    required List<OnSelect> skillOnSelect,
+    required skillData}) {
   return Column(
     children: [
       Column(
           children: List.generate(skillData.length ?? 0, (index) {
-            return Stack(
-              children: [
-                buildDetailResumeCheckboxCustomNotIconsReadOnly(
-                    context: context,
-                    detail:skillData[index].skill?? "",
-                    appBarForeGroundColor: appBarForegroundColor,
-                    checkbox: Checkbox(
-                      checkColor: Theme.of(context).primaryColor,
-                      fillColor: MaterialStateProperty.resolveWith(getColor),
-                      value: skillOnSelect[index].onselect ,
-                      onChanged: (bool? value) {
-                        skillOnSelect[index].onselect = value!;
-                        onChangedSetState();
-                        print(value);
-                        print(!value);
-                        print(skillOnSelect[index].onselect .toString());
-                        print(skillOnSelect[index]);
-                        print(jsonEncode(skillOnSelect[index]));
-                        print(jsonEncode(skillOnSelect));
-                      },
-                    )),
-                Positioned(
-
-                    left: -5,
-                    top: -5,
-                    child: Card(
-
-                      elevation: 0,
-                      shadowColor: Theme.of(context).appBarTheme.backgroundColor,
-                      color:Theme.of(context).appBarTheme.foregroundColor,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(30),
+        return Stack(
+          children: [
+            buildDetailResumeCheckboxCustomNotIconsReadOnly(
+                context: context,
+                detail: skillData[index].skill ?? "",
+                appBarForeGroundColor: appBarForegroundColor,
+                checkbox: Checkbox(
+                  checkColor: Theme.of(context).primaryColor,
+                  fillColor: MaterialStateProperty.resolveWith(getColor),
+                  value: skillOnSelect[index].onselect,
+                  onChanged: (bool? value) {
+                    skillOnSelect[index].onselect = value!;
+                    onChangedSetState();
+                    print(value);
+                    print(!value);
+                    print(skillOnSelect[index].onselect.toString());
+                    print(skillOnSelect[index]);
+                    print(jsonEncode(skillOnSelect[index]));
+                    print(jsonEncode(skillOnSelect));
+                  },
+                )),
+            Positioned(
+                left: -5,
+                top: -5,
+                child: Card(
+                  elevation: 0,
+                  shadowColor: Theme.of(context).appBarTheme.backgroundColor,
+                  color: Theme.of(context).appBarTheme.foregroundColor,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(30),
+                    ),
+                  ),
+                  child: SizedBox(
+                      width: 30.0,
+                      child: Center(
+                        child: Text(
+                          skillData[index].orderchoose.toString(),
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Theme.of(context)
+                                .appBarTheme
+                                .backgroundColor, // height: 2.0,
+                          ),
                         ),
-                      ),
-                      child: SizedBox(
-
-                          width:30.0,
-                          child: Center(
-                            child: Text(skillData[index].orderchoose.toString(),
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Theme.of(context).appBarTheme.backgroundColor, // height: 2.0,
-                              ),),
-                          )
-                      ),
-                    ))
-              ],
-            );
-          })),
+                      )),
+                ))
+          ],
+        );
+      })),
       if (skillOnSelect.isEmpty)
         Text(
           // editInFormations ??
           ">> คุณยังไม่มีข้อมูลส่วนนี้ <<",
           style: TextStyle(
-            // decoration: TextDecoration.underline,
+              // decoration: TextDecoration.underline,
               decorationThickness: 2,
               fontSize: 10,
               fontWeight: FontWeight.w500,
@@ -2331,79 +2460,80 @@ buildSkillOnSelectCard(
   );
 }
 
-buildEducationOnSelectCard(
-    {required BuildContext context,
-      required Color appBarForegroundColor,
-      required String title,
-      required Function() returnResumeEdit,
-      required Color Function(Set<MaterialState> states) getColor,
-      required onChangedSetState,
-      required List<OnSelect> educationOnSelect,
-      required  educationData,}) {
+buildEducationOnSelectCard({
+  required BuildContext context,
+  required Color appBarForegroundColor,
+  required String title,
+  required Function() returnResumeEdit,
+  required Color Function(Set<MaterialState> states) getColor,
+  required onChangedSetState,
+  required List<OnSelect> educationOnSelect,
+  required educationData,
+}) {
   return Column(
     children: [
       Padding(
         padding: EdgeInsets.all(5),
-        child: Text( title),
+        child: Text(title),
       ),
       Column(
           children: List.generate(educationData.length ?? 0, (index) {
-            return Stack(
-              children: [
-                buildDetailResumeCheckboxCustomNotIconsReadOnly(
-                    context: context,
-                    detail:educationData[index].placeofstudy.toString(),
-                    appBarForeGroundColor: appBarForegroundColor,
-                    checkbox: Checkbox(
-                      checkColor: Theme.of(context).primaryColor,
-                      fillColor: MaterialStateProperty.resolveWith(getColor),
-                      value: educationOnSelect[index].onselect ,
-                      onChanged: (bool? value) {
-                        educationOnSelect[index].onselect = value!;
-                        onChangedSetState();
-                        print(value);
-                        print(!value);
-                        print(educationOnSelect[index].onselect .toString());
-                        print(educationData[index]);
-                        print(jsonEncode(educationData[index]));
-                        print(jsonEncode(educationOnSelect));
-                      },
-                    )),
-                Positioned(
-
-                    left: -5,
-                    top: -5,
-                    child: Card(
-
-                      elevation: 0,
-                      shadowColor: Theme.of(context).appBarTheme.backgroundColor,
-                      color:Theme.of(context).appBarTheme.foregroundColor,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(30),
+        return Stack(
+          children: [
+            buildDetailResumeCheckboxCustomNotIconsReadOnly(
+                context: context,
+                detail: educationData[index].placeofstudy.toString(),
+                appBarForeGroundColor: appBarForegroundColor,
+                checkbox: Checkbox(
+                  checkColor: Theme.of(context).primaryColor,
+                  fillColor: MaterialStateProperty.resolveWith(getColor),
+                  value: educationOnSelect[index].onselect,
+                  onChanged: (bool? value) {
+                    educationOnSelect[index].onselect = value!;
+                    onChangedSetState();
+                    print(value);
+                    print(!value);
+                    print(educationOnSelect[index].onselect.toString());
+                    print(educationData[index]);
+                    print(jsonEncode(educationData[index]));
+                    print(jsonEncode(educationOnSelect));
+                  },
+                )),
+            Positioned(
+                left: -5,
+                top: -5,
+                child: Card(
+                  elevation: 0,
+                  shadowColor: Theme.of(context).appBarTheme.backgroundColor,
+                  color: Theme.of(context).appBarTheme.foregroundColor,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(30),
+                    ),
+                  ),
+                  child: SizedBox(
+                      width: 30.0,
+                      child: Center(
+                        child: Text(
+                          educationData[index].orderchoose.toString(),
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Theme.of(context)
+                                .appBarTheme
+                                .backgroundColor, // height: 2.0,
+                          ),
                         ),
-                      ),
-                      child: SizedBox(
-
-                          width:30.0,
-                          child: Center(
-                            child: Text(educationData[index].orderchoose.toString(),
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Theme.of(context).appBarTheme.backgroundColor, // height: 2.0,
-                              ),),
-                          )
-                      ),
-                    ))
-              ],
-            );
-          })),
+                      )),
+                ))
+          ],
+        );
+      })),
       if (educationData.isEmpty)
         Text(
           // editInFormations ??
           ">> คุณยังไม่มีข้อมูลส่วนนี้ <<",
           style: TextStyle(
-            // decoration: TextDecoration.underline,
+              // decoration: TextDecoration.underline,
               decorationThickness: 2,
               fontSize: 10,
               fontWeight: FontWeight.w500,
@@ -2412,7 +2542,6 @@ buildEducationOnSelectCard(
     ],
   );
 }
-
 
 // List<OnSelect> positionOnSelect =[
 //   OnSelect(id:1,select:true ),
@@ -2420,16 +2549,13 @@ buildEducationOnSelectCard(
 //   OnSelect(id:3,select:true ),
 //   OnSelect(id:4,select:true )];
 
-
-
 class OnSelect {
   int id;
   bool onselect;
 
   OnSelect({
-    required  this.id,
-    required   this.onselect,
+    required this.id,
+    required this.onselect,
   });
   Map<String, dynamic> toJson() => {"id": id, "onselect": onselect};
-
 }

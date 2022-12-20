@@ -132,7 +132,7 @@ class _EditActivityPageState extends State<EditActivityPage>
         String venueValue = "${widget.data.venue}";
         String approverValue = "${widget.data.approvername} ${widget.data.approverlastname} ";
         String detailValue = "${widget.data.detail}";
-        int idValue = int.parse(widget.data.id);
+        int idValue = int.parse(widget.data.addressID);
         return buildEditActivityBody(
             context,
             _addActivityScreenApi,

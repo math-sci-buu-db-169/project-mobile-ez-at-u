@@ -33,7 +33,7 @@ class MyDio {
   static final _optionsServer = BaseOptions(
     baseUrl: 'http://msd.buu.ac.th/ServiceTest',
     connectTimeout: 5000,
-    receiveTimeout: 3000,
+    receiveTimeout: 5000,
   );
 
   static Dio createDioServer() {

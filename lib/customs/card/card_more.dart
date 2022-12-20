@@ -73,7 +73,7 @@ buildCardMore({
         elevation: 8,
         child: Container(
           margin: const EdgeInsets.all(1),
-          // padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+          padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
           decoration: BoxDecoration(
             color: transparent,
             border: Border.all(
@@ -94,7 +94,7 @@ buildCardMore({
             // ], begin: Alignment.centerLeft, end: Alignment.centerRight),
           ),
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height * 0.1,
+          // height: MediaQuery.of(context).size.height * 0.05,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

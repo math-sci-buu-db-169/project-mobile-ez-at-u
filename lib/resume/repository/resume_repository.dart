@@ -124,38 +124,53 @@ class ResumeRepository {
         })
     );
   }
+
   Future<Response> sentEditAddressResume({
-    required String role,
-    required String number,
+    required String house,
     required String moo,
-    required String soi,
-    required String road,
-    required String subDistrict,
-    required String district,
-    required String province,
+    required String soiTH,
+    required String roadTH,
     required String soiEN,
     required String roadEN,
-    required String subDistrictEN,
-    required String districtEN,
-    required String provinceEN,
+    required String subDistrictID,
+    required String districtID,
+    required String provinceID,
     required String zipcode,}) async {
+    print(
+        jsonEncode({
+
+
+          "number": house,
+          "moo": moo,
+          "soi_th": soiTH,
+          "soi_en": soiEN,
+          "road_th": roadTH,
+          "road_en": roadEN,
+          "subdistrict_id": subDistrictID,
+          "district_id":districtID,
+          "province_id": provinceID,
+          "zipcode": zipcode
+
+
+        })
+    );
     return await MyDio.createDioServer().post("/api/resume/editaddressresume",
+
+
         data: jsonEncode({
 
-          "role": role,
-          "number": number,
-          "moo": moo,
-          "soi": soi,
-          "road": road,
-          "subdistrict": subDistrict,
-          "district": district,
-          "province": province,
-          "soien": soiEN,
-          "roaden": roadEN,
-          "subdisteicten": subDistrictEN,
-          "districten": districtEN,
-          "provinceen": provinceEN,
-          "zipcode": zipcode
+
+            "number": house,
+            "moo": moo,
+            "soi_th": soiTH,
+            "soi_en": soiEN,
+            "road_th": roadTH,
+            "road_en": roadEN,
+            "subdistrict_id": subDistrictID,
+            "district_id":districtID,
+            "province_id": provinceID,
+            "zipcode": zipcode
+
 
         })
     );
@@ -348,7 +363,55 @@ class ResumeRepository {
 
         })
     );
-  }Future<Response> sentScreenCertificateResume({required int certificateId}) async {
+  }
+  Future<Response> sentScreenDistrictListAddressResume ({required String provinceId}) async {
+    prefs = await SharedPreferences.getInstance();
+    String? userLanguage = prefs.getString('userLanguageResume');
+
+    return await MyDio.createDioServer().post("/api/resume/addressdistrictlist",
+        data: jsonEncode({
+          "languageresume": userLanguage,
+            "province_id": provinceId
+
+        })
+    );
+  }
+  Future<Response> sentScreenTamBonListAddressResume ({required String districtId}) async {
+    prefs = await SharedPreferences.getInstance();
+    String? userLanguage = prefs.getString('userLanguageResume');
+
+    return await MyDio.createDioServer().post("/api/resume/addresstambonlist",
+        data: jsonEncode({
+          "languageresume": userLanguage,
+            "district_id": districtId
+
+        })
+    );
+  }
+  Future<Response> sentScreenZipCodeAddressResume ({required String subDistrictId}) async {
+    prefs = await SharedPreferences.getInstance();
+    String? userLanguage = prefs.getString('userLanguageResume');
+
+    return await MyDio.createDioServer().post("/api/resume/addresszipcode",
+        data: jsonEncode({
+          "languageresume": userLanguage,
+            "sub_district_id": subDistrictId
+
+        })
+    );
+  }
+  Future<Response> sentScreenProvinceAddressResume() async {
+    prefs = await SharedPreferences.getInstance();
+    String? userLanguage = prefs.getString('userLanguageResume');
+
+    return await MyDio.createDioServer().post("/api/resume/addressprovincelist",
+        data: jsonEncode({
+          "languageresume": userLanguage
+
+        })
+    );
+  }
+  Future<Response> sentScreenCertificateResume({required int certificateId}) async {
     prefs = await SharedPreferences.getInstance();
     String? userLanguage = prefs.getString('userLanguageResume');
 

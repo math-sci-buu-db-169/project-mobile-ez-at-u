@@ -44,7 +44,41 @@ class SetOnSelectedAndPreviewResumeEvent extends ResumeEvent {
 class GetSetPreviewResumeEvent extends ResumeEvent {}
 
 class GetEditScreenPreviewResumeEvent extends ResumeEvent {}
-
+class GetEditScreenAddressResumeEvent extends ResumeEvent {}
+class GetEditScreenDistrictAddressResumeEvent extends ResumeEvent {
+  String provinceId;
+  GetEditScreenDistrictAddressResumeEvent({required this.provinceId});
+}
+class GetEditScreenTamBonAddressResumeEvent extends ResumeEvent {
+  String tamBonId;
+  GetEditScreenTamBonAddressResumeEvent({required this.tamBonId});
+}
+class GetEditScreenZipCodeAddressResumeEvent extends ResumeEvent {
+  String subDistrictID;
+  GetEditScreenZipCodeAddressResumeEvent({required this.subDistrictID});
+}
+class SendEditAddressResumeEvent extends ResumeEvent {
+   String house;
+   String moo;
+   String soiTH;
+   String roadTH;
+   String soiEN;
+   String roadEN;
+   String subDistrictID;
+   String districtID;
+   String provinceID;
+   String zipcode;
+   SendEditAddressResumeEvent({  required this. house,
+     required this. moo,
+     required this. soiTH,
+     required this. roadTH,
+     required this. soiEN,
+     required this. roadEN,
+     required this. subDistrictID,
+     required this. districtID,
+     required this. provinceID,
+     required this. zipcode,});
+}
 class ResumeInnitEvent extends ResumeEvent {}
 
 class SentEditAboutResumeEvent extends ResumeEvent {
