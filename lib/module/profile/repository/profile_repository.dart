@@ -177,4 +177,73 @@ class ProfileRepository {
         })
     );
   }
+  Future<Response> profileTeacherScreen(
+      // String user,String password,
+      ) async {
+    return await MyDio.createDioServer().post(
+        "/profile/profilethscreen",
+        data: jsonEncode({
+        })
+    );
+  }
+  Future<Response> sentProfileTeacherGeneralData(
+      String teacherName,
+      String teacherLastname,
+      String teacherNickname,
+      ) async {
+    print("attention = ${teacherName}");
+    print("status = ${teacherLastname}");
+    print("jobType = ${teacherNickname}");
+    return await MyDio.createDioServer().post(
+        "/profile/careersubmit",
+        data: jsonEncode(
+            {
+              "name": teacherName,
+              "lastname": teacherLastname,
+              "nickname": teacherNickname
+            }
+        )
+    );
+  }
+  Future<Response> sentProfileTeacherAcadamicData(
+      String teacherBachelorDegree,
+      String teacherMasterDegree,
+      String teacherPHD,
+      String teacherReseachArea,
+      ) async {
+    print("attention = ${teacherBachelorDegree}");
+    print("status = ${teacherMasterDegree}");
+    print("jobType = ${teacherPHD}");
+    print("jobType = ${teacherReseachArea}");
+    return await MyDio.createDioServer().post(
+        "/profile/acadamicprofilethsubmit",
+        data: jsonEncode(
+            {
+              "graduatedegree": teacherBachelorDegree,
+              "masterdegree": teacherMasterDegree,
+              "phd": teacherPHD,
+              "scopeofstudy": teacherReseachArea
+            }
+        )
+    );
+  }
+  Future<Response> sentProfileTeacherContactData(
+      String teacherPhone,
+      String teacherRoom,
+      String teacherEmail,
+      ) async {
+    print("attention = ${teacherPhone}");
+    print("status = ${teacherRoom}");
+    print("jobType = ${teacherEmail}");
+    return await MyDio.createDioServer().post(
+        "/profile/contactprofilethsubmit",
+        data: jsonEncode(
+            {
+              "phone": teacherPhone,
+              "workshop": teacherRoom,
+              "email": teacherEmail
+            }
+        )
+    );
+  }
 }
