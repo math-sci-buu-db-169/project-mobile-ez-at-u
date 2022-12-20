@@ -1,4 +1,4 @@
-import 'package:ez_at_u/resume/model/response/pre_view_resume_response.dart';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
@@ -9,12 +9,10 @@ import '../../../../../customs/message/text_button.dart';
 import '../../../../../customs/message/text_error.dart';
 import '../../../../../customs/progress_dialog.dart';
 import '../../../../../utils/shared_preferences.dart';
-import '../../customs/color/color_const.dart';
 import '../../customs/size/size.dart';
 import '../../customs/text_file/build_textformfiled_unlimit_custom.dart';
 import '../../module/login/screen/login_screen/login_screen.dart';
 import '../bloc_resume/resume_bloc.dart';
-import '../examples/content_design_resume.dart';
 import '../examples/content_design_resume_edit.dart';
 import '../model/response/get_user_infomartion_resume_response.dart';
 

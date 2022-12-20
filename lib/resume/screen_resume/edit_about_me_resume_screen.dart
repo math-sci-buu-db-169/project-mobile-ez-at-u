@@ -190,6 +190,7 @@ class _EditAboutMeResumePageState extends State<EditAboutMeResumePage>
                         height: 10,
                       ),
                       BuildTextFormFieldUnLimitCustomNotIconsNotContainer(
+                        maxLength:256,
                         textEditingController: aboutMeControllerTH,
                         onChanged: (valueNameControllerTH) {
                           setState(() {
@@ -205,6 +206,7 @@ class _EditAboutMeResumePageState extends State<EditAboutMeResumePage>
                       ),
 
                       BuildTextFormFieldUnLimitCustomNotIconsNotContainer(
+                        maxLength:256,
                         textEditingController: aboutMeControllerEN,
                         onChanged: (valueNameControllerEN) {
                           setState(() {

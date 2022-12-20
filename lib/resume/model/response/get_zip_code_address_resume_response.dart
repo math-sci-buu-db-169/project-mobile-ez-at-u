@@ -1,37 +1,66 @@
 import 'dart:convert';
 /// head : {"status":200,"message":"success","modulename":"home/resume","timeexpire":false}
-/// body : {}
+/// body : {"zipcode":"39170"}
 
-SetOnSelectedResume setOnSelectedResumeFromJson(String str) => SetOnSelectedResume.fromJson(json.decode(str));
-String setOnSelectedResumeToJson(SetOnSelectedResume data) => json.encode(data.toJson());
-class SetOnSelectedResume {
-  SetOnSelectedResume({
+GetZipCodeAddressResumeResponse getZipCodeAddressResumeResponseFromJson(String str) => GetZipCodeAddressResumeResponse.fromJson(json.decode(str));
+String getZipCodeAddressResumeResponseToJson(GetZipCodeAddressResumeResponse data) => json.encode(data.toJson());
+class GetZipCodeAddressResumeResponse {
+  GetZipCodeAddressResumeResponse({
       Head? head, 
-      dynamic body,}){
+      Body? body,}){
     _head = head;
     _body = body;
 }
 
-  SetOnSelectedResume.fromJson(dynamic json) {
+  GetZipCodeAddressResumeResponse.fromJson(dynamic json) {
     _head = json['head'] != null ? Head.fromJson(json['head']) : null;
-    _body = json['body'];
+    _body = json['body'] != null ? Body.fromJson(json['body']) : null;
   }
   Head? _head;
-  dynamic _body;
-SetOnSelectedResume copyWith({  Head? head,
-  dynamic body,
-}) => SetOnSelectedResume(  head: head ?? _head,
+  Body? _body;
+GetZipCodeAddressResumeResponse copyWith({  Head? head,
+  Body? body,
+}) => GetZipCodeAddressResumeResponse(  head: head ?? _head,
   body: body ?? _body,
 );
   Head? get head => _head;
-  dynamic get body => _body;
+  Body? get body => _body;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     if (_head != null) {
       map['head'] = _head?.toJson();
     }
-    map['body'] = _body;
+    if (_body != null) {
+      map['body'] = _body?.toJson();
+    }
+    return map;
+  }
+
+}
+
+/// zipcode : "39170"
+
+Body bodyFromJson(String str) => Body.fromJson(json.decode(str));
+String bodyToJson(Body data) => json.encode(data.toJson());
+class Body {
+  Body({
+      String? zipcode,}){
+    _zipcode = zipcode;
+}
+
+  Body.fromJson(dynamic json) {
+    _zipcode = json['zipcode'];
+  }
+  String? _zipcode;
+Body copyWith({  String? zipcode,
+}) => Body(  zipcode: zipcode ?? _zipcode,
+);
+  String? get zipcode => _zipcode;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['zipcode'] = _zipcode;
     return map;
   }
 

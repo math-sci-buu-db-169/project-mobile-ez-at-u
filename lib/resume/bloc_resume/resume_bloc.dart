@@ -6,25 +6,30 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:bloc/bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../check_token/token_bloc.dart';
 import '../../main_route/main_route_bloc_model/check_token_expired_response.dart';
 import '../../main_route/main_route_bloc_model/refresh_token_response.dart';
 import '../../utils/shared_preferences.dart';
+import '../examples/content_design_resume.dart';
 import '../model/response/api_edit_resume_response_head.dart';
+import '../model/response/get_address_resume_response.dart';
 import '../model/response/get_certificate_resume_response.dart';
 import '../model/response/get_about_me_resume_response.dart';
+import '../model/response/get_district_list_address_resume_response.dart';
 import '../model/response/get_education_resume_response.dart';
 import '../model/response/get_experience_resume_response.dart';
-import '../model/response/get_on_selected_resume.dart';
 import '../model/response/get_position_resume_response.dart';
+import '../model/response/get_province_address_resume_response.dart';
 import '../model/response/get_skill_language_resume_response.dart';
 import '../model/response/get_skill_resume_response.dart';
+import '../model/response/get_sub_district_list_address_resume_response.dart';
 import '../model/response/get_user_infomartion_resume_response.dart';
+import '../model/response/get_zip_code_address_resume_response.dart';
 import '../model/response/image_up_load_resume_response.dart';
 import '../model/response/pre_view_resume_response.dart';
+import '../model/response/set_on_selected_resume.dart';
 import '../repository/resume_repository.dart';
 
 part 'resume_event.dart';
@@ -160,29 +165,19 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
     on<GetOnSelectedAndPreviewResumeEvent>((event, emit) async {
       try {
         emit(PreviewResumeLoading());
-        print("GetOnSelectedAndPreviewResumeEvent 56 == GetOnSelectedAndPreviewResumeEvent");
+        print(
+            "GetOnSelectedAndPreviewResumeEvent 56 == GetOnSelectedAndPreviewResumeEvent");
 
         await checkPreviewResumeEventInitial(event, emit);
         Response responsePreViewResume = await getPreviewResumeDataAndScreen();
-        Response responseOnSelectedResume = await getOnSelectedResume();
         emit(PreviewResumeEndLoading());
         if (responsePreViewResume.statusCode == 200) {
           PreViewResumeResponse preViewResumeResponse =
               PreViewResumeResponse.fromJson(responsePreViewResume.data);
           if (preViewResumeResponse.head?.status == 200) {
-            if (responseOnSelectedResume.statusCode == 200) {
-              GetOnSelectedResume getOnSelectedResume =
-              GetOnSelectedResume.fromJson(responseOnSelectedResume.data);
-              if (getOnSelectedResume.head?.status == 200) {
-                emit(OnSelectedAndPreviewResumeSuccessState(
-                    isPreViewResumeResponse: preViewResumeResponse,
-                    isGetOnSelectedResume: getOnSelectedResume,
-                ));
-              } else {
-                emit(PreviewResumeError(
-                    errorMessage: preViewResumeResponse.head?.message ?? ""));
-              }
-            }
+            emit(OnSelectedAndPreviewResumeSuccessState(
+              isPreViewResumeResponse: preViewResumeResponse,
+            ));
           } else {
             emit(PreviewResumeError(
                 errorMessage: preViewResumeResponse.head?.message ?? ""));
@@ -205,7 +200,7 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
         emit(PreviewResumeEndLoading());
         if (responsePreViewResume.statusCode == 200) {
           PreViewResumeResponse preViewResumeResponse =
-          PreViewResumeResponse.fromJson(responsePreViewResume.data);
+              PreViewResumeResponse.fromJson(responsePreViewResume.data);
           if (preViewResumeResponse.head?.status == 200) {
             emit(PreviewResumeSuccessState(
                 isPreViewResumeResponse: preViewResumeResponse));
@@ -216,6 +211,45 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
         } else {
           emit(PreviewResumeError(
               errorMessage: responsePreViewResume.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(PreviewResumeError(errorMessage: e.response?.statusMessage ?? ""));
+      }
+    });
+    on<SetOnSelectedAndPreviewResumeEvent>((event, emit) async {
+      try {
+        emit(PreviewResumeLoading());
+        print("CheckProfile 5 == ProfileApiEvent");
+
+        await checkPreviewResumeEventInitial(event, emit);
+        Response responseSetOnSelectedResume = await setOnSelectedResume(
+          positionOnSelect: event.positionOnSelect,
+          educationHSCOnSelect: event.educationHSCOnSelect,
+          educationBDOnSelect: event.educationBDOnSelect,
+          educationMDOnSelect: event.educationMDOnSelect,
+          educationDDOnSelect: event.educationDDOnSelect,
+          educationHDDOnSelect: event.educationHDDOnSelect,
+          socialOnSelect: event.socialOnSelect,
+          addressOnSelect: event.addressOnSelect,
+          experienceOnSelect: event.experienceOnSelect,
+          certificateOnSelect: event.certificateOnSelect,
+          skillOnSelect: event.skillOnSelect,
+          languageOnSelect: event.languageOnSelect,
+        );
+        emit(PreviewResumeEndLoading());
+        if (responseSetOnSelectedResume.statusCode == 200) {
+          SetOnSelectedResume setOnSelectedResume =
+              SetOnSelectedResume.fromJson(responseSetOnSelectedResume.data);
+          if (setOnSelectedResume.head?.status == 200) {
+            emit(SetOnSelectedResumeSuccessState(
+                isSetOnSelectedResume: setOnSelectedResume));
+          } else {
+            emit(PreviewResumeError(
+                errorMessage: setOnSelectedResume.head?.message ?? ""));
+          }
+        } else {
+          emit(PreviewResumeError(
+              errorMessage: responseSetOnSelectedResume.statusMessage ?? ""));
         }
       } on DioError catch (e) {
         emit(PreviewResumeError(errorMessage: e.response?.statusMessage ?? ""));
@@ -299,11 +333,11 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
       await setResumePhoto(resumePhoto: base64Image ?? '');
       await checkPreviewResumeEventInitial(event, emit);
       Response responseBase64Img =
-      await sentResumeImage(base64Image: base64Image);
+          await sentResumeImage(base64Image: base64Image);
       emit(EditPreviewResumeEndLoading());
       if (responseBase64Img.statusCode == 200) {
         ImageUpLoadResumeResponse imageUpLoadResumeResponse =
-        ImageUpLoadResumeResponse.fromJson(responseBase64Img.data);
+            ImageUpLoadResumeResponse.fromJson(responseBase64Img.data);
         if (imageUpLoadResumeResponse.head?.status == 200) {
           emit(EditChooseImageUpLoadResumeSuccess(
               avatarImage: imageCroppedTemp, base64img: base64Image));
@@ -346,6 +380,189 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
             errorMessage: e.response?.statusMessage ?? ""));
       }
     });
+    on<GetEditScreenAddressResumeEvent>((event, emit) async {
+      try {
+        emit(EditPreviewResumeLoading());
+        print("CheckProfile 5 == ProfileApiEvent");
+
+        await checkPreviewResumeEventInitial(event, emit);
+        Response responseScreenAddressResume = await sentScreenAddressResume();
+        Response responseScreenProvinceAddressResume =
+            await sentScreenProvinceAddressResume();
+        emit(EditPreviewResumeEndLoading());
+        if (responseScreenAddressResume.statusCode == 200) {
+          GetAddressResumeResponse getAddressResumeResponse =
+              GetAddressResumeResponse.fromJson(
+                  responseScreenAddressResume.data);
+          if (getAddressResumeResponse.head?.status == 200) {
+            if (responseScreenProvinceAddressResume.statusCode == 200) {
+              GetProvinceAddressResumeResponse
+                  getProvinceAddressResumeResponse =
+                  GetProvinceAddressResumeResponse.fromJson(
+                      responseScreenProvinceAddressResume.data);
+              if (getAddressResumeResponse.head?.status == 200) {
+                emit(GetEditScreenAddressResumeSuccessState(
+                  isGetAddressResumeResponse: getAddressResumeResponse,
+                  isGetProvinceAddressResumeResponse:
+                      getProvinceAddressResumeResponse,
+                ));
+              } else {
+                emit(EditPreviewResumeError(
+                    errorMessage:
+                        getAddressResumeResponse.head?.message ?? ""));
+              }
+            }
+          } else {
+            emit(EditPreviewResumeError(
+                errorMessage: getAddressResumeResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(EditPreviewResumeError(
+              errorMessage: responseScreenAddressResume.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(EditPreviewResumeError(
+            errorMessage: e.response?.statusMessage ?? ""));
+      }
+    });
+    on<GetEditScreenDistrictAddressResumeEvent>((event, emit) async {
+      try {
+        emit(EditPreviewResumeLoading());
+        print("GetEditScreenDistrictAddressResumeEvent 5+2 == GetEditScreenDistrictAddressResumeEvent");
+
+        await checkPreviewResumeEventInitial(event, emit);
+        Response responseGetDistrictListAddressResumeResponse = await sentScreenDistrictListAddressResume(provinceId: event.provinceId);
+        emit(EditPreviewResumeEndLoading());
+        if (responseGetDistrictListAddressResumeResponse.statusCode == 200) {
+          GetDistrictListAddressResumeResponse
+              getDistrictListAddressResumeResponse =
+              GetDistrictListAddressResumeResponse.fromJson(
+                  responseGetDistrictListAddressResumeResponse.data);
+          if (getDistrictListAddressResumeResponse.head?.status == 200) {
+
+            emit(GetEditScreenDistrictAddressResumeSuccessState(
+              isGetDistrictListAddressResumeResponse:
+                  getDistrictListAddressResumeResponse,
+            ));
+          } else {
+            emit(EditPreviewResumeError(
+                errorMessage:
+                    getDistrictListAddressResumeResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(EditPreviewResumeError(
+              errorMessage: responseGetDistrictListAddressResumeResponse.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(EditPreviewResumeError(
+            errorMessage: e.response?.statusMessage ?? ""));
+      }
+    });
+
+    on<GetEditScreenZipCodeAddressResumeEvent>((event, emit) async {
+      try {
+        emit(EditPreviewResumeLoading());
+        print("GetEditScreenDistrictAddressResumeEvent 5+2 == GetEditScreenDistrictAddressResumeEvent");
+
+        await checkPreviewResumeEventInitial(event, emit);
+        Response responseGetZipCodeAddressResumeResponse = await sentScreenZipCodeAddressResume(subDistrictId: event.subDistrictID);
+        emit(EditPreviewResumeEndLoading());
+        if (responseGetZipCodeAddressResumeResponse.statusCode == 200) {
+          GetZipCodeAddressResumeResponse
+          getZipCodeAddressResumeResponse =
+          GetZipCodeAddressResumeResponse.fromJson(
+              responseGetZipCodeAddressResumeResponse.data);
+          if (getZipCodeAddressResumeResponse.head?.status == 200) {
+
+            emit(GetEditScreenZipCodeAddressResumeSuccessState(
+              isGetZipCodeAddressResumeResponse: getZipCodeAddressResumeResponse,
+            ));
+          } else {
+            emit(EditPreviewResumeError(
+                errorMessage:
+                getZipCodeAddressResumeResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(EditPreviewResumeError(
+              errorMessage: responseGetZipCodeAddressResumeResponse.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(EditPreviewResumeError(
+            errorMessage: e.response?.statusMessage ?? ""));
+      }
+    });
+
+    on<GetEditScreenTamBonAddressResumeEvent>((event, emit) async {
+      try {
+        emit(EditPreviewResumeLoading());
+        print("GetEditScreenTamBonAddressResumeEvent 5+3 == GetEditScreenTamBonAddressResumeEvent");
+
+        await checkPreviewResumeEventInitial(event, emit);
+        Response responseGetSubDistrictListAddressResumeResponse = await sentScreenTamBonListAddressResume(districtId: event.tamBonId);
+        emit(EditPreviewResumeEndLoading());
+        if (responseGetSubDistrictListAddressResumeResponse.statusCode == 200) {
+          GetSubDistrictListAddressResumeResponse
+          getSubDistrictListAddressResumeResponse =
+          GetSubDistrictListAddressResumeResponse.fromJson(
+              responseGetSubDistrictListAddressResumeResponse.data);
+          if (getSubDistrictListAddressResumeResponse.head?.status == 200) {
+
+            emit(GetEditScreenSubDistrictAddressResumeSuccessState(
+              isGetSubDistrictListAddressResumeResponse:
+              getSubDistrictListAddressResumeResponse
+            ));
+          } else {
+            emit(EditPreviewResumeError(
+                errorMessage:
+                getSubDistrictListAddressResumeResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(EditPreviewResumeError(
+              errorMessage: responseGetSubDistrictListAddressResumeResponse.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(EditPreviewResumeError(
+            errorMessage: e.response?.statusMessage ?? ""));
+      }
+    });
+
+    on<SendEditAddressResumeEvent>((event, emit) async {
+        try {
+          print("SendEditAddressResumeEvent 5 +3 == SendEditAddressResumeEvent");
+
+          await checkPreviewResumeEventInitial(event, emit);
+          Response responseSentEditSkillResume = await sentEditAddressResume(
+            house: event.house ,
+            moo:  event.moo ,
+            soiTH: event.soiTH ,
+            soiEN:event.soiEN ,
+            roadTH:event.roadTH ,
+            roadEN: event.roadEN ,
+            subDistrictID: event.subDistrictID ,
+            districtID: event.districtID ,
+            provinceID: event.provinceID ,
+            zipcode:event.zipcode ,
+          );
+          if (responseSentEditSkillResume.statusCode == 200) {
+            ApiEditResumeResponseHead sentEditContactResumeResponse =
+            ApiEditResumeResponseHead.fromJson(
+                responseSentEditSkillResume.data);
+            if (sentEditContactResumeResponse.head?.status == 200) {
+              emit(SentEditAddressResumeSuccessState(
+                  apiEditResumeResponseHead: sentEditContactResumeResponse));
+            } else {
+              emit(PreviewResumeError(
+                  errorMessage:
+                  sentEditContactResumeResponse.head?.message ?? ""));
+            }
+          } else {
+            emit(PreviewResumeError(
+                errorMessage: responseSentEditSkillResume.statusMessage ?? ""));
+          }
+        } on DioError catch (e) {
+          emit(PreviewResumeError(errorMessage: e.response?.statusMessage ?? ""));
+        }
+      });
     on<EditChangeLanguageResumeRequest>((event, emit) async {
       try {
         emit(EditPreviewResumeLoading());
@@ -378,12 +595,16 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
         print("CheckProfile 5 == ProfileApiEvent");
 
         await checkPreviewResumeEventInitial(event, emit);
-        Response responseSentEditAboutResume = await sentEditAboutMeResume(detailsTH: event.aboutMeControllerTH, detailsEN: event.aboutMeControllerEN);
+        Response responseSentEditAboutResume = await sentEditAboutMeResume(
+            detailsTH: event.aboutMeControllerTH,
+            detailsEN: event.aboutMeControllerEN);
         if (responseSentEditAboutResume.statusCode == 200) {
           ApiEditResumeResponseHead sentEditAboutResumeResponse =
-          ApiEditResumeResponseHead.fromJson(responseSentEditAboutResume.data);
+              ApiEditResumeResponseHead.fromJson(
+                  responseSentEditAboutResume.data);
           if (sentEditAboutResumeResponse.head?.status == 200) {
-            emit(SentEditAboutMeResumeSuccessState(apiEditResumeResponseHead: sentEditAboutResumeResponse));
+            emit(SentEditAboutMeResumeSuccessState(
+                apiEditResumeResponseHead: sentEditAboutResumeResponse));
           } else {
             emit(PreviewResumeError(
                 errorMessage: sentEditAboutResumeResponse.head?.message ?? ""));
@@ -402,20 +623,24 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
         print("CheckProfile 5 == ProfileApiEvent");
 
         await checkPreviewResumeEventInitial(event, emit);
-        Response responseGetAboutMeResumeResponse = await sentScreenAboutResume();
+        Response responseGetAboutMeResumeResponse =
+            await sentScreenAboutResume();
         emit(EditPreviewResumeEndLoading());
         if (responseGetAboutMeResumeResponse.statusCode == 200) {
           GetAboutMeResumeResponse getAboutMeResumeResponse =
-          GetAboutMeResumeResponse.fromJson(responseGetAboutMeResumeResponse.data);
+              GetAboutMeResumeResponse.fromJson(
+                  responseGetAboutMeResumeResponse.data);
           if (getAboutMeResumeResponse.head?.status == 200) {
-            emit(GetEditScreenAboutMeResumeSuccessState( isGetEducationResumeResponse: getAboutMeResumeResponse));
+            emit(GetEditScreenAboutMeResumeSuccessState(
+                isGetEducationResumeResponse: getAboutMeResumeResponse));
           } else {
             emit(EditPreviewResumeError(
                 errorMessage: getAboutMeResumeResponse.head?.message ?? ""));
           }
         } else {
           emit(EditPreviewResumeError(
-              errorMessage: responseGetAboutMeResumeResponse.statusMessage ?? ""));
+              errorMessage:
+                  responseGetAboutMeResumeResponse.statusMessage ?? ""));
         }
       } on DioError catch (e) {
         emit(EditPreviewResumeError(
@@ -428,20 +653,26 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
         print("CheckProfile 5 == ProfileApiEvent");
 
         await checkPreviewResumeEventInitial(event, emit);
-        Response responseGetUserInformationResume = await sentScreenUserInfoResume();
+        Response responseGetUserInformationResume =
+            await sentScreenUserInfoResume();
         emit(EditPreviewResumeEndLoading());
         if (responseGetUserInformationResume.statusCode == 200) {
           GetUserInformationResumeResponse getUserInformationResumeResponse =
-          GetUserInformationResumeResponse.fromJson(responseGetUserInformationResume.data);
+              GetUserInformationResumeResponse.fromJson(
+                  responseGetUserInformationResume.data);
           if (getUserInformationResumeResponse.head?.status == 200) {
-            emit(GetEditScreenUserInfoResumeSuccessState( isGetUserInformationResumeResponse: getUserInformationResumeResponse));
+            emit(GetEditScreenUserInfoResumeSuccessState(
+                isGetUserInformationResumeResponse:
+                    getUserInformationResumeResponse));
           } else {
             emit(EditPreviewResumeError(
-                errorMessage: getUserInformationResumeResponse.head?.message ?? ""));
+                errorMessage:
+                    getUserInformationResumeResponse.head?.message ?? ""));
           }
         } else {
           emit(EditPreviewResumeError(
-              errorMessage: responseGetUserInformationResume.statusMessage ?? ""));
+              errorMessage:
+                  responseGetUserInformationResume.statusMessage ?? ""));
         }
       } on DioError catch (e) {
         emit(EditPreviewResumeError(
@@ -454,20 +685,24 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
         print("CheckProfile 5 == ProfileApiEvent");
 
         await checkPreviewResumeEventInitial(event, emit);
-        Response responseGetAboutMeResumeResponse = await sentScreenPositionResume(positionID: event.positionID);
+        Response responseGetAboutMeResumeResponse =
+            await sentScreenPositionResume(positionID: event.positionID);
         emit(EditPreviewResumeEndLoading());
         if (responseGetAboutMeResumeResponse.statusCode == 200) {
           GetPositionResumeResponse getPositionResumeResponse =
-          GetPositionResumeResponse.fromJson(responseGetAboutMeResumeResponse.data);
+              GetPositionResumeResponse.fromJson(
+                  responseGetAboutMeResumeResponse.data);
           if (getPositionResumeResponse.head?.status == 200) {
-            emit(GetEditScreenPositionResumeSuccessState( isGetPositionResumeResponse: getPositionResumeResponse));
+            emit(GetEditScreenPositionResumeSuccessState(
+                isGetPositionResumeResponse: getPositionResumeResponse));
           } else {
             emit(EditPreviewResumeError(
                 errorMessage: getPositionResumeResponse.head?.message ?? ""));
           }
         } else {
           emit(EditPreviewResumeError(
-              errorMessage: responseGetAboutMeResumeResponse.statusMessage ?? ""));
+              errorMessage:
+                  responseGetAboutMeResumeResponse.statusMessage ?? ""));
         }
       } on DioError catch (e) {
         emit(EditPreviewResumeError(
@@ -480,20 +715,25 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
         print("CheckProfile 5 == ProfileApiEvent");
 
         await checkPreviewResumeEventInitial(event, emit);
-        Response responseGetAboutMeResumeResponse = await sentScreenEducationResume(eduId: event.eduId, type: event.type);
+        Response responseGetAboutMeResumeResponse =
+            await sentScreenEducationResume(
+                eduId: event.eduId, type: event.type);
         emit(EditPreviewResumeEndLoading());
         if (responseGetAboutMeResumeResponse.statusCode == 200) {
           GetEducationResumeResponse getEducationResumeResponse =
-          GetEducationResumeResponse.fromJson(responseGetAboutMeResumeResponse.data);
+              GetEducationResumeResponse.fromJson(
+                  responseGetAboutMeResumeResponse.data);
           if (getEducationResumeResponse.head?.status == 200) {
-            emit(GetEditScreenEducationResumeSuccessState( isGetEducationResumeResponse: getEducationResumeResponse));
+            emit(GetEditScreenEducationResumeSuccessState(
+                isGetEducationResumeResponse: getEducationResumeResponse));
           } else {
             emit(EditPreviewResumeError(
                 errorMessage: getEducationResumeResponse.head?.message ?? ""));
           }
         } else {
           emit(EditPreviewResumeError(
-              errorMessage: responseGetAboutMeResumeResponse.statusMessage ?? ""));
+              errorMessage:
+                  responseGetAboutMeResumeResponse.statusMessage ?? ""));
         }
       } on DioError catch (e) {
         emit(EditPreviewResumeError(
@@ -506,20 +746,24 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
         print("CheckProfile 5 == ProfileApiEvent");
 
         await checkPreviewResumeEventInitial(event, emit);
-        Response responseGetAboutMeResumeResponse = await sentScreenExperienceResume(experienceId: event.id);
+        Response responseGetAboutMeResumeResponse =
+            await sentScreenExperienceResume(experienceId: event.id);
         emit(EditPreviewResumeEndLoading());
         if (responseGetAboutMeResumeResponse.statusCode == 200) {
           GetExperienceResumeResponse getExperienceResumeResponse =
-          GetExperienceResumeResponse.fromJson(responseGetAboutMeResumeResponse.data);
+              GetExperienceResumeResponse.fromJson(
+                  responseGetAboutMeResumeResponse.data);
           if (getExperienceResumeResponse.head?.status == 200) {
-            emit(GetEditScreenExperienceResumeSuccessState(isGetExperienceResumeResponse: getExperienceResumeResponse ));
+            emit(GetEditScreenExperienceResumeSuccessState(
+                isGetExperienceResumeResponse: getExperienceResumeResponse));
           } else {
             emit(EditPreviewResumeError(
                 errorMessage: getExperienceResumeResponse.head?.message ?? ""));
           }
         } else {
           emit(EditPreviewResumeError(
-              errorMessage: responseGetAboutMeResumeResponse.statusMessage ?? ""));
+              errorMessage:
+                  responseGetAboutMeResumeResponse.statusMessage ?? ""));
         }
       } on DioError catch (e) {
         emit(EditPreviewResumeError(
@@ -533,20 +777,25 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
         print("CheckProfile 5 == ProfileApiEvent");
 
         await checkPreviewResumeEventInitial(event, emit);
-        Response responseGetCertificateResumeResponse = await sentScreenCertificateResume(certificateId :event.id);
+        Response responseGetCertificateResumeResponse =
+            await sentScreenCertificateResume(certificateId: event.id);
         emit(EditPreviewResumeEndLoading());
         if (responseGetCertificateResumeResponse.statusCode == 200) {
           GetCertificateResumeResponse getCertificateResumeResponse =
-          GetCertificateResumeResponse.fromJson(responseGetCertificateResumeResponse.data);
+              GetCertificateResumeResponse.fromJson(
+                  responseGetCertificateResumeResponse.data);
           if (getCertificateResumeResponse.head?.status == 200) {
-            emit(GetEditScreenCertificateResumeSuccessState(isGetCertificateResumeResponse: getCertificateResumeResponse ));
+            emit(GetEditScreenCertificateResumeSuccessState(
+                isGetCertificateResumeResponse: getCertificateResumeResponse));
           } else {
             emit(EditPreviewResumeError(
-                errorMessage: getCertificateResumeResponse.head?.message ?? ""));
+                errorMessage:
+                    getCertificateResumeResponse.head?.message ?? ""));
           }
         } else {
           emit(EditPreviewResumeError(
-              errorMessage: responseGetCertificateResumeResponse.statusMessage ?? ""));
+              errorMessage:
+                  responseGetCertificateResumeResponse.statusMessage ?? ""));
         }
       } on DioError catch (e) {
         emit(EditPreviewResumeError(
@@ -559,20 +808,26 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
         print("CheckProfile 5 == ProfileApiEvent");
 
         await checkPreviewResumeEventInitial(event, emit);
-        Response responseGetSkillLanguageResumeResponse = await sentScreenSkillLanguageResume(skillLanguageId :event.id);
+        Response responseGetSkillLanguageResumeResponse =
+            await sentScreenSkillLanguageResume(skillLanguageId: event.id);
         emit(SkillLanguageResumeEndLoading());
         if (responseGetSkillLanguageResumeResponse.statusCode == 200) {
           GetSkillLanguageResumeResponse getSkillLanguageResumeResponse =
-          GetSkillLanguageResumeResponse.fromJson(responseGetSkillLanguageResumeResponse.data);
+              GetSkillLanguageResumeResponse.fromJson(
+                  responseGetSkillLanguageResumeResponse.data);
           if (getSkillLanguageResumeResponse.head?.status == 200) {
-            emit(GetEditScreenSkillLanguageResumeSuccessState(isGetSkillLanguageResumeResponse: getSkillLanguageResumeResponse ));
+            emit(GetEditScreenSkillLanguageResumeSuccessState(
+                isGetSkillLanguageResumeResponse:
+                    getSkillLanguageResumeResponse));
           } else {
             emit(SkillLanguageResumeError(
-                errorMessage: getSkillLanguageResumeResponse.head?.message ?? ""));
+                errorMessage:
+                    getSkillLanguageResumeResponse.head?.message ?? ""));
           }
         } else {
           emit(SkillLanguageResumeError(
-              errorMessage: responseGetSkillLanguageResumeResponse.statusMessage ?? ""));
+              errorMessage:
+                  responseGetSkillLanguageResumeResponse.statusMessage ?? ""));
         }
       } on DioError catch (e) {
         emit(SkillLanguageResumeError(
@@ -586,20 +841,24 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
         print("CheckProfile 5 == ProfileApiEvent");
 
         await checkPreviewResumeEventInitial(event, emit);
-        Response responseGetSkillResumeResponse = await sentScreenSkillResume(skillId:event.id);
+        Response responseGetSkillResumeResponse =
+            await sentScreenSkillResume(skillId: event.id);
         emit(EditPreviewResumeEndLoading());
         if (responseGetSkillResumeResponse.statusCode == 200) {
           GetSkillResumeResponse getSkillResumeResponse =
-          GetSkillResumeResponse.fromJson(responseGetSkillResumeResponse.data);
+              GetSkillResumeResponse.fromJson(
+                  responseGetSkillResumeResponse.data);
           if (getSkillResumeResponse.head?.status == 200) {
-            emit(GetEditScreenSkillResumeSuccessState(isGetSkillResumeResponse: getSkillResumeResponse ));
+            emit(GetEditScreenSkillResumeSuccessState(
+                isGetSkillResumeResponse: getSkillResumeResponse));
           } else {
             emit(EditPreviewResumeError(
                 errorMessage: getSkillResumeResponse.head?.message ?? ""));
           }
         } else {
           emit(EditPreviewResumeError(
-              errorMessage: responseGetSkillResumeResponse.statusMessage ?? ""));
+              errorMessage:
+                  responseGetSkillResumeResponse.statusMessage ?? ""));
         }
       } on DioError catch (e) {
         emit(EditPreviewResumeError(
@@ -611,36 +870,39 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
         print("CheckProfile 5 == ProfileApiEvent");
 
         await checkPreviewResumeEventInitial(event, emit);
-        Response responseSentEditEducationResume = await sentEditEducationResume(
-            edit:event.edit,
-            id:event.id,
-            orderChoose:event. orderChoose,
-            startDate:event.startDate,
-            endDate:event.endDate,
-            type:event.type,
-            placeOfStudy:event.placeOfStudy,
-            placeOfStudyEN:event.placeOfStudyEN,
-            detailTH:event.detailTH,
-            detailEN:event.detailEN,
+        Response responseSentEditEducationResume =
+            await sentEditEducationResume(
+          edit: event.edit,
+          id: event.id,
+          orderChoose: event.orderChoose,
+          startDate: event.startDate,
+          endDate: event.endDate,
+          type: event.type,
+          placeOfStudy: event.placeOfStudy,
+          placeOfStudyEN: event.placeOfStudyEN,
+          detailTH: event.detailTH,
+          detailEN: event.detailEN,
         );
         if (responseSentEditEducationResume.statusCode == 200) {
           ApiEditResumeResponseHead sentEditAboutResumeResponse =
-          ApiEditResumeResponseHead.fromJson(responseSentEditEducationResume.data);
+              ApiEditResumeResponseHead.fromJson(
+                  responseSentEditEducationResume.data);
           if (sentEditAboutResumeResponse.head?.status == 200) {
-            emit(SentEditEducationResumeSuccessState(apiEditResumeResponseHead: sentEditAboutResumeResponse));
+            emit(SentEditEducationResumeSuccessState(
+                apiEditResumeResponseHead: sentEditAboutResumeResponse));
           } else {
             emit(PreviewResumeError(
                 errorMessage: sentEditAboutResumeResponse.head?.message ?? ""));
           }
         } else {
           emit(PreviewResumeError(
-              errorMessage: responseSentEditEducationResume.statusMessage ?? ""));
+              errorMessage:
+                  responseSentEditEducationResume.statusMessage ?? ""));
         }
       } on DioError catch (e) {
         emit(PreviewResumeError(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
-
 
     on<SentEditContactResumeEvent>((event, emit) async {
       try {
@@ -658,16 +920,20 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
         );
         if (responseSentEditPositionsResume.statusCode == 200) {
           ApiEditResumeResponseHead sentEditContactResumeResponse =
-          ApiEditResumeResponseHead.fromJson(responseSentEditPositionsResume.data);
+              ApiEditResumeResponseHead.fromJson(
+                  responseSentEditPositionsResume.data);
           if (sentEditContactResumeResponse.head?.status == 200) {
-            emit(SentEditContactResumeSuccessState(apiEditResumeResponseHead: sentEditContactResumeResponse));
+            emit(SentEditContactResumeSuccessState(
+                apiEditResumeResponseHead: sentEditContactResumeResponse));
           } else {
             emit(PreviewResumeError(
-                errorMessage: sentEditContactResumeResponse.head?.message ?? ""));
+                errorMessage:
+                    sentEditContactResumeResponse.head?.message ?? ""));
           }
         } else {
           emit(PreviewResumeError(
-              errorMessage: responseSentEditPositionsResume.statusMessage ?? ""));
+              errorMessage:
+                  responseSentEditPositionsResume.statusMessage ?? ""));
         }
       } on DioError catch (e) {
         emit(PreviewResumeError(errorMessage: e.response?.statusMessage ?? ""));
@@ -678,7 +944,8 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
         print("CheckProfile 5 == ProfileApiEvent");
 
         await checkPreviewResumeEventInitial(event, emit);
-        Response responseSentEditPositionsResume = await sentEditExperienceResume(
+        Response responseSentEditPositionsResume =
+            await sentEditExperienceResume(
           edit: event.edit,
           id: event.id,
           orderChoose: event.orderChoose,
@@ -691,16 +958,20 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
         );
         if (responseSentEditPositionsResume.statusCode == 200) {
           ApiEditResumeResponseHead sentEditContactResumeResponse =
-          ApiEditResumeResponseHead.fromJson(responseSentEditPositionsResume.data);
+              ApiEditResumeResponseHead.fromJson(
+                  responseSentEditPositionsResume.data);
           if (sentEditContactResumeResponse.head?.status == 200) {
-            emit(SentEditExperienceResumeSuccessState(apiEditResumeResponseHead: sentEditContactResumeResponse));
+            emit(SentEditExperienceResumeSuccessState(
+                apiEditResumeResponseHead: sentEditContactResumeResponse));
           } else {
             emit(PreviewResumeError(
-                errorMessage: sentEditContactResumeResponse.head?.message ?? ""));
+                errorMessage:
+                    sentEditContactResumeResponse.head?.message ?? ""));
           }
         } else {
           emit(PreviewResumeError(
-              errorMessage: responseSentEditPositionsResume.statusMessage ?? ""));
+              errorMessage:
+                  responseSentEditPositionsResume.statusMessage ?? ""));
         }
       } on DioError catch (e) {
         emit(PreviewResumeError(errorMessage: e.response?.statusMessage ?? ""));
@@ -722,16 +993,19 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
         );
         if (responseSentEditPositionsResume.statusCode == 200) {
           ApiEditResumeResponseHead sentEditAboutResumeResponse =
-          ApiEditResumeResponseHead.fromJson(responseSentEditPositionsResume.data);
+              ApiEditResumeResponseHead.fromJson(
+                  responseSentEditPositionsResume.data);
           if (sentEditAboutResumeResponse.head?.status == 200) {
-            emit(SentEditPositionResumeSuccessState(apiEditResumeResponseHead: sentEditAboutResumeResponse));
+            emit(SentEditPositionResumeSuccessState(
+                apiEditResumeResponseHead: sentEditAboutResumeResponse));
           } else {
             emit(PreviewResumeError(
                 errorMessage: sentEditAboutResumeResponse.head?.message ?? ""));
           }
         } else {
           emit(PreviewResumeError(
-              errorMessage: responseSentEditPositionsResume.statusMessage ?? ""));
+              errorMessage:
+                  responseSentEditPositionsResume.statusMessage ?? ""));
         }
       } on DioError catch (e) {
         emit(PreviewResumeError(errorMessage: e.response?.statusMessage ?? ""));
@@ -744,23 +1018,31 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
 
         await checkPreviewResumeEventInitial(event, emit);
 
-        print(" prefix: ${event.prefixId} ,name:  ${event.name} ,lastName: ${event.lastName}  ,nameEN:${event.nameEN} ,lastNameEN: ${event.lastNameEN} ");
+        print(
+            " prefix: ${event.prefixId} ,name:  ${event.name} ,lastName: ${event.lastName}  ,nameEN:${event.nameEN} ,lastNameEN: ${event.lastNameEN} ");
 
         Response responseSentEditUserInfoResume = await sentEditUserInfoResume(
-            prefixId: event.prefixId, name: event.name, lastName: event.lastName, nameEN: event.nameEN, lastNameEN: event.lastNameEN);
+            prefixId: event.prefixId,
+            name: event.name,
+            lastName: event.lastName,
+            nameEN: event.nameEN,
+            lastNameEN: event.lastNameEN);
         emit(EditPreviewResumeEndLoading());
         if (responseSentEditUserInfoResume.statusCode == 200) {
           ApiEditResumeResponseHead apiEditResumeResponseHead =
-          ApiEditResumeResponseHead.fromJson(responseSentEditUserInfoResume.data);
+              ApiEditResumeResponseHead.fromJson(
+                  responseSentEditUserInfoResume.data);
           if (apiEditResumeResponseHead.head?.status == 200) {
-            emit(SentEditUserInfoResumeSuccessState( apiEditResumeResponseHead: apiEditResumeResponseHead));
+            emit(SentEditUserInfoResumeSuccessState(
+                apiEditResumeResponseHead: apiEditResumeResponseHead));
           } else {
             emit(EditPreviewResumeError(
                 errorMessage: apiEditResumeResponseHead.head?.message ?? ""));
           }
         } else {
           emit(EditPreviewResumeError(
-              errorMessage: responseSentEditUserInfoResume.statusMessage ?? ""));
+              errorMessage:
+                  responseSentEditUserInfoResume.statusMessage ?? ""));
         }
       } on DioError catch (e) {
         emit(EditPreviewResumeError(
@@ -772,7 +1054,8 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
         print("CheckProfile 5 == ProfileApiEvent");
 
         await checkPreviewResumeEventInitial(event, emit);
-        Response responseSentEditCertificateResume = await sentEditCertificateResume(
+        Response responseSentEditCertificateResume =
+            await sentEditCertificateResume(
           edit: event.edit,
           id: event.id,
           orderChoose: event.orderChoose,
@@ -783,16 +1066,20 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
         );
         if (responseSentEditCertificateResume.statusCode == 200) {
           ApiEditResumeResponseHead sentEditContactResumeResponse =
-          ApiEditResumeResponseHead.fromJson(responseSentEditCertificateResume.data);
+              ApiEditResumeResponseHead.fromJson(
+                  responseSentEditCertificateResume.data);
           if (sentEditContactResumeResponse.head?.status == 200) {
-            emit(SentEditCertificateResumeSuccessState(apiEditResumeResponseHead: sentEditContactResumeResponse));
+            emit(SentEditCertificateResumeSuccessState(
+                apiEditResumeResponseHead: sentEditContactResumeResponse));
           } else {
             emit(PreviewResumeError(
-                errorMessage: sentEditContactResumeResponse.head?.message ?? ""));
+                errorMessage:
+                    sentEditContactResumeResponse.head?.message ?? ""));
           }
         } else {
           emit(PreviewResumeError(
-              errorMessage: responseSentEditCertificateResume.statusMessage ?? ""));
+              errorMessage:
+                  responseSentEditCertificateResume.statusMessage ?? ""));
         }
       } on DioError catch (e) {
         emit(PreviewResumeError(errorMessage: e.response?.statusMessage ?? ""));
@@ -803,7 +1090,8 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
         print("CheckProfile 5 == ProfileApiEvent");
 
         await checkPreviewResumeEventInitial(event, emit);
-        Response responseSentEditSkillLanguageResume = await sentEditSkillLanguageResume(
+        Response responseSentEditSkillLanguageResume =
+            await sentEditSkillLanguageResume(
           edit: event.edit,
           id: event.id,
           orderChoose: event.orderChoose,
@@ -815,16 +1103,20 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
         );
         if (responseSentEditSkillLanguageResume.statusCode == 200) {
           ApiEditResumeResponseHead sentEditContactResumeResponse =
-          ApiEditResumeResponseHead.fromJson(responseSentEditSkillLanguageResume.data);
+              ApiEditResumeResponseHead.fromJson(
+                  responseSentEditSkillLanguageResume.data);
           if (sentEditContactResumeResponse.head?.status == 200) {
-            emit(SentEditSkillLanguageResumeSuccessState(apiEditResumeResponseHead: sentEditContactResumeResponse));
+            emit(SentEditSkillLanguageResumeSuccessState(
+                apiEditResumeResponseHead: sentEditContactResumeResponse));
           } else {
             emit(PreviewResumeError(
-                errorMessage: sentEditContactResumeResponse.head?.message ?? ""));
+                errorMessage:
+                    sentEditContactResumeResponse.head?.message ?? ""));
           }
         } else {
           emit(PreviewResumeError(
-              errorMessage: responseSentEditSkillLanguageResume.statusMessage ?? ""));
+              errorMessage:
+                  responseSentEditSkillLanguageResume.statusMessage ?? ""));
         }
       } on DioError catch (e) {
         emit(PreviewResumeError(errorMessage: e.response?.statusMessage ?? ""));
@@ -847,12 +1139,15 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
         );
         if (responseSentEditSkillResume.statusCode == 200) {
           ApiEditResumeResponseHead sentEditContactResumeResponse =
-          ApiEditResumeResponseHead.fromJson(responseSentEditSkillResume.data);
+              ApiEditResumeResponseHead.fromJson(
+                  responseSentEditSkillResume.data);
           if (sentEditContactResumeResponse.head?.status == 200) {
-            emit(SentEditSkillResumeSuccessState(apiEditResumeResponseHead: sentEditContactResumeResponse));
+            emit(SentEditSkillResumeSuccessState(
+                apiEditResumeResponseHead: sentEditContactResumeResponse));
           } else {
             emit(PreviewResumeError(
-                errorMessage: sentEditContactResumeResponse.head?.message ?? ""));
+                errorMessage:
+                    sentEditContactResumeResponse.head?.message ?? ""));
           }
         } else {
           emit(PreviewResumeError(
@@ -862,6 +1157,5 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
         emit(PreviewResumeError(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
-
   }
 }

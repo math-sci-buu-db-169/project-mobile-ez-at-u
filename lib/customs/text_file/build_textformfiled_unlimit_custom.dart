@@ -526,7 +526,7 @@ class BuildTextFormFieldUnLimitCustomNotIconsNotContainer
     return Padding(
       padding: EdgeInsets.only(left: 10, right: 10, top: 20),
       child: TextFormField(
-        maxLength: null,
+        maxLength: maxLength,
         readOnly: false,
         textInputAction: TextInputAction.newline,
         cursorColor: appBarforegroundColor,
@@ -534,6 +534,75 @@ class BuildTextFormFieldUnLimitCustomNotIconsNotContainer
           fontSize: 12, color: appBarforegroundColor, // height: 2.0,
         ),
         keyboardType: TextInputType.multiline,
+        maxLines: null,
+        initialValue: initialvalue,
+        onChanged: onChanged,
+        decoration: InputDecoration(
+            filled: true,
+            fillColor: Theme.of(context).primaryColor == Colors.black
+                ? fillColorDark
+                : fillColorLight,
+            hintText: "$hintLabel",
+            labelText: '$hintLabel',
+            labelStyle: TextStyle(
+                fontSize: 16,
+                color: Theme.of(context).appBarTheme.foregroundColor),
+            hintStyle: TextStyle(
+                fontSize: 14,
+                color: Theme.of(context).appBarTheme.foregroundColor),
+            // enabledBorder:   OutlineInputBorder(
+            //   borderSide: BorderSide(color:  Theme.of(context).bottomAppBarColor.withOpacity(0.3), width: 1.0),
+            //   borderRadius:const BorderRadius.all(Radius.circular(10)),
+            // ),
+            contentPadding: const EdgeInsets.all(10),
+            focusedBorder: UnderlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(0)),
+              borderSide: BorderSide(
+                  color: Theme.of(context).primaryColor == Colors.white
+                      ? fillColorDark
+                      : fillColorLight,
+                  width: 2),
+            )),
+      ),
+    );
+  }
+}
+
+class BuildTextFormFieldCustomNotIconsNotContainer
+    extends StatelessWidget {
+  final TextEditingController? textEditingController;
+  final String? hintLabel;
+  final TextInputType textInputType;
+  final ValueChanged<String>? onChanged;
+  final String? initialvalue;
+  final int? maxLength;
+  const BuildTextFormFieldCustomNotIconsNotContainer({
+    Key? key,
+    this.textEditingController,
+    required this.hintLabel,
+    this.onChanged,
+    required this.textInputType,
+    required this.initialvalue,
+    this.maxLength,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Color? appBarBackgroundColor =
+        Theme.of(context).appBarTheme.backgroundColor ?? Colors.white;
+    Color? appBarforegroundColor =
+        Theme.of(context).appBarTheme.foregroundColor ?? Colors.black;
+    return Padding(
+      padding: EdgeInsets.only(left: 10, right: 10, top: 20),
+      child: TextFormField(
+        maxLength: maxLength,
+        readOnly: false,
+        textInputAction: TextInputAction.newline,
+        cursorColor: appBarforegroundColor,
+        style: TextStyle(
+          fontSize: 12, color: appBarforegroundColor, // height: 2.0,
+        ),
+        keyboardType: textInputType,
         maxLines: null,
         initialValue: initialvalue,
         onChanged: onChanged,

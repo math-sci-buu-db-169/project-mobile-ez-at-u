@@ -40,9 +40,9 @@ class PreviewResumeSuccessState extends  ResumeState {
 }
 class OnSelectedAndPreviewResumeSuccessState extends  ResumeState {
   PreViewResumeResponse isPreViewResumeResponse;
-  GetOnSelectedResume isGetOnSelectedResume;
+  // GetOnSelectedResume isGetOnSelectedResume;
 
-  OnSelectedAndPreviewResumeSuccessState({required this.isPreViewResumeResponse , required this.isGetOnSelectedResume});
+  OnSelectedAndPreviewResumeSuccessState({required this.isPreViewResumeResponse});
 }
 
 class SetPreviewResumeSuccessState extends  ResumeState {
@@ -155,4 +155,34 @@ class GetEditScreenSkillResumeSuccessState extends  ResumeState {
 
   GetEditScreenSkillResumeSuccessState(
       {required this.isGetSkillResumeResponse});
+}
+class SetOnSelectedResumeSuccessState extends  ResumeState {
+  SetOnSelectedResume isSetOnSelectedResume;
+  SetOnSelectedResumeSuccessState({required this.isSetOnSelectedResume});
+}
+
+class GetEditScreenAddressResumeSuccessState extends  ResumeState {
+  GetAddressResumeResponse isGetAddressResumeResponse;
+  GetProvinceAddressResumeResponse isGetProvinceAddressResumeResponse;
+  GetEditScreenAddressResumeSuccessState({required this.isGetAddressResumeResponse , required this.isGetProvinceAddressResumeResponse});
+}
+
+class GetEditScreenDistrictAddressResumeSuccessState extends  ResumeState {
+  GetDistrictListAddressResumeResponse isGetDistrictListAddressResumeResponse;
+  GetEditScreenDistrictAddressResumeSuccessState({required this.isGetDistrictListAddressResumeResponse });
+}
+
+class GetEditScreenSubDistrictAddressResumeSuccessState extends  ResumeState {
+  GetSubDistrictListAddressResumeResponse isGetSubDistrictListAddressResumeResponse;
+  GetEditScreenSubDistrictAddressResumeSuccessState({required this.isGetSubDistrictListAddressResumeResponse });
+}
+
+class GetEditScreenZipCodeAddressResumeSuccessState extends  ResumeState {
+  GetZipCodeAddressResumeResponse isGetZipCodeAddressResumeResponse;
+  GetEditScreenZipCodeAddressResumeSuccessState({required this.isGetZipCodeAddressResumeResponse });
+}
+
+class SentEditAddressResumeSuccessState extends  ResumeState {
+  ApiEditResumeResponseHead apiEditResumeResponseHead;
+  SentEditAddressResumeSuccessState({required this.apiEditResumeResponseHead});
 }
