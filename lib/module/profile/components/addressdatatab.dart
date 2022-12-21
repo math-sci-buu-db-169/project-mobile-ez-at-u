@@ -304,7 +304,7 @@ class _ProfileAddressDataTabState extends State<ProfileAddressDataTab> {
             Container(
               width: MediaQuery.of(context).size.width * 0.4,
               child: TextFormField(
-                cursorColor: Colors.black,
+                cursorColor: textColor,
                 autofocus: false,
                 minLines: 1,
                 maxLines: null,

@@ -160,74 +160,6 @@ class _ProfileContactDataHeadTeacherState extends State<ProfileContactDataHeadTe
     ;
   }
 }
-class ProfileContactDataTabTeacher extends StatefulWidget {
-  final Color textColor;
-  final Color dataTabColor;
-  final Widget iconContact;
-  final String textContact;
-  final bool isUnpressed;
-  final ValueChanged<String>? onChange;
-  final TextInputType? keyboardType;
-  final int? maxLength;
-  const ProfileContactDataTabTeacher(
-      {Key? key,
-        required this.iconContact,
-        required this.textContact,
-        required this.isUnpressed,
-        required this.textColor,
-        required this.dataTabColor,
-        this.keyboardType,
-        this.maxLength,
-        this.onChange})
-      : super(key: key);
-
-  @override
-  State<ProfileContactDataTabTeacher> createState() => _ProfileContactDataTabTeacherState();
-}
-
-class _ProfileContactDataTabTeacherState extends State<ProfileContactDataTabTeacher> {
-  @override
-  Widget build(BuildContext context) {
-    Color textColor = widget.textColor;
-    Color dataTabColor = widget.dataTabColor;
-    Widget iconContact = widget.iconContact;
-    String textContact = widget.textContact;
-    bool isUnpressed = widget.isUnpressed;
-    return Container(
-      decoration: BoxDecoration(
-        color: dataTabColor.withOpacity(0.1),
-        border: Border(
-            top: BorderSide(width: 1, color: Colors.black12),
-            bottom: BorderSide(width: 1, color: Colors.black12)),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.only(left: 10,top: 10,bottom: 10,right: 20),
-        child: Row(
-          children: [
-            iconContact,
-            Expanded(
-              child: TextFormField(
-                style: TextStyle(fontSize: 18, color: textColor),
-                cursorColor: Colors.black,
-                keyboardType: widget.keyboardType,
-                maxLength: widget.maxLength,
-                readOnly: isUnpressed,
-                textAlign: TextAlign.right,
-                decoration: const InputDecoration(
-                    border: InputBorder.none,
-                    counterText: ""
-                ),
-                onChanged: widget.onChange,
-                initialValue: textContact,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 //////
 class ProfileContactDataTCTab extends StatefulWidget {
   final Color textColor;
@@ -284,7 +216,7 @@ class _ProfileContactDataTCTabState extends State<ProfileContactDataTCTab> {
             Expanded(
               child: TextFormField(
                 style: TextStyle(fontSize: 18, color: textColor),
-                cursorColor: Colors.black,
+                cursorColor: textColor,
                 keyboardType: widget.keyboardType,
                 maxLength: widget.maxLength,
                 readOnly: isUnpressed,
