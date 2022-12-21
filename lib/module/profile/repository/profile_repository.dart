@@ -7,22 +7,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 
 class ProfileRepository {
-  /// มาจาก webbinaryz ///
-  // Future<Response> getApiProfile(
-  //     // String user,String password,
-  //     ) async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   String? globalKey = prefs.getString("globalKey");
-  //   if (kDebugMode) {
-  //     print(globalKey);
-  //   }
-  //   return await MyDio.createDioTest().post(
-  //     "/v1/api/modules/profile/wording/profile",
-  //     data: jsonEncode({
-  //     })
-  //   );
-  // }
-  /// มาจาก server ///
   Future<Response> getApiProfile(
       // String user,String password,
       ) async {
@@ -69,7 +53,8 @@ class ProfileRepository {
           "gpashs": gpaSh
         })
     );
-  } Future<Response> sentProfileAddressData(
+  }
+  Future<Response> sentProfileAddressData(
       String number,
       String moo,
       String soi,
@@ -129,8 +114,6 @@ class ProfileRepository {
       String company,
       String workplace
       ) async {
-    // final prefs = await SharedPreferences.getInstance();
-    // String? globalKey = prefs.getString("globalKey");
     print("attention = ${attention}");
     print("status = ${status}");
     print("jobType = ${jobType}");
@@ -154,8 +137,6 @@ class ProfileRepository {
   Future<Response> sentProfileImage(
       String getBase64Img,
       ) async {
-    // final prefs = await SharedPreferences.getInstance();
-    // String? globalKey = prefs.getString("globalKey");
     return await MyDio.createDioServer().post(
         "/profile/profileimage",
         data: jsonEncode(
@@ -210,11 +191,17 @@ class ProfileRepository {
       String teacherMasterDegree,
       String teacherPHD,
       String teacherReseachArea,
+      String teacherUBD,
+      String teacherUMD,
+      String teacherUPHD,
       ) async {
     print("attention = ${teacherBachelorDegree}");
     print("status = ${teacherMasterDegree}");
     print("jobType = ${teacherPHD}");
     print("jobType = ${teacherReseachArea}");
+    print("jobType = ${teacherUBD}");
+    print("jobType = ${teacherUMD}");
+    print("jobType = ${teacherUPHD}");
     return await MyDio.createDioServer().post(
         "/profile/acadamicprofilethsubmit",
         data: jsonEncode(
@@ -222,7 +209,10 @@ class ProfileRepository {
               "graduatedegree": teacherBachelorDegree,
               "masterdegree": teacherMasterDegree,
               "phd": teacherPHD,
-              "scopeofstudy": teacherReseachArea
+              "reshercharea": teacherReseachArea,
+              "univofgraduatedegree": teacherUBD,
+              "univofmasterdegree": teacherUMD,
+              "univofphd": teacherUPHD
             }
         )
     );

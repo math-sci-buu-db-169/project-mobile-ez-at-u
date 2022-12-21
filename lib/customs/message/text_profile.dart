@@ -36,3 +36,8 @@ const String profileTextAttention   = 'ความสนใจ';
 const String profileTextCareer   = 'อาชีพ';
 const String profileTextJobType   = 'ประเภทงาน';
 const String profileTextStatus   = 'สถานะ';
+//--TC--//
+const String profileTextPosition   = 'ตำแหน่ง';
+const String profileTextBSC   = 'ปริญญาบัณฑิต';
+const String profileTextMSC   = 'ปริญญามหาบัณฑิต';
+const String profileTextPHD   = 'ปริญญาดุษฎีบัณฑิต';

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
+import 'package:ez_at_u/module/profile/model/response/profile_teacher_screen_api.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -260,7 +261,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> with ProfileRepositor
       }
     }
     );
-
     on<CareerSubmitEvent>((event, emit) async{
       try {
         emit(ProfileLoading());
@@ -288,6 +288,30 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> with ProfileRepositor
       } on DioError catch (e) {
         emit(ProfileError(errorMessage: e.response?.statusMessage ?? ""));
       }
+    }
+    );
+    on<ProfileApiTeacherEvent>((event, emit) async{
+      try {
+        emit(ProfileTeacherLoading());
+        print("CheckProfile 5 == ProfileApiEvent");
+        await  checkProfileEventInitial(event, emit) ;
+        Response response = await profileTeacherScreen();
+        emit(ProfileTeacherLoadingSuccess());
+        if (response.statusCode == 200) {
+          // print('aa = ' + '${response.data}');
+          ProfileTeacherScreenApi apiProfileTeacherResponse = ProfileTeacherScreenApi.fromJson(response.data);
+          if (apiProfileTeacherResponse.head?.status == 200) {
+            emit(ProfileTeacherScreenSuccessState(response: apiProfileTeacherResponse));
+          } else {
+            emit(ProfileTeacherError(errorMessage: apiProfileTeacherResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(ProfileTeacherError(errorMessage: response.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(ProfileTeacherError(errorMessage: e.response?.statusMessage ?? ""));
+      }
+
     }
     );
   }
