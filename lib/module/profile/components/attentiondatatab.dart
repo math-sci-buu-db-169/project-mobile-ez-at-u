@@ -55,61 +55,62 @@ class _ProfileAttentionDropdownTabState
       child: Padding(
         padding: const EdgeInsets.only(left: 10,top: 10,bottom: 10,right: 20),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
 
-              width: MediaQuery.of(context).size.width * 0.5,
+              width: MediaQuery.of(context).size.width * 0.4,
 
               child: Text(
                 textLeft,
                 style: TextStyle(fontSize: 18, color: textColor),
               ),
             ),
-            Expanded(
-              child: SizedBox(
-                child: IgnorePointer(
-                  ignoring: isUnpressed,
-                  child:
-                  PopupMenuButton<String>(
-                    // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                              child: Text(
-                                showAttentionValue??'',
-                                style:  TextStyle(fontSize:18 ,color: textColor,),
-                                textAlign: TextAlign.end,
-                                overflow: TextOverflow.fade,
-                                softWrap: false,
-                              )),
-                          Icon(Icons.keyboard_arrow_down, color: textColor,)
-                        ]),
-                    itemBuilder: (context) {
-                      return List.generate(widget.attentionArray.length,
-                              (index) {
-                            return PopupMenuItem(
-                              textStyle: TextStyle(fontSize: 18, color: textColor),
-                              value: widget.attentionArray[index].attenvalue,
-                              child:
-                              Column(
-                                children: [
-                                  Text(widget.attentionArray[index].attenname ?? ''),
-                                ],
-                              ),
-                            );
-                          });
-                    },
-                    onSelected: (value) {
-                      setState(() {
-                        userAttentionValue = value;
-                        showAttentionValue = widget.attentionArray[int.parse(value)-1].attenname;
-                        widget.callbackFromAttentionDataTab(userAttentionValue??"-");
-                        print(widget.attentionArray.length);
-                      });
-                    },
-                  ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.4,
+              child: IgnorePointer(
+                ignoring: isUnpressed,
+                child:
+                PopupMenuButton<String>(
+                  // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                            child: Text(
+                              showAttentionValue??'',
+                              style:  TextStyle(fontSize:18 ,color: textColor,),
+                              textAlign: TextAlign.end,
+                              overflow: TextOverflow.fade,
+                              softWrap: false,
+                            )),
+                        Icon(Icons.keyboard_arrow_down, color: textColor,)
+                      ]),
+                  itemBuilder: (context) {
+                    return List.generate(widget.attentionArray.length,
+                            (index) {
+                          return PopupMenuItem(
+                            textStyle: TextStyle(fontSize: 18, color: textColor),
+                            value: widget.attentionArray[index].attenvalue,
+                            child:
+                            Column(
+                              children: [
+                                Text(widget.attentionArray[index].attenname ?? ''),
+                              ],
+                            ),
+                          );
+                        });
+                  },
+                  onSelected: (value) {
+                    setState(() {
+                      userAttentionValue = value;
+                      showAttentionValue = widget.attentionArray[int.parse(value)-1].attenname;
+                      widget.callbackFromAttentionDataTab(userAttentionValue??"-");
+                      print(widget.attentionArray.length);
+                    });
+                  },
                 ),
               ),
             ),

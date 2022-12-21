@@ -71,7 +71,6 @@ class _ProfileAddressDataHeadState extends State<ProfileAddressDataHead> {
     // String provinceValue = dataFromAPI?.body?.profileAddressInfo?.province??"-";
     // String zipcodeValue = dataFromAPI?.body?.profileAddressInfo?.zipcode??"-";
     return
-      (userRole == "ST") ?
     Column(
             children: [
               Container(
@@ -247,10 +246,6 @@ class _ProfileAddressDataHeadState extends State<ProfileAddressDataHead> {
               ),
             ],
           )
-        : (userRole == "TC") ?
-      Column()
-          :
-          Container()
     ;
   }
 }
@@ -296,15 +291,23 @@ class _ProfileAddressDataTabState extends State<ProfileAddressDataTab> {
         padding:
             const EdgeInsets.only(left: 10, top: 10, bottom: 10, right: 20),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              '$textLeft ',
-              style: TextStyle(fontSize: 18, color: textColor),
+            Container(
+              width: MediaQuery.of(context).size.width * 0.4,
+              child: Text(
+                '$textLeft ',
+                style: TextStyle(fontSize: 18, color: textColor),
+              ),
             ),
-            Expanded(
+            Container(
+              width: MediaQuery.of(context).size.width * 0.4,
               child: TextFormField(
                 cursorColor: Colors.black,
                 autofocus: false,
+                minLines: 1,
+                maxLines: null,
                 style: TextStyle(fontSize: 18, color: textColor),
                 readOnly: isUnpressed,
                 textAlign: TextAlign.right,
