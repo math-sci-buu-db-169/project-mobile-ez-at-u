@@ -45,3 +45,6 @@ const String profileTextReseachArea   = 'ขอบเขตการวิจั
 const String profileTextUBSC   = 'มหาวิทยาลัยระดับปริญญาบัณฑิต';
 const String profileTextUMSC   = 'มหาวิทยาลัยระดับปริญญามหาบัณฑิต';
 const String profileTextUPHD   = 'มหาวิทยาลัยระดับปริญญาดุษฎีบัณฑิต';
+const String profileTextRoom   = 'ห้องปฏิบัติงาน';
+const String profileTextEmail   = 'อีเมล';
+const String profileTextTel   = 'โทร';

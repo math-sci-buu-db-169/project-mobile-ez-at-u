@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io' show File;
+import 'package:ez_at_u/module/profile/components/contact_data_tab_teacher.dart';
 import 'package:ez_at_u/module/profile/components/education_data_tab_teacher.dart';
 import 'package:ez_at_u/module/profile/components/general_data_tab_teacher.dart';
 import 'package:ez_at_u/module/profile/components/generaldatatab.dart';
@@ -275,12 +276,8 @@ class _ProfilePageTeacherState extends State<ProfilePageTeacher> with ProgressDi
                     textColor: textColor, dataTabColor:dataTabColor, dataTabColorRO: dataTabColorRO),
                 ProfileEducationDataHeadTeacher(dataFromAPI: apiProfileTeacherScreenResponse, userRole: roleFromApi,
                     textColor: textColor, dataTabColor:dataTabColor, dataTabColorRO: dataTabColorRO),
-                // ProfileAddressDataHead(dataFromAPI: apiProfileTeacherScreenResponse, userRole: roleFromApi,
-                //     textColor: textColor, dataTabColor:dataTabColor, dataTabColorRO: dataTabColorRO),
-                // ProfileContactDataHead(dataFromAPI: apiProfileTeacherScreenResponse, userRole: roleFromApi,
-                //     textColor: textColor, dataTabColor:dataTabColor, dataTabColorRO: dataTabColorRO),
-                // ProfileCareerDataHead(dataFromAPI: apiProfileTeacherScreenResponse, userRole: roleFromApi,
-                //     textColor: textColor, dataTabColor:dataTabColor, dataTabColorRO: dataTabColorRO),
+                ProfileContactDataHeadTeacher(dataFromAPI: apiProfileTeacherScreenResponse, userRole: roleFromApi,
+                    textColor: textColor, dataTabColor:dataTabColor, dataTabColorRO: dataTabColorRO),
                 const SizedBox(height: 60)
               ],
             ),
