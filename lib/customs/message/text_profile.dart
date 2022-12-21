@@ -41,3 +41,7 @@ const String profileTextPosition   = 'ตำแหน่ง';
 const String profileTextBSC   = 'ปริญญาบัณฑิต';
 const String profileTextMSC   = 'ปริญญามหาบัณฑิต';
 const String profileTextPHD   = 'ปริญญาดุษฎีบัณฑิต';
+const String profileTextReseachArea   = 'ขอบเขตการวิจัย';
+const String profileTextUBSC   = 'มหาวิทยาลัยระดับปริญญาบัณฑิต';
+const String profileTextUMSC   = 'มหาวิทยาลัยระดับปริญญามหาบัณฑิต';
+const String profileTextUPHD   = 'มหาวิทยาลัยระดับปริญญาดุษฎีบัณฑิต';

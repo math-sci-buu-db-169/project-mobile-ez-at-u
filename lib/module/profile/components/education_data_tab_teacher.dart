@@ -90,12 +90,12 @@ class _ProfileEducationDataHeadTeacherState extends State<ProfileEducationDataHe
               ),
             ),
           ),
-          ProfileEducationDataTab(
+          ProfileEducationDataTabTeacher(
             dataTabColor: dataTabColor,
             textColor: textColor,
             isUnpressed: isUnpressed,
             textLeft: dataFromAPI?.body?.screeninfo?.textgdegree??profileTextBSC,
-            textRight: "มหาวิทยาลียบูรพา",
+            textRight: dataFromAPI?.body?.profileAcademicTH?.graduatedegree??"-",
             // onChange: (value) {
             //   gpaJhValue = value;
             //   if (kDebugMode) {
@@ -103,12 +103,12 @@ class _ProfileEducationDataHeadTeacherState extends State<ProfileEducationDataHe
             //   }
             // },
           ),
-          ProfileEducationDataTab(
+          ProfileEducationDataTabTeacher(
             dataTabColor: dataTabColor,
             textColor: textColor,
             isUnpressed: isUnpressed,
-            textLeft: "ปริญญามหาบัณฑิต",
-            textRight: "มหาวิทยาลัยบูรพา2",
+            textLeft: dataFromAPI?.body?.screeninfo?.textmdegree??profileTextMSC,
+            textRight: dataFromAPI?.body?.profileAcademicTH?.masterdegree??"-",
             // onChange: (value) {
             //   gpaShValue = value;
             //   if (kDebugMode) {
@@ -116,12 +116,12 @@ class _ProfileEducationDataHeadTeacherState extends State<ProfileEducationDataHe
             //   }
             // }
             ),
-          ProfileEducationDataTab(
+          ProfileEducationDataTabTeacher(
             dataTabColor: dataTabColor,
             textColor: textColor,
             isUnpressed: isUnpressed,
-            textLeft: "ปริญญาดุษฎีบัณฑิต",
-            textRight: "มหาวิทยาลัยบูรพา3",
+            textLeft: dataFromAPI?.body?.screeninfo?.textphd??profileTextPHD,
+            textRight: dataFromAPI?.body?.profileAcademicTH?.phd??"-",
             // onChange: (value) {
             //   gpaBdValue = value;
             //   if (kDebugMode) {
@@ -129,12 +129,51 @@ class _ProfileEducationDataHeadTeacherState extends State<ProfileEducationDataHe
             //   }
             // },
           ),
-          ProfileEducationDataTab(
+          ProfileEducationDataTabTeacher(
             dataTabColor: dataTabColor,
             textColor: textColor,
             isUnpressed: isUnpressed,
-            textLeft: "ขอบเขตการวิจัย",
-            textRight: "Discrete Mathematics, Differential Equations, Numerical Analysis",
+            textLeft: dataFromAPI?.body?.screeninfo?.textreserch??profileTextReseachArea,
+            textRight: dataFromAPI?.body?.profileAcademicTH?.reshercharea??"-",
+            // onChange: (value) {
+            //   gpaBdValue = value;
+            //   if (kDebugMode) {
+            //     print(gpaBdValue);
+            //   }
+            // },
+          ),
+          ProfileEducationDataTabTeacher(
+            dataTabColor: dataTabColor,
+            textColor: textColor,
+            isUnpressed: isUnpressed,
+            textLeft: dataFromAPI?.body?.screeninfo?.textunivdg??profileTextReseachArea,
+            textRight: dataFromAPI?.body?.profileAcademicTH?.reshercharea??"-",
+            // onChange: (value) {
+            //   gpaBdValue = value;
+            //   if (kDebugMode) {
+            //     print(gpaBdValue);
+            //   }
+            // },
+          ),
+          ProfileEducationDataTabTeacher(
+            dataTabColor: dataTabColor,
+            textColor: textColor,
+            isUnpressed: isUnpressed,
+            textLeft: dataFromAPI?.body?.screeninfo?.textunivmdg??profileTextReseachArea,
+            textRight: dataFromAPI?.body?.profileAcademicTH?.reshercharea??"-",
+            // onChange: (value) {
+            //   gpaBdValue = value;
+            //   if (kDebugMode) {
+            //     print(gpaBdValue);
+            //   }
+            // },
+          ),
+          ProfileEducationDataTabTeacher(
+            dataTabColor: dataTabColor,
+            textColor: textColor,
+            isUnpressed: isUnpressed,
+            textLeft: dataFromAPI?.body?.screeninfo?.textunivphd??profileTextReseachArea,
+            textRight: dataFromAPI?.body?.profileAcademicTH?.reshercharea??"-",
             // onChange: (value) {
             //   gpaBdValue = value;
             //   if (kDebugMode) {
@@ -147,14 +186,14 @@ class _ProfileEducationDataHeadTeacherState extends State<ProfileEducationDataHe
   }
 }
 ////////////////////////////////////////////////////////////////////////////////
-class ProfileEducationDataTab extends StatefulWidget {
+class ProfileEducationDataTabTeacher extends StatefulWidget {
   final Color dataTabColor;
   final Color textColor;
   final String textLeft;
   final String textRight;
   final bool isUnpressed;
   final ValueChanged<String>? onChange;
-  const ProfileEducationDataTab(
+  const ProfileEducationDataTabTeacher(
       {Key? key,
         required this.textLeft,
         required this.textRight,
@@ -165,10 +204,10 @@ class ProfileEducationDataTab extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<ProfileEducationDataTab> createState() => _ProfileEducationDataTabState();
+  State<ProfileEducationDataTabTeacher> createState() => _ProfileEducationDataTabTeacherState();
 }
 
-class _ProfileEducationDataTabState extends State<ProfileEducationDataTab> {
+class _ProfileEducationDataTabTeacherState extends State<ProfileEducationDataTabTeacher> {
   @override
   Widget build(BuildContext context) {
     Color textColor = widget.textColor;
@@ -186,21 +225,25 @@ class _ProfileEducationDataTabState extends State<ProfileEducationDataTab> {
       child: Padding(
         padding: const EdgeInsets.only(left: 10,top: 10,bottom: 10,right: 20),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top : 12.0),
-              child: Text(
+            Container(
+              width: MediaQuery.of(context).size.width * 0.4,
+              child:
+              Text(
                 '$textLeft ',
                 style: TextStyle(fontSize: 18, color: textColor),
+                // overflow: TextOverflow.ellipsis,
               ),
             ),
-            Expanded(
+            Container(
+              width: MediaQuery.of(context).size.width * 0.4,
               child: TextFormField(
                 cursorColor: textColor,
                 autofocus: false,
                 minLines: 1,
-                maxLines: 5,
+                maxLines: null,
                 style: TextStyle(fontSize: 18, color: textColor),
                 readOnly: isUnpressed,
                 textAlign: TextAlign.right,
