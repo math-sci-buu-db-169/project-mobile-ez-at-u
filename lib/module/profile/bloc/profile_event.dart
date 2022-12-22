@@ -111,6 +111,25 @@ class TeacherGeneralSubmitEvent extends ProfileEvent {
     required this.nickname,
   });
 }
+class TeacherEducationSubmitEvent extends ProfileEvent {
+  String teacherBachelorDegree;
+  String teacherMasterDegree;
+  String teacherPHD;
+  String teacherReseachArea;
+  String teacherUBD;
+  String teacherUMD;
+  String teacherUPHD;
+  TeacherEducationSubmitEvent(
+      {
+        required this.teacherBachelorDegree,
+        required this.teacherMasterDegree,
+        required this.teacherPHD,
+        required this.teacherReseachArea,
+        required this.teacherUBD,
+        required this.teacherUMD,
+        required this.teacherUPHD
+      });
+}
 class TeacherContactSubmitEvent extends ProfileEvent {
   String phone;
   String room;

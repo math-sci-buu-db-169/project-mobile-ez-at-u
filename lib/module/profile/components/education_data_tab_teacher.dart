@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../customs/message/text_profile.dart';
 import '../bloc/profile_bloc.dart';
-import '../model/response/api_profile_response.dart';
 
 
 class ProfileEducationDataHeadTeacher extends StatefulWidget {
@@ -26,8 +25,12 @@ class _ProfileEducationDataHeadTeacherState extends State<ProfileEducationDataHe
   bool isUnpressed = true;
   late dynamic dataFromAPI;
   late String bachelorDegreeValue;
-  late String masterDegreeValueValue;
+  late String masterDegreeValue;
   late String pHDValue;
+  late String researchAreaValue;
+  late String uBDValue;
+  late String uMDValue;
+  late String uPHDValue;
   late String userRole;
   late Color textColor;
   late Color dataTabColor;
@@ -36,8 +39,12 @@ class _ProfileEducationDataHeadTeacherState extends State<ProfileEducationDataHe
   void initState() {
     dataFromAPI = widget.dataFromAPI;
     bachelorDegreeValue = dataFromAPI?.body?.profileAcademicTH?.graduatedegree??"-";
-    masterDegreeValueValue = dataFromAPI?.body?.profileAcademicTH?.masterdegree??"-";
+    masterDegreeValue = dataFromAPI?.body?.profileAcademicTH?.masterdegree??"-";
     pHDValue = dataFromAPI?.body?.profileAcademicTH?.phd??"-";
+    researchAreaValue = dataFromAPI?.body?.profileAcademicTH?.reshercharea??"-";
+    uBDValue = dataFromAPI?.body?.profileAcademicTH?.univofgraduatedegree??"-";
+    uMDValue = dataFromAPI?.body?.profileAcademicTH?.univofmasterdegree??"-";
+    uPHDValue = dataFromAPI?.body?.profileAcademicTH?.univofphd??"-";
     userRole = widget.userRole??"ST";
     textColor = widget.textColor??Colors.black.withOpacity(0.5);
     dataTabColor = widget.dataTabColor??Colors.transparent.withOpacity(0.5);
@@ -76,7 +83,15 @@ class _ProfileEducationDataHeadTeacherState extends State<ProfileEducationDataHe
                           setState(() {
                             isUnpressed = !isUnpressed;
                             if(isUnpressed == true){
-                              // context.read<ProfileBloc>().add(EducationSubmitEvent(gpaBd: gpaBdValue, gpaSh: gpaShValue, gpaJh: gpaJhValue));
+                              context.read<ProfileBloc>().add(TeacherEducationSubmitEvent(
+                                teacherBachelorDegree: bachelorDegreeValue,
+                                teacherMasterDegree: masterDegreeValue,
+                                teacherPHD: pHDValue,
+                                teacherReseachArea: researchAreaValue,
+                                teacherUBD: uBDValue,
+                                teacherUMD: uMDValue,
+                                teacherUPHD: uPHDValue,
+                              ));
                             }
                           });
                         },
@@ -96,12 +111,12 @@ class _ProfileEducationDataHeadTeacherState extends State<ProfileEducationDataHe
             isUnpressed: isUnpressed,
             textLeft: dataFromAPI?.body?.screeninfo?.textgdegree??profileTextBSC,
             textRight: dataFromAPI?.body?.profileAcademicTH?.graduatedegree??"-",
-            // onChange: (value) {
-            //   gpaJhValue = value;
-            //   if (kDebugMode) {
-            //     print(gpaJhValue);
-            //   }
-            // },
+              onChange: (value) {
+                bachelorDegreeValue = value;
+                if (kDebugMode) {
+                  print(bachelorDegreeValue);
+                }
+              }
           ),
           ProfileEducationDataTabTeacher(
             dataTabColor: dataTabColor,
@@ -109,12 +124,12 @@ class _ProfileEducationDataHeadTeacherState extends State<ProfileEducationDataHe
             isUnpressed: isUnpressed,
             textLeft: dataFromAPI?.body?.screeninfo?.textmdegree??profileTextMSC,
             textRight: dataFromAPI?.body?.profileAcademicTH?.masterdegree??"-",
-            // onChange: (value) {
-            //   gpaShValue = value;
-            //   if (kDebugMode) {
-            //     print(gpaShValue);
-            //   }
-            // }
+            onChange: (value) {
+              masterDegreeValue = value;
+              if (kDebugMode) {
+                print(masterDegreeValue);
+              }
+            }
             ),
           ProfileEducationDataTabTeacher(
             dataTabColor: dataTabColor,
@@ -122,12 +137,12 @@ class _ProfileEducationDataHeadTeacherState extends State<ProfileEducationDataHe
             isUnpressed: isUnpressed,
             textLeft: dataFromAPI?.body?.screeninfo?.textphd??profileTextPHD,
             textRight: dataFromAPI?.body?.profileAcademicTH?.phd??"-",
-            // onChange: (value) {
-            //   gpaBdValue = value;
-            //   if (kDebugMode) {
-            //     print(gpaBdValue);
-            //   }
-            // },
+              onChange: (value) {
+                pHDValue = value;
+                if (kDebugMode) {
+                  print(pHDValue);
+                }
+              }
           ),
           ProfileEducationDataTabTeacher(
             dataTabColor: dataTabColor,
@@ -135,12 +150,12 @@ class _ProfileEducationDataHeadTeacherState extends State<ProfileEducationDataHe
             isUnpressed: isUnpressed,
             textLeft: dataFromAPI?.body?.screeninfo?.textreserch??profileTextReseachArea,
             textRight: dataFromAPI?.body?.profileAcademicTH?.reshercharea??"-",
-            // onChange: (value) {
-            //   gpaBdValue = value;
-            //   if (kDebugMode) {
-            //     print(gpaBdValue);
-            //   }
-            // },
+              onChange: (value) {
+                researchAreaValue = value;
+                if (kDebugMode) {
+                  print(researchAreaValue);
+                }
+              }
           ),
           ProfileEducationDataTabTeacher(
             dataTabColor: dataTabColor,
@@ -148,12 +163,12 @@ class _ProfileEducationDataHeadTeacherState extends State<ProfileEducationDataHe
             isUnpressed: isUnpressed,
             textLeft: dataFromAPI?.body?.screeninfo?.textunivdg??profileTextReseachArea,
             textRight: dataFromAPI?.body?.profileAcademicTH?.univofgraduatedegree??"-",
-            // onChange: (value) {
-            //   gpaBdValue = value;
-            //   if (kDebugMode) {
-            //     print(gpaBdValue);
-            //   }
-            // },
+              onChange: (value) {
+                uBDValue = value;
+                if (kDebugMode) {
+                  print(uBDValue);
+                }
+              }
           ),
           ProfileEducationDataTabTeacher(
             dataTabColor: dataTabColor,
@@ -161,12 +176,12 @@ class _ProfileEducationDataHeadTeacherState extends State<ProfileEducationDataHe
             isUnpressed: isUnpressed,
             textLeft: dataFromAPI?.body?.screeninfo?.textunivmdg??profileTextReseachArea,
             textRight: dataFromAPI?.body?.profileAcademicTH?.univofmasterdegree??"-",
-            // onChange: (value) {
-            //   gpaBdValue = value;
-            //   if (kDebugMode) {
-            //     print(gpaBdValue);
-            //   }
-            // },
+              onChange: (value) {
+                uMDValue = value;
+                if (kDebugMode) {
+                  print(uMDValue);
+                }
+              }
           ),
           ProfileEducationDataTabTeacher(
             dataTabColor: dataTabColor,
@@ -174,12 +189,12 @@ class _ProfileEducationDataHeadTeacherState extends State<ProfileEducationDataHe
             isUnpressed: isUnpressed,
             textLeft: dataFromAPI?.body?.screeninfo?.textunivphd??profileTextReseachArea,
             textRight: dataFromAPI?.body?.profileAcademicTH?.univofphd??"-",
-            // onChange: (value) {
-            //   gpaBdValue = value;
-            //   if (kDebugMode) {
-            //     print(gpaBdValue);
-            //   }
-            // },
+              onChange: (value) {
+                uPHDValue = value;
+                if (kDebugMode) {
+                  print(uPHDValue);
+                }
+              }
           ),
         ],
       );

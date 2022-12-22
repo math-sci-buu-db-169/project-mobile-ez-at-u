@@ -340,6 +340,36 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> with ProfileRepositor
       }
     }
     );
+    on<TeacherEducationSubmitEvent>((event, emit) async{
+      try {
+        emit(ProfileTeacherLoading());
+        print("CheckProfile == TeacherEducationSubmitEvent");
+        await  checkProfileEventInitial(event, emit) ;
+        Response responseEducationTeacherSubmit = await sentProfileTeacherEducationData(
+            event.teacherBachelorDegree,
+            event.teacherMasterDegree,
+            event.teacherPHD,
+            event.teacherReseachArea,
+            event.teacherUBD,
+            event.teacherUMD,
+            event.teacherUPHD
+        );
+        emit(ProfileTeacherLoadingSuccess());
+        if (responseEducationTeacherSubmit.statusCode == 200) {
+          ResponseHeaderOnlyProfile EducationTeacherResponse = ResponseHeaderOnlyProfile.fromJson(responseEducationTeacherSubmit.data);
+          if (EducationTeacherResponse.head?.status == 200) {
+            emit(TeacherProfileSubmitSuccessState(responseTeacherGeneral: EducationTeacherResponse));
+          } else {
+            emit(ProfileTeacherError(errorMessage: EducationTeacherResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(ProfileTeacherError(errorMessage: responseEducationTeacherSubmit.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(ProfileTeacherError(errorMessage: e.response?.statusMessage ?? ""));
+      }
+    }
+    );
     on<TeacherContactSubmitEvent>((event, emit) async{
       try {
         emit(ProfileTeacherLoading());

@@ -180,7 +180,7 @@ class ProfileRepository {
         )
     );
   }
-  Future<Response> sentProfileTeacherAcadamicData(
+  Future<Response> sentProfileTeacherEducationData(
       String teacherBachelorDegree,
       String teacherMasterDegree,
       String teacherPHD,
