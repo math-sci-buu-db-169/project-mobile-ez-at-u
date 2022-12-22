@@ -100,3 +100,14 @@ class CareerSubmitEvent extends ProfileEvent {
 class ProfileApiTeacherEvent extends ProfileEvent {
   ProfileApiTeacherEvent();
 }
+
+class TeacherGeneralSubmitEvent extends ProfileEvent {
+  String name;
+  String surname;
+  String nickname;
+  TeacherGeneralSubmitEvent({
+    required this.name,
+    required this.surname,
+    required this.nickname,
+  });
+}

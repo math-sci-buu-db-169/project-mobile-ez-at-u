@@ -172,11 +172,11 @@ class ProfileRepository {
       String teacherLastname,
       String teacherNickname,
       ) async {
-    print("attention = ${teacherName}");
-    print("status = ${teacherLastname}");
-    print("jobType = ${teacherNickname}");
+    print("teacherName = ${teacherName}");
+    print("teacherLastname = ${teacherLastname}");
+    print("teacherNickname = ${teacherNickname}");
     return await MyDio.createDioServer().post(
-        "/profile/careersubmit",
+        "/profile/generalprofilethsubmit",
         data: jsonEncode(
             {
               "name": teacherName,

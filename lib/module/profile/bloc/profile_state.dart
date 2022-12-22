@@ -64,6 +64,7 @@ class TokenExpiredState extends ProfileState{
     required this.checkrefreshtokenmessage,
   });
 }
+//--TC--//
 class ProfileTeacherScreenSuccessState extends ProfileState{
   ProfileTeacherScreenApi  response;
   ProfileTeacherScreenSuccessState({required this.response});
@@ -74,3 +75,7 @@ class ProfileTeacherError extends ProfileState{
 }
 class ProfileTeacherLoading extends ProfileState {}
 class ProfileTeacherLoadingSuccess extends ProfileState {}
+class TeacherGeneralSubmitSuccessState extends ProfileState{
+  ResponseHeaderOnlyProfile responseTeacherGeneral;
+  TeacherGeneralSubmitSuccessState({required this.responseTeacherGeneral});
+}

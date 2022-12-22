@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 import 'package:ez_at_u/module/profile/model/response/profile_teacher_screen_api.dart';
+import 'package:ez_at_u/module/profile/model/response/response_header_only_profile.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -312,6 +313,31 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> with ProfileRepositor
         emit(ProfileTeacherError(errorMessage: e.response?.statusMessage ?? ""));
       }
 
+    }
+    );
+    on<TeacherGeneralSubmitEvent>((event, emit) async{
+      try {
+        emit(ProfileTeacherLoading());
+        print("CheckProfile 6 == GeneralSubmitEvent");
+        await  checkProfileEventInitial(event, emit) ;
+        Response responseGeneralTeacherSubmit = await sentProfileTeacherGeneralData(
+            event.name,
+            event.surname,
+            event.nickname);
+        emit(ProfileTeacherLoadingSuccess());
+        if (responseGeneralTeacherSubmit.statusCode == 200) {
+          ResponseHeaderOnlyProfile generalTeacherResponse = ResponseHeaderOnlyProfile.fromJson(responseGeneralTeacherSubmit.data);
+          if (generalTeacherResponse.head?.status == 200) {
+            emit(TeacherGeneralSubmitSuccessState(responseTeacherGeneral: generalTeacherResponse));
+          } else {
+            emit(ProfileTeacherError(errorMessage: generalTeacherResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(ProfileTeacherError(errorMessage: responseGeneralTeacherSubmit.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(ProfileTeacherError(errorMessage: e.response?.statusMessage ?? ""));
+      }
     }
     );
   }

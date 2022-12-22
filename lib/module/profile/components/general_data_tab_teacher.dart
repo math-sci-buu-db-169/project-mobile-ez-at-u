@@ -82,7 +82,7 @@ class _ProfileGeneralDataHeadTeacherState extends State<ProfileGeneralDataHeadTe
                                     if (isUnpressed == true) {
                                       context
                                           .read<ProfileBloc>()
-                                          .add(GeneralSubmitEvent(
+                                          .add(TeacherGeneralSubmitEvent(
                                               nickname: nicknameValue
                                               // , name: nameValueController.text
                                               ,
@@ -161,13 +161,14 @@ class _ProfileGeneralDataHeadTeacherState extends State<ProfileGeneralDataHeadTe
                           print(nicknameValue);
                         }
                       }),
-                  ProfileGeneralDataTab(
+                  ProfileGeneralDataReadonlyTab(
                     dataTabColor: dataTabColor,
                     textColor: textColor,
                     isUnpressed: isUnpressed,
                     textLeft: dataFromAPI?.body?.screeninfo?.textacaposit ?? profileTextPosition,
                     textRight:
-                        dataFromAPI?.body?.profileGeneralTH?.position ?? '555',
+                        dataFromAPI?.body?.profileGeneralTH?.position ?? 'อาจารย์',
+                    dataTabColorRO: dataTabColorRO,
                     // onChange: (value) {
                     //   nicknameValue = value;
                     //   if (kDebugMode) {

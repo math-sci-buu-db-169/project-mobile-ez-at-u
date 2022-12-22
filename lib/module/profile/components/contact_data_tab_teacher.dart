@@ -5,10 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
-
 import '../../../customs/message/text_profile.dart';
 import '../bloc/profile_bloc.dart';
-import '../model/response/api_profile_response.dart';
 
 class ProfileContactDataHeadTeacher extends StatefulWidget {
   final Color? dataTabColor;
