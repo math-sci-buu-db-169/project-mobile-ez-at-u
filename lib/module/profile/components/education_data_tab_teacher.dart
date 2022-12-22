@@ -147,7 +147,7 @@ class _ProfileEducationDataHeadTeacherState extends State<ProfileEducationDataHe
             textColor: textColor,
             isUnpressed: isUnpressed,
             textLeft: dataFromAPI?.body?.screeninfo?.textunivdg??profileTextReseachArea,
-            textRight: dataFromAPI?.body?.profileAcademicTH?.reshercharea??"-",
+            textRight: dataFromAPI?.body?.profileAcademicTH?.univofgraduatedegree??"-",
             // onChange: (value) {
             //   gpaBdValue = value;
             //   if (kDebugMode) {
@@ -160,7 +160,7 @@ class _ProfileEducationDataHeadTeacherState extends State<ProfileEducationDataHe
             textColor: textColor,
             isUnpressed: isUnpressed,
             textLeft: dataFromAPI?.body?.screeninfo?.textunivmdg??profileTextReseachArea,
-            textRight: dataFromAPI?.body?.profileAcademicTH?.reshercharea??"-",
+            textRight: dataFromAPI?.body?.profileAcademicTH?.univofmasterdegree??"-",
             // onChange: (value) {
             //   gpaBdValue = value;
             //   if (kDebugMode) {
@@ -173,7 +173,7 @@ class _ProfileEducationDataHeadTeacherState extends State<ProfileEducationDataHe
             textColor: textColor,
             isUnpressed: isUnpressed,
             textLeft: dataFromAPI?.body?.screeninfo?.textunivphd??profileTextReseachArea,
-            textRight: dataFromAPI?.body?.profileAcademicTH?.reshercharea??"-",
+            textRight: dataFromAPI?.body?.profileAcademicTH?.univofphd??"-",
             // onChange: (value) {
             //   gpaBdValue = value;
             //   if (kDebugMode) {

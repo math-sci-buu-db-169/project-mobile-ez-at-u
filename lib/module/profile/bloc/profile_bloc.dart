@@ -318,7 +318,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> with ProfileRepositor
     on<TeacherGeneralSubmitEvent>((event, emit) async{
       try {
         emit(ProfileTeacherLoading());
-        print("CheckProfile 6 == GeneralSubmitEvent");
+        print("CheckProfile == TeacherGeneralSubmitEvent");
         await  checkProfileEventInitial(event, emit) ;
         Response responseGeneralTeacherSubmit = await sentProfileTeacherGeneralData(
             event.name,
@@ -328,12 +328,37 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> with ProfileRepositor
         if (responseGeneralTeacherSubmit.statusCode == 200) {
           ResponseHeaderOnlyProfile generalTeacherResponse = ResponseHeaderOnlyProfile.fromJson(responseGeneralTeacherSubmit.data);
           if (generalTeacherResponse.head?.status == 200) {
-            emit(TeacherGeneralSubmitSuccessState(responseTeacherGeneral: generalTeacherResponse));
+            emit(TeacherProfileSubmitSuccessState(responseTeacherGeneral: generalTeacherResponse));
           } else {
             emit(ProfileTeacherError(errorMessage: generalTeacherResponse.head?.message ?? ""));
           }
         } else {
           emit(ProfileTeacherError(errorMessage: responseGeneralTeacherSubmit.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(ProfileTeacherError(errorMessage: e.response?.statusMessage ?? ""));
+      }
+    }
+    );
+    on<TeacherContactSubmitEvent>((event, emit) async{
+      try {
+        emit(ProfileTeacherLoading());
+        print("CheckProfile == TeacherContactSubmitEvent");
+        await  checkProfileEventInitial(event, emit) ;
+        Response responseContactTeacherSubmit = await sentProfileTeacherContactData(
+            event.phone,
+            event.room,
+            event.email);
+        emit(ProfileTeacherLoadingSuccess());
+        if (responseContactTeacherSubmit.statusCode == 200) {
+          ResponseHeaderOnlyProfile contactTeacherResponse = ResponseHeaderOnlyProfile.fromJson(responseContactTeacherSubmit.data);
+          if (contactTeacherResponse.head?.status == 200) {
+            emit(TeacherProfileSubmitSuccessState(responseTeacherGeneral: contactTeacherResponse));
+          } else {
+            emit(ProfileTeacherError(errorMessage: contactTeacherResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(ProfileTeacherError(errorMessage: responseContactTeacherSubmit.statusMessage ?? ""));
         }
       } on DioError catch (e) {
         emit(ProfileTeacherError(errorMessage: e.response?.statusMessage ?? ""));

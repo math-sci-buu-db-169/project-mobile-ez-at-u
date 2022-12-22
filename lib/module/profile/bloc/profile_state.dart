@@ -75,7 +75,7 @@ class ProfileTeacherError extends ProfileState{
 }
 class ProfileTeacherLoading extends ProfileState {}
 class ProfileTeacherLoadingSuccess extends ProfileState {}
-class TeacherGeneralSubmitSuccessState extends ProfileState{
+class TeacherProfileSubmitSuccessState extends ProfileState{
   ResponseHeaderOnlyProfile responseTeacherGeneral;
-  TeacherGeneralSubmitSuccessState({required this.responseTeacherGeneral});
+  TeacherProfileSubmitSuccessState({required this.responseTeacherGeneral});
 }

@@ -111,3 +111,13 @@ class TeacherGeneralSubmitEvent extends ProfileEvent {
     required this.nickname,
   });
 }
+class TeacherContactSubmitEvent extends ProfileEvent {
+  String phone;
+  String room;
+  String email;
+  TeacherContactSubmitEvent(
+      {
+        required this.phone,
+        required this.room,
+        required this.email});
+}

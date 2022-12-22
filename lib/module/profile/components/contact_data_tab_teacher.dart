@@ -79,13 +79,8 @@ class _ProfileContactDataHeadTeacherState extends State<ProfileContactDataHeadTe
                           setState(() {
                             isUnpressed = !isUnpressed;
                             if (isUnpressed == true) {
-                              // context.read<ProfileBloc>().add(ContactSubmitEvent(
-                              //     instagram: instagramValue,
-                              //     twitter: twitterValue,
-                              //     youtube: youtubeValue,
-                              //     facebook: facebookValue,
-                              //     line: lineValue,
-                              //     phone: phoneValue));
+                              context.read<ProfileBloc>().add(TeacherContactSubmitEvent(
+                                  phone: phoneValue, room: roomValue, email: emailValue));
                             }
                           });
                         },
@@ -112,6 +107,7 @@ class _ProfileContactDataHeadTeacherState extends State<ProfileContactDataHeadTe
             textContact: dataFromAPI?.body?.profileContactTH?.phone??"-",
             keyboardType: const TextInputType.numberWithOptions(),
             maxLength: 10,
+
             onChange: (value) {
               phoneValue = value;
               if (kDebugMode) {
@@ -129,12 +125,12 @@ class _ProfileContactDataHeadTeacherState extends State<ProfileContactDataHeadTe
               color: HexColor('#00B900'),
             ),
             textContact: dataFromAPI?.body?.profileContactTH?.email??"-",
-            // onChange: (value) {
-            //   lineValue = value;
-            //   if (kDebugMode) {
-            //     print(lineValue);
-            //   }
-            // },
+            onChange: (value) {
+              emailValue = value;
+              if (kDebugMode) {
+                print(emailValue);
+              }
+            },
           ),
           ProfileContactDataTCTab(
             dataTabColor: dataTabColor,
@@ -146,12 +142,12 @@ class _ProfileContactDataHeadTeacherState extends State<ProfileContactDataHeadTe
               color: HexColor('#3B5998'),
             ),
             textContact: dataFromAPI?.body?.profileContactTH?.workshop??"-",
-            // onChange: (value) {
-            //   facebookValue = value;
-            //   if (kDebugMode) {
-            //     print(facebookValue);
-            //   }
-            // },
+            onChange: (value) {
+              roomValue = value;
+              if (kDebugMode) {
+                print(roomValue);
+              }
+            },
   ),
         ],
       )
@@ -208,7 +204,7 @@ class _ProfileContactDataTCTabState extends State<ProfileContactDataTCTab> {
           children: [
             iconContact,
             Text(
-              ' $textLeft ',
+               ' $textLeft ',
               style: TextStyle(fontSize: 18, color: textColor),
             ),
             Expanded(

@@ -2,19 +2,9 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:ez_at_u/utils/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-
-
 class ProfileRepository {
   Future<Response> getApiProfile(
-      // String user,String password,
       ) async {
-    final prefs = await SharedPreferences.getInstance();
-    String? globalKey = prefs.getString("globalKey");
-    // if (kDebugMode) {
-    //   print(globalKey);
-    // }
     return await MyDio.createDioServer().post(
         "/profile/profilescreen",
         data: jsonEncode({
@@ -114,12 +104,14 @@ class ProfileRepository {
       String company,
       String workplace
       ) async {
-    print("attention = ${attention}");
-    print("status = ${status}");
-    print("jobType = ${jobType}");
-    print("career = ${career}");
-    print("company = ${company}");
-    print("workplace = ${workplace}");
+    if (kDebugMode) {
+      print("attention = $attention");
+      print("status = $status");
+      print("jobType = $jobType");
+      print("career = $career");
+      print("company = $company");
+      print("workplace = $workplace");
+    }
     return await MyDio.createDioServer().post(
         "/profile/careersubmit",
         data: jsonEncode(
@@ -172,9 +164,11 @@ class ProfileRepository {
       String teacherLastname,
       String teacherNickname,
       ) async {
-    print("teacherName = ${teacherName}");
-    print("teacherLastname = ${teacherLastname}");
-    print("teacherNickname = ${teacherNickname}");
+    if (kDebugMode) {
+      print("teacherName = $teacherName");
+      print("teacherLastname = $teacherLastname");
+      print("teacherNickname = $teacherNickname");
+    }
     return await MyDio.createDioServer().post(
         "/profile/generalprofilethsubmit",
         data: jsonEncode(
@@ -195,13 +189,15 @@ class ProfileRepository {
       String teacherUMD,
       String teacherUPHD,
       ) async {
-    print("attention = ${teacherBachelorDegree}");
-    print("status = ${teacherMasterDegree}");
-    print("jobType = ${teacherPHD}");
-    print("jobType = ${teacherReseachArea}");
-    print("jobType = ${teacherUBD}");
-    print("jobType = ${teacherUMD}");
-    print("jobType = ${teacherUPHD}");
+    if (kDebugMode) {
+      print("graduatedegree = $teacherBachelorDegree");
+      print("masterdegree = $teacherMasterDegree");
+      print("phd = $teacherPHD");
+      print("reshercharea = $teacherReseachArea");
+      print("univofgraduatedegree = $teacherUBD");
+      print("univofmasterdegree = $teacherUMD");
+      print("univofphd = $teacherUPHD");
+    }
     return await MyDio.createDioServer().post(
         "/profile/acadamicprofilethsubmit",
         data: jsonEncode(
@@ -222,9 +218,11 @@ class ProfileRepository {
       String teacherRoom,
       String teacherEmail,
       ) async {
-    print("attention = ${teacherPhone}");
-    print("status = ${teacherRoom}");
-    print("jobType = ${teacherEmail}");
+    if (kDebugMode) {
+      print("phone = $teacherPhone");
+      print("workshop = $teacherRoom");
+      print("email = $teacherEmail");
+    }
     return await MyDio.createDioServer().post(
         "/profile/contactprofilethsubmit",
         data: jsonEncode(
