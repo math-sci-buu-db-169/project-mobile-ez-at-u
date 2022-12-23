@@ -196,6 +196,7 @@ class _HomePageState extends State<HomePage> with ProgressDialog {
           _screenStatusActivityStudentResponse = state.responseActivityStudent;
           _screenStatusActivityTeacherResponse = state.responseActivityTeacher;
           _userLanguage = _screenProfileResponse?.body?.profileGeneralInfo?.langeuage ?? "TH";
+          print("ชื่ออาจารย์ในไฟล์ home_screen = ${state.responseProfileTeacher?.body?.profileGeneralTH?.name}");
           return buildContentHomeScreen(
               context,
               _toggleLanguageView,
@@ -219,6 +220,7 @@ class _HomePageState extends State<HomePage> with ProgressDialog {
         } else if (state is ScreenInfoHomeNoActivityStudentAndTeacherSuccessState) {
           _screenHomeResponse = state.responseScreenInfoHome;
           _screenProfileResponse = state.responseProfile;
+          _screenProfileTeacherResponse = state.responseProfileTeacher;
           _noActivityStudentResponse = state.responseNoActivityStudent;
           _noActivityTeacherResponse = state.responseNoActivityTeacher;
           _userLanguage = _screenProfileResponse?.body?.profileGeneralInfo?.langeuage ?? "TH"; //+++
