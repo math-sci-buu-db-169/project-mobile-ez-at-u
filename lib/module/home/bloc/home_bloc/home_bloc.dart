@@ -7,6 +7,7 @@ import 'package:ez_at_u/module/home/model/response/home_response/no_activity_tea
 import 'package:ez_at_u/module/home/model/response/home_response/submit_delete_account_response.dart';
 import 'package:ez_at_u/module/home/model/response/home_response/submit_logout_response.dart';
 import 'package:ez_at_u/module/profile/model/response/api_profile_response.dart';
+import 'package:ez_at_u/module/profile/model/response/profile_teacher_screen_api.dart';
 import 'package:ez_at_u/utils/shared_preferences.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ez_at_u/module/home/model/response/home_response/alert_logout_response.dart';
@@ -152,16 +153,49 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> with HomeRepository {
                   ApiProfileResponse.fromJson(responseProfile.data);
               if (apiProfileResponse.head?.status == 200) {
                 print("here 2  == status 200");
-                prefs = await SharedPreferences.getInstance();
-                await setUserLanguage(
-                    apiProfileResponse.body?.profileGeneralInfo?.langeuage ??
-                        'TH');
-                await setMyNameUser(
-                    apiProfileResponse.body?.profileGeneralInfo?.name ?? '');
-                print("here 3  == getUserRole");
-                Response responseGetUserRole = await getUserRole();
-                print("here out 3  == getUserRole");
-                if (responseGetUserRole.statusCode == 200){
+                if (apiProfileResponse.body?.profileGeneralInfo?.role == 'ST') {
+                  prefs = await SharedPreferences.getInstance();
+                  await setUserLanguage(
+                      apiProfileResponse.body?.profileGeneralInfo?.langeuage ??
+                          'TH');
+                  await setMyNameUser(
+                      apiProfileResponse.body?.profileGeneralInfo?.name ?? '');
+                } else {
+                  ///------------------------
+                  print("here 2.5  == getApiProfileTeacher");
+                  Response responseProfileTeacher = await profileTeacherScreen();
+                  print("here out 2.5  == getApiProfileTeacher");
+                  if (responseProfileTeacher.statusCode == 200) {
+                    print("here out 2.5  == statusCode 200");
+                    ProfileTeacherScreenApi responseProfileTeacherApi =
+                    ProfileTeacherScreenApi.fromJson(
+                        responseProfileTeacher.data);
+                    if (responseProfileTeacherApi.head?.status == 200) {
+                      print("here 2.5  == status 200");
+                      prefs = await SharedPreferences.getInstance();
+                      await setUserLanguage(
+                          responseProfileTeacherApi.body?.profileGeneralTH
+                              ?.language ??
+                              'TH');
+                      await setMyNameUser(
+                          responseProfileTeacherApi.body?.profileGeneralTH
+                              ?.name ?? '');
+                      print(responseProfileTeacherApi.body?.profileGeneralTH
+                          ?.language);
+                      print(responseProfileTeacherApi.body?.profileGeneralTH
+                          ?.name);
+                    } else {
+                      emit(
+                          HomeError(message: responseProfileTeacherApi.head?.message ?? ""));
+                    }
+                  }
+                      ///-------------------------
+                }
+
+                    print("here 3  == getUserRole");
+                    Response responseGetUserRole = await getUserRole();
+                    print("here out 3  == getUserRole");
+                    if (responseGetUserRole.statusCode == 200){
                   print("here 2  == getUserRole 200");
                   GetUserRoleResponse getUserRoleResponse =
                   GetUserRoleResponse.fromJson(responseGetUserRole.data);

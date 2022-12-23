@@ -20,6 +20,15 @@ class HomeRepository {
     return await MyDio.createDioServer()
         .post("/api/home/activityscreen", data: jsonEncode({}));
   }
+  Future<Response> profileTeacherScreen(
+      // String user,String password,
+      ) async {
+    return await MyDio.createDioServer().post(
+        "/profile/profilethscreen",
+        data: jsonEncode({
+        })
+    );
+  }
 
   Future<Response> getChangeLanguageHome({required String userLanguage}) async {
     // final prefs = await SharedPreferences.getInstance();

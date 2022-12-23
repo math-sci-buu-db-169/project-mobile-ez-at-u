@@ -1,4 +1,5 @@
 import 'package:ez_at_u/module/home/screen/home_widget/setting_pin_lock_app_screen.dart';
+import 'package:ez_at_u/module/profile/model/response/profile_teacher_screen_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -20,39 +21,40 @@ import '../../../../module/login/screen/change_password_screen/change_password_s
 import '../../../../module/profile/model/response/api_profile_response.dart';
 import '../../../../utils/shared_preferences.dart';
 
-drawerHome(
+drawerStudentHome(
     BuildContext context,
     void Function() toggleLanguageView,
     isHidden,
     ScreenHomeResponse? screenHomeResponse,
     ApiProfileResponse? screenProfileResponse,
+    ProfileTeacherScreenApi? screenProfileTeacherResponse,
     TextEditingController otpCodeController,
     TextEditingController passwordController,
     {required String versionApp,
     required void Function() iniGetThemeMode,
     required int intThemeMode}) {
-  String name = screenProfileResponse?.body?.profileGeneralInfo?.name ?? '-';
-  String lName =
-      screenProfileResponse?.body?.profileGeneralInfo?.lastname ?? '-';
-  String textAlertDeleteAccount =
-      screenHomeResponse?.body?.alertmessage?.alertdeleteaccount ??
-          alertDeleteAccount;
-  String textAlertDeleteAccountPassword =
-      screenHomeResponse?.body?.alertmessage?.alertdeleteaccountpassword ??
-          alertDeleteAccount;
-  String textAlertDeleteAccountPDPA =
-      screenHomeResponse?.body?.alertmessage?.alertdeleteaccountpdpa ??
-          alertDeleteAccount;
-  String textAlertLogout =
-      screenHomeResponse?.body?.alertmessage?.alertlogout ?? alertLogout;
-  String textEmailSupport =
-      screenHomeResponse?.body?.alertmessage?.emailsupport ?? emailSupport;
-  String textPhoneSupport =
-      screenHomeResponse?.body?.alertmessage?.phonesupport ?? phoneSupport;
-  String textPassword =
-      screenHomeResponse?.body?.alertmessage?.alertpassword ?? alertPassword;
-  String role = screenProfileResponse?.body?.profileGeneralInfo?.role ?? "";
-  screenHomeResponse?.body?.alertmessage?.alertpassword ?? alertPassword;
+    String name = screenProfileResponse?.body?.profileGeneralInfo?.name ?? '-';
+    String lName =
+        screenProfileResponse?.body?.profileGeneralInfo?.lastname ?? '-';
+    String textAlertDeleteAccount =
+        screenHomeResponse?.body?.alertmessage?.alertdeleteaccount ??
+            alertDeleteAccount;
+    String textAlertDeleteAccountPassword =
+        screenHomeResponse?.body?.alertmessage?.alertdeleteaccountpassword ??
+            alertDeleteAccount;
+    String textAlertDeleteAccountPDPA =
+        screenHomeResponse?.body?.alertmessage?.alertdeleteaccountpdpa ??
+            alertDeleteAccount;
+    String textAlertLogout =
+        screenHomeResponse?.body?.alertmessage?.alertlogout ?? alertLogout;
+    String textEmailSupport =
+        screenHomeResponse?.body?.alertmessage?.emailsupport ?? emailSupport;
+    String textPhoneSupport =
+        screenHomeResponse?.body?.alertmessage?.phonesupport ?? phoneSupport;
+    String textPassword =
+        screenHomeResponse?.body?.alertmessage?.alertpassword ?? alertPassword;
+    String role = screenProfileResponse?.body?.profileGeneralInfo?.role ?? "";
+    screenHomeResponse?.body?.alertmessage?.alertpassword ?? alertPassword;
   List<String> optionsThemeMode = ["light", "dark", "system"];
   return SafeArea(
     child: Container(
@@ -82,6 +84,7 @@ drawerHome(
                           buildTableGeneralImageInfo(
                             context,
                             screenProfileResponse,
+                            screenProfileTeacherResponse,
                             tb1: 0.65,
                             tb2: 0.05,
                             tb3: 0.3,
@@ -94,7 +97,7 @@ drawerHome(
                             textLeftTitle: screenHomeResponse
                                     ?.body?.screenInfo?.textname ??
                                 homeTextName,
-                            textRightDetail: '$name   $lName ',
+                            textRightDetail: '$name = name   $lName ',
                             tb1: 0.3,
                             tb2: 0.05,
                             tb3: 0.65,

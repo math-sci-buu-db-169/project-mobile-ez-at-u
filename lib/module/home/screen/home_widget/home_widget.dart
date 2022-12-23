@@ -5,17 +5,15 @@ import 'package:ez_at_u/module/activity/screen/add_activity_by_teacher.dart';
 import 'package:ez_at_u/module/activity/screen/select_activity_by_student.dart';
 import 'package:ez_at_u/module/home/model/response/home_response/no_activity_teacher_response.dart';
 import 'package:ez_at_u/module/home/screen/home_widget/setting_screen.dart';
+import 'package:ez_at_u/module/profile/model/response/profile_teacher_screen_api.dart';
 import 'package:ez_at_u/module/profile/screen/profile_page_teacher.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../../../../resume/app.dart';
-import '../../../../resume/examples/content_design_resume.dart';
 import '../../../../resume/examples/content_design_resume_edit.dart';
 import 'home_body_widget.dart';
 import '../../../../customs/button/button_custom.dart';
 import '../../../../customs/message/text_home.dart';
 import '../../../../module/activity/model/response/screen_status_activity_response.dart';
-import '../../../../module/activity/screen/add_activity.dart';
 import '../../../../module/home/model/response/home_response/alert_no_activity_response.dart';
 import '../../../../module/home/model/response/home_response/screen_home_response.dart';
 import '../../../../module/home/screen/more_screen/more_screen.dart';
@@ -28,6 +26,7 @@ buildContentHomeScreen(
     void Function() toggleLanguageView,
     ScreenHomeResponse? screenHomeResponse,
     ApiProfileResponse? screenProfileResponse,
+    ProfileTeacherScreenApi? screenProfileTeacherResponse,
     userLanguage,
     ScreenStatusActivityStudentResponse? screenStatusActivityStudentResponse,
     ActivityListTeacherScreen? screenStatusActivityTeacherResponse,
@@ -50,13 +49,32 @@ buildContentHomeScreen(
     },
     child: Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      drawer: Drawer(
-        child: drawerHome(
+      drawer:
+      (userRole == 'ST')?
+      Drawer(
+        child: drawerStudentHome(
           context,
           toggleLanguageView,
           isHidden,
           screenHomeResponse,
           screenProfileResponse,
+          screenProfileTeacherResponse,
+          otpCodeController,
+          passwordController,
+          versionApp: versionApp,
+          iniGetThemeMode: iniGetThemeMode,
+          intThemeMode: intThemeMode,
+        ),
+      )
+          :
+      Drawer(
+        child: drawerStudentHome(
+          context,
+          toggleLanguageView,
+          isHidden,
+          screenHomeResponse,
+          screenProfileResponse,
+          screenProfileTeacherResponse,
           otpCodeController,
           passwordController,
           versionApp: versionApp,

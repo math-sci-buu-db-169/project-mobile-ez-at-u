@@ -1,5 +1,6 @@
 import 'package:ez_at_u/module/activity/model/response/activity_list_teacher_screen.dart';
 import 'package:ez_at_u/module/home/model/response/home_response/no_activity_teacher_response.dart';
+import 'package:ez_at_u/module/profile/model/response/profile_teacher_screen_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_info/package_info.dart';
@@ -43,6 +44,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> with ProgressDialog {
   ScreenHomeResponse? _screenHomeResponse;
   ApiProfileResponse? _screenProfileResponse;
+  ProfileTeacherScreenApi? _screenProfileTeacherResponse;
   ScreenStatusActivityStudentResponse? _screenStatusActivityStudentResponse;
   ActivityListTeacherScreen? _screenStatusActivityTeacherResponse;
 
@@ -202,6 +204,7 @@ class _HomePageState extends State<HomePage> with ProgressDialog {
               role:_role,
               _screenHomeResponse,
               _screenProfileResponse,
+              _screenProfileTeacherResponse,
               _userLanguage,
               _screenStatusActivityStudentResponse,
               _screenStatusActivityTeacherResponse,
@@ -227,6 +230,7 @@ class _HomePageState extends State<HomePage> with ProgressDialog {
               role:_role,
               _screenHomeResponse,
               _screenProfileResponse,
+              _screenProfileTeacherResponse,
               _userLanguage,
               _screenStatusActivityStudentResponse,
               _screenStatusActivityTeacherResponse,
