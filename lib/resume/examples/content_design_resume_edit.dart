@@ -234,6 +234,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
 
   @override
   Widget build(BuildContext context) {
+
     var isPreViewResumeResponse = widget.isPreViewResumeResponse;
     String prefix = isPreViewResumeResponse.body?.data?.userinfo?.prefix ?? '';
     String name = isPreViewResumeResponse.body?.data?.userinfo?.name == ""
@@ -278,7 +279,10 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
         isPreViewResumeResponse.body?.data?.contactinfo?.twitter ?? '';
     String youtube =
         isPreViewResumeResponse.body?.data?.contactinfo?.youtube ?? '';
+    setState(() {
 
+
+    });
     return WillPopScope(
         onWillPop: () async {
           return false;
@@ -316,10 +320,10 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                 InkWell(
                   onTap: () async {
                     await setUserLanguageResume(
-                        isSelectLanguageThai == true ? "TH" : "EN");
+                        isSelectLanguageThai == true ? "EN":"TH");
                     setState(() {
                       isSelectLanguageThai = !isSelectLanguageThai;
-                      isSelectLanguageThai == true ? "TH" : "EN";
+                      isSelectLanguageThai == true ? "EN":"TH"  ;
 
                       context
                           .read<ResumeBloc>()
@@ -968,21 +972,22 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                         GetEditScreenPreviewResumeEvent());
                                   }),
                                 );}),
-                          BuildTextFormFieldUnLimitCustomResume(
-                            readOnly: true,
-                            textEditingController: objectives,
-                            onChanged: (value) {
-                              objectives.text = value;
-                              if (kDebugMode) {
-                                print(objectives.text);
-                              }
-                            },
-                            hintLabel: "",
-                            initialvalue: isAddressValue,
-                            textInputType: TextInputType.text,
-                            // iconsFile : Icons.person_rounded,
-                            iconsFile: FontAwesomeIcons.locationDot,
-                          ),
+                          Stack(
+                            children: [
+                              buildDetailResumeCustomNotIconsReadOnly(
+                                  context: context,
+                                  detail:
+                                  "         $isAddressValue",
+                                  appBarForeGroundColor: appBarForegroundColor),
+                              const Positioned(
+                                top: 15,
+left: 15,
+                                child:
+                              Icon(FontAwesomeIcons.mapPin),)
+                            ],
+                          )
+
+
                         ],
                       ),
                     ),

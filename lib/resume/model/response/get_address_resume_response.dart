@@ -1,6 +1,6 @@
 import 'dart:convert';
 /// head : {"status":200,"message":"success","modulename":"home/resume","timeexpire":false}
-/// body : {"screeninfo":{"save":"บันทึก","editinfomations":"แก้ไขข้อมูล","number":"บ้านเลขที่ / House no.","moo":"หมู่ / Moo","soi_th":"ซอย","road_th":"ถนน","subdistrict_th":"ตำบล","district_th":"อำเภอ","province_th":"จังหวัด","soi_en":"Soi","road_en":"Road","subdistrict_en":"Subdistrict","district_en":"District","province_en":"Province","zipcode":"รหัสไปรษณีย์ / Zip Code"},"data":{"number":"num","moo":"mo","soi_th":"so","soi_en":"soi","road_th":"ro","road_en":"road","subdistrict_id":"390206","district_id":"3902","province_id":"39","subdistrict_th":"ฝั่งแดง","district_th":"นากลาง","province_th":"หนองบัวลำภู","subdistrict_en":"Fang Daeng","district_en":"Na Klang","province_en":"Nong Bua Lam Phu","zipcode":"39170","onselected_number":false,"onselected_moo":false,"onselected_soi":false,"onselected_road":true,"onselected_subdistrict":true,"onselected_district":true,"onselected_province":true,"onselected_zipcode":true}}
+/// body : {"screeninfo":{"save":"บันทึก","editinfomations":"แก้ไขข้อมูล","number":"บ้านเลขที่ / House no.","moo":"หมู่ / Moo","soi_th":"ซอย","road_th":"ถนน","subdistrict_th":"ตำบล","district_th":"อำเภอ","province_th":"จังหวัด","soi_en":"Soi","road_en":"Road","subdistrict_en":"Subdistrict","district_en":"District","province_en":"Province","zipcode":"รหัสไปรษณีย์ / Zip Code"},"data":{"number":"169","moo":"2","soi_th":" ","soi_en":" ","road_th":"ลงหาดบางแสน ","road_en":"Long Hard-Bangsaen ","subdistrict_id":"200104","district_id":"2001","province_id":"20","subdistrict_th":"แสนสุข","district_th":"เมืองชลบุรี","province_th":"ชลบุรี","subdistrict_en":"Saen Suk","district_en":"Mueang Chon Buri","province_en":"Chon Buri","zipcode":"20130","onselected_number":true,"onselected_moo":false,"onselected_soi":false,"onselected_road":true,"onselected_subdistrict":true,"onselected_district":true,"onselected_province":true,"onselected_zipcode":true},"districtlist":[{"districtid":2001,"districtnameth":"เมืองชลบุรี","districtnameen":"Mueang Chon Buri"},{"districtid":2002,"districtnameth":"บ้านบึง","districtnameen":"Ban Bueng"},{"districtid":2003,"districtnameth":"หนองใหญ่","districtnameen":"Nong Yai"},{"districtid":2004,"districtnameth":"บางละมุง","districtnameen":"Bang Lamung"},{"districtid":2005,"districtnameth":"พานทอง","districtnameen":"Phan Thong"},{"districtid":2006,"districtnameth":"พนัสนิคม","districtnameen":"Phanat Nikhom"},{"districtid":2007,"districtnameth":"ศรีราชา","districtnameen":"Si Racha"},{"districtid":2008,"districtnameth":"เกาะสีชัง","districtnameen":"Ko Sichang"},{"districtid":2009,"districtnameth":"สัตหีบ","districtnameen":"Sattahip"},{"districtid":2010,"districtnameth":"บ่อทอง","districtnameen":"Bo Thong"},{"districtid":2011,"districtnameth":"เกาะจันทร์","districtnameen":"Ko Chan"}],"tambonlist":[{"tambonid":200101,"tambonnameth":"บางปลาสร้อย","tambonnameen":"Bang Pla Soi"},{"tambonid":200102,"tambonnameth":"มะขามหย่ง","tambonnameen":"Makham Yong"},{"tambonid":200103,"tambonnameth":"บ้านโขด","tambonnameen":"Ban Khot"},{"tambonid":200104,"tambonnameth":"แสนสุข","tambonnameen":"Saen Suk"},{"tambonid":200105,"tambonnameth":"บ้านสวน","tambonnameen":"Ban Suan"},{"tambonid":200106,"tambonnameth":"หนองรี","tambonnameen":"Nong Ri"},{"tambonid":200107,"tambonnameth":"นาป่า","tambonnameen":"Na Pa"},{"tambonid":200108,"tambonnameth":"หนองข้างคอก","tambonnameen":"Nong Khang Khok"},{"tambonid":200109,"tambonnameth":"ดอนหัวฬ่อ","tambonnameen":"Don Hua Lo"},{"tambonid":200110,"tambonnameth":"หนองไม้แดง","tambonnameen":"Nong Mai Daeng"},{"tambonid":200111,"tambonnameth":"บางทราย","tambonnameen":"Bang Sai"},{"tambonid":200112,"tambonnameth":"คลองตำหรุ","tambonnameen":"Khlong Tamru"},{"tambonid":200113,"tambonnameth":"เหมือง","tambonnameen":"Mueang"},{"tambonid":200114,"tambonnameth":"บ้านปึก","tambonnameen":"Ban Puek"},{"tambonid":200115,"tambonnameth":"ห้วยกะปิ","tambonnameen":"Huai Kapi"},{"tambonid":200116,"tambonnameth":"เสม็ด","tambonnameen":"Samet"},{"tambonid":200117,"tambonnameth":"อ่างศิลา","tambonnameen":"Ang Sila"},{"tambonid":200118,"tambonnameth":"สำนักบก","tambonnameen":"Samnak Bok"}]}
 
 GetAddressResumeResponse getAddressResumeResponseFromJson(String str) => GetAddressResumeResponse.fromJson(json.decode(str));
 String getAddressResumeResponseToJson(GetAddressResumeResponse data) => json.encode(data.toJson());
@@ -40,31 +40,57 @@ GetAddressResumeResponse copyWith({  Head? head,
 }
 
 /// screeninfo : {"save":"บันทึก","editinfomations":"แก้ไขข้อมูล","number":"บ้านเลขที่ / House no.","moo":"หมู่ / Moo","soi_th":"ซอย","road_th":"ถนน","subdistrict_th":"ตำบล","district_th":"อำเภอ","province_th":"จังหวัด","soi_en":"Soi","road_en":"Road","subdistrict_en":"Subdistrict","district_en":"District","province_en":"Province","zipcode":"รหัสไปรษณีย์ / Zip Code"}
-/// data : {"number":"num","moo":"mo","soi_th":"so","soi_en":"soi","road_th":"ro","road_en":"road","subdistrict_id":"390206","district_id":"3902","province_id":"39","subdistrict_th":"ฝั่งแดง","district_th":"นากลาง","province_th":"หนองบัวลำภู","subdistrict_en":"Fang Daeng","district_en":"Na Klang","province_en":"Nong Bua Lam Phu","zipcode":"39170","onselected_number":false,"onselected_moo":false,"onselected_soi":false,"onselected_road":true,"onselected_subdistrict":true,"onselected_district":true,"onselected_province":true,"onselected_zipcode":true}
+/// data : {"number":"169","moo":"2","soi_th":" ","soi_en":" ","road_th":"ลงหาดบางแสน ","road_en":"Long Hard-Bangsaen ","subdistrict_id":"200104","district_id":"2001","province_id":"20","subdistrict_th":"แสนสุข","district_th":"เมืองชลบุรี","province_th":"ชลบุรี","subdistrict_en":"Saen Suk","district_en":"Mueang Chon Buri","province_en":"Chon Buri","zipcode":"20130","onselected_number":true,"onselected_moo":false,"onselected_soi":false,"onselected_road":true,"onselected_subdistrict":true,"onselected_district":true,"onselected_province":true,"onselected_zipcode":true}
+/// districtlist : [{"districtid":2001,"districtnameth":"เมืองชลบุรี","districtnameen":"Mueang Chon Buri"},{"districtid":2002,"districtnameth":"บ้านบึง","districtnameen":"Ban Bueng"},{"districtid":2003,"districtnameth":"หนองใหญ่","districtnameen":"Nong Yai"},{"districtid":2004,"districtnameth":"บางละมุง","districtnameen":"Bang Lamung"},{"districtid":2005,"districtnameth":"พานทอง","districtnameen":"Phan Thong"},{"districtid":2006,"districtnameth":"พนัสนิคม","districtnameen":"Phanat Nikhom"},{"districtid":2007,"districtnameth":"ศรีราชา","districtnameen":"Si Racha"},{"districtid":2008,"districtnameth":"เกาะสีชัง","districtnameen":"Ko Sichang"},{"districtid":2009,"districtnameth":"สัตหีบ","districtnameen":"Sattahip"},{"districtid":2010,"districtnameth":"บ่อทอง","districtnameen":"Bo Thong"},{"districtid":2011,"districtnameth":"เกาะจันทร์","districtnameen":"Ko Chan"}]
+/// tambonlist : [{"tambonid":200101,"tambonnameth":"บางปลาสร้อย","tambonnameen":"Bang Pla Soi"},{"tambonid":200102,"tambonnameth":"มะขามหย่ง","tambonnameen":"Makham Yong"},{"tambonid":200103,"tambonnameth":"บ้านโขด","tambonnameen":"Ban Khot"},{"tambonid":200104,"tambonnameth":"แสนสุข","tambonnameen":"Saen Suk"},{"tambonid":200105,"tambonnameth":"บ้านสวน","tambonnameen":"Ban Suan"},{"tambonid":200106,"tambonnameth":"หนองรี","tambonnameen":"Nong Ri"},{"tambonid":200107,"tambonnameth":"นาป่า","tambonnameen":"Na Pa"},{"tambonid":200108,"tambonnameth":"หนองข้างคอก","tambonnameen":"Nong Khang Khok"},{"tambonid":200109,"tambonnameth":"ดอนหัวฬ่อ","tambonnameen":"Don Hua Lo"},{"tambonid":200110,"tambonnameth":"หนองไม้แดง","tambonnameen":"Nong Mai Daeng"},{"tambonid":200111,"tambonnameth":"บางทราย","tambonnameen":"Bang Sai"},{"tambonid":200112,"tambonnameth":"คลองตำหรุ","tambonnameen":"Khlong Tamru"},{"tambonid":200113,"tambonnameth":"เหมือง","tambonnameen":"Mueang"},{"tambonid":200114,"tambonnameth":"บ้านปึก","tambonnameen":"Ban Puek"},{"tambonid":200115,"tambonnameth":"ห้วยกะปิ","tambonnameen":"Huai Kapi"},{"tambonid":200116,"tambonnameth":"เสม็ด","tambonnameen":"Samet"},{"tambonid":200117,"tambonnameth":"อ่างศิลา","tambonnameen":"Ang Sila"},{"tambonid":200118,"tambonnameth":"สำนักบก","tambonnameen":"Samnak Bok"}]
 
 Body bodyFromJson(String str) => Body.fromJson(json.decode(str));
 String bodyToJson(Body data) => json.encode(data.toJson());
 class Body {
   Body({
       Screeninfo? screeninfo, 
-      Data? data,}){
+      Data? data, 
+      List<Districtlist>? districtlist, 
+      List<Tambonlist>? tambonlist,}){
     _screeninfo = screeninfo;
     _data = data;
+    _districtlist = districtlist;
+    _tambonlist = tambonlist;
 }
 
   Body.fromJson(dynamic json) {
     _screeninfo = json['screeninfo'] != null ? Screeninfo.fromJson(json['screeninfo']) : null;
     _data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    if (json['districtlist'] != null) {
+      _districtlist = [];
+      json['districtlist'].forEach((v) {
+        _districtlist?.add(Districtlist.fromJson(v));
+      });
+    }
+    if (json['tambonlist'] != null) {
+      _tambonlist = [];
+      json['tambonlist'].forEach((v) {
+        _tambonlist?.add(Tambonlist.fromJson(v));
+      });
+    }
   }
   Screeninfo? _screeninfo;
   Data? _data;
+  List<Districtlist>? _districtlist;
+  List<Tambonlist>? _tambonlist;
 Body copyWith({  Screeninfo? screeninfo,
   Data? data,
+  List<Districtlist>? districtlist,
+  List<Tambonlist>? tambonlist,
 }) => Body(  screeninfo: screeninfo ?? _screeninfo,
   data: data ?? _data,
+  districtlist: districtlist ?? _districtlist,
+  tambonlist: tambonlist ?? _tambonlist,
 );
   Screeninfo? get screeninfo => _screeninfo;
   Data? get data => _data;
+  List<Districtlist>? get districtlist => _districtlist;
+  List<Tambonlist>? get tambonlist => _tambonlist;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -74,28 +100,124 @@ Body copyWith({  Screeninfo? screeninfo,
     if (_data != null) {
       map['data'] = _data?.toJson();
     }
+    if (_districtlist != null) {
+      map['districtlist'] = _districtlist?.map((v) => v.toJson()).toList();
+    }
+    if (_tambonlist != null) {
+      map['tambonlist'] = _tambonlist?.map((v) => v.toJson()).toList();
+    }
     return map;
   }
 
 }
 
-/// number : "num"
-/// moo : "mo"
-/// soi_th : "so"
-/// soi_en : "soi"
-/// road_th : "ro"
-/// road_en : "road"
-/// subdistrict_id : "390206"
-/// district_id : "3902"
-/// province_id : "39"
-/// subdistrict_th : "ฝั่งแดง"
-/// district_th : "นากลาง"
-/// province_th : "หนองบัวลำภู"
-/// subdistrict_en : "Fang Daeng"
-/// district_en : "Na Klang"
-/// province_en : "Nong Bua Lam Phu"
-/// zipcode : "39170"
-/// onselected_number : false
+/// tambonid : 200101
+/// tambonnameth : "บางปลาสร้อย"
+/// tambonnameen : "Bang Pla Soi"
+
+Tambonlist tambonlistFromJson(String str) => Tambonlist.fromJson(json.decode(str));
+String tambonlistToJson(Tambonlist data) => json.encode(data.toJson());
+class Tambonlist {
+  Tambonlist({
+      int? tambonid, 
+      String? tambonnameth, 
+      String? tambonnameen,}){
+    _tambonid = tambonid;
+    _tambonnameth = tambonnameth;
+    _tambonnameen = tambonnameen;
+}
+
+  Tambonlist.fromJson(dynamic json) {
+    _tambonid = json['tambonid'];
+    _tambonnameth = json['tambonnameth'];
+    _tambonnameen = json['tambonnameen'];
+  }
+  int? _tambonid;
+  String? _tambonnameth;
+  String? _tambonnameen;
+Tambonlist copyWith({  int? tambonid,
+  String? tambonnameth,
+  String? tambonnameen,
+}) => Tambonlist(  tambonid: tambonid ?? _tambonid,
+  tambonnameth: tambonnameth ?? _tambonnameth,
+  tambonnameen: tambonnameen ?? _tambonnameen,
+);
+  int? get tambonid => _tambonid;
+  String? get tambonnameth => _tambonnameth;
+  String? get tambonnameen => _tambonnameen;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['tambonid'] = _tambonid;
+    map['tambonnameth'] = _tambonnameth;
+    map['tambonnameen'] = _tambonnameen;
+    return map;
+  }
+
+}
+
+/// districtid : 2001
+/// districtnameth : "เมืองชลบุรี"
+/// districtnameen : "Mueang Chon Buri"
+
+Districtlist districtlistFromJson(String str) => Districtlist.fromJson(json.decode(str));
+String districtlistToJson(Districtlist data) => json.encode(data.toJson());
+class Districtlist {
+  Districtlist({
+      int? districtid, 
+      String? districtnameth, 
+      String? districtnameen,}){
+    _districtid = districtid;
+    _districtnameth = districtnameth;
+    _districtnameen = districtnameen;
+}
+
+  Districtlist.fromJson(dynamic json) {
+    _districtid = json['districtid'];
+    _districtnameth = json['districtnameth'];
+    _districtnameen = json['districtnameen'];
+  }
+  int? _districtid;
+  String? _districtnameth;
+  String? _districtnameen;
+Districtlist copyWith({  int? districtid,
+  String? districtnameth,
+  String? districtnameen,
+}) => Districtlist(  districtid: districtid ?? _districtid,
+  districtnameth: districtnameth ?? _districtnameth,
+  districtnameen: districtnameen ?? _districtnameen,
+);
+  int? get districtid => _districtid;
+  String? get districtnameth => _districtnameth;
+  String? get districtnameen => _districtnameen;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['districtid'] = _districtid;
+    map['districtnameth'] = _districtnameth;
+    map['districtnameen'] = _districtnameen;
+    return map;
+  }
+
+}
+
+/// number : "169"
+/// moo : "2"
+/// soi_th : " "
+/// soi_en : " "
+/// road_th : "ลงหาดบางแสน "
+/// road_en : "Long Hard-Bangsaen "
+/// subdistrict_id : "200104"
+/// district_id : "2001"
+/// province_id : "20"
+/// subdistrict_th : "แสนสุข"
+/// district_th : "เมืองชลบุรี"
+/// province_th : "ชลบุรี"
+/// subdistrict_en : "Saen Suk"
+/// district_en : "Mueang Chon Buri"
+/// province_en : "Chon Buri"
+/// zipcode : "20130"
+/// onselected_number : true
 /// onselected_moo : false
 /// onselected_soi : false
 /// onselected_road : true

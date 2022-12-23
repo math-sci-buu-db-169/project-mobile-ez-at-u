@@ -369,7 +369,11 @@ class _BodyPreviewResumeState extends State<BodyPreviewResume> {
               elevation: 0,
               leading: IconButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  // Navigator.pop(context);
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                          builder: (context) => const ContentDesignResumeEditScreen()),
+                          (Route<dynamic> route) => false);
                 },
                 icon: Icon(
                   Icons.arrow_back,
@@ -401,32 +405,33 @@ class _BodyPreviewResumeState extends State<BodyPreviewResume> {
                           fontWeight: FontWeight.w500,
                           color:
                               Theme.of(context).appBarTheme.foregroundColor))),
-              actions: [
-                InkWell(
-                  onTap: () async {
-                    await setUserLanguageResume(
-                        isSelectLanguageThai == true ? "TH" : "EN");
-                    setState(() {
-                      isSelectLanguageThai = !isSelectLanguageThai;
-                      isSelectLanguageThai == true ? "TH" : "EN";
-                    });
-                    context
-                        .read<ResumeBloc>()
-                        .add(GetOnSelectedAndPreviewResumeEvent());
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Center(
-                        child: Text(isSelectLanguageThai == true ? "EN" : "TH",
-                            style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                                color: Theme.of(context)
-                                    .appBarTheme
-                                    .foregroundColor))),
-                  ),
-                ),
-              ]),
+              // actions: [
+              //   InkWell(
+              //     onTap: () async {
+              //       await setUserLanguageResume(
+              //           isSelectLanguageThai == true ? "TH" : "EN");
+              //       setState(() {
+              //         isSelectLanguageThai = !isSelectLanguageThai;
+              //         isSelectLanguageThai == true ? "TH" : "EN";
+              //       });
+              //       context
+              //           .read<ResumeBloc>()
+              //           .add(GetOnSelectedAndPreviewResumeEvent());
+              //     },
+              //     child: Padding(
+              //       padding: const EdgeInsets.all(8.0),
+              //       child: Center(
+              //           child: Text(isSelectLanguageThai == true ? "EN" : "TH",
+              //               style: TextStyle(
+              //                   fontSize: 12,
+              //                   fontWeight: FontWeight.w500,
+              //                   color: Theme.of(context)
+              //                       .appBarTheme
+              //                       .foregroundColor))),
+              //     ),
+              //   ),
+              // ]
+          ),
           body: SafeArea(
               child: SizedBox(
             height: MediaQuery.of(context).size.height,

@@ -383,12 +383,11 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
     on<GetEditScreenAddressResumeEvent>((event, emit) async {
       try {
         emit(EditPreviewResumeLoading());
-        print("CheckProfile 5 == ProfileApiEvent");
+        print("GetEditScreenAddressResumeEventsentScreenProvinceAddressResume  5+6 == GetEditScreenAddressResumeEvent");
 
         await checkPreviewResumeEventInitial(event, emit);
         Response responseScreenAddressResume = await sentScreenAddressResume();
-        Response responseScreenProvinceAddressResume =
-            await sentScreenProvinceAddressResume();
+        Response responseScreenProvinceAddressResume = await sentScreenProvinceAddressResume();
         emit(EditPreviewResumeEndLoading());
         if (responseScreenAddressResume.statusCode == 200) {
           GetAddressResumeResponse getAddressResumeResponse =
@@ -416,7 +415,8 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
             emit(EditPreviewResumeError(
                 errorMessage: getAddressResumeResponse.head?.message ?? ""));
           }
-        } else {
+        }
+        else {
           emit(EditPreviewResumeError(
               errorMessage: responseScreenAddressResume.statusMessage ?? ""));
         }

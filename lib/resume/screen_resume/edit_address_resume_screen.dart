@@ -130,13 +130,30 @@ class _EditAddressResumePageState extends State<EditAddressResumePage>
               state.isGetAddressResumeResponse;
           isGetProvinceAddressResumeResponse =
               state.isGetProvinceAddressResumeResponse;
-
+             subDistrictID=isGetAddressResumeResponse.body?.data?.subdistrictId??'';
+            districtID=isGetAddressResumeResponse.body?.data?.districtId??'';
+            provinceID=isGetAddressResumeResponse.body?.data?.provinceId??'';
+            addressDistrictList.clear();
+            addressSubDistrictList.clear();
+            provinceName ="${isGetAddressResumeResponse.body?.data?.provinceTh??''}/${isGetAddressResumeResponse.body?.data?.provinceEn??''}" ;
+            districtName ="${isGetAddressResumeResponse.body?.data?.districtTh??''}/${isGetAddressResumeResponse.body?.data?.districtEn??''}" ;
+            subDistrictName ="${isGetAddressResumeResponse.body?.data?.subdistrictTh??''}/${isGetAddressResumeResponse.body?.data?.subdistrictEn??''}" ;
+            getZipCode =isGetAddressResumeResponse.body?.data?.zipcode??'' ;
             isGetProvinceAddressResumeResponse.body?.provincelist?.forEach((element) {
               addressProvinceList.add(
                   ContentAddress(addressID: element.provinceid ?? 0,  contentTH: element.provincenameth ?? '', contentEN: element.provincenameen ?? ''));
             });
 
+            isGetAddressResumeResponse.body?.districtlist?.forEach((element) {
+              addressDistrictList.add(
+                  ContentAddress(addressID: element.districtid ?? 0,  contentTH: element.districtnameth ?? '', contentEN: element.districtnameen ?? ''));
+            });
 
+
+            isGetAddressResumeResponse.body?.tambonlist?.forEach((element) {
+              addressSubDistrictList.add(
+                  ContentAddress(addressID: element.tambonid ?? 0,  contentTH: element.tambonnameth ?? '', contentEN: element.tambonnameen ?? ''));
+            });
 
           });
         }
