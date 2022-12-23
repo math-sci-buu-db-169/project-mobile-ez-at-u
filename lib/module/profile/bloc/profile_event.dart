@@ -2,21 +2,16 @@ part of 'profile_bloc.dart';
 
 // @immutable
 abstract class ProfileEvent {}
-
 class ChangeAvatarRequest extends ProfileEvent {}
-
 class SaveProfileChanges extends ProfileEvent {}
-
 //----------------------------------API---------------------------------------//
 class ProfileApiEvent extends ProfileEvent {
   ProfileApiEvent();
 }
-
 class ProfileGeneralSummitEvent extends ProfileEvent {
   bool istextbuttonpressed;
   ProfileGeneralSummitEvent({required this.istextbuttonpressed});
 }
-
 class ProfileGeneralUpdateEvent extends ProfileEvent {
   String name;
   String surname;
@@ -30,7 +25,6 @@ class ProfileGeneralUpdateEvent extends ProfileEvent {
       required this.stuCode,
       required this.gen});
 }
-
 class GeneralSubmitEvent extends ProfileEvent {
   String name;
   String surname;
@@ -41,7 +35,6 @@ class GeneralSubmitEvent extends ProfileEvent {
     required this.nickname,
   });
 }
-
 class EducationSubmitEvent extends ProfileEvent {
   String gpaJh;
   String gpaSh;
@@ -52,7 +45,6 @@ class EducationSubmitEvent extends ProfileEvent {
       required this.gpaSh,
       required this.gpaBd});
 }
-
 class AddressSubmitEvent extends ProfileEvent {
   String number;
   String moo;
@@ -73,7 +65,6 @@ class AddressSubmitEvent extends ProfileEvent {
       required this.province,
       required this.zipcode});
 }
-
 class ContactSubmitEvent extends ProfileEvent {
   String phone;
   String line;
@@ -90,7 +81,6 @@ class ContactSubmitEvent extends ProfileEvent {
       required this.twitter,
       required this.youtube});
 }
-
 class CareerSubmitEvent extends ProfileEvent {
   String attention;
   String status;
@@ -105,4 +95,48 @@ class CareerSubmitEvent extends ProfileEvent {
         required this.career,
         required this.company,
         required this.workplace});
+}
+//--TC--//
+class ProfileApiTeacherEvent extends ProfileEvent {
+  ProfileApiTeacherEvent();
+}
+
+class TeacherGeneralSubmitEvent extends ProfileEvent {
+  String name;
+  String surname;
+  String nickname;
+  TeacherGeneralSubmitEvent({
+    required this.name,
+    required this.surname,
+    required this.nickname,
+  });
+}
+class TeacherEducationSubmitEvent extends ProfileEvent {
+  String teacherBachelorDegree;
+  String teacherMasterDegree;
+  String teacherPHD;
+  String teacherReseachArea;
+  String teacherUBD;
+  String teacherUMD;
+  String teacherUPHD;
+  TeacherEducationSubmitEvent(
+      {
+        required this.teacherBachelorDegree,
+        required this.teacherMasterDegree,
+        required this.teacherPHD,
+        required this.teacherReseachArea,
+        required this.teacherUBD,
+        required this.teacherUMD,
+        required this.teacherUPHD
+      });
+}
+class TeacherContactSubmitEvent extends ProfileEvent {
+  String phone;
+  String room;
+  String email;
+  TeacherContactSubmitEvent(
+      {
+        required this.phone,
+        required this.room,
+        required this.email});
 }

@@ -1,5 +1,9 @@
 import 'dart:convert';
 import 'dart:io' show File;
+import 'package:ez_at_u/module/profile/components/contact_data_tab_teacher.dart';
+import 'package:ez_at_u/module/profile/components/education_data_tab_teacher.dart';
+import 'package:ez_at_u/module/profile/components/general_data_tab_teacher.dart';
+import 'package:ez_at_u/module/profile/components/generaldatatab.dart';
 import 'package:ez_at_u/module/profile/model/response/api_profile_response.dart';
 import 'package:ez_at_u/module/home/screen/home_screen/home_screen.dart';
 import 'package:ez_at_u/module/profile/bloc/profile_bloc.dart';
@@ -7,7 +11,7 @@ import 'package:ez_at_u/module/profile/components/addressdatatab.dart';
 import 'package:ez_at_u/module/profile/components/careerdatatab.dart';
 import 'package:ez_at_u/module/profile/components/contactdatatab.dart';
 import 'package:ez_at_u/module/profile/components/educationdatatab.dart';
-import 'package:ez_at_u/module/profile/components/generaldatatab.dart';
+import 'package:ez_at_u/module/profile/model/response/profile_teacher_screen_api.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,28 +21,28 @@ import '../../../customs/message/text_profile.dart';
 import '../../../customs/progress_dialog.dart';
 import '../../../customs/size/size.dart';
 
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+class ProfileScreenTeacher extends StatelessWidget {
+  const ProfileScreenTeacher({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(create: (context) => ProfileBloc(),
-    child: const ProfilePage(),
+    child: const ProfilePageTeacher(),
     );
   }
 }
 
 
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+class ProfilePageTeacher extends StatefulWidget {
+  const ProfilePageTeacher({Key? key}) : super(key: key);
 
   @override
-  State<ProfilePage> createState() => _ProfilePageState();
+  State<ProfilePageTeacher> createState() => _ProfilePageTeacherState();
 }
 
-class _ProfilePageState extends State<ProfilePage> with ProgressDialog {
-  ApiProfileResponse? _apiProfileResponse;
+class _ProfilePageTeacherState extends State<ProfilePageTeacher> with ProgressDialog {
+  ProfileTeacherScreenApi? _apiProfileResponse;
   File? image;
   ChooseAvatarSuccess? avatarImage;
   String? base64img;
@@ -52,25 +56,25 @@ class _ProfilePageState extends State<ProfilePage> with ProgressDialog {
     if (kDebugMode) {
       print('เรียก initState');
     }
-    context.read<ProfileBloc>().add(ProfileApiEvent());
+    context.read<ProfileBloc>().add(ProfileApiTeacherEvent());
   }
   void _initRole()  async{
 
     prefs = await SharedPreferences.getInstance();
     setState(()  {
-      roleFromApi = prefs.getString('Role')??"ST";
+      roleFromApi = prefs.getString('Role')??"TC";
     });
   }
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ProfileBloc, ProfileState>(listener: (context, state) {
-      if (state is ProfileLoading) {
+      if (state is ProfileTeacherLoading) {
         showProgressDialog(context);
       }
-      if (state is ProfileLoadingSuccess) {
+      if (state is ProfileTeacherLoadingSuccess) {
         hideProgressDialog(context);
       }
-      if (state is ProfileError) {
+      if (state is ProfileTeacherError) {
         // print(state.errorMessage);
         dialogOneLineOneBtn(context, '${state.errorMessage}\n ', "OK", onClickBtn: () {
         // dialogOneLineOneBtn(context, state.errorMessage + '\n ', "OK", onClickBtn: () {
@@ -81,41 +85,41 @@ class _ProfilePageState extends State<ProfilePage> with ProgressDialog {
         // print("TEST general");
         // print(state.responseGeneral.toJson());
         // print("TEST general");
-        context.read<ProfileBloc>().add(ProfileApiEvent());
+        context.read<ProfileBloc>().add(ProfileApiTeacherEvent());
       }
       if (state is EducationSubmitSuccessState) {
         // print("TEST edu");
         // print(state.responseEducation.toJson());
         // print("TEST edu");
-        context.read<ProfileBloc>().add(ProfileApiEvent());
+        context.read<ProfileBloc>().add(ProfileApiTeacherEvent());
       }
       if (state is AddressSubmitSuccessState) {
         // print("TEST address");
         // print(state.responseAddress.toJson());
         // print("TEST address");
-        context.read<ProfileBloc>().add(ProfileApiEvent());
+        context.read<ProfileBloc>().add(ProfileApiTeacherEvent());
       }
       if (state is ContactSubmitSuccessState) {
         // print("TEST contact");
         // print(state.responseContact.toJson());
         // print("TEST contact");
-        context.read<ProfileBloc>().add(ProfileApiEvent());
+        context.read<ProfileBloc>().add(ProfileApiTeacherEvent());
       }
       if (state is CareerSubmitSuccessState) {
         // print("TEST Career");
         // print(state.responseCareer.toJson());
         // print("TEST Career");
-        context.read<ProfileBloc>().add(ProfileApiEvent());
+        context.read<ProfileBloc>().add(ProfileApiTeacherEvent());
       }
       if (state is ChooseAvatarSuccess) {
         // print("TEST Career");
         // print(state.responseCareer.toJson());
         // print("TEST Career");
-        context.read<ProfileBloc>().add(ProfileApiEvent());
+        context.read<ProfileBloc>().add(ProfileApiTeacherEvent());
       }
     },
       builder: (context, state) {
-        if (state is ProfileApiSuccessState) {
+        if (state is ProfileTeacherScreenSuccessState) {
           _apiProfileResponse = state.response;
           return buildContent(context, _apiProfileResponse, image, base64img);
         }
@@ -125,7 +129,7 @@ class _ProfilePageState extends State<ProfilePage> with ProgressDialog {
         return Scaffold(body: Container());
       },
       buildWhen: (context, state){
-      return state is ProfileApiSuccessState;
+      return state is ProfileTeacherScreenSuccessState;
       // return state is ProfileApiSuccessState || state is ChooseAvatarSuccess;
 
       },
@@ -133,7 +137,7 @@ class _ProfilePageState extends State<ProfilePage> with ProgressDialog {
   }
 
   Widget buildContent(BuildContext context,
-      ApiProfileResponse? apiProfileResponse, File? image, String? base64img) {
+      ProfileTeacherScreenApi? apiProfileTeacherScreenResponse, File? image, String? base64img) {
     Color? textColor = Theme.of(context).bottomAppBarColor;
     Color? dataTabColor = Theme.of(context).appBarTheme.backgroundColor;
     Color? dataTabColorRO = Theme.of(context).appBarTheme.foregroundColor;
@@ -163,7 +167,7 @@ class _ProfilePageState extends State<ProfilePage> with ProgressDialog {
             ),
           ),
           title: Text(
-            apiProfileResponse?.body?.screeninfo?.titleprofile??profileTitleProfile
+            apiProfileTeacherScreenResponse?.body?.screeninfo?.titleprofile??profileTitleProfile
 // '+$global_key'
             ,
 // 'ทดสอบ bloc',
@@ -180,22 +184,14 @@ class _ProfilePageState extends State<ProfilePage> with ProgressDialog {
               children: [
                 Column(
                   children: [
-// MaterialButton(
-//     color: Colors.blue,
-//     child: Text('Pick image'),
-//     onPressed: (){
-//       pickImage();
-// }),
                     Container(
                         height: height * 0.3,
                         width: width,
                         color: Theme.of(context).splashColor,
-                        child: (apiProfileResponse?.body?.profileGeneralInfo?.img == "" || apiProfileResponse?.body?.profileGeneralInfo?.img == null)
+                        child: (apiProfileTeacherScreenResponse?.body?.profileGeneralTH?.img
+                            == "" ||
+                            apiProfileTeacherScreenResponse?.body?.profileGeneralTH?.img == null)
                             ?
-// Icon(
-//         Icons.account_circle,
-//         size: 100,
-//       )
                         Container(
                           height: 150,
                           width: 150,
@@ -235,7 +231,7 @@ class _ProfilePageState extends State<ProfilePage> with ProgressDialog {
                             shape: BoxShape.circle,
                             image: DecorationImage(
                               image: MemoryImage(base64Decode(base64.normalize(
-                                  apiProfileResponse?.body?.profileGeneralInfo?.img ??
+                                  apiProfileTeacherScreenResponse?.body?.profileGeneralTH?.img ??
                                       base64.normalize(phimg)))),
                               fit: BoxFit.cover,
                               colorFilter: ColorFilter.mode(
@@ -254,7 +250,7 @@ class _ProfilePageState extends State<ProfilePage> with ProgressDialog {
                                   shape: BoxShape.circle,
                                   image: DecorationImage(
                                     image: MemoryImage(base64Decode(base64.normalize(
-                                        apiProfileResponse?.body?.profileGeneralInfo?.img ??
+                                        apiProfileTeacherScreenResponse?.body?.profileGeneralTH?.img ??
                                             base64.normalize(phimg)))),
                                   ),
                                 ),
@@ -265,16 +261,12 @@ class _ProfilePageState extends State<ProfilePage> with ProgressDialog {
                   ],
                 ),
 // Container(child: Image.memory(base64Decode(base64img??phimg))),
-                ProfileGeneralDataHead
-                  (dataFromAPI: apiProfileResponse, userRole: roleFromApi,
+                ProfileGeneralDataHeadTeacher
+                  (dataFromAPI: apiProfileTeacherScreenResponse, userRole: roleFromApi,
                     textColor: textColor, dataTabColor:dataTabColor, dataTabColorRO: dataTabColorRO),
-                ProfileEducationDataHead(dataFromAPI: apiProfileResponse, userRole: roleFromApi,
+                ProfileEducationDataHeadTeacher(dataFromAPI: apiProfileTeacherScreenResponse, userRole: roleFromApi,
                     textColor: textColor, dataTabColor:dataTabColor, dataTabColorRO: dataTabColorRO),
-                ProfileAddressDataHead(dataFromAPI: apiProfileResponse, userRole: roleFromApi,
-                    textColor: textColor, dataTabColor:dataTabColor, dataTabColorRO: dataTabColorRO),
-                ProfileContactDataHead(dataFromAPI: apiProfileResponse, userRole: roleFromApi,
-                    textColor: textColor, dataTabColor:dataTabColor, dataTabColorRO: dataTabColorRO),
-                ProfileCareerDataHead(dataFromAPI: apiProfileResponse, userRole: roleFromApi,
+                ProfileContactDataHeadTeacher(dataFromAPI: apiProfileTeacherScreenResponse, userRole: roleFromApi,
                     textColor: textColor, dataTabColor:dataTabColor, dataTabColorRO: dataTabColorRO),
                 const SizedBox(height: 60)
               ],

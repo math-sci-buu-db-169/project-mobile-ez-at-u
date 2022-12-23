@@ -50,7 +50,6 @@ class _ProfileEducationDataHeadState extends State<ProfileEducationDataHead> {
     // String gpaShValue = dataFromAPI?.body?.profileEduInfo?.gpaShs??"-";
     // String gpaBdValue = dataFromAPI?.body?.profileEduInfo?.gpaBd??"-";
     return
-      (userRole == "ST") ?
       Column(
       children: [
         Container(
@@ -149,101 +148,6 @@ class _ProfileEducationDataHeadState extends State<ProfileEducationDataHead> {
           },),
       ],
     )
-          : (userRole == "TC") ?
-      Column(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              color: dataTabColor,
-              border: Border(
-                  top: BorderSide(width: 1, color: Colors.black12),
-                  bottom: BorderSide(width: 1, color: Colors.transparent)),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Row(
-                children: [
-                  Text(
-                    dataFromAPI?.body?.screeninfo?.subtitleeduinfo??profileSubTitleEduInfo,
-                    style: TextStyle(fontSize: 20, color: textColor),
-                  ),
-                  Expanded(
-                    child: Container(
-                      alignment: Alignment.centerRight,
-                      child: TextButton(
-                        onPressed: () {
-                          setState(() {
-                            isUnpressed = !isUnpressed;
-                            if(isUnpressed == true){
-                              context.read<ProfileBloc>().add(EducationSubmitEvent(gpaBd: gpaBdValue, gpaSh: gpaShValue, gpaJh: gpaJhValue));
-                            }
-                          });
-                        },
-                        child: isUnpressed
-                            ? Text(dataFromAPI?.body?.screeninfo?.textedit??profileTextEdit, style: const TextStyle(color: Colors.red))
-                            : Text(dataFromAPI?.body?.screeninfo?.textsave??profileTextSave, style: const TextStyle(color: Colors.green)),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          ProfileEducationDataTab(
-            dataTabColor: dataTabColor,
-            textColor: textColor,
-            isUnpressed: isUnpressed,
-            textLeft: "ปริญญาบัณฑิต",
-            textRight: "มหาวิทยาลียบูรพา",
-            // onChange: (value) {
-            //   gpaJhValue = value;
-            //   if (kDebugMode) {
-            //     print(gpaJhValue);
-            //   }
-            // },
-          ),
-          ProfileEducationDataTab(
-            dataTabColor: dataTabColor,
-            textColor: textColor,
-            isUnpressed: isUnpressed,
-            textLeft: "ปริญญามหาบัณฑิต",
-            textRight: "มหาวิทยาลัยบูรพา2",
-            // onChange: (value) {
-            //   gpaShValue = value;
-            //   if (kDebugMode) {
-            //     print(gpaShValue);
-            //   }
-            // }
-            ),
-          ProfileEducationDataTab(
-            dataTabColor: dataTabColor,
-            textColor: textColor,
-            isUnpressed: isUnpressed,
-            textLeft: "ปริญญาดุษฎีบัณฑิต",
-            textRight: "มหาวิทยาลัยบูรพา3",
-            // onChange: (value) {
-            //   gpaBdValue = value;
-            //   if (kDebugMode) {
-            //     print(gpaBdValue);
-            //   }
-            // },
-          ),
-          ProfileEducationDataTab(
-            dataTabColor: dataTabColor,
-            textColor: textColor,
-            isUnpressed: isUnpressed,
-            textLeft: "ขอบเขตการวิจัย",
-            textRight: "Discrete Mathematics, Differential Equations, Numerical Analysis",
-            // onChange: (value) {
-            //   gpaBdValue = value;
-            //   if (kDebugMode) {
-            //     print(gpaBdValue);
-            //   }
-            // },
-          ),
-        ],
-      )
-          : Container()
     ;
   }
 }
@@ -287,16 +191,18 @@ class _ProfileEducationDataTabState extends State<ProfileEducationDataTab> {
       child: Padding(
         padding: const EdgeInsets.only(left: 10,top: 10,bottom: 10,right: 20),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top : 12.0),
+            Container(
+              width: MediaQuery.of(context).size.width * 0.4,
               child: Text(
                 '$textLeft ',
                 style: TextStyle(fontSize: 18, color: textColor),
               ),
             ),
-            Expanded(
+            Container(
+              width: MediaQuery.of(context).size.width * 0.4,
               child: TextFormField(
                 cursorColor: textColor,
                 autofocus: false,
@@ -362,13 +268,21 @@ class _ProfileEducationDataReadonlyTabState extends State<ProfileEducationDataRe
       child: Padding(
         padding: const EdgeInsets.only(left: 10,top: 10,bottom: 10,right: 20),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              '$textLeft ',
-              style: TextStyle(fontSize: 18, color: textColor),
+            Container(
+              width: MediaQuery.of(context).size.width * 0.4,
+              child: Text(
+                '$textLeft ',
+                style: TextStyle(fontSize: 18, color: textColor),
+              ),
             ),
-            Expanded(
+            Container(
+              width: MediaQuery.of(context).size.width * 0.4,
               child: TextFormField(
+                minLines: 1,
+                maxLines: null,
                 autofocus: false,
                 style: TextStyle(fontSize: 18, color: textColor),
                 readOnly: true,

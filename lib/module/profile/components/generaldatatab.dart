@@ -53,8 +53,8 @@ class _ProfileGeneralDataHeadState extends State<ProfileGeneralDataHead> {
     // var dataFromAPI = widget.dataFromAPI;
     // String surnameValue = dataFromAPI?.body?.profileGeneralInfo?.lastname??"-";
     // String nicknameValue = dataFromAPI?.body?.profileGeneralInfo?.nickname??"-";
-    return (userRole == "ST")
-        ? Column(
+    return
+      Column(
             children: [
               Container(
                 decoration: BoxDecoration(
@@ -175,133 +175,7 @@ class _ProfileGeneralDataHeadState extends State<ProfileGeneralDataHead> {
                   textRight:
                       dataFromAPI?.body?.profileGeneralInfo?.generation ?? "-"),
             ],
-          )
-        : (userRole == "TC")
-            ? Column(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: dataTabColor,
-                      border: Border(
-                          top: BorderSide(width: 1, color: Colors.black12),
-                          bottom:
-                              BorderSide(width: 1, color: Colors.transparent)),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Row(
-                        children: [
-                          Text(
-                            dataFromAPI?.body?.screeninfo?.subtitlegeninfo ??
-                                profileSubTitleGenInfo,
-                            style: TextStyle(fontSize: 20, color: textColor),
-                          ),
-                          Expanded(
-                            child: Container(
-                              alignment: Alignment.centerRight,
-                              child: TextButton(
-                                onPressed: () {
-                                  setState(() {
-                                    isUnpressed = !isUnpressed;
-                                    if (isUnpressed == true) {
-                                      context
-                                          .read<ProfileBloc>()
-                                          .add(GeneralSubmitEvent(
-                                              nickname: nicknameValue
-                                              // , name: nameValueController.text
-                                              ,
-                                              name: nameValue,
-                                              surname: surnameValue));
-                                    }
-                                  });
-                                },
-                                child: isUnpressed
-                                    // ? Text('บันทึก', style: TextStyle(color: Colors.green))
-                                    ? Text(
-                                        dataFromAPI
-                                                ?.body?.screeninfo?.textedit ??
-                                            profileTextEdit,
-                                        style:
-                                            const TextStyle(color: Colors.red))
-                                    : Text(
-                                        dataFromAPI
-                                                ?.body?.screeninfo?.textsave ??
-                                            profileTextSave,
-                                        style: const TextStyle(
-                                            color: Colors.green)),
-                                // : Text('แก้ไข', style: TextStyle(color: Colors.red)),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  ProfileGeneralDataTab(
-                    dataTabColor: dataTabColor,
-                    textColor: textColor,
-                    isUnpressed: isUnpressed,
-                    textLeft: dataFromAPI?.body?.screeninfo?.textname ??
-                        profileTextName,
-                    textRight:
-                        dataFromAPI?.body?.profileGeneralInfo?.name ?? "-",
-                    // textEditingController: nameValueController..text=dataFromAPI?.body?.profileGeneralInfo?.name??"-",
-                    onChange: (value) {
-                      // nameValueController.text = value;
-                      nameValue = value;
-                      if (kDebugMode) {
-                        // print(nameValueController.text);
-                        print(nameValue);
-                      }
-                    },
-                  ),
-                  ProfileGeneralDataTab(
-                    dataTabColor: dataTabColor,
-                    textColor: textColor,
-                    isUnpressed: isUnpressed,
-                    textLeft: dataFromAPI?.body?.screeninfo?.textlname ??
-                        profileTextLastName,
-                    textRight:
-                        dataFromAPI?.body?.profileGeneralInfo?.lastname ?? "-",
-                    onChange: (value) {
-                      surnameValue = value;
-                      if (kDebugMode) {
-                        print(surnameValue);
-                      }
-                    },
-                  ),
-                  ProfileGeneralDataTab(
-                      dataTabColor: dataTabColor,
-                      textColor: textColor,
-                      isUnpressed: isUnpressed,
-                      textLeft: dataFromAPI?.body?.screeninfo?.textnickname ??
-                          profileTextNickName,
-                      textRight:
-                          dataFromAPI?.body?.profileGeneralInfo?.nickname ??
-                              "-",
-                      onChange: (value) {
-                        nicknameValue = value;
-                        if (kDebugMode) {
-                          print(nicknameValue);
-                        }
-                      }),
-                  ProfileGeneralDataTab(
-                    dataTabColor: dataTabColor,
-                    textColor: textColor,
-                    isUnpressed: isUnpressed,
-                    textLeft: "ตำแหน่งทางวิชาการ",
-                    textRight:
-                        dataFromAPI?.body?.profileGeneralInfo?.position ?? '-',
-                    // onChange: (value) {
-                    //   nicknameValue = value;
-                    //   if (kDebugMode) {
-                    //     print(nicknameValue);
-                    //   }
-                    // }
-                  ),
-                ],
-              )
-            : Container();
+          );
   }
 }
 
@@ -348,15 +222,23 @@ class _ProfileGeneralDataTabState extends State<ProfileGeneralDataTab> {
         padding:
             const EdgeInsets.only(left: 10, top: 10, bottom: 10, right: 20),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              '$textLeft ',
-              style: TextStyle(fontSize: 18, color: textColor),
+            Container(
+              width: MediaQuery.of(context).size.width * 0.4,
+              child: Text(
+                '$textLeft ',
+                style: TextStyle(fontSize: 18, color: textColor),
+              ),
             ),
-            Expanded(
+            Container(
+              width: MediaQuery.of(context).size.width * 0.4,
               child: TextFormField(
                 cursorColor: textColor,
                 autofocus: false,
+                minLines: 1,
+                maxLines: null,
                 style: TextStyle(fontSize: 18, color: textColor),
                 readOnly: isUnpressed,
                 // readOnly: true,
@@ -421,13 +303,21 @@ class _ProfileGeneralDataReadonlyTabState
         padding:
             const EdgeInsets.only(left: 10, top: 10, bottom: 10, right: 20),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              '$textLeft ',
-              style: TextStyle(fontSize: 18, color: textColor),
+            Container(
+              width: MediaQuery.of(context).size.width * 0.4,
+              child: Text(
+                '$textLeft ',
+                style: TextStyle(fontSize: 18, color: textColor),
+              ),
             ),
-            Expanded(
+            Container(
+              width: MediaQuery.of(context).size.width * 0.4,
               child: TextFormField(
+                minLines: 1,
+                maxLines: null,
                 autofocus: false,
                 style: TextStyle(fontSize: 18, color: textColor),
                 readOnly: true,

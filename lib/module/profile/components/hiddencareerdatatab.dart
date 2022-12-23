@@ -147,15 +147,24 @@ class _ProfileCareerDataTabState extends State<ProfileCareerDataTab> {
       child: Padding(
         padding: const EdgeInsets.only(left: 10,top: 10,bottom: 10,right: 20),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              '$textLeft ',
-              style: TextStyle(fontSize: 18, color: textColor),
+            Container(
+              width: MediaQuery.of(context).size.width * 0.4,
+              child: Text(
+                '$textLeft ',
+                style: TextStyle(fontSize: 18, color: textColor),
+              ),
             ),
-            Expanded(
+            Container(
+              width: MediaQuery.of(context).size.width * 0.4,
               child: TextFormField(
                 style: TextStyle(fontSize: 18, color: textColor),
-                cursorColor: Colors.black,
+                cursorColor: textColor,
+                autofocus: false,
+                minLines: 1,
+                maxLines: null,
                 readOnly: isUnpressed,
                 textAlign: TextAlign.right,
                 decoration: const InputDecoration(

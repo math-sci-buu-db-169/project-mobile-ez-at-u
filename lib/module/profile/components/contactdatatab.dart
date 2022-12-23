@@ -61,7 +61,6 @@ class _ProfileContactDataHeadState extends State<ProfileContactDataHead> {
     // String twitterValue =  dataFromAPI?.body?.profileContactInfo?.twitter??"-";
     // String youtubeValue =  dataFromAPI?.body?.profileContactInfo?.youtube??"-";
     return
-      (userRole == "ST") ?
       Column(
       children: [
         Container(
@@ -203,107 +202,6 @@ class _ProfileContactDataHeadState extends State<ProfileContactDataHead> {
           },),
       ],
     )
-          : (userRole == "TC") ?
-      Column(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              color: dataTabColor,
-              border: Border(
-                  top: BorderSide(width: 1, color: Colors.black12),
-                  bottom: BorderSide(width: 1, color: Colors.transparent)),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Row(
-                children: [
-                  Text(
-                    dataFromAPI?.body?.screeninfo?.subtitlecont??profileSubTitleContact,
-                    style: TextStyle(fontSize: 20, color: textColor),
-                  ),
-                  Expanded(
-                    child: Container(
-                      alignment: Alignment.centerRight,
-                      child: TextButton(
-                        onPressed: () {
-                          setState(() {
-                            isUnpressed = !isUnpressed;
-                            if (isUnpressed == true) {
-                              context.read<ProfileBloc>().add(ContactSubmitEvent(
-                                  instagram: instagramValue,
-                                  twitter: twitterValue,
-                                  youtube: youtubeValue,
-                                  facebook: facebookValue,
-                                  line: lineValue,
-                                  phone: phoneValue));
-                            }
-                          });
-                        },
-                        child: isUnpressed
-                            ? Text(dataFromAPI?.body?.screeninfo?.textedit??profileTextEdit, style: const TextStyle(color: Colors.red))
-                            : Text(dataFromAPI?.body?.screeninfo?.textsave??profileTextSave,
-                            style: const TextStyle(color: Colors.green)),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          ProfileContactDataTCTab(
-            dataTabColor: dataTabColor,
-            textColor: textColor,
-            textLeft: "โทร",
-            isUnpressed: isUnpressed,
-            iconContact: Icon(
-              Icons.phone,
-              color: HexColor('#000000'),
-            ),
-            textContact: dataFromAPI?.body?.profileContactInfo?.phone??"-",
-            keyboardType: const TextInputType.numberWithOptions(),
-            maxLength: 10,
-            onChange: (value) {
-              phoneValue = value;
-              if (kDebugMode) {
-                print(phoneValue);
-              }
-            },
-          ),
-          ProfileContactDataTCTab(
-            dataTabColor: dataTabColor,
-            textColor: textColor,
-            textLeft: "อีเมล",
-            isUnpressed: isUnpressed,
-            iconContact: Icon(
-              FontAwesomeIcons.envelope,
-              color: HexColor('#00B900'),
-            ),
-            textContact: dataFromAPI?.body?.profileContactInfo?.line??"-",
-            onChange: (value) {
-              lineValue = value;
-              if (kDebugMode) {
-                print(lineValue);
-              }
-            },),
-          ProfileContactDataTCTab(
-            dataTabColor: dataTabColor,
-            textColor: textColor,
-            textLeft: "ห้องปฏิบัติงาน",
-            isUnpressed: isUnpressed,
-            iconContact: Icon(
-              FontAwesomeIcons.building,
-              color: HexColor('#3B5998'),
-            ),
-            textContact: dataFromAPI?.body?.profileContactInfo?.facebook??"-",
-            onChange: (value) {
-              facebookValue = value;
-              if (kDebugMode) {
-                print(facebookValue);
-              }
-            },),
-        ],
-      ) :
-          Container()
     ;
   }
 }
@@ -350,22 +248,30 @@ class _ProfileContactDataTabState extends State<ProfileContactDataTab> {
       child: Padding(
         padding: const EdgeInsets.only(left: 10,top: 10,bottom: 10,right: 20),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             iconContact,
             Expanded(
-              child: TextFormField(
-                style: TextStyle(fontSize: 18, color: textColor),
-                cursorColor: Colors.black,
-                keyboardType: widget.keyboardType,
-                maxLength: widget.maxLength,
-                readOnly: isUnpressed,
-                textAlign: TextAlign.right,
-                decoration: const InputDecoration(
-                    border: InputBorder.none,
-                    counterText: ""
+              child: Container(
+                width: MediaQuery.of(context).size.width * 0.4,
+                child: TextFormField(
+                  style: TextStyle(fontSize: 18, color: textColor),
+                  cursorColor: textColor,
+                  autofocus: false,
+                  minLines: 1,
+                  maxLines: null,
+                  keyboardType: widget.keyboardType,
+                  maxLength: widget.maxLength,
+                  readOnly: isUnpressed,
+                  textAlign: TextAlign.right,
+                  decoration: const InputDecoration(
+                      border: InputBorder.none,
+                      counterText: ""
+                  ),
+                  onChanged: widget.onChange,
+                  initialValue: textContact,
                 ),
-                onChanged: widget.onChange,
-                initialValue: textContact,
               ),
             ),
           ],

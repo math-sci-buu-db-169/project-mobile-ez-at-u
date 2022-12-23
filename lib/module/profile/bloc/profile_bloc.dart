@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
+import 'package:ez_at_u/module/profile/model/response/profile_teacher_screen_api.dart';
+import 'package:ez_at_u/module/profile/model/response/response_header_only_profile.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -260,7 +262,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> with ProfileRepositor
       }
     }
     );
-
     on<CareerSubmitEvent>((event, emit) async{
       try {
         emit(ProfileLoading());
@@ -287,6 +288,110 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> with ProfileRepositor
         }
       } on DioError catch (e) {
         emit(ProfileError(errorMessage: e.response?.statusMessage ?? ""));
+      }
+    }
+    );
+    on<ProfileApiTeacherEvent>((event, emit) async{
+      try {
+        emit(ProfileTeacherLoading());
+        print("CheckProfile 5 == ProfileApiEvent");
+        await  checkProfileEventInitial(event, emit) ;
+        Response response = await profileTeacherScreen();
+        emit(ProfileTeacherLoadingSuccess());
+        if (response.statusCode == 200) {
+          // print('aa = ' + '${response.data}');
+          ProfileTeacherScreenApi apiProfileTeacherResponse = ProfileTeacherScreenApi.fromJson(response.data);
+          if (apiProfileTeacherResponse.head?.status == 200) {
+            emit(ProfileTeacherScreenSuccessState(response: apiProfileTeacherResponse));
+          } else {
+            emit(ProfileTeacherError(errorMessage: apiProfileTeacherResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(ProfileTeacherError(errorMessage: response.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(ProfileTeacherError(errorMessage: e.response?.statusMessage ?? ""));
+      }
+
+    }
+    );
+    on<TeacherGeneralSubmitEvent>((event, emit) async{
+      try {
+        emit(ProfileTeacherLoading());
+        print("CheckProfile == TeacherGeneralSubmitEvent");
+        await  checkProfileEventInitial(event, emit) ;
+        Response responseGeneralTeacherSubmit = await sentProfileTeacherGeneralData(
+            event.name,
+            event.surname,
+            event.nickname);
+        emit(ProfileTeacherLoadingSuccess());
+        if (responseGeneralTeacherSubmit.statusCode == 200) {
+          ResponseHeaderOnlyProfile generalTeacherResponse = ResponseHeaderOnlyProfile.fromJson(responseGeneralTeacherSubmit.data);
+          if (generalTeacherResponse.head?.status == 200) {
+            emit(TeacherProfileSubmitSuccessState(responseTeacherGeneral: generalTeacherResponse));
+          } else {
+            emit(ProfileTeacherError(errorMessage: generalTeacherResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(ProfileTeacherError(errorMessage: responseGeneralTeacherSubmit.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(ProfileTeacherError(errorMessage: e.response?.statusMessage ?? ""));
+      }
+    }
+    );
+    on<TeacherEducationSubmitEvent>((event, emit) async{
+      try {
+        emit(ProfileTeacherLoading());
+        print("CheckProfile == TeacherEducationSubmitEvent");
+        await  checkProfileEventInitial(event, emit) ;
+        Response responseEducationTeacherSubmit = await sentProfileTeacherEducationData(
+            event.teacherBachelorDegree,
+            event.teacherMasterDegree,
+            event.teacherPHD,
+            event.teacherReseachArea,
+            event.teacherUBD,
+            event.teacherUMD,
+            event.teacherUPHD
+        );
+        emit(ProfileTeacherLoadingSuccess());
+        if (responseEducationTeacherSubmit.statusCode == 200) {
+          ResponseHeaderOnlyProfile EducationTeacherResponse = ResponseHeaderOnlyProfile.fromJson(responseEducationTeacherSubmit.data);
+          if (EducationTeacherResponse.head?.status == 200) {
+            emit(TeacherProfileSubmitSuccessState(responseTeacherGeneral: EducationTeacherResponse));
+          } else {
+            emit(ProfileTeacherError(errorMessage: EducationTeacherResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(ProfileTeacherError(errorMessage: responseEducationTeacherSubmit.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(ProfileTeacherError(errorMessage: e.response?.statusMessage ?? ""));
+      }
+    }
+    );
+    on<TeacherContactSubmitEvent>((event, emit) async{
+      try {
+        emit(ProfileTeacherLoading());
+        print("CheckProfile == TeacherContactSubmitEvent");
+        await  checkProfileEventInitial(event, emit) ;
+        Response responseContactTeacherSubmit = await sentProfileTeacherContactData(
+            event.phone,
+            event.room,
+            event.email);
+        emit(ProfileTeacherLoadingSuccess());
+        if (responseContactTeacherSubmit.statusCode == 200) {
+          ResponseHeaderOnlyProfile contactTeacherResponse = ResponseHeaderOnlyProfile.fromJson(responseContactTeacherSubmit.data);
+          if (contactTeacherResponse.head?.status == 200) {
+            emit(TeacherProfileSubmitSuccessState(responseTeacherGeneral: contactTeacherResponse));
+          } else {
+            emit(ProfileTeacherError(errorMessage: contactTeacherResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(ProfileTeacherError(errorMessage: responseContactTeacherSubmit.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(ProfileTeacherError(errorMessage: e.response?.statusMessage ?? ""));
       }
     }
     );

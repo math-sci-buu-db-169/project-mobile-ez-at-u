@@ -4,46 +4,30 @@ part of 'profile_bloc.dart';
 abstract class ProfileState {
   const ProfileState();
 }
-
 class ProfileApiSuccessState extends ProfileState{
   ApiProfileResponse  response;
   ProfileApiSuccessState({required this.response});
 }
-
-
-
-class ChangeAvatarProcress extends ProfileState {
-}
-
+class ChangeAvatarProcress extends ProfileState {}
 class ChooseAvatarSuccess extends ProfileState {
   final File avatarImage;
   final String base64img;
   ChooseAvatarSuccess({required this.avatarImage,required this.base64img});
 }
-
-
 class ProfileError extends ProfileState{
   String errorMessage;
   ProfileError({required this.errorMessage});
 }
-
 class ProfileInitial extends ProfileState {
   @override
   String toString() => 'ProfileInitial';
 }
-
-class ProfileLoading extends ProfileState {
-}
-
-class ProfileLoadingSuccess extends ProfileState {
-
-}
-
+class ProfileLoading extends ProfileState {}
+class ProfileLoadingSuccess extends ProfileState {}
 class ProfileStatusState extends ProfileState {
   bool statuscheck  ;
   ProfileStatusState({required this.statuscheck});
 }
-
 class GeneralSubmitSuccessState extends ProfileState{
   GeneralResponse responseGeneral;
   GeneralSubmitSuccessState({required this.responseGeneral});
@@ -72,7 +56,6 @@ class RefreshTokenSuccessState extends ProfileState{
     required this.refreshToken,
   });
 }
-
 class TokenExpiredState extends ProfileState{
   String message;
   RefreshTokenResponse checkrefreshtokenmessage;
@@ -80,4 +63,19 @@ class TokenExpiredState extends ProfileState{
     required this.message,
     required this.checkrefreshtokenmessage,
   });
+}
+//--TC--//
+class ProfileTeacherScreenSuccessState extends ProfileState{
+  ProfileTeacherScreenApi  response;
+  ProfileTeacherScreenSuccessState({required this.response});
+}
+class ProfileTeacherError extends ProfileState{
+  String errorMessage;
+  ProfileTeacherError({required this.errorMessage});
+}
+class ProfileTeacherLoading extends ProfileState {}
+class ProfileTeacherLoadingSuccess extends ProfileState {}
+class TeacherProfileSubmitSuccessState extends ProfileState{
+  ResponseHeaderOnlyProfile responseTeacherGeneral;
+  TeacherProfileSubmitSuccessState({required this.responseTeacherGeneral});
 }

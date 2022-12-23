@@ -69,7 +69,6 @@ class _ProfileCareerDataHeadState extends State<ProfileCareerDataHead> {
     // String companyValue =
     //     dataFromAPI?.body?.profileCareerInfo?.usercompany ?? "-";
     return
-      (userRole == "ST") ?
       Column(
       children: [
         Container(
@@ -218,10 +217,6 @@ class _ProfileCareerDataHeadState extends State<ProfileCareerDataHead> {
         ),
       ],
     )
-          :
-      (userRole == "TC") ?
-          Column():
-            Container()
     ;
   }
 }

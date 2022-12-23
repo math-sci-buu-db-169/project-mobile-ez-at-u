@@ -5,6 +5,7 @@ import 'package:ez_at_u/module/activity/screen/add_activity_by_teacher.dart';
 import 'package:ez_at_u/module/activity/screen/select_activity_by_student.dart';
 import 'package:ez_at_u/module/home/model/response/home_response/no_activity_teacher_response.dart';
 import 'package:ez_at_u/module/home/screen/home_widget/setting_screen.dart';
+import 'package:ez_at_u/module/profile/screen/profile_page_teacher.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../../resume/app.dart';
@@ -231,6 +232,7 @@ buildContentHomeScreen(
                   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    (userRole == "ST") ?
                     Expanded(
                         child: IconButton(
                       icon: FaIcon(FontAwesomeIcons.userLarge,
@@ -241,7 +243,29 @@ buildContentHomeScreen(
                             MaterialPageRoute(
                                 builder: (context) => const ProfileScreen()));
                       },
-                    )),
+                    )):(userRole == "TC") ?
+                Expanded(
+                    child: IconButton(
+                      icon: FaIcon(FontAwesomeIcons.userLarge,
+                          color: Theme.of(context).iconTheme.color, size: 40),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const ProfileScreenTeacher()));
+                      },
+                    )):
+                    Expanded(
+                        child: IconButton(
+                          icon: FaIcon(FontAwesomeIcons.userLarge,
+                              color: Theme.of(context).iconTheme.color, size: 40),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const ProfileScreen()));
+                          },
+                        )),
                     if(userRole == "ST")
                     Expanded(
                         child: IconButton(
