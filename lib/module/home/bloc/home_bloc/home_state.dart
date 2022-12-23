@@ -18,12 +18,14 @@ class HomeError extends HomeState {
 class ScreenInfoHomeSuccessState extends HomeState {
   ScreenHomeResponse responseScreenInfoHome;
   ApiProfileResponse responseProfile;
+  ProfileTeacherScreenApi responseProfileTeacher;
   ScreenStatusActivityStudentResponse? responseActivityStudent;
   ActivityListTeacherScreen? responseActivityTeacher;
   // AlertNoActivityResponse  responseNoActivity;
   ScreenInfoHomeSuccessState({
     required this.responseScreenInfoHome,
     required this.responseProfile,
+    required this.responseProfileTeacher,
     this.responseActivityStudent,
     this.responseActivityTeacher,
     // required this.responseNoActivity
@@ -39,12 +41,14 @@ class ScreenInfoHomeSettingSuccessState extends HomeState {
 class ScreenInfoHomeNoActivityStudentAndTeacherSuccessState extends HomeState {
   ScreenHomeResponse responseScreenInfoHome;
   ApiProfileResponse responseProfile;
+  ProfileTeacherScreenApi responseProfileTeacher;
   // ScreenStatusActivityResponse responseActivity;
   AlertNoActivityStudentResponse? responseNoActivityStudent;
   NoActivityTeacherResponse? responseNoActivityTeacher;
   ScreenInfoHomeNoActivityStudentAndTeacherSuccessState({
     required this.responseScreenInfoHome,
     required this.responseProfile,
+    required this.responseProfileTeacher,
     this.responseNoActivityStudent,
     this.responseNoActivityTeacher,
     // required this.responseNoActivity

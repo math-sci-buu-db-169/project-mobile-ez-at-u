@@ -153,14 +153,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> with HomeRepository {
                   ApiProfileResponse.fromJson(responseProfile.data);
               if (apiProfileResponse.head?.status == 200) {
                 print("here 2  == status 200");
-                if (apiProfileResponse.body?.profileGeneralInfo?.role == 'ST') {
+                // if (apiProfileResponse.body?.profileGeneralInfo?.role == 'ST') {
                   prefs = await SharedPreferences.getInstance();
                   await setUserLanguage(
                       apiProfileResponse.body?.profileGeneralInfo?.langeuage ??
                           'TH');
                   await setMyNameUser(
                       apiProfileResponse.body?.profileGeneralInfo?.name ?? '');
-                } else {
+                // } else {
                   ///------------------------
                   print("here 2.5  == getApiProfileTeacher");
                   Response responseProfileTeacher = await profileTeacherScreen();
@@ -180,18 +180,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> with HomeRepository {
                       await setMyNameUser(
                           responseProfileTeacherApi.body?.profileGeneralTH
                               ?.name ?? '');
-                      print(responseProfileTeacherApi.body?.profileGeneralTH
-                          ?.language);
-                      print(responseProfileTeacherApi.body?.profileGeneralTH
-                          ?.name);
-                    } else {
-                      emit(
-                          HomeError(message: responseProfileTeacherApi.head?.message ?? ""));
                     }
-                  }
                       ///-------------------------
-                }
-
+                // }
                     print("here 3  == getUserRole");
                     Response responseGetUserRole = await getUserRole();
                     print("here out 3  == getUserRole");
@@ -214,6 +205,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> with HomeRepository {
                             emit(ScreenInfoHomeSuccessState(
                                 responseScreenInfoHome: screenHomeResponse,
                                 responseProfile: apiProfileResponse,
+                                responseProfileTeacher: responseProfileTeacherApi,
                                 responseActivityStudent: apiStatusActivityStudentResponse));
                           }
                           else if (apiStatusActivityStudentResponse.body?.activity?.length.toInt() == 0) {
@@ -228,6 +220,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> with HomeRepository {
                                 emit(ScreenInfoHomeNoActivityStudentAndTeacherSuccessState(
                                     responseScreenInfoHome: screenHomeResponse,
                                     responseProfile: apiProfileResponse,
+                                    responseProfileTeacher: responseProfileTeacherApi,
                                     responseNoActivityStudent: alertNoActivityStudentResponse));
                               } else {
                                 emit(HomeError(
@@ -269,6 +262,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> with HomeRepository {
                             emit(ScreenInfoHomeSuccessState(
                                 responseScreenInfoHome: screenHomeResponse,
                                 responseProfile: apiProfileResponse,
+                                responseProfileTeacher: responseProfileTeacherApi,
                                 responseActivityTeacher: apiActivityTeacherResponse));
                           }
                           else if (apiActivityTeacherResponse.body?.activitylist?.length.toInt() == 0) {
@@ -283,6 +277,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> with HomeRepository {
                                 emit(ScreenInfoHomeNoActivityStudentAndTeacherSuccessState(
                                     responseScreenInfoHome: screenHomeResponse,
                                     responseProfile: apiProfileResponse,
+                                    responseProfileTeacher: responseProfileTeacherApi,
                                     responseNoActivityTeacher: alertNoActivityTeacherResponse));
                               } else {
                                 emit(HomeError(
@@ -313,6 +308,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> with HomeRepository {
                       //--
                     }
                   }
+                    } else {
+                      emit(
+                          HomeError(message: responseProfileTeacherApi.head?.message ?? ""));
+                    }
                 }
               } else {
                 emit(

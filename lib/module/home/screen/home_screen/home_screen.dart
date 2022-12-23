@@ -192,6 +192,7 @@ class _HomePageState extends State<HomePage> with ProgressDialog {
         if (state is ScreenInfoHomeSuccessState) {
           _screenHomeResponse = state.responseScreenInfoHome;
           _screenProfileResponse = state.responseProfile;
+          _screenProfileTeacherResponse = state.responseProfileTeacher;
           _screenStatusActivityStudentResponse = state.responseActivityStudent;
           _screenStatusActivityTeacherResponse = state.responseActivityTeacher;
           _userLanguage = _screenProfileResponse?.body?.profileGeneralInfo?.langeuage ?? "TH";

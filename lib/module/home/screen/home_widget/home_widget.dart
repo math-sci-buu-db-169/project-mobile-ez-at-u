@@ -4,9 +4,11 @@ import 'package:ez_at_u/module/activity/screen/activity_name_by_teacher_page.dar
 import 'package:ez_at_u/module/activity/screen/add_activity_by_teacher.dart';
 import 'package:ez_at_u/module/activity/screen/select_activity_by_student.dart';
 import 'package:ez_at_u/module/home/model/response/home_response/no_activity_teacher_response.dart';
+import 'package:ez_at_u/module/home/screen/home_widget/drawer_teacher_widget.dart';
 import 'package:ez_at_u/module/home/screen/home_widget/setting_screen.dart';
 import 'package:ez_at_u/module/profile/model/response/profile_teacher_screen_api.dart';
 import 'package:ez_at_u/module/profile/screen/profile_page_teacher.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../../resume/examples/content_design_resume_edit.dart';
@@ -17,7 +19,7 @@ import '../../../../module/activity/model/response/screen_status_activity_respon
 import '../../../../module/home/model/response/home_response/alert_no_activity_response.dart';
 import '../../../../module/home/model/response/home_response/screen_home_response.dart';
 import '../../../../module/home/screen/more_screen/more_screen.dart';
-import '../../../../module/home/screen/home_widget/drawer_widget.dart';
+import '../../../../module/home/screen/home_widget/drawer_student_widget.dart';
 import '../../../../module/profile/model/response/api_profile_response.dart';
 import '../../../../module/profile/screen/profile_page.dart';
 
@@ -45,7 +47,7 @@ buildContentHomeScreen(
   String userRole = role;
   return WillPopScope(
     onWillPop: () async {
-      return false;
+        return false;
     },
     child: Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -67,6 +69,23 @@ buildContentHomeScreen(
         ),
       )
           :
+      (userRole == 'TC')?
+      Drawer(
+        child: drawerTeacherHome(
+          context,
+          toggleLanguageView,
+          isHidden,
+          screenHomeResponse,
+          screenProfileResponse,
+          screenProfileTeacherResponse,
+          otpCodeController,
+          passwordController,
+          versionApp: versionApp,
+          iniGetThemeMode: iniGetThemeMode,
+          intThemeMode: intThemeMode,
+        ),
+      )
+      :
       Drawer(
         child: drawerStudentHome(
           context,
@@ -90,6 +109,8 @@ buildContentHomeScreen(
                 icon: FaIcon(FontAwesomeIcons.bars,
                     color: Theme.of(context).iconTheme.color, size: 20),
                 onPressed: () {
+                  print("ชื่ออาจารย์ =" "${screenProfileTeacherResponse?.body?.profileGeneralTH?.name}");
+                  print("นามสกุลอาจารย์ =" "${screenProfileTeacherResponse?.body?.profileGeneralTH?.lastname}");
                   Scaffold.of(context).openDrawer();
                 },
                 tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
