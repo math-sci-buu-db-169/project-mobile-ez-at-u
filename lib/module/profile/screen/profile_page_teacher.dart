@@ -184,12 +184,6 @@ class _ProfilePageTeacherState extends State<ProfilePageTeacher> with ProgressDi
               children: [
                 Column(
                   children: [
-// MaterialButton(
-//     color: Colors.blue,
-//     child: Text('Pick image'),
-//     onPressed: (){
-//       pickImage();
-// }),
                     Container(
                         height: height * 0.3,
                         width: width,
@@ -198,10 +192,6 @@ class _ProfilePageTeacherState extends State<ProfilePageTeacher> with ProgressDi
                             == "" ||
                             apiProfileTeacherScreenResponse?.body?.profileGeneralTH?.img == null)
                             ?
-// Icon(
-//         Icons.account_circle,
-//         size: 100,
-//       )
                         Container(
                           height: 150,
                           width: 150,

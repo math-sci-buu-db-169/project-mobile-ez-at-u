@@ -132,6 +132,7 @@ buildActivityNameListByTeacherBody(
         style: TextStyle(
           color: appBarforegroundColor,
           fontSize: sizeTitle24,
+          fontWeight: FontWeight.w200
         ),
       ),
     ),
@@ -169,20 +170,21 @@ class ActivityNameCard extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 8.0),
           child: Card(
             shape: RoundedRectangleBorder(
-                side: BorderSide(color: Theme.of(context).splashColor), 
-                borderRadius: BorderRadius.circular(10)
+                side: BorderSide(color: Theme.of(context).splashColor),
+                // borderRadius: BorderRadius.circular(30)
             ),
             elevation: 5,
             child: Container(
                 width: MediaQuery.of(context).size.width * 0.9,
+                // height: MediaQuery.of(context).size.height * 0.1,
                 decoration: BoxDecoration(
                   border: Border(
                     left: BorderSide(color: Theme.of(context).splashColor,width: 10)
                   )
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(10,10,5,10),
-                  child: Text(data?.activitynameresponse,style: TextStyle(color: Theme.of(context).appBarTheme.foregroundColor),),
+                  padding: const EdgeInsets.fromLTRB(20,20,20,20),
+                  child: Text(data?.activitynameresponse,style: TextStyle(color: Theme.of(context).appBarTheme.foregroundColor,fontSize: 18,fontWeight: FontWeight.bold),),
                 )
             )
 
