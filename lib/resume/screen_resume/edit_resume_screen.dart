@@ -12,6 +12,7 @@ import '../../../../../utils/shared_preferences.dart';
 import '../../customs/text_file/build_textformfiled_unlimit_custom.dart';
 import '../../module/login/screen/login_screen/login_screen.dart';
 import '../bloc_resume/resume_bloc.dart';
+import '../components/components_resume.dart';
 import '../examples/content_design_resume.dart';
 class EditResumeScreen extends StatelessWidget {
   final PreViewResumeResponse isResumeData;

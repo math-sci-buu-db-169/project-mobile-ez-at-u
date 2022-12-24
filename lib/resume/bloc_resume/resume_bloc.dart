@@ -12,6 +12,7 @@ import '../../check_token/token_bloc.dart';
 import '../../main_route/main_route_bloc_model/check_token_expired_response.dart';
 import '../../main_route/main_route_bloc_model/refresh_token_response.dart';
 import '../../utils/shared_preferences.dart';
+import '../components/components_resume.dart';
 import '../examples/content_design_resume.dart';
 import '../model/response/api_edit_resume_response_head.dart';
 import '../model/response/get_address_resume_response.dart';

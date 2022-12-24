@@ -10,6 +10,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../customs/color/color_const.dart';
+import '../../customs/color/pdf_color_const.dart';
 import '../../customs/dialog/dialog_widget.dart';
 import '../../customs/image_base_64.dart';
 import '../../customs/message/text_button.dart';
@@ -21,6 +22,7 @@ import '../../customs/text_file/build_textformfiled_unlimit_custom.dart';
 import '../bloc_resume/resume_bloc.dart';
 import '../../module/login/screen/login_screen/login_screen.dart';
 import '../../utils/shared_preferences.dart';
+import '../components/components_resume.dart';
 import '../model/response/pre_view_resume_response.dart';
 import '../screen_resume/edit_about_me_resume_screen.dart';
 import '../screen_resume/edit_address_resume_screen.dart';
@@ -31,7 +33,7 @@ import '../screen_resume/edit_position_resume_screen.dart';
 import '../screen_resume/edit_skill_language_resume_screen.dart';
 import '../screen_resume/edit_skill_resume_screen.dart';
 import '../screen_resume/edit_user_info_resume_screen.dart';
-import 'content_design_resume.dart';
+import 'content_design_resume_color.dart';
 
 class ContentDesignResumeEditScreen extends StatelessWidget {
   const ContentDesignResumeEditScreen({Key? key}) : super(key: key);
@@ -616,7 +618,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                   "ตำแหน่งที่สนใจ",
                               isPreViewResumeEditData: '',
                               ontap: () {}),
-                          buildPositionCard(
+                          buildCardPositionEditResumeScreen(
                               context: context,
                               type: '',
                               editInFormations: isPreViewResumeResponse
@@ -1393,7 +1395,7 @@ left: 15,
               ),
             ),
           )),
-          floatingActionButton: floatingSetThemePDF(
+          floatingActionButton: floatingGoToSetThemePDF(
             context: context,
             setState,
             "Set Theme PDF",
@@ -1404,7 +1406,7 @@ left: 15,
   }
 }
 
-floatingSetThemePDF(
+floatingGoToSetThemePDF(
   setState,
   String pdf, {
   required BuildContext context,
@@ -1417,7 +1419,7 @@ floatingSetThemePDF(
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => const ContentDesignResumeScreen()));
+              builder: (context) => const ContentDesignResumeScreenColor()));
     },
     icon: Icon(
       FontAwesomeIcons.barsStaggered,
@@ -1429,512 +1431,5 @@ floatingSetThemePDF(
           fontSize: sizeTextSmaller14,
           color: Theme.of(context).iconTheme.color,
         )),
-  );
-}
-
-buildTitleEditDataResume(
-    {required String isPreViewResumeTitle,
-    required BuildContext context,
-    required String isPreViewResumeEditData,
-    required Null Function() ontap}) {
-  return Padding(
-    padding: const EdgeInsets.only(left: 5, right: 10),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Padding(
-          padding: EdgeInsets.all(5.0),
-          child: Text(isPreViewResumeTitle,
-              style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: Theme.of(context).appBarTheme.foregroundColor)),
-        ),
-        Row(
-          children: [
-            InkWell(
-              onTap: ontap,
-              child: Text(
-                isPreViewResumeEditData,
-                style: TextStyle(
-                    decoration: TextDecoration.underline,
-                    decorationThickness: 2,
-                    fontSize: 10,
-                    fontWeight: FontWeight.w500,
-                    color: Theme.of(context).appBarTheme.foregroundColor),
-              ),
-            ),
-          ],
-        ),
-      ],
-    ),
-  );
-}
-
-buildPositionCard(
-    {required BuildContext context,
-    required String editInFormations,
-    required String title,
-    required String type,
-    required positionData,
-    required Color appBarForegroundColor,
-    required Function() returnResumeEdit,
-      required bool boolClick,
-      required Null Function() onTap}) {
-
-  int length = positionData?.length ?? 0;
-  return Column(
-    children: [
-      Column(
-          children: List.generate(
-              (length) > 3
-                  ? (boolClick == true ? 3 : length)
-                  : (length), (index) {
-        return Stack(
-          children: [
-            buildDetailResumeCustomNotIconsReadOnly(
-                context: context,
-                detail: positionData[index].position ?? "",
-                appBarForeGroundColor: appBarForegroundColor),
-            Positioned(
-              // height: 0,
-              // width: 0,
-              // left: 0,
-              right: MediaQuery.of(context).padding.right + 15,
-              bottom: MediaQuery.of(context).padding.bottom + 15,
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return EditPositionsResumeScreen(
-                        id: positionData?[index].addressID ?? 0);
-                  })).then(
-                    (value) => returnResumeEdit,
-                  );
-                },
-                child: Text(
-                  editInFormations ?? "Edit Information",
-                  style: TextStyle(
-                      decoration: TextDecoration.underline,
-                      decorationThickness: 2,
-                      fontSize: 10,
-                      fontWeight: FontWeight.w500,
-                      color: Theme.of(context).appBarTheme.foregroundColor),
-                ),
-              ),
-            )
-          ],
-        );
-      })),
-      if((length) > 3)
-      InkWell(
-        onTap: onTap,
-        child: Text(
-          boolClick ==true?
-          // editInFormations ??
-              "ดูเพิ่มเติม":
-              "แสดงบางส่วน",
-          style: TextStyle(
-              decoration: TextDecoration.underline,
-              decorationThickness: 2,
-              fontSize: 10,
-              fontWeight: FontWeight.w500,
-              color: Theme.of(context).appBarTheme.foregroundColor),
-        ),
-      ),
-      GestureDetector(
-        onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const EditPositionsResumeScreen(id: 0);
-            //
-          })).then(
-            (value) => returnResumeEdit,
-          );
-        },
-        child: Container(
-          padding: EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(50),
-          ),
-          child: DottedBorder(
-            color: (Theme.of(context).iconTheme.color ?? Colors.grey)
-                .withOpacity(0.5),
-            borderType: BorderType.RRect,
-            radius: Radius.circular(12),
-            padding: EdgeInsets.all(2),
-            child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(12)),
-              child: Container(
-                //inner container
-
-                height: 20, //height of inner container
-                width: MediaQuery.of(context).size.width,
-
-                child: Center(
-                  child: Icon(
-                    FontAwesomeIcons.plus,
-                    color: (Theme.of(context).iconTheme.color ?? Colors.grey)
-                        .withOpacity(0.5),
-                    size: 20.0,
-                  ),
-                ), //background color of inner container
-              ),
-            ),
-          ),
-        ),
-      ),
-    ],
-  );
-}
-
-buildExperienceCard(
-    {required BuildContext context,
-    required String editInFormations,
-    required String title,
-    required String type,
-    required experienceData,
-    required Color appBarForegroundColor,
-    required Function() returnResumeEdit,
-      required bool boolClick,
-      required Null Function() onTap}) {
-  int length = experienceData?.length ?? 0;
-  return Column(
-    children: [
-      Column(
-          children: List.generate(
-              (length) > 3
-                  ? (boolClick == true ? 3 : length)
-                  : (length), (index) {
-        return Stack(
-          children: [
-            buildDetailResumeCustomNotIconsReadOnly(
-                context: context,
-                detail:
-                    "     ${experienceData[index].startdate ?? ""} - ${experienceData[index].startdate ?? ""} "
-                    "${experienceData[index].position ?? ""} \n"
-                    "${experienceData[index].detail ?? ""}",
-                appBarForeGroundColor: appBarForegroundColor),
-            Positioned(
-              // height: 0,
-              // width: 0,
-              // left: 0,
-              right: MediaQuery.of(context).padding.right + 15,
-              bottom: MediaQuery.of(context).padding.bottom + 15,
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return EditExperienceResumeScreen(
-                        id: experienceData?[index].addressID ?? 0);
-                  })).then(
-                    (value) => returnResumeEdit,
-                  );
-                },
-                child: Text(
-                  editInFormations ?? "Edit Information",
-                  style: TextStyle(
-                      decoration: TextDecoration.underline,
-                      decorationThickness: 2,
-                      fontSize: 10,
-                      fontWeight: FontWeight.w500,
-                      color: Theme.of(context).appBarTheme.foregroundColor),
-                ),
-              ),
-            )
-          ],
-        );
-      })),
-      if((length) > 3)
-        InkWell(
-          onTap: onTap,
-          child: Text(
-            boolClick ==true?
-            // editInFormations ??
-            "ดูเพิ่มเติม":
-            "แสดงบางส่วน",
-            style: TextStyle(
-                decoration: TextDecoration.underline,
-                decorationThickness: 2,
-                fontSize: 10,
-                fontWeight: FontWeight.w500,
-                color: Theme.of(context).appBarTheme.foregroundColor),
-          ),
-        ),
-      GestureDetector(
-        onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const EditExperienceResumeScreen(id: 0);
-          })).then(
-            (value) => returnResumeEdit,
-          );
-        },
-        child: Container(
-          padding: EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(50),
-          ),
-          child: DottedBorder(
-            color: (Theme.of(context).iconTheme.color ?? Colors.grey)
-                .withOpacity(0.5),
-            borderType: BorderType.RRect,
-            radius: Radius.circular(12),
-            padding: EdgeInsets.all(2),
-            child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(12)),
-              child: Container(
-                //inner container
-
-                height: 20, //height of inner container
-                width: MediaQuery.of(context).size.width,
-
-                child: Center(
-                  child: Icon(
-                    FontAwesomeIcons.plus,
-                    color: (Theme.of(context).iconTheme.color ?? Colors.grey)
-                        .withOpacity(0.5),
-                    size: 20.0,
-                  ),
-                ), //background color of inner container
-              ),
-            ),
-          ),
-        ),
-      ),
-    ],
-  );
-}
-
-buildCertificateCard(
-    {required BuildContext context,
-    required String editInFormations,
-    required String title,
-    required String type,
-    required certificateData,
-    required Color appBarForegroundColor,
-    required Function() returnResumeEdit,
-      required bool boolClick,
-      required Null Function() onTap}) {
-  int length = certificateData?.length ?? 0;
-  return Column(
-    children: [
-      Column(
-          children: List.generate(
-              (length) > 3
-                  ? (boolClick == true ? 3 : length)
-                  : (length), (index) {
-        return Stack(
-          children: [
-            buildDetailResumeCustomNotIconsReadOnly(
-                context: context,
-                detail: "  ${certificateData?[index].title ?? ""} "
-                    "\n"
-                    "${certificateData?[index].description ?? ""}",
-                appBarForeGroundColor: appBarForegroundColor),
-            Positioned(
-              // height: 0,
-              // width: 0,
-              // left: 0,
-              right: MediaQuery.of(context).padding.right + 15,
-              bottom: MediaQuery.of(context).padding.bottom + 15,
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return EditCertificateResumeScreen(
-                        id: (certificateData?[index].addressID ?? 0).toInt());
-                  })).then(
-                    (value) => returnResumeEdit,
-                  );
-                },
-                child: Text(
-                  editInFormations ?? "Edit Information",
-                  style: TextStyle(
-                      decoration: TextDecoration.underline,
-                      decorationThickness: 2,
-                      fontSize: 10,
-                      fontWeight: FontWeight.w500,
-                      color: Theme.of(context).appBarTheme.foregroundColor),
-                ),
-              ),
-            )
-          ],
-        );
-      })),
-      if((length) > 3)
-        InkWell(
-          onTap: onTap,
-          child: Text(
-            boolClick ==true?
-            // editInFormations ??
-            "ดูเพิ่มเติม":
-            "แสดงบางส่วน",
-            style: TextStyle(
-                decoration: TextDecoration.underline,
-                decorationThickness: 2,
-                fontSize: 10,
-                fontWeight: FontWeight.w500,
-                color: Theme.of(context).appBarTheme.foregroundColor),
-          ),
-        ),
-      GestureDetector(
-        onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const EditCertificateResumeScreen(id: 0);
-          })).then(
-            (value) => returnResumeEdit,
-          );
-        },
-        child: Container(
-          padding: EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(50),
-          ),
-          child: DottedBorder(
-            color: (Theme.of(context).iconTheme.color ?? Colors.grey)
-                .withOpacity(0.5),
-            borderType: BorderType.RRect,
-            radius: Radius.circular(12),
-            padding: EdgeInsets.all(2),
-            child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(12)),
-              child: Container(
-                //inner container
-
-                height: 20, //height of inner container
-                width: MediaQuery.of(context).size.width,
-
-                child: Center(
-                  child: Icon(
-                    FontAwesomeIcons.plus,
-                    color: (Theme.of(context).iconTheme.color ?? Colors.grey)
-                        .withOpacity(0.5),
-                    size: 20.0,
-                  ),
-                ), //background color of inner container
-              ),
-            ),
-          ),
-        ),
-      ),
-    ],
-  );
-}
-
-buildEducationCard(
-    {required BuildContext context,
-    required String editInFormations,
-    required String title,
-    required String type,
-    required educationData,
-    required Color appBarForegroundColor,
-    required Function() returnResumeEdit,
-      required bool boolClick,
-      required Null Function() onTap}) {
-  int length = educationData?.length ?? 0;
-  return Column(
-    children: [
-      Padding(
-        padding: EdgeInsets.all(5),
-        child: Text(title),
-      ),
-        Column(
-        children: List.generate(
-        (length) > 3
-        ? (boolClick == true ? 3 : length)
-            : (length), (index) {
-        return Stack(
-          children: [
-            buildDetailResumeCustomNotIconsReadOnly(
-                context: context,
-                detail:
-                    "     ${educationData?[index].startdate ?? ""} - ${educationData?[index].startdate ?? ""} "
-                    "${educationData?[index].placeofstudy ?? ""} \n"
-                    "${educationData?[index].detail ?? ""}",
-                appBarForeGroundColor: appBarForegroundColor),
-            Positioned(
-              // height: 0,
-              // width: 0,
-              // left: 0,
-              right: MediaQuery.of(context).padding.right + 15,
-              bottom: MediaQuery.of(context).padding.bottom + 15,
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return EditEducationResumeScreen(
-                      id: educationData?[index].addressID ?? 0,
-                      type: educationData?[index].type ?? 'HSC',
-                    );
-                  })).then(
-                    (value) => returnResumeEdit,
-                  );
-                },
-                child: Text(
-                  editInFormations ?? "Edit Information",
-                  style: TextStyle(
-                      decoration: TextDecoration.underline,
-                      decorationThickness: 2,
-                      fontSize: 10,
-                      fontWeight: FontWeight.w500,
-                      color: Theme.of(context).appBarTheme.foregroundColor),
-                ),
-              ),
-            )
-          ],
-        );
-      })),
-      if((length) > 3)
-        InkWell(
-          onTap: onTap,
-          child: Text(
-            boolClick ==true?
-            // editInFormations ??
-            "ดูเพิ่มเติม":
-            "แสดงบางส่วน",
-            style: TextStyle(
-                decoration: TextDecoration.underline,
-                decorationThickness: 2,
-                fontSize: 10,
-                fontWeight: FontWeight.w500,
-                color: Theme.of(context).appBarTheme.foregroundColor),
-          ),
-        ),
-      GestureDetector(
-        onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return EditEducationResumeScreen(id: 0, type: type);
-          })).then(
-            (value) => returnResumeEdit,
-          );
-        },
-        child: Container(
-          padding: EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(50),
-          ),
-          child: DottedBorder(
-            color: (Theme.of(context).iconTheme.color ?? Colors.grey)
-                .withOpacity(0.5),
-            borderType: BorderType.RRect,
-            radius: Radius.circular(12),
-            padding: EdgeInsets.all(2),
-            child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(12)),
-              child: Container(
-                //inner container
-
-                height: 20, //height of inner container
-                width: MediaQuery.of(context).size.width,
-
-                child: Center(
-                  child: Icon(
-                    FontAwesomeIcons.plus,
-                    color: (Theme.of(context).iconTheme.color ?? Colors.grey)
-                        .withOpacity(0.5),
-                    size: 20.0,
-                  ),
-                ), //background color of inner container
-              ),
-            ),
-          ),
-        ),
-      ),
-    ],
   );
 }
