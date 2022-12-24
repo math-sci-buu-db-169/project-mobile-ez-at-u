@@ -42,203 +42,210 @@ studentDetailBody(BuildContext context, ScreenMoreBoardStudentDetailResponse? sc
           ),
         ),
         body: SafeArea(
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 0, left: 0, right: 0, bottom: 20),
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 10.0,
-                  ),
-                  Stack(children: [
-                    Container(
-                      margin: const EdgeInsets.only(left: 10, right: 10, top: 70),
-                      // padding: EdgeInsets.fromLTRB(5, 5, 5, 10),
-                      decoration:  BoxDecoration(
-                        color: Theme.of(context).bottomAppBarColor.withOpacity(0.05),
-                        borderRadius:const BorderRadius.only(
-                          bottomRight: Radius.circular(40),
-                          topLeft: Radius.circular(40),
-                        ),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.only(bottom: 40),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              height: 35,
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            _buildListStudentDetail(
-                                context:context,
-                                title: screenMoreBoardStudentDetailResponse?.body?.screeninfo?.textname ?? boardDetailNiSitTextName,
-                                value: '$sName  $sLastName'),
-                            _buildListStudentDetail(
-                                context:context,
-                                title: screenMoreBoardStudentDetailResponse?.body?.screeninfo?.textnickname ??
-                                    boardDetailNiSitTextNickName,
-                                value: screenMoreBoardStudentDetailResponse?.body?.data?.nickname ?? '-'),
-                            _buildListStudentDetail(
-                                context:context,
-                                title: screenMoreBoardStudentDetailResponse?.body?.screeninfo?.textgen ?? boardDetailNiSitTextGen,
-                                value: screenMoreBoardStudentDetailResponse?.body?.data?.gen ?? '-'),
-                            _buildListStudentDetail(
-                                context:context,
-                                title: screenMoreBoardStudentDetailResponse?.body?.screeninfo?.textstudentcode ??
-                                    boardDetailNiSitTextStudentCode,
-                                value: screenMoreBoardStudentDetailResponse?.body?.data?.studentcode ?? '-'),
 
-                            _buildListStudentDetail(
-                                context:context,
-                                title: screenMoreBoardStudentDetailResponse?.body?.screeninfo?.textcareer ?? boardDetailNiSitTextCareer,
-                                value: screenMoreBoardStudentDetailResponse?.body?.data?.attention ?? '-'),
-                            _buildListStudentDetail(
-                                context:context,
-                                title: screenMoreBoardStudentDetailResponse?.body?.screeninfo?.textworkstatus ??
-                                    boardDetailNiSitTextWorkStatus,
-                                value: screenMoreBoardStudentDetailResponse?.body?.data?.status ?? '-'),
-                            _buildListStudentDetail(
-                                context:context,
-                                title:
-                                screenMoreBoardStudentDetailResponse?.body?.screeninfo?.textcompany ?? boardDetailNiSitTextCompany,
-                                value: screenMoreBoardStudentDetailResponse?.body?.data?.usercompany ?? '-'),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 10.0, bottom: 6.0),
-                              child: Center(
-                                child: Text(
-                                  screenMoreBoardStudentDetailResponse?.body?.screeninfo?.textadvisor ??
-                                      boardDetailNiSitTextAdvisor,
-                                  style:  TextStyle(fontSize: 16, fontWeight: FontWeight.bold,color: Theme.of(context).appBarTheme.foregroundColor,),
-                                ),
-                              ),
-                            ),
-                            _buildAdvisor(
-                                context:context,screenMoreBoardStudentDetailResponse: screenMoreBoardStudentDetailResponse),
-
-                            Padding(
-                              padding: const EdgeInsets.only(top: 10.0, bottom: 6.0),
-                              child: Center(
-                                child: Text(
-                                  screenMoreBoardStudentDetailResponse?.body?.screeninfo?.textcontact ??
-                                      boardDetailNiSitTextConfirmAct,
-                                  style:  TextStyle(fontSize: 16, fontWeight: FontWeight.bold,color: Theme.of(context).appBarTheme.foregroundColor,),
-                                ),
-                              ),
-                            ),
-                            _buildListContactUser(
-                              context:context,
-                              contactUser: screenMoreBoardStudentDetailResponse?.body?.data?.phone ?? '-',
-                              iconSocial: FontAwesomeIcons.phone,
-                              colorOne: const Color(0xff4f4f4f),
-                              colorTwo: const Color(0xff000000),
-                            ),
-                            _buildListContactUser(
-                              context:context,
-                              contactUser: screenMoreBoardStudentDetailResponse?.body?.data?.line ?? '-',
-                              iconSocial: FontAwesomeIcons.line,
-                              colorOne: const Color(0xff00a80a),
-                              colorTwo: const Color(0xff00a80a),
-                            ),
-                            _buildListContactUser(
-                              context:context,
-                              contactUser: screenMoreBoardStudentDetailResponse?.body?.data?.facebook ?? '-',
-                              iconSocial: FontAwesomeIcons.facebook,
-                              colorOne: const Color(0xff0647fd),
-                              colorTwo: const Color(0xff0647fd),
-                            ),
-                            _buildListContactUser(
-                                context:context,
-                                contactUser: screenMoreBoardStudentDetailResponse?.body?.data?.instagram ?? '-',
-                                iconSocial: FontAwesomeIcons.instagram,
-                                colorOne: const Color(0xFFE1306C),
-                                colorTwo: const Color(0xFFE1306C)),
-                            _buildListContactUser(
-                              context:context,
-                              contactUser: screenMoreBoardStudentDetailResponse?.body?.data?.twitter ?? '-',
-                              iconSocial: FontAwesomeIcons.twitter,
-                              colorOne: const Color(0xff1DA1F2),
-                              colorTwo: const Color(0xff1DA1F2),
-                            ),
-                            _buildListContactUser(
-                              context:context,
-                              contactUser: screenMoreBoardStudentDetailResponse?.body?.data?.youtube ?? '-',
-                              iconSocial: FontAwesomeIcons.youtube,
-                              colorOne: const Color(0xffff0000),
-                              colorTwo: const Color(0xffff0000),
-                            ),
-                          ],
-                        ),
-                      ),
+          child: Container(
+            height: double.infinity,
+            width: double.infinity,
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 0, left: 0, right: 0, bottom: 20),
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 10.0,
                     ),
-                    Positioned(
-                      left: 50,
-                      right: 50,
-                      top: 0,
-                      child: Center(
+                    Stack(children: [
+                      Container(
+                        margin: const EdgeInsets.only(left: 10, right: 10, top: 70),
+                        // padding: EdgeInsets.fromLTRB(5, 5, 5, 10),
+                        decoration:  BoxDecoration(
+                          color: Theme.of(context).bottomAppBarColor.withOpacity(0.1),
+                          borderRadius:const BorderRadius.only(
+                            topRight: Radius.circular(20),
+                            topLeft: Radius.circular(20),
+                            bottomRight: Radius.circular(20),
+                            bottomLeft: Radius.circular(20),
+                          ),
+                        ),
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.only(bottom: 40),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                height: 35,
+                              ),
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              _buildListStudentDetail(
+                                  context:context,
+                                  title: screenMoreBoardStudentDetailResponse?.body?.screeninfo?.textname ?? boardDetailNiSitTextName,
+                                  value: '$sName  $sLastName'),
+                              _buildListStudentDetail(
+                                  context:context,
+                                  title: screenMoreBoardStudentDetailResponse?.body?.screeninfo?.textnickname ??
+                                      boardDetailNiSitTextNickName,
+                                  value: screenMoreBoardStudentDetailResponse?.body?.data?.nickname ?? '-'),
+                              _buildListStudentDetail(
+                                  context:context,
+                                  title: screenMoreBoardStudentDetailResponse?.body?.screeninfo?.textgen ?? boardDetailNiSitTextGen,
+                                  value: screenMoreBoardStudentDetailResponse?.body?.data?.gen ?? '-'),
+                              _buildListStudentDetail(
+                                  context:context,
+                                  title: screenMoreBoardStudentDetailResponse?.body?.screeninfo?.textstudentcode ??
+                                      boardDetailNiSitTextStudentCode,
+                                  value: screenMoreBoardStudentDetailResponse?.body?.data?.studentcode ?? '-'),
 
-                          child: (screenMoreBoardStudentDetailResponse?.body?.data?.img == "" ||
-                              screenMoreBoardStudentDetailResponse?.body?.data?.img == null)
-                              ? const CircleAvatar(
-                            radius: 50.0,
-                            backgroundImage: AssetImage(
-                              'assets/logo/profile.png',
-                            ),
-                          )
-                          //--//widget.image
-                              : Container(
-                              height: 100,
-                              margin: const EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                  image: MemoryImage(base64Decode(base64.normalize(
-                                      screenMoreBoardStudentDetailResponse?.body?.data?.img ??
-                                          base64.normalize(phImg)))),
-                                  fit: BoxFit.cover,
-                                  colorFilter: ColorFilter.mode(Colors.grey.withOpacity(0.5), BlendMode.dstATop),
+                              _buildListStudentDetail(
+                                  context:context,
+                                  title: screenMoreBoardStudentDetailResponse?.body?.screeninfo?.textcareer ?? boardDetailNiSitTextCareer,
+                                  value: screenMoreBoardStudentDetailResponse?.body?.data?.attention ?? '-'),
+                              _buildListStudentDetail(
+                                  context:context,
+                                  title: screenMoreBoardStudentDetailResponse?.body?.screeninfo?.textworkstatus ??
+                                      boardDetailNiSitTextWorkStatus,
+                                  value: screenMoreBoardStudentDetailResponse?.body?.data?.status ?? '-'),
+                              _buildListStudentDetail(
+                                  context:context,
+                                  title:
+                                  screenMoreBoardStudentDetailResponse?.body?.screeninfo?.textcompany ?? boardDetailNiSitTextCompany,
+                                  value: screenMoreBoardStudentDetailResponse?.body?.data?.usercompany ?? '-'),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10.0, bottom: 6.0),
+                                child: Center(
+                                  child: Text(
+                                    screenMoreBoardStudentDetailResponse?.body?.screeninfo?.textadvisor ??
+                                        boardDetailNiSitTextAdvisor,
+                                    style:  TextStyle(fontSize: 16, fontWeight: FontWeight.bold,color: Theme.of(context).appBarTheme.foregroundColor,),
+                                  ),
                                 ),
                               ),
-                              child: Container(
+                              _buildAdvisor(
+                                  context:context,screenMoreBoardStudentDetailResponse: screenMoreBoardStudentDetailResponse),
+
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10.0, bottom: 6.0),
+                                child: Center(
+                                  child: Text(
+                                    screenMoreBoardStudentDetailResponse?.body?.screeninfo?.textcontact ??
+                                        boardDetailNiSitTextConfirmAct,
+                                    style:  TextStyle(fontSize: 16, fontWeight: FontWeight.bold,color: Theme.of(context).appBarTheme.foregroundColor,),
+                                  ),
+                                ),
+                              ),
+                              _buildListContactUser(
+                                context:context,
+                                contactUser: screenMoreBoardStudentDetailResponse?.body?.data?.phone ?? '-',
+                                iconSocial: FontAwesomeIcons.phone,
+                                colorOne: const Color(0xff4f4f4f),
+                                colorTwo: const Color(0xff000000),
+                              ),
+                              _buildListContactUser(
+                                context:context,
+                                contactUser: screenMoreBoardStudentDetailResponse?.body?.data?.line ?? '-',
+                                iconSocial: FontAwesomeIcons.line,
+                                colorOne: const Color(0xff00a80a),
+                                colorTwo: const Color(0xff00a80a),
+                              ),
+                              _buildListContactUser(
+                                context:context,
+                                contactUser: screenMoreBoardStudentDetailResponse?.body?.data?.facebook ?? '-',
+                                iconSocial: FontAwesomeIcons.facebook,
+                                colorOne: const Color(0xff0647fd),
+                                colorTwo: const Color(0xff0647fd),
+                              ),
+                              _buildListContactUser(
+                                  context:context,
+                                  contactUser: screenMoreBoardStudentDetailResponse?.body?.data?.instagram ?? '-',
+                                  iconSocial: FontAwesomeIcons.instagram,
+                                  colorOne: const Color(0xFFE1306C),
+                                  colorTwo: const Color(0xFFE1306C)),
+                              _buildListContactUser(
+                                context:context,
+                                contactUser: screenMoreBoardStudentDetailResponse?.body?.data?.twitter ?? '-',
+                                iconSocial: FontAwesomeIcons.twitter,
+                                colorOne: const Color(0xff1DA1F2),
+                                colorTwo: const Color(0xff1DA1F2),
+                              ),
+                              _buildListContactUser(
+                                context:context,
+                                contactUser: screenMoreBoardStudentDetailResponse?.body?.data?.youtube ?? '-',
+                                iconSocial: FontAwesomeIcons.youtube,
+                                colorOne: const Color(0xffff0000),
+                                colorTwo: const Color(0xffff0000),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        left: 50,
+                        right: 50,
+                        top: 0,
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+
+                            child: (screenMoreBoardStudentDetailResponse?.body?.data?.img == "" ||
+                                screenMoreBoardStudentDetailResponse?.body?.data?.img == null)
+                                ? const CircleAvatar(
+                              radius: 50.0,
+                              backgroundImage: AssetImage(
+                                'assets/logo/profile.png',
+                              ),
+                            )
+                            //--//widget.image
+                                : Container(
+                                height: 100,
+                                margin: const EdgeInsets.all(10),
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   image: DecorationImage(
                                     image: MemoryImage(base64Decode(base64.normalize(
                                         screenMoreBoardStudentDetailResponse?.body?.data?.img ??
                                             base64.normalize(phImg)))),
+                                    fit: BoxFit.cover,
+                                    colorFilter: ColorFilter.mode(Colors.grey.withOpacity(0.5), BlendMode.dstATop),
                                   ),
                                 ),
-                              )),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                      image: MemoryImage(base64Decode(base64.normalize(
+                                          screenMoreBoardStudentDetailResponse?.body?.data?.img ??
+                                              base64.normalize(phImg)))),
+                                    ),
+                                  ),
+                                )),
 
-                          // child: CircleAvatar(
-                          //   radius: 50.0,
-                          //   backgroundImage: NetworkImage(
-                          //       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhOaaBAY_yOcJXbL4jW0I_Y5sePbzagqN2aA&usqp=CAU"),
+                            // child: CircleAvatar(
+                            //   radius: 50.0,
+                            //   backgroundImage: NetworkImage(
+                            //       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhOaaBAY_yOcJXbL4jW0I_Y5sePbzagqN2aA&usqp=CAU"),
+                            // ),
+                          ),
+
+                          // child: Padding(
+                          //   padding: const EdgeInsets.all(8.0),
+                          //   child: CircleAvatar(
+                          //     radius: 50.0,
+                          //     backgroundImage: MemoryImage(base64Decode(base64.normalize(
+                          //         screenMoreBoardStudentDetailResponse?.body?.data?.img ?? base64.normalize(phImg)))),
+                          //   ),
                           // ),
                         ),
-
-                        // child: Padding(
-                        //   padding: const EdgeInsets.all(8.0),
-                        //   child: CircleAvatar(
-                        //     radius: 50.0,
-                        //     backgroundImage: MemoryImage(base64Decode(base64.normalize(
-                        //         screenMoreBoardStudentDetailResponse?.body?.data?.img ?? base64.normalize(phImg)))),
-                        //   ),
-                        // ),
                       ),
+                    ]),
+                    const SizedBox(
+                      height: 20,
                     ),
-                  ]),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
+          )
         ),
       ));
 }

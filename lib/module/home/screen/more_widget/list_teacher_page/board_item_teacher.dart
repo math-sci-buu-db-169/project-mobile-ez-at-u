@@ -16,10 +16,8 @@ boardItemTeacherLeft({
     onTap: onTap,
     child: Card(
       color:Theme.of(context).primaryColor,
-      shape:  const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topRight: Radius.circular(30),
-          bottomLeft: Radius.circular(30),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(10)
         ),
       ),
       child: Padding(
@@ -109,10 +107,8 @@ boardItemTeacherRight({
     child: Card(
       color:Theme.of(context).primaryColor,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topRight: Radius.circular(30),
-          bottomLeft: Radius.circular(30),
-        ),
+        borderRadius: BorderRadius.all(Radius.circular(10)
+    ),
       ),
       child: Padding(
         padding: const EdgeInsets.only(top: 3.0, bottom: 3.0, right: 3.0, left: 10.0),
@@ -242,9 +238,7 @@ boardItemStaff({
     child: Card(
       color:Theme.of(context).primaryColor,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topRight: Radius.circular(30),
-          bottomLeft: Radius.circular(30),
+        borderRadius: BorderRadius.all(Radius.circular(10)
         ),
       ),
       child: Padding(

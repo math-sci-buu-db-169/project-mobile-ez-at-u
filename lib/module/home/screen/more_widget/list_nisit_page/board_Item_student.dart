@@ -15,18 +15,40 @@ boardItemStudent({
     onTap: onTap,
     child: Padding(
       padding: const EdgeInsets.only(bottom: 5),
-      child: Card(
-        elevation: 8,
-        shadowColor: Theme.of(context).appBarTheme.foregroundColor,
-        color:Theme.of(context).appBarTheme.backgroundColor,
-        shape:  const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            topRight: Radius.circular(30),
-            bottomLeft: Radius.circular(30),
+      child: Container(
+        margin: EdgeInsets.all(5),
+        width:double.infinity,
 
+        decoration:  BoxDecoration(
+          color:HexColor("${data?.colorgen}"),
+          borderRadius:  BorderRadius.only(
+            topRight: Radius.circular(10),
+            // bottomLeft: Radius.circular(40),
           ),
-        ),
+          gradient: LinearGradient(stops: [
+            0.02,
+            0.02,
+            1,
+          ], colors: [
+            HexColor("${data?.colorgen}"),
 
+            HexColor("${data?.colorgen}").withOpacity(0.1),
+
+
+            HexColor("${data?.colorgen}").withOpacity(0.1),
+          ], begin: Alignment.centerLeft, end: Alignment.centerRight),
+          // boxShadow:[
+          //   BoxShadow(
+          //     color: Colors.white.withOpacity(0.5), //color of shadow
+          //     spreadRadius:1, //spread radius
+          //     blurRadius: 2, // blur radius
+          //     offset: Offset(0, 2), // changes position of shadow
+          //     //first paramerter of offset is left-right
+          //     //second parameter is top to down
+          //   ),
+          //   //you can set more BoxShadow() here
+          // ],
+        ),
         child: Table(
           border: TableBorder.symmetric(outside: const BorderSide(width: 2, color: Colors.transparent)),
           columnWidths: const {0: FractionColumnWidth(0.3), 1: FractionColumnWidth(0.01), 2: FractionColumnWidth(0.69)},
@@ -80,17 +102,29 @@ boardItemStudentUser({
 }) {
   return GestureDetector(
     onTap: onTap,
+    child:  Container(
+      margin: EdgeInsets.all(5),
+      // height: 200,
+      width:double.infinity,
 
-    child:  Card(
-      elevation: 8,
-      shadowColor: Theme.of(context).appBarTheme.foregroundColor,
-      color:Theme.of(context).appBarTheme.backgroundColor,
-  shape: const RoundedRectangleBorder(
-  borderRadius: BorderRadius.only(
-  topLeft: Radius.circular(30),
-  bottomRight: Radius.circular(30),
-  ),
-  ),
+      decoration: BoxDecoration(
+        gradient:LinearGradient(
+            colors: [
+              HexColor("${dataUserStudent?.colorgen}"),
+              HexColor("${dataUserStudent?.colorgen}"),
+
+              HexColor('#F5F5F5'),
+              HexColor('#F5F5F5'),
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            stops: [0, 0.1, 0.9, 0.2]
+        ),
+
+        borderRadius: BorderRadius.circular(10),
+        //border corner radius
+
+      ),
       child: Table(
         border: TableBorder.symmetric(outside: const BorderSide(width: 2, color: Colors.transparent)),
         columnWidths: const {0: FractionColumnWidth(0.3), 1: FractionColumnWidth(0.01), 2: FractionColumnWidth(0.69)},
@@ -119,9 +153,9 @@ boardItemStudentUser({
                   ),
                   Center(
                       child: Text(
-                    "${dataUserStudent?.numgen}",
-                    style:  const TextStyle(color: Colors.black, fontSize: 30),
-                  )),
+                        "${dataUserStudent?.numgen}",
+                        style:  const TextStyle(color: Colors.black, fontSize: 30),
+                      )),
                 ]),
               ),
             ),
@@ -134,6 +168,58 @@ boardItemStudentUser({
         ],
       ),
     ),
+  //   child:  Card(
+  //     elevation: 8,
+  //     shadowColor: Theme.of(context).appBarTheme.foregroundColor,
+  //     color:Theme.of(context).appBarTheme.backgroundColor,
+  // shape: const RoundedRectangleBorder(
+  // borderRadius: BorderRadius.only(
+  // bottomRight: Radius.circular(15),
+  // ),
+  // ),
+  //     child: Table(
+  //       border: TableBorder.symmetric(outside: const BorderSide(width: 2, color: Colors.transparent)),
+  //       columnWidths: const {0: FractionColumnWidth(0.3), 1: FractionColumnWidth(0.01), 2: FractionColumnWidth(0.69)},
+  //       defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+  //       children: [
+  //         TableRow(children: [
+  //           Padding(
+  //             padding: const EdgeInsets.all(8.0),
+  //             child: CircleAvatar(
+  //               radius: 30,
+  //               child: Stack(children: [
+  //                 Container(
+  //                   decoration: BoxDecoration(
+  //                     shape: BoxShape.circle,
+  //                     gradient: LinearGradient(
+  //                       colors: [
+  //                         HexColor('#F5F5F5'),
+  //                         HexColor("${dataUserStudent?.colorgen}"),
+  //                       ],
+  //                       begin: Alignment.bottomLeft,
+  //                       end: Alignment.topRight,
+  //                       stops: const [0.2, 0.7],
+  //                       tileMode: TileMode.repeated,
+  //                     ),
+  //                   ),
+  //                 ),
+  //                 Center(
+  //                     child: Text(
+  //                   "${dataUserStudent?.numgen}",
+  //                   style:  const TextStyle(color: Colors.black, fontSize: 30),
+  //                 )),
+  //               ]),
+  //             ),
+  //           ),
+  //           const SizedBox(),
+  //           Text(
+  //             "${dataUserStudent?.namegen}",
+  //             style:  TextStyle(color: Theme.of(context).bottomAppBarColor ,fontSize: 18, fontWeight: FontWeight.bold),
+  //           ),
+  //         ])
+  //       ],
+  //     ),
+  //   ),
   );
 }
 
