@@ -6,11 +6,11 @@ PreViewResumeResponse preViewResumeResponseFromJson(String str) => PreViewResume
 String preViewResumeResponseToJson(PreViewResumeResponse data) => json.encode(data.toJson());
 class PreViewResumeResponse {
   PreViewResumeResponse({
-      Head? head, 
-      Body? body,}){
+    Head? head,
+    Body? body,}){
     _head = head;
     _body = body;
-}
+  }
 
   PreViewResumeResponse.fromJson(dynamic json) {
     _head = json['head'] != null ? Head.fromJson(json['head']) : null;
@@ -18,11 +18,11 @@ class PreViewResumeResponse {
   }
   Head? _head;
   Body? _body;
-PreViewResumeResponse copyWith({  Head? head,
-  Body? body,
-}) => PreViewResumeResponse(  head: head ?? _head,
-  body: body ?? _body,
-);
+  PreViewResumeResponse copyWith({  Head? head,
+    Body? body,
+  }) => PreViewResumeResponse(  head: head ?? _head,
+    body: body ?? _body,
+  );
   Head? get head => _head;
   Body? get body => _body;
 
@@ -46,30 +46,30 @@ Body bodyFromJson(String str) => Body.fromJson(json.decode(str));
 String bodyToJson(Body data) => json.encode(data.toJson());
 class Body {
   Body({
-      ScreenInfo? screenInfo, 
-      Data? data,}){
-    _screenInfo = screenInfo;
+    Screeninfo? screeninfo,
+    Data? data,}){
+    _screeninfo = screeninfo;
     _data = data;
-}
+  }
 
   Body.fromJson(dynamic json) {
-    _screenInfo = json['screenInfo'] != null ? ScreenInfo.fromJson(json['screenInfo']) : null;
+    _screeninfo = json['screeninfo'] != null ? Screeninfo.fromJson(json['screeninfo']) : null;
     _data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
-  ScreenInfo? _screenInfo;
+  Screeninfo? _screeninfo;
   Data? _data;
-Body copyWith({  ScreenInfo? screenInfo,
-  Data? data,
-}) => Body(  screenInfo: screenInfo ?? _screenInfo,
-  data: data ?? _data,
-);
-  ScreenInfo? get screenInfo => _screenInfo;
+  Body copyWith({  Screeninfo? screeninfo,
+    Data? data,
+  }) => Body(  screeninfo: screeninfo ?? _screeninfo,
+    data: data ?? _data,
+  );
+  Screeninfo? get screeninfo => _screeninfo;
   Data? get data => _data;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    if (_screenInfo != null) {
-      map['screenInfo'] = _screenInfo?.toJson();
+    if (_screeninfo != null) {
+      map['screeninfo'] = _screeninfo?.toJson();
     }
     if (_data != null) {
       map['data'] = _data?.toJson();
@@ -78,7 +78,6 @@ Body copyWith({  ScreenInfo? screenInfo,
   }
 
 }
-
 /// userinfo : {"prefixid":"","prefix":"","name":"","lastname":""}
 /// position : [{"id":8,"orderchoose":2,"onselect":true,"position":"4444444","office":"44455","detail":"string"},{"id":7,"orderchoose":9,"onselect":true,"position":"โปรแกรมการแข่งขันกีฬา","office":"","detail":"string"}]
 /// aboutme : ""
@@ -106,8 +105,9 @@ class Data {
       List<Skill>? skill, 
       List<Certificate>? certificate, 
       List<Language>? language, 
-      Resumedatacount? resumedatacount, 
-      String? image,}){
+      Resumedatacount? resumedatacount,
+      Resumedatacolor? resumedatacolor,
+    String? image,}){
     _userinfo = userinfo;
     _position = position;
     _aboutme = aboutme;
@@ -119,6 +119,7 @@ class Data {
     _certificate = certificate;
     _language = language;
     _resumedatacount = resumedatacount;
+    _resumedatacolor = resumedatacolor;
     _image = image;
 }
 
@@ -159,6 +160,7 @@ class Data {
       });
     }
     _resumedatacount = json['resumedatacount'] != null ? Resumedatacount.fromJson(json['resumedatacount']) : null;
+    _resumedatacolor = json['resumedatacolor'] != null ? Resumedatacolor.fromJson(json['resumedatacolor']) : null;
     _image = json['image'];
   }
   Userinfo? _userinfo;
@@ -172,6 +174,7 @@ class Data {
   List<Certificate>? _certificate;
   List<Language>? _language;
   Resumedatacount? _resumedatacount;
+  Resumedatacolor? _resumedatacolor;
   String? _image;
 Data copyWith({  Userinfo? userinfo,
   List<Position>? position,
@@ -184,6 +187,7 @@ Data copyWith({  Userinfo? userinfo,
   List<Certificate>? certificate,
   List<Language>? language,
   Resumedatacount? resumedatacount,
+  Resumedatacolor? resumedatacolor,
   String? image,
 }) => Data(  userinfo: userinfo ?? _userinfo,
   position: position ?? _position,
@@ -196,6 +200,7 @@ Data copyWith({  Userinfo? userinfo,
   certificate: certificate ?? _certificate,
   language: language ?? _language,
   resumedatacount: resumedatacount ?? _resumedatacount,
+  resumedatacolor: resumedatacolor ?? _resumedatacolor,
   image: image ?? _image,
 );
   Userinfo? get userinfo => _userinfo;
@@ -209,6 +214,7 @@ Data copyWith({  Userinfo? userinfo,
   List<Certificate>? get certificate => _certificate;
   List<Language>? get language => _language;
   Resumedatacount? get resumedatacount => _resumedatacount;
+  Resumedatacolor? get resumedatacolor => _resumedatacolor;
   String? get image => _image;
 
   Map<String, dynamic> toJson() {
@@ -244,11 +250,138 @@ Data copyWith({  Userinfo? userinfo,
     if (_resumedatacount != null) {
       map['resumedatacount'] = _resumedatacount?.toJson();
     }
+    if (_resumedatacolor != null) {
+      map['resumedatacolor'] = _resumedatacolor?.toJson();
+    }
     map['image'] = _image;
     return map;
   }
 
 }
+
+Resumedatacolor resumedatacolorFromJson(String str) => Resumedatacolor.fromJson(json.decode(str));
+String resumedatacolorToJson(Resumedatacolor data) => json.encode(data.toJson());
+class Resumedatacolor {
+  Resumedatacolor({
+    int? text,
+    int? name,
+    int? theme,
+    int? aboutme,
+    int? position,
+    int? education,
+    int? contact,
+    int? address,
+    int? experience,
+    int? certificate,
+    int? skill,
+    int? language,}){
+    _text = text;
+    _name = name;
+    _theme = theme;
+    _aboutme = aboutme;
+    _position = position;
+    _education = education;
+    _contact = contact;
+    _address = address;
+    _experience = experience;
+    _certificate = certificate;
+    _skill = skill;
+    _language = language;
+  }
+
+  Resumedatacolor.fromJson(dynamic json) {
+    _text = json['text'];
+    _name = json['name'];
+    _theme = json['theme'];
+    _aboutme = json['aboutme'];
+    _position = json['position'];
+    _education = json['education'];
+    _contact = json['contact'];
+    _address = json['address'];
+    _experience = json['experience'];
+    _certificate = json['certificate'];
+    _skill = json['skill'];
+    _language = json['language'];
+  }
+  int? _text;
+  int? _name;
+  int? _theme;
+  int? _aboutme;
+  int? _position;
+  int? _education;
+  int? _contact;
+  int? _address;
+  int? _experience;
+  int? _certificate;
+  int? _skill;
+  int? _language;
+  Resumedatacolor copyWith({  int? text,
+    int? name,
+    int? theme,
+    int? aboutme,
+    int? position,
+    int? education,
+    int? contact,
+    int? address,
+    int? experience,
+    int? certificate,
+    int? skill,
+    int? language,
+  }) => Resumedatacolor(  text: text ?? _text,
+    name: name ?? _name,
+    theme: theme ?? _theme,
+    aboutme: aboutme ?? _aboutme,
+    position: position ?? _position,
+    education: education ?? _education,
+    contact: contact ?? _contact,
+    address: address ?? _address,
+    experience: experience ?? _experience,
+    certificate: certificate ?? _certificate,
+    skill: skill ?? _skill,
+    language: language ?? _language,
+  );
+  int? get text => _text;
+  int? get name => _name;
+  int? get theme => _theme;
+  int? get aboutme => _aboutme;
+  int? get position => _position;
+  int? get education => _education;
+  int? get contact => _contact;
+  int? get address => _address;
+  int? get experience => _experience;
+  int? get certificate => _certificate;
+  int? get skill => _skill;
+  int? get language => _language;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['text'] = _text;
+    map['name'] = _name;
+    map['theme'] = _theme;
+    map['aboutme'] = _aboutme;
+    map['position'] = _position;
+    map['education'] = _education;
+    map['contact'] = _contact;
+    map['address'] = _address;
+    map['experience'] = _experience;
+    map['certificate'] = _certificate;
+    map['skill'] = _skill;
+    map['language'] = _language;
+    return map;
+  }
+
+}
+
+/// position : 0
+/// experience : 0
+/// education_hsc : 0
+/// education_bd : 0
+/// education_md : 0
+/// education_dd : 0
+/// education_hdd : 0
+/// skill : 0
+/// certificate : 0
+/// language : 0
 
 /// position : 2
 /// experience : 1
@@ -1691,74 +1824,80 @@ Userinfo copyWith({  String? prefixid,
 /// saveor : "Save/บันทึก"
 /// youtube : "ยูทูป"
 
-ScreenInfo screenInfoFromJson(String str) => ScreenInfo.fromJson(json.decode(str));
-String screenInfoToJson(ScreenInfo data) => json.encode(data.toJson());
-class ScreenInfo {
-  ScreenInfo({
-      String? aboutme, 
-      String? aboutmedetail, 
-      String? address, 
-      String? appliedposition, 
-      String? certificate, 
-      String? contact, 
-      String? textdefault, 
-      String? description, 
-      String? detail, 
-      String? district, 
-      String? editinfomations, 
-      String? education, 
-      String? educationinfo, 
-      String? email, 
-      String? enddate, 
-      String? experience, 
-      String? facebook, 
-      String? instagram, 
-      String? language, 
-      String? lastname, 
-      String? line, 
-      String? moo, 
-      String? mypositions, 
-      String? n, 
-      String? name, 
-      String? number, 
-      String? phone, 
-      String? pictuce, 
-      String? placeofstudy, 
-      String? position, 
-      String? positions, 
-      String? prefix, 
-      String? province, 
-      String? ratio, 
-      String? road, 
-      String? select, 
-      String? selectacolor, 
-      String? selecttheinformation, 
-      String? size, 
-      String? sizepictuce, 
-      String? skill, 
-      String? soi, 
-      String? startdate, 
-      String? subdistrict, 
-      String? themecolor, 
-      String? title, 
-      String? titlesetthemecolor, 
-      String? twitter, 
-      String? type, 
-      String? value, 
-      String? whcm, 
-      String? zipcode, 
-      String? unkhown, 
-      String? viewpdf, 
-      String? titleresumeinformation, 
-      String? hsc, 
-      String? bd, 
-      String? md, 
-      String? dd, 
-      String? hdd, 
-      String? tapedit, 
-      String? save, 
-      String? saveor, 
-      String? youtube,}){
+Screeninfo screeninfoFromJson(String str) => Screeninfo.fromJson(json.decode(str));
+String screeninfoToJson(Screeninfo data) => json.encode(data.toJson());
+class Screeninfo {
+  Screeninfo({
+    String? aboutme,
+    String? aboutmedetail,
+    String? address,
+    String? appliedposition,
+    String? certificate,
+    String? contact,
+    String? textdefault,
+    String? description,
+    String? detail,
+    String? district,
+    String? editinfomations,
+    String? education,
+    String? educationinfo,
+    String? email,
+    String? enddate,
+    String? experience,
+    String? facebook,
+    String? instagram,
+    String? language,
+    String? lastname,
+    String? line,
+    String? moo,
+    String? mypositions,
+    String? n,
+    String? name,
+    String? number,
+    String? phone,
+    String? pictuce,
+    String? placeofstudy,
+    String? position,
+    String? positions,
+    String? prefix,
+    String? province,
+    String? ratio,
+    String? road,
+    String? select,
+    String? selectacolor,
+    String? selecttheinformation,
+    String? size,
+    String? sizepictuce,
+    String? skill,
+    String? soi,
+    String? startdate,
+    String? subdistrict,
+    String? themecolor,
+    String? title,
+    String? titlesetthemecolor,
+    String? twitter,
+    String? type,
+    String? value,
+    String? whcm,
+    String? zipcode,
+    String? unkhown,
+    String? viewpdf,
+    String? titleresumeinformation,
+    String? hsc,
+    String? bd,
+    String? md,
+    String? dd,
+    String? hdd,
+    String? tapedit,
+    String? save,
+    String? saveor,
+    String? youtube,
+    String? showall,
+    String? showsome,
+    String? activitynot,
+    String? selectednot,
+    String? btnresume1,
+    String? btnresume2,}){
     _aboutme = aboutme;
     _aboutmedetail = aboutmedetail;
     _address = address;
@@ -1823,9 +1962,15 @@ class ScreenInfo {
     _save = save;
     _saveor = saveor;
     _youtube = youtube;
-}
+    _showall = showall;
+    _showsome = showsome;
+    _activitynot = activitynot;
+    _selectednot = selectednot;
+    _btnresume1 = btnresume1;
+    _btnresume2 = btnresume2;
+  }
 
-  ScreenInfo.fromJson(dynamic json) {
+  Screeninfo.fromJson(dynamic json) {
     _aboutme = json['aboutme'];
     _aboutmedetail = json['aboutmedetail'];
     _address = json['address'];
@@ -1890,6 +2035,12 @@ class ScreenInfo {
     _save = json['save'];
     _saveor = json['saveor'];
     _youtube = json['youtube'];
+    _showall = json['showall'];
+    _showsome = json['showsome'];
+    _activitynot = json['activitynot'];
+    _selectednot = json['selectednot'];
+    _btnresume1 = json['btnresume1'];
+    _btnresume2 = json['btnresume2'];
   }
   String? _aboutme;
   String? _aboutmedetail;
@@ -1955,135 +2106,153 @@ class ScreenInfo {
   String? _save;
   String? _saveor;
   String? _youtube;
-ScreenInfo copyWith({  String? aboutme,
-  String? aboutmedetail,
-  String? address,
-  String? appliedposition,
-  String? certificate,
-  String? contact,
-  String? textdefault,
-  String? description,
-  String? detail,
-  String? district,
-  String? editinfomations,
-  String? education,
-  String? educationinfo,
-  String? email,
-  String? enddate,
-  String? experience,
-  String? facebook,
-  String? instagram,
-  String? language,
-  String? lastname,
-  String? line,
-  String? moo,
-  String? mypositions,
-  String? n,
-  String? name,
-  String? number,
-  String? phone,
-  String? pictuce,
-  String? placeofstudy,
-  String? position,
-  String? positions,
-  String? prefix,
-  String? province,
-  String? ratio,
-  String? road,
-  String? select,
-  String? selectacolor,
-  String? selecttheinformation,
-  String? size,
-  String? sizepictuce,
-  String? skill,
-  String? soi,
-  String? startdate,
-  String? subdistrict,
-  String? themecolor,
-  String? title,
-  String? titlesetthemecolor,
-  String? twitter,
-  String? type,
-  String? value,
-  String? whcm,
-  String? zipcode,
-  String? unkhown,
-  String? viewpdf,
-  String? titleresumeinformation,
-  String? hsc,
-  String? bd,
-  String? md,
-  String? dd,
-  String? hdd,
-  String? tapedit,
-  String? save,
-  String? saveor,
-  String? youtube,
-}) => ScreenInfo(  aboutme: aboutme ?? _aboutme,
-  aboutmedetail: aboutmedetail ?? _aboutmedetail,
-  address: address ?? _address,
-  appliedposition: appliedposition ?? _appliedposition,
-  certificate: certificate ?? _certificate,
-  contact: contact ?? _contact,
-  textdefault: textdefault ?? _textdefault,
-  description: description ?? _description,
-  detail: detail ?? _detail,
-  district: district ?? _district,
-  editinfomations: editinfomations ?? _editinfomations,
-  education: education ?? _education,
-  educationinfo: educationinfo ?? _educationinfo,
-  email: email ?? _email,
-  enddate: enddate ?? _enddate,
-  experience: experience ?? _experience,
-  facebook: facebook ?? _facebook,
-  instagram: instagram ?? _instagram,
-  language: language ?? _language,
-  lastname: lastname ?? _lastname,
-  line: line ?? _line,
-  moo: moo ?? _moo,
-  mypositions: mypositions ?? _mypositions,
-  n: n ?? _n,
-  name: name ?? _name,
-  number: number ?? _number,
-  phone: phone ?? _phone,
-  pictuce: pictuce ?? _pictuce,
-  placeofstudy: placeofstudy ?? _placeofstudy,
-  position: position ?? _position,
-  positions: positions ?? _positions,
-  prefix: prefix ?? _prefix,
-  province: province ?? _province,
-  ratio: ratio ?? _ratio,
-  road: road ?? _road,
-  select: select ?? _select,
-  selectacolor: selectacolor ?? _selectacolor,
-  selecttheinformation: selecttheinformation ?? _selecttheinformation,
-  size: size ?? _size,
-  sizepictuce: sizepictuce ?? _sizepictuce,
-  skill: skill ?? _skill,
-  soi: soi ?? _soi,
-  startdate: startdate ?? _startdate,
-  subdistrict: subdistrict ?? _subdistrict,
-  themecolor: themecolor ?? _themecolor,
-  title: title ?? _title,
-  titlesetthemecolor: titlesetthemecolor ?? _titlesetthemecolor,
-  twitter: twitter ?? _twitter,
-  type: type ?? _type,
-  value: value ?? _value,
-  whcm: whcm ?? _whcm,
-  zipcode: zipcode ?? _zipcode,
-  unkhown: unkhown ?? _unkhown,
-  viewpdf: viewpdf ?? _viewpdf,
-  titleresumeinformation: titleresumeinformation ?? _titleresumeinformation,
-  hsc: hsc ?? _hsc,
-  bd: bd ?? _bd,
-  md: md ?? _md,
-  dd: dd ?? _dd,
-  hdd: hdd ?? _hdd,
-  tapedit: tapedit ?? _tapedit,
-  save: save ?? _save,
-  saveor: saveor ?? _saveor,
-  youtube: youtube ?? _youtube,
-);
+  String? _showall;
+  String? _showsome;
+  String? _activitynot;
+  String? _selectednot;
+  String? _btnresume1;
+  String? _btnresume2;
+  Screeninfo copyWith({  String? aboutme,
+    String? aboutmedetail,
+    String? address,
+    String? appliedposition,
+    String? certificate,
+    String? contact,
+    String? textdefault,
+    String? description,
+    String? detail,
+    String? district,
+    String? editinfomations,
+    String? education,
+    String? educationinfo,
+    String? email,
+    String? enddate,
+    String? experience,
+    String? facebook,
+    String? instagram,
+    String? language,
+    String? lastname,
+    String? line,
+    String? moo,
+    String? mypositions,
+    String? n,
+    String? name,
+    String? number,
+    String? phone,
+    String? pictuce,
+    String? placeofstudy,
+    String? position,
+    String? positions,
+    String? prefix,
+    String? province,
+    String? ratio,
+    String? road,
+    String? select,
+    String? selectacolor,
+    String? selecttheinformation,
+    String? size,
+    String? sizepictuce,
+    String? skill,
+    String? soi,
+    String? startdate,
+    String? subdistrict,
+    String? themecolor,
+    String? title,
+    String? titlesetthemecolor,
+    String? twitter,
+    String? type,
+    String? value,
+    String? whcm,
+    String? zipcode,
+    String? unkhown,
+    String? viewpdf,
+    String? titleresumeinformation,
+    String? hsc,
+    String? bd,
+    String? md,
+    String? dd,
+    String? hdd,
+    String? tapedit,
+    String? save,
+    String? saveor,
+    String? youtube,
+    String? showall,
+    String? showsome,
+    String? activitynot,
+    String? selectednot,
+    String? btnresume1,
+    String? btnresume2,
+  }) => Screeninfo(  aboutme: aboutme ?? _aboutme,
+    aboutmedetail: aboutmedetail ?? _aboutmedetail,
+    address: address ?? _address,
+    appliedposition: appliedposition ?? _appliedposition,
+    certificate: certificate ?? _certificate,
+    contact: contact ?? _contact,
+    textdefault: textdefault ?? _textdefault,
+    description: description ?? _description,
+    detail: detail ?? _detail,
+    district: district ?? _district,
+    editinfomations: editinfomations ?? _editinfomations,
+    education: education ?? _education,
+    educationinfo: educationinfo ?? _educationinfo,
+    email: email ?? _email,
+    enddate: enddate ?? _enddate,
+    experience: experience ?? _experience,
+    facebook: facebook ?? _facebook,
+    instagram: instagram ?? _instagram,
+    language: language ?? _language,
+    lastname: lastname ?? _lastname,
+    line: line ?? _line,
+    moo: moo ?? _moo,
+    mypositions: mypositions ?? _mypositions,
+    n: n ?? _n,
+    name: name ?? _name,
+    number: number ?? _number,
+    phone: phone ?? _phone,
+    pictuce: pictuce ?? _pictuce,
+    placeofstudy: placeofstudy ?? _placeofstudy,
+    position: position ?? _position,
+    positions: positions ?? _positions,
+    prefix: prefix ?? _prefix,
+    province: province ?? _province,
+    ratio: ratio ?? _ratio,
+    road: road ?? _road,
+    select: select ?? _select,
+    selectacolor: selectacolor ?? _selectacolor,
+    selecttheinformation: selecttheinformation ?? _selecttheinformation,
+    size: size ?? _size,
+    sizepictuce: sizepictuce ?? _sizepictuce,
+    skill: skill ?? _skill,
+    soi: soi ?? _soi,
+    startdate: startdate ?? _startdate,
+    subdistrict: subdistrict ?? _subdistrict,
+    themecolor: themecolor ?? _themecolor,
+    title: title ?? _title,
+    titlesetthemecolor: titlesetthemecolor ?? _titlesetthemecolor,
+    twitter: twitter ?? _twitter,
+    type: type ?? _type,
+    value: value ?? _value,
+    whcm: whcm ?? _whcm,
+    zipcode: zipcode ?? _zipcode,
+    unkhown: unkhown ?? _unkhown,
+    viewpdf: viewpdf ?? _viewpdf,
+    titleresumeinformation: titleresumeinformation ?? _titleresumeinformation,
+    hsc: hsc ?? _hsc,
+    bd: bd ?? _bd,
+    md: md ?? _md,
+    dd: dd ?? _dd,
+    hdd: hdd ?? _hdd,
+    tapedit: tapedit ?? _tapedit,
+    save: save ?? _save,
+    saveor: saveor ?? _saveor,
+    youtube: youtube ?? _youtube,
+    showall: showall ?? _showall,
+    showsome: showsome ?? _showsome,
+    activitynot: activitynot ?? _activitynot,
+    selectednot: selectednot ?? _selectednot,
+    btnresume1: btnresume1 ?? _btnresume1,
+    btnresume2: btnresume2 ?? _btnresume2,
+  );
   String? get aboutme => _aboutme;
   String? get aboutmedetail => _aboutmedetail;
   String? get address => _address;
@@ -2148,6 +2317,12 @@ ScreenInfo copyWith({  String? aboutme,
   String? get save => _save;
   String? get saveor => _saveor;
   String? get youtube => _youtube;
+  String? get showall => _showall;
+  String? get showsome => _showsome;
+  String? get activitynot => _activitynot;
+  String? get selectednot => _selectednot;
+  String? get btnresume1 => _btnresume1;
+  String? get btnresume2 => _btnresume2;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -2215,6 +2390,12 @@ ScreenInfo copyWith({  String? aboutme,
     map['save'] = _save;
     map['saveor'] = _saveor;
     map['youtube'] = _youtube;
+    map['showall'] = _showall;
+    map['showsome'] = _showsome;
+    map['activitynot'] = _activitynot;
+    map['selectednot'] = _selectednot;
+    map['btnresume1'] = _btnresume1;
+    map['btnresume2'] = _btnresume2;
     return map;
   }
 

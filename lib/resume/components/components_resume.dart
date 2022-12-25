@@ -11,6 +11,7 @@ import '../../customs/color/pdf_color_const.dart';
 import '../../customs/size/size.dart';
 import '../app.dart';
 import '../bloc_resume/resume_bloc.dart';
+import '../examples/content_design_resume_color.dart';
 import '../model/response/pre_view_resume_response.dart';
 import '../screen_resume/edit_certificate_resume_screen.dart';
 import '../screen_resume/edit_education_resume_screen.dart';
@@ -28,7 +29,7 @@ class OnSelect {
   Map<String, dynamic> toJson() => {"id": id, "onselect": onselect};
 }
 
-floatingGeneratePDF(
+floatingGeneratePDFAndSaveData(
   setState,
   String pdf,
   String save, {
@@ -58,12 +59,15 @@ floatingGeneratePDF(
   required List<OnSelect> experienceOnSelect,
   required List<OnSelect> certificateOnSelect,
   required List<OnSelect> skillOnSelect,
-  required List<OnSelect> languageOnSelect,
+  required List<OnSelect> languageOnSelect, required SendOnSelectColorListResume sendOnSelectColorSet,
 }) {
   return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    children: [
+    crossAxisAlignment: CrossAxisAlignment.center,
+    mainAxisAlignment: MainAxisAlignment.spaceAround,
+    children: <Widget>[
       FloatingActionButton.extended(
+
+        heroTag: "btn1",
         backgroundColor:
             Theme.of(context).appBarTheme.backgroundColor?.withOpacity(0.9),
         foregroundColor: Colors.black,
@@ -100,6 +104,8 @@ floatingGeneratePDF(
             )),
       ),
       FloatingActionButton.extended(
+
+        heroTag: "btn2",
         backgroundColor:
             Theme.of(context).appBarTheme.backgroundColor?.withOpacity(0.9),
         foregroundColor: Colors.black,
@@ -117,6 +123,7 @@ floatingGeneratePDF(
                 certificateOnSelect: certificateOnSelect,
                 skillOnSelect: skillOnSelect,
                 languageOnSelect: languageOnSelect,
+              sendOnSelectColorSet:sendOnSelectColorSet,
               ));
         },
         icon: Icon(
@@ -134,6 +141,33 @@ floatingGeneratePDF(
   );
 }
 
+floatingGoToSetThemePDF(
+    setState,
+    String pdf, {
+      required BuildContext context,
+    }) {
+  return FloatingActionButton.extended(
+    backgroundColor:
+    Theme.of(context).appBarTheme.backgroundColor?.withOpacity(0.9),
+    foregroundColor: Colors.black,
+    onPressed: () {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => const ContentDesignResumeScreenColor()));
+    },
+    icon: Icon(
+      FontAwesomeIcons.barsStaggered,
+      color: Theme.of(context).iconTheme.color,
+      size: 20.0,
+    ),
+    label: Text('   ${pdf ?? 'PDF'}',
+        style: TextStyle(
+          fontSize: sizeTextSmaller14,
+          color: Theme.of(context).iconTheme.color,
+        )),
+  );
+}
 class SelectSizeImageResume {
   double sizePhoto;
   double widthSizeCM;
@@ -214,7 +248,11 @@ buildDetailResumeCheckboxCustomNotIconsReadOnly(
 }
 
 buildPositionOnSelectCard(
-    {required BuildContext context,
+    {
+      required String showAll,
+      required String showSome,
+      required String activityNot,
+      required BuildContext context,
     required Color appBarForegroundColor,
     required Function() returnResumeEdit,
     required Color Function(Set<MaterialState> states) getColor,
@@ -288,10 +326,8 @@ buildPositionOnSelectCard(
             padding: const EdgeInsets.all(5.0),
             child: Text(
               boolClick == false
-                  ?
-              // editInFormations ??
-              "ดูเพิ่มเติม"
-                  : "แสดงบางส่วน",
+                  ?showAll
+                  : showSome,
               style: TextStyle(
                   decoration: TextDecoration.underline,
                   decorationThickness: 2,
@@ -307,7 +343,7 @@ buildPositionOnSelectCard(
           padding: const EdgeInsets.all(5.0),
           child: Text(
             // editInFormations ??
-            ">> คุณยังไม่มีข้อมูลส่วนนี้ <<",
+            ">> $activityNot <<",
             style: TextStyle(
               // decoration: TextDecoration.underline,
                 decorationThickness: 2,
@@ -322,7 +358,11 @@ buildPositionOnSelectCard(
 
 
 buildExperienceOnSelectCard(
-    {required BuildContext context,
+    {
+      required String showAll,
+      required String showSome,
+      required String activityNot,
+      required BuildContext context,
     required Color appBarForegroundColor,
     required Function() returnResumeEdit,
     required Color Function(Set<MaterialState> states) getColor,
@@ -397,10 +437,8 @@ buildExperienceOnSelectCard(
             padding: const EdgeInsets.all(5.0),
             child: Text(
               boolClick == false
-                  ?
-              // editInFormations ??
-              "ดูเพิ่มเติม"
-                  : "แสดงบางส่วน",
+                  ?showAll
+                  : showSome,
               style: TextStyle(
                   decoration: TextDecoration.underline,
                   decorationThickness: 2,
@@ -412,11 +450,12 @@ buildExperienceOnSelectCard(
         ),
       if (experienceData.isEmpty)
 
+
         Padding(
           padding: const EdgeInsets.all(5.0),
           child: Text(
             // editInFormations ??
-            ">> คุณยังไม่มีข้อมูลส่วนนี้ <<",
+            ">> $activityNot <<",
             style: TextStyle(
               // decoration: TextDecoration.underline,
                 decorationThickness: 2,
@@ -429,8 +468,13 @@ buildExperienceOnSelectCard(
   );
 }
 
+
 buildCertificateOnSelectCard(
-    {required BuildContext context,
+    {
+      required String showAll,
+      required String showSome,
+      required String activityNot,
+      required BuildContext context,
     required Color appBarForegroundColor,
     required Function() returnResumeEdit,
     required Color Function(Set<MaterialState> states) getColor,
@@ -504,10 +548,8 @@ buildCertificateOnSelectCard(
             padding: const EdgeInsets.all(5.0),
             child: Text(
               boolClick == false
-                  ?
-              // editInFormations ??
-              "ดูเพิ่มเติม"
-                  : "แสดงบางส่วน",
+                  ?showAll
+                  : showSome,
               style: TextStyle(
                   decoration: TextDecoration.underline,
                   decorationThickness: 2,
@@ -519,11 +561,12 @@ buildCertificateOnSelectCard(
         ),
       if (certificateData.isEmpty)
 
+
         Padding(
           padding: const EdgeInsets.all(5.0),
           child: Text(
             // editInFormations ??
-            ">> คุณยังไม่มีข้อมูลส่วนนี้ <<",
+            ">> $activityNot <<",
             style: TextStyle(
               // decoration: TextDecoration.underline,
                 decorationThickness: 2,
@@ -536,8 +579,14 @@ buildCertificateOnSelectCard(
   );
 }
 
+
 buildLanguageOnSelectCard(
-    {required BuildContext context,
+    {
+
+      required String showAll,
+      required String showSome,
+      required String activityNot,
+      required BuildContext context,
     required Color appBarForegroundColor,
     required Function() returnResumeEdit,
     required Color Function(Set<MaterialState> states) getColor,
@@ -644,7 +693,11 @@ buildLanguageOnSelectCard(
 }
 
 buildSkillOnSelectCard(
-    {required BuildContext context,
+    {
+      required String showAll,
+      required String showSome,
+      required String activityNot,
+      required BuildContext context,
     required Color appBarForegroundColor,
     required Function() returnResumeEdit,
     required Color Function(Set<MaterialState> states) getColor,
@@ -718,10 +771,8 @@ buildSkillOnSelectCard(
             padding: const EdgeInsets.all(5.0),
             child: Text(
               boolClick == false
-                  ?
-              // editInFormations ??
-              "ดูเพิ่มเติม"
-                  : "แสดงบางส่วน",
+                  ?showAll
+                  : showSome,
               style: TextStyle(
                   decoration: TextDecoration.underline,
                   decorationThickness: 2,
@@ -733,11 +784,12 @@ buildSkillOnSelectCard(
         ),
       if (skillData.isEmpty)
 
+
         Padding(
           padding: const EdgeInsets.all(5.0),
           child: Text(
             // editInFormations ??
-            ">> คุณยังไม่มีข้อมูลส่วนนี้ <<",
+            ">> $activityNot <<",
             style: TextStyle(
               // decoration: TextDecoration.underline,
                 decorationThickness: 2,
@@ -750,7 +802,11 @@ buildSkillOnSelectCard(
   );
 }
 
+
 buildEducationOnSelectCard({
+  required String showAll,
+  required String showSome,
+  required String activityNot,
   required BuildContext context,
   required Color appBarForegroundColor,
   required String title,
@@ -831,10 +887,8 @@ buildEducationOnSelectCard({
             padding: const EdgeInsets.all(5.0),
             child: Text(
               boolClick == false
-                  ?
-              // editInFormations ??
-              "ดูเพิ่มเติม"
-                  : "แสดงบางส่วน",
+                  ?showAll
+                  : showSome,
               style: TextStyle(
                   decoration: TextDecoration.underline,
                   decorationThickness: 2,
@@ -846,11 +900,12 @@ buildEducationOnSelectCard({
         ),
       if (educationData.isEmpty)
 
+
         Padding(
           padding: const EdgeInsets.all(5.0),
           child: Text(
             // editInFormations ??
-            ">> คุณยังไม่มีข้อมูลส่วนนี้ <<",
+            ">> $activityNot <<",
             style: TextStyle(
               // decoration: TextDecoration.underline,
                 decorationThickness: 2,
@@ -862,6 +917,7 @@ buildEducationOnSelectCard({
     ],
   );
 }
+
 
 // List<OnSelect> positionOnSelect =[
 //   OnSelect(id:1,select:true ),
@@ -1622,7 +1678,20 @@ class OnSelectClickResume {
   "language": language,
   };
   }
-
+enum ParameterColor {
+  theme ,
+  aboutMe ,
+  position ,
+  education ,
+  contact ,
+  address ,
+  experience ,
+  certificate ,
+  skill,
+  language ,
+  text ,
+  name ,
+}
 class OnSelectColorResume {
   int id;
   String nameColor;
@@ -1666,82 +1735,132 @@ class OnSelectColorListResume {
     required this.text,
     required this.name,
   });
+  Map<String, List<OnSelectColorResume> > toJson() => {
+
+   'dj':[text,name,theme,aboutMe,position,education,contact,address,experience,certificate,skill,language,]
+      };
+}
+
+class SendOnSelectColorResume {
+  int id;
+  String nameColor;
+  String parameter;
+
+  SendOnSelectColorResume({
+    required this.id,
+    required this.nameColor,
+    required this.parameter,
+  });
+  Map<String, dynamic> toJson() =>
+      {"id": id,"nameColor": nameColor,"parameter": parameter, };
+}
+class SendOnSelectColorListResume {
+
+  SendOnSelectColorResume text;
+  SendOnSelectColorResume name;
+  SendOnSelectColorResume theme;
+  SendOnSelectColorResume aboutMe;
+  SendOnSelectColorResume position;
+  SendOnSelectColorResume education;
+  SendOnSelectColorResume contact;
+  SendOnSelectColorResume address;
+  SendOnSelectColorResume experience;
+  SendOnSelectColorResume certificate;
+  SendOnSelectColorResume skill;
+  SendOnSelectColorResume language;
+
+  SendOnSelectColorListResume({
+    required this.theme,
+    required this.aboutMe,
+    required this.position,
+    required this.education,
+    required this.contact,
+    required this.address,
+    required this.experience,
+    required this.certificate,
+    required this.skill,
+    required this.language,
+    required this.text,
+    required this.name,
+  });
   Map<String, dynamic> toJson() => {
-        "fromInt": text,
-        "fromInt": name,
-        "fromInt": theme,
-        "aboutMe": aboutMe,
-        "position": position,
-        "education": education,
-        "contact": contact,
-        "address": address,
-        "experience": experience,
-        "certificate": certificate,
-        "skill": skill,
-        "language": language,
+        // "text": text,
+        // "name": name,
+        // "theme": theme,
+        // "aboutMe": aboutMe,
+        // "position": position,
+        // "education": education,
+        // "contact": contact,
+        // "address": address,
+        // "experience": experience,
+        // "certificate": certificate,
+        // "skill": skill,
+        // "language": language,
+
+    'color':[text,name,theme,aboutMe,position,education,contact,address,experience,certificate,skill,language,]
       };
 }
 
 int colorInt = 8;
-OnSelectColorListResume onSelectColor = OnSelectColorListResume(
-  text: OnSelectColorResume(
-      id: colorInt,
-      nameColor: 'black',
-      materialColor: colorOfPdfList[1].materialColor,
-      pdfColor: colorOfPdfList[1].pdfOfColor, ),
-  name: OnSelectColorResume(
-      id: colorInt,
-      nameColor: 'black',
-      materialColor: colorOfPdfList[1].materialColor,
-      pdfColor: colorOfPdfList[1].pdfOfColor, ),
-  theme: OnSelectColorResume(
-      id: colorInt,
-      nameColor: 'lightBlue',
-      materialColor: colorOfPdfList[colorInt].materialColor,
-      pdfColor: colorOfPdfList[colorInt].pdfOfColor, ),
-  aboutMe: OnSelectColorResume(
-      id: colorInt,
-      nameColor: 'lightBlue',
-      materialColor: colorOfPdfList[colorInt].materialColor,
-      pdfColor: colorOfPdfList[colorInt].pdfOfColor),
-  position: OnSelectColorResume(
-      id: colorInt,
-      nameColor: 'lightBlue',
-      materialColor: colorOfPdfList[colorInt].materialColor,
-      pdfColor: colorOfPdfList[colorInt].pdfOfColor),
-  education: OnSelectColorResume(
-      id: colorInt,
-      nameColor: 'lightBlue',
-      materialColor: colorOfPdfList[colorInt].materialColor,
-      pdfColor: colorOfPdfList[colorInt].pdfOfColor),
-  contact: OnSelectColorResume(
-      id: colorInt,
-      nameColor: 'lightBlue',
-      materialColor: colorOfPdfList[colorInt].materialColor,
-      pdfColor: colorOfPdfList[colorInt].pdfOfColor),
-  address: OnSelectColorResume(
-      id: colorInt,
-      nameColor: 'lightBlue',
-      materialColor: colorOfPdfList[colorInt].materialColor,
-      pdfColor: colorOfPdfList[colorInt].pdfOfColor),
-  experience: OnSelectColorResume(
-      id: colorInt,
-      nameColor: 'lightBlue',
-      materialColor: colorOfPdfList[colorInt].materialColor,
-      pdfColor: colorOfPdfList[colorInt].pdfOfColor),
-  certificate: OnSelectColorResume(
-      id: colorInt,
-      nameColor: 'lightBlue',
-      materialColor: colorOfPdfList[colorInt].materialColor,
-      pdfColor: colorOfPdfList[colorInt].pdfOfColor),
-  skill: OnSelectColorResume(
-      id: colorInt,
-      nameColor: 'lightBlue',
-      materialColor: colorOfPdfList[colorInt].materialColor,
-      pdfColor: colorOfPdfList[colorInt].pdfOfColor),
-  language: OnSelectColorResume(
-      id: colorInt,
-      nameColor: 'lightBlue',
-      materialColor: colorOfPdfList[colorInt].materialColor,
-      pdfColor: colorOfPdfList[colorInt].pdfOfColor),
-);
+// OnSelectColorListResume onSelectColor = OnSelectColorListResume(
+//   text: OnSelectColorResume(
+//       id: 0,
+//       nameColor: 'black',
+//       materialColor: colorOfPdfList[0].materialColor,
+//       pdfColor: colorOfPdfList[0].pdfOfColor, ),
+//   name: OnSelectColorResume(
+//       id: 0,
+//       nameColor: 'black',
+//       materialColor: colorOfPdfList[0].materialColor,
+//       pdfColor: colorOfPdfList[0].pdfOfColor, ),
+//   theme: OnSelectColorResume(
+//       id: colorInt,
+//       nameColor: 'lightBlue',
+//       materialColor: colorOfPdfList[colorInt].materialColor,
+//       pdfColor: colorOfPdfList[colorInt].pdfOfColor, ),
+//   aboutMe: OnSelectColorResume(
+//       id: colorInt,
+//       nameColor: 'lightBlue',
+//       materialColor: colorOfPdfList[colorInt].materialColor,
+//       pdfColor: colorOfPdfList[colorInt].pdfOfColor),
+//   position: OnSelectColorResume(
+//       id: colorInt,
+//       nameColor: 'lightBlue',
+//       materialColor: colorOfPdfList[colorInt].materialColor,
+//       pdfColor: colorOfPdfList[colorInt].pdfOfColor),
+//   education: OnSelectColorResume(
+//       id: colorInt,
+//       nameColor: 'lightBlue',
+//       materialColor: colorOfPdfList[colorInt].materialColor,
+//       pdfColor: colorOfPdfList[colorInt].pdfOfColor),
+//   contact: OnSelectColorResume(
+//       id: colorInt,
+//       nameColor: 'lightBlue',
+//       materialColor: colorOfPdfList[colorInt].materialColor,
+//       pdfColor: colorOfPdfList[colorInt].pdfOfColor),
+//   address: OnSelectColorResume(
+//       id: colorInt,
+//       nameColor: 'lightBlue',
+//       materialColor: colorOfPdfList[colorInt].materialColor,
+//       pdfColor: colorOfPdfList[colorInt].pdfOfColor),
+//   experience: OnSelectColorResume(
+//       id: colorInt,
+//       nameColor: 'lightBlue',
+//       materialColor: colorOfPdfList[colorInt].materialColor,
+//       pdfColor: colorOfPdfList[colorInt].pdfOfColor),
+//   certificate: OnSelectColorResume(
+//       id: colorInt,
+//       nameColor: 'lightBlue',
+//       materialColor: colorOfPdfList[colorInt].materialColor,
+//       pdfColor: colorOfPdfList[colorInt].pdfOfColor),
+//   skill: OnSelectColorResume(
+//       id: colorInt,
+//       nameColor: 'lightBlue',
+//       materialColor: colorOfPdfList[colorInt].materialColor,
+//       pdfColor: colorOfPdfList[colorInt].pdfOfColor),
+//   language: OnSelectColorResume(
+//       id: colorInt,
+//       nameColor: 'lightBlue',
+//       materialColor: colorOfPdfList[colorInt].materialColor,
+//       pdfColor: colorOfPdfList[colorInt].pdfOfColor),
+// );

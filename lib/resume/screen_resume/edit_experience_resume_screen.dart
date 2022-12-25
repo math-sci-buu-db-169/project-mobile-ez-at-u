@@ -115,13 +115,13 @@ class _EditExperienceResumePageState extends State<EditExperienceResumePage>
               MaterialPageRoute(
                   builder: (BuildContext context) => const ContentDesignResumeEditScreen()));
         }
-        if (state is EditPreviewResumeLoading) {
+        if (state is ExperiencePreviewResumeLoading) {
           showProgressDialog(context);
         }
-        if (state is EditPreviewResumeEndLoading) {
+        if (state is ExperiencePreviewResumeEndLoading) {
           hideProgressDialog(context);
         }
-        if (state is EditPreviewResumeError) {
+        if (state is ExperienceResumeError) {
           if (state.errorMessage.toString() == 'Unauthorized') {
             dialogSessionExpiredOneBtn(
                 context, textSessionExpired, textSubSessionExpired, _buttonOk,

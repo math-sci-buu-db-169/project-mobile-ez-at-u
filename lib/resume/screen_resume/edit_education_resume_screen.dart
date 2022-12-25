@@ -122,13 +122,13 @@ class _EditEducationResumePageState extends State<EditEducationResumePage>
               MaterialPageRoute(
                   builder: (BuildContext context) => const ContentDesignResumeEditScreen()));
         }
-        if (state is ResumeLoading) {
+        if (state is EducationPreviewResumeLoading) {
           showProgressDialog(context);
         }
-        if (state is ResumeEndLoading) {
+        if (state is EducationPreviewResumeEndLoading) {
           hideProgressDialog(context);
         }
-        if (state is ResumeError) {
+        if (state is EducationResumeError) {
           if (state.errorMessage.toString() == 'Unauthorized') {
             dialogSessionExpiredOneBtn(
                 context, textSessionExpired, textSubSessionExpired, _buttonOk,

@@ -26,6 +26,7 @@ class SetOnSelectedAndPreviewResumeEvent extends ResumeEvent {
   List<OnSelect> certificateOnSelect ;
   List<OnSelect> skillOnSelect ;
   List<OnSelect> languageOnSelect ;
+  SendOnSelectColorListResume sendOnSelectColorSet ;
   SetOnSelectedAndPreviewResumeEvent({
     required  this.positionOnSelect,
     required  this.educationHSCOnSelect,
@@ -38,7 +39,8 @@ class SetOnSelectedAndPreviewResumeEvent extends ResumeEvent {
     required  this.experienceOnSelect ,
     required  this.certificateOnSelect ,
     required  this.skillOnSelect ,
-    required  this.languageOnSelect ,});
+    required  this.languageOnSelect,
+    required  this. sendOnSelectColorSet ,});
 }
 
 class GetSetPreviewResumeEvent extends ResumeEvent {}
@@ -303,4 +305,10 @@ class SentEditSkillResumeEvent extends ResumeEvent {
         required this.detailTH,
         required this.detailEN,
         required this.valueSkill});
+}
+
+class SendColorResumeEvent extends ResumeEvent {
+  int id;
+  SendColorResumeEvent(
+      {required this.id,});
 }

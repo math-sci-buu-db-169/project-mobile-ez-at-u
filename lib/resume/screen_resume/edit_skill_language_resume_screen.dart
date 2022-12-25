@@ -11,7 +11,6 @@ import '../../../../../customs/progress_dialog.dart';
 import '../../../../../utils/shared_preferences.dart';
 import '../../customs/button/button_custom.dart';
 import '../../customs/color/color_const.dart';
-import '../../customs/size/size.dart';
 import '../../customs/text_file/build_textformfiled_unlimit_custom.dart';
 import '../../module/login/screen/login_screen/login_screen.dart';
 import '../bloc_resume/resume_bloc.dart';
@@ -120,10 +119,10 @@ class _EditSkillLanguageResumePageState
                   builder: (BuildContext context) =>
                       const ContentDesignResumeEditScreen()));
         }
-        if (state is SkillLanguageResumeLoading) {
+        if (state is SkillLanguagePreviewResumeLoading) {
           showProgressDialog(context);
         }
-        if (state is SkillLanguageResumeEndLoading) {
+        if (state is SkillLanguagePreviewResumeEndLoading) {
           hideProgressDialog(context);
         }
         if (state is SkillLanguageResumeError) {
@@ -181,8 +180,10 @@ class _EditSkillLanguageResumePageState
               '${isGetSkillLanguageResumeResponse?.body?.screeninfo?.languageEn} *';
           String? textValue =
               '${isGetSkillLanguageResumeResponse?.body?.screeninfo?.level} *';
-          print("id: widget.id");
-          print("id: ${widget.id}");
+          if (kDebugMode) {
+            print("id: widget.id");
+            print("id: ${widget.id}");
+          }
           return Scaffold(
             appBar: AppBar(
                 backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
@@ -276,7 +277,7 @@ class _EditSkillLanguageResumePageState
                           child: Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Container(
-                                padding: EdgeInsets.only(
+                                padding: const EdgeInsets.only(
                                     right: 5, left: 5, top: 20, bottom: 20),
                                 decoration: BoxDecoration(
                                   borderRadius: const BorderRadius.all(
@@ -284,11 +285,11 @@ class _EditSkillLanguageResumePageState
                                   ),
                                   color: Theme.of(context).primaryColor ==
                                       Colors.black
-                                      ? Color(0xFF1F222A)
+                                      ? const Color(0xFF1F222A)
                                       : Colors.transparent.withOpacity(0.03),
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsets.only(left: 10, right: 10),
+                                  padding: const EdgeInsets.only(left: 10, right: 10),
                                   child: Row(
                                     mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -349,9 +350,9 @@ class _EditSkillLanguageResumePageState
                           });
                         },
                       ),
-                      SizedBox(height: 10,),
+                      const SizedBox(height: 10,),
                       SfLinearGauge(
-                        axisTrackStyle: LinearAxisTrackStyle(
+                        axisTrackStyle: const LinearAxisTrackStyle(
                             thickness: 10
                         ),
                         markerPointers: [
@@ -373,7 +374,8 @@ class _EditSkillLanguageResumePageState
                                 widgetPointerValue = value;
                               });
                             },
-                            child: Container(
+                            position: LinearElementPosition.outside,
+                            child: SizedBox(
                               width: 55,
                               height: 45,
                               child: Center(
@@ -387,7 +389,6 @@ class _EditSkillLanguageResumePageState
                                 ),
                               ),
                             ),
-                            position: LinearElementPosition.outside,
                           ),
                         ],
                         ranges: [
@@ -397,7 +398,7 @@ class _EditSkillLanguageResumePageState
                               position: LinearElementPosition.cross)
                         ],
                       ),
-                      SizedBox(height: 10,),
+                      const SizedBox(height: 10,),
                       Text(textValue,
                           style: TextStyle(
                               fontSize: 10,
@@ -410,7 +411,7 @@ class _EditSkillLanguageResumePageState
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
 
-                          Container(
+                          SizedBox(
 
                             width: widget.id >0 ? null:MediaQuery.of(context).size.width-50,
                             child: ButtonIconsCustomLimit(
@@ -456,45 +457,43 @@ class _EditSkillLanguageResumePageState
                           )
                           ,
                           if(widget.id >0)
-                            Container(
-                              child: ButtonIconsCustomLimit(
-                                label: isGetSkillLanguageResumeResponse?.body?.screeninfo?.deleteor??" Delete/ลบ",
-                                buttonIcons: Icon(
-                                  FontAwesomeIcons.trashCan,
-                                  color:bcButtonDelete.withOpacity(0.8),
-                                  size: 20.0,
-                                ),
-                                colortext:bcButtonDelete.withOpacity(0.8),
-                                colorbutton:
-                                Theme.of(context).scaffoldBackgroundColor,
-                                sizetext: 14,
-                                colorborder:bcButtonDelete.withOpacity(0.8),
-                                sizeborder: 3,
-                                onPressed: () {
-                                  context.read<ResumeBloc>().add(SentEditSkillLanguageResumeEvent(
-                                    edit: false,
-                                    id:widget.id,
-                                    orderChoose: searchStatus,
-                                    languageTH:  (languageControllerTH.text == ''
-                                        ? languageTh
-                                        : languageControllerTH.text) ??
-                                        '',
-                                    languageEN:   (languageControllerEN.text == ''
-                                        ? languageEn
-                                        : languageControllerEN.text) ??
-                                        '',
-                                    detailTH:  (detailControllerTH.text == ''
-                                        ? detailTh
-                                        : detailControllerTH.text) ??
-                                        '',
-                                    detailEN: (detailControllerEN.text == ''
-                                        ? detailEn
-                                        : detailControllerEN.text) ??
-                                        '',
-                                    valueLanguage:widgetPointerValue.toStringAsFixed(0),
-                                  ));
-                                },
+                            ButtonIconsCustomLimit(
+                              label: isGetSkillLanguageResumeResponse?.body?.screeninfo?.deleteor??" Delete/ลบ",
+                              buttonIcons: Icon(
+                                FontAwesomeIcons.trashCan,
+                                color:bcButtonDelete.withOpacity(0.8),
+                                size: 20.0,
                               ),
+                              colortext:bcButtonDelete.withOpacity(0.8),
+                              colorbutton:
+                              Theme.of(context).scaffoldBackgroundColor,
+                              sizetext: 14,
+                              colorborder:bcButtonDelete.withOpacity(0.8),
+                              sizeborder: 3,
+                              onPressed: () {
+                                context.read<ResumeBloc>().add(SentEditSkillLanguageResumeEvent(
+                                  edit: false,
+                                  id:widget.id,
+                                  orderChoose: searchStatus,
+                                  languageTH:  (languageControllerTH.text == ''
+                                      ? languageTh
+                                      : languageControllerTH.text) ??
+                                      '',
+                                  languageEN:   (languageControllerEN.text == ''
+                                      ? languageEn
+                                      : languageControllerEN.text) ??
+                                      '',
+                                  detailTH:  (detailControllerTH.text == ''
+                                      ? detailTh
+                                      : detailControllerTH.text) ??
+                                      '',
+                                  detailEN: (detailControllerEN.text == ''
+                                      ? detailEn
+                                      : detailControllerEN.text) ??
+                                      '',
+                                  valueLanguage:widgetPointerValue.toStringAsFixed(0),
+                                ));
+                              },
                             )
                         ],
                       ),

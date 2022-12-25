@@ -19,8 +19,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) =>
-            LoginBloc()..add(LoginScreenInfoEvent(userLanguage: "TH")),
+        create: (context) =>LoginBloc(),
         // child: const GenerativeWidget());
         child: const LoginPage());
   }
@@ -52,6 +51,7 @@ class _LoginPageState extends State<LoginPage> with ProgressDialog {
     valueLanguage = "TH";
     setUserLanguage(valueLanguage);
     _isSessionUnauthorized();
+    context.read<LoginBloc>().add(LoginScreenInfoEvent(userLanguage: "TH"));
     super.initState();
   }
 
@@ -108,7 +108,7 @@ class _LoginPageState extends State<LoginPage> with ProgressDialog {
         }
         if (state is LoginError) {
           // show dialog error
-          if (state.message.toString() == 'Unauthorized') {
+          if (state.message.toString() == 'Unauthorized'||state.message.isEmpty) {
             dialogSessionExpiredOneBtn(
                 context, textSessionExpired, textSubSessionExpired, _buttonOk,
                 onClickBtn: () {
@@ -118,6 +118,11 @@ class _LoginPageState extends State<LoginPage> with ProgressDialog {
                   MaterialPageRoute(
                       builder: (BuildContext context) => const LoginScreen()));
             });
+          } // show dialog error
+          if (state.message.isEmpty) {
+
+            Navigator.of(context).pop();
+            context.read<LoginBloc>().add(LoginScreenInfoEvent(userLanguage: "TH"));
           } else {
             dialogOneLineOneBtn(context, '${state.message}\n ', _buttonOk,
                 onClickBtn: () {

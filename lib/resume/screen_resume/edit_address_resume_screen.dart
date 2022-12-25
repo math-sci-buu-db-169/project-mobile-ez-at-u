@@ -163,13 +163,13 @@ class _EditAddressResumePageState extends State<EditAddressResumePage>
               MaterialPageRoute(
                   builder: (BuildContext context) => const ContentDesignResumeEditScreen()));
         }
-        if (state is ResumeLoading) {
+        if (state is AddressPreviewResumeLoading) {
           showProgressDialog(context);
         }
-        if (state is ResumeEndLoading) {
+        if (state is AddressPreviewResumeEndLoading) {
           hideProgressDialog(context);
         }
-        if (state is ResumeError) {
+        if (state is AddressResumeError) {
           if (state.errorMessage.toString() == 'Unauthorized') {
             dialogSessionExpiredOneBtn(
                 context, textSessionExpired, textSubSessionExpired, _buttonOk,

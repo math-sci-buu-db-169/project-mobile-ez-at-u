@@ -121,13 +121,13 @@ class _EditUserInfoResumePageState extends State<EditUserInfoResumePage>
               MaterialPageRoute(
                   builder: (BuildContext context) => const ContentDesignResumeEditScreen()));
         }
-        if (state is ResumeLoading) {
+        if (state is UserInfoPreviewResumeLoading) {
           showProgressDialog(context);
         }
-        if (state is ResumeEndLoading) {
+        if (state is UserInfoPreviewResumeEndLoading) {
           hideProgressDialog(context);
         }
-        if (state is ResumeError) {
+        if (state is UserInfoResumeError) {
           if (state.errorMessage.toString() == 'Unauthorized') {
             dialogSessionExpiredOneBtn(
                 context, textSessionExpired, textSubSessionExpired, _buttonOk,
@@ -428,7 +428,7 @@ floatingSetThemePDF(
       //         builder: (context) => const ContentDesignResumeScreen()));
     },
     icon: Icon(
-      FontAwesomeIcons.barsStaggered,
+      FontAwesomeIcons.paperPlane,
       color: Theme.of(context).iconTheme.color,
       size: 20.0,
     ),

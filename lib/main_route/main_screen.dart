@@ -129,17 +129,22 @@ class _MainRouteState extends State<MainRoutePage> with ProgressDialog {
           hideProgressDialog(context);
         }
         if (state is MainRouteError) {
-          if(state.message.toString() == 'Unauthorized'){
-
-            dialogSessionExpiredOneBtn(context, textSessionExpired , textSubSessionExpired, _buttonOk, onClickBtn: () {
-              cleanDelete();
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => const LoginScreen()));
-            });
-          }else{
-            dialogOneLineOneBtn(context, '${state.message}\n ', _buttonOk  , onClickBtn: () {
-              Navigator.of(context).pop();
-            });
-          }
+          dialogSessionExpiredOneBtn(context, textSessionExpired , textSubSessionExpired, _buttonOk, onClickBtn: () {
+            cleanDelete();
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => const LoginScreen()));
+          });
+          // if(state.message.toString() == 'Unauthorized'){
+          //
+          //   dialogSessionExpiredOneBtn(context, textSessionExpired , textSubSessionExpired, _buttonOk, onClickBtn: () {
+          //     cleanDelete();
+          //     Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => const LoginScreen()));
+          //   });
+          // }
+          // else{
+          //   dialogOneLineOneBtn(context, '${state.message}\n ', _buttonOk  , onClickBtn: () {
+          //     Navigator.of(context).pop();
+          //   });
+          // }
 
           // show dialog error
           if (kDebugMode) {

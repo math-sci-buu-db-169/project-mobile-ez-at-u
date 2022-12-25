@@ -108,13 +108,13 @@ class _EditCertificateResumePageState extends State<EditCertificateResumePage>
               MaterialPageRoute(
                   builder: (BuildContext context) => const ContentDesignResumeEditScreen()));
         }
-        if (state is ResumeLoading) {
+        if (state is CertificatePreviewResumeLoading) {
           showProgressDialog(context);
         }
-        if (state is ResumeEndLoading) {
+        if (state is CertificatePreviewResumeEndLoading) {
           hideProgressDialog(context);
         }
-        if (state is ResumeError) {
+        if (state is CertificateResumeError) {
           if (state.errorMessage.toString() == 'Unauthorized') {
             dialogSessionExpiredOneBtn(
                 context, textSessionExpired, textSubSessionExpired, _buttonOk,

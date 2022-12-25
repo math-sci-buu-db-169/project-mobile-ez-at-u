@@ -9,15 +9,12 @@ import '../../../../../customs/message/text_button.dart';
 import '../../../../../customs/message/text_error.dart';
 import '../../../../../customs/progress_dialog.dart';
 import '../../../../../utils/shared_preferences.dart';
-import '../../customs/color/color_const.dart';
 import '../../customs/size/size.dart';
 import '../../customs/text_file/build_textformfiled_unlimit_custom.dart';
 import '../../module/login/screen/login_screen/login_screen.dart';
 import '../bloc_resume/resume_bloc.dart';
-import '../examples/content_design_resume.dart';
 import '../examples/content_design_resume_edit.dart';
 import '../model/response/get_about_me_resume_response.dart';
-import '../model/response/get_user_infomartion_resume_response.dart';
 
 class EditAboutMeResumeScreen extends StatelessWidget {
   const EditAboutMeResumeScreen({
@@ -103,7 +100,7 @@ class _EditAboutMeResumePageState extends State<EditAboutMeResumePage>
       listener: (context, state) {
         if (state is GetEditScreenAboutMeResumeSuccessState) {
           isGetAboutMeResumeResponse =
-              state.isGetEducationResumeResponse;
+              state.isGetAboutMeResumeResponse;
           setState(() {});
         }
         if (state is SentEditAboutMeResumeSuccessState) {
@@ -112,13 +109,13 @@ class _EditAboutMeResumePageState extends State<EditAboutMeResumePage>
               MaterialPageRoute(
                   builder: (BuildContext context) => const ContentDesignResumeEditScreen()));
         }
-        if (state is ResumeLoading) {
+        if (state is AboutMePreviewResumeLoading) {
           showProgressDialog(context);
         }
-        if (state is ResumeEndLoading) {
+        if (state is AboutMePreviewResumeEndLoading) {
           hideProgressDialog(context);
         }
-        if (state is ResumeError) {
+        if (state is AboutMeResumeError) {
           if (state.errorMessage.toString() == 'Unauthorized') {
             dialogSessionExpiredOneBtn(
                 context, textSessionExpired, textSubSessionExpired, _buttonOk,
@@ -145,7 +142,7 @@ class _EditAboutMeResumePageState extends State<EditAboutMeResumePage>
       builder: (context, state) {
         if (state is GetEditScreenAboutMeResumeSuccessState) {
           isGetAboutMeResumeResponse =
-              state.isGetEducationResumeResponse;
+              state.isGetAboutMeResumeResponse;
           String? textAboutMeTh =
               '${isGetAboutMeResumeResponse?.body?.screeninfo?.aboutmeTh} *';
           String? textEditInfo=
@@ -273,7 +270,7 @@ floatingSetThemePDF(
       //         builder: (context) => const ContentDesignResumeScreen()));
     },
     icon: Icon(
-      FontAwesomeIcons.barsStaggered,
+      FontAwesomeIcons.paperPlane,
       color: Theme.of(context).iconTheme.color,
       size: 20.0,
     ),

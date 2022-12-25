@@ -64,7 +64,7 @@ Future<Uint8List> generateResume(
   final pageTheme = await _myPageTheme(format, colorOfPdfUsTheme);
  String isName = isPreViewResumeResponse.body?.data?.userinfo?.name ?? '';
  String isLastName = isPreViewResumeResponse.body?.data?.userinfo?.lastname?? '';
- String isAboutMe = isPreViewResumeResponse.body?.screenInfo?.aboutme ?? '';
+ String isAboutMe = isPreViewResumeResponse.body?.screeninfo?.aboutme ?? '';
  String isAboutMeValue = isPreViewResumeResponse.body?.data?.aboutme ?? '';
  String isBachelor = isPreViewResumeResponse.body?.data?.education?.hsc?[0].placeofstudy  ?? '';
  String isBachelorValue = isPreViewResumeResponse.body?.data?.education?.hsc?[0].detail ?? '';
@@ -72,15 +72,15 @@ Future<Uint8List> generateResume(
  String isHighSchool = isPreViewResumeResponse.body?.data?.education?.hsc?[0].placeofstudy  ?? '';
  String isHighSchoolValue =isPreViewResumeResponse.body?.data?.education?.hsc?[0].detail ?? '';
  String isHighSchoolValueDate = '${isPreViewResumeResponse.body?.data?.education?.hsc?[0].startdate??''} - ${isPreViewResumeResponse.body?.data?.education?.hsc?[0].enddate??''}';
- String isFacebook = isPreViewResumeResponse.body?.screenInfo?.facebook ?? '';
+ String isFacebook = isPreViewResumeResponse.body?.screeninfo?.facebook ?? '';
  String isFacebookValue = isPreViewResumeResponse.body?.data?.contactinfo?.facebook ?? '';
- String isLine = isPreViewResumeResponse.body?.screenInfo?.line ?? '';
+ String isLine = isPreViewResumeResponse.body?.screeninfo?.line ?? '';
  String isLineValue =  isPreViewResumeResponse.body?.data?.contactinfo?.line ?? '';
- String isIG = isPreViewResumeResponse.body?.screenInfo?.instagram ?? '';
+ String isIG = isPreViewResumeResponse.body?.screeninfo?.instagram ?? '';
  String isIGValue =  isPreViewResumeResponse.body?.data?.contactinfo?.instagram?? '';
- String isEmail = isPreViewResumeResponse.body?.screenInfo?.email ?? '';
+ String isEmail = isPreViewResumeResponse.body?.screeninfo?.email ?? '';
  String isEmailVAlue =  isPreViewResumeResponse.body?.data?.contactinfo?.email?? '';
- String isAddress = isPreViewResumeResponse.body?.screenInfo?.address ?? '';
+ String isAddress = isPreViewResumeResponse.body?.screeninfo?.address ?? '';
  String isAddressValue =  "${isPreViewResumeResponse.body?.data?.address?.number ?? ''} "
                           "${isPreViewResumeResponse.body?.data?.address?.moo ?? ''} "
                           " ${isPreViewResumeResponse.body?.data?.address?.soi ?? ''} "
@@ -89,16 +89,16 @@ Future<Uint8List> generateResume(
                          " ${isPreViewResumeResponse.body?.data?.address?.district ?? ''} "
                          "${isPreViewResumeResponse.body?.data?.address?.province ?? ''} "
                          " ${isPreViewResumeResponse.body?.data?.address?.zipcode ?? ''}";
- String isCertifications = isPreViewResumeResponse.body?.screenInfo?.certificate ?? '';
+ String isCertifications = isPreViewResumeResponse.body?.screeninfo?.certificate ?? '';
   String isCertificationsValue =isPreViewResumeResponse.body?.data?.certificate?[0].title ?? '';
   String isCertificationsValueDetail =isPreViewResumeResponse.body?.data?.certificate?[0].description ?? '';
- String isSKILLS = isPreViewResumeResponse.body?.screenInfo?.skill ?? '';
+ String isSKILLS = isPreViewResumeResponse.body?.screeninfo?.skill ?? '';
  String isWord = isPreViewResumeResponse.body?.data?.skill?[0].skill ?? '';
  String isExcel = isPreViewResumeResponse.body?.data?.skill?[0].skill ?? '';
  String isPowerPoint =  'PowerPoint';
  String isEnglish = isPreViewResumeResponse.body?.data?.language?[0].language ?? '';
- String isEducation =  isPreViewResumeResponse.body?.screenInfo?.education ?? 'Education';
- String isExperience =  isPreViewResumeResponse.body?.screenInfo?.experience ?? 'Experience';
+ String isEducation =  isPreViewResumeResponse.body?.screeninfo?.education ?? 'Education';
+ String isExperience =  isPreViewResumeResponse.body?.screeninfo?.experience ?? 'Experience';
   String isExperienceValueOne = isPreViewResumeResponse.body?.data?.experience?[0].position ?? '';
   String isExperienceValueStarDate = isPreViewResumeResponse.body?.data?.experience?[0].startdate ?? '';
   String isExperienceValueEndDate = isPreViewResumeResponse.body?.data?.experience?[0].enddate ?? '';

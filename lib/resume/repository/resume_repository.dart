@@ -17,7 +17,7 @@ class ResumeRepository {
     prefs = await SharedPreferences.getInstance();
     String resumeLanguage = prefs.getString('userLanguageResume')??"";
     print("resumeLanguage  getPreviewResumeDataAndScreen ============ $resumeLanguage");
-    return await MyDio.createDioServer().post("/api/resume/previewresume",
+    return await MyDio.createDioServer().post("/resume/previewresume",
         data: jsonEncode({
           "userlanguage": resumeLanguage
         })
@@ -37,25 +37,25 @@ class ResumeRepository {
         })
     );
   }
-  Future<Response> sentResumeImage({required String base64Image}) async {
-    return await MyDio.createDioServer().post("/api/resume/imageuploadresume",
+  Future<Response> setResumeImage({required String base64Image}) async {
+    return await MyDio.createDioServer().post("/resume/imageuploadresume",
         data: jsonEncode({
           "base64": base64Image
         })
     );
   }
-  Future<Response> sentEditAboutMeResume({required String detailsTH,required String detailsEN,}) async {
+  Future<Response> setEditAboutMeResume({required String detailsTH,required String detailsEN,}) async {
     print("object");
     print(detailsTH);
     print(detailsEN);
-    return await MyDio.createDioServer().post("/api/resume/editaboutmeresume",
+    return await MyDio.createDioServer().post("/resume/editaboutmeresume",
         data: jsonEncode({
           "detailsth": detailsTH,
           "detailsen": detailsEN
         })
     );
   }
-  Future<Response> sentEditUserInfoResume({
+  Future<Response> setEditUserInfoResume({
     required String prefixId,
     required String name,
     required String lastName,
@@ -64,7 +64,7 @@ class ResumeRepository {
     print("sentEditUserInfoResume");
     print(" prefix: $prefixId ,name: $name,lastName: $lastName,nameEN: $nameEN,lastNameEN: $lastNameEN");
 
-    return await MyDio.createDioServer().post("/api/resume/edituserinforesume",
+    return await MyDio.createDioServer().post("/resume/edituserinforesume",
         data: jsonEncode({
           "prefixid": prefixId,
           "name_th": name,
@@ -75,7 +75,7 @@ class ResumeRepository {
     );
   }
 
-  Future<Response> sentEditPositionResume({required String positionTH,required String positionEN,
+  Future<Response> setEditPositionResume({required String positionTH,required String positionEN,
     required bool edit,
     required int id,
     required int orderChoose,
@@ -88,7 +88,7 @@ class ResumeRepository {
     print(positionEN);
     print(officeTH);
     print(officeEN);
-    return await MyDio.createDioServer().post("/api/resume/editpositionresume",
+    return await MyDio.createDioServer().post("/resume/editpositionresume",
         data: jsonEncode({
           "edit": edit,
           "id": id,
@@ -103,7 +103,7 @@ class ResumeRepository {
         })
     );
   }
-  Future<Response> sentEditContactResume({
+  Future<Response> setEditContactResume({
     required String email,
     required String phone,
     required String facebook,
@@ -111,7 +111,7 @@ class ResumeRepository {
     required String instagram,
     required String twitter,
     required String youtube,}) async {
-    return await MyDio.createDioServer().post("/api/resume/editcontactresume",
+    return await MyDio.createDioServer().post("/resume/editcontactresume",
         data: jsonEncode({
 
           "email": email,
@@ -126,7 +126,7 @@ class ResumeRepository {
     );
   }
 
-  Future<Response> sentEditAddressResume({
+  Future<Response> setEditAddressResume({
     required String house,
     required String moo,
     required String soiTH,
@@ -155,27 +155,27 @@ class ResumeRepository {
 
         })
     );
-    return await MyDio.createDioServer().post("/api/resume/editaddressresume",
+    return await MyDio.createDioServer().post("/resume/editaddressresume",
 
 
         data: jsonEncode({
 
 
-            "number": house,
-            "moo": moo,
-            "soi_th": soiTH,
-            "soi_en": soiEN,
-            "road_th": roadTH,
-            "road_en": roadEN,
-            "subdistrict_id": subDistrictID,
-            "district_id":districtID,
-            "province_id": provinceID,
-            "zipcode": zipcode
+          "number": house,
+          "moo": moo,
+          "soi_th": soiTH,
+          "soi_en": soiEN,
+          "road_th": roadTH,
+          "road_en": roadEN,
+          "subdistrict_id": subDistrictID,
+          "district_id":districtID,
+          "province_id": provinceID,
+          "zipcode": zipcode
 
 
         })
     );
-  }Future<Response> sentEditCertificateResume({
+  }Future<Response> setEditCertificateResume({
     required bool edit,
     required int id,
     required int orderChoose,
@@ -183,7 +183,7 @@ class ResumeRepository {
     required String titleEN,
     required String description,
     required String descriptionEN}) async {
-    return await MyDio.createDioServer().post("/api/resume/editcertificateresume",
+    return await MyDio.createDioServer().post("/resume/editcertificateresume",
         data: jsonEncode({
           "edit": edit,
           "id": id ,
@@ -195,7 +195,7 @@ class ResumeRepository {
 
         })
     );
-  }Future<Response> sentEditSkillResume({
+  }Future<Response> setEditSkillResume({
     required bool edit,
     required int id,
     required int orderChoose,
@@ -204,7 +204,7 @@ class ResumeRepository {
     required String descriptionTH,
     required String descriptionEN,
     required String value}) async {
-    return await MyDio.createDioServer().post("/api/resume/editskillresume",
+    return await MyDio.createDioServer().post("/resume/editskillresume",
         data: jsonEncode({
 
           "edit": edit,
@@ -218,7 +218,7 @@ class ResumeRepository {
 
         })
     );
-  }Future<Response> sentEditSkillLanguageResume({
+  }Future<Response> setEditSkillLanguageResume({
     required bool edit,
     required int id,
     required int orderChoose,
@@ -227,7 +227,7 @@ class ResumeRepository {
     required String descriptionTH,
     required String descriptionEN,
     required String value}) async {
-    return await MyDio.createDioServer().post("/api/resume/editskilllanguageresume",
+    return await MyDio.createDioServer().post("/resume/editskilllanguageresume",
         data: jsonEncode({
 
           "edit": edit,
@@ -241,7 +241,7 @@ class ResumeRepository {
 
         })
     );
-  }Future<Response> sentEditExperienceResume({
+  }Future<Response> setEditExperienceResume({
     required bool edit,
     required int id,
     required int orderChoose,
@@ -251,7 +251,7 @@ class ResumeRepository {
     required String positionEN,
     required String detailTH,
     required String detailEN}) async {
-    return await MyDio.createDioServer().post("/api/resume/editexperienceresume",
+    return await MyDio.createDioServer().post("/resume/editexperienceresume",
         data: jsonEncode({
 
           "edit": edit,
@@ -267,7 +267,7 @@ class ResumeRepository {
         })
     );
   }
-  Future<Response> sentEditEducationResume({
+  Future<Response> setEditEducationResume({
     required bool edit,
     required int id,
     required int orderChoose,
@@ -278,7 +278,7 @@ class ResumeRepository {
     required String placeOfStudyEN,
     required String detailTH,
     required String detailEN}) async {
-    return await MyDio.createDioServer().post("/api/resume/editeducationresume",
+    return await MyDio.createDioServer().post("/resume/editeducationresume",
         data: jsonEncode({
 
           "edit": edit,
@@ -297,32 +297,32 @@ class ResumeRepository {
   }
 
 
-  Future<Response> sentScreenAboutResume() async {
+  Future<Response> setScreenAboutResume() async {
     prefs = await SharedPreferences.getInstance();
     String? userLanguage = prefs.getString('userLanguageResume');
 
-    return await MyDio.createDioServer().post("/api/resume/aboutmeresume",
+    return await MyDio.createDioServer().post("/resume/aboutmeresume",
         data: jsonEncode({
           "languageresume": userLanguage
         })
     );
   }
-  Future<Response> sentScreenUserInfoResume() async {
+  Future<Response> setScreenUserInfoResume() async {
     prefs = await SharedPreferences.getInstance();
     String? userLanguage = prefs.getString('userLanguageResume');
 
-    return await MyDio.createDioServer().post("/api/resume/userinforesume",
+    return await MyDio.createDioServer().post("/resume/userinforesume",
         data: jsonEncode({
           "languageresume": userLanguage
         })
     );
   }
 
-  Future<Response> sentScreenPositionResume({required int positionID }) async {
+  Future<Response> setScreenPositionResume({required int positionID }) async {
     prefs = await SharedPreferences.getInstance();
     String? userLanguage = prefs.getString('userLanguageResume');
 
-    return await MyDio.createDioServer().post("/api/resume/positionresume",
+    return await MyDio.createDioServer().post("/resume/positionresume",
         data: jsonEncode({
           "position_id":positionID,
           "languageresume": userLanguage
@@ -330,22 +330,22 @@ class ResumeRepository {
         })
     );
   }
-  Future<Response> sentScreenContactResume() async {
+  Future<Response> setScreenContactResume() async {
     prefs = await SharedPreferences.getInstance();
     String? userLanguage = prefs.getString('userLanguageResume');
 
-    return await MyDio.createDioServer().post("/api/resume/contactresume",
+    return await MyDio.createDioServer().post("/resume/contactresume",
         data: jsonEncode({
           "languageresume": userLanguage
 
         })
     );
   }
-  Future<Response> sentScreenEducationResume({required int eduId ,required String type}) async {
+  Future<Response> setScreenEducationResume({required int eduId ,required String type}) async {
     prefs = await SharedPreferences.getInstance();
     String? userLanguage = prefs.getString('userLanguageResume');
 
-    return await MyDio.createDioServer().post("/api/resume/educationresume",
+    return await MyDio.createDioServer().post("/resume/educationresume",
         data: jsonEncode({
           "languageresume": userLanguage,
           "edu_id": eduId,
@@ -354,100 +354,100 @@ class ResumeRepository {
         })
     );
   }
-  Future<Response> sentScreenAddressResume() async {
+  Future<Response> setScreenAddressResume() async {
     prefs = await SharedPreferences.getInstance();
     String? userLanguage = prefs.getString('userLanguageResume');
 
-    return await MyDio.createDioServer().post("/api/resume/addressresume",
+    return await MyDio.createDioServer().post("/resume/addressresume",
         data: jsonEncode({
           "languageresume": userLanguage
 
         })
     );
   }
-  Future<Response> sentScreenDistrictListAddressResume ({required String provinceId}) async {
+  Future<Response> setScreenDistrictListAddressResume ({required String provinceId}) async {
     prefs = await SharedPreferences.getInstance();
     String? userLanguage = prefs.getString('userLanguageResume');
 
-    return await MyDio.createDioServer().post("/api/resume/addressdistrictlist",
+    return await MyDio.createDioServer().post("/resume/addressdistrictlist",
         data: jsonEncode({
           "languageresume": userLanguage,
-            "province_id": provinceId
+          "province_id": provinceId
 
         })
     );
   }
-  Future<Response> sentScreenTamBonListAddressResume ({required String districtId}) async {
+  Future<Response> setScreenTamBonListAddressResume ({required String districtId}) async {
     prefs = await SharedPreferences.getInstance();
     String? userLanguage = prefs.getString('userLanguageResume');
 
-    return await MyDio.createDioServer().post("/api/resume/addresstambonlist",
+    return await MyDio.createDioServer().post("/resume/addresstambonlist",
         data: jsonEncode({
           "languageresume": userLanguage,
-            "district_id": districtId
+          "district_id": districtId
 
         })
     );
   }
-  Future<Response> sentScreenZipCodeAddressResume ({required String subDistrictId}) async {
+  Future<Response> setScreenZipCodeAddressResume ({required String subDistrictId}) async {
     prefs = await SharedPreferences.getInstance();
     String? userLanguage = prefs.getString('userLanguageResume');
 
-    return await MyDio.createDioServer().post("/api/resume/addresszipcode",
+    return await MyDio.createDioServer().post("/resume/addresszipcode",
         data: jsonEncode({
           "languageresume": userLanguage,
-            "sub_district_id": subDistrictId
+          "sub_district_id": subDistrictId
 
         })
     );
   }
-  Future<Response> sentScreenProvinceAddressResume() async {
+  Future<Response> setScreenProvinceAddressResume() async {
     prefs = await SharedPreferences.getInstance();
     String? userLanguage = prefs.getString('userLanguageResume');
 
-    return await MyDio.createDioServer().post("/api/resume/addressprovincelist",
+    return await MyDio.createDioServer().post("/resume/addressprovincelist",
         data: jsonEncode({
           "languageresume": userLanguage
 
         })
     );
   }
-  Future<Response> sentScreenCertificateResume({required int certificateId}) async {
+  Future<Response> setScreenCertificateResume({required int certificateId}) async {
     prefs = await SharedPreferences.getInstance();
     String? userLanguage = prefs.getString('userLanguageResume');
 
-    return await MyDio.createDioServer().post("/api/resume/certificateresume",
+    return await MyDio.createDioServer().post("/resume/certificateresume",
         data: jsonEncode({
           "certificate_id": certificateId,
           "languageresume": userLanguage
         })
     );
-  }Future<Response> sentScreenSkillResume({required int skillId}) async {
+  }Future<Response> setScreenSkillResume({required int skillId}) async {
     prefs = await SharedPreferences.getInstance();
     String? userLanguage = prefs.getString('userLanguageResume');
 
-    return await MyDio.createDioServer().post("/api/resume/skillresume",
+    return await MyDio.createDioServer().post("/resume/skillresume",
         data: jsonEncode({
           "skill_id":skillId,
           "languageresume": userLanguage
         })
     );
-  }Future<Response> sentScreenSkillLanguageResume({required int skillLanguageId}) async {
+  }Future<Response> setScreenSkillLanguageResume({required int skillLanguageId}) async {
     prefs = await SharedPreferences.getInstance();
     String? userLanguage = prefs.getString('userLanguageResume');
 
-    return await MyDio.createDioServer().post("/api/resume/skilllanguageresume",
+    return await MyDio.createDioServer().post("/resume/skilllanguageresume",
         data: jsonEncode({
           "skillanguage_id": skillLanguageId,
           "languageresume": userLanguage
 
         })
     );
-  }Future<Response> sentScreenExperienceResume({required int experienceId}) async {
+  }Future<Response> setScreenExperienceResume({required int experienceId}) async {
     prefs = await SharedPreferences.getInstance();
     String? userLanguage = prefs.getString('userLanguageResume');
 
-    return await MyDio.createDioServer().post("/api/resume/experienceresume",
+    return await MyDio.createDioServer().post("/resume/experienceresume",
         data: jsonEncode({
 
           "experience_id": experienceId,
@@ -457,26 +457,26 @@ class ResumeRepository {
     );
   }
   Future<Response> getOnSelectedResume() async {
-    return await MyDio.createDioServer().post("/api/resume/onselectresume",
+    return await MyDio.createDioServer().post("/resume/onselectresume",
         data: jsonEncode({
         })
     );
   }
   Future<Response> setOnSelectedResume({
-  required List<OnSelect> positionOnSelect,
-  required List<OnSelect> educationHSCOnSelect,
-  required List<OnSelect> educationBDOnSelect ,
-  required List<OnSelect> educationMDOnSelect ,
-  required List<OnSelect> educationDDOnSelect ,
-  required List<OnSelect> educationHDDOnSelect ,
-  required List<OnSelect> socialOnSelect ,
-  required List<OnSelect> addressOnSelect,
-  required List<OnSelect> experienceOnSelect ,
-  required List<OnSelect> certificateOnSelect ,
-  required List<OnSelect> skillOnSelect ,
-  required List<OnSelect> languageOnSelect ,
+    required List<OnSelect> positionOnSelect,
+    required List<OnSelect> educationHSCOnSelect,
+    required List<OnSelect> educationBDOnSelect ,
+    required List<OnSelect> educationMDOnSelect ,
+    required List<OnSelect> educationDDOnSelect ,
+    required List<OnSelect> educationHDDOnSelect ,
+    required List<OnSelect> socialOnSelect ,
+    required List<OnSelect> addressOnSelect,
+    required List<OnSelect> experienceOnSelect ,
+    required List<OnSelect> certificateOnSelect ,
+    required List<OnSelect> skillOnSelect ,
+    required List<OnSelect> languageOnSelect ,
 
-}) async {
+  }) async {
     print(jsonEncode({
       "data_on_select": {
         "position_on_select": positionOnSelect,
@@ -513,7 +513,7 @@ class ResumeRepository {
       }
     }
     ));
-    return await MyDio.createDioServer().post("/api/resume/setonselectresume",
+    return await MyDio.createDioServer().post("/resume/setonselectresume",
 
         data: jsonEncode({
           "data_on_select": {
@@ -551,6 +551,14 @@ class ResumeRepository {
           }
         }
         )
+    );
+
+  }
+  Future<Response> sendColorResume({required SendOnSelectColorListResume sendOnSelectColorSet}) async {
+print("jsonEncode(sendOnSelectColorSet )");
+print(jsonEncode(sendOnSelectColorSet ));
+    return await MyDio.createDioServer().post("/resume/colorresume",
+        data: jsonEncode(sendOnSelectColorSet )
     );
   }
 }
