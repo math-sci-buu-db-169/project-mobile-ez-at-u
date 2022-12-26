@@ -35,7 +35,8 @@ buildTableGeneralImageInfo(
                           fontWeight: FontWeight.bold),
                     )
                   : Text(
-                      screenProfileResponse?.body?.profileGeneralInfo?.branchname ?? '-',
+                // screenProfileTeacherResponse?.body?.profileGeneralTH?.branchname ?? '-',
+                screenProfileTeacherResponse?.body?.profileGeneralTH?.role ?? '-',
                       // 'AAA',
                       style: TextStyle(
                           color: Theme.of(context).bottomAppBarColor,
@@ -56,7 +57,8 @@ buildTableGeneralImageInfo(
                         )
                       : Text(
                           // 'BBB',
-                          screenProfileResponse?.body?.profileGeneralInfo?.facultyname ?? '-',
+                    // screenProfileTeacherResponse?.body?.profileGeneralTH?.facultyname ?? '-',
+                    screenProfileTeacherResponse?.body?.profileGeneralTH?.teacherid ?? '-',
                           textAlign: TextAlign.end,
                           style: TextStyle(
                               color: Theme.of(context).bottomAppBarColor,
@@ -76,7 +78,7 @@ buildTableGeneralImageInfo(
               ? const CircleAvatar(
                   radius: 35.0,
                   backgroundImage: AssetImage(
-                    'assets/logo/profile.png',
+                    'assets/logo/logo.png',
                   ),
                 )
               : Container(
@@ -127,7 +129,7 @@ buildTableGeneralImageInfo(
               ? const CircleAvatar(
             radius: 35.0,
             backgroundImage: AssetImage(
-              'assets/logo/profile.png',
+              'assets/logo/logo.png',
             ),
           )
               : Container(
@@ -175,7 +177,7 @@ buildTableGeneralImageInfo(
           const CircleAvatar(
               radius: 35.0,
               backgroundImage: AssetImage(
-                'assets/logo/profile.png',
+                'assets/logo/logo.png',
               ),
           )
         ])

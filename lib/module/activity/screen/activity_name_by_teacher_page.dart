@@ -206,8 +206,8 @@ class ActivityNameCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        // Text(sequence,style: TextStyle(fontSize: 26,fontWeight: FontWeight.w900,color: Theme.of(context).appBarTheme.foregroundColor),),
-                        Text('9999',style: TextStyle(fontSize: 26,fontWeight: FontWeight.w900,color: Theme.of(context).appBarTheme.foregroundColor),),
+                        Text(sequence,style: TextStyle(fontSize: 26,fontWeight: FontWeight.w900,color: Theme.of(context).appBarTheme.foregroundColor),),
+                        // Text('9999',style: TextStyle(fontSize: 26,fontWeight: FontWeight.w900,color: Theme.of(context).appBarTheme.foregroundColor),),
                       ],
                     ),
                   ),
