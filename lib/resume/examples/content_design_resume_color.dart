@@ -25,7 +25,16 @@ import '../bloc_resume/resume_bloc.dart';
 import '../components/components_resume.dart';
 import '../model/response/pre_view_resume_response.dart';
 import 'content_design_resume_edit.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+Future<void> _launchInBrowser(Uri url) async {
+  if (!await launchUrl(
+    url,
+    mode: LaunchMode.externalApplication,
+  )) {
+    throw 'Could not launch $url';
+  }
+}
 class ContentDesignResumeScreenColor extends StatelessWidget {
   const ContentDesignResumeScreenColor({Key? key}) : super(key: key);
 
@@ -85,6 +94,12 @@ class _ContentDesignResumeColorState extends State<ContentDesignResumeColor>
         }
         if (state is PreviewResumeEndLoading) {
           hideProgressDialog(context);
+        }
+        if (state is SetOnSelectedAndGenResumeSuccessState) {
+            setState(() {
+              _launchInBrowser(Uri.parse(
+                  "http://msd.buu.ac.th/ServiceTest/resume/generatepdftest?id=62030340"));
+            });
         }
         if (state is OnSelectedAndPreviewResumeSuccessState) {
           _preViewResumeResponse = state.isPreViewResumeResponse;
