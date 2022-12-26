@@ -103,9 +103,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> with LoginRepository {
             final appVersion = await PackageInfoApi.getAppVersion();
             // final ipAddress = await IpInfoApi.getIPAddress();
             final phone = await DeviceInfoPlusApi.getPhoneInfo();
-            final phoneVersion = await DeviceInfoPlusApi.getPhoneInfo();
-            final operatingSystem = await DeviceInfoPlusApi.getPhoneInfo();
-            final screenResolution = await DeviceInfoPlusApi.getPhoneInfo();
+            final phoneVersion = await DeviceInfoPlusApi.getPhoneVersion();
+            final operatingSystem = await DeviceInfoPlusApi.getOperatingSystem();
+            final screenResolution = await DeviceInfoPlusApi.getScreenResolution();
             // final phoneVersion = await DeviceInfoPlusApi.getPhoneVersion();
             // final operatingSystem = await DeviceInfoPlusApi.getOperatingSystem();
             // final screenResolution = await DeviceInfoPlusApi.getScreenResolution();
