@@ -260,6 +260,50 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
         emit(PreviewResumeError(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
+    on<SetOnSelectedAndGenPreviewResumeEvent>((event, emit) async {
+      try {
+        emit(PreviewResumeLoading());
+        print("CheckProfile 5 == ProfileApiEvent");
+
+        await checkPreviewResumeEventInitial(event, emit);
+        Response responseSetOnSelectedResume = await setOnSelectedResume(
+          positionOnSelect: event.positionOnSelect,
+          educationHSCOnSelect: event.educationHSCOnSelect,
+          educationBDOnSelect: event.educationBDOnSelect,
+          educationMDOnSelect: event.educationMDOnSelect,
+          educationDDOnSelect: event.educationDDOnSelect,
+          educationHDDOnSelect: event.educationHDDOnSelect,
+          socialOnSelect: event.socialOnSelect,
+          addressOnSelect: event.addressOnSelect,
+          experienceOnSelect: event.experienceOnSelect,
+          certificateOnSelect: event.certificateOnSelect,
+          skillOnSelect: event.skillOnSelect,
+          languageOnSelect: event.languageOnSelect,
+        ); Response responseSetOnColorResume = await sendColorResume(
+
+          sendOnSelectColorSet: event.sendOnSelectColorSet,
+        );
+        emit(PreviewResumeEndLoading());
+        if (responseSetOnSelectedResume.statusCode == 200 &&responseSetOnColorResume.statusCode == 200) {
+          SetOnSelectedResume setOnSelectedResume =
+              SetOnSelectedResume.fromJson(responseSetOnSelectedResume.data);
+          ApiEditResumeResponseHead apiEditResumeResponseHead =
+          ApiEditResumeResponseHead.fromJson(responseSetOnColorResume.data);
+          if (setOnSelectedResume.head?.status == 200|| apiEditResumeResponseHead.head?.status == 200) {
+            emit(SetOnSelectedAndGenResumeSuccessState(
+                isSetOnSelectedResume: setOnSelectedResume));
+          } else {
+            emit(PreviewResumeError(
+                errorMessage: setOnSelectedResume.head?.message ?? ""));
+          }
+        } else {
+          emit(PreviewResumeError(
+              errorMessage: responseSetOnSelectedResume.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(PreviewResumeError(errorMessage: e.response?.statusMessage ?? ""));
+      }
+    });
     on<ChangeLanguageResumeRequest>((event, emit) async {
       try {
         emit(PreviewResumeLoading());
