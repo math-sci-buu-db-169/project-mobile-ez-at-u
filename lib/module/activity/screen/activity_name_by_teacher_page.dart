@@ -151,15 +151,22 @@ buildListActivityNameByTeacher(BuildContext context, ActivityNameListByTeacher? 
     child: Column(
             children: List.generate(int.parse(
                 "${addEditDeleteActivityScreenByTeacherApi?.body?.activitynamelistteacher?.length}"),
-                    (index) => ActivityNameCard(data: listFromApi?[index],onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=> EditActivityByTeacherScreen(data: listFromApi?[index],)));}))
+                    (index) => ActivityNameCard(data: listFromApi?[index],
+                        sequence: (int.parse(
+                            "${addEditDeleteActivityScreenByTeacherApi?.
+                            body?.
+                            activitynamelistteacher?.
+                            length}") - index).toString(),
+                        onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=> EditActivityByTeacherScreen(data: listFromApi?[index],)));}))
     ),
   );
 }
 
 class ActivityNameCard extends StatelessWidget {
   final dynamic data;
+  final String sequence;
   final GestureTapCallback? onTap;
-  const ActivityNameCard({Key? key, required this.data, this.onTap}) : super(key: key);
+  const ActivityNameCard({Key? key, required this.data, required this.sequence, this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -170,21 +177,51 @@ class ActivityNameCard extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 8.0),
           child: Card(
             shape: RoundedRectangleBorder(
-                side: BorderSide(color: Theme.of(context).splashColor),
-                // borderRadius: BorderRadius.circular(30)
+                side: BorderSide(color: Theme.of(context).splashColor, width: 0),
+                borderRadius: BorderRadius.circular(10)
             ),
             elevation: 5,
             child: Container(
-                width: MediaQuery.of(context).size.width * 0.9,
+                width: MediaQuery.of(context).size.width * 0.95,
                 // height: MediaQuery.of(context).size.height * 0.1,
                 decoration: BoxDecoration(
-                  border: Border(
-                    left: BorderSide(color: Theme.of(context).splashColor,width: 10)
-                  )
+                  // border: Border(
+                  //   right: BorderSide(color: Theme.of(context).splashColor,width: 20)
+                  // )
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20,20,20,20),
-                  child: Text(data?.activitynameresponse,style: TextStyle(color: Theme.of(context).appBarTheme.foregroundColor,fontSize: 18,fontWeight: FontWeight.bold),),
+                child: Row(
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  // crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10,0,0,0),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    height: MediaQuery.of(context).size.height * 0.2,
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).splashColor,
+                      shape: BoxShape.circle
+                  ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        // Text(sequence,style: TextStyle(fontSize: 26,fontWeight: FontWeight.w900,color: Theme.of(context).appBarTheme.foregroundColor),),
+                        Text('9999',style: TextStyle(fontSize: 26,fontWeight: FontWeight.w900,color: Theme.of(context).appBarTheme.foregroundColor),),
+                      ],
+                    ),
+                  ),
+                ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(5,5,5,5),
+                        child: Text(
+                          data?.activitynameresponse,style:
+                        TextStyle(color: Theme.of(context).appBarTheme.foregroundColor,
+                            fontSize: 18,fontWeight: FontWeight.bold),),
+                      ),
+                    ),
+                  ],
                 )
             )
 
