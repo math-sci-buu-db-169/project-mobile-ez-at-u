@@ -1185,5 +1185,34 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
         emit(SkillResumeError(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
+
+
+    on<GeneratePdfTestResumeEvent>((event, emit) async {
+      try {
+        emit(EditPreviewResumeLoading());
+        print("CheckProfile 5 == ProfileApiEvent");
+
+        await checkPreviewResumeEventInitial(event, emit);
+        Response responsePreViewResume = await getPreviewResumeDataAndScreen();
+        emit(EditPreviewResumeEndLoading());
+        if (responsePreViewResume.statusCode == 200) {
+          PreViewResumeResponse preViewResumeResponse =
+          PreViewResumeResponse.fromJson(responsePreViewResume.data);
+          if (preViewResumeResponse.head?.status == 200) {
+            emit(EditPreviewResumeSuccessState(
+                isPreViewResumeResponse: preViewResumeResponse));
+          } else {
+            emit(EditPreviewResumeError(
+                errorMessage: preViewResumeResponse.head?.message ?? ""));
+          }
+        } else {
+          emit(EditPreviewResumeError(
+              errorMessage: responsePreViewResume.statusMessage ?? ""));
+        }
+      } on DioError catch (e) {
+        emit(EditPreviewResumeError(
+            errorMessage: e.response?.statusMessage ?? ""));
+      }
+    });
   }
 }
