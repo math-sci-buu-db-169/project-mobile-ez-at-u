@@ -7,6 +7,7 @@ import 'package:ez_at_u/module/login/model/response/submit_login_response.dart';
 import 'package:ez_at_u/module/login/repository/login_repository.dart';
 
 import '../../../../customs/common/api/device_info_api.dart';
+import '../../../../customs/common/api/device_info_plus.dart';
 import '../../../../customs/common/api/package_info_api.dart';
 import '../../model/response/log_sessions/log_sessions_response.dart';
 
@@ -101,10 +102,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> with LoginRepository {
             final packageName = await PackageInfoApi.getPackageName();
             final appVersion = await PackageInfoApi.getAppVersion();
             // final ipAddress = await IpInfoApi.getIPAddress();
-            final phone = await DeviceInfoApi.getPhoneInfo();
-            final phoneVersion = await DeviceInfoApi.getPhoneVersion();
-            final operatingSystem = await DeviceInfoApi.getOperatingSystem();
-            final screenResolution = await DeviceInfoApi.getScreenResolution();
+            final phone = await DeviceInfoPlusApi.getPhoneInfo();
+            final phoneVersion = await DeviceInfoPlusApi.getPhoneVersion();
+            final operatingSystem = await DeviceInfoPlusApi.getOperatingSystem();
+            final screenResolution = await DeviceInfoPlusApi.getScreenResolution();
+            // final phoneVersion = await DeviceInfoPlusApi.getPhoneVersion();
+            // final operatingSystem = await DeviceInfoPlusApi.getOperatingSystem();
+            // final screenResolution = await DeviceInfoPlusApi.getScreenResolution();
           print(packageName);
           print(appVersion);
           print(phone);

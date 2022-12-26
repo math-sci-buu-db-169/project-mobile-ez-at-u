@@ -150,16 +150,16 @@ moreBodyWidget(BuildContext context, ScreenMoreResponse? screenMoreResponse,
                     title: screenMoreResponse?.body?.screeninfo?.btncou ?? moreBtnCou,
                     iconsFile : FontAwesomeIcons.usersViewfinder,
                   ),
-                  // buildCardMore(
-                  //   context: context,
-                  //   onTap: () {
-                  //     setState(() {
-                  //       launchInBrowser(Uri.parse("https://sites.google.com/go.buu.ac.th/bscmathematics?pli=1"));
-                  //     });
-                  //   },
-                  //   title: 'หลักสูตรระดับปริญญาตรี',
-                  //   iconsFile : FontAwesomeIcons.usersViewfinder,
-                  // ),
+                  buildCardMore(
+                    context: context,
+                    onTap: () {
+                      setState(() {
+                        launchInBrowser(Uri.parse("http://msd.buu.ac.th/ServiceTest/resume/generatepdftest?id=62030340"));
+                      });
+                    },
+                    title: 'Gen PDF',
+                    iconsFile : FontAwesomeIcons.usersViewfinder,
+                  ),
                   buildCardMore(
                     context: context,
                     onTap: () {
