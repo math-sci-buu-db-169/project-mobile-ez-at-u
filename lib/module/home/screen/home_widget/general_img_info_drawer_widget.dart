@@ -35,8 +35,8 @@ buildTableGeneralImageInfo(
                           fontWeight: FontWeight.bold),
                     )
                   : Text(
-                // screenProfileTeacherResponse?.body?.profileGeneralTH?.branchname ?? '-',
-                screenProfileTeacherResponse?.body?.profileGeneralTH?.role ?? '-',
+                screenProfileTeacherResponse?.body?.profileGeneralTH?.branchname ?? '-',
+                // screenProfileTeacherResponse?.body?.profileGeneralTH?.role ?? '-',
                       // 'AAA',
                       style: TextStyle(
                           color: Theme.of(context).bottomAppBarColor,
