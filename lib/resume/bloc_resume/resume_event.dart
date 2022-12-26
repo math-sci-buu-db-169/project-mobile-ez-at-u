@@ -44,6 +44,7 @@ class SetOnSelectedAndPreviewResumeEvent extends ResumeEvent {
 }
 
 class GetSetPreviewResumeEvent extends ResumeEvent {}
+class GeneratePdfTestResumeEvent extends ResumeEvent {}
 
 class GetEditScreenPreviewResumeEvent extends ResumeEvent {}
 class GetEditScreenAddressResumeEvent extends ResumeEvent {}

@@ -97,7 +97,7 @@ drawerStudentHome(
                             textLeftTitle: screenHomeResponse
                                     ?.body?.screenInfo?.textname ??
                                 homeTextName,
-                            textRightDetail: '$name = name   $lName ',
+                            textRightDetail: '$name $lName ',
                             tb1: 0.3,
                             tb2: 0.05,
                             tb3: 0.65,

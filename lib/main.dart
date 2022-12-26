@@ -10,6 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'customs/common/api/plush.dart';
 import 'customs/common/provider/theme_provider.dart';
 import 'main_route/main_screen.dart';
 import 'module/login/screen/login_screen/login_screen.dart';
@@ -86,7 +87,7 @@ class _MyAppRunState extends State<MyAppRun> {
             // ),
             // home: HomeScreen(),              '/': (context) =>const MainRouteScreen(),
             routes: {
-              '/': (context) =>const MainRouteScreen(),
+              '/': (context) =>const MyAppplus(),
               // '/': (context) => ContentDesignResumeScreen(),
             }
         );
