@@ -1149,6 +1149,7 @@ buildCardPositionEditResumeScreen(
     required Color appBarForegroundColor,
     required Function() returnResumeEdit,
     required bool boolClick,
+    // required int count,
     required Null Function() onTap}) {
   int length = positionData?.length ?? 0;
   return Column(
@@ -1173,7 +1174,8 @@ buildCardPositionEditResumeScreen(
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return EditPositionsResumeScreen(
-                        id: positionData?[index].id ?? 0);
+                        id: positionData?[index].id ?? 0,
+                      count: 10,);
                   })).then(
                     (value) => returnResumeEdit,
                   );
@@ -1212,7 +1214,7 @@ buildCardPositionEditResumeScreen(
       GestureDetector(
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const EditPositionsResumeScreen(id: 0);
+            return const EditPositionsResumeScreen(id: 0, count: 10,);
             //
           })).then(
             (value) => returnResumeEdit,

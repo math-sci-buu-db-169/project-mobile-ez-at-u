@@ -23,8 +23,9 @@ import '../model/response/get_user_infomartion_resume_response.dart';
 
 class EditPositionsResumeScreen extends StatelessWidget {
   final int id;
+  final int count;
   const EditPositionsResumeScreen({
-    Key? key, required this.id,
+    Key? key, required this.id, required this.count,
   }) : super(key: key);
 
   @override
@@ -33,14 +34,15 @@ class EditPositionsResumeScreen extends StatelessWidget {
         create: (context) =>
             ResumeBloc()..add(GetEditScreenPositionsResumeEvent(positionID: id)),
         // child: const GenerativeWidget());
-        child:  EditPositionsResumePage(id:id));
+        child:  EditPositionsResumePage(id:id,count:count,));
   }
 }
 
 class EditPositionsResumePage extends StatefulWidget {
   final int id;
+  final int count;
   const EditPositionsResumePage({
-    Key? key, required this.id,
+    Key? key, required this.id, required this.count,
   }) : super(key: key);
 
   @override
@@ -56,11 +58,13 @@ class _EditPositionsResumePageState extends State<EditPositionsResumePage>
   late String _buttonOk;
 
   late int searchStatus;
+  late int countGenerate;
   late int isSearchStatus;
   GetPositionResumeResponse? isGetPositionResumeResponse;
   @override
   void initState() {
     valueLanguage = "TH";
+    countGenerate = widget.count;
     getUserLanguage();
     _isSessionUnauthorized();
     searchStatus = 0;
@@ -139,6 +143,8 @@ class _EditPositionsResumePageState extends State<EditPositionsResumePage>
       },
       builder: (context, state) {
         if (state is GetEditScreenPositionResumeSuccessState) {
+
+          countGenerate = widget.count;
           isGetPositionResumeResponse =
               state.isGetPositionResumeResponse;
           String? textPositionTh =
@@ -305,7 +311,7 @@ class _EditPositionsResumePageState extends State<EditPositionsResumePage>
                           ),
                         ),
                         itemBuilder: (context) {
-                          return List.generate(10,
+                          return List.generate(countGenerate,
                                   (index) {
                                 return PopupMenuItem(
                                   value: index + 1,
