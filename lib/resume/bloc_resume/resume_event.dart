@@ -99,7 +99,8 @@ class SendEditAddressResumeEvent extends ResumeEvent {
    String districtID;
    String provinceID;
    String zipcode;
-   SendEditAddressResumeEvent({  required this. house,
+   SendEditAddressResumeEvent({
+     required this. house,
      required this. moo,
      required this. soiTH,
      required this. roadTH,

@@ -60,14 +60,14 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
           );
         } else if (refreshTokenResponse.head?.status == 400) {
           emit(TokenExpiredState(
-              message: response.statusMessage ?? "",
+              message: response.statusMessage ?? "S401EXP01",
               checkrefreshtokenmessage: refreshTokenResponse));
         } else {
           emit(ResumeError(
-              errorMessage: refreshTokenResponse.head?.message ?? ""));
+              errorMessage: refreshTokenResponse.head?.message ?? "S401EXP01"));
         }
       } else {
-        emit(ResumeError(errorMessage: response.statusMessage ?? ""));
+        emit(ResumeError(errorMessage: response.statusMessage ?? "S401EXP01"));
       }
     }
 
@@ -577,6 +577,8 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
 
     on<SendEditAddressResumeEvent>((event, emit) async {
         try {
+
+          emit(AddressPreviewResumeLoading());
           print("SendEditAddressResumeEvent 5 +3 == SendEditAddressResumeEvent");
 
           await checkPreviewResumeEventInitial(event, emit);
@@ -592,6 +594,7 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
             provinceID: event.provinceID ,
             zipcode:event.zipcode ,
           );
+          emit(AddressPreviewResumeEndLoading());
           if (responseSentEditSkillResume.statusCode == 200) {
             ApiEditResumeResponseHead sentEditContactResumeResponse =
             ApiEditResumeResponseHead.fromJson(

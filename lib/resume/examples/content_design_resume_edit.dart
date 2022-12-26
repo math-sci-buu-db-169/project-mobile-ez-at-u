@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../check_token/token_bloc.dart';
 import '../../customs/color/color_const.dart';
 import '../../customs/dialog/dialog_widget.dart';
 import '../../customs/image_base_64.dart';
@@ -93,6 +94,17 @@ class _ContentDesignEditResumeState extends State<ContentDesignEditResume>
         if (state is SentEditContactResumeSuccessState) {
           context.read<ResumeBloc>().add(GetEditScreenPreviewResumeEvent());
         }
+        if (state is TokenExpiredState) {
+          dialogSessionExpiredOneBtn(
+              context, textSessionExpired, textSubSessionExpired, _buttonOk,
+              onClickBtn: () {
+                cleanDelete();
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => const LoginScreen()));
+              });
+        }
         if (state is EditPreviewResumeError) {
           if (state.errorMessage.toString() == 'Unauthorized') {
             dialogSessionExpiredOneBtn(
@@ -104,7 +116,17 @@ class _ContentDesignEditResumeState extends State<ContentDesignEditResume>
                       MaterialPageRoute(
                           builder: (BuildContext context) => const LoginScreen()));
                 });
-          } else {
+          } else if (state.errorMessage.toUpperCase().toString() == 'S401EXP01'||state.errorMessage.toUpperCase().toString() == 'T401NOT01') {
+            dialogSessionExpiredOneBtn(
+                context, textSessionExpired, textSubSessionExpired, _buttonOk,
+                onClickBtn: () {
+                  cleanDelete();
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => const LoginScreen()));
+                });
+          }else {
             dialogOneLineOneBtn(context, '${state.errorMessage}\n ', _buttonOk,
                 onClickBtn: () {
                   Navigator.of(context).pop();
@@ -151,6 +173,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
     _isSelectLanguageThai();
     _isSessionUnauthorized();
     widgetPointerValue = 26;
+    countIntData =widget.isPreViewResumeResponse.body?.data?.resumedatacount;
     super.initState();
   }
 
@@ -201,6 +224,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
   late bool isClickSkill = false;
   late bool isClickLanguage = false;
   late bool isClickContactReadOnly = true;
+  late Resumedatacount? countIntData ;
   Future<void> _isSelectLanguageThai() async {
     prefs = await SharedPreferences.getInstance();
     isSelectLanguageThai =
@@ -276,6 +300,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
         isPreViewResumeResponse.body?.data?.contactinfo?.youtube ?? '';
     setState(() {
 
+      countIntData =widget.isPreViewResumeResponse.body?.data?.resumedatacount;
 
     });
     return WillPopScope(
@@ -612,6 +637,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                   isPreViewResumeEditData: '',
                                   ontap: () {}),
                               buildCardPositionEditResumeScreen(
+                                count:countIntData?.position??0,
                                 context: context,
                                 type: '',
                                 editInFormations: isPreViewResumeResponse
@@ -646,6 +672,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                   isPreViewResumeEditData: "",
                                   ontap: () {}),
                               buildEducationCard(
+                                count:countIntData?.educationHsc??0,
                                 context: context,
                                 type: 'HSC',
                                 editInFormations: isPreViewResumeResponse
@@ -667,6 +694,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
 
                                 },),
                               buildEducationCard(
+                                count:countIntData?.educationBd??0,
                                 context: context,
                                 type: 'BD',
                                 editInFormations: isPreViewResumeResponse
@@ -688,6 +716,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
 
                                 },),
                               buildEducationCard(
+                                count:countIntData?.educationMd??0,
                                 context: context,
                                 type: 'MD',
                                 editInFormations: isPreViewResumeResponse
@@ -709,6 +738,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
 
                                 },),
                               buildEducationCard(
+                                count:countIntData?.educationDd??0,
                                 context: context,
                                 type: 'DD',
                                 editInFormations: isPreViewResumeResponse
@@ -730,6 +760,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
 
                                 },),
                               buildEducationCard(
+                                count:countIntData?.educationHdd??0,
                                 context: context,
                                 type: 'HDD',
                                 editInFormations: isPreViewResumeResponse
@@ -999,6 +1030,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                   isPreViewResumeEditData: '',
                                   ontap: () {}),
                               buildExperienceCard(
+                                count:countIntData?.experience??0,
                                 context: context,
                                 type: '',
                                 editInFormations: isPreViewResumeResponse
@@ -1033,6 +1065,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                   isPreViewResumeEditData: '',
                                   ontap: () {}),
                               buildCertificateCard(
+                                count:countIntData?.certificate??0,
                                 context: context,
                                 type: '',
                                 editInFormations: isPreViewResumeResponse
@@ -1099,6 +1132,8 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                                       id: isPreViewResumeResponse.body?.data
                                                           ?.skill?[index].id ??
                                                           0,
+
+                                                      count:countIntData?.skill??0,
                                                     );
                                                   })).then(
                                                     (value) => setState(() {
@@ -1166,8 +1201,9 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                 onTap: () {
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
-                                        return const EditSkillResumeScreen(
+                                        return  EditSkillResumeScreen(
                                           id: 0,
+                                          count:countIntData?.skill??0,
                                         );
                                       })).then(
                                         (value) => setState(() {
@@ -1261,6 +1297,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                                       id: isPreViewResumeResponse.body?.data
                                                           ?.language?[index].id ??
                                                           0,
+                                                      count:countIntData?.language??0,
                                                     );
                                                   })).then(
                                                     (value) => setState(() {
@@ -1304,10 +1341,10 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                                           lineHeight: 20.0,
                                                           animationDuration: 2500,
                                                           percent: int.parse(
-                                                              "${isPreViewResumeResponse.body?.data?.skill?[index].value ?? 0}") /
+                                                              "${isPreViewResumeResponse.body?.data?.language?[index].value ?? 0}") /
                                                               100.0,
                                                           center: Text(
-                                                              "${isPreViewResumeResponse.body?.data?.skill?[index].value ?? 0}.0%"),
+                                                              "${isPreViewResumeResponse.body?.data?.language?[index].value ?? 0}.0%"),
                                                           linearStrokeCap:
                                                           LinearStrokeCap.roundAll,
                                                           progressColor:
@@ -1330,6 +1367,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                       MaterialPageRoute(builder: (context) {
                                         return EditSkillLanguageResumeScreen(
                                           id: 0,
+                                          count:countIntData?.language??0,
                                         );
                                       })).then(
                                         (value) => setState(() {

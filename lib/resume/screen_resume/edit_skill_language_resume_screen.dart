@@ -19,9 +19,11 @@ import '../model/response/get_skill_language_resume_response.dart';
 
 class EditSkillLanguageResumeScreen extends StatelessWidget {
   final int id;
+  final int count;
   const EditSkillLanguageResumeScreen({
     Key? key,
     required this.id,
+    required this.count,
   }) : super(key: key);
 
   @override
@@ -30,15 +32,17 @@ class EditSkillLanguageResumeScreen extends StatelessWidget {
         create: (context) =>
             ResumeBloc()..add(GetEditScreenSkillLanguageResumeEvent(id: id)),
         // child: const GenerativeWidget());
-        child: EditSkillLanguageResumePage(id: id));
+        child: EditSkillLanguageResumePage(id: id,count: count,));
   }
 }
 
 class EditSkillLanguageResumePage extends StatefulWidget {
   final int id;
+  final int count;
   const EditSkillLanguageResumePage({
     Key? key,
     required this.id,
+    required this.count,
   }) : super(key: key);
 
   @override
@@ -89,13 +93,7 @@ class _EditSkillLanguageResumePageState
   TextEditingController languageControllerEN = TextEditingController();
   TextEditingController detailControllerTH = TextEditingController();
   TextEditingController detailControllerEN = TextEditingController();
-  List<String> lengthPopupMenuItem = [
-    "High School SkillLanguage",
-    "Bachelor Degrees",
-    "Master Degrees",
-    "Doctor Degrees",
-    "Honorary Doctorate Degree"
-  ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -130,22 +128,27 @@ class _EditSkillLanguageResumePageState
             dialogSessionExpiredOneBtn(
                 context, textSessionExpired, textSubSessionExpired, _buttonOk,
                 onClickBtn: () {
-              cleanDelete();
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) => const LoginScreen()));
-            });
-          } else {
+                  cleanDelete();
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => const LoginScreen()));
+                });
+          } else if (state.errorMessage.toUpperCase().toString() == 'S401EXP01'||state.errorMessage.toUpperCase().toString() == 'T401NOT01') {
+            dialogSessionExpiredOneBtn(
+                context, textSessionExpired, textSubSessionExpired, _buttonOk,
+                onClickBtn: () {
+                  cleanDelete();
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => const LoginScreen()));
+                });
+          }else {
             dialogOneLineOneBtn(context, '${state.errorMessage}\n ', _buttonOk,
                 onClickBtn: () {
-              Navigator.of(context).pop();
-            });
-          }
-
-          // show dialog error
-          if (kDebugMode) {
-            print(state.errorMessage);
+                  Navigator.of(context).pop();
+                });
           }
         }
       },
@@ -327,7 +330,7 @@ class _EditSkillLanguageResumePageState
                           ),
                         ),
                         itemBuilder: (context) {
-                          return List.generate((lengthPopupMenuItem.length),
+                          return List.generate(widget.count +3,
                                   (index) {
                                 return PopupMenuItem(
                                   value: index + 1,

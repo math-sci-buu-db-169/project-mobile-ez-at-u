@@ -22,8 +22,9 @@ import '../model/response/get_experience_resume_response.dart';
 
 class EditExperienceResumeScreen extends StatelessWidget {
   final int  id;
+  final int  count;
   const EditExperienceResumeScreen({
-    Key? key, required this.id,
+    Key? key, required this.id, required this.count,
   }) : super(key: key);
 
   @override
@@ -32,14 +33,15 @@ class EditExperienceResumeScreen extends StatelessWidget {
         create: (context) =>
             ResumeBloc()..add(GetEditScreenExperienceResumeEvent(id:id)),
         // child: const GenerativeWidget());
-        child:  EditExperienceResumePage(id:id));
+        child:  EditExperienceResumePage(id:id,count:count,));
   }
 }
 
 class EditExperienceResumePage extends StatefulWidget {
   final int  id;
+  final int  count;
   const EditExperienceResumePage({
-    Key? key, required this.id,
+    Key? key, required this.id, required this.count,
   }) : super(key: key);
 
   @override
@@ -94,7 +96,7 @@ class _EditExperienceResumePageState extends State<EditExperienceResumePage>
   TextEditingController detailControllerEN = TextEditingController();
   TextEditingController endDateController = TextEditingController();
   TextEditingController startDateController = TextEditingController();
-   List<String> lengthPopupMenuItem =["High School Certificate","Bachelor Degrees","Master Degrees","Doctor Degrees","Honorary Doctorate Degree"];
+   // List<String> lengthPopupMenuItem =["High School Certificate","Bachelor Degrees","Master Degrees","Doctor Degrees","Honorary Doctorate Degree"];
 
   @override
   Widget build(BuildContext context) {
@@ -126,22 +128,27 @@ class _EditExperienceResumePageState extends State<EditExperienceResumePage>
             dialogSessionExpiredOneBtn(
                 context, textSessionExpired, textSubSessionExpired, _buttonOk,
                 onClickBtn: () {
-              cleanDelete();
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) => const LoginScreen()));
-            });
-          } else {
+                  cleanDelete();
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => const LoginScreen()));
+                });
+          } else if (state.errorMessage.toUpperCase().toString() == 'S401EXP01'||state.errorMessage.toUpperCase().toString() == 'T401NOT01') {
+            dialogSessionExpiredOneBtn(
+                context, textSessionExpired, textSubSessionExpired, _buttonOk,
+                onClickBtn: () {
+                  cleanDelete();
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => const LoginScreen()));
+                });
+          }else {
             dialogOneLineOneBtn(context, '${state.errorMessage}\n ', _buttonOk,
                 onClickBtn: () {
-              Navigator.of(context).pop();
-            });
-          }
-
-          // show dialog error
-          if (kDebugMode) {
-            print(state.errorMessage);
+                  Navigator.of(context).pop();
+                });
           }
         }
       },
@@ -226,78 +233,6 @@ class _EditExperienceResumePageState extends State<EditExperienceResumePage>
                           }
                         },
                       ),
-                      PopupMenuButton(
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Container(
-                              padding: EdgeInsets.only(right: 5,left: 5,top: 20,bottom: 20),
-                              decoration: BoxDecoration(
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(10),
-                                ),
-                                color: Theme.of(context).primaryColor == Colors.black
-                                    ? Color(0xFF1F222A)
-                                    : Colors.transparent.withOpacity(0.03),
-                              ),
-                              child: Padding(padding: EdgeInsets.only(left: 10,right: 10),child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    searchStatus == 0?
-                                    isSearchStatus == 0?
-                                    "โปรดเลือกลำดับการแสดง":
-                                    "การแสดงอันดับที่  $isSearchStatus"
-                                        :"การแสดงอันดับที่  $searchStatus",
-                                    style: TextStyle(
-                                      // decoration: TextDecoration.underline,
-                                        decorationThickness: 2,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w500,
-                                        color: Theme.of(context).appBarTheme.foregroundColor),
-                                  ), Text(
-                                    'เลือก',
-                                    style: TextStyle(
-                                        decoration: TextDecoration.underline,
-                                        decorationThickness: 2,
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.w500,
-                                        color: Theme.of(context).appBarTheme.foregroundColor),
-                                  ),
-
-                                ],
-                              ),)
-                            ),
-
-                          ),
-                        ),
-                        itemBuilder: (context) {
-                          return List.generate(
-                              (lengthPopupMenuItem.length)
-                              , (index) {
-
-                            return  PopupMenuItem(
-                              value: index + 1,
-                              child: Text("${index + 1}" ??'Settings',style: TextStyle(color: Theme.of(context).appBarTheme.foregroundColor),),
-                            );
-
-                          }
-                          );
-                        },
-                        onSelected: (value) {
-                          isSearchStatus = value ;
-                          searchStatus = value ;
-                          setState(() {
-                            isSearchStatus = value ;
-                            searchStatus = value ;
-                          }
-                          );
-
-                        },
-
-                      ),
-
 
                       BuildTextFormFieldUnLimitCustomNotIconsNotContainer(
                         textEditingController: positionControllerTH,
@@ -357,6 +292,77 @@ class _EditExperienceResumePageState extends State<EditExperienceResumePage>
                         hintLabel: textDetailEn,
                         initialvalue: detailEn,
                         textInputType: TextInputType.text,
+                      ),
+
+                      PopupMenuButton(
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Container(
+                                padding: EdgeInsets.only(right: 5,left: 5,top: 20,bottom: 20),
+                                decoration: BoxDecoration(
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(10),
+                                  ),
+                                  color: Theme.of(context).primaryColor == Colors.black
+                                      ? Color(0xFF1F222A)
+                                      : Colors.transparent.withOpacity(0.03),
+                                ),
+                                child: Padding(padding: EdgeInsets.only(left: 10,right: 10),child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      searchStatus == 0?
+                                      isSearchStatus == 0?
+                                      "โปรดเลือกลำดับการแสดง":
+                                      "การแสดงอันดับที่  $isSearchStatus"
+                                          :"การแสดงอันดับที่  $searchStatus",
+                                      style: TextStyle(
+                                        // decoration: TextDecoration.underline,
+                                          decorationThickness: 2,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500,
+                                          color: Theme.of(context).appBarTheme.foregroundColor),
+                                    ), Text(
+                                      'เลือก',
+                                      style: TextStyle(
+                                          decoration: TextDecoration.underline,
+                                          decorationThickness: 2,
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.w500,
+                                          color: Theme.of(context).appBarTheme.foregroundColor),
+                                    ),
+
+                                  ],
+                                ),)
+                            ),
+
+                          ),
+                        ),
+                        itemBuilder: (context) {
+                          return List.generate(widget.count
+                              , (index) {
+
+                            return  PopupMenuItem(
+                              value: index + 1,
+                              child: Text("${index + 1}" ??'Settings',style: TextStyle(color: Theme.of(context).appBarTheme.foregroundColor),),
+                            );
+
+                          }
+                          );
+                        },
+                        onSelected: (value) {
+                          isSearchStatus = value ;
+                          searchStatus = value ;
+                          setState(() {
+                            isSearchStatus = value ;
+                            searchStatus = value ;
+                          }
+                          );
+
+                        },
+
                       ),
 
                       const SizedBox(

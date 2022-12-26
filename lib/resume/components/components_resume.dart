@@ -1144,7 +1144,8 @@ buildCardPositionEditResumeScreen(
     required Function() returnResumeEdit,
     required bool boolClick,
     // required int count,
-    required Null Function() onTap}) {
+    required Null Function() onTap,
+      required int count}) {
   int length = positionData?.length ?? 0;
   return Column(
     children: [
@@ -1169,7 +1170,7 @@ buildCardPositionEditResumeScreen(
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return EditPositionsResumeScreen(
                       id: positionData?[index].id ?? 0,
-                      count: 10,
+                      count: count + 3,
                     );
                   })).then(
                     (value) => returnResumeEdit,
@@ -1263,7 +1264,7 @@ buildExperienceCard(
     required Color appBarForegroundColor,
     required Function() returnResumeEdit,
     required bool boolClick,
-    required Null Function() onTap}) {
+    required Null Function() onTap, required int count}) {
   int length = experienceData?.length ?? 0;
   return Column(
     children: [
@@ -1290,7 +1291,8 @@ buildExperienceCard(
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return EditExperienceResumeScreen(
-                        id: experienceData?[index].id ?? 0);
+                        id: experienceData?[index].id ?? 0,
+                        count:count+3);
                   })).then(
                     (value) => returnResumeEdit,
                   );
@@ -1329,7 +1331,8 @@ buildExperienceCard(
       GestureDetector(
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const EditExperienceResumeScreen(id: 0);
+            return  EditExperienceResumeScreen(id: 0,
+                count:count+3);
           })).then(
             (value) => returnResumeEdit,
           );
@@ -1379,7 +1382,7 @@ buildCertificateCard(
     required Color appBarForegroundColor,
     required Function() returnResumeEdit,
     required bool boolClick,
-    required Null Function() onTap}) {
+    required Null Function() onTap, required int count}) {
   int length = certificateData?.length ?? 0;
   return Column(
     children: [
@@ -1405,7 +1408,8 @@ buildCertificateCard(
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return EditCertificateResumeScreen(
-                        id: (certificateData?[index].id ?? 0).toInt());
+                        id: (certificateData?[index].id ?? 0).toInt(),
+                        count:count+3);
                   })).then(
                     (value) => returnResumeEdit,
                   );
@@ -1444,7 +1448,8 @@ buildCertificateCard(
       GestureDetector(
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const EditCertificateResumeScreen(id: 0);
+            return  EditCertificateResumeScreen(id: 0,
+                count:count+3);
           })).then(
             (value) => returnResumeEdit,
           );
@@ -1494,7 +1499,7 @@ buildEducationCard(
     required Color appBarForegroundColor,
     required Function() returnResumeEdit,
     required bool boolClick,
-    required Null Function() onTap}) {
+    required Null Function() onTap, required int count}) {
   int length = educationData?.length ?? 0;
   return Column(
     children: [
@@ -1527,6 +1532,7 @@ buildEducationCard(
                     return EditEducationResumeScreen(
                       id: educationData?[index].id ?? 0,
                       type: educationData?[index].type ?? 'HSC',
+                      count: count + 3,
                     );
                   })).then(
                     (value) => returnResumeEdit,
@@ -1566,7 +1572,8 @@ buildEducationCard(
       GestureDetector(
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return EditEducationResumeScreen(id: 0, type: type);
+            return EditEducationResumeScreen(id: 0, type: type,
+              count: count + 3,);
           })).then(
             (value) => returnResumeEdit,
           );

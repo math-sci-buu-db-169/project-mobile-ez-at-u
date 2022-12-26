@@ -120,22 +120,27 @@ class _EditAboutMeResumePageState extends State<EditAboutMeResumePage>
             dialogSessionExpiredOneBtn(
                 context, textSessionExpired, textSubSessionExpired, _buttonOk,
                 onClickBtn: () {
-              cleanDelete();
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) => const LoginScreen()));
-            });
-          } else {
+                  cleanDelete();
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => const LoginScreen()));
+                });
+          } else if (state.errorMessage.toUpperCase().toString() == 'S401EXP01'||state.errorMessage.toUpperCase().toString() == 'T401NOT01') {
+            dialogSessionExpiredOneBtn(
+                context, textSessionExpired, textSubSessionExpired, _buttonOk,
+                onClickBtn: () {
+                  cleanDelete();
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => const LoginScreen()));
+                });
+          }else {
             dialogOneLineOneBtn(context, '${state.errorMessage}\n ', _buttonOk,
                 onClickBtn: () {
-              Navigator.of(context).pop();
-            });
-          }
-
-          // show dialog error
-          if (kDebugMode) {
-            print(state.errorMessage);
+                  Navigator.of(context).pop();
+                });
           }
         }
       },

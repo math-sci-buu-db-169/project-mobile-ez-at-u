@@ -22,8 +22,9 @@ import '../model/response/get_education_resume_response.dart';
 class EditEducationResumeScreen extends StatelessWidget {
   final int id;
   final String type;
+  final int count;
   const EditEducationResumeScreen({
-    Key? key, required this.id, required this.type,
+    Key? key, required this.id, required this.type, required this. count,
   }) : super(key: key);
 
   @override
@@ -32,15 +33,16 @@ class EditEducationResumeScreen extends StatelessWidget {
         create: (context) =>
             ResumeBloc()..add(GetEditScreenEducationResumeEvent(eduId: id, type: type)),
         // child: const GenerativeWidget());
-        child:  EditEducationResumePage(id: id, type: type,));
+        child:  EditEducationResumePage(id: id, type: type, count: count,));
   }
 }
 
 class EditEducationResumePage extends StatefulWidget {
   final int id;
+  final int count;
 final String type;
   const EditEducationResumePage({
-    Key? key, required this.id, required this.type,
+    Key? key, required this.id, required this.type,required this.count,
   }) : super(key: key);
 
   @override
@@ -99,7 +101,7 @@ class _EditEducationResumePageState extends State<EditEducationResumePage>
   TextEditingController detailControllerEN = TextEditingController();
   TextEditingController startDateController = TextEditingController();
   TextEditingController endDateController = TextEditingController();
-   List<String> lengthPopupMenuItem =["High School Certificate","Bachelor Degrees","Master Degrees","Doctor Degrees","Honorary Doctorate Degree"];
+   // List<String> lengthPopupMenuItem =["High School Certificate","Bachelor Degrees","Master Degrees","Doctor Degrees","Honorary Doctorate Degree"];
 
   @override
   Widget build(BuildContext context) {
@@ -133,22 +135,27 @@ class _EditEducationResumePageState extends State<EditEducationResumePage>
             dialogSessionExpiredOneBtn(
                 context, textSessionExpired, textSubSessionExpired, _buttonOk,
                 onClickBtn: () {
-              cleanDelete();
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) => const LoginScreen()));
-            });
-          } else {
+                  cleanDelete();
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => const LoginScreen()));
+                });
+          } else if (state.errorMessage.toUpperCase().toString() == 'S401EXP01'||state.errorMessage.toUpperCase().toString() == 'T401NOT01') {
+            dialogSessionExpiredOneBtn(
+                context, textSessionExpired, textSubSessionExpired, _buttonOk,
+                onClickBtn: () {
+                  cleanDelete();
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => const LoginScreen()));
+                });
+          }else {
             dialogOneLineOneBtn(context, '${state.errorMessage}\n ', _buttonOk,
                 onClickBtn: () {
-              Navigator.of(context).pop();
-            });
-          }
-
-          // show dialog error
-          if (kDebugMode) {
-            print(state.errorMessage);
+                  Navigator.of(context).pop();
+                });
           }
         }
       },
@@ -417,8 +424,7 @@ class _EditEducationResumePageState extends State<EditEducationResumePage>
                           ),
                         ),
                         itemBuilder: (context) {
-                          return List.generate(
-                              (lengthPopupMenuItem.length)
+                          return List.generate(widget.count
                               , (index) {
 
                             return  PopupMenuItem(

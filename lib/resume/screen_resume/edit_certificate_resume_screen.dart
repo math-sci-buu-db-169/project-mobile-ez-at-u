@@ -19,8 +19,9 @@ import '../model/response/get_certificate_resume_response.dart';
 
 class EditCertificateResumeScreen extends StatelessWidget {
   final int  id;
+  final int  count;
   const EditCertificateResumeScreen({
-    Key? key, required this.id,
+    Key? key, required this.id, required this.count,
   }) : super(key: key);
 
   @override
@@ -29,14 +30,15 @@ class EditCertificateResumeScreen extends StatelessWidget {
         create: (context) =>
         ResumeBloc()..add(GetEditScreenCertificateResumeEvent(id: id)),
         // child: const GenerativeWidget());
-        child:  EditCertificateResumePage(id:id));
+        child:  EditCertificateResumePage(id:id,count:count,));
   }
 }
 
 class EditCertificateResumePage extends StatefulWidget {
   final int  id;
+  final int  count;
   const EditCertificateResumePage({
-    Key? key, required this.id,
+    Key? key, required this.id, required this.count,
   }) : super(key: key);
 
   @override
@@ -85,7 +87,7 @@ class _EditCertificateResumePageState extends State<EditCertificateResumePage>
   TextEditingController titleControllerEN = TextEditingController();
   TextEditingController detailControllerTH = TextEditingController();
   TextEditingController detailControllerEN = TextEditingController();
-  List<String> lengthPopupMenuItem =["High School Certificate","Bachelor Degrees","Master Degrees","Doctor Degrees","Honorary Doctorate Degree"];
+  // List<String> lengthPopupMenuItem =["High School Certificate","Bachelor Degrees","Master Degrees","Doctor Degrees","Honorary Doctorate Degree"];
 
 
   @override
@@ -125,16 +127,21 @@ class _EditCertificateResumePageState extends State<EditCertificateResumePage>
                       MaterialPageRoute(
                           builder: (BuildContext context) => const LoginScreen()));
                 });
-          } else {
+          } else if (state.errorMessage.toUpperCase().toString() == 'S401EXP01'||state.errorMessage.toUpperCase().toString() == 'T401NOT01') {
+            dialogSessionExpiredOneBtn(
+                context, textSessionExpired, textSubSessionExpired, _buttonOk,
+                onClickBtn: () {
+                  cleanDelete();
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => const LoginScreen()));
+                });
+          }else {
             dialogOneLineOneBtn(context, '${state.errorMessage}\n ', _buttonOk,
                 onClickBtn: () {
                   Navigator.of(context).pop();
                 });
-          }
-
-          // show dialog error
-          if (kDebugMode) {
-            print(state.errorMessage);
           }
         }
       },
@@ -299,8 +306,7 @@ class _EditCertificateResumePageState extends State<EditCertificateResumePage>
                           ),
                         ),
                         itemBuilder: (context) {
-                          return List.generate(
-                              (lengthPopupMenuItem.length)
+                          return List.generate(widget.count
                               , (index) {
 
                             return  PopupMenuItem(

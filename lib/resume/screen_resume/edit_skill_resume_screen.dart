@@ -21,9 +21,11 @@ import '../model/response/get_skill_resume_response.dart';
 
 class EditSkillResumeScreen extends StatelessWidget {
   final int id;
+  final int count;
   const EditSkillResumeScreen({
     Key? key,
     required this.id,
+    required this.count,
   }) : super(key: key);
 
   @override
@@ -32,15 +34,17 @@ class EditSkillResumeScreen extends StatelessWidget {
         create: (context) =>
         ResumeBloc()..add(GetEditScreenSkillResumeEvent(id: id)),
         // child: const GenerativeWidget());
-        child: EditSkillResumePage(id: id));
+        child: EditSkillResumePage(id: id,count: count,));
   }
 }
 
 class EditSkillResumePage extends StatefulWidget {
   final int id;
+  final int count;
   const EditSkillResumePage({
     Key? key,
     required this.id,
+    required this.count,
   }) : super(key: key);
 
   @override
@@ -91,13 +95,7 @@ class _EditSkillResumePageState
   TextEditingController skillControllerEN = TextEditingController();
   TextEditingController detailControllerTH = TextEditingController();
   TextEditingController detailControllerEN = TextEditingController();
-  List<String> lengthPopupMenuItem = [
-    "High School Skill",
-    "Bachelor Degrees",
-    "Master Degrees",
-    "Doctor Degrees",
-    "Honorary Doctorate Degree"
-  ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -138,16 +136,21 @@ class _EditSkillResumePageState
                       MaterialPageRoute(
                           builder: (BuildContext context) => const LoginScreen()));
                 });
-          } else {
+          } else if (state.errorMessage.toUpperCase().toString() == 'S401EXP01'||state.errorMessage.toUpperCase().toString() == 'T401NOT01') {
+            dialogSessionExpiredOneBtn(
+                context, textSessionExpired, textSubSessionExpired, _buttonOk,
+                onClickBtn: () {
+                  cleanDelete();
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => const LoginScreen()));
+                });
+          }else {
             dialogOneLineOneBtn(context, '${state.errorMessage}\n ', _buttonOk,
                 onClickBtn: () {
                   Navigator.of(context).pop();
                 });
-          }
-
-          // show dialog error
-          if (kDebugMode) {
-            print(state.errorMessage);
           }
         }
       },
@@ -325,7 +328,7 @@ class _EditSkillResumePageState
                           ),
                         ),
                         itemBuilder: (context) {
-                          return List.generate((lengthPopupMenuItem.length),
+                          return List.generate(widget.count+3,
                                   (index) {
                                 return PopupMenuItem(
                                   value: index + 1,
