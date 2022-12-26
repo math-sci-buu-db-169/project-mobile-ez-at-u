@@ -13,6 +13,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'customs/common/provider/theme_provider.dart';
 import 'main_route/main_screen.dart';
 import 'module/login/screen/login_screen/login_screen.dart';
+
+import 'package:flutter_localizations/flutter_localizations.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([
@@ -72,6 +74,24 @@ class _MyAppRunState extends State<MyAppRun> {
         final themeProvider = Provider.of<ThemeProvider>(context);
 
         return MaterialApp(
+            localizationsDelegates: [
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: [
+              Locale('en'),
+              Locale('zh'),
+              Locale('fr'),
+              Locale('es'),
+              Locale('de'),
+              Locale('ru'),
+              Locale('ja'),
+              Locale('ar'),
+              Locale('fa'),
+              Locale("es"),
+              Locale("it"),
+            ],
             title: 'Easy At You BETA',
             debugShowCheckedModeBanner: false,
             themeMode: themeProvider.themeMode,

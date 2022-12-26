@@ -265,3 +265,7 @@ class SetOnSelectedResumeSuccessState extends  ResumeState {
   SetOnSelectedResume isSetOnSelectedResume;
   SetOnSelectedResumeSuccessState({required this.isSetOnSelectedResume});
 }
+class SetOnSelectedAndGenResumeSuccessState extends  ResumeState {
+  SetOnSelectedResume isSetOnSelectedResume;
+  SetOnSelectedAndGenResumeSuccessState({required this.isSetOnSelectedResume});
+}

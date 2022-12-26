@@ -41,6 +41,34 @@ class SetOnSelectedAndPreviewResumeEvent extends ResumeEvent {
     required  this.skillOnSelect ,
     required  this.languageOnSelect,
     required  this. sendOnSelectColorSet ,});
+}class SetOnSelectedAndGenPreviewResumeEvent extends ResumeEvent {
+  List<OnSelect> positionOnSelect;
+  List<OnSelect> educationHSCOnSelect;
+  List<OnSelect> educationBDOnSelect ;
+  List<OnSelect> educationMDOnSelect ;
+  List<OnSelect> educationDDOnSelect ;
+  List<OnSelect> educationHDDOnSelect ;
+  List<OnSelect> socialOnSelect ;
+  List<OnSelect> addressOnSelect;
+  List<OnSelect> experienceOnSelect ;
+  List<OnSelect> certificateOnSelect ;
+  List<OnSelect> skillOnSelect ;
+  List<OnSelect> languageOnSelect ;
+  SendOnSelectColorListResume sendOnSelectColorSet ;
+  SetOnSelectedAndGenPreviewResumeEvent({
+    required  this.positionOnSelect,
+    required  this.educationHSCOnSelect,
+    required  this.educationBDOnSelect ,
+    required  this.educationMDOnSelect ,
+    required  this.educationDDOnSelect ,
+    required  this.educationHDDOnSelect ,
+    required  this.socialOnSelect ,
+    required  this.addressOnSelect,
+    required  this.experienceOnSelect ,
+    required  this.certificateOnSelect ,
+    required  this.skillOnSelect ,
+    required  this.languageOnSelect,
+    required  this. sendOnSelectColorSet ,});
 }
 
 class GetSetPreviewResumeEvent extends ResumeEvent {}

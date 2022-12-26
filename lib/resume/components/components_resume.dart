@@ -17,6 +17,16 @@ import '../screen_resume/edit_certificate_resume_screen.dart';
 import '../screen_resume/edit_education_resume_screen.dart';
 import '../screen_resume/edit_experience_resume_screen.dart';
 import '../screen_resume/edit_position_resume_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+Future<void> _launchInBrowser(Uri url) async {
+  if (!await launchUrl(
+    url,
+    mode: LaunchMode.externalApplication,
+  )) {
+    throw 'Could not launch $url';
+  }
+}
 
 class OnSelect {
   int id;
@@ -59,39 +69,62 @@ floatingGeneratePDFAndSaveData(
   required List<OnSelect> experienceOnSelect,
   required List<OnSelect> certificateOnSelect,
   required List<OnSelect> skillOnSelect,
-  required List<OnSelect> languageOnSelect, required SendOnSelectColorListResume sendOnSelectColorSet,
+  required List<OnSelect> languageOnSelect,
+  required SendOnSelectColorListResume sendOnSelectColorSet,
 }) {
   return Row(
     crossAxisAlignment: CrossAxisAlignment.center,
     mainAxisAlignment: MainAxisAlignment.spaceAround,
     children: <Widget>[
       FloatingActionButton.extended(
-
         heroTag: "btn1",
         backgroundColor:
             Theme.of(context).appBarTheme.backgroundColor?.withOpacity(0.9),
         foregroundColor: Colors.black,
+        // onPressed: () {
+        //   setState(() {
+        //     _launchInBrowser(Uri.parse(
+        //         "http://msd.buu.ac.th/ServiceTest/resume/generatepdftest?id=62030340"));
+        //   });
+        // },
         onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => MyAppResume(
-                        colorOfPdfUsButtonTitle: colorOfPdfUsButtonTitle,
-                        colorOfPdfUsName: colorOfPdfUsName,
-                        colorOfPdfUsPosition: colorOfPdfUsPosition,
-                        colorOfPdfUsExperience: colorOfPdfUsExperience,
-                        colorOfPdfUsEducations: colorOfPdfUsEducations,
-                        colorOfPdfUsContact: colorOfPdfUsContact,
-                        colorOfPdfUsCertifications: colorOfPdfUsCertifications,
-                        colorOfPdfUsSkills: colorOfPdfUsSkills,
-                        colorOfPdfUsAbout: colorOfPdfUsAbout,
-                        colorOfPdfUsText: colorOfPdfUsText,
-                        colorOfPdfUsTheme: colorOfPdfUsTheme,
-                        widthSizeCM: widthSizeCM,
-                        heightSizeCM: heightSizeCM,
-                        isPreViewResumeResponse: isPreViewResumeResponse,
-                      )));
+          context.read<ResumeBloc>().add(SetOnSelectedAndGenPreviewResumeEvent(
+            positionOnSelect: positionOnSelect,
+            educationHSCOnSelect: educationHSCOnSelect,
+            educationBDOnSelect: educationBDOnSelect,
+            educationMDOnSelect: educationMDOnSelect,
+            educationDDOnSelect: educationDDOnSelect,
+            educationHDDOnSelect: educationHDDOnSelect,
+            socialOnSelect: socialOnSelect,
+            addressOnSelect: addressOnSelect,
+            experienceOnSelect: experienceOnSelect,
+            certificateOnSelect: certificateOnSelect,
+            skillOnSelect: skillOnSelect,
+            languageOnSelect: languageOnSelect,
+            sendOnSelectColorSet: sendOnSelectColorSet,
+          ));
         },
+        // onPressed: () {
+        //   Navigator.push(
+        //       context,
+        //       MaterialPageRoute(
+        //           builder: (context) => MyAppResume(
+        //                 colorOfPdfUsButtonTitle: colorOfPdfUsButtonTitle,
+        //                 colorOfPdfUsName: colorOfPdfUsName,
+        //                 colorOfPdfUsPosition: colorOfPdfUsPosition,
+        //                 colorOfPdfUsExperience: colorOfPdfUsExperience,
+        //                 colorOfPdfUsEducations: colorOfPdfUsEducations,
+        //                 colorOfPdfUsContact: colorOfPdfUsContact,
+        //                 colorOfPdfUsCertifications: colorOfPdfUsCertifications,
+        //                 colorOfPdfUsSkills: colorOfPdfUsSkills,
+        //                 colorOfPdfUsAbout: colorOfPdfUsAbout,
+        //                 colorOfPdfUsText: colorOfPdfUsText,
+        //                 colorOfPdfUsTheme: colorOfPdfUsTheme,
+        //                 widthSizeCM: widthSizeCM,
+        //                 heightSizeCM: heightSizeCM,
+        //                 isPreViewResumeResponse: isPreViewResumeResponse,
+        //               )));
+        // },
         icon: Icon(
           FontAwesomeIcons.filePdf,
           color: Theme.of(context).iconTheme.color,
@@ -104,7 +137,6 @@ floatingGeneratePDFAndSaveData(
             )),
       ),
       FloatingActionButton.extended(
-
         heroTag: "btn2",
         backgroundColor:
             Theme.of(context).appBarTheme.backgroundColor?.withOpacity(0.9),
@@ -123,7 +155,7 @@ floatingGeneratePDFAndSaveData(
                 certificateOnSelect: certificateOnSelect,
                 skillOnSelect: skillOnSelect,
                 languageOnSelect: languageOnSelect,
-              sendOnSelectColorSet:sendOnSelectColorSet,
+                sendOnSelectColorSet: sendOnSelectColorSet,
               ));
         },
         icon: Icon(
@@ -142,13 +174,13 @@ floatingGeneratePDFAndSaveData(
 }
 
 floatingGoToSetThemePDF(
-    setState,
-    String pdf, {
-      required BuildContext context,
-    }) {
+  setState,
+  String pdf, {
+  required BuildContext context,
+}) {
   return FloatingActionButton.extended(
     backgroundColor:
-    Theme.of(context).appBarTheme.backgroundColor?.withOpacity(0.9),
+        Theme.of(context).appBarTheme.backgroundColor?.withOpacity(0.9),
     foregroundColor: Colors.black,
     onPressed: () {
       Navigator.push(
@@ -168,6 +200,7 @@ floatingGoToSetThemePDF(
         )),
   );
 }
+
 class SelectSizeImageResume {
   double sizePhoto;
   double widthSizeCM;
@@ -248,86 +281,82 @@ buildDetailResumeCheckboxCustomNotIconsReadOnly(
 }
 
 buildPositionOnSelectCard(
-    {
-      required String showAll,
-      required String showSome,
-      required String activityNot,
-      required BuildContext context,
+    {required String showAll,
+    required String showSome,
+    required String activityNot,
+    required BuildContext context,
     required Color appBarForegroundColor,
     required Function() returnResumeEdit,
     required Color Function(Set<MaterialState> states) getColor,
     required onChangedSetState,
     required List<OnSelect> positionOnSelect,
     required List<Position> positionData,
-      required bool boolClick,
-      required Null Function() onTap}) {
-
+    required bool boolClick,
+    required Null Function() onTap}) {
   int length = positionData.length ?? 0;
   return Column(
     children: [
       Column(
           children: List.generate(
               (length) > 3 ? (boolClick == false ? 3 : length) : (length),
-                  (index) {
-                return Stack(
-                  children: [
-                    buildDetailResumeCheckboxCustomNotIconsReadOnly(
-                        context: context,
-                        detail: positionData[index].position ?? "",
-                        appBarForeGroundColor: appBarForegroundColor,
-                        checkbox: Checkbox(
-                          checkColor: Theme.of(context).primaryColor,
-                          fillColor: MaterialStateProperty.resolveWith(getColor),
-                          value: positionOnSelect[index].onselect,
-                          onChanged: (bool? value) {
-                            positionOnSelect[index].onselect = value!;
-                            onChangedSetState();
-                            print(value);
-                            print(!value);
-                            print(positionOnSelect[index].onselect.toString());
-                            print(positionOnSelect[index]);
-                            print(jsonEncode(positionOnSelect[index]));
-                            print(jsonEncode(positionOnSelect));
-                          },
-                        )),
-                    Positioned(
-                        left: -5,
-                        top: -5,
-                        child: Card(
-                          elevation: 0,
-                          shadowColor: Theme.of(context).appBarTheme.backgroundColor,
-                          color: Theme.of(context).appBarTheme.foregroundColor,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                              bottomRight: Radius.circular(30),
-                            ),
+              (index) {
+        return Stack(
+          children: [
+            buildDetailResumeCheckboxCustomNotIconsReadOnly(
+                context: context,
+                detail: positionData[index].position ?? "",
+                appBarForeGroundColor: appBarForegroundColor,
+                checkbox: Checkbox(
+                  checkColor: Theme.of(context).primaryColor,
+                  fillColor: MaterialStateProperty.resolveWith(getColor),
+                  value: positionOnSelect[index].onselect,
+                  onChanged: (bool? value) {
+                    positionOnSelect[index].onselect = value!;
+                    onChangedSetState();
+                    print(value);
+                    print(!value);
+                    print(positionOnSelect[index].onselect.toString());
+                    print(positionOnSelect[index]);
+                    print(jsonEncode(positionOnSelect[index]));
+                    print(jsonEncode(positionOnSelect));
+                  },
+                )),
+            Positioned(
+                left: -5,
+                top: -5,
+                child: Card(
+                  elevation: 0,
+                  shadowColor: Theme.of(context).appBarTheme.backgroundColor,
+                  color: Theme.of(context).appBarTheme.foregroundColor,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(30),
+                    ),
+                  ),
+                  child: SizedBox(
+                      width: 30.0,
+                      child: Center(
+                        child: Text(
+                          positionData[index].orderchoose.toString(),
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Theme.of(context)
+                                .appBarTheme
+                                .backgroundColor, // height: 2.0,
                           ),
-                          child: SizedBox(
-                              width: 30.0,
-                              child: Center(
-                                child: Text(
-                                  positionData[index].orderchoose.toString(),
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Theme.of(context)
-                                        .appBarTheme
-                                        .backgroundColor, // height: 2.0,
-                                  ),
-                                ),
-                              )),
-                        ))
-                  ],
-                );
-              })),
+                        ),
+                      )),
+                ))
+          ],
+        );
+      })),
       if ((length) > 3)
         InkWell(
           onTap: onTap,
           child: Padding(
             padding: const EdgeInsets.all(5.0),
             child: Text(
-              boolClick == false
-                  ?showAll
-                  : showSome,
+              boolClick == false ? showAll : showSome,
               style: TextStyle(
                   decoration: TextDecoration.underline,
                   decorationThickness: 2,
@@ -338,14 +367,13 @@ buildPositionOnSelectCard(
           ),
         ),
       if (positionData.isEmpty)
-
         Padding(
           padding: const EdgeInsets.all(5.0),
           child: Text(
             // editInFormations ??
             ">> $activityNot <<",
             style: TextStyle(
-              // decoration: TextDecoration.underline,
+                // decoration: TextDecoration.underline,
                 decorationThickness: 2,
                 fontSize: 10,
                 fontWeight: FontWeight.w500,
@@ -356,13 +384,11 @@ buildPositionOnSelectCard(
   );
 }
 
-
 buildExperienceOnSelectCard(
-    {
-      required String showAll,
-      required String showSome,
-      required String activityNot,
-      required BuildContext context,
+    {required String showAll,
+    required String showSome,
+    required String activityNot,
+    required BuildContext context,
     required Color appBarForegroundColor,
     required Function() returnResumeEdit,
     required Color Function(Set<MaterialState> states) getColor,
@@ -370,75 +396,71 @@ buildExperienceOnSelectCard(
     required List<OnSelect> experienceOnSelect,
     required experienceData,
     required bool boolClick,
-      required Null Function() onTap}) {
-
+    required Null Function() onTap}) {
   int length = experienceData.length ?? 0;
   return Column(
     children: [
-
       Column(
           children: List.generate(
               (length) > 3 ? (boolClick == false ? 3 : length) : (length),
-                  (index) {
-                return Stack(
-                  children: [
-                    buildDetailResumeCheckboxCustomNotIconsReadOnly(
-                        context: context,
-                        detail: experienceData[index].position ?? "",
-                        appBarForeGroundColor: appBarForegroundColor,
-                        checkbox: Checkbox(
-                          checkColor: Theme.of(context).primaryColor,
-                          fillColor: MaterialStateProperty.resolveWith(getColor),
-                          value: experienceOnSelect[index].onselect,
-                          onChanged: (bool? value) {
-                            experienceOnSelect[index].onselect = value!;
-                            onChangedSetState();
-                            print(value);
-                            print(!value);
-                            print(experienceOnSelect[index].onselect.toString());
-                            print(experienceOnSelect[index]);
-                            print(jsonEncode(experienceOnSelect[index]));
-                            print(jsonEncode(experienceOnSelect));
-                          },
-                        )),
-                    Positioned(
-                        left: -5,
-                        top: -5,
-                        child: Card(
-                          elevation: 0,
-                          shadowColor: Theme.of(context).appBarTheme.backgroundColor,
-                          color: Theme.of(context).appBarTheme.foregroundColor,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                              bottomRight: Radius.circular(30),
-                            ),
+              (index) {
+        return Stack(
+          children: [
+            buildDetailResumeCheckboxCustomNotIconsReadOnly(
+                context: context,
+                detail: experienceData[index].position ?? "",
+                appBarForeGroundColor: appBarForegroundColor,
+                checkbox: Checkbox(
+                  checkColor: Theme.of(context).primaryColor,
+                  fillColor: MaterialStateProperty.resolveWith(getColor),
+                  value: experienceOnSelect[index].onselect,
+                  onChanged: (bool? value) {
+                    experienceOnSelect[index].onselect = value!;
+                    onChangedSetState();
+                    print(value);
+                    print(!value);
+                    print(experienceOnSelect[index].onselect.toString());
+                    print(experienceOnSelect[index]);
+                    print(jsonEncode(experienceOnSelect[index]));
+                    print(jsonEncode(experienceOnSelect));
+                  },
+                )),
+            Positioned(
+                left: -5,
+                top: -5,
+                child: Card(
+                  elevation: 0,
+                  shadowColor: Theme.of(context).appBarTheme.backgroundColor,
+                  color: Theme.of(context).appBarTheme.foregroundColor,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(30),
+                    ),
+                  ),
+                  child: SizedBox(
+                      width: 30.0,
+                      child: Center(
+                        child: Text(
+                          experienceData[index].orderchoose.toString(),
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Theme.of(context)
+                                .appBarTheme
+                                .backgroundColor, // height: 2.0,
                           ),
-                          child: SizedBox(
-                              width: 30.0,
-                              child: Center(
-                                child: Text(
-                                  experienceData[index].orderchoose.toString(),
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Theme.of(context)
-                                        .appBarTheme
-                                        .backgroundColor, // height: 2.0,
-                                  ),
-                                ),
-                              )),
-                        ))
-                  ],
-                );
-              })),
+                        ),
+                      )),
+                ))
+          ],
+        );
+      })),
       if ((length) > 3)
         InkWell(
           onTap: onTap,
           child: Padding(
             padding: const EdgeInsets.all(5.0),
             child: Text(
-              boolClick == false
-                  ?showAll
-                  : showSome,
+              boolClick == false ? showAll : showSome,
               style: TextStyle(
                   decoration: TextDecoration.underline,
                   decorationThickness: 2,
@@ -449,15 +471,13 @@ buildExperienceOnSelectCard(
           ),
         ),
       if (experienceData.isEmpty)
-
-
         Padding(
           padding: const EdgeInsets.all(5.0),
           child: Text(
             // editInFormations ??
             ">> $activityNot <<",
             style: TextStyle(
-              // decoration: TextDecoration.underline,
+                // decoration: TextDecoration.underline,
                 decorationThickness: 2,
                 fontSize: 10,
                 fontWeight: FontWeight.w500,
@@ -468,88 +488,83 @@ buildExperienceOnSelectCard(
   );
 }
 
-
 buildCertificateOnSelectCard(
-    {
-      required String showAll,
-      required String showSome,
-      required String activityNot,
-      required BuildContext context,
+    {required String showAll,
+    required String showSome,
+    required String activityNot,
+    required BuildContext context,
     required Color appBarForegroundColor,
     required Function() returnResumeEdit,
     required Color Function(Set<MaterialState> states) getColor,
     required onChangedSetState,
     required List<OnSelect> certificateOnSelect,
     required certificateData,
-      required bool boolClick,
-      required Null Function() onTap}) {
-
+    required bool boolClick,
+    required Null Function() onTap}) {
   int length = certificateData.length ?? 0;
   return Column(
     children: [
       Column(
           children: List.generate(
               (length) > 3 ? (boolClick == false ? 3 : length) : (length),
-                  (index) {
-                return Stack(
-                  children: [
-                    buildDetailResumeCheckboxCustomNotIconsReadOnly(
-                        context: context,
-                        detail: certificateData[index].title ?? "",
-                        appBarForeGroundColor: appBarForegroundColor,
-                        checkbox: Checkbox(
-                          checkColor: Theme.of(context).primaryColor,
-                          fillColor: MaterialStateProperty.resolveWith(getColor),
-                          value: certificateOnSelect[index].onselect,
-                          onChanged: (bool? value) {
-                            certificateOnSelect[index].onselect = value!;
-                            onChangedSetState();
-                            print(value);
-                            print(!value);
-                            print(certificateOnSelect[index].onselect.toString());
-                            print(certificateOnSelect[index]);
-                            print(jsonEncode(certificateOnSelect[index]));
-                            print(jsonEncode(certificateOnSelect));
-                          },
-                        )),
-                    Positioned(
-                        left: -5,
-                        top: -5,
-                        child: Card(
-                          elevation: 0,
-                          shadowColor: Theme.of(context).appBarTheme.backgroundColor,
-                          color: Theme.of(context).appBarTheme.foregroundColor,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                              bottomRight: Radius.circular(30),
-                            ),
+              (index) {
+        return Stack(
+          children: [
+            buildDetailResumeCheckboxCustomNotIconsReadOnly(
+                context: context,
+                detail: certificateData[index].title ?? "",
+                appBarForeGroundColor: appBarForegroundColor,
+                checkbox: Checkbox(
+                  checkColor: Theme.of(context).primaryColor,
+                  fillColor: MaterialStateProperty.resolveWith(getColor),
+                  value: certificateOnSelect[index].onselect,
+                  onChanged: (bool? value) {
+                    certificateOnSelect[index].onselect = value!;
+                    onChangedSetState();
+                    print(value);
+                    print(!value);
+                    print(certificateOnSelect[index].onselect.toString());
+                    print(certificateOnSelect[index]);
+                    print(jsonEncode(certificateOnSelect[index]));
+                    print(jsonEncode(certificateOnSelect));
+                  },
+                )),
+            Positioned(
+                left: -5,
+                top: -5,
+                child: Card(
+                  elevation: 0,
+                  shadowColor: Theme.of(context).appBarTheme.backgroundColor,
+                  color: Theme.of(context).appBarTheme.foregroundColor,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(30),
+                    ),
+                  ),
+                  child: SizedBox(
+                      width: 30.0,
+                      child: Center(
+                        child: Text(
+                          certificateData[index].orderchoose.toString(),
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Theme.of(context)
+                                .appBarTheme
+                                .backgroundColor, // height: 2.0,
                           ),
-                          child: SizedBox(
-                              width: 30.0,
-                              child: Center(
-                                child: Text(
-                                  certificateData[index].orderchoose.toString(),
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Theme.of(context)
-                                        .appBarTheme
-                                        .backgroundColor, // height: 2.0,
-                                  ),
-                                ),
-                              )),
-                        ))
-                  ],
-                );
-              })),
+                        ),
+                      )),
+                ))
+          ],
+        );
+      })),
       if ((length) > 3)
         InkWell(
           onTap: onTap,
           child: Padding(
             padding: const EdgeInsets.all(5.0),
             child: Text(
-              boolClick == false
-                  ?showAll
-                  : showSome,
+              boolClick == false ? showAll : showSome,
               style: TextStyle(
                   decoration: TextDecoration.underline,
                   decorationThickness: 2,
@@ -560,15 +575,13 @@ buildCertificateOnSelectCard(
           ),
         ),
       if (certificateData.isEmpty)
-
-
         Padding(
           padding: const EdgeInsets.all(5.0),
           child: Text(
             // editInFormations ??
             ">> $activityNot <<",
             style: TextStyle(
-              // decoration: TextDecoration.underline,
+                // decoration: TextDecoration.underline,
                 decorationThickness: 2,
                 fontSize: 10,
                 fontWeight: FontWeight.w500,
@@ -579,80 +592,76 @@ buildCertificateOnSelectCard(
   );
 }
 
-
 buildLanguageOnSelectCard(
-    {
-
-      required String showAll,
-      required String showSome,
-      required String activityNot,
-      required BuildContext context,
+    {required String showAll,
+    required String showSome,
+    required String activityNot,
+    required BuildContext context,
     required Color appBarForegroundColor,
     required Function() returnResumeEdit,
     required Color Function(Set<MaterialState> states) getColor,
     required onChangedSetState,
     required List<OnSelect> languageOnSelect,
     required languageData,
-      required bool boolClick,
-      required Null Function() onTap}) {
-
+    required bool boolClick,
+    required Null Function() onTap}) {
   int length = languageData.length ?? 0;
   return Column(
     children: [
       Column(
           children: List.generate(
               (length) > 3 ? (boolClick == false ? 3 : length) : (length),
-                  (index) {
-                return Stack(
-                  children: [
-                    buildDetailResumeCheckboxCustomNotIconsReadOnly(
-                        context: context,
-                        detail: languageData[index].language ?? "",
-                        appBarForeGroundColor: appBarForegroundColor,
-                        checkbox: Checkbox(
-                          checkColor: Theme.of(context).primaryColor,
-                          fillColor: MaterialStateProperty.resolveWith(getColor),
-                          value: languageOnSelect[index].onselect,
-                          onChanged: (bool? value) {
-                            languageOnSelect[index].onselect = value!;
-                            onChangedSetState();
-                            print(value);
-                            print(!value);
-                            print(languageOnSelect[index].onselect.toString());
-                            print(languageOnSelect[index]);
-                            print(jsonEncode(languageOnSelect[index]));
-                            print(jsonEncode(languageOnSelect));
-                          },
-                        )),
-                    Positioned(
-                        left: -5,
-                        top: -5,
-                        child: Card(
-                          elevation: 0,
-                          shadowColor: Theme.of(context).appBarTheme.backgroundColor,
-                          color: Theme.of(context).appBarTheme.foregroundColor,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                              bottomRight: Radius.circular(30),
-                            ),
+              (index) {
+        return Stack(
+          children: [
+            buildDetailResumeCheckboxCustomNotIconsReadOnly(
+                context: context,
+                detail: languageData[index].language ?? "",
+                appBarForeGroundColor: appBarForegroundColor,
+                checkbox: Checkbox(
+                  checkColor: Theme.of(context).primaryColor,
+                  fillColor: MaterialStateProperty.resolveWith(getColor),
+                  value: languageOnSelect[index].onselect,
+                  onChanged: (bool? value) {
+                    languageOnSelect[index].onselect = value!;
+                    onChangedSetState();
+                    print(value);
+                    print(!value);
+                    print(languageOnSelect[index].onselect.toString());
+                    print(languageOnSelect[index]);
+                    print(jsonEncode(languageOnSelect[index]));
+                    print(jsonEncode(languageOnSelect));
+                  },
+                )),
+            Positioned(
+                left: -5,
+                top: -5,
+                child: Card(
+                  elevation: 0,
+                  shadowColor: Theme.of(context).appBarTheme.backgroundColor,
+                  color: Theme.of(context).appBarTheme.foregroundColor,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(30),
+                    ),
+                  ),
+                  child: SizedBox(
+                      width: 30.0,
+                      child: Center(
+                        child: Text(
+                          languageData[index].orderchoose.toString(),
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Theme.of(context)
+                                .appBarTheme
+                                .backgroundColor, // height: 2.0,
                           ),
-                          child: SizedBox(
-                              width: 30.0,
-                              child: Center(
-                                child: Text(
-                                  languageData[index].orderchoose.toString(),
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Theme.of(context)
-                                        .appBarTheme
-                                        .backgroundColor, // height: 2.0,
-                                  ),
-                                ),
-                              )),
-                        ))
-                  ],
-                );
-              })),
+                        ),
+                      )),
+                ))
+          ],
+        );
+      })),
       if ((length) > 3)
         InkWell(
           onTap: onTap,
@@ -661,8 +670,8 @@ buildLanguageOnSelectCard(
             child: Text(
               boolClick == false
                   ?
-              // editInFormations ??
-              "ดูเพิ่มเติม"
+                  // editInFormations ??
+                  "ดูเพิ่มเติม"
                   : "แสดงบางส่วน",
               style: TextStyle(
                   decoration: TextDecoration.underline,
@@ -674,14 +683,13 @@ buildLanguageOnSelectCard(
           ),
         ),
       if (languageData.isEmpty)
-
         Padding(
           padding: const EdgeInsets.all(5.0),
           child: Text(
             // editInFormations ??
             ">> คุณยังไม่มีข้อมูลส่วนนี้ <<",
             style: TextStyle(
-              // decoration: TextDecoration.underline,
+                // decoration: TextDecoration.underline,
                 decorationThickness: 2,
                 fontSize: 10,
                 fontWeight: FontWeight.w500,
@@ -693,11 +701,10 @@ buildLanguageOnSelectCard(
 }
 
 buildSkillOnSelectCard(
-    {
-      required String showAll,
-      required String showSome,
-      required String activityNot,
-      required BuildContext context,
+    {required String showAll,
+    required String showSome,
+    required String activityNot,
+    required BuildContext context,
     required Color appBarForegroundColor,
     required Function() returnResumeEdit,
     required Color Function(Set<MaterialState> states) getColor,
@@ -705,74 +712,71 @@ buildSkillOnSelectCard(
     required List<OnSelect> skillOnSelect,
     required skillData,
     required bool boolClick,
-      required Null Function() onTap}) {
-
+    required Null Function() onTap}) {
   int length = skillData.length ?? 0;
   return Column(
     children: [
       Column(
           children: List.generate(
               (length) > 3 ? (boolClick == false ? 3 : length) : (length),
-                  (index) {
-                return Stack(
-                  children: [
-                    buildDetailResumeCheckboxCustomNotIconsReadOnly(
-                        context: context,
-                        detail: skillData[index].skill ?? "",
-                        appBarForeGroundColor: appBarForegroundColor,
-                        checkbox: Checkbox(
-                          checkColor: Theme.of(context).primaryColor,
-                          fillColor: MaterialStateProperty.resolveWith(getColor),
-                          value: skillOnSelect[index].onselect,
-                          onChanged: (bool? value) {
-                            skillOnSelect[index].onselect = value!;
-                            onChangedSetState();
-                            print(value);
-                            print(!value);
-                            print(skillOnSelect[index].onselect.toString());
-                            print(skillOnSelect[index]);
-                            print(jsonEncode(skillOnSelect[index]));
-                            print(jsonEncode(skillOnSelect));
-                          },
-                        )),
-                    Positioned(
-                        left: -5,
-                        top: -5,
-                        child: Card(
-                          elevation: 0,
-                          shadowColor: Theme.of(context).appBarTheme.backgroundColor,
-                          color: Theme.of(context).appBarTheme.foregroundColor,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                              bottomRight: Radius.circular(30),
-                            ),
+              (index) {
+        return Stack(
+          children: [
+            buildDetailResumeCheckboxCustomNotIconsReadOnly(
+                context: context,
+                detail: skillData[index].skill ?? "",
+                appBarForeGroundColor: appBarForegroundColor,
+                checkbox: Checkbox(
+                  checkColor: Theme.of(context).primaryColor,
+                  fillColor: MaterialStateProperty.resolveWith(getColor),
+                  value: skillOnSelect[index].onselect,
+                  onChanged: (bool? value) {
+                    skillOnSelect[index].onselect = value!;
+                    onChangedSetState();
+                    print(value);
+                    print(!value);
+                    print(skillOnSelect[index].onselect.toString());
+                    print(skillOnSelect[index]);
+                    print(jsonEncode(skillOnSelect[index]));
+                    print(jsonEncode(skillOnSelect));
+                  },
+                )),
+            Positioned(
+                left: -5,
+                top: -5,
+                child: Card(
+                  elevation: 0,
+                  shadowColor: Theme.of(context).appBarTheme.backgroundColor,
+                  color: Theme.of(context).appBarTheme.foregroundColor,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(30),
+                    ),
+                  ),
+                  child: SizedBox(
+                      width: 30.0,
+                      child: Center(
+                        child: Text(
+                          skillData[index].orderchoose.toString(),
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Theme.of(context)
+                                .appBarTheme
+                                .backgroundColor, // height: 2.0,
                           ),
-                          child: SizedBox(
-                              width: 30.0,
-                              child: Center(
-                                child: Text(
-                                  skillData[index].orderchoose.toString(),
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Theme.of(context)
-                                        .appBarTheme
-                                        .backgroundColor, // height: 2.0,
-                                  ),
-                                ),
-                              )),
-                        ))
-                  ],
-                );
-              })),
+                        ),
+                      )),
+                ))
+          ],
+        );
+      })),
       if ((length) > 3)
         InkWell(
           onTap: onTap,
           child: Padding(
             padding: const EdgeInsets.all(5.0),
             child: Text(
-              boolClick == false
-                  ?showAll
-                  : showSome,
+              boolClick == false ? showAll : showSome,
               style: TextStyle(
                   decoration: TextDecoration.underline,
                   decorationThickness: 2,
@@ -783,15 +787,13 @@ buildSkillOnSelectCard(
           ),
         ),
       if (skillData.isEmpty)
-
-
         Padding(
           padding: const EdgeInsets.all(5.0),
           child: Text(
             // editInFormations ??
             ">> $activityNot <<",
             style: TextStyle(
-              // decoration: TextDecoration.underline,
+                // decoration: TextDecoration.underline,
                 decorationThickness: 2,
                 fontSize: 10,
                 fontWeight: FontWeight.w500,
@@ -802,22 +804,20 @@ buildSkillOnSelectCard(
   );
 }
 
-
-buildEducationOnSelectCard({
-  required String showAll,
-  required String showSome,
-  required String activityNot,
-  required BuildContext context,
-  required Color appBarForegroundColor,
-  required String title,
-  required Function() returnResumeEdit,
-  required Color Function(Set<MaterialState> states) getColor,
-  required onChangedSetState,
-  required List<OnSelect> educationOnSelect,
-  required educationData,
-  required bool boolClick,
-  required Null Function() onTap}) {
-
+buildEducationOnSelectCard(
+    {required String showAll,
+    required String showSome,
+    required String activityNot,
+    required BuildContext context,
+    required Color appBarForegroundColor,
+    required String title,
+    required Function() returnResumeEdit,
+    required Color Function(Set<MaterialState> states) getColor,
+    required onChangedSetState,
+    required List<OnSelect> educationOnSelect,
+    required educationData,
+    required bool boolClick,
+    required Null Function() onTap}) {
   int length = educationData.length ?? 0;
   return Column(
     children: [
@@ -825,70 +825,67 @@ buildEducationOnSelectCard({
         padding: EdgeInsets.all(5),
         child: Text(title),
       ),
-
       Column(
           children: List.generate(
               (length) > 3 ? (boolClick == false ? 3 : length) : (length),
-                  (index) {
-                return Stack(
-                  children: [
-                    buildDetailResumeCheckboxCustomNotIconsReadOnly(
-                        context: context,
-                        detail: educationData[index].placeofstudy.toString(),
-                        appBarForeGroundColor: appBarForegroundColor,
-                        checkbox: Checkbox(
-                          checkColor: Theme.of(context).primaryColor,
-                          fillColor: MaterialStateProperty.resolveWith(getColor),
-                          value: educationOnSelect[index].onselect,
-                          onChanged: (bool? value) {
-                            educationOnSelect[index].onselect = value!;
-                            onChangedSetState();
-                            print(value);
-                            print(!value);
-                            print(educationOnSelect[index].onselect.toString());
-                            print(educationData[index]);
-                            print(jsonEncode(educationData[index]));
-                            print(jsonEncode(educationOnSelect));
-                          },
-                        )),
-                    Positioned(
-                        left: -5,
-                        top: -5,
-                        child: Card(
-                          elevation: 0,
-                          shadowColor: Theme.of(context).appBarTheme.backgroundColor,
-                          color: Theme.of(context).appBarTheme.foregroundColor,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                              bottomRight: Radius.circular(30),
-                            ),
+              (index) {
+        return Stack(
+          children: [
+            buildDetailResumeCheckboxCustomNotIconsReadOnly(
+                context: context,
+                detail: educationData[index].placeofstudy.toString(),
+                appBarForeGroundColor: appBarForegroundColor,
+                checkbox: Checkbox(
+                  checkColor: Theme.of(context).primaryColor,
+                  fillColor: MaterialStateProperty.resolveWith(getColor),
+                  value: educationOnSelect[index].onselect,
+                  onChanged: (bool? value) {
+                    educationOnSelect[index].onselect = value!;
+                    onChangedSetState();
+                    print(value);
+                    print(!value);
+                    print(educationOnSelect[index].onselect.toString());
+                    print(educationData[index]);
+                    print(jsonEncode(educationData[index]));
+                    print(jsonEncode(educationOnSelect));
+                  },
+                )),
+            Positioned(
+                left: -5,
+                top: -5,
+                child: Card(
+                  elevation: 0,
+                  shadowColor: Theme.of(context).appBarTheme.backgroundColor,
+                  color: Theme.of(context).appBarTheme.foregroundColor,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(30),
+                    ),
+                  ),
+                  child: SizedBox(
+                      width: 30.0,
+                      child: Center(
+                        child: Text(
+                          educationData[index].orderchoose.toString(),
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Theme.of(context)
+                                .appBarTheme
+                                .backgroundColor, // height: 2.0,
                           ),
-                          child: SizedBox(
-                              width: 30.0,
-                              child: Center(
-                                child: Text(
-                                  educationData[index].orderchoose.toString(),
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Theme.of(context)
-                                        .appBarTheme
-                                        .backgroundColor, // height: 2.0,
-                                  ),
-                                ),
-                              )),
-                        ))
-                  ],
-                );
-              })),
+                        ),
+                      )),
+                ))
+          ],
+        );
+      })),
       if ((length) > 3)
         InkWell(
           onTap: onTap,
           child: Padding(
             padding: const EdgeInsets.all(5.0),
             child: Text(
-              boolClick == false
-                  ?showAll
-                  : showSome,
+              boolClick == false ? showAll : showSome,
               style: TextStyle(
                   decoration: TextDecoration.underline,
                   decorationThickness: 2,
@@ -899,15 +896,13 @@ buildEducationOnSelectCard({
           ),
         ),
       if (educationData.isEmpty)
-
-
         Padding(
           padding: const EdgeInsets.all(5.0),
           child: Text(
             // editInFormations ??
             ">> $activityNot <<",
             style: TextStyle(
-              // decoration: TextDecoration.underline,
+                // decoration: TextDecoration.underline,
                 decorationThickness: 2,
                 fontSize: 10,
                 fontWeight: FontWeight.w500,
@@ -917,7 +912,6 @@ buildEducationOnSelectCard({
     ],
   );
 }
-
 
 // List<OnSelect> positionOnSelect =[
 //   OnSelect(id:1,select:true ),
@@ -1149,6 +1143,7 @@ buildCardPositionEditResumeScreen(
     required Color appBarForegroundColor,
     required Function() returnResumeEdit,
     required bool boolClick,
+    // required int count,
     required Null Function() onTap}) {
   int length = positionData?.length ?? 0;
   return Column(
@@ -1173,7 +1168,9 @@ buildCardPositionEditResumeScreen(
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return EditPositionsResumeScreen(
-                        id: positionData?[index].id ?? 0);
+                      id: positionData?[index].id ?? 0,
+                      count: 10,
+                    );
                   })).then(
                     (value) => returnResumeEdit,
                   );
@@ -1212,7 +1209,10 @@ buildCardPositionEditResumeScreen(
       GestureDetector(
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const EditPositionsResumeScreen(id: 0);
+            return const EditPositionsResumeScreen(
+              id: 0,
+              count: 10,
+            );
             //
           })).then(
             (value) => returnResumeEdit,
@@ -1606,15 +1606,17 @@ buildEducationCard(
     ],
   );
 }
+
 class BoolOnSelectClickResume {
   bool isBool;
 
   BoolOnSelectClickResume({
     required this.isBool,
   });
-  Map<String, dynamic> toJson() =>
-      {"bool": bool};
-}class OnSelectClickEducationResume {
+  Map<String, dynamic> toJson() => {"bool": bool};
+}
+
+class OnSelectClickEducationResume {
   bool hsc;
   bool bd;
   bool md;
@@ -1628,13 +1630,15 @@ class BoolOnSelectClickResume {
     required this.dd,
     required this.hdd,
   });
-  Map<String, dynamic> toJson() =>
-      {"hsc": hsc,
+  Map<String, dynamic> toJson() => {
+        "hsc": hsc,
         "bd": bd,
         "md": md,
         "dd": dd,
-        "hdd": hdd,};
+        "hdd": hdd,
+      };
 }
+
 class OnSelectClickResume {
   bool theme;
   bool aboutMe;
@@ -1650,48 +1654,50 @@ class OnSelectClickResume {
   bool name;
 
   OnSelectClickResume({
-  required this.theme,
-  required this.aboutMe,
-  required this.position,
-  required this.education,
-  required this.contact,
-  required this.address,
-  required this.experience,
-  required this.certificate,
-  required this.skill,
-  required this.language,
-  required this.text,
-  required this.name,
+    required this.theme,
+    required this.aboutMe,
+    required this.position,
+    required this.education,
+    required this.contact,
+    required this.address,
+    required this.experience,
+    required this.certificate,
+    required this.skill,
+    required this.language,
+    required this.text,
+    required this.name,
   });
   Map<String, dynamic> toJson() => {
-  "fromInt": text,
-  "fromInt": name,
-  "fromInt": theme,
-  "aboutMe": aboutMe,
-  "position": position,
-  "education": education,
-  "contact": contact,
-  "address": address,
-  "experience": experience,
-  "certificate": certificate,
-  "skill": skill,
-  "language": language,
-  };
-  }
-enum ParameterColor {
-  theme ,
-  aboutMe ,
-  position ,
-  education ,
-  contact ,
-  address ,
-  experience ,
-  certificate ,
-  skill,
-  language ,
-  text ,
-  name ,
+        "fromInt": text,
+        "fromInt": name,
+        "fromInt": theme,
+        "aboutMe": aboutMe,
+        "position": position,
+        "education": education,
+        "contact": contact,
+        "address": address,
+        "experience": experience,
+        "certificate": certificate,
+        "skill": skill,
+        "language": language,
+      };
 }
+
+enum ParameterColor {
+  theme,
+  aboutMe,
+  position,
+  education,
+  contact,
+  address,
+  experience,
+  certificate,
+  skill,
+  language,
+  text,
+  name,
+}
+
 class OnSelectColorResume {
   int id;
   String nameColor;
@@ -1704,9 +1710,14 @@ class OnSelectColorResume {
     required this.materialColor,
     required this.pdfColor,
   });
-  Map<String, dynamic> toJson() =>
-      {"id": id,"nameColor": nameColor, "Color": materialColor, "PdfColor": materialColor};
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "nameColor": nameColor,
+        "Color": materialColor,
+        "PdfColor": materialColor
+      };
 }
+
 class OnSelectColorListResume {
   OnSelectColorResume theme;
   OnSelectColorResume aboutMe;
@@ -1735,9 +1746,21 @@ class OnSelectColorListResume {
     required this.text,
     required this.name,
   });
-  Map<String, List<OnSelectColorResume> > toJson() => {
-
-   'dj':[text,name,theme,aboutMe,position,education,contact,address,experience,certificate,skill,language,]
+  Map<String, List<OnSelectColorResume>> toJson() => {
+        'dj': [
+          text,
+          name,
+          theme,
+          aboutMe,
+          position,
+          education,
+          contact,
+          address,
+          experience,
+          certificate,
+          skill,
+          language,
+        ]
       };
 }
 
@@ -1751,11 +1774,14 @@ class SendOnSelectColorResume {
     required this.nameColor,
     required this.parameter,
   });
-  Map<String, dynamic> toJson() =>
-      {"id": id,"nameColor": nameColor,"parameter": parameter, };
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "nameColor": nameColor,
+        "parameter": parameter,
+      };
 }
-class SendOnSelectColorListResume {
 
+class SendOnSelectColorListResume {
   SendOnSelectColorResume text;
   SendOnSelectColorResume name;
   SendOnSelectColorResume theme;
@@ -1797,7 +1823,20 @@ class SendOnSelectColorListResume {
         // "skill": skill,
         // "language": language,
 
-    'color':[text,name,theme,aboutMe,position,education,contact,address,experience,certificate,skill,language,]
+        'color': [
+          text,
+          name,
+          theme,
+          aboutMe,
+          position,
+          education,
+          contact,
+          address,
+          experience,
+          certificate,
+          skill,
+          language,
+        ]
       };
 }
 

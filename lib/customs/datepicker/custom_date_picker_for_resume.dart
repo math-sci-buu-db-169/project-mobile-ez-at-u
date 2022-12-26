@@ -1,6 +1,7 @@
 import 'package:ez_at_u/customs/color/color_const.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:month_picker_dialog_2/month_picker_dialog_2.dart';
 
 class CustomDatePickerForResumeMMYY extends StatefulWidget {
   final String hintLabel;
@@ -21,11 +22,12 @@ class CustomDatePickerForResumeMMYY extends StatefulWidget {
 
 class CustomDatePickerForResumeMMYYState
     extends State<CustomDatePickerForResumeMMYY> {
-  DateTime date = DateTime.now();
+  DateTime selectedDate= DateTime.now();
   late String? dateFormated;
   @override
   void initState() {
-    dateFormated = DateFormat('M/y').format(date);
+    dateFormated = DateFormat('M/y').format(selectedDate);
+    selectedDate =  DateTime.now();
     // date = DateTime.now();
     super.initState();
   }
@@ -55,39 +57,43 @@ class CustomDatePickerForResumeMMYYState
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                dateFormated ?? "02/2001",
+                dateFormated ?? "01/2023",
                 style: TextStyle(fontSize: 18, color: appBarforegroundColor),
               ),
               IconButton(
                   onPressed: () async {
-                    DateTime? newDate = await showDatePicker(
-                        builder: (context, child) {
-                          return Theme(
-                            data: Theme.of(context).copyWith(
-                              colorScheme: ColorScheme.light(
-                                primary: Theme.of(context).splashColor,
-                                onPrimary: appBarBackgroundColor,
-                                onSurface: appBarforegroundColor,
-                              ),
-                              textButtonTheme: TextButtonThemeData(
-                                style: TextButton.styleFrom(
-                                  foregroundColor: appBarforegroundColor,
-                                ),
-                              ),
-                            ),
-                            child: child!,
-                          );
-                        },
-                        context: context,
-                        initialDate: date,
-                        firstDate: DateTime(2000),
-                        lastDate: DateTime(2200));
+                    DateTime? newDate = await  showMonthPicker(
+                      context: context,
+                      firstDate: DateTime(DateTime.now().year - 10, 1),
+                      lastDate: DateTime(DateTime.now().year + 1,3),
+                      initialDate: selectedDate ?? DateTime.now(),
+                      locale: Locale("en"),
+                      //show only even months
+                      // selectableMonthPredicate: (DateTime val) => val.month.isEven,
+                      headerColor: Theme.of(context).appBarTheme.backgroundColor?.withOpacity(0.6),
+                      headerTextColor: Theme.of(context).scaffoldBackgroundColor,
+                      selectedMonthBackgroundColor: tcButtonLine,
+                      selectedMonthTextColor:Theme.of(context).scaffoldBackgroundColor,
+                      unselectedMonthTextColor: Colors.green,
+                      confirmText: Text('OK !',style: TextStyle(fontWeight: FontWeight.bold,color: tcButtonGreen),),
+                      cancelText: Text('Cancel',style: TextStyle(color:tcButtonRed),),
+                      yearFirst: true,
+                      roundedCornersRadius: 20,
+                    ).then((selectedDate) {
+                      if (selectedDate != null) {
+                        setState(() {
+                          dateFormated = DateFormat('M/y').format(selectedDate);
+                          widget.callbackFromCustomDatePicker(
+                              dateFormated ?? "01/2023");
+                        });
+                      }
+                    });
                     if (newDate == null) return;
                     setState(() {
-                      date = newDate;
-                      dateFormated = DateFormat('M/y').format(date);
+                      selectedDate = newDate;
+                      dateFormated = DateFormat('M/y').format(selectedDate);
                       widget.callbackFromCustomDatePicker(
-                          dateFormated ?? "02/2001");
+                          dateFormated ?? "01/2023");
                     });
                   },
                   icon: Icon(
