@@ -192,29 +192,58 @@ class _EditSkillResumePageState
                 leading: IconButton(
                   onPressed: () {
                     // Navigator.pop(context);
+                    dialogOneLineTwoBtnWarning(
+                        context,
+                        "${isGetSkillResumeResponse?.body?.alertmessage?.alertsavedataTh ?? "คุณต้องการบันทึกข้อมูลนี้ใช่หรือไม่?"}\n${isGetSkillResumeResponse?.body?.alertmessage?.alertsavedataEn ?? "Do you want to save this information?"}",
+                        isGetSkillResumeResponse
+                            ?.body?.errorbutton?.buttonyes ??
+                            "yes ",
+                        isGetSkillResumeResponse
+                            ?.body?.errorbutton?.buttonno ??
+                            "No",
+                        onClickBtn: (String result) {
+                          Navigator.of(context).pop();
+                          switch (result) {
+                            case 'Cancel':
+                              {
+                                //"No"
 
-                    context.read<ResumeBloc>().add(SentEditSkillResumeEvent(
-                      edit: true,
-                      id:widget.id,
-                      orderChoose: searchStatus,
-                      skillTH:  (skillControllerTH.text == ''
-                          ? skillTh
-                          : skillControllerTH.text) ??
-                          '',
-                      skillEN:  (skillControllerEN.text == ''
-                          ? skillEn
-                          : skillControllerEN.text) ??
-                          '',
-                      detailTH:  (detailControllerTH.text == ''
-                          ? detailTh
-                          : detailControllerTH.text) ??
-                          '',
-                      detailEN: (detailControllerEN.text == ''
-                          ? detailEn
-                          : detailControllerEN.text) ??
-                          '',
-                      valueSkill:widgetPointerValue.toStringAsFixed(0),
-                    ));
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                        const ContentDesignResumeEditScreen()));
+                                print('Cancel');
+                                break;
+                              }
+                            case 'OK':
+                              {
+                                //"Yes"
+                                context.read<ResumeBloc>().add(SentEditSkillResumeEvent(
+                                  edit: true,
+                                  id:widget.id,
+                                  orderChoose: searchStatus,
+                                  skillTH:  (skillControllerTH.text == ''
+                                      ? skillTh
+                                      : skillControllerTH.text) ??
+                                      '',
+                                  skillEN:  (skillControllerEN.text == ''
+                                      ? skillEn
+                                      : skillControllerEN.text) ??
+                                      '',
+                                  detailTH:  (detailControllerTH.text == ''
+                                      ? detailTh
+                                      : detailControllerTH.text) ??
+                                      '',
+                                  detailEN: (detailControllerEN.text == ''
+                                      ? detailEn
+                                      : detailControllerEN.text) ??
+                                      '',
+                                  valueSkill:widgetPointerValue.toStringAsFixed(0),
+                                ));
+                              }
+                          }
+                        });
                   },
                   icon: Icon(
                     Icons.arrow_back,
@@ -496,28 +525,52 @@ class _EditSkillResumePageState
                                 colorborder:bcButtonDelete.withOpacity(0.8),
                                 sizeborder: 3,
                                 onPressed: () {
-                                  context.read<ResumeBloc>().add(SentEditSkillResumeEvent(
-                                    edit: false,
-                                    id:widget.id,
-                                    orderChoose: searchStatus,
-                                    skillTH:  (skillControllerTH.text == ''
-                                        ? skillTh
-                                        : skillControllerTH.text) ??
-                                        '',
-                                    skillEN:  (skillControllerEN.text == ''
-                                        ? skillEn
-                                        : skillControllerEN.text) ??
-                                        '',
-                                    detailTH:  (detailControllerTH.text == ''
-                                        ? detailTh
-                                        : detailControllerTH.text) ??
-                                        '',
-                                    detailEN: (detailControllerEN.text == ''
-                                        ? detailEn
-                                        : detailControllerEN.text) ??
-                                        '',
-                                    valueSkill:widgetPointerValue.toStringAsFixed(0),
-                                  ));
+                                  dialogOneLineTwoBtnWarning(
+                                      context,
+                                      "${isGetSkillResumeResponse?.body?.alertmessage?.alertdeletedataTh?? "คุณต้องการลบข้อมูลนี้ใช่หรือไม่?"}\n${isGetSkillResumeResponse?.body?.alertmessage?.alertdeletedataEn ?? "Do you want to delete this information?"}",
+                                      isGetSkillResumeResponse
+                                          ?.body?.errorbutton?.buttonyes ??
+                                          "yes ",
+                                      isGetSkillResumeResponse
+                                          ?.body?.errorbutton?.buttonno ??
+                                          "No",
+                                      onClickBtn: (String result) {
+                                        Navigator.of(context).pop();
+                                        switch (result) {
+                                          case 'Cancel':
+                                            {
+                                              //"No"
+                                              print('Cancel');
+                                              break;
+                                            }
+                                          case 'OK':
+                                            {
+                                              //"Yes"
+                                              context.read<ResumeBloc>().add(SentEditSkillResumeEvent(
+                                                edit: false,
+                                                id:widget.id,
+                                                orderChoose: searchStatus,
+                                                skillTH:  (skillControllerTH.text == ''
+                                                    ? skillTh
+                                                    : skillControllerTH.text) ??
+                                                    '',
+                                                skillEN:  (skillControllerEN.text == ''
+                                                    ? skillEn
+                                                    : skillControllerEN.text) ??
+                                                    '',
+                                                detailTH:  (detailControllerTH.text == ''
+                                                    ? detailTh
+                                                    : detailControllerTH.text) ??
+                                                    '',
+                                                detailEN: (detailControllerEN.text == ''
+                                                    ? detailEn
+                                                    : detailControllerEN.text) ??
+                                                    '',
+                                                valueSkill:widgetPointerValue.toStringAsFixed(0),
+                                              ));
+                                            }
+                                        }
+                                      });
                                 },
                               ),
                             )

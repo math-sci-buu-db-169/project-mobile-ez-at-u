@@ -173,28 +173,57 @@ class _EditCertificateResumePageState extends State<EditCertificateResumePage>
                 leading: IconButton(
                   onPressed: () {
                     // Navigator.pop(context);
+                    dialogOneLineTwoBtnWarning(
+                        context,
+                        "${isGetCertificateResumeResponse?.body?.alertmessage?.alertsavedataTh ?? "คุณต้องการบันทึกข้อมูลนี้ใช่หรือไม่?"}\n${isGetCertificateResumeResponse?.body?.alertmessage?.alertsavedataEn ?? "Do you want to save this information?"}",
+                        isGetCertificateResumeResponse
+                            ?.body?.errorbutton?.buttonyes ??
+                            "yes ",
+                        isGetCertificateResumeResponse
+                            ?.body?.errorbutton?.buttonno ??
+                            "No",
+                        onClickBtn: (String result) {
+                          Navigator.of(context).pop();
+                          switch (result) {
+                            case 'Cancel':
+                              {
+                                //"No"
 
-                    context.read<ResumeBloc>().add(SentEditCertificateResumeEvent(
-                      edit: true,
-                      id:widget.id,
-                      orderChoose: orderChoose,
-                      titleTH :(titleControllerTH.text == ''
-                          ? titleTh
-                          : titleControllerTH.text) ??
-                          '',
-                      titleEN : (titleControllerEN.text == ''
-                          ? titleEn
-                          : titleControllerEN.text) ??
-                          '' ,
-                      detailTH :(detailControllerTH.text == ''
-                          ? detailTh
-                          : detailControllerTH.text) ??
-                          '' ,
-                      detailEN : (detailControllerEN.text == ''
-                          ? detailEn
-                          : detailControllerEN.text) ??
-                          '' ,
-                    ));
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                        const ContentDesignResumeEditScreen()));
+                                print('Cancel');
+                                break;
+                              }
+                            case 'OK':
+                              {
+                                //"Yes"
+                                context.read<ResumeBloc>().add(SentEditCertificateResumeEvent(
+                                  edit: true,
+                                  id:widget.id,
+                                  orderChoose: orderChoose,
+                                  titleTH :(titleControllerTH.text == ''
+                                      ? titleTh
+                                      : titleControllerTH.text) ??
+                                      '',
+                                  titleEN : (titleControllerEN.text == ''
+                                      ? titleEn
+                                      : titleControllerEN.text) ??
+                                      '' ,
+                                  detailTH :(detailControllerTH.text == ''
+                                      ? detailTh
+                                      : detailControllerTH.text) ??
+                                      '' ,
+                                  detailEN : (detailControllerEN.text == ''
+                                      ? detailEn
+                                      : detailControllerEN.text) ??
+                                      '' ,
+                                ));
+                              }
+                          }
+                        });
                   },
                   icon: Icon(
                     Icons.arrow_back,
@@ -422,27 +451,52 @@ class _EditCertificateResumePageState extends State<EditCertificateResumePage>
                               colorborder:bcButtonDelete.withOpacity(0.8),
                               sizeborder: 3,
                               onPressed: () {
-                                context.read<ResumeBloc>().add(SentEditCertificateResumeEvent(
-                                  edit: false,
-                                  id:widget.id,
-                                  orderChoose: orderChoose,
-                                  titleTH :(titleControllerTH.text == ''
-                                      ? titleTh
-                                      : titleControllerTH.text) ??
-                                      '',
-                                  titleEN : (titleControllerEN.text == ''
-                                      ? titleEn
-                                      : titleControllerEN.text) ??
-                                      '' ,
-                                  detailTH :(detailControllerTH.text == ''
-                                      ? detailTh
-                                      : detailControllerTH.text) ??
-                                      '' ,
-                                  detailEN : (detailControllerEN.text == ''
-                                      ? detailEn
-                                      : detailControllerEN.text) ??
-                                      '' ,
-                                ));
+                                dialogOneLineTwoBtnWarning(
+                                    context,
+                                    "${isGetCertificateResumeResponse?.body?.alertmessage?.alertdeletedataTh ?? "คุณต้องการลบข้อมูลนี้ใช่หรือไม่?"}\n${isGetCertificateResumeResponse?.body?.alertmessage?.alertdeletedataEn ?? "Do you want to delete this information?"}",
+                                    isGetCertificateResumeResponse
+                                        ?.body?.errorbutton?.buttonyes ??
+                                        "yes ",
+                                    isGetCertificateResumeResponse
+                                        ?.body?.errorbutton?.buttonno ??
+                                        "No",
+                                    onClickBtn: (String result) {
+                                      Navigator.of(context).pop();
+                                      switch (result) {
+                                        case 'Cancel':
+                                          {
+                                            //"No"
+
+                                            print('Cancel');
+                                            break;
+                                          }
+                                        case 'OK':
+                                          {
+                                            //"Yes"
+                                            context.read<ResumeBloc>().add(SentEditCertificateResumeEvent(
+                                              edit: false,
+                                              id:widget.id,
+                                              orderChoose: orderChoose,
+                                              titleTH :(titleControllerTH.text == ''
+                                                  ? titleTh
+                                                  : titleControllerTH.text) ??
+                                                  '',
+                                              titleEN : (titleControllerEN.text == ''
+                                                  ? titleEn
+                                                  : titleControllerEN.text) ??
+                                                  '' ,
+                                              detailTH :(detailControllerTH.text == ''
+                                                  ? detailTh
+                                                  : detailControllerTH.text) ??
+                                                  '' ,
+                                              detailEN : (detailControllerEN.text == ''
+                                                  ? detailEn
+                                                  : detailControllerEN.text) ??
+                                                  '' ,
+                                            ));
+                                          }
+                                      }
+                                    });
                               },
                             ),
                           )

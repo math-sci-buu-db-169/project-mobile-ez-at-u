@@ -1,16 +1,16 @@
 import 'dart:convert';
 /// head : {"status":200,"message":"success","modulename":"home/resume","timeexpire":false}
-/// body : {"screeninfo":{"save":"Save/บันทึก","editinfomations":"แก้ไขข้อมูล","skill_th":"ทักษะ","skill_en":"Skill","level":"ระดับความสามารถ / Skill level","level_th":"ระดับความสามารถ","level_en":"Skill level","description_th":"รายละเอียด","description_en":"Description"},"data":[{"id":1,"orderchoose":0,"skill":"เวิร์ด","skillen":"ms word","value":"70","detail":null,"detailen":null},{"id":2,"orderchoose":0,"skill":"ms excel","skillen":"ms excel","value":"60","detail":null,"detailen":null},{"id":3,"orderchoose":0,"skill":"ฟลัทเทอร์","skillen":"Flutter","value":"30","detail":null,"detailen":null},{"id":4,"orderchoose":0,"skill":"คณิต","skillen":"Math","value":"60","detail":null,"detailen":null},{"id":5,"orderchoose":0,"skill":"ดอทเนต","skillen":"Dotnet","value":"80","detail":null,"detailen":null},{"id":6,"orderchoose":0,"skill":"ดาร์ท","skillen":"Dart","value":"60","detail":null,"detailen":null}]}
+/// body : {"screeninfo":{"save":"บันทึก","editinfomations":"แก้ไขข้อมูล","skill_th":"ทักษะ","skill_en":"Skill","level":"ระดับความสามารถ / Skill level","level_th":"ระดับความสามารถ","level_en":"Skill level","description_th":"รายละเอียด","description_en":"Description","deleteor":"Delete/ลบ","delete":"ลบ"},"data":{"id":0,"orderchoose":0,"skill":null,"skillen":null,"value":null,"detail":null,"detailen":null},"errorbutton":{"buttonok":"OK","buttonconfirm":"Confirm","buttonyes":"Yes","buttonno":"No","buttoncancel":"Cancel"},"alertmessage":{"alertdeletedata_th":"คุณต้องการลบข้อมูลนี้ใช่หรือไม่?","alertdeletedata_en":"Do you want to delete this information?","alertsavedata_th":" คุณต้องการบันทึกข้อมูลนี้ใช่หรือไม่","alertsavedata_en":"Do you want to save this information?"}}
 
 GetSkillResumeResponse getSkillResumeResponseFromJson(String str) => GetSkillResumeResponse.fromJson(json.decode(str));
 String getSkillResumeResponseToJson(GetSkillResumeResponse data) => json.encode(data.toJson());
 class GetSkillResumeResponse {
   GetSkillResumeResponse({
-    Head? head,
-    Body? body,}){
+      Head? head, 
+      Body? body,}){
     _head = head;
     _body = body;
-  }
+}
 
   GetSkillResumeResponse.fromJson(dynamic json) {
     _head = json['head'] != null ? Head.fromJson(json['head']) : null;
@@ -18,11 +18,11 @@ class GetSkillResumeResponse {
   }
   Head? _head;
   Body? _body;
-  GetSkillResumeResponse copyWith({  Head? head,
-    Body? body,
-  }) => GetSkillResumeResponse(  head: head ?? _head,
-    body: body ?? _body,
-  );
+GetSkillResumeResponse copyWith({  Head? head,
+  Body? body,
+}) => GetSkillResumeResponse(  head: head ?? _head,
+  body: body ?? _body,
+);
   Head? get head => _head;
   Body? get body => _body;
 
@@ -40,31 +40,47 @@ class GetSkillResumeResponse {
 }
 
 /// screeninfo : {"save":"บันทึก","editinfomations":"แก้ไขข้อมูล","skill_th":"ทักษะ","skill_en":"Skill","level":"ระดับความสามารถ / Skill level","level_th":"ระดับความสามารถ","level_en":"Skill level","description_th":"รายละเอียด","description_en":"Description","deleteor":"Delete/ลบ","delete":"ลบ"}
-/// data : {"id":1,"orderchoose":0,"skill":"เวิร์ด 2016","skillen":"ms word 2016","value":"71","detail":null,"detailen":null}
+/// data : {"id":0,"orderchoose":0,"skill":null,"skillen":null,"value":null,"detail":null,"detailen":null}
+/// errorbutton : {"buttonok":"OK","buttonconfirm":"Confirm","buttonyes":"Yes","buttonno":"No","buttoncancel":"Cancel"}
+/// alertmessage : {"alertdeletedata_th":"คุณต้องการลบข้อมูลนี้ใช่หรือไม่?","alertdeletedata_en":"Do you want to delete this information?","alertsavedata_th":" คุณต้องการบันทึกข้อมูลนี้ใช่หรือไม่","alertsavedata_en":"Do you want to save this information?"}
 
 Body bodyFromJson(String str) => Body.fromJson(json.decode(str));
 String bodyToJson(Body data) => json.encode(data.toJson());
 class Body {
   Body({
-    Screeninfo? screeninfo,
-    Data? data,}){
+      Screeninfo? screeninfo, 
+      Data? data, 
+      Errorbutton? errorbutton, 
+      Alertmessage? alertmessage,}){
     _screeninfo = screeninfo;
     _data = data;
-  }
+    _errorbutton = errorbutton;
+    _alertmessage = alertmessage;
+}
 
   Body.fromJson(dynamic json) {
     _screeninfo = json['screeninfo'] != null ? Screeninfo.fromJson(json['screeninfo']) : null;
     _data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    _errorbutton = json['errorbutton'] != null ? Errorbutton.fromJson(json['errorbutton']) : null;
+    _alertmessage = json['alertmessage'] != null ? Alertmessage.fromJson(json['alertmessage']) : null;
   }
   Screeninfo? _screeninfo;
   Data? _data;
-  Body copyWith({  Screeninfo? screeninfo,
-    Data? data,
-  }) => Body(  screeninfo: screeninfo ?? _screeninfo,
-    data: data ?? _data,
-  );
+  Errorbutton? _errorbutton;
+  Alertmessage? _alertmessage;
+Body copyWith({  Screeninfo? screeninfo,
+  Data? data,
+  Errorbutton? errorbutton,
+  Alertmessage? alertmessage,
+}) => Body(  screeninfo: screeninfo ?? _screeninfo,
+  data: data ?? _data,
+  errorbutton: errorbutton ?? _errorbutton,
+  alertmessage: alertmessage ?? _alertmessage,
+);
   Screeninfo? get screeninfo => _screeninfo;
   Data? get data => _data;
+  Errorbutton? get errorbutton => _errorbutton;
+  Alertmessage? get alertmessage => _alertmessage;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -74,16 +90,139 @@ class Body {
     if (_data != null) {
       map['data'] = _data?.toJson();
     }
+    if (_errorbutton != null) {
+      map['errorbutton'] = _errorbutton?.toJson();
+    }
+    if (_alertmessage != null) {
+      map['alertmessage'] = _alertmessage?.toJson();
+    }
     return map;
   }
 
 }
 
-/// id : 1
+/// alertdeletedata_th : "คุณต้องการลบข้อมูลนี้ใช่หรือไม่?"
+/// alertdeletedata_en : "Do you want to delete this information?"
+/// alertsavedata_th : " คุณต้องการบันทึกข้อมูลนี้ใช่หรือไม่"
+/// alertsavedata_en : "Do you want to save this information?"
+
+Alertmessage alertmessageFromJson(String str) => Alertmessage.fromJson(json.decode(str));
+String alertmessageToJson(Alertmessage data) => json.encode(data.toJson());
+class Alertmessage {
+  Alertmessage({
+      String? alertdeletedataTh, 
+      String? alertdeletedataEn, 
+      String? alertsavedataTh, 
+      String? alertsavedataEn,}){
+    _alertdeletedataTh = alertdeletedataTh;
+    _alertdeletedataEn = alertdeletedataEn;
+    _alertsavedataTh = alertsavedataTh;
+    _alertsavedataEn = alertsavedataEn;
+}
+
+  Alertmessage.fromJson(dynamic json) {
+    _alertdeletedataTh = json['alertdeletedata_th'];
+    _alertdeletedataEn = json['alertdeletedata_en'];
+    _alertsavedataTh = json['alertsavedata_th'];
+    _alertsavedataEn = json['alertsavedata_en'];
+  }
+  String? _alertdeletedataTh;
+  String? _alertdeletedataEn;
+  String? _alertsavedataTh;
+  String? _alertsavedataEn;
+Alertmessage copyWith({  String? alertdeletedataTh,
+  String? alertdeletedataEn,
+  String? alertsavedataTh,
+  String? alertsavedataEn,
+}) => Alertmessage(  alertdeletedataTh: alertdeletedataTh ?? _alertdeletedataTh,
+  alertdeletedataEn: alertdeletedataEn ?? _alertdeletedataEn,
+  alertsavedataTh: alertsavedataTh ?? _alertsavedataTh,
+  alertsavedataEn: alertsavedataEn ?? _alertsavedataEn,
+);
+  String? get alertdeletedataTh => _alertdeletedataTh;
+  String? get alertdeletedataEn => _alertdeletedataEn;
+  String? get alertsavedataTh => _alertsavedataTh;
+  String? get alertsavedataEn => _alertsavedataEn;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['alertdeletedata_th'] = _alertdeletedataTh;
+    map['alertdeletedata_en'] = _alertdeletedataEn;
+    map['alertsavedata_th'] = _alertsavedataTh;
+    map['alertsavedata_en'] = _alertsavedataEn;
+    return map;
+  }
+
+}
+
+/// buttonok : "OK"
+/// buttonconfirm : "Confirm"
+/// buttonyes : "Yes"
+/// buttonno : "No"
+/// buttoncancel : "Cancel"
+
+Errorbutton errorbuttonFromJson(String str) => Errorbutton.fromJson(json.decode(str));
+String errorbuttonToJson(Errorbutton data) => json.encode(data.toJson());
+class Errorbutton {
+  Errorbutton({
+      String? buttonok, 
+      String? buttonconfirm, 
+      String? buttonyes, 
+      String? buttonno, 
+      String? buttoncancel,}){
+    _buttonok = buttonok;
+    _buttonconfirm = buttonconfirm;
+    _buttonyes = buttonyes;
+    _buttonno = buttonno;
+    _buttoncancel = buttoncancel;
+}
+
+  Errorbutton.fromJson(dynamic json) {
+    _buttonok = json['buttonok'];
+    _buttonconfirm = json['buttonconfirm'];
+    _buttonyes = json['buttonyes'];
+    _buttonno = json['buttonno'];
+    _buttoncancel = json['buttoncancel'];
+  }
+  String? _buttonok;
+  String? _buttonconfirm;
+  String? _buttonyes;
+  String? _buttonno;
+  String? _buttoncancel;
+Errorbutton copyWith({  String? buttonok,
+  String? buttonconfirm,
+  String? buttonyes,
+  String? buttonno,
+  String? buttoncancel,
+}) => Errorbutton(  buttonok: buttonok ?? _buttonok,
+  buttonconfirm: buttonconfirm ?? _buttonconfirm,
+  buttonyes: buttonyes ?? _buttonyes,
+  buttonno: buttonno ?? _buttonno,
+  buttoncancel: buttoncancel ?? _buttoncancel,
+);
+  String? get buttonok => _buttonok;
+  String? get buttonconfirm => _buttonconfirm;
+  String? get buttonyes => _buttonyes;
+  String? get buttonno => _buttonno;
+  String? get buttoncancel => _buttoncancel;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['buttonok'] = _buttonok;
+    map['buttonconfirm'] = _buttonconfirm;
+    map['buttonyes'] = _buttonyes;
+    map['buttonno'] = _buttonno;
+    map['buttoncancel'] = _buttoncancel;
+    return map;
+  }
+
+}
+
+/// id : 0
 /// orderchoose : 0
-/// skill : "เวิร์ด 2016"
-/// skillen : "ms word 2016"
-/// value : "71"
+/// skill : null
+/// skillen : null
+/// value : null
 /// detail : null
 /// detailen : null
 
@@ -91,13 +230,13 @@ Data dataFromJson(String str) => Data.fromJson(json.decode(str));
 String dataToJson(Data data) => json.encode(data.toJson());
 class Data {
   Data({
-    int? id,
-    int? orderchoose,
-    String? skill,
-    String? skillen,
-    String? value,
-    dynamic detail,
-    dynamic detailen,}){
+      int? id, 
+      int? orderchoose, 
+      dynamic skill, 
+      dynamic skillen, 
+      dynamic value, 
+      dynamic detail, 
+      dynamic detailen,}){
     _id = id;
     _orderchoose = orderchoose;
     _skill = skill;
@@ -105,7 +244,7 @@ class Data {
     _value = value;
     _detail = detail;
     _detailen = detailen;
-  }
+}
 
   Data.fromJson(dynamic json) {
     _id = json['id'];
@@ -118,31 +257,31 @@ class Data {
   }
   int? _id;
   int? _orderchoose;
-  String? _skill;
-  String? _skillen;
-  String? _value;
+  dynamic _skill;
+  dynamic _skillen;
+  dynamic _value;
   dynamic _detail;
   dynamic _detailen;
-  Data copyWith({  int? id,
-    int? orderchoose,
-    String? skill,
-    String? skillen,
-    String? value,
-    dynamic detail,
-    dynamic detailen,
-  }) => Data(  id: id ?? _id,
-    orderchoose: orderchoose ?? _orderchoose,
-    skill: skill ?? _skill,
-    skillen: skillen ?? _skillen,
-    value: value ?? _value,
-    detail: detail ?? _detail,
-    detailen: detailen ?? _detailen,
-  );
+Data copyWith({  int? id,
+  int? orderchoose,
+  dynamic skill,
+  dynamic skillen,
+  dynamic value,
+  dynamic detail,
+  dynamic detailen,
+}) => Data(  id: id ?? _id,
+  orderchoose: orderchoose ?? _orderchoose,
+  skill: skill ?? _skill,
+  skillen: skillen ?? _skillen,
+  value: value ?? _value,
+  detail: detail ?? _detail,
+  detailen: detailen ?? _detailen,
+);
   int? get id => _id;
   int? get orderchoose => _orderchoose;
-  String? get skill => _skill;
-  String? get skillen => _skillen;
-  String? get value => _value;
+  dynamic get skill => _skill;
+  dynamic get skillen => _skillen;
+  dynamic get value => _value;
   dynamic get detail => _detail;
   dynamic get detailen => _detailen;
 
@@ -176,17 +315,17 @@ Screeninfo screeninfoFromJson(String str) => Screeninfo.fromJson(json.decode(str
 String screeninfoToJson(Screeninfo data) => json.encode(data.toJson());
 class Screeninfo {
   Screeninfo({
-    String? save,
-    String? editinfomations,
-    String? skillTh,
-    String? skillEn,
-    String? level,
-    String? levelTh,
-    String? levelEn,
-    String? descriptionTh,
-    String? descriptionEn,
-    String? deleteor,
-    String? delete,}){
+      String? save, 
+      String? editinfomations, 
+      String? skillTh, 
+      String? skillEn, 
+      String? level, 
+      String? levelTh, 
+      String? levelEn, 
+      String? descriptionTh, 
+      String? descriptionEn, 
+      String? deleteor, 
+      String? delete,}){
     _save = save;
     _editinfomations = editinfomations;
     _skillTh = skillTh;
@@ -198,7 +337,7 @@ class Screeninfo {
     _descriptionEn = descriptionEn;
     _deleteor = deleteor;
     _delete = delete;
-  }
+}
 
   Screeninfo.fromJson(dynamic json) {
     _save = json['save'];
@@ -224,29 +363,29 @@ class Screeninfo {
   String? _descriptionEn;
   String? _deleteor;
   String? _delete;
-  Screeninfo copyWith({  String? save,
-    String? editinfomations,
-    String? skillTh,
-    String? skillEn,
-    String? level,
-    String? levelTh,
-    String? levelEn,
-    String? descriptionTh,
-    String? descriptionEn,
-    String? deleteor,
-    String? delete,
-  }) => Screeninfo(  save: save ?? _save,
-    editinfomations: editinfomations ?? _editinfomations,
-    skillTh: skillTh ?? _skillTh,
-    skillEn: skillEn ?? _skillEn,
-    level: level ?? _level,
-    levelTh: levelTh ?? _levelTh,
-    levelEn: levelEn ?? _levelEn,
-    descriptionTh: descriptionTh ?? _descriptionTh,
-    descriptionEn: descriptionEn ?? _descriptionEn,
-    deleteor: deleteor ?? _deleteor,
-    delete: delete ?? _delete,
-  );
+Screeninfo copyWith({  String? save,
+  String? editinfomations,
+  String? skillTh,
+  String? skillEn,
+  String? level,
+  String? levelTh,
+  String? levelEn,
+  String? descriptionTh,
+  String? descriptionEn,
+  String? deleteor,
+  String? delete,
+}) => Screeninfo(  save: save ?? _save,
+  editinfomations: editinfomations ?? _editinfomations,
+  skillTh: skillTh ?? _skillTh,
+  skillEn: skillEn ?? _skillEn,
+  level: level ?? _level,
+  levelTh: levelTh ?? _levelTh,
+  levelEn: levelEn ?? _levelEn,
+  descriptionTh: descriptionTh ?? _descriptionTh,
+  descriptionEn: descriptionEn ?? _descriptionEn,
+  deleteor: deleteor ?? _deleteor,
+  delete: delete ?? _delete,
+);
   String? get save => _save;
   String? get editinfomations => _editinfomations;
   String? get skillTh => _skillTh;
@@ -286,15 +425,15 @@ Head headFromJson(String str) => Head.fromJson(json.decode(str));
 String headToJson(Head data) => json.encode(data.toJson());
 class Head {
   Head({
-    int? status,
-    String? message,
-    String? modulename,
-    bool? timeexpire,}){
+      int? status, 
+      String? message, 
+      String? modulename, 
+      bool? timeexpire,}){
     _status = status;
     _message = message;
     _modulename = modulename;
     _timeexpire = timeexpire;
-  }
+}
 
   Head.fromJson(dynamic json) {
     _status = json['status'];
@@ -306,15 +445,15 @@ class Head {
   String? _message;
   String? _modulename;
   bool? _timeexpire;
-  Head copyWith({  int? status,
-    String? message,
-    String? modulename,
-    bool? timeexpire,
-  }) => Head(  status: status ?? _status,
-    message: message ?? _message,
-    modulename: modulename ?? _modulename,
-    timeexpire: timeexpire ?? _timeexpire,
-  );
+Head copyWith({  int? status,
+  String? message,
+  String? modulename,
+  bool? timeexpire,
+}) => Head(  status: status ?? _status,
+  message: message ?? _message,
+  modulename: modulename ?? _modulename,
+  timeexpire: timeexpire ?? _timeexpire,
+);
   int? get status => _status;
   String? get message => _message;
   String? get modulename => _modulename;

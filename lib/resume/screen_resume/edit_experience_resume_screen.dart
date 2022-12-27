@@ -187,36 +187,60 @@ class _EditExperienceResumePageState extends State<EditExperienceResumePage>
               leading: IconButton(
                 onPressed: () {
                   // Navigator.pop(context);
+                  dialogOneLineTwoBtnWarning(
+                      context,
+                      "${isGetExperienceResumeResponse?.body?.alertmessage?.alertsavedataTh??"คุณต้องการบันทึกข้อมูลนี้ใช่หรือไม่?"}\n${isGetExperienceResumeResponse?.body?.alertmessage?.alertsavedataEn??"Do you want to save this information?"}",
+                      isGetExperienceResumeResponse?.body?.errorbutton?.buttonyes??"yes ",
+                      isGetExperienceResumeResponse?.body?.errorbutton?.buttonno??"No",
+                      onClickBtn: (String result) {
+                        Navigator.of(context).pop();
+                        switch (result) {
+                          case 'Cancel':
+                            {
+                              //"No"
 
-                  context.read<ResumeBloc>().add(SentEditExperienceResumeEvent(
-                    edit: true,
-                    id:widget.id,
-                    orderChoose: searchStatus,
-                    positionTH :(positionControllerTH.text == ''
-                        ? positionTh
-                        : positionControllerTH.text) ??
-                        '',
-                    positionEN : (positionControllerEN.text == ''
-                        ? positionEn
-                        : positionControllerEN.text) ??
-                        '',
-                    detailTH :(detailControllerTH.text == ''
-                        ? detailTh
-                        : detailControllerTH.text) ??
-                        '',
-                    detailEN :(detailControllerEN.text == ''
-                        ? detailEn
-                        : detailControllerEN.text) ??
-                        '',
-                    startDate :  (startDateController.text == ''
-                        ? startDate
-                        : startDateController.text) ??
-                        '',
-                    endDate: (endDateController.text == ''
-                        ? endDate
-                        : endDateController.text) ??
-                        '',
-                  ));
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) => const ContentDesignResumeEditScreen()));
+                              print('Cancel');
+                              break;
+                            }
+                          case 'OK':
+                            {
+                              //"Yes"
+                              context.read<ResumeBloc>().add(SentEditExperienceResumeEvent(
+                                edit: true,
+                                id:widget.id,
+                                orderChoose: searchStatus,
+                                positionTH :(positionControllerTH.text == ''
+                                    ? positionTh
+                                    : positionControllerTH.text) ??
+                                    '',
+                                positionEN : (positionControllerEN.text == ''
+                                    ? positionEn
+                                    : positionControllerEN.text) ??
+                                    '',
+                                detailTH :(detailControllerTH.text == ''
+                                    ? detailTh
+                                    : detailControllerTH.text) ??
+                                    '',
+                                detailEN :(detailControllerEN.text == ''
+                                    ? detailEn
+                                    : detailControllerEN.text) ??
+                                    '',
+                                startDate :  (startDateController.text == ''
+                                    ? startDate
+                                    : startDateController.text) ??
+                                    '',
+                                endDate: (endDateController.text == ''
+                                    ? endDate
+                                    : endDateController.text) ??
+                                    '',
+                              ));
+                            }
+                        }
+                      });
                 },
                 icon: Icon(
                   Icons.arrow_back,
@@ -470,35 +494,61 @@ class _EditExperienceResumePageState extends State<EditExperienceResumePage>
                               colorborder:bcButtonDelete.withOpacity(0.8),
                               sizeborder: 3,
                               onPressed: () {
-                                context.read<ResumeBloc>().add(SentEditExperienceResumeEvent(
-                                  edit: false,
-                                  id:widget.id,
-                                  orderChoose: searchStatus,
-                                  positionTH :(positionControllerTH.text == ''
-                                      ? positionTh
-                                      : positionControllerTH.text) ??
-                                      '',
-                                  positionEN : (positionControllerEN.text == ''
-                                      ? positionEn
-                                      : positionControllerEN.text) ??
-                                      '',
-                                  detailTH :(detailControllerTH.text == ''
-                                      ? detailTh
-                                      : detailControllerTH.text) ??
-                                      '',
-                                  detailEN :(detailControllerEN.text == ''
-                                      ? detailEn
-                                      : detailControllerEN.text) ??
-                                      '',
-                                  startDate :  (startDateController.text == ''
-                                      ? startDate
-                                      : startDateController.text) ??
-                                      '',
-                                  endDate: (endDateController.text == ''
-                                      ? endDate
-                                      : endDateController.text) ??
-                                      '',
-                                ));
+
+                                dialogOneLineTwoBtnWarning(
+                                    context,
+                                    "${isGetExperienceResumeResponse?.body?.alertmessage?.alertdeletedataTh??"คุณต้องการลบข้อมูลนี้ใช่หรือไม่?"}\n${isGetExperienceResumeResponse?.body?.alertmessage?.alertdeletedataEn??"Do you want to delete this information?"}",
+                                    isGetExperienceResumeResponse?.body?.errorbutton?.buttonyes??"yes ",
+                                    isGetExperienceResumeResponse?.body?.errorbutton?.buttonno??"No",
+                                    onClickBtn: (String result) {
+                                      Navigator.of(context).pop();
+                                      switch (result) {
+                                        case 'Cancel':
+                                          {
+                                            //"No"
+                                            //
+                                            // Navigator.pushReplacement(
+                                            //     context,
+                                            //     MaterialPageRoute(
+                                            //         builder: (BuildContext context) => const ContentDesignResumeEditScreen()));
+                                            print('Cancel');
+                                            break;
+                                          }
+                                        case 'OK':
+                                          {
+                                            //"Yes"
+                                            context.read<ResumeBloc>().add(SentEditExperienceResumeEvent(
+                                              edit: false,
+                                              id:widget.id,
+                                              orderChoose: searchStatus,
+                                              positionTH :(positionControllerTH.text == ''
+                                                  ? positionTh
+                                                  : positionControllerTH.text) ??
+                                                  '',
+                                              positionEN : (positionControllerEN.text == ''
+                                                  ? positionEn
+                                                  : positionControllerEN.text) ??
+                                                  '',
+                                              detailTH :(detailControllerTH.text == ''
+                                                  ? detailTh
+                                                  : detailControllerTH.text) ??
+                                                  '',
+                                              detailEN :(detailControllerEN.text == ''
+                                                  ? detailEn
+                                                  : detailControllerEN.text) ??
+                                                  '',
+                                              startDate :  (startDateController.text == ''
+                                                  ? startDate
+                                                  : startDateController.text) ??
+                                                  '',
+                                              endDate: (endDateController.text == ''
+                                                  ? endDate
+                                                  : endDateController.text) ??
+                                                  '',
+                                            ));
+                                          }
+                                      }
+                                    });
                               },
                             ),
                           )

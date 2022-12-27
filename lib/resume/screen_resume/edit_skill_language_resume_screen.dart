@@ -194,29 +194,58 @@ class _EditSkillLanguageResumePageState
                 leading: IconButton(
                   onPressed: () {
                     // Navigator.pop(context);
+                    dialogOneLineTwoBtnWarning(
+                        context,
+                        "${isGetSkillLanguageResumeResponse?.body?.alertmessage?.alertsavedataTh ?? "คุณต้องการบันทึกข้อมูลนี้ใช่หรือไม่?"}\n${isGetSkillLanguageResumeResponse?.body?.alertmessage?.alertsavedataEn ?? "Do you want to save this information?"}",
+                        isGetSkillLanguageResumeResponse
+                            ?.body?.errorbutton?.buttonyes ??
+                            "yes ",
+                        isGetSkillLanguageResumeResponse
+                            ?.body?.errorbutton?.buttonno ??
+                            "No",
+                        onClickBtn: (String result) {
+                          Navigator.of(context).pop();
+                          switch (result) {
+                            case 'Cancel':
+                              {
+                                //"No"
 
-                    context.read<ResumeBloc>().add(SentEditSkillLanguageResumeEvent(
-                      edit: true,
-                      id:widget.id,
-                      orderChoose: searchStatus,
-                      languageTH:  (languageControllerTH.text == ''
-                          ? languageTh
-                          : languageControllerTH.text) ??
-                          '',
-                      languageEN:   (languageControllerEN.text == ''
-                          ? languageEn
-                          : languageControllerEN.text) ??
-                          '',
-                      detailTH:  (detailControllerTH.text == ''
-                          ? detailTh
-                          : detailControllerTH.text) ??
-                          '',
-                      detailEN: (detailControllerEN.text == ''
-                          ? detailEn
-                          : detailControllerEN.text) ??
-                          '',
-                      valueLanguage:widgetPointerValue.toStringAsFixed(0),
-                    ));
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                        const ContentDesignResumeEditScreen()));
+                                print('Cancel');
+                                break;
+                              }
+                            case 'OK':
+                              {
+                                //"Yes"
+                                context.read<ResumeBloc>().add(SentEditSkillLanguageResumeEvent(
+                                  edit: true,
+                                  id:widget.id,
+                                  orderChoose: searchStatus,
+                                  languageTH:  (languageControllerTH.text == ''
+                                      ? languageTh
+                                      : languageControllerTH.text) ??
+                                      '',
+                                  languageEN:   (languageControllerEN.text == ''
+                                      ? languageEn
+                                      : languageControllerEN.text) ??
+                                      '',
+                                  detailTH:  (detailControllerTH.text == ''
+                                      ? detailTh
+                                      : detailControllerTH.text) ??
+                                      '',
+                                  detailEN: (detailControllerEN.text == ''
+                                      ? detailEn
+                                      : detailControllerEN.text) ??
+                                      '',
+                                  valueLanguage:widgetPointerValue.toStringAsFixed(0),
+                                ));
+                              }
+                          }
+                        });
                   },
                   icon: Icon(
                     Icons.arrow_back,
@@ -497,28 +526,52 @@ class _EditSkillLanguageResumePageState
                               colorborder:bcButtonDelete.withOpacity(0.8),
                               sizeborder: 3,
                               onPressed: () {
-                                context.read<ResumeBloc>().add(SentEditSkillLanguageResumeEvent(
-                                  edit: false,
-                                  id:widget.id,
-                                  orderChoose: searchStatus,
-                                  languageTH:  (languageControllerTH.text == ''
-                                      ? languageTh
-                                      : languageControllerTH.text) ??
-                                      '',
-                                  languageEN:   (languageControllerEN.text == ''
-                                      ? languageEn
-                                      : languageControllerEN.text) ??
-                                      '',
-                                  detailTH:  (detailControllerTH.text == ''
-                                      ? detailTh
-                                      : detailControllerTH.text) ??
-                                      '',
-                                  detailEN: (detailControllerEN.text == ''
-                                      ? detailEn
-                                      : detailControllerEN.text) ??
-                                      '',
-                                  valueLanguage:widgetPointerValue.toStringAsFixed(0),
-                                ));
+                                dialogOneLineTwoBtnWarning(
+                                    context,
+                                    "${isGetSkillLanguageResumeResponse?.body?.alertmessage?.alertdeletedataTh ?? "คุณต้องการบันทึกข้อมูลนี้ใช่หรือไม่?"}\n${isGetSkillLanguageResumeResponse?.body?.alertmessage?.alertdeletedataEn?? "Do you want to delete this information?"}",
+                                    isGetSkillLanguageResumeResponse
+                                        ?.body?.errorbutton?.buttonyes ??
+                                        "yes ",
+                                    isGetSkillLanguageResumeResponse
+                                        ?.body?.errorbutton?.buttonno ??
+                                        "No",
+                                    onClickBtn: (String result) {
+                                      Navigator.of(context).pop();
+                                      switch (result) {
+                                        case 'Cancel':
+                                          {
+                                            //"No"
+                                            print('Cancel');
+                                            break;
+                                          }
+                                        case 'OK':
+                                          {
+                                            //"Yes"
+                                            context.read<ResumeBloc>().add(SentEditSkillLanguageResumeEvent(
+                                              edit: false,
+                                              id:widget.id,
+                                              orderChoose: searchStatus,
+                                              languageTH:  (languageControllerTH.text == ''
+                                                  ? languageTh
+                                                  : languageControllerTH.text) ??
+                                                  '',
+                                              languageEN:   (languageControllerEN.text == ''
+                                                  ? languageEn
+                                                  : languageControllerEN.text) ??
+                                                  '',
+                                              detailTH:  (detailControllerTH.text == ''
+                                                  ? detailTh
+                                                  : detailControllerTH.text) ??
+                                                  '',
+                                              detailEN: (detailControllerEN.text == ''
+                                                  ? detailEn
+                                                  : detailControllerEN.text) ??
+                                                  '',
+                                              valueLanguage:widgetPointerValue.toStringAsFixed(0),
+                                            ));
+                                          }
+                                      }
+                                    });
                               },
                             )
                         ],

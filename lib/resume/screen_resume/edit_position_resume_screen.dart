@@ -174,30 +174,56 @@ class _EditPositionsResumePageState extends State<EditPositionsResumePage>
               backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
               elevation: 0,
               leading: IconButton(
+
                 onPressed: () {
-                  // Navigator.pop(context);
-                  context.read<ResumeBloc>().add(SentEditPositionsResumeEvent(
-                    edit: true,
-                    positionsId:widget.id,
-                    orderChoose: searchStatus,
-                    positionControllerTH:(positionControllerTH.text == ''
-                        ? positionTh
-                        : positionControllerTH.text) ??
-                        '',
-                    positionControllerEN: (positionControllerEN.text == ''
-                        ? positionEn
-                        : positionControllerEN.text) ??
-                        '',
-                    officeControllerTH:  (officeControllerTH.text == ''
-                        ? officeTh
-                        : officeControllerTH.text) ??
-                        '',
-                    officeControllerEN:  (officeControllerEN.text == ''
-                        ? officeEn
-                        : officeControllerEN.text) ??
-                        '',
-                  ));
+                  dialogOneLineTwoBtnWarning(
+                      context,
+                      "${isGetPositionResumeResponse?.body?.alertmessage?.alertsavedataTh??"คุณต้องการบันทึกข้อมูลนี้ใช่หรือไม่?"}\n${isGetPositionResumeResponse?.body?.alertmessage?.alertsavedataEn??"Do you want to save this information?"}",
+                      isGetPositionResumeResponse?.body?.errorbutton?.buttonyes??"yes ",
+                      isGetPositionResumeResponse?.body?.errorbutton?.buttonno??"No",
+                      onClickBtn: (String result) {
+                        Navigator.of(context).pop();
+                        switch (result) {
+                          case 'Cancel':
+                            {
+                              //"No"
+
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) => const ContentDesignResumeEditScreen()));
+                              print('Cancel');
+                              break;
+                            }
+                          case 'OK':
+                            {
+                              //"Yes"
+                              context.read<ResumeBloc>().add(SentEditPositionsResumeEvent(
+                                edit: true,
+                                positionsId:widget.id,
+                                orderChoose: searchStatus,
+                                positionControllerTH:(positionControllerTH.text == ''
+                                    ? positionTh
+                                    : positionControllerTH.text) ??
+                                    '',
+                                positionControllerEN: (positionControllerEN.text == ''
+                                    ? positionEn
+                                    : positionControllerEN.text) ??
+                                    '',
+                                officeControllerTH:  (officeControllerTH.text == ''
+                                    ? officeTh
+                                    : officeControllerTH.text) ??
+                                    '',
+                                officeControllerEN:  (officeControllerEN.text == ''
+                                    ? officeEn
+                                    : officeControllerEN.text) ??
+                                    '',
+                              ));
+                            }
+                        }
+                      });
                 },
+
                 icon: Icon(
                   Icons.arrow_back,
                   size: sizeTitle24,
@@ -363,6 +389,7 @@ class _EditPositionsResumePageState extends State<EditPositionsResumePage>
                       const SizedBox(
                         height: 50,
                       ),
+
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -427,28 +454,49 @@ class _EditPositionsResumePageState extends State<EditPositionsResumePage>
                                 colorborder:bcButtonDelete.withOpacity(0.8),
                                 sizeborder: 3,
                                 onPressed: () {
-                                  context.read<ResumeBloc>().add(SentEditPositionsResumeEvent(
-                                    edit: false,
-                                    positionsId:widget.id,
-                                    orderChoose: searchStatus,
-                                      positionControllerTH:(positionControllerTH.text == ''
-                                          ? positionTh
-                                          : positionControllerTH.text) ??
-                                          '',
-                                      positionControllerEN: (positionControllerEN.text == ''
-                                          ? positionEn
-                                          : positionControllerEN.text) ??
-                                          '',
-                                      officeControllerTH:  (officeControllerTH.text == ''
-                                          ? officeTh
-                                          : officeControllerTH.text) ??
-                                          '',
-                                      officeControllerEN:  (officeControllerEN.text == ''
-                                          ? officeEn
-                                          : officeControllerEN.text) ??
-                                          '',
-                                  ));
+                                  dialogOneLineTwoBtnWarning(
+                                      context,
+                                      "${isGetPositionResumeResponse?.body?.alertmessage?.alertdeletedataTh??"คุณต้องการลบข้อมูลนี้ใช่หรือไม่?"}\n${isGetPositionResumeResponse?.body?.alertmessage?.alertdeletedataEn??"Do you want to delete this information?"}",
+                                      isGetPositionResumeResponse?.body?.errorbutton?.buttonyes??"yes ",
+                                      isGetPositionResumeResponse?.body?.errorbutton?.buttonno??"No",
+                                      onClickBtn: (String result) {
+                                        Navigator.of(context).pop();
+                                        switch (result) {
+                                          case 'Cancel':
+                                            {
+                                              //"No"
+                                              print('Cancel');
+                                              break;
+                                            }
+                                          case 'OK':
+                                            {
+                                              //"Yes"
+                                              context.read<ResumeBloc>().add(SentEditPositionsResumeEvent(
+                                                edit: false,
+                                                positionsId:widget.id,
+                                                orderChoose: searchStatus,
+                                                positionControllerTH:(positionControllerTH.text == ''
+                                                    ? positionTh
+                                                    : positionControllerTH.text) ??
+                                                    '',
+                                                positionControllerEN: (positionControllerEN.text == ''
+                                                    ? positionEn
+                                                    : positionControllerEN.text) ??
+                                                    '',
+                                                officeControllerTH:  (officeControllerTH.text == ''
+                                                    ? officeTh
+                                                    : officeControllerTH.text) ??
+                                                    '',
+                                                officeControllerEN:  (officeControllerEN.text == ''
+                                                    ? officeEn
+                                                    : officeControllerEN.text) ??
+                                                    '',
+                                              ));
+                                            }
+                                        }
+                                      });
                                 },
+
                               ),
                             )
                         ],
