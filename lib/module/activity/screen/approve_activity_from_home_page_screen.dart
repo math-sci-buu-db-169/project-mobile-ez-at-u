@@ -355,7 +355,7 @@ buildContextActivity(
                                   // context.read<ActivityBloc>().add(EditActivityScreenInfoEvent(data: data));
                                   Navigator.pushReplacement(context,
                                       MaterialPageRoute(builder: (context) {
-                                    return ActivityListForTeacher();
+                                    return HomeScreen();
                                   }));
                                 },
                                 // label: '${activityScreenText.buttonleft}',

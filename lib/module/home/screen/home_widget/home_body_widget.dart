@@ -128,18 +128,24 @@ homeTeacherBodyEmptyActivityWidget(
             //       color:Theme.of(context).bottomAppBarColor.withOpacity(0.8),)),
             //test commit by personal github
             SizedBox(
-              child: Text(NoActivityTeacherResponse?.body?.screeninfo?.noactivity??noActivity,
-                  textAlign: TextAlign.center,
-                  style:  TextStyle(fontSize: 20, fontWeight: FontWeight.w500,
-                    color:Theme.of(context).bottomAppBarColor.withOpacity(0.8),)),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 1.0, right: 1.0),
+                child: Text(NoActivityTeacherResponse?.body?.screeninfo?.noactivity??noActivityTeacher,
+                    textAlign: TextAlign.center,
+                    style:  TextStyle(fontSize: 20, fontWeight: FontWeight.w500,
+                      color:Theme.of(context).bottomAppBarColor.withOpacity(0.8),)),
+              ),
             ),
             const SizedBox(
               height: 5,
             ),
-            Text(NoActivityTeacherResponse?.body?.screeninfo?.subactlineone??subNoActivityLineOne,
-                textAlign: TextAlign.center,
-                style:  TextStyle(fontSize: 15, fontWeight: FontWeight.w500,
-                  color:Theme.of(context).bottomAppBarColor.withOpacity(0.8),)),
+            Padding(
+              padding: const EdgeInsets.only(left: 1.0, right: 1.0),
+              child: Text(NoActivityTeacherResponse?.body?.screeninfo?.subactlineone??subNoActivityTeacherLineOne,
+                  textAlign: TextAlign.center,
+                  style:  TextStyle(fontSize: 15, fontWeight: FontWeight.w500,
+                    color:Theme.of(context).bottomAppBarColor.withOpacity(0.8),)),
+            ),
             const SizedBox(
               height: 5,
             ),
