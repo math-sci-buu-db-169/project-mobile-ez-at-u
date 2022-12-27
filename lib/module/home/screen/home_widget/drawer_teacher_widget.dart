@@ -33,9 +33,12 @@ drawerTeacherHome(
     {required String versionApp,
     required void Function() iniGetThemeMode,
     required int intThemeMode}) {
-    String name = screenProfileTeacherResponse?.body?.profileGeneralTH?.name ?? '-';
-    String lName =
-        screenProfileTeacherResponse?.body?.profileGeneralTH?.lastname ?? '-';
+    String nameTeacher = screenProfileTeacherResponse?.body?.profileGeneralTH?.name ?? '-';
+    String lNameTeacher = screenProfileTeacherResponse?.body?.profileGeneralTH?.lastname ?? '-';
+    String nickNameTeacher = screenProfileTeacherResponse?.body?.profileGeneralTH?.nickname ?? '-';
+    String positionTeacher = screenProfileTeacherResponse?.body?.profileGeneralTH?.position ?? '-';
+    String emailTeacher = screenProfileTeacherResponse?.body?.profileGeneralTH?.email ?? '-';
+    String roleTeacher = screenProfileTeacherResponse?.body?.profileGeneralTH?.rolename ?? '-';
     String textAlertDeleteAccount =
         screenHomeResponse?.body?.alertmessage?.alertdeleteaccount ??
             alertDeleteAccount;
@@ -97,7 +100,7 @@ drawerTeacherHome(
                             textLeftTitle: screenHomeResponse
                                     ?.body?.screenInfo?.textname ??
                                 homeTextName,
-                            textRightDetail: '$name   $lName ',
+                            textRightDetail: '$nameTeacher   $lNameTeacher ',
                             tb1: 0.3,
                             tb2: 0.05,
                             tb3: 0.65,
@@ -111,9 +114,7 @@ drawerTeacherHome(
                             textLeftTitle: screenHomeResponse
                                     ?.body?.screenInfo?.textnickname ??
                                 homeTexNickName,
-                            textRightDetail: screenProfileResponse
-                                    ?.body?.profileGeneralInfo?.nickname ??
-                                '-',
+                            textRightDetail: '$nickNameTeacher',
                             tb1: 0.45,
                             tb2: 0.05,
                             tb3: 0.5,
@@ -122,29 +123,13 @@ drawerTeacherHome(
                           const SizedBox(
                             height: 5,
                           ),
-                          screenProfileResponse?.body?.profileGeneralInfo?.role =="ST"
-                              ? buildTableDrawerTwoTable(
-                                  context,
-                                  textLeftTitle: screenHomeResponse
-                                          ?.body?.screenInfo?.textstdcode ??
-                                      homeTextStdCode,
-                                  textRightDetail: screenProfileResponse?.body
-                                          ?.profileGeneralInfo?.studentid ??
-                                      '-',
-                                  tb1: 0.45,
-                                  tb2: 0.05,
-                                  tb3: 0.5,
-                                  underline: false,
-                                )
-                              : buildTableDrawerTwoTable(
+                          buildTableDrawerTwoTable(
                                   context,
                                   textLeftTitle:
                                   screenHomeResponse
                                           ?.body?.screenInfo?.position ??
                                       homeTextPosition,
-                                  textRightDetail:screenProfileResponse
-                                      ?.body?.profileGeneralInfo?.position ??
-                                      '-',
+                                  textRightDetail:'$positionTeacher',
                                   tb1: 0.45,
                                   tb2: 0.05,
                                   tb3: 0.5,
@@ -158,9 +143,7 @@ drawerTeacherHome(
                             textLeftTitle: screenHomeResponse
                                     ?.body?.screenInfo?.textemail ??
                                 homeTextEmail,
-                            textRightDetail: screenProfileResponse
-                                    ?.body?.profileGeneralInfo?.email ??
-                                '-',
+                            textRightDetail: '$emailTeacher',
                             tb1: 0.2,
                             tb2: 0.02,
                             tb3: 0.77,
@@ -179,9 +162,7 @@ drawerTeacherHome(
                       textLeftTitle:
                           screenHomeResponse?.body?.screenInfo?.textrole ??
                               homeTextRole,
-                      textRightDetail: screenProfileResponse
-                              ?.body?.profileGeneralInfo?.rolename ??
-                          '-',
+                      textRightDetail: '$roleTeacher',
                       tb1: 0.5,
                       tb2: 0.05,
                       tb3: 0.45,

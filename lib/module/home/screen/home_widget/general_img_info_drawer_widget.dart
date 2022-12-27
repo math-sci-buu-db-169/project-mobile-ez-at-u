@@ -35,7 +35,7 @@ buildTableGeneralImageInfo(
                           fontWeight: FontWeight.bold),
                     )
                   : Text(
-                screenProfileTeacherResponse?.body?.profileGeneralTH?.branchname ?? '-',
+                screenProfileTeacherResponse?.body?.profileGeneralTH?.facultyname ?? 'AA',
                 // screenProfileTeacherResponse?.body?.profileGeneralTH?.role ?? '-',
                       // 'AAA',
                       style: TextStyle(
@@ -57,8 +57,8 @@ buildTableGeneralImageInfo(
                         )
                       : Text(
                           // 'BBB',
-                    // screenProfileTeacherResponse?.body?.profileGeneralTH?.facultyname ?? '-',
-                    screenProfileTeacherResponse?.body?.profileGeneralTH?.teacherid ?? '-',
+                    screenProfileTeacherResponse?.body?.profileGeneralTH?.departmentname ?? 'BBB',
+                    // screenProfileTeacherResponse?.body?.profileGeneralTH?.teacherid ?? '-',
                           textAlign: TextAlign.end,
                           style: TextStyle(
                               color: Theme.of(context).bottomAppBarColor,
@@ -122,10 +122,10 @@ buildTableGeneralImageInfo(
                   ),
                 )
           :
-          (screenProfileResponse?.body?.profileGeneralInfo?.role == "TC") ?
+          (screenProfileTeacherResponse?.body?.profileGeneralTH?.role == "TC") ?
           //-----------------------TC--------------------------------//
-            (screenProfileResponse?.body?.profileGeneralInfo?.img == "" ||
-              screenProfileResponse?.body?.profileGeneralInfo?.img == null)
+            (screenProfileTeacherResponse?.body?.profileGeneralTH?.img == "" ||
+                screenProfileTeacherResponse?.body?.profileGeneralTH?.img == null)
               ? const CircleAvatar(
             radius: 35.0,
             backgroundImage: AssetImage(
@@ -161,8 +161,8 @@ buildTableGeneralImageInfo(
                         shape: BoxShape.circle,
                         image: DecorationImage(
                           image: MemoryImage(base64Decode(
-                              base64.normalize(screenProfileResponse
-                                  ?.body?.profileGeneralInfo?.img ??
+                              base64.normalize(screenProfileTeacherResponse
+                                  ?.body?.profileGeneralTH?.img ??
                                   base64.normalize(phimg)))),
                         ),
                       ),
@@ -177,7 +177,7 @@ buildTableGeneralImageInfo(
           const CircleAvatar(
               radius: 35.0,
               backgroundImage: AssetImage(
-                'assets/logo/logo.png',
+                'assets/logo/profile.png',
               ),
           )
         ])
