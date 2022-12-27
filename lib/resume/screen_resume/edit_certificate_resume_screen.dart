@@ -172,7 +172,29 @@ class _EditCertificateResumePageState extends State<EditCertificateResumePage>
                 elevation: 0,
                 leading: IconButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                    // Navigator.pop(context);
+
+                    context.read<ResumeBloc>().add(SentEditCertificateResumeEvent(
+                      edit: true,
+                      id:widget.id,
+                      orderChoose: orderChoose,
+                      titleTH :(titleControllerTH.text == ''
+                          ? titleTh
+                          : titleControllerTH.text) ??
+                          '',
+                      titleEN : (titleControllerEN.text == ''
+                          ? titleEn
+                          : titleControllerEN.text) ??
+                          '' ,
+                      detailTH :(detailControllerTH.text == ''
+                          ? detailTh
+                          : detailControllerTH.text) ??
+                          '' ,
+                      detailEN : (detailControllerEN.text == ''
+                          ? detailEn
+                          : detailControllerEN.text) ??
+                          '' ,
+                    ));
                   },
                   icon: Icon(
                     Icons.arrow_back,

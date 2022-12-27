@@ -186,7 +186,37 @@ class _EditExperienceResumePageState extends State<EditExperienceResumePage>
               elevation: 0,
               leading: IconButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  // Navigator.pop(context);
+
+                  context.read<ResumeBloc>().add(SentEditExperienceResumeEvent(
+                    edit: true,
+                    id:widget.id,
+                    orderChoose: searchStatus,
+                    positionTH :(positionControllerTH.text == ''
+                        ? positionTh
+                        : positionControllerTH.text) ??
+                        '',
+                    positionEN : (positionControllerEN.text == ''
+                        ? positionEn
+                        : positionControllerEN.text) ??
+                        '',
+                    detailTH :(detailControllerTH.text == ''
+                        ? detailTh
+                        : detailControllerTH.text) ??
+                        '',
+                    detailEN :(detailControllerEN.text == ''
+                        ? detailEn
+                        : detailControllerEN.text) ??
+                        '',
+                    startDate :  (startDateController.text == ''
+                        ? startDate
+                        : startDateController.text) ??
+                        '',
+                    endDate: (endDateController.text == ''
+                        ? endDate
+                        : endDateController.text) ??
+                        '',
+                  ));
                 },
                 icon: Icon(
                   Icons.arrow_back,

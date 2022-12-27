@@ -9,8 +9,8 @@ import 'package:pdf/pdf.dart';
 import '../../customs/color/color_const.dart';
 import '../../customs/color/pdf_color_const.dart';
 import '../../customs/size/size.dart';
-import '../app.dart';
 import '../bloc_resume/resume_bloc.dart';
+import '../examples/content_design_resume.dart';
 import '../examples/content_design_resume_color.dart';
 import '../model/response/pre_view_resume_response.dart';
 import '../screen_resume/edit_certificate_resume_screen.dart';
@@ -37,6 +37,32 @@ class OnSelect {
     required this.onselect,
   });
   Map<String, dynamic> toJson() => {"id": id, "onselect": onselect};
+}
+
+floatingButtonSave(
+    setState,
+    String save, {
+      required BuildContext context,
+      required bool pop,
+      required Function() onPressed,
+    }) {
+  return FloatingActionButton.extended(
+    heroTag: "save1",
+    backgroundColor:
+    Theme.of(context).appBarTheme.backgroundColor?.withOpacity(0.9),
+    foregroundColor: Colors.black,
+    onPressed: onPressed,
+    icon: Icon(
+      FontAwesomeIcons.paperPlane,
+      color: Theme.of(context).iconTheme.color,
+      size: 20.0,
+    ),
+    label: Text('   ${save}',
+        style: TextStyle(
+          fontSize: sizeTextSmaller14,
+          color: Theme.of(context).iconTheme.color,
+        )),
+  );
 }
 
 floatingGeneratePDFAndSaveData(
@@ -143,6 +169,7 @@ floatingGeneratePDFAndSaveData(
         foregroundColor: Colors.black,
         onPressed: () {
           context.read<ResumeBloc>().add(SetOnSelectedAndPreviewResumeEvent(
+                pop: false,
                 positionOnSelect: positionOnSelect,
                 educationHSCOnSelect: educationHSCOnSelect,
                 educationBDOnSelect: educationBDOnSelect,
@@ -186,7 +213,8 @@ floatingGoToSetThemePDF(
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => const ContentDesignResumeScreenColor()));
+              // builder: (context) => const ContentDesignResumeScreenColor()));
+              builder: (context) => const ContentDesignResumeScreen()));
     },
     icon: Icon(
       FontAwesomeIcons.barsStaggered,
@@ -228,13 +256,13 @@ buildDetailResumeCustomNotIconsReadOnly(
   return Container(
     width: MediaQuery.of(context).size.width,
     margin: const EdgeInsets.all(10),
-    padding: EdgeInsets.fromLTRB(10, 10, 15, 10),
+    padding: const EdgeInsets.fromLTRB(10, 10, 15, 10),
     decoration: BoxDecoration(
       borderRadius: const BorderRadius.all(
         Radius.circular(10),
       ),
       color: Theme.of(context).primaryColor == Colors.black
-          ? Color(0xFF1F222A)
+          ? const Color(0xFF1F222A)
           : Colors.transparent.withOpacity(0.03),
     ),
     child: Text(
@@ -255,13 +283,13 @@ buildDetailResumeCheckboxCustomNotIconsReadOnly(
   return Container(
       width: MediaQuery.of(context).size.width,
       margin: const EdgeInsets.all(5),
-      padding: EdgeInsets.fromLTRB(5, 5, 0, 5),
+      padding: const EdgeInsets.fromLTRB(5, 5, 0, 5),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(
           Radius.circular(10),
         ),
         color: Theme.of(context).primaryColor == Colors.black
-            ? Color(0xFF1F222A)
+            ? const Color(0xFF1F222A)
             : Colors.transparent.withOpacity(0.03),
       ),
       child: Row(
@@ -408,7 +436,9 @@ buildExperienceOnSelectCard(
           children: [
             buildDetailResumeCheckboxCustomNotIconsReadOnly(
                 context: context,
-                detail: experienceData[index].position ?? "",
+
+                detail: "${experienceData[index].startdate??''} - ${experienceData[index].enddate??''} : ${experienceData[index].position??''}",
+
                 appBarForeGroundColor: appBarForegroundColor,
                 checkbox: Checkbox(
                   checkColor: Theme.of(context).primaryColor,
@@ -512,7 +542,9 @@ buildCertificateOnSelectCard(
           children: [
             buildDetailResumeCheckboxCustomNotIconsReadOnly(
                 context: context,
-                detail: certificateData[index].title ?? "",
+
+                detail: certificateData[index].description == ''?
+                "${certificateData[index].title??''} ":"${certificateData[index].title??''} \n${certificateData[index].description??''} ",
                 appBarForeGroundColor: appBarForegroundColor,
                 checkbox: Checkbox(
                   checkColor: Theme.of(context).primaryColor,
@@ -668,11 +700,7 @@ buildLanguageOnSelectCard(
           child: Padding(
             padding: const EdgeInsets.all(5.0),
             child: Text(
-              boolClick == false
-                  ?
-                  // editInFormations ??
-                  "ดูเพิ่มเติม"
-                  : "แสดงบางส่วน",
+              boolClick == false ? showAll : showSome,
               style: TextStyle(
                   decoration: TextDecoration.underline,
                   decorationThickness: 2,
@@ -687,9 +715,9 @@ buildLanguageOnSelectCard(
           padding: const EdgeInsets.all(5.0),
           child: Text(
             // editInFormations ??
-            ">> คุณยังไม่มีข้อมูลส่วนนี้ <<",
+            ">> $activityNot <<",
             style: TextStyle(
-                // decoration: TextDecoration.underline,
+              // decoration: TextDecoration.underline,
                 decorationThickness: 2,
                 fontSize: 10,
                 fontWeight: FontWeight.w500,
@@ -699,7 +727,6 @@ buildLanguageOnSelectCard(
     ],
   );
 }
-
 buildSkillOnSelectCard(
     {required String showAll,
     required String showSome,
@@ -822,7 +849,7 @@ buildEducationOnSelectCard(
   return Column(
     children: [
       Padding(
-        padding: EdgeInsets.all(5),
+        padding: const EdgeInsets.all(5),
         child: Text(title),
       ),
       Column(
@@ -833,7 +860,7 @@ buildEducationOnSelectCard(
           children: [
             buildDetailResumeCheckboxCustomNotIconsReadOnly(
                 context: context,
-                detail: educationData[index].placeofstudy.toString(),
+                detail: "${educationData[index].startdate??''} - ${educationData[index].enddate??''} : ${educationData[index].placeofstudy??''}\n${educationData[index].detail??''}",
                 appBarForeGroundColor: appBarForegroundColor,
                 checkbox: Checkbox(
                   checkColor: Theme.of(context).primaryColor,
@@ -931,7 +958,7 @@ buildTitleEditDataResume(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Padding(
-          padding: EdgeInsets.all(5.0),
+          padding: const EdgeInsets.all(5.0),
           child: Text(isPreViewResumeTitle,
               style: TextStyle(
                   fontSize: 16,
@@ -1084,7 +1111,7 @@ buildTitleEditColorResume({
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.all(5.0),
+          padding: const EdgeInsets.all(5.0),
           child: Text(isPreViewResumeTitle,
               style: TextStyle(
                   fontSize: 16,
@@ -1095,7 +1122,7 @@ buildTitleEditColorResume({
             onTap: () async {
               await showMenu<int>(
                   context: context,
-                  position: RelativeRect.fromLTRB(0, 0, 0, 0),
+                  position: const RelativeRect.fromLTRB(0, 0, 0, 0),
                   items: List.generate(colorOfPdfList.length ?? 0, (index) {
                     return PopupMenuItem(
                       value: index,
@@ -1220,7 +1247,7 @@ buildCardPositionEditResumeScreen(
           );
         },
         child: Container(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(50),
           ),
@@ -1228,10 +1255,10 @@ buildCardPositionEditResumeScreen(
             color: (Theme.of(context).iconTheme.color ?? Colors.grey)
                 .withOpacity(0.5),
             borderType: BorderType.RRect,
-            radius: Radius.circular(12),
-            padding: EdgeInsets.all(2),
+            radius: const Radius.circular(12),
+            padding: const EdgeInsets.all(2),
             child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(12)),
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
               child: Container(
                 //inner container
 
@@ -1338,7 +1365,7 @@ buildExperienceCard(
           );
         },
         child: Container(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(50),
           ),
@@ -1346,10 +1373,10 @@ buildExperienceCard(
             color: (Theme.of(context).iconTheme.color ?? Colors.grey)
                 .withOpacity(0.5),
             borderType: BorderType.RRect,
-            radius: Radius.circular(12),
-            padding: EdgeInsets.all(2),
+            radius: const Radius.circular(12),
+            padding: const EdgeInsets.all(2),
             child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(12)),
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
               child: Container(
                 //inner container
 
@@ -1455,7 +1482,7 @@ buildCertificateCard(
           );
         },
         child: Container(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(50),
           ),
@@ -1463,10 +1490,10 @@ buildCertificateCard(
             color: (Theme.of(context).iconTheme.color ?? Colors.grey)
                 .withOpacity(0.5),
             borderType: BorderType.RRect,
-            radius: Radius.circular(12),
-            padding: EdgeInsets.all(2),
+            radius: const Radius.circular(12),
+            padding: const EdgeInsets.all(2),
             child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(12)),
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
               child: Container(
                 //inner container
 
@@ -1504,7 +1531,7 @@ buildEducationCard(
   return Column(
     children: [
       Padding(
-        padding: EdgeInsets.all(5),
+        padding: const EdgeInsets.all(5),
         child: Text(title),
       ),
       Column(
@@ -1579,7 +1606,7 @@ buildEducationCard(
           );
         },
         child: Container(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(50),
           ),
@@ -1587,10 +1614,10 @@ buildEducationCard(
             color: (Theme.of(context).iconTheme.color ?? Colors.grey)
                 .withOpacity(0.5),
             borderType: BorderType.RRect,
-            radius: Radius.circular(12),
-            padding: EdgeInsets.all(2),
+            radius: const Radius.circular(12),
+            padding: const EdgeInsets.all(2),
             child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(12)),
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
               child: Container(
                 //inner container
 

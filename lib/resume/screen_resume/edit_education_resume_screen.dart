@@ -193,7 +193,38 @@ class _EditEducationResumePageState extends State<EditEducationResumePage>
               elevation: 0,
               leading: IconButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  // Navigator.pop(context);
+
+                  context.read<ResumeBloc>().add(SentEditEducationResumeEvent(
+                    edit: true,
+                    id:widget.id,
+                    orderChoose:orderChoose,
+                    startDate: (endDateController.text == ''
+                        ? endDate
+                        : endDateController.text) ??
+                        '',
+                    endDate: (endDateController.text == ''
+                        ? endDate
+                        : endDateController.text) ??
+                        '',
+                    type: typeid??widget.type,
+                    placeOfStudy: (placeOfStudyControllerTH.text == ''
+                        ? placeOfStudyTh
+                        : placeOfStudyControllerTH.text) ??
+                        '',
+                    placeOfStudyEN:(placeOfStudyControllerEN.text == ''
+                        ? placeOfStudyEn
+                        : placeOfStudyControllerEN.text) ??
+                        '',
+                    detailTH:(detailControllerTH.text == ''
+                        ?detailTh
+                        : detailControllerTH.text) ??
+                        '',
+                    detailEN:(detailControllerTH.text == ''
+                        ? detailEn
+                        : detailControllerTH.text) ??
+                        '',
+                  ));
                 },
                 icon: Icon(
                   Icons.arrow_back,

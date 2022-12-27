@@ -193,7 +193,30 @@ class _EditSkillLanguageResumePageState
                 elevation: 0,
                 leading: IconButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                    // Navigator.pop(context);
+
+                    context.read<ResumeBloc>().add(SentEditSkillLanguageResumeEvent(
+                      edit: true,
+                      id:widget.id,
+                      orderChoose: searchStatus,
+                      languageTH:  (languageControllerTH.text == ''
+                          ? languageTh
+                          : languageControllerTH.text) ??
+                          '',
+                      languageEN:   (languageControllerEN.text == ''
+                          ? languageEn
+                          : languageControllerEN.text) ??
+                          '',
+                      detailTH:  (detailControllerTH.text == ''
+                          ? detailTh
+                          : detailControllerTH.text) ??
+                          '',
+                      detailEN: (detailControllerEN.text == ''
+                          ? detailEn
+                          : detailControllerEN.text) ??
+                          '',
+                      valueLanguage:widgetPointerValue.toStringAsFixed(0),
+                    ));
                   },
                   icon: Icon(
                     Icons.arrow_back,

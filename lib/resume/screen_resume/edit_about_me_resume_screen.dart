@@ -13,6 +13,7 @@ import '../../customs/size/size.dart';
 import '../../customs/text_file/build_textformfiled_unlimit_custom.dart';
 import '../../module/login/screen/login_screen/login_screen.dart';
 import '../bloc_resume/resume_bloc.dart';
+import '../components/components_resume.dart';
 import '../examples/content_design_resume_edit.dart';
 import '../model/response/get_about_me_resume_response.dart';
 
@@ -165,7 +166,16 @@ class _EditAboutMeResumePageState extends State<EditAboutMeResumePage>
               elevation: 0,
               leading: IconButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  // Navigator.pop(context);
+                  context.read<ResumeBloc>().add(SentEditAboutMeResumeEvent(
+                    aboutMeControllerTH: (aboutMeControllerTH.text == ''
+                        ? aboutMeTh
+                        : aboutMeControllerTH.text) ??
+                        '',
+                    aboutMeControllerEN: (aboutMeControllerEN.text == ''
+                        ? aboutMeEn
+                        : aboutMeControllerEN.text) ??
+                        '',));
                 },
                 icon: Icon(
                   Icons.arrow_back,
@@ -229,19 +239,28 @@ class _EditAboutMeResumePageState extends State<EditAboutMeResumePage>
                 ),
               ),
             ),
-            floatingActionButton: floatingSetThemePDF(
+            floatingActionButton: floatingButtonSave(
               context: context,
               setState,
               textSave ?? 'Save',
-              aboutMeControllerTH: (aboutMeControllerTH.text == ''
-                      ? aboutMeTh
-                      : aboutMeControllerTH.text) ??
-                  '',
-              aboutMeControllerEN: (aboutMeControllerEN.text == ''
-                      ? aboutMeEn
-                      : aboutMeControllerEN.text) ??
-                  '',
+              pop: false,
+              onPressed: () {
+                context.read<ResumeBloc>().add(SentEditAboutMeResumeEvent(
+                    aboutMeControllerTH: (aboutMeControllerTH.text == ''
+                        ? aboutMeTh
+                        : aboutMeControllerTH.text) ??
+                        '',
+                    aboutMeControllerEN: (aboutMeControllerEN.text == ''
+                        ? aboutMeEn
+                        : aboutMeControllerEN.text) ??
+                        '',));
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) => const ContentDesignResumeScreen()));
+              },
             ),
+
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerFloat,
           );
@@ -253,36 +272,4 @@ class _EditAboutMeResumePageState extends State<EditAboutMeResumePage>
       },
     );
   }
-}
-
-floatingSetThemePDF(
-  setState,
-  String pdf, {
-  required BuildContext context,
-  required String aboutMeControllerTH,
-  required String aboutMeControllerEN,
-}) {return FloatingActionButton.extended(
-    backgroundColor:
-        Theme.of(context).appBarTheme.backgroundColor?.withOpacity(0.9),
-    foregroundColor: Colors.black,
-    onPressed: () {
-      context.read<ResumeBloc>().add(SentEditAboutMeResumeEvent(
-          aboutMeControllerTH: aboutMeControllerTH,
-          aboutMeControllerEN: aboutMeControllerEN));
-      // Navigator.push(
-      //     context,
-      //     MaterialPageRoute(
-      //         builder: (context) => const ContentDesignResumeScreen()));
-    },
-    icon: Icon(
-      FontAwesomeIcons.paperPlane,
-      color: Theme.of(context).iconTheme.color,
-      size: 20.0,
-    ),
-    label: Text('   ${pdf ?? 'PDF'}',
-        style: TextStyle(
-          fontSize: sizeTextSmaller14,
-          color: Theme.of(context).iconTheme.color,
-        )),
-  );
 }

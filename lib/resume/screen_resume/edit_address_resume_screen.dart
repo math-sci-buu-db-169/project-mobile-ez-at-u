@@ -285,7 +285,42 @@ class _EditAddressResumePageState extends State<EditAddressResumePage>
               elevation: 0,
               leading: IconButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  // Navigator.pop(context);
+
+                  context.read<ResumeBloc>().add(SendEditAddressResumeEvent(
+                    house: (houseControllerTHEN.text == ''
+                        ? house
+                        : houseControllerTHEN.text) ??
+                        '',
+                    moo:  (mooControllerTHEN.text == ''
+                        ? moo
+                        : mooControllerTHEN.text) ??
+                        '',
+                    soiTH:  (soiControllerTH.text == ''
+                        ? soiTh
+                        : soiControllerTH.text) ??
+                        '',
+                    soiEN:   (soiControllerEN.text == ''
+                        ? soiEn
+                        : soiControllerEN.text) ??
+                        '',
+                    roadTH:   (roadControllerTH.text == ''
+                        ? roadTh
+                        : roadControllerTH.text) ??
+                        '',
+                    roadEN: (roadControllerEN.text == ''
+                        ? roadEn
+                        : roadControllerEN.text) ??
+                        '',
+                    subDistrictID: subDistrictID,
+                    districtID: districtID,
+                    provinceID: provinceID,
+                    zipcode:(zipCodeControllerTH.text == ''
+                        ? getZipCode
+                        : zipCodeControllerTH.text) ??
+                        '',
+
+                  ));
                 },
                 icon: Icon(
                   Icons.arrow_back,

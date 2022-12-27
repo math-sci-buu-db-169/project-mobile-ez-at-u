@@ -175,7 +175,28 @@ class _EditPositionsResumePageState extends State<EditPositionsResumePage>
               elevation: 0,
               leading: IconButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  // Navigator.pop(context);
+                  context.read<ResumeBloc>().add(SentEditPositionsResumeEvent(
+                    edit: true,
+                    positionsId:widget.id,
+                    orderChoose: searchStatus,
+                    positionControllerTH:(positionControllerTH.text == ''
+                        ? positionTh
+                        : positionControllerTH.text) ??
+                        '',
+                    positionControllerEN: (positionControllerEN.text == ''
+                        ? positionEn
+                        : positionControllerEN.text) ??
+                        '',
+                    officeControllerTH:  (officeControllerTH.text == ''
+                        ? officeTh
+                        : officeControllerTH.text) ??
+                        '',
+                    officeControllerEN:  (officeControllerEN.text == ''
+                        ? officeEn
+                        : officeControllerEN.text) ??
+                        '',
+                  ));
                 },
                 icon: Icon(
                   Icons.arrow_back,

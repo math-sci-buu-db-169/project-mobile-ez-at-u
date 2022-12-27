@@ -191,7 +191,30 @@ class _EditSkillResumePageState
                 elevation: 0,
                 leading: IconButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                    // Navigator.pop(context);
+
+                    context.read<ResumeBloc>().add(SentEditSkillResumeEvent(
+                      edit: true,
+                      id:widget.id,
+                      orderChoose: searchStatus,
+                      skillTH:  (skillControllerTH.text == ''
+                          ? skillTh
+                          : skillControllerTH.text) ??
+                          '',
+                      skillEN:  (skillControllerEN.text == ''
+                          ? skillEn
+                          : skillControllerEN.text) ??
+                          '',
+                      detailTH:  (detailControllerTH.text == ''
+                          ? detailTh
+                          : detailControllerTH.text) ??
+                          '',
+                      detailEN: (detailControllerEN.text == ''
+                          ? detailEn
+                          : detailControllerEN.text) ??
+                          '',
+                      valueSkill:widgetPointerValue.toStringAsFixed(0),
+                    ));
                   },
                   icon: Icon(
                     Icons.arrow_back,

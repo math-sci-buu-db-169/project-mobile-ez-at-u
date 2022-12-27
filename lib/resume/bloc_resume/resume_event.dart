@@ -14,6 +14,7 @@ class EditChangeLanguageResumeRequest extends ResumeEvent {}
 // class GetPreviewResumeEvent extends ResumeEvent {}
 class GetOnSelectedAndPreviewResumeEvent extends ResumeEvent {}
 class SetOnSelectedAndPreviewResumeEvent extends ResumeEvent {
+  bool pop;
   List<OnSelect> positionOnSelect;
   List<OnSelect> educationHSCOnSelect;
   List<OnSelect> educationBDOnSelect ;
@@ -40,7 +41,7 @@ class SetOnSelectedAndPreviewResumeEvent extends ResumeEvent {
     required  this.certificateOnSelect ,
     required  this.skillOnSelect ,
     required  this.languageOnSelect,
-    required  this. sendOnSelectColorSet ,});
+    required  this. sendOnSelectColorSet, required this. pop ,});
 }class SetOnSelectedAndGenPreviewResumeEvent extends ResumeEvent {
   List<OnSelect> positionOnSelect;
   List<OnSelect> educationHSCOnSelect;
@@ -109,7 +110,7 @@ class SendEditAddressResumeEvent extends ResumeEvent {
      required this. subDistrictID,
      required this. districtID,
      required this. provinceID,
-     required this. zipcode,});
+     required this. zipcode, });
 }
 class ResumeInnitEvent extends ResumeEvent {}
 
@@ -217,6 +218,7 @@ class SentEditContactResumeEvent extends ResumeEvent {
   String instagram;
   String twitter;
   String youtube;
+  bool pop;
 
   SentEditContactResumeEvent({
     required this.email,
@@ -226,6 +228,7 @@ class SentEditContactResumeEvent extends ResumeEvent {
     required this.instagram,
     required this.twitter,
     required this.youtube,
+    required this.pop,
   });
 }
 

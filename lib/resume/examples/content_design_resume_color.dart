@@ -128,6 +128,13 @@ class _ContentDesignResumeColorState extends State<ContentDesignResumeColor>
         if (state is SetOnSelectedAndPreviewResumeEvent) {
           context.read<ResumeBloc>().add(GetOnSelectedAndPreviewResumeEvent());
         }
+        if (state is SetOnSelectedResumeSuccessState) {
+          if(state.pop == true){
+            Navigator.of(context).pop();
+          }else{
+            context.read<ResumeBloc>().add(GetOnSelectedAndPreviewResumeEvent());
+          }
+        }
       },
       builder: (context, state) {
         if (state is OnSelectedAndPreviewResumeSuccessState) {
@@ -1311,69 +1318,75 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                     onSelectColorSet.contact.materialColor = colorOfPdfList[optionSearchResult].materialColor;
                                   });
                                 }),
-                            Stack(
-                              children: [
-                                BuildTextFormFieldUnLimitSocialCustomResume(
-                                    readOnly: true,
-                                    hintLabel: isPreViewResumeResponse
-                                        .body?.screeninfo?.email ??
-                                        "email",
-                                    initialvalue: isPreViewResumeResponse
-                                        .body?.data?.contactinfo?.email ??
-                                        ">> $activityNot  <<",
-                                    textInputType: TextInputType.text,
-                                    // iconsFile : Icons.person_rounded,
-                                    iconsFile: FontAwesomeIcons.envelope,
-                                    checkbox: Checkbox(
-                                      checkColor: Theme.of(context).primaryColor,
-                                      fillColor: MaterialStateProperty.resolveWith(
-                                          getColor),
-                                      value: isPreViewResumeResponse
-                                          .body?.data?.contactinfo?.email ==
-                                          null
-                                          ? false
-                                          : socialOnSelect[0].onselect,
-                                      onChanged: (bool? value) {
-                                        if (isPreViewResumeResponse
-                                            .body?.data?.contactinfo?.phone !=
-                                            null) {
-                                          socialOnSelect[0].onselect = value!;
-                                        } else {
-                                          var textSnack =
-                                              '$activityNot  $selectedNot';
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(SnackBar(
-                                            content: Text(textSnack,
-                                                style: const TextStyle(
-                                                    fontSize: sizeTextSmaller14,
-                                                    color: Colors.black)),
-                                            duration: const Duration(seconds: 1),
-                                            backgroundColor:
-                                            const Color(0xFFFFF9D1),
-                                          ));
-                                        }
-                                        onChangedSetState();
-                                        if (kDebugMode) {
-                                          print(value);
-                                          print(
-                                              socialOnSelect[0].onselect.toString());
-                                          print(socialOnSelect[0]);
-                                          print(jsonEncode(socialOnSelect[1]));
-                                          print(jsonEncode(socialOnSelect));
-                                        }
-                                      },
-                                    )),
-                              ],
-                            ),
+
+
+                            BuildTextFormFieldUnLimitSocialCustomResume(
+                                readOnly: true,
+                                hintLabel: isPreViewResumeResponse
+                                    .body?.screeninfo?.email ??
+                                    "email",
+                                initialvalue:
+                                isPreViewResumeResponse
+                                    .body?.data?.contactinfo?.email  ==''?
+                                ">> $activityNot <<":isPreViewResumeResponse
+                                    .body?.data?.contactinfo?.email  ??
+                                    ">> $activityNot <<",
+                                textInputType: TextInputType.text,
+                                // iconsFile : Icons.person_rounded,
+                                iconsFile: FontAwesomeIcons.envelope,
+                                checkbox: Checkbox(
+                                  checkColor: Theme.of(context).primaryColor,
+                                  fillColor:
+                                  MaterialStateProperty.resolveWith(getColor),
+                                  value: isPreViewResumeResponse
+                                      .body?.data?.contactinfo?.email ==
+                                      null
+                                      ? false
+                                      : socialOnSelect[0].onselect,
+                                  onChanged: (bool? value) {
+                                    if (
+                                    isPreViewResumeResponse.body?.data?.contactinfo?.email == ''||
+                                        isPreViewResumeResponse.body?.data?.contactinfo?.email == null) {
+                                      var textSnack =
+                                          '$activityNot $selectedNot';
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
+                                        content: Text(textSnack,
+                                            style: const TextStyle(
+                                                fontSize: sizeTextSmaller14,
+                                                color: Colors.black)),
+                                        duration: const Duration(seconds: 1),
+                                        backgroundColor:
+                                        const Color(0xFFFFF9D1),
+                                      ));
+                                    }
+                                    else {
+
+                                      socialOnSelect[0].onselect = value!;
+
+                                    }
+                                    onChangedSetState();
+                                    if (kDebugMode) {
+                                      print(value);
+                                      print(socialOnSelect[0].onselect.toString());
+                                      print(socialOnSelect[0]);
+                                      print(jsonEncode(socialOnSelect[0]));
+                                      print(jsonEncode(socialOnSelect));
+                                    }
+                                  },
+                                )),
                             BuildTextFormFieldUnLimitSocialCustomResume(
                                 readOnly: true,
                                 hintLabel: isPreViewResumeResponse
                                     .body?.screeninfo?.phone ??
-                                    "เบอร์โทรศัพท์",
-                                initialvalue: isPreViewResumeResponse
-                                    .body?.data?.contactinfo?.phone ??
-                                    ">> $activityNot  <<",
-                                textInputType: TextInputType.number,
+                                    "phone",
+                                initialvalue:
+                                isPreViewResumeResponse
+                                    .body?.data?.contactinfo?.phone  ==''?
+                                ">> $activityNot <<":isPreViewResumeResponse
+                                    .body?.data?.contactinfo?.phone  ??
+                                    ">> $activityNot <<",
+                                textInputType: TextInputType.text,
                                 // iconsFile : Icons.person_rounded,
                                 iconsFile: FontAwesomeIcons.phone,
                                 checkbox: Checkbox(
@@ -1384,13 +1397,11 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                       .body?.data?.contactinfo?.phone ==
                                       null
                                       ? false
-                                      : socialOnSelect[2].onselect,
+                                      : socialOnSelect[1].onselect,
                                   onChanged: (bool? value) {
-                                    if (isPreViewResumeResponse
-                                        .body?.data?.contactinfo?.phone !=
-                                        null) {
-                                      socialOnSelect[1].onselect = value!;
-                                    } else {
+                                    if (
+                                    isPreViewResumeResponse.body?.data?.contactinfo?.phone == ''||
+                                        isPreViewResumeResponse.body?.data?.contactinfo?.phone == null) {
                                       var textSnack =
                                           '$activityNot $selectedNot';
                                       ScaffoldMessenger.of(context)
@@ -1400,15 +1411,21 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                                 fontSize: sizeTextSmaller14,
                                                 color: Colors.black)),
                                         duration: const Duration(seconds: 1),
-                                        backgroundColor: const Color(0xFFFFF9D1),
+                                        backgroundColor:
+                                        const Color(0xFFFFF9D1),
                                       ));
+                                    }
+                                    else {
+
+                                      socialOnSelect[1].onselect = value!;
+
                                     }
                                     onChangedSetState();
                                     if (kDebugMode) {
                                       print(value);
                                       print(socialOnSelect[1].onselect.toString());
                                       print(socialOnSelect[1]);
-                                      print(jsonEncode(socialOnSelect[2]));
+                                      print(jsonEncode(socialOnSelect[1]));
                                       print(jsonEncode(socialOnSelect));
                                     }
                                   },
@@ -1417,10 +1434,13 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                 readOnly: true,
                                 hintLabel: isPreViewResumeResponse
                                     .body?.screeninfo?.facebook ??
-                                    "เฟสบุ๊ค",
-                                initialvalue: isPreViewResumeResponse
-                                    .body?.data?.contactinfo?.facebook ??
-                                    ">> $activityNot  <<",
+                                    "facebook",
+                                initialvalue:
+                                isPreViewResumeResponse
+                                    .body?.data?.contactinfo?.facebook  ==''?
+                                ">> $activityNot <<":isPreViewResumeResponse
+                                    .body?.data?.contactinfo?.facebook  ??
+                                    ">> $activityNot <<",
                                 textInputType: TextInputType.text,
                                 // iconsFile : Icons.person_rounded,
                                 iconsFile: FontAwesomeIcons.facebook,
@@ -1434,11 +1454,9 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                       ? false
                                       : socialOnSelect[2].onselect,
                                   onChanged: (bool? value) {
-                                    if (isPreViewResumeResponse
-                                        .body?.data?.contactinfo?.facebook !=
-                                        null) {
-                                      socialOnSelect[2].onselect = value!;
-                                    } else {
+                                    if (
+                                    isPreViewResumeResponse.body?.data?.contactinfo?.facebook == ''||
+                                        isPreViewResumeResponse.body?.data?.contactinfo?.facebook == null) {
                                       var textSnack =
                                           '$activityNot $selectedNot';
                                       ScaffoldMessenger.of(context)
@@ -1448,15 +1466,21 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                                 fontSize: sizeTextSmaller14,
                                                 color: Colors.black)),
                                         duration: const Duration(seconds: 1),
-                                        backgroundColor: const Color(0xFFFFF9D1),
+                                        backgroundColor:
+                                        const Color(0xFFFFF9D1),
                                       ));
+                                    }
+                                    else {
+
+                                      socialOnSelect[2].onselect = value!;
+
                                     }
                                     onChangedSetState();
                                     if (kDebugMode) {
                                       print(value);
                                       print(socialOnSelect[2].onselect.toString());
                                       print(socialOnSelect[2]);
-                                      print(jsonEncode(socialOnSelect[1]));
+                                      print(jsonEncode(socialOnSelect[2]));
                                       print(jsonEncode(socialOnSelect));
                                     }
                                   },
@@ -1465,10 +1489,13 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                 readOnly: true,
                                 hintLabel: isPreViewResumeResponse
                                     .body?.screeninfo?.line ??
-                                    "ไลน์",
-                                initialvalue: isPreViewResumeResponse
-                                    .body?.data?.contactinfo?.line ??
-                                    ">> $activityNot ้ <<",
+                                    "line",
+                                initialvalue:
+                                isPreViewResumeResponse
+                                    .body?.data?.contactinfo?.line  ==''?
+                                ">> $activityNot <<":isPreViewResumeResponse
+                                    .body?.data?.contactinfo?.line  ??
+                                    ">> $activityNot <<",
                                 textInputType: TextInputType.text,
                                 // iconsFile : Icons.person_rounded,
                                 iconsFile: FontAwesomeIcons.line,
@@ -1482,13 +1509,11 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                       ? false
                                       : socialOnSelect[3].onselect,
                                   onChanged: (bool? value) {
-                                    if (isPreViewResumeResponse
-                                        .body?.data?.contactinfo?.line !=
-                                        null) {
-                                      socialOnSelect[3].onselect = value!;
-                                    } else {
+                                    if (
+                                    isPreViewResumeResponse.body?.data?.contactinfo?.line == ''||
+                                        isPreViewResumeResponse.body?.data?.contactinfo?.line == null) {
                                       var textSnack =
-                                          '$activityNot ้ $selectedNot';
+                                          '$activityNot $selectedNot';
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(SnackBar(
                                         content: Text(textSnack,
@@ -1496,8 +1521,14 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                                 fontSize: sizeTextSmaller14,
                                                 color: Colors.black)),
                                         duration: const Duration(seconds: 1),
-                                        backgroundColor: const Color(0xFFFFF9D1),
+                                        backgroundColor:
+                                        const Color(0xFFFFF9D1),
                                       ));
+                                    }
+                                    else {
+
+                                      socialOnSelect[3].onselect = value!;
+
                                     }
                                     onChangedSetState();
                                     if (kDebugMode) {
@@ -1514,9 +1545,12 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                 hintLabel: isPreViewResumeResponse
                                     .body?.screeninfo?.instagram ??
                                     "instagram",
-                                initialvalue: isPreViewResumeResponse
-                                    .body?.data?.contactinfo?.instagram ??
-                                    ">> $activityNot  <<",
+                                initialvalue:
+                                isPreViewResumeResponse
+                                    .body?.data?.contactinfo?.instagram  ==''?
+                                ">> $activityNot <<":isPreViewResumeResponse
+                                    .body?.data?.contactinfo?.instagram  ??
+                                    ">> $activityNot <<",
                                 textInputType: TextInputType.text,
                                 // iconsFile : Icons.person_rounded,
                                 iconsFile: FontAwesomeIcons.instagram,
@@ -1530,13 +1564,11 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                       ? false
                                       : socialOnSelect[4].onselect,
                                   onChanged: (bool? value) {
-                                    if (isPreViewResumeResponse
-                                        .body?.data?.contactinfo?.instagram !=
-                                        null) {
-                                      socialOnSelect[4].onselect = value!;
-                                    } else {
+                                    if (
+                                    isPreViewResumeResponse.body?.data?.contactinfo?.instagram == ''||
+                                        isPreViewResumeResponse.body?.data?.contactinfo?.instagram == null) {
                                       var textSnack =
-                                          '$activityNot  $selectedNot';
+                                          '$activityNot $selectedNot';
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(SnackBar(
                                         content: Text(textSnack,
@@ -1544,8 +1576,14 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                                 fontSize: sizeTextSmaller14,
                                                 color: Colors.black)),
                                         duration: const Duration(seconds: 1),
-                                        backgroundColor: const Color(0xFFFFF9D1),
+                                        backgroundColor:
+                                        const Color(0xFFFFF9D1),
                                       ));
+                                    }
+                                    else {
+
+                                      socialOnSelect[4].onselect = value!;
+
                                     }
                                     onChangedSetState();
                                     if (kDebugMode) {
@@ -1562,9 +1600,12 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                 hintLabel: isPreViewResumeResponse
                                     .body?.screeninfo?.twitter ??
                                     "twitter",
-                                initialvalue: isPreViewResumeResponse
-                                    .body?.data?.contactinfo?.twitter ??
-                                    ">> $activityNot  <<",
+                                initialvalue:
+                                isPreViewResumeResponse
+                                    .body?.data?.contactinfo?.twitter  ==''?
+                                ">> $activityNot <<":isPreViewResumeResponse
+                                    .body?.data?.contactinfo?.twitter  ??
+                                    ">> $activityNot <<",
                                 textInputType: TextInputType.text,
                                 // iconsFile : Icons.person_rounded,
                                 iconsFile: FontAwesomeIcons.twitter,
@@ -1578,13 +1619,11 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                       ? false
                                       : socialOnSelect[5].onselect,
                                   onChanged: (bool? value) {
-                                    if (isPreViewResumeResponse
-                                        .body?.data?.contactinfo?.twitter !=
-                                        null) {
-                                      socialOnSelect[5].onselect = value!;
-                                    } else {
+                                    if (
+                                    isPreViewResumeResponse.body?.data?.contactinfo?.twitter == ''||
+                                        isPreViewResumeResponse.body?.data?.contactinfo?.twitter == null) {
                                       var textSnack =
-                                          '$activityNot  $selectedNot';
+                                          '$activityNot $selectedNot';
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(SnackBar(
                                         content: Text(textSnack,
@@ -1592,8 +1631,14 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                                 fontSize: sizeTextSmaller14,
                                                 color: Colors.black)),
                                         duration: const Duration(seconds: 1),
-                                        backgroundColor: const Color(0xFFFFF9D1),
+                                        backgroundColor:
+                                        const Color(0xFFFFF9D1),
                                       ));
+                                    }
+                                    else {
+
+                                      socialOnSelect[5].onselect = value!;
+
                                     }
                                     onChangedSetState();
                                     if (kDebugMode) {
@@ -1610,9 +1655,12 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                 hintLabel: isPreViewResumeResponse
                                     .body?.screeninfo?.youtube ??
                                     "youtube",
-                                initialvalue: isPreViewResumeResponse
-                                    .body?.data?.contactinfo?.youtube ??
-                                    ">> $activityNot  <<",
+                                initialvalue:
+                                isPreViewResumeResponse
+                                    .body?.data?.contactinfo?.youtube  ==''?
+                                ">> $activityNot <<":isPreViewResumeResponse
+                                    .body?.data?.contactinfo?.youtube  ??
+                                    ">> $activityNot <<",
                                 textInputType: TextInputType.text,
                                 // iconsFile : Icons.person_rounded,
                                 iconsFile: FontAwesomeIcons.youtube,
@@ -1626,13 +1674,11 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                       ? false
                                       : socialOnSelect[6].onselect,
                                   onChanged: (bool? value) {
-                                    if (isPreViewResumeResponse
-                                        .body?.data?.contactinfo?.youtube !=
-                                        null) {
-                                      socialOnSelect[6].onselect = value!;
-                                    } else {
+                                    if (
+                                    isPreViewResumeResponse.body?.data?.contactinfo?.youtube == ''||
+                                        isPreViewResumeResponse.body?.data?.contactinfo?.youtube == null) {
                                       var textSnack =
-                                          '$activityNot  $selectedNot';
+                                          '$activityNot $selectedNot';
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(SnackBar(
                                         content: Text(textSnack,
@@ -1640,10 +1686,15 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                                 fontSize: sizeTextSmaller14,
                                                 color: Colors.black)),
                                         duration: const Duration(seconds: 1),
-                                        backgroundColor: const Color(0xFFFFF9D1),
+                                        backgroundColor:
+                                        const Color(0xFFFFF9D1),
                                       ));
                                     }
+                                    else {
 
+                                      socialOnSelect[6].onselect = value!;
+
+                                    }
                                     onChangedSetState();
                                     if (kDebugMode) {
                                       print(value);
@@ -1679,6 +1730,7 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                     onSelectColorSet.address.materialColor = colorOfPdfList[optionSearchResult].materialColor;
                                   });
                                 }),
+
                             Column(
                               children: [
                                 BuildTextFormFieldUnLimitSocialCustomResume(
@@ -1687,8 +1739,10 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                         .body?.screeninfo?.number ??
                                         "บ้านเลขที่",
                                     initialvalue: isPreViewResumeResponse
+                                        .body?.data?.address?.number ==''?
+                                    ">> $activityNot <<":isPreViewResumeResponse
                                         .body?.data?.address?.number ??
-                                        ">> $activityNot  <<",
+                                        ">> $activityNot <<",
                                     textInputType: TextInputType.text,
                                     // iconsFile : Icons.person_rounded,
                                     iconsFile: FontAwesomeIcons.solidMap,
@@ -1702,11 +1756,9 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                           ? false
                                           : addressOnSelect[0].onselect,
                                       onChanged: (bool? value) {
-                                        if (isPreViewResumeResponse
-                                            .body?.data?.address?.number !=
-                                            null) {
-                                          addressOnSelect[0].onselect = value!;
-                                        } else {
+                                        if (
+                                        isPreViewResumeResponse.body?.data?.address?.number == ''||
+                                            isPreViewResumeResponse.body?.data?.address?.number == null) {
                                           var textSnack =
                                               '$activityNot $selectedNot';
                                           ScaffoldMessenger.of(context)
@@ -1720,13 +1772,18 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                             const Color(0xFFFFF9D1),
                                           ));
                                         }
+                                        else {
+
+                                          addressOnSelect[0].onselect = value!;
+
+                                        }
                                         onChangedSetState();
                                         if (kDebugMode) {
                                           print(value);
                                           print(
                                               addressOnSelect[0].onselect.toString());
                                           print(addressOnSelect[0]);
-                                          print(jsonEncode(addressOnSelect[1]));
+                                          print(jsonEncode(addressOnSelect[0]));
                                           print(jsonEncode(addressOnSelect));
                                         }
                                       },
@@ -1737,8 +1794,10 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                         .body?.screeninfo?.moo ??
                                         "หมู่",
                                     initialvalue: isPreViewResumeResponse
+                                        .body?.data?.address?.moo ==''?
+                                    ">> $activityNot <<":isPreViewResumeResponse
                                         .body?.data?.address?.moo ??
-                                        ">> $activityNot  <<",
+                                        ">> $activityNot <<",
                                     textInputType: TextInputType.text,
                                     // iconsFile : Icons.person_rounded,
                                     iconsFile: FontAwesomeIcons.signsPost,
@@ -1752,11 +1811,9 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                           ? false
                                           : addressOnSelect[1].onselect,
                                       onChanged: (bool? value) {
-                                        if (isPreViewResumeResponse
-                                            .body?.data?.address?.moo !=
-                                            null) {
-                                          addressOnSelect[1].onselect = value!;
-                                        } else {
+                                        if (
+                                        isPreViewResumeResponse.body?.data?.address?.moo == ''||
+                                            isPreViewResumeResponse.body?.data?.address?.moo == null) {
                                           var textSnack =
                                               '$activityNot $selectedNot';
                                           ScaffoldMessenger.of(context)
@@ -1769,6 +1826,11 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                             backgroundColor:
                                             const Color(0xFFFFF9D1),
                                           ));
+                                        }
+                                        else {
+
+                                          addressOnSelect[1].onselect = value!;
+
                                         }
                                         onChangedSetState();
                                         if (kDebugMode) {
@@ -1787,8 +1849,10 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                         .body?.screeninfo?.soi ??
                                         "ซอย",
                                     initialvalue: isPreViewResumeResponse
+                                        .body?.data?.address?.soi ==''?
+                                    ">> $activityNot <<":isPreViewResumeResponse
                                         .body?.data?.address?.soi ??
-                                        ">> $activityNot  <<",
+                                        ">> $activityNot <<",
                                     textInputType: TextInputType.text,
                                     // iconsFile : Icons.person_rounded,
                                     iconsFile: FontAwesomeIcons.trafficLight,
@@ -1802,13 +1866,11 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                           ? false
                                           : addressOnSelect[2].onselect,
                                       onChanged: (bool? value) {
-                                        if (isPreViewResumeResponse
-                                            .body?.data?.address?.soi !=
-                                            null) {
-                                          addressOnSelect[2].onselect = value!;
-                                        } else {
+                                        if (
+                                        isPreViewResumeResponse.body?.data?.address?.soi == ''||
+                                            isPreViewResumeResponse.body?.data?.address?.soi == null) {
                                           var textSnack =
-                                              '$activityNot  $selectedNot';
+                                              '$activityNot $selectedNot';
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(SnackBar(
                                             content: Text(textSnack,
@@ -1820,13 +1882,18 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                             const Color(0xFFFFF9D1),
                                           ));
                                         }
+                                        else {
+
+                                          addressOnSelect[2].onselect = value!;
+
+                                        }
                                         onChangedSetState();
                                         if (kDebugMode) {
                                           print(value);
                                           print(
                                               addressOnSelect[2].onselect.toString());
                                           print(addressOnSelect[2]);
-                                          print(jsonEncode(addressOnSelect[1]));
+                                          print(jsonEncode(addressOnSelect[2]));
                                           print(jsonEncode(addressOnSelect));
                                         }
                                       },
@@ -1837,8 +1904,10 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                         .body?.screeninfo?.road ??
                                         "ถนน",
                                     initialvalue: isPreViewResumeResponse
+                                        .body?.data?.address?.road ==''?
+                                    ">> $activityNot <<":isPreViewResumeResponse
                                         .body?.data?.address?.road ??
-                                        ">> $activityNot  <<",
+                                        ">> $activityNot <<",
                                     textInputType: TextInputType.text,
                                     // iconsFile : Icons.person_rounded,
                                     iconsFile: FontAwesomeIcons.road,
@@ -1852,13 +1921,11 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                           ? false
                                           : addressOnSelect[3].onselect,
                                       onChanged: (bool? value) {
-                                        if (isPreViewResumeResponse
-                                            .body?.data?.address?.road !=
-                                            null) {
-                                          addressOnSelect[3].onselect = value!;
-                                        } else {
+                                        if (
+                                        isPreViewResumeResponse.body?.data?.address?.road == ''||
+                                            isPreViewResumeResponse.body?.data?.address?.road == null) {
                                           var textSnack =
-                                              '$activityNot  $selectedNot';
+                                              '$activityNot $selectedNot';
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(SnackBar(
                                             content: Text(textSnack,
@@ -1869,6 +1936,11 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                             backgroundColor:
                                             const Color(0xFFFFF9D1),
                                           ));
+                                        }
+                                        else {
+
+                                          addressOnSelect[3].onselect = value!;
+
                                         }
                                         onChangedSetState();
                                         if (kDebugMode) {
@@ -1886,9 +1958,11 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                     hintLabel: isPreViewResumeResponse
                                         .body?.screeninfo?.subdistrict ??
                                         "ตำบล",
-                                    initialvalue: isPreViewResumeResponse
+                                    initialvalue:isPreViewResumeResponse
+                                        .body?.data?.address?.subdistrict ==''?
+                                    ">> $activityNot <<":isPreViewResumeResponse
                                         .body?.data?.address?.subdistrict ??
-                                        ">> $activityNot  <<",
+                                        ">> $activityNot <<",
                                     textInputType: TextInputType.text,
                                     // iconsFile : Icons.person_rounded,
                                     iconsFile: FontAwesomeIcons.treeCity,
@@ -1902,13 +1976,11 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                           ? false
                                           : addressOnSelect[4].onselect,
                                       onChanged: (bool? value) {
-                                        if (isPreViewResumeResponse
-                                            .body?.data?.address?.subdistrict !=
-                                            null) {
-                                          addressOnSelect[4].onselect = value!;
-                                        } else {
+                                        if (
+                                        isPreViewResumeResponse.body?.data?.address?.subdistrict == ''||
+                                            isPreViewResumeResponse.body?.data?.address?.subdistrict == null) {
                                           var textSnack =
-                                              '$activityNot  $selectedNot';
+                                              '$activityNot $selectedNot';
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(SnackBar(
                                             content: Text(textSnack,
@@ -1919,6 +1991,11 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                             backgroundColor:
                                             const Color(0xFFFFF9D1),
                                           ));
+                                        }
+                                        else {
+
+                                          addressOnSelect[4].onselect = value!;
+
                                         }
                                         onChangedSetState();
                                         if (kDebugMode) {
@@ -1935,10 +2012,12 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                     readOnly: true,
                                     hintLabel: isPreViewResumeResponse
                                         .body?.screeninfo?.district ??
-                                        "หมู่",
+                                        "อำเภอ",
                                     initialvalue: isPreViewResumeResponse
+                                        .body?.data?.address?.district ==''?
+                                    ">> $activityNot <<":isPreViewResumeResponse
                                         .body?.data?.address?.district ??
-                                        ">> $activityNot  <<",
+                                        ">> $activityNot <<",
                                     textInputType: TextInputType.text,
                                     // iconsFile : Icons.person_rounded,
                                     iconsFile: FontAwesomeIcons.city,
@@ -1952,13 +2031,11 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                           ? false
                                           : addressOnSelect[5].onselect,
                                       onChanged: (bool? value) {
-                                        if (isPreViewResumeResponse
-                                            .body?.data?.address?.district !=
-                                            null) {
-                                          addressOnSelect[5].onselect = value!;
-                                        } else {
+                                        if (
+                                        isPreViewResumeResponse.body?.data?.address?.district == ''||
+                                            isPreViewResumeResponse.body?.data?.address?.district == null) {
                                           var textSnack =
-                                              '$activityNot  $selectedNot';
+                                              '$activityNot $selectedNot';
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(SnackBar(
                                             content: Text(textSnack,
@@ -1969,6 +2046,11 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                             backgroundColor:
                                             const Color(0xFFFFF9D1),
                                           ));
+                                        }
+                                        else {
+
+                                          addressOnSelect[5].onselect = value!;
+
                                         }
                                         onChangedSetState();
                                         if (kDebugMode) {
@@ -1987,8 +2069,10 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                         .body?.screeninfo?.province ??
                                         "จังหวัด",
                                     initialvalue: isPreViewResumeResponse
+                                        .body?.data?.address?.province ==''?
+                                    ">> $activityNot <<":isPreViewResumeResponse
                                         .body?.data?.address?.province ??
-                                        ">> $activityNot ้ <<",
+                                        ">> $activityNot <<",
                                     textInputType: TextInputType.text,
                                     // iconsFile : Icons.person_rounded,
                                     iconsFile: FontAwesomeIcons.earthAsia,
@@ -2002,11 +2086,9 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                           ? false
                                           : addressOnSelect[6].onselect,
                                       onChanged: (bool? value) {
-                                        if (isPreViewResumeResponse
-                                            .body?.data?.address?.province !=
-                                            null) {
-                                          addressOnSelect[6].onselect = value!;
-                                        } else {
+                                        if (
+                                        isPreViewResumeResponse.body?.data?.address?.province == ''||
+                                            isPreViewResumeResponse.body?.data?.address?.province == null) {
                                           var textSnack =
                                               '$activityNot $selectedNot';
                                           ScaffoldMessenger.of(context)
@@ -2019,6 +2101,11 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                             backgroundColor:
                                             const Color(0xFFFFF9D1),
                                           ));
+                                        }
+                                        else {
+
+                                          addressOnSelect[6].onselect = value!;
+
                                         }
                                         onChangedSetState();
                                         if (kDebugMode) {
@@ -2037,6 +2124,8 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                         .body?.screeninfo?.zipcode ??
                                         "รหัสไปรษณีย์",
                                     initialvalue: isPreViewResumeResponse
+                                        .body?.data?.address?.zipcode ==''?
+                                    ">> $activityNot <<":isPreViewResumeResponse
                                         .body?.data?.address?.zipcode ??
                                         ">> $activityNot <<",
                                     textInputType: TextInputType.text,
@@ -2050,13 +2139,11 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                           .body?.data?.address?.zipcode ==
                                           null
                                           ? false
-                                          : addressOnSelect[6].onselect,
+                                          : addressOnSelect[7].onselect,
                                       onChanged: (bool? value) {
-                                        if (isPreViewResumeResponse
-                                            .body?.data?.address?.zipcode !=
-                                            null) {
-                                          addressOnSelect[6].onselect = value!;
-                                        } else {
+                                        if (
+                                        isPreViewResumeResponse.body?.data?.address?.zipcode == ''||
+                                            isPreViewResumeResponse.body?.data?.address?.zipcode == null) {
                                           var textSnack =
                                               '$activityNot $selectedNot';
                                           ScaffoldMessenger.of(context)
@@ -2070,13 +2157,18 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                                             const Color(0xFFFFF9D1),
                                           ));
                                         }
+                                        else {
+
+                                          addressOnSelect[7].onselect = value!;
+
+                                        }
                                         onChangedSetState();
                                         if (kDebugMode) {
                                           print(value);
                                           print(
-                                              addressOnSelect[6].onselect.toString());
-                                          print(addressOnSelect[6]);
-                                          print(jsonEncode(addressOnSelect[6]));
+                                              addressOnSelect[7].onselect.toString());
+                                          print(addressOnSelect[7]);
+                                          print(jsonEncode(addressOnSelect[7]));
                                           print(jsonEncode(addressOnSelect));
                                         }
                                       },

@@ -92,7 +92,17 @@ class _ContentDesignEditResumeState extends State<ContentDesignEditResume>
           hideProgressDialog(context);
         }
         if (state is SentEditContactResumeSuccessState) {
-          context.read<ResumeBloc>().add(GetEditScreenPreviewResumeEvent());
+          if(state.pop == true){
+
+            // Navigator.pop(context);
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(
+                    builder: (context) => const HomeScreen()),
+                    (Route<dynamic> route) => false);
+          }else{
+
+            context.read<ResumeBloc>().add(GetEditScreenPreviewResumeEvent());
+          }
         }
         if (state is TokenExpiredState) {
           dialogSessionExpiredOneBtn(
@@ -314,11 +324,40 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
               elevation: 0,
               leading: IconButton(
                 onPressed: () {
-                  // Navigator.pop(context);
-                  Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(
-                          builder: (context) => const HomeScreen()),
-                          (Route<dynamic> route) => false);
+                  context
+                      .read<ResumeBloc>()
+                      .add(SentEditContactResumeEvent(
+                    pop:true,
+                    email: (emailController.text == ''
+                        ? email
+                        : emailController.text) ??
+                        '',
+                    phone: (phoneController.text == ''
+                        ? phone
+                        : phoneController.text) ??
+                        '',
+                    facebook: (facebookController.text == ''
+                        ? facebook
+                        : facebookController.text) ??
+                        '',
+                    line: (lineController.text == ''
+                        ? line
+                        : lineController.text) ??
+                        '',
+                    instagram: (instagramController.text ==
+                        ''
+                        ? instagram
+                        : instagramController.text) ??
+                        '',
+                    twitter: (twitterController.text == ''
+                        ? twitter
+                        : twitterController.text) ??
+                        '',
+                    youtube: (youtubeController.text == ''
+                        ? youtube
+                        : youtubeController.text) ??
+                        '',
+                  ));
                 },
                 icon: Icon(
                   Icons.arrow_back,
@@ -812,6 +851,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                       context
                                           .read<ResumeBloc>()
                                           .add(SentEditContactResumeEvent(
+                                        pop:false,
                                         email: (emailController.text == ''
                                             ? email
                                             : emailController.text) ??
@@ -858,6 +898,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                     "email",
                                 initialvalue: isPreViewResumeResponse
                                     .body?.data?.contactinfo?.email,
+
                                 textInputType: TextInputType.text,
                                 // iconsFile : Icons.person_rounded,
                                 iconsFile: FontAwesomeIcons.envelope,

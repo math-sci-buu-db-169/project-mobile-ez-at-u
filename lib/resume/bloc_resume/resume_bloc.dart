@@ -247,7 +247,8 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
           ApiEditResumeResponseHead.fromJson(responseSetOnColorResume.data);
           if (setOnSelectedResume.head?.status == 200|| apiEditResumeResponseHead.head?.status == 200) {
             emit(SetOnSelectedResumeSuccessState(
-                isSetOnSelectedResume: setOnSelectedResume));
+                isSetOnSelectedResume: setOnSelectedResume,
+                pop: event.pop,));
           } else {
             emit(PreviewResumeError(
                 errorMessage: setOnSelectedResume.head?.message ?? ""));
@@ -984,7 +985,8 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
                   responseSentEditPositionsResume.data);
           if (sentEditContactResumeResponse.head?.status == 200) {
             emit(SentEditContactResumeSuccessState(
-                apiEditResumeResponseHead: sentEditContactResumeResponse));
+                apiEditResumeResponseHead: sentEditContactResumeResponse,
+               pop:event.pop));
           } else {
             emit(PreviewResumeError(
                 errorMessage:
