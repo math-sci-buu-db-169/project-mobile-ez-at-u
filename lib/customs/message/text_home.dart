@@ -26,9 +26,11 @@ const String alertPassword   = 'รหัสผ่าน ';
 const String alertDeleteAccount   = " คุณต้องการลบบัญชีใช่หรือไม่ หากคุณต้องการลบบัญชีผู้ใช้ กรุณากดปุ่ม 'ตกลง' หรือกดปุ่ม 'ยกเลิก' เพื่อกลับไปใช้งาน ";
 const String textAlertDeleteAccountPassword = " กรุณากรอกรหัสผ่าน เพื่อยืนยันการลบบัญชี ";
 const String textAlertDeleteAccountPDPA = " การลบบัญชี จะเป็นไปตามเงื่อนไขและข้อตกลง ";
-const String noActivity   = " คไม่พบกิจกรรมของคุณ ";
+const String noActivity   = " ไม่พบกิจกรรมของคุณ ";
 const String subNoActivityLineOne = " กดปุ่ม'เพิ่ม'เพื่อบันทึกกิจกรรม ";
 const String subNoActivityLineTwo = " หรือกรุณาตรวจสอบสถานะกิจกรรมของคุณอีกครั้ง ";
 //teacher
 const String homeTitleActTeacher   = 'ยืนยันกิจกรรม';
 const String homeTextSeeAll = 'เพิ่ม';
+const String noActivityTeacher   = " ไม่มีกิจกรรมที่ต้องยืนยัน ";
+const String subNoActivityTeacherLineOne = " กรุณารอให้นักศึกษาเลือกกิจกรรม หรือตรวจสอบรายการที่ต้องอนุมัติอีกครั้งในภายหลัง ";
