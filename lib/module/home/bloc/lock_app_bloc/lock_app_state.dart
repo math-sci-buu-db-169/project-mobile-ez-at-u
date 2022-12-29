@@ -17,18 +17,18 @@ class LockAppLoading extends LockAppState {}
 class LockAppEndLoading extends LockAppState {}
 
 class LockAppError extends LockAppState {
-  String message;
-  LockAppError({required this.message});
+  String errorMessage;
+  LockAppError({required this.errorMessage});
 }
 class TokenExpiredState extends LockAppState {
 
-  String message;
+  String errorMessage;
   RefreshTokenResponse checkrefreshtokenmessage;
-  TokenExpiredState({required this.message, required this.checkrefreshtokenmessage});
+  TokenExpiredState({required this.errorMessage, required this.checkrefreshtokenmessage});
 
 }
 class CheckTokenError extends LockAppState {
 
-  String message;
-  CheckTokenError({required this.message});
+  String errorMessage;
+  CheckTokenError({required this.errorMessage});
 }

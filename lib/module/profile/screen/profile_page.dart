@@ -13,9 +13,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../customs/dialog/dialog_widget.dart';
+import '../../../customs/message/text_button.dart';
+import '../../../customs/message/text_error.dart';
 import '../../../customs/message/text_profile.dart';
 import '../../../customs/progress_dialog.dart';
 import '../../../customs/size/size.dart';
+import '../../../utils/shared_preferences.dart';
+import '../../login/screen/login_screen/login_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -45,8 +49,12 @@ class _ProfilePageState extends State<ProfilePage> with ProgressDialog {
   String phimg = "iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAA1lJREFUeF7t3GtyqkAQBWBchmzD/e8Al6Euw1tTKXONAvPqxzlD8ydUAtM954PBoiqelmV5ns/nKTb/BB6Px3S63W7PtHO5XPw7OnAH1+t1muf5ByTtpF8Eis8V8cr+9w5JIGkLFHuQ98y/QALFFuTzBlgFCRQblLXVaBMkUHRRth4NuyCBooOy95zOggSKLEruQ1MRSKDIoOQwUpVikEDpQynBqAYJlDaUUowmkECpQ6nBaAYJlDKUWowukEDZR2nB6AYJlHWUVgwRkED5i9KDIQYSKD8ovRiiIFINlT0u8Y6SwBAHOSqKFIYKyNFQJDHUQI6CIo2hCjI6igaGOsioKFoYJiCjoWhimIGMgqKNYQrCjmKBYQ7CimKF4QLChmKJ4QbCgmKN4QqCjuKB4Q6CiuKFAQGChuKJAQOCguKNAQXijYKAAQfihYKCAQlijYKEAQtihYKGAQ2ijYKIAQ+ihYKKQQEijYKMQQMihYKOQQXSi8KAQQfSisKCQQlSi8KEQQtSisKGQQ2SQ2HEoAfZQmHFGALkE4UZYxiQF0r6yf71UlX/p54mjLqlOyNAQHTel6lYspxR1gCYUaiXrL3gWVFoQUoCLznG+Qb/Kk8JUhN0zbEIOHQgLQG3nOOFQwXSE2zPuZY4NCASgUqMoY1DASIZpORYGjjwIBoBaowphQMNohmc5tg9OLAgFoFZ1KjFgQSxDMqyVgkOHIhHQB41t3CgQDyD8az9jgMDghAIQg8QIAhBvK5S717cQbwDWFvLPXtyBfGceO4Tj1dvbiBeE85BvP/do0cXEI+J1kB4opiDMGF4POhNQRgxrFHMQJgxLFFMQEbAsEJRBxkJwwJFFWREDG0UNZCRMTRRVECOgKGFIg5yJAwNFFGQI2JIo4iBHBlDEkUEJDD+v/3qzaIbpLeB1pd+yOf1ZNIF0lMYOVCJ3lqzaQZpLSgxWZYxWjJqAmkpxBKidJ+1WVWD1BaQniDjeDWZVYHUDMwYnGbPpdkVg5QOqDkp9rFLMiwCKRmIPSyr/nNZZkFyA1hNZKQ6e5nuggSG3mWwle0mSGDoYey9+1oFCQx9jC2UL5DAsMNYQ/kDEhj2GJ8ovyBph/3Lv/zilKmcboh5nqfTsizPtBObfwL3+336B07+3Sny7gNQAAAAAElFTkSuQmCC";
   late String roleFromApi;
   late SharedPreferences prefs;
+  late String _userLanguage;
+  late String textSessionExpired;
+  late String textSubSessionExpired;
+  late String _buttonOk;
   @override
-  void initState() {
+  void initState() {_isSessionUnauthorized();
     _initRole();
     super.initState();
     if (kDebugMode) {
@@ -61,6 +69,18 @@ class _ProfilePageState extends State<ProfilePage> with ProgressDialog {
       roleFromApi = prefs.getString('Role')??"ST";
     });
   }
+  Future<void> _isSessionUnauthorized() async {
+    prefs = await SharedPreferences.getInstance();
+    _userLanguage = prefs.getString('userLanguage') ?? 'TH';
+    _userLanguage = prefs.getString('userLanguage') ?? 'TH';
+    textSessionExpired =
+    _userLanguage == 'EN' ? textUnauthorizedEN : textUnauthorizedTH;
+    textSubSessionExpired =
+    _userLanguage == 'EN' ? textSubUnauthorizedEN : textSubUnauthorizedTH;
+    _buttonOk = _userLanguage == 'EN' ? buttonOkEN : buttonOkTH;
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ProfileBloc, ProfileState>(listener: (context, state) {
@@ -71,11 +91,44 @@ class _ProfilePageState extends State<ProfilePage> with ProgressDialog {
         hideProgressDialog(context);
       }
       if (state is ProfileError) {
-        // print(state.errorMessage);
-        dialogOneLineOneBtn(context, '${state.errorMessage}\n ', "OK", onClickBtn: () {
-        // dialogOneLineOneBtn(context, state.errorMessage + '\n ', "OK", onClickBtn: () {
-          Navigator.of(context).pop();
-        });
+        if (state.errorMessage.toString() == 'Unauthorized') {
+          dialogSessionExpiredOneBtn(
+              context, textSessionExpired, textSubSessionExpired, _buttonOk,
+              onClickBtn: () {
+                cleanDelete();
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => const LoginScreen()));
+              });
+        } else if (state.errorMessage.toUpperCase().toString() == 'S401EXP01'||state.errorMessage.toUpperCase().toString() == 'T401NOT01') {
+          dialogSessionExpiredOneBtn(
+              context, textSessionExpired, textSubSessionExpired, _buttonOk,
+              onClickBtn: () {
+                cleanDelete();
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => const LoginScreen()));
+              });
+        }else {
+          dialogOneLineOneBtn(context, '${state.errorMessage}\n ', _buttonOk,
+              onClickBtn: () {
+                Navigator.of(context).pop();
+              });
+        }
+      }
+
+      if (state is TokenExpiredState) {
+        dialogSessionExpiredOneBtn(
+            context, textSessionExpired, textSubSessionExpired, _buttonOk,
+            onClickBtn: () {
+              cleanDelete();
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => const LoginScreen()));
+            });
       }
       if (state is GeneralSubmitSuccessState) {
         // print("TEST general");

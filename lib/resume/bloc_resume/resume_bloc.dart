@@ -58,7 +58,7 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
             isRole: refreshTokenResponse.body?.role ?? "TC",
             userLanguage: refreshTokenResponse.body?.language ?? "TH",
           );
-        } else if (refreshTokenResponse.head?.status == 400) {
+        } else if (refreshTokenResponse.head?.status == 401) {
           emit(TokenExpiredState(
               message: response.statusMessage ?? "S401EXP01",
               checkrefreshtokenmessage: refreshTokenResponse));

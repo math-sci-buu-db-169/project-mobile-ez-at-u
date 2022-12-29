@@ -183,24 +183,45 @@ class _SettingPageState extends State<SettingPage> with ProgressDialog {
           hideProgressDialog(context);
         }
         if (state is HomeError) {
-          if (state.message.toString() == 'Unauthorized') {
+          if (state.errorMessage.toString() == 'Unauthorized') {
             dialogSessionExpiredOneBtn(
                 context, textSessionExpired, textSubSessionExpired, _buttonOk,
                 onClickBtn: () {
-              cleanDelete();
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) => const LoginScreen()));
-            });
-          } else {
-            dialogOneLineOneBtn(context, '${state.message}\n ', _buttonOk,
+                  cleanDelete();
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => const LoginScreen()));
+                });
+          } else if (state.errorMessage.toUpperCase().toString() == 'S401EXP01'||state.errorMessage.toUpperCase().toString() == 'T401NOT01') {
+            dialogSessionExpiredOneBtn(
+                context, textSessionExpired, textSubSessionExpired, _buttonOk,
                 onClickBtn: () {
-              Navigator.of(context).pop();
-            });
+                  cleanDelete();
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => const LoginScreen()));
+                });
+          }else {
+            dialogOneLineOneBtn(context, '${state.errorMessage}\n ', _buttonOk,
+                onClickBtn: () {
+                  Navigator.of(context).pop();
+                });
           }
         }
 
+        if (state is TokenExpiredState) {
+          dialogSessionExpiredOneBtn(
+              context, textSessionExpired, textSubSessionExpired, _buttonOk,
+              onClickBtn: () {
+                cleanDelete();
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => const LoginScreen()));
+              });
+        }
         if (state is HomeLogoutState) {
           cleanDelete();
           Navigator.pushReplacement(

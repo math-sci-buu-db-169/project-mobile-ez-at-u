@@ -16,6 +16,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../customs/message/text_button.dart';
+import '../../../customs/message/text_error.dart';
+import '../../../utils/shared_preferences.dart';
+import '../../login/screen/login_screen/login_screen.dart';
 
 class EditActivityScreen extends StatelessWidget {
   final dynamic data;
@@ -57,8 +63,13 @@ class _EditActivityPageState extends State<EditActivityPage>
   TextEditingController approver = TextEditingController();
   TextEditingController detail = TextEditingController();
   AddEditActivityScreenApi? _addActivityScreenApi;
+  late SharedPreferences prefs;
+  late String _userLanguage;
+  late String textSessionExpired;
+  late String textSubSessionExpired;
+  late String _buttonOk;
   @override
-  void initState(){
+  void initState(){_isSessionUnauthorized();
     activityName.text = widget.data.name;
     year.text = widget.data.year;
     term.text = widget.data.term;
@@ -71,6 +82,18 @@ class _EditActivityPageState extends State<EditActivityPage>
     detail.text = widget.data.detail;
     super.initState();
   }
+  Future<void> _isSessionUnauthorized() async {
+    prefs = await SharedPreferences.getInstance();
+    _userLanguage = prefs.getString('userLanguage') ?? 'TH';
+    _userLanguage = prefs.getString('userLanguage') ?? 'TH';
+    textSessionExpired =
+    _userLanguage == 'EN' ? textUnauthorizedEN : textUnauthorizedTH;
+    textSubSessionExpired =
+    _userLanguage == 'EN' ? textSubUnauthorizedEN : textSubUnauthorizedTH;
+    _buttonOk = _userLanguage == 'EN' ? buttonOkEN : buttonOkTH;
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     context.read<ActivityBloc>().add(EditActivityScreenInfoEvent());
@@ -84,13 +107,44 @@ class _EditActivityPageState extends State<EditActivityPage>
         hideProgressDialog(context);
       }
       if (state is EditActivityError) {
-        dialogOneLineOneBtn(context, '${state.message}\n ', "OK",
-            onClickBtn: () {
-          Navigator.of(context).pop();
-        });
-        if (kDebugMode) {
-          print(state.message);
+        if (state.errorMessage.toString() == 'Unauthorized') {
+          dialogSessionExpiredOneBtn(
+              context, textSessionExpired, textSubSessionExpired, _buttonOk,
+              onClickBtn: () {
+                cleanDelete();
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => const LoginScreen()));
+              });
+        } else if (state.errorMessage.toUpperCase().toString() == 'S401EXP01'||state.errorMessage.toUpperCase().toString() == 'T401NOT01') {
+          dialogSessionExpiredOneBtn(
+              context, textSessionExpired, textSubSessionExpired, _buttonOk,
+              onClickBtn: () {
+                cleanDelete();
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => const LoginScreen()));
+              });
+        }else {
+          dialogOneLineOneBtn(context, '${state.errorMessage}\n ', _buttonOk,
+              onClickBtn: () {
+                Navigator.of(context).pop();
+              });
         }
+      }
+
+      if (state is TokenExpiredState) {
+        dialogSessionExpiredOneBtn(
+            context, textSessionExpired, textSubSessionExpired, _buttonOk,
+            onClickBtn: () {
+              cleanDelete();
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => const LoginScreen()));
+            });
       }
       if (state is SubmitAddEditActivityLoadingState) {
         showProgressDialog(context);
@@ -99,12 +153,12 @@ class _EditActivityPageState extends State<EditActivityPage>
         hideProgressDialog(context);
       }
       if (state is SubmitAddEditActivityError) {
-        dialogOneLineOneBtn(context, '${state.message}\n ', "OK",
+        dialogOneLineOneBtn(context, '${state.errorMessage}\n ', "OK",
             onClickBtn: () {
               Navigator.of(context).pop();
             });
         if (kDebugMode) {
-          print(state.message);
+          print(state.errorMessage);
         }
       }
       if (state is SubmitAddEditActivityState) {

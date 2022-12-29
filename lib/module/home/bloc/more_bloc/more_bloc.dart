@@ -61,14 +61,14 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
           );
         }
         else if (refreshTokenResponse.head?.status == 400) {
-          emit(TokenExpiredState(message: response.statusMessage ?? "", checkrefreshtokenmessage : refreshTokenResponse));
+          emit(TokenExpiredState(errorMessage: response.statusMessage ?? "", checkrefreshtokenmessage : refreshTokenResponse));
         }
         else {
           emit(MoreError(
-              message: refreshTokenResponse.head?.message ?? ""));
+              errorMessage: refreshTokenResponse.head?.message ?? ""));
         }
       }  else {
-        emit(MoreError(message: response.statusMessage ?? ""));
+        emit(MoreError(errorMessage: response.statusMessage ?? ""));
       }
     }
 
@@ -101,7 +101,7 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
         }
         else {
           emit(MoreError(
-              message: checkTokenExpiredResponse.head?.message ?? ""));
+              errorMessage: checkTokenExpiredResponse.head?.message ?? ""));
         }
       }
 
@@ -112,7 +112,7 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
       }
       else {
         emit(MoreError(
-            message: responseCheckTokenExpiredResponse.statusMessage ?? ""));
+            errorMessage: responseCheckTokenExpiredResponse.statusMessage ?? ""));
       }
     }
 
@@ -132,13 +132,13 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
               responseScreenMore: screenMoreResponse,
             ));
           } else {
-            emit(MoreError(message: screenMoreResponse.head?.message ?? ""));
+            emit(MoreError(errorMessage: screenMoreResponse.head?.message ?? ""));
           }
         } else {
-          emit(MoreError(message: responseMorePDPA.statusMessage ?? ""));
+          emit(MoreError(errorMessage: responseMorePDPA.statusMessage ?? ""));
         }
       } on DioError catch (e) {
-        emit(MoreError(message: e.response?.statusMessage ?? ""));
+        emit(MoreError(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
     on<MorePDPAEvent>((event, emit) async {
@@ -157,13 +157,13 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
               responsePDPA: screenMorePDPAResponse,
             ));
           } else {
-            emit(MorePDPAError(message: screenMorePDPAResponse.head?.message ?? ""));
+            emit(MorePDPAError(errorMessage: screenMorePDPAResponse.head?.message ?? ""));
           }
         } else {
-          emit(MorePDPAError(message: responseMorePDPA.statusMessage ?? ""));
+          emit(MorePDPAError(errorMessage: responseMorePDPA.statusMessage ?? ""));
         }
       } on DioError catch (e) {
-        emit(MorePDPAError(message: e.response?.statusMessage ?? ""));
+        emit(MorePDPAError(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
 
@@ -180,13 +180,13 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
           if (screenMoreFAQResponse.head?.status == 200) {
             emit(MoreFAQSuccessState(responseFAQ: screenMoreFAQResponse));
           } else {
-            emit(MoreFAQError(message: screenMoreFAQResponse.head?.message ?? ""));
+            emit(MoreFAQError(errorMessage: screenMoreFAQResponse.head?.message ?? ""));
           }
         } else {
-          emit(MoreFAQError(message: responseMoreFAQ.statusMessage ?? ""));
+          emit(MoreFAQError(errorMessage: responseMoreFAQ.statusMessage ?? ""));
         }
       } on DioError catch (e) {
-        emit(MoreFAQError(message: e.response?.statusMessage ?? ""));
+        emit(MoreFAQError(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
 
@@ -203,13 +203,13 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
           if (screenMoreContactUsResponse.head?.status == 200) {
             emit(MoreContactUsSuccessState(responseContactUs: screenMoreContactUsResponse));
           } else {
-            emit(MoreContactUsError(message: screenMoreContactUsResponse.head?.message ?? ""));
+            emit(MoreContactUsError(errorMessage: screenMoreContactUsResponse.head?.message ?? ""));
           }
         } else {
-          emit(MoreContactUsError(message: responseMoreContactUs.statusMessage ?? ""));
+          emit(MoreContactUsError(errorMessage: responseMoreContactUs.statusMessage ?? ""));
         }
       } on DioError catch (e) {
-        emit(MoreContactUsError(message: e.response?.statusMessage ?? ""));
+        emit(MoreContactUsError(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
     on<MoreBoardDetailStudentEvent>((event, emit) async {
@@ -225,13 +225,13 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
           if (screenMoreBoardStudentDetailResponse.head?.status == 200) {
             emit(MoreBoardDetailStudentSuccessState(responseBoardDetailStudent: screenMoreBoardStudentDetailResponse));
           } else {
-            emit(MoreBoardDetailStudentError(message: screenMoreBoardStudentDetailResponse.head?.message ?? ""));
+            emit(MoreBoardDetailStudentError(errorMessage: screenMoreBoardStudentDetailResponse.head?.message ?? ""));
           }
         } else {
-          emit(MoreBoardDetailStudentError(message: responseMoreBoardDetailStudent.statusMessage ?? ""));
+          emit(MoreBoardDetailStudentError(errorMessage: responseMoreBoardDetailStudent.statusMessage ?? ""));
         }
       } on DioError catch (e) {
-        emit(MoreBoardDetailStudentError(message: e.response?.statusMessage ?? ""));
+        emit(MoreBoardDetailStudentError(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
     on<MoreBoardListStudentEvent>((event, emit) async {
@@ -247,13 +247,13 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
           if (screenMoreBoardStudentListResponse.head?.status == 200) {
             emit(MoreBoardListStudentSuccessState(responseBoardListStudent: screenMoreBoardStudentListResponse));
           } else {
-            emit(MoreBoardListStudentError(message: screenMoreBoardStudentListResponse.head?.message ?? ""));
+            emit(MoreBoardListStudentError(errorMessage: screenMoreBoardStudentListResponse.head?.message ?? ""));
           }
         } else {
-          emit(MoreBoardListStudentError(message: responseMoreBoardListStudent.statusMessage ?? ""));
+          emit(MoreBoardListStudentError(errorMessage: responseMoreBoardListStudent.statusMessage ?? ""));
         }
       } on DioError catch (e) {
-        emit(MoreBoardListStudentError(message: e.response?.statusMessage ?? ""));
+        emit(MoreBoardListStudentError(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
 
@@ -269,13 +269,13 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
           if (screenMoreBoardStudentListResponse.head?.status == 200) {
             emit(MoreBoardListStudentSearchSuccessState(responseBoardListStudent: screenMoreBoardStudentListResponse));
           } else {
-            emit(MoreBoardListStudentError(message: screenMoreBoardStudentListResponse.head?.message ?? ""));
+            emit(MoreBoardListStudentError(errorMessage: screenMoreBoardStudentListResponse.head?.message ?? ""));
           }
         } else {
-          emit(MoreBoardListStudentError(message: responseMoreBoardListStudent.statusMessage ?? ""));
+          emit(MoreBoardListStudentError(errorMessage: responseMoreBoardListStudent.statusMessage ?? ""));
         }
       } on DioError catch (e) {
-        emit(MoreBoardListStudentError(message: e.response?.statusMessage ?? ""));
+        emit(MoreBoardListStudentError(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
     on<MoreBoardListGenStudentEvent>((event, emit) async {
@@ -292,13 +292,13 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
           if (screenMoreListNameGenResponse.head?.status == 200) {
             emit(MoreBoardListGenStudentSuccessState(responseBoardListGenStudent: screenMoreListNameGenResponse));
           } else {
-            emit(ListGenStudentError(message: screenMoreListNameGenResponse.head?.message ?? ""));
+            emit(ListGenStudentError(errorMessage: screenMoreListNameGenResponse.head?.message ?? ""));
           }
         } else {
-          emit(ListGenStudentError(message: responseListGenStudent.statusMessage ?? ""));
+          emit(ListGenStudentError(errorMessage: responseListGenStudent.statusMessage ?? ""));
         }
       } on DioError catch (e) {
-        emit(ListGenStudentError(message: e.response?.statusMessage ?? ""));
+        emit(ListGenStudentError(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
     on<MoreBoardListGenStudentSearchEvent>((event, emit) async {
@@ -312,13 +312,13 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
           if (screenMoreListNameGenResponse.head?.status == 200) {
             emit(MoreBoardListGenStudentSearchSuccessState(responseBoardListGenStudent: screenMoreListNameGenResponse));
           } else {
-            emit(ListGenStudentError(message: screenMoreListNameGenResponse.head?.message ?? ""));
+            emit(ListGenStudentError(errorMessage: screenMoreListNameGenResponse.head?.message ?? ""));
           }
         } else {
-          emit(ListGenStudentError(message: responseListGenStudent.statusMessage ?? ""));
+          emit(ListGenStudentError(errorMessage: responseListGenStudent.statusMessage ?? ""));
         }
       } on DioError catch (e) {
-        emit(ListGenStudentError(message: e.response?.statusMessage ?? ""));
+        emit(ListGenStudentError(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
     on<MoreBoardTeacherEvent>((event, emit) async {
@@ -334,13 +334,13 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
           if (screenMoreBoardTeacherResponse.head?.status == 200) {
             emit(MoreBoardTeacherSuccessState(responseBoardTeacher: screenMoreBoardTeacherResponse));
           } else {
-            emit(MoreBoardTeacherError(message: screenMoreBoardTeacherResponse.head?.message ?? ""));
+            emit(MoreBoardTeacherError(errorMessage: screenMoreBoardTeacherResponse.head?.message ?? ""));
           }
         } else {
-          emit(MoreBoardTeacherError(message: responseMoreBoardTeacher.statusMessage ?? ""));
+          emit(MoreBoardTeacherError(errorMessage: responseMoreBoardTeacher.statusMessage ?? ""));
         }
       } on DioError catch (e) {
-        emit(MoreBoardTeacherError(message: e.response?.statusMessage ?? ""));
+        emit(MoreBoardTeacherError(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
 
@@ -368,13 +368,13 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
           if (upImgTeacherResponse.head?.status == 200) {
             emit(SubmitChooseAvatarSuccess());
           } else {
-            emit(MoreBoardTeacherError(message: upImgTeacherResponse.head?.message ?? ""));
+            emit(MoreBoardTeacherError(errorMessage: upImgTeacherResponse.head?.message ?? ""));
           }
         } else {
-          emit(MoreBoardTeacherError(message: responseBase64Img.statusMessage ?? ""));
+          emit(MoreBoardTeacherError(errorMessage: responseBase64Img.statusMessage ?? ""));
         }
       } on DioError catch (e) {
-        emit(MoreBoardTeacherError(message: e.response?.statusMessage ?? ""));
+        emit(MoreBoardTeacherError(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
     on<MoreRelatedLinksEvent>((event, emit) async {
@@ -390,13 +390,13 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
           if (relatedLinksResponse.head?.status == 200) {
             emit(MoreRelatedLinksScreenInfoSuccessState(relatedLinksResponse: relatedLinksResponse));
           } else {
-            emit(MoreRelatedLinksError(message: relatedLinksResponse.head?.message ?? ""));
+            emit(MoreRelatedLinksError(errorMessage: relatedLinksResponse.head?.message ?? ""));
           }
         } else {
-          emit(MoreRelatedLinksError(message: responseRelatedLinksScreen.statusMessage ?? ""));
+          emit(MoreRelatedLinksError(errorMessage: responseRelatedLinksScreen.statusMessage ?? ""));
         }
       } on DioError catch (e) {
-        emit(MoreRelatedLinksError(message: e.response?.statusMessage ?? ""));
+        emit(MoreRelatedLinksError(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
     on<MoreCoursesScreenEvent>((event, emit) async {
@@ -412,13 +412,13 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
           if (coursesScreenResponse.head?.status == 200) {
             emit(MoreCoursesScreenInfoSuccessState(coursesScreenResponse: coursesScreenResponse));
           } else {
-            emit(MoreCoursesError(message: coursesScreenResponse.head?.message ?? ""));
+            emit(MoreCoursesError(errorMessage: coursesScreenResponse.head?.message ?? ""));
           }
         } else {
-          emit(MoreCoursesError(message: responseCoursesScreen.statusMessage ?? ""));
+          emit(MoreCoursesError(errorMessage: responseCoursesScreen.statusMessage ?? ""));
         }
       } on DioError catch (e) {
-        emit(MoreCoursesError(message: e.response?.statusMessage ?? ""));
+        emit(MoreCoursesError(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
 
@@ -435,13 +435,13 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
           if (screenMoreBoardStudentListResponse.head?.status == 200) {
             emit(MoreSrarchNisitNinitSuccessState(responseBoardListStudent: screenMoreBoardStudentListResponse));
           } else {
-            emit(MoreSrarchNisitError(message: screenMoreBoardStudentListResponse.head?.message ?? ""));
+            emit(MoreSrarchNisitError(errorMessage: screenMoreBoardStudentListResponse.head?.message ?? ""));
           }
         } else {
-          emit(MoreSrarchNisitError(message: responseMoreBoardListStudent.statusMessage ?? ""));
+          emit(MoreSrarchNisitError(errorMessage: responseMoreBoardListStudent.statusMessage ?? ""));
         }
       } on DioError catch (e) {
-        emit(MoreSrarchNisitError(message: e.response?.statusMessage ?? ""));
+        emit(MoreSrarchNisitError(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
 
@@ -458,13 +458,13 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
           if (screenMoreBoardStudentListResponse.head?.status == 200) {
             emit(MoreSrarchNisitSuccessState(responseBoardListStudent: screenMoreBoardStudentListResponse));
           } else {
-            emit(MoreSrarchNisitError(message: screenMoreBoardStudentListResponse.head?.message ?? ""));
+            emit(MoreSrarchNisitError(errorMessage: screenMoreBoardStudentListResponse.head?.message ?? ""));
           }
         } else {
-          emit(MoreSrarchNisitError(message: responseMoreBoardListStudent.statusMessage ?? ""));
+          emit(MoreSrarchNisitError(errorMessage: responseMoreBoardListStudent.statusMessage ?? ""));
         }
       } on DioError catch (e) {
-        emit(MoreSrarchNisitError(message: e.response?.statusMessage ?? ""));
+        emit(MoreSrarchNisitError(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
   }

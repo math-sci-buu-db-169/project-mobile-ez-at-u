@@ -37,7 +37,7 @@ void dialogOneLineOneBtn(BuildContext context, String content ,String btn, {requ
                       onPressed: () => {handleClickBtn()},
                       child: Text(
                         btn,
-                        style:  TextStyle(color: Theme.of(context).bottomAppBarColor),
+                        style:  const TextStyle(color: tcButtonTextBlack),
                       ),
                     )
                   ],
@@ -123,7 +123,9 @@ void dialogSessionExpiredOneBtn(BuildContext context, String content , String su
                             style:  TextStyle(fontSize: 20, fontWeight: FontWeight.bold,
                               color: Theme.of(context).bottomAppBarColor,)),
                         const SizedBox(height: 10),
-                        Text(subContent, textAlign: TextAlign.start),
+                        Text(subContent, textAlign: TextAlign.start,
+                          style:  TextStyle(fontSize: 20, fontWeight: FontWeight.bold,
+                          color: Theme.of(context).bottomAppBarColor,),),
                         const SizedBox( height: 15),
                         Row(
                           children: [

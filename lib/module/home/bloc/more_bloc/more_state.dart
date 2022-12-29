@@ -11,8 +11,8 @@ class MoreScreenInfoSuccessState extends MoreState {
 }
 
 class MoreError extends MoreState {
-  String message;
-  MoreError({required this.message});
+  String errorMessage;
+  MoreError({required this.errorMessage});
 }
 
 class MoreLoading extends MoreState {}
@@ -24,8 +24,8 @@ class MorePDPALoading extends MoreState {}
 class MorePDPAEndLoading extends MoreState {}
 
 class MorePDPAError extends MoreState {
-  String message;
-  MorePDPAError({required this.message});
+  String errorMessage;
+  MorePDPAError({required this.errorMessage});
 }
 
 class MorePDPASuccessState extends MoreState {
@@ -40,8 +40,8 @@ class MoreFAQLoading extends MoreState {}
 class MoreFAQEndLoading extends MoreState {}
 
 class MoreFAQError extends MoreState {
-  String message;
-  MoreFAQError({required this.message});
+  String errorMessage;
+  MoreFAQError({required this.errorMessage});
 }
 
 class MoreFAQSuccessState extends MoreState {
@@ -56,8 +56,8 @@ class MoreContactUsLoading extends MoreState {}
 class MoreContactUsEndLoading extends MoreState {}
 
 class MoreContactUsError extends MoreState {
-  String message;
-  MoreContactUsError({required this.message});
+  String errorMessage;
+  MoreContactUsError({required this.errorMessage});
 }
 
 class MoreContactUsSuccessState extends MoreState {
@@ -71,8 +71,8 @@ class MoreBoardDetailStudentLoading extends MoreState {}
 class MoreBoardDetailStudentEndLoading extends MoreState {}
 
 class MoreBoardDetailStudentError extends MoreState {
-  String message;
-  MoreBoardDetailStudentError({required this.message});
+  String errorMessage;
+  MoreBoardDetailStudentError({required this.errorMessage});
 }
 
 class MoreBoardDetailStudentSuccessState extends MoreState {
@@ -87,8 +87,8 @@ class MoreBoardListStudentLoading extends MoreState {}
 class MoreBoardListStudentEndLoading extends MoreState {}
 
 class MoreBoardListStudentError extends MoreState {
-  String message;
-  MoreBoardListStudentError({required this.message});
+  String errorMessage;
+  MoreBoardListStudentError({required this.errorMessage});
 }
 
 class MoreBoardListStudentSuccessState extends MoreState {
@@ -107,8 +107,8 @@ class ListGenStudentLoading extends MoreState {}
 class ListGenStudentEndLoading extends MoreState {}
 
 class ListGenStudentError extends MoreState {
-  String message;
-  ListGenStudentError({required this.message});
+  String errorMessage;
+  ListGenStudentError({required this.errorMessage});
 }
 
 class MoreBoardListGenStudentSuccessState extends MoreState {
@@ -128,8 +128,8 @@ class MoreBoardTeacherLoading extends MoreState {}
 class MoreBoardTeacherEndLoading extends MoreState {}
 
 class MoreBoardTeacherError extends MoreState {
-  String message;
-  MoreBoardTeacherError({required this.message});
+  String errorMessage;
+  MoreBoardTeacherError({required this.errorMessage});
 }
 
 class MoreBoardTeacherSuccessState extends MoreState {
@@ -153,8 +153,8 @@ class MoreImgUpLoading extends MoreState {}
 class MoreImgUpEndLoading extends MoreState {}
 
 class MoreImgUpError extends MoreState {
-  String message;
-  MoreImgUpError({required this.message});
+  String errorMessage;
+  MoreImgUpError({required this.errorMessage});
 }
 class RefreshTokenSuccessState extends MoreState{
   String? token;
@@ -166,10 +166,10 @@ class RefreshTokenSuccessState extends MoreState{
 }
 
 class TokenExpiredState extends MoreState{
-  String message;
+  String errorMessage;
   RefreshTokenResponse checkrefreshtokenmessage;
   TokenExpiredState({
-    required this.message,
+    required this.errorMessage,
     required this.checkrefreshtokenmessage,
   });
 }
@@ -183,8 +183,8 @@ class MoreRelatedLinksLoading extends MoreState {}
 class MoreRelatedLinksEndLoading extends MoreState {}
 
 class MoreRelatedLinksError extends MoreState {
-  String message;
-  MoreRelatedLinksError({required this.message});
+  String errorMessage;
+  MoreRelatedLinksError({required this.errorMessage});
 }
 class MoreCoursesScreenInfoSuccessState extends MoreState {
   CoursesScreenResponse coursesScreenResponse;
@@ -195,8 +195,8 @@ class MoreCoursesLoading extends MoreState {}
 class MoreCoursesEndLoading extends MoreState {}
 
 class MoreCoursesError extends MoreState {
-  String message;
-  MoreCoursesError({required this.message});
+  String errorMessage;
+  MoreCoursesError({required this.errorMessage});
 }
 // ----------------------------------------->
 class MoreSrarchNisitLoading extends MoreState {}
@@ -204,8 +204,8 @@ class MoreSrarchNisitLoading extends MoreState {}
 class MoreSrarchNisitEndLoading extends MoreState {}
 
 class MoreSrarchNisitError extends MoreState {
-  String message;
-  MoreSrarchNisitError({required this.message});
+  String errorMessage;
+  MoreSrarchNisitError({required this.errorMessage});
 }
 
 class MoreSrarchNisitNinitSuccessState extends MoreState {

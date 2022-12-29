@@ -104,17 +104,6 @@ class _ContentDesignEditResumeState extends State<ContentDesignEditResume>
             context.read<ResumeBloc>().add(GetEditScreenPreviewResumeEvent());
           }
         }
-        if (state is TokenExpiredState) {
-          dialogSessionExpiredOneBtn(
-              context, textSessionExpired, textSubSessionExpired, _buttonOk,
-              onClickBtn: () {
-                cleanDelete();
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => const LoginScreen()));
-              });
-        }
         if (state is EditPreviewResumeError) {
           if (state.errorMessage.toString() == 'Unauthorized') {
             dialogSessionExpiredOneBtn(
@@ -142,6 +131,18 @@ class _ContentDesignEditResumeState extends State<ContentDesignEditResume>
                   Navigator.of(context).pop();
                 });
           }
+        }
+
+        if (state is TokenExpiredState) {
+          dialogSessionExpiredOneBtn(
+              context, textSessionExpired, textSubSessionExpired, _buttonOk,
+              onClickBtn: () {
+                cleanDelete();
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => const LoginScreen()));
+              });
         }
         if (state is EditPreviewResumeSuccessState) {
           _preViewResumeResponse = state.isPreViewResumeResponse;

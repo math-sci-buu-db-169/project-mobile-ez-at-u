@@ -13,6 +13,11 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../customs/color/color_const.dart';
 import '../../../../customs/size/size.dart';
+import '../../../customs/dialog/dialog_widget.dart';
+import '../../../customs/message/text_button.dart';
+import '../../../customs/message/text_error.dart';
+import '../../../utils/shared_preferences.dart';
+import '../../login/screen/login_screen/login_screen.dart';
 
 class ApproveActivityFromHomePageScreen extends StatelessWidget {
   final dynamic activityScreenText;
@@ -79,10 +84,12 @@ class _ApproveActivityPageState extends State<ApproveActivityPage>
   late String _userLanguage= 'TH';
   late Color appBarBackgroundColor;
   late Color appBarForegroundColor;
-
+  late String textSessionExpired;
+  late String textSubSessionExpired;
+  late String _buttonOk;
   //---------------------------------API----------------------------------------//
   @override
-  void initState() {
+  void initState() {_isSessionUnauthorized();
     activityScreenText = widget.activityScreenText;
     data = widget.data;
     buttonText = widget.buttonText;
@@ -96,6 +103,19 @@ class _ApproveActivityPageState extends State<ApproveActivityPage>
     // getActivityDetailApi();
     super.initState();
   }
+
+  Future<void> _isSessionUnauthorized() async {
+    prefs = await SharedPreferences.getInstance();
+    _userLanguage = prefs.getString('userLanguage') ?? 'TH';
+    _userLanguage = prefs.getString('userLanguage') ?? 'TH';
+    textSessionExpired =
+    _userLanguage == 'EN' ? textUnauthorizedEN : textUnauthorizedTH;
+    textSubSessionExpired =
+    _userLanguage == 'EN' ? textSubUnauthorizedEN : textSubUnauthorizedTH;
+    _buttonOk = _userLanguage == 'EN' ? buttonOkEN : buttonOkTH;
+    setState(() {});
+  }
+
 
   Future<void> _isSessionExpired() async {
     prefs = await SharedPreferences.getInstance();
@@ -131,10 +151,44 @@ class _ApproveActivityPageState extends State<ApproveActivityPage>
           hideProgressDialog(context);
         }
         if (state is ActivityError) {
-          // show dialog error
-          if (kDebugMode) {
-            print(state.message);
+          if (state.errorMessage.toString() == 'Unauthorized') {
+            dialogSessionExpiredOneBtn(
+                context, textSessionExpired, textSubSessionExpired, _buttonOk,
+                onClickBtn: () {
+                  cleanDelete();
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => const LoginScreen()));
+                });
+          } else if (state.errorMessage.toUpperCase().toString() == 'S401EXP01'||state.errorMessage.toUpperCase().toString() == 'T401NOT01') {
+            dialogSessionExpiredOneBtn(
+                context, textSessionExpired, textSubSessionExpired, _buttonOk,
+                onClickBtn: () {
+                  cleanDelete();
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => const LoginScreen()));
+                });
+          }else {
+            dialogOneLineOneBtn(context, '${state.errorMessage}\n ', _buttonOk,
+                onClickBtn: () {
+                  Navigator.of(context).pop();
+                });
           }
+        }
+
+        if (state is TokenExpiredState) {
+          dialogSessionExpiredOneBtn(
+              context, textSessionExpired, textSubSessionExpired, _buttonOk,
+              onClickBtn: () {
+                cleanDelete();
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => const LoginScreen()));
+              });
         }
         if (state is SubmitDeleteActivityByStudentState) {
           // Navigator.push(context, MaterialPageRoute(builder: (context)=> HomeScreen()));

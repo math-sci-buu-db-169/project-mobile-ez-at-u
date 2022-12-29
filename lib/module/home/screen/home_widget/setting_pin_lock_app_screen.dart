@@ -1,12 +1,9 @@
 import 'package:ez_at_u/module/home/screen/home_widget/setting_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screen_lock/flutter_screen_lock.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../../customs/color/color_const.dart';
 import '../../../../customs/dialog/dialog_widget.dart';
 import '../../../../customs/message/text_button.dart';
 import '../../../../customs/message/text_error.dart';
@@ -16,15 +13,9 @@ import '../../../../customs/pin/pin_lock_create_screen.dart';
 import '../../../../customs/progress_dialog.dart';
 import '../../../../customs/size/size.dart';
 import '../../../../utils/shared_preferences.dart';
-import '../../../login/bloc/change_password_bloc/change_password_bloc.dart';
-import '../../../login/model/response/change_password_response/change_password_response.dart';
-import '../../../login/model/response/screen_change_password_response.dart';
 import '../../../login/screen/login_screen/login_screen.dart';
 import '../../bloc/lock_app_bloc/lock_app_bloc.dart';
 import '../../model/response/home_response/lock_app_screen_response.dart';
-import '../../model/response/home_response/screen_home_response.dart';
-import '../home_screen/home_screen.dart';
-
 class SettingPinLockAppScreen extends StatelessWidget {
   const SettingPinLockAppScreen({Key? key, }) : super(key: key);
 
@@ -151,7 +142,7 @@ class _PinLockAppPageState extends State<PinLockAppPage> with ProgressDialog {
           hideProgressDialog(context);
         }
         if (state is LockAppError) {
-          if (state.message.toString() == 'Unauthorized') {
+          if (state.errorMessage.toString() == 'Unauthorized') {
             dialogSessionExpiredOneBtn(
                 context, textSessionExpired, textSubSessionExpired, _buttonOk,
                 onClickBtn: () {
@@ -161,12 +152,34 @@ class _PinLockAppPageState extends State<PinLockAppPage> with ProgressDialog {
                       MaterialPageRoute(
                           builder: (BuildContext context) => const LoginScreen()));
                 });
-          } else {
-            dialogOneLineOneBtn(context, '${state.message}\n ', _buttonOk,
+          } else if (state.errorMessage.toUpperCase().toString() == 'S401EXP01'||state.errorMessage.toUpperCase().toString() == 'T401NOT01') {
+            dialogSessionExpiredOneBtn(
+                context, textSessionExpired, textSubSessionExpired, _buttonOk,
+                onClickBtn: () {
+                  cleanDelete();
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => const LoginScreen()));
+                });
+          }else {
+            dialogOneLineOneBtn(context, '${state.errorMessage}\n ', _buttonOk,
                 onClickBtn: () {
                   Navigator.of(context).pop();
                 });
           }
+        }
+
+        if (state is TokenExpiredState) {
+          dialogSessionExpiredOneBtn(
+              context, textSessionExpired, textSubSessionExpired, _buttonOk,
+              onClickBtn: () {
+                cleanDelete();
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => const LoginScreen()));
+              });
         }
 
       },
