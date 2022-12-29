@@ -124,7 +124,7 @@ void dialogSessionExpiredOneBtn(BuildContext context, String content , String su
                               color: Theme.of(context).bottomAppBarColor,)),
                         const SizedBox(height: 10),
                         Text(subContent, textAlign: TextAlign.start,
-                          style:  TextStyle(fontSize: 20, fontWeight: FontWeight.bold,
+                          style:  TextStyle(fontSize: 14,
                           color: Theme.of(context).bottomAppBarColor,),),
                         const SizedBox( height: 15),
                         Row(
