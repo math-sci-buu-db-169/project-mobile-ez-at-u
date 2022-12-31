@@ -1,6 +1,6 @@
 
 import 'package:ez_at_u/resume/app.dart';
-import 'package:ez_at_u/resume/examples/content_design_resume.dart';
+import 'package:ez_at_u/resume/screen_resume/content_design_resume.dart';
 import 'package:ez_at_u/utils/shared_preferences.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

@@ -1,6 +1,6 @@
 import 'dart:convert';
 /// head : {"status":200,"message":"success","modulename":"home/resume","timeexpire":false}
-/// body : {"screeninfo":{"save":"บันทึก","editinfomations":"แก้ไขข้อมูล","skill_th":"ทักษะ","skill_en":"Skill","level":"ระดับความสามารถ / Skill level","level_th":"ระดับความสามารถ","level_en":"Skill level","description_th":"รายละเอียด","description_en":"Description","deleteor":"Delete/ลบ","delete":"ลบ"},"data":{"id":0,"orderchoose":0,"skill":null,"skillen":null,"value":null,"detail":null,"detailen":null},"errorbutton":{"buttonok":"OK","buttonconfirm":"Confirm","buttonyes":"Yes","buttonno":"No","buttoncancel":"Cancel"},"alertmessage":{"alertdeletedata_th":"คุณต้องการลบข้อมูลนี้ใช่หรือไม่?","alertdeletedata_en":"Do you want to delete this information?","alertsavedata_th":" คุณต้องการบันทึกข้อมูลนี้ใช่หรือไม่","alertsavedata_en":"Do you want to save this information?"}}
+/// body : {"screeninfo":{"save":"บันทึก","editinfomations":"แก้ไขข้อมูล","skill_th":"ทักษะ","skill_en":"Skill","level":"ระดับความสามารถ / Skill level","level_th":"ระดับความสามารถ","level_en":"Skill level","description_th":"รายละเอียด","description_en":"Description","deleteor":"Delete/ลบ","delete":"ลบ"},"data":{"id":0,"orderchoose":0,"skill":"","skillen":"","value":"","detail":"","detailen":""},"errorbutton":{"buttonok":"OK","buttonconfirm":"Confirm","buttonyes":"Yes","buttonno":"No","buttoncancel":"Cancel"},"alertmessage":{"alertdeletedata_th":"คุณต้องการลบข้อมูลนี้ใช่หรือไม่?","alertdeletedata_en":"Do you want to delete this information?","alertsavedata_th":" คุณต้องการบันทึกข้อมูลนี้ใช่หรือไม่","alertsavedata_en":"Do you want to save this information?","completefields_th":"กรุณากรอกให้ครบทุกช่อง","completefields_en":"Please complete all fields."}}
 
 GetSkillResumeResponse getSkillResumeResponseFromJson(String str) => GetSkillResumeResponse.fromJson(json.decode(str));
 String getSkillResumeResponseToJson(GetSkillResumeResponse data) => json.encode(data.toJson());
@@ -40,9 +40,9 @@ GetSkillResumeResponse copyWith({  Head? head,
 }
 
 /// screeninfo : {"save":"บันทึก","editinfomations":"แก้ไขข้อมูล","skill_th":"ทักษะ","skill_en":"Skill","level":"ระดับความสามารถ / Skill level","level_th":"ระดับความสามารถ","level_en":"Skill level","description_th":"รายละเอียด","description_en":"Description","deleteor":"Delete/ลบ","delete":"ลบ"}
-/// data : {"id":0,"orderchoose":0,"skill":null,"skillen":null,"value":null,"detail":null,"detailen":null}
+/// data : {"id":0,"orderchoose":0,"skill":"","skillen":"","value":"","detail":"","detailen":""}
 /// errorbutton : {"buttonok":"OK","buttonconfirm":"Confirm","buttonyes":"Yes","buttonno":"No","buttoncancel":"Cancel"}
-/// alertmessage : {"alertdeletedata_th":"คุณต้องการลบข้อมูลนี้ใช่หรือไม่?","alertdeletedata_en":"Do you want to delete this information?","alertsavedata_th":" คุณต้องการบันทึกข้อมูลนี้ใช่หรือไม่","alertsavedata_en":"Do you want to save this information?"}
+/// alertmessage : {"alertdeletedata_th":"คุณต้องการลบข้อมูลนี้ใช่หรือไม่?","alertdeletedata_en":"Do you want to delete this information?","alertsavedata_th":" คุณต้องการบันทึกข้อมูลนี้ใช่หรือไม่","alertsavedata_en":"Do you want to save this information?","completefields_th":"กรุณากรอกให้ครบทุกช่อง","completefields_en":"Please complete all fields."}
 
 Body bodyFromJson(String str) => Body.fromJson(json.decode(str));
 String bodyToJson(Body data) => json.encode(data.toJson());
@@ -105,6 +105,8 @@ Body copyWith({  Screeninfo? screeninfo,
 /// alertdeletedata_en : "Do you want to delete this information?"
 /// alertsavedata_th : " คุณต้องการบันทึกข้อมูลนี้ใช่หรือไม่"
 /// alertsavedata_en : "Do you want to save this information?"
+/// completefields_th : "กรุณากรอกให้ครบทุกช่อง"
+/// completefields_en : "Please complete all fields."
 
 Alertmessage alertmessageFromJson(String str) => Alertmessage.fromJson(json.decode(str));
 String alertmessageToJson(Alertmessage data) => json.encode(data.toJson());
@@ -113,11 +115,15 @@ class Alertmessage {
       String? alertdeletedataTh, 
       String? alertdeletedataEn, 
       String? alertsavedataTh, 
-      String? alertsavedataEn,}){
+      String? alertsavedataEn, 
+      String? completefieldsTh, 
+      String? completefieldsEn,}){
     _alertdeletedataTh = alertdeletedataTh;
     _alertdeletedataEn = alertdeletedataEn;
     _alertsavedataTh = alertsavedataTh;
     _alertsavedataEn = alertsavedataEn;
+    _completefieldsTh = completefieldsTh;
+    _completefieldsEn = completefieldsEn;
 }
 
   Alertmessage.fromJson(dynamic json) {
@@ -125,24 +131,34 @@ class Alertmessage {
     _alertdeletedataEn = json['alertdeletedata_en'];
     _alertsavedataTh = json['alertsavedata_th'];
     _alertsavedataEn = json['alertsavedata_en'];
+    _completefieldsTh = json['completefields_th'];
+    _completefieldsEn = json['completefields_en'];
   }
   String? _alertdeletedataTh;
   String? _alertdeletedataEn;
   String? _alertsavedataTh;
   String? _alertsavedataEn;
+  String? _completefieldsTh;
+  String? _completefieldsEn;
 Alertmessage copyWith({  String? alertdeletedataTh,
   String? alertdeletedataEn,
   String? alertsavedataTh,
   String? alertsavedataEn,
+  String? completefieldsTh,
+  String? completefieldsEn,
 }) => Alertmessage(  alertdeletedataTh: alertdeletedataTh ?? _alertdeletedataTh,
   alertdeletedataEn: alertdeletedataEn ?? _alertdeletedataEn,
   alertsavedataTh: alertsavedataTh ?? _alertsavedataTh,
   alertsavedataEn: alertsavedataEn ?? _alertsavedataEn,
+  completefieldsTh: completefieldsTh ?? _completefieldsTh,
+  completefieldsEn: completefieldsEn ?? _completefieldsEn,
 );
   String? get alertdeletedataTh => _alertdeletedataTh;
   String? get alertdeletedataEn => _alertdeletedataEn;
   String? get alertsavedataTh => _alertsavedataTh;
   String? get alertsavedataEn => _alertsavedataEn;
+  String? get completefieldsTh => _completefieldsTh;
+  String? get completefieldsEn => _completefieldsEn;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -150,6 +166,8 @@ Alertmessage copyWith({  String? alertdeletedataTh,
     map['alertdeletedata_en'] = _alertdeletedataEn;
     map['alertsavedata_th'] = _alertsavedataTh;
     map['alertsavedata_en'] = _alertsavedataEn;
+    map['completefields_th'] = _completefieldsTh;
+    map['completefields_en'] = _completefieldsEn;
     return map;
   }
 
@@ -220,11 +238,11 @@ Errorbutton copyWith({  String? buttonok,
 
 /// id : 0
 /// orderchoose : 0
-/// skill : null
-/// skillen : null
-/// value : null
-/// detail : null
-/// detailen : null
+/// skill : ""
+/// skillen : ""
+/// value : ""
+/// detail : ""
+/// detailen : ""
 
 Data dataFromJson(String str) => Data.fromJson(json.decode(str));
 String dataToJson(Data data) => json.encode(data.toJson());
@@ -232,11 +250,11 @@ class Data {
   Data({
       int? id, 
       int? orderchoose, 
-      dynamic skill, 
-      dynamic skillen, 
-      dynamic value, 
-      dynamic detail, 
-      dynamic detailen,}){
+      String? skill, 
+      String? skillen, 
+      String? value, 
+      String? detail, 
+      String? detailen,}){
     _id = id;
     _orderchoose = orderchoose;
     _skill = skill;
@@ -257,18 +275,18 @@ class Data {
   }
   int? _id;
   int? _orderchoose;
-  dynamic _skill;
-  dynamic _skillen;
-  dynamic _value;
-  dynamic _detail;
-  dynamic _detailen;
+  String? _skill;
+  String? _skillen;
+  String? _value;
+  String? _detail;
+  String? _detailen;
 Data copyWith({  int? id,
   int? orderchoose,
-  dynamic skill,
-  dynamic skillen,
-  dynamic value,
-  dynamic detail,
-  dynamic detailen,
+  String? skill,
+  String? skillen,
+  String? value,
+  String? detail,
+  String? detailen,
 }) => Data(  id: id ?? _id,
   orderchoose: orderchoose ?? _orderchoose,
   skill: skill ?? _skill,
@@ -279,11 +297,11 @@ Data copyWith({  int? id,
 );
   int? get id => _id;
   int? get orderchoose => _orderchoose;
-  dynamic get skill => _skill;
-  dynamic get skillen => _skillen;
-  dynamic get value => _value;
-  dynamic get detail => _detail;
-  dynamic get detailen => _detailen;
+  String? get skill => _skill;
+  String? get skillen => _skillen;
+  String? get value => _value;
+  String? get detail => _detail;
+  String? get detailen => _detailen;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

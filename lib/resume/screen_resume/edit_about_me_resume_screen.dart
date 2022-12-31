@@ -14,7 +14,7 @@ import '../../customs/text_file/build_textformfiled_unlimit_custom.dart';
 import '../../module/login/screen/login_screen/login_screen.dart';
 import '../bloc_resume/resume_bloc.dart';
 import '../components/components_resume.dart';
-import '../examples/content_design_resume_edit.dart';
+import 'content_design_resume_edit.dart';
 import '../model/response/get_about_me_resume_response.dart';
 
 class EditAboutMeResumeScreen extends StatelessWidget {
@@ -159,24 +159,71 @@ class _EditAboutMeResumePageState extends State<EditAboutMeResumePage>
               '${isGetAboutMeResumeResponse?.body?.screeninfo?.aboutmeEn} *';
           String? aboutMeTh = isGetAboutMeResumeResponse?.body?.data?.details;
           String? aboutMeEn = isGetAboutMeResumeResponse?.body?.data?.detailsen;
-
           return Scaffold(
             appBar: AppBar(
               backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
               elevation: 0,
               leading: IconButton(
+
+
+
                 onPressed: () {
-                  // Navigator.pop(context);
-                  context.read<ResumeBloc>().add(SentEditAboutMeResumeEvent(
-                    aboutMeControllerTH: (aboutMeControllerTH.text == ''
-                        ? aboutMeTh
-                        : aboutMeControllerTH.text) ??
-                        '',
-                    aboutMeControllerEN: (aboutMeControllerEN.text == ''
-                        ? aboutMeEn
-                        : aboutMeControllerEN.text) ??
-                        '',));
+                  dialogOneLineTwoBtnWarning(
+                      context,
+                      "${isGetAboutMeResumeResponse?.body?.alertmessage?.alertsavedataTh??"คุณต้องการบันทึกข้อมูลนี้ใช่หรือไม่?"}\n${isGetAboutMeResumeResponse?.body?.alertmessage?.alertsavedataEn??"Do you want to save this information?"}",
+                      isGetAboutMeResumeResponse?.body?.errorbutton?.buttonyes??"yes ",
+                      isGetAboutMeResumeResponse?.body?.errorbutton?.buttonno??"No",
+                      onClickBtn: (String result) {
+                        Navigator.of(context).pop();
+                        switch (result) {
+                          case 'Cancel':
+                            {
+                              //"No"
+
+
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) => const ContentDesignResumeEditScreen()));
+
+                              print('Cancel');
+                              break;
+                            }
+                          case 'OK':
+                            {
+                              //"Yes"
+
+                              if((aboutMeControllerTH.text == ''
+                                  ? aboutMeTh
+                                  : aboutMeControllerTH.text)  == ''||
+                                  (aboutMeControllerEN.text == ''
+                                      ? aboutMeEn
+                                      : aboutMeControllerEN.text)  == ''){
+
+                                dialogOneLineOneBtn(context, '${isGetAboutMeResumeResponse?.body?.alertmessage?.completefieldsTh??"กรุณากรอกให้ครบทุกช่อง"}\n'
+                                    '${isGetAboutMeResumeResponse?.body?.alertmessage?.completefieldsEn??"Please complete all fields."} ', _buttonOk,
+                                    onClickBtn: () {
+                                      Navigator.of(context).pop();
+                                    });
+                              }
+                              else{
+
+                                context.read<ResumeBloc>().add(SentEditAboutMeResumeEvent(
+                                  aboutMeControllerTH: (aboutMeControllerTH.text == ''
+                                      ? aboutMeTh
+                                      : aboutMeControllerTH.text) ??
+                                      '',
+                                  aboutMeControllerEN: (aboutMeControllerEN.text == ''
+                                      ? aboutMeEn
+                                      : aboutMeControllerEN.text) ??
+                                      '',));
+                              }
+                            }
+                        }
+                      });
                 },
+
+
                 icon: Icon(
                   Icons.arrow_back,
                   size: sizeTitle24,

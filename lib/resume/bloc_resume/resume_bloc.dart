@@ -25,7 +25,7 @@ import '../model/response/get_province_address_resume_response.dart';
 import '../model/response/get_skill_language_resume_response.dart';
 import '../model/response/get_skill_resume_response.dart';
 import '../model/response/get_sub_district_list_address_resume_response.dart';
-import '../model/response/get_user_infomartion_resume_response.dart';
+import '../model/response/get_user_informartion_resume_response.dart';
 import '../model/response/get_zip_code_address_resume_response.dart';
 import '../model/response/image_up_load_resume_response.dart';
 import '../model/response/pre_view_resume_response.dart';

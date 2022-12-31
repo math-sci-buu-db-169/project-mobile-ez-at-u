@@ -24,11 +24,11 @@ import '../../module/login/screen/login_screen/login_screen.dart';
 import '../../utils/shared_preferences.dart';
 import '../components/components_resume.dart';
 import '../model/response/pre_view_resume_response.dart';
-import '../screen_resume/edit_about_me_resume_screen.dart';
-import '../screen_resume/edit_address_resume_screen.dart';
-import '../screen_resume/edit_skill_language_resume_screen.dart';
-import '../screen_resume/edit_skill_resume_screen.dart';
-import '../screen_resume/edit_user_info_resume_screen.dart';
+import 'edit_about_me_resume_screen.dart';
+import 'edit_address_resume_screen.dart';
+import 'edit_skill_language_resume_screen.dart';
+import 'edit_skill_resume_screen.dart';
+import 'edit_user_info_resume_screen.dart';
 import 'content_design_resume_color.dart';
 
 class ContentDesignResumeEditScreen extends StatelessWidget {

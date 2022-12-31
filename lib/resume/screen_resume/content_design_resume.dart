@@ -28,6 +28,15 @@ import '../components/components_resume.dart';
 import '../model/response/pre_view_resume_response.dart';
 import 'content_design_resume_edit.dart';
 
+import 'package:url_launcher/url_launcher.dart';
+Future<void> _launchInBrowser(Uri url) async {
+  if (!await launchUrl(
+    url,
+    mode: LaunchMode.externalApplication,
+  )) {
+    throw 'Could not launch $url';
+  }
+}
 class ContentDesignResumeScreen extends StatelessWidget {
   const ContentDesignResumeScreen({Key? key}) : super(key: key);
 
@@ -93,6 +102,12 @@ class _ContentDesignResumeState extends State<ContentDesignResume>
           BodyPreviewResume(
             isPreViewResumeResponse: _preViewResumeResponse,
           );
+        }
+        if (state is SetOnSelectedAndGenResumeSuccessState) {
+          setState(() {
+            _launchInBrowser(Uri.parse(
+                "http://msd.buu.ac.th/ServiceTest/resume/generatepdftest?id=62030340"));
+          });
         }
         if (state is PreviewResumeError) {
           if (state.errorMessage.toString() == 'Unauthorized') {

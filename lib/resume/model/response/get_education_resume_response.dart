@@ -1,6 +1,6 @@
 import 'dart:convert';
 /// head : {"status":200,"message":"success","modulename":"home/resume","timeexpire":false}
-/// body : {"screeninfo":{"save":"บันทึก","editinfomations":"แก้ไขข้อมูล","startdate_th":"วันเริ่มต้น","enddate_th":"วันสิ้นสุด","startdate_en":"Start date","enddate_en":"End date","type_th":"ประเภทการศึกษา","type_en":"Education type","placeofstudy_th":"สถานศึกษา","placeofstudy_en":"Place name","detail_th":"รายละเอียด","detail_en":"Description","deleteor":"Delete/ลบ","delete":"ลบ"},"data":{"id":0,"orderchoose":0,"startdate":"","enddate":"","typeid":"","type_th":"","type_en":"","placeofstudy_th":"","placeofstudy_en":"","detail_th":"","detail_en":""},"type":[{"typeid":"HSC","type_th":"High School Certificate","type_en":"ระดับประกาศนียบัตรมัธยมศึกษาตอนปลาย"},{"typeid":"BD","type_th":"Bachelor Degrees","type_en":"ระดับปริญญาตรี"},{"typeid":"MD","type_th":"Master Degrees","type_en":"ระดับปริญญาโท    "},{"typeid":"DD","type_th":"Doctor Degrees","type_en":"ระดับปริญญาเอก"},{"typeid":"HDD","type_th":"Honorary Doctorate Degree ","type_en":"ระดับปริญญาดุษฎีบัณฑิตกิตติมศักดิ์"}],"errorbutton":{"buttonok":"OK","buttonconfirm":"Confirm","buttonyes":"Yes","buttonno":"No","buttoncancel":"Cancel"},"alertmessage":{"alertdeletedata_th":"คุณต้องการลบข้อมูลนี้ใช่หรือไม่?","alertdeletedata_en":"Do you want to delete this information?","alertsavedata_th":" คุณต้องการบันทึกข้อมูลนี้ใช่หรือไม่","alertsavedata_en":"Do you want to save this information?"}}
+/// body : {"screeninfo":{"save":"บันทึก","editinfomations":"แก้ไขข้อมูล","startdate_th":"วันเริ่มต้น","enddate_th":"วันสิ้นสุด","startdate_en":"Start date","enddate_en":"End date","type_th":"ประเภทการศึกษา","type_en":"Education type","placeofstudy_th":"สถานศึกษา","placeofstudy_en":"Place name","fbc_th":"คณะ,  สาขา, หลักสูตร","fbc_en":"Faculty, Branch, Course","detail_th":"รายละเอียด","detail_en":"Description","deleteor":"Delete/ลบ","delete":"ลบ"},"data":{"id":0,"orderchoose":0,"startdate":"","enddate":"","typeid":"","type_th":"","type_en":"","placeofstudy_th":"","placeofstudy_en":"","detail_th":"","detail_en":""},"type":[{"typeid":"HSC","type_th":"High School Certificate","type_en":"ระดับประกาศนียบัตรมัธยมศึกษาตอนปลาย"},{"typeid":"BD","type_th":"Bachelor Degrees","type_en":"ระดับปริญญาตรี"},{"typeid":"MD","type_th":"Master Degrees","type_en":"ระดับปริญญาโท    "},{"typeid":"DD","type_th":"Doctor Degrees","type_en":"ระดับปริญญาเอก"},{"typeid":"HDD","type_th":"Honorary Doctorate Degree ","type_en":"ระดับปริญญาดุษฎีบัณฑิตกิตติมศักดิ์"}],"errorbutton":{"buttonok":"OK","buttonconfirm":"Confirm","buttonyes":"Yes","buttonno":"No","buttoncancel":"Cancel"},"alertmessage":{"alertdeletedata_th":"คุณต้องการลบข้อมูลนี้ใช่หรือไม่?","alertdeletedata_en":"Do you want to delete this information?","alertsavedata_th":" คุณต้องการบันทึกข้อมูลนี้ใช่หรือไม่","alertsavedata_en":"Do you want to save this information?","completefields_th":"กรุณากรอกให้ครบทุกช่อง","completefields_en":"Please complete all fields."}}
 
 GetEducationResumeResponse getEducationResumeResponseFromJson(String str) => GetEducationResumeResponse.fromJson(json.decode(str));
 String getEducationResumeResponseToJson(GetEducationResumeResponse data) => json.encode(data.toJson());
@@ -39,11 +39,11 @@ GetEducationResumeResponse copyWith({  Head? head,
 
 }
 
-/// screeninfo : {"save":"บันทึก","editinfomations":"แก้ไขข้อมูล","startdate_th":"วันเริ่มต้น","enddate_th":"วันสิ้นสุด","startdate_en":"Start date","enddate_en":"End date","type_th":"ประเภทการศึกษา","type_en":"Education type","placeofstudy_th":"สถานศึกษา","placeofstudy_en":"Place name","detail_th":"รายละเอียด","detail_en":"Description","deleteor":"Delete/ลบ","delete":"ลบ"}
+/// screeninfo : {"save":"บันทึก","editinfomations":"แก้ไขข้อมูล","startdate_th":"วันเริ่มต้น","enddate_th":"วันสิ้นสุด","startdate_en":"Start date","enddate_en":"End date","type_th":"ประเภทการศึกษา","type_en":"Education type","placeofstudy_th":"สถานศึกษา","placeofstudy_en":"Place name","fbc_th":"คณะ,  สาขา, หลักสูตร","fbc_en":"Faculty, Branch, Course","detail_th":"รายละเอียด","detail_en":"Description","deleteor":"Delete/ลบ","delete":"ลบ"}
 /// data : {"id":0,"orderchoose":0,"startdate":"","enddate":"","typeid":"","type_th":"","type_en":"","placeofstudy_th":"","placeofstudy_en":"","detail_th":"","detail_en":""}
 /// type : [{"typeid":"HSC","type_th":"High School Certificate","type_en":"ระดับประกาศนียบัตรมัธยมศึกษาตอนปลาย"},{"typeid":"BD","type_th":"Bachelor Degrees","type_en":"ระดับปริญญาตรี"},{"typeid":"MD","type_th":"Master Degrees","type_en":"ระดับปริญญาโท    "},{"typeid":"DD","type_th":"Doctor Degrees","type_en":"ระดับปริญญาเอก"},{"typeid":"HDD","type_th":"Honorary Doctorate Degree ","type_en":"ระดับปริญญาดุษฎีบัณฑิตกิตติมศักดิ์"}]
 /// errorbutton : {"buttonok":"OK","buttonconfirm":"Confirm","buttonyes":"Yes","buttonno":"No","buttoncancel":"Cancel"}
-/// alertmessage : {"alertdeletedata_th":"คุณต้องการลบข้อมูลนี้ใช่หรือไม่?","alertdeletedata_en":"Do you want to delete this information?","alertsavedata_th":" คุณต้องการบันทึกข้อมูลนี้ใช่หรือไม่","alertsavedata_en":"Do you want to save this information?"}
+/// alertmessage : {"alertdeletedata_th":"คุณต้องการลบข้อมูลนี้ใช่หรือไม่?","alertdeletedata_en":"Do you want to delete this information?","alertsavedata_th":" คุณต้องการบันทึกข้อมูลนี้ใช่หรือไม่","alertsavedata_en":"Do you want to save this information?","completefields_th":"กรุณากรอกให้ครบทุกช่อง","completefields_en":"Please complete all fields."}
 
 Body bodyFromJson(String str) => Body.fromJson(json.decode(str));
 String bodyToJson(Body data) => json.encode(data.toJson());
@@ -121,6 +121,8 @@ Body copyWith({  Screeninfo? screeninfo,
 /// alertdeletedata_en : "Do you want to delete this information?"
 /// alertsavedata_th : " คุณต้องการบันทึกข้อมูลนี้ใช่หรือไม่"
 /// alertsavedata_en : "Do you want to save this information?"
+/// completefields_th : "กรุณากรอกให้ครบทุกช่อง"
+/// completefields_en : "Please complete all fields."
 
 Alertmessage alertmessageFromJson(String str) => Alertmessage.fromJson(json.decode(str));
 String alertmessageToJson(Alertmessage data) => json.encode(data.toJson());
@@ -129,11 +131,15 @@ class Alertmessage {
       String? alertdeletedataTh, 
       String? alertdeletedataEn, 
       String? alertsavedataTh, 
-      String? alertsavedataEn,}){
+      String? alertsavedataEn, 
+      String? completefieldsTh, 
+      String? completefieldsEn,}){
     _alertdeletedataTh = alertdeletedataTh;
     _alertdeletedataEn = alertdeletedataEn;
     _alertsavedataTh = alertsavedataTh;
     _alertsavedataEn = alertsavedataEn;
+    _completefieldsTh = completefieldsTh;
+    _completefieldsEn = completefieldsEn;
 }
 
   Alertmessage.fromJson(dynamic json) {
@@ -141,24 +147,34 @@ class Alertmessage {
     _alertdeletedataEn = json['alertdeletedata_en'];
     _alertsavedataTh = json['alertsavedata_th'];
     _alertsavedataEn = json['alertsavedata_en'];
+    _completefieldsTh = json['completefields_th'];
+    _completefieldsEn = json['completefields_en'];
   }
   String? _alertdeletedataTh;
   String? _alertdeletedataEn;
   String? _alertsavedataTh;
   String? _alertsavedataEn;
+  String? _completefieldsTh;
+  String? _completefieldsEn;
 Alertmessage copyWith({  String? alertdeletedataTh,
   String? alertdeletedataEn,
   String? alertsavedataTh,
   String? alertsavedataEn,
+  String? completefieldsTh,
+  String? completefieldsEn,
 }) => Alertmessage(  alertdeletedataTh: alertdeletedataTh ?? _alertdeletedataTh,
   alertdeletedataEn: alertdeletedataEn ?? _alertdeletedataEn,
   alertsavedataTh: alertsavedataTh ?? _alertsavedataTh,
   alertsavedataEn: alertsavedataEn ?? _alertsavedataEn,
+  completefieldsTh: completefieldsTh ?? _completefieldsTh,
+  completefieldsEn: completefieldsEn ?? _completefieldsEn,
 );
   String? get alertdeletedataTh => _alertdeletedataTh;
   String? get alertdeletedataEn => _alertdeletedataEn;
   String? get alertsavedataTh => _alertsavedataTh;
   String? get alertsavedataEn => _alertsavedataEn;
+  String? get completefieldsTh => _completefieldsTh;
+  String? get completefieldsEn => _completefieldsEn;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -166,6 +182,8 @@ Alertmessage copyWith({  String? alertdeletedataTh,
     map['alertdeletedata_en'] = _alertdeletedataEn;
     map['alertsavedata_th'] = _alertsavedataTh;
     map['alertsavedata_en'] = _alertsavedataEn;
+    map['completefields_th'] = _completefieldsTh;
+    map['completefields_en'] = _completefieldsEn;
     return map;
   }
 
@@ -406,6 +424,8 @@ Data copyWith({  int? id,
 /// type_en : "Education type"
 /// placeofstudy_th : "สถานศึกษา"
 /// placeofstudy_en : "Place name"
+/// fbc_th : "คณะ,  สาขา, หลักสูตร"
+/// fbc_en : "Faculty, Branch, Course"
 /// detail_th : "รายละเอียด"
 /// detail_en : "Description"
 /// deleteor : "Delete/ลบ"
@@ -425,6 +445,8 @@ class Screeninfo {
       String? typeEn, 
       String? placeofstudyTh, 
       String? placeofstudyEn, 
+      String? fbcTh, 
+      String? fbcEn, 
       String? detailTh, 
       String? detailEn, 
       String? deleteor, 
@@ -439,6 +461,8 @@ class Screeninfo {
     _typeEn = typeEn;
     _placeofstudyTh = placeofstudyTh;
     _placeofstudyEn = placeofstudyEn;
+    _fbcTh = fbcTh;
+    _fbcEn = fbcEn;
     _detailTh = detailTh;
     _detailEn = detailEn;
     _deleteor = deleteor;
@@ -456,6 +480,8 @@ class Screeninfo {
     _typeEn = json['type_en'];
     _placeofstudyTh = json['placeofstudy_th'];
     _placeofstudyEn = json['placeofstudy_en'];
+    _fbcTh = json['fbc_th'];
+    _fbcEn = json['fbc_en'];
     _detailTh = json['detail_th'];
     _detailEn = json['detail_en'];
     _deleteor = json['deleteor'];
@@ -471,6 +497,8 @@ class Screeninfo {
   String? _typeEn;
   String? _placeofstudyTh;
   String? _placeofstudyEn;
+  String? _fbcTh;
+  String? _fbcEn;
   String? _detailTh;
   String? _detailEn;
   String? _deleteor;
@@ -485,6 +513,8 @@ Screeninfo copyWith({  String? save,
   String? typeEn,
   String? placeofstudyTh,
   String? placeofstudyEn,
+  String? fbcTh,
+  String? fbcEn,
   String? detailTh,
   String? detailEn,
   String? deleteor,
@@ -499,6 +529,8 @@ Screeninfo copyWith({  String? save,
   typeEn: typeEn ?? _typeEn,
   placeofstudyTh: placeofstudyTh ?? _placeofstudyTh,
   placeofstudyEn: placeofstudyEn ?? _placeofstudyEn,
+  fbcTh: fbcTh ?? _fbcTh,
+  fbcEn: fbcEn ?? _fbcEn,
   detailTh: detailTh ?? _detailTh,
   detailEn: detailEn ?? _detailEn,
   deleteor: deleteor ?? _deleteor,
@@ -514,6 +546,8 @@ Screeninfo copyWith({  String? save,
   String? get typeEn => _typeEn;
   String? get placeofstudyTh => _placeofstudyTh;
   String? get placeofstudyEn => _placeofstudyEn;
+  String? get fbcTh => _fbcTh;
+  String? get fbcEn => _fbcEn;
   String? get detailTh => _detailTh;
   String? get detailEn => _detailEn;
   String? get deleteor => _deleteor;
@@ -531,6 +565,8 @@ Screeninfo copyWith({  String? save,
     map['type_en'] = _typeEn;
     map['placeofstudy_th'] = _placeofstudyTh;
     map['placeofstudy_en'] = _placeofstudyEn;
+    map['fbc_th'] = _fbcTh;
+    map['fbc_en'] = _fbcEn;
     map['detail_th'] = _detailTh;
     map['detail_en'] = _detailEn;
     map['deleteor'] = _deleteor;

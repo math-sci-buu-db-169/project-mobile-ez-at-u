@@ -42,7 +42,8 @@ class SetOnSelectedAndPreviewResumeEvent extends ResumeEvent {
     required  this.skillOnSelect ,
     required  this.languageOnSelect,
     required  this. sendOnSelectColorSet, required this. pop ,});
-}class SetOnSelectedAndGenPreviewResumeEvent extends ResumeEvent {
+}
+class SetOnSelectedAndGenPreviewResumeEvent extends ResumeEvent {
   List<OnSelect> positionOnSelect;
   List<OnSelect> educationHSCOnSelect;
   List<OnSelect> educationBDOnSelect ;
@@ -69,7 +70,7 @@ class SetOnSelectedAndPreviewResumeEvent extends ResumeEvent {
     required  this.certificateOnSelect ,
     required  this.skillOnSelect ,
     required  this.languageOnSelect,
-    required  this. sendOnSelectColorSet ,});
+    required  this. sendOnSelectColorSet,});
 }
 
 class GetSetPreviewResumeEvent extends ResumeEvent {}

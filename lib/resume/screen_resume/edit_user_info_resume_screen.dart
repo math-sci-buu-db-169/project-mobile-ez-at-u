@@ -14,8 +14,8 @@ import '../../customs/text_file/build_textformfiled_unlimit_custom.dart';
 import '../../module/login/screen/login_screen/login_screen.dart';
 import '../bloc_resume/resume_bloc.dart';
 import '../components/components_resume.dart';
-import '../examples/content_design_resume_edit.dart';
-import '../model/response/get_user_infomartion_resume_response.dart';
+import 'content_design_resume_edit.dart';
+import '../model/response/get_user_informartion_resume_response.dart';
 
 class EditUserInfoResumeScreen extends StatelessWidget {
   const EditUserInfoResumeScreen({
@@ -198,28 +198,88 @@ class _EditUserInfoResumePageState extends State<EditUserInfoResumePage>
               backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
               elevation: 0,
               leading: IconButton(
+
+
                 onPressed: () {
-                  // Navigator.pop(context);
-                  context.read<ResumeBloc>().add(SentEditUserInfoResumeEvent(
-                    prefixId: isPrefixController,
-                    name:  (nameControllerTH.text == ''
-                        ? nameTh
-                        : nameControllerTH.text) ??
-                        '',
-                    lastName:  (lastNameControllerTH.text == ''
-                        ? lastNameTh
-                        : lastNameControllerTH.text) ??
-                        '',
-                    nameEN: (nameControllerEN.text == ''
-                        ? nameEn
-                        : nameControllerEN.text) ??
-                        '',
-                    lastNameEN: (lastNameControllerEN.text == ''
-                        ? lastNameEn
-                        : lastNameControllerEN.text) ??
-                        '',
-                  ));
+                  dialogOneLineTwoBtnWarning(
+                      context,
+                      "${isGetUserInformationResumeResponse?.body?.alertmessage?.alertsavedataTh??"คุณต้องการบันทึกข้อมูลนี้ใช่หรือไม่?"}\n${isGetUserInformationResumeResponse?.body?.alertmessage?.alertsavedataEn??"Do you want to save this information?"}",
+                      isGetUserInformationResumeResponse?.body?.errorbutton?.buttonyes??"yes ",
+                      isGetUserInformationResumeResponse?.body?.errorbutton?.buttonno??"No",
+                      onClickBtn: (String result) {
+                        Navigator.of(context).pop();
+                        switch (result) {
+                          case 'Cancel':
+                            {
+                              //"No"
+
+
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) => const ContentDesignResumeEditScreen()));
+
+                              print('Cancel');
+                              break;
+                            }
+                          case 'OK':
+                            {
+                              //"Yes"
+
+                              if(
+                              ((nameControllerTH.text == ''
+                                  ? nameTh
+                                  : nameControllerTH.text) ??
+                                  '') == ''
+                                  ||
+                                  ((lastNameControllerTH.text == ''
+                                      ? lastNameTh
+                                      : lastNameControllerTH.text) ??
+                                      '') == ''
+                                  ||
+                                  ((nameControllerEN.text == ''
+                                      ? nameEn
+                                      : nameControllerEN.text) ??
+                                      '') == ''
+                                  ||
+                                  ((lastNameControllerEN.text == ''
+                                      ? lastNameEn
+                                      : lastNameControllerEN.text) ??
+                                      '')== ''){
+
+                                dialogOneLineOneBtn(context, '${isGetUserInformationResumeResponse?.body?.alertmessage?.completefieldsTh??"กรุณากรอกให้ครบทุกช่อง"}\n'
+                                    '${isGetUserInformationResumeResponse?.body?.alertmessage?.completefieldsEn??"Please complete all fields."} ', _buttonOk,
+                                    onClickBtn: () {
+                                      Navigator.of(context).pop();
+                                    });
+                              }
+                              else{
+
+                                context.read<ResumeBloc>().add(SentEditUserInfoResumeEvent(
+                                  prefixId: isPrefixController,
+                                  name:  (nameControllerTH.text == ''
+                                      ? nameTh
+                                      : nameControllerTH.text) ??
+                                      '',
+                                  lastName:  (lastNameControllerTH.text == ''
+                                      ? lastNameTh
+                                      : lastNameControllerTH.text) ??
+                                      '',
+                                  nameEN: (nameControllerEN.text == ''
+                                      ? nameEn
+                                      : nameControllerEN.text) ??
+                                      '',
+                                  lastNameEN: (lastNameControllerEN.text == ''
+                                      ? lastNameEn
+                                      : lastNameControllerEN.text) ??
+                                      '',
+                                ));
+                              }
+                            }
+                        }
+                      });
                 },
+
                 icon: Icon(
                   Icons.arrow_back,
                   size: sizeTitle24,

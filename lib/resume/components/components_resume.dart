@@ -10,8 +10,7 @@ import '../../customs/color/color_const.dart';
 import '../../customs/color/pdf_color_const.dart';
 import '../../customs/size/size.dart';
 import '../bloc_resume/resume_bloc.dart';
-import '../examples/content_design_resume.dart';
-import '../examples/content_design_resume_color.dart';
+import '../screen_resume/content_design_resume.dart';
 import '../model/response/pre_view_resume_response.dart';
 import '../screen_resume/edit_certificate_resume_screen.dart';
 import '../screen_resume/edit_education_resume_screen.dart';
@@ -129,6 +128,10 @@ floatingGeneratePDFAndSaveData(
             languageOnSelect: languageOnSelect,
             sendOnSelectColorSet: sendOnSelectColorSet,
           ));
+            // setState(() {
+            //   _launchInBrowser(Uri.parse(
+            //       "http://msd.buu.ac.th/ServiceTest/resume/generatepdftest?id=62030340"));
+            // });
         },
         // onPressed: () {
         //   Navigator.push(

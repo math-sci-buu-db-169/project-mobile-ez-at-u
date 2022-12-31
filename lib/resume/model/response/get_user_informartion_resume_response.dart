@@ -1,26 +1,26 @@
 import 'dart:convert';
 /// head : {"status":200,"message":"success","modulename":"home/resume","timeexpire":false}
-/// body : {"screeninfo":{"save":"บันทึก","editinfomations":"แก้ไขข้อมูล","language_th":"ทักษะทางภาษา","language_en":"Skill Language","level":"ระดับความสามารถ / Skill level","level_th":"ระดับความสามารถ","level_en":"Skill level","description_th":"รายละเอียด","description_en":"Description","deleteor":"Delete/ลบ","delete":"ลบ"},"data":{"id":0,"orderchoose":0,"language":"","languageen":"","value":"","detail":"","detailen":""},"errorbutton":{"buttonok":"OK","buttonconfirm":"Confirm","buttonyes":"Yes","buttonno":"No","buttoncancel":"Cancel"},"alertmessage":{"alertdeletedata_th":"คุณต้องการลบข้อมูลนี้ใช่หรือไม่?","alertdeletedata_en":"Do you want to delete this information?","alertsavedata_th":" คุณต้องการบันทึกข้อมูลนี้ใช่หรือไม่","alertsavedata_en":"Do you want to save this information?","completefields_th":"กรุณากรอกให้ครบทุกช่อง","completefields_en":"Please complete all fields."}}
+/// body : {"screeninfo":{"textprefix_th":"คำนำหน้า","textprefix_en":"prefix","textname_th":"ชื่อ","textname_en":"Name","textlastname_th":"นามสกุล","textlastname_en":"Last name","save":"บันทึก","editinfomations":"แก้ไขข้อมูล"},"prefix":[{"specifically":"P1","th":"นาง","en":"MRS"},{"specifically":"P2","th":"นางสาว","en":"MISS"},{"specifically":"P3","th":"นาย","en":"MR"}],"data":{"prefixid":"P1","prefix_th":"นาง","prefix_en":"MRS","name":"","lastname":"","nameen":"","lastnameen":""},"errorbutton":{"buttonok":"OK","buttonconfirm":"Confirm","buttonyes":"Yes","buttonno":"No","buttoncancel":"Cancel"},"alertmessage":{"alertdeletedata_th":"คุณต้องการลบข้อมูลนี้ใช่หรือไม่?","alertdeletedata_en":"Do you want to delete this information?","alertsavedata_th":" คุณต้องการบันทึกข้อมูลนี้ใช่หรือไม่","alertsavedata_en":"Do you want to save this information?","completefields_th":"กรุณากรอกให้ครบทุกช่อง","completefields_en":"Please complete all fields."}}
 
-GetSkillLanguageResumeResponse getSkillLanguageResumeResponseFromJson(String str) => GetSkillLanguageResumeResponse.fromJson(json.decode(str));
-String getSkillLanguageResumeResponseToJson(GetSkillLanguageResumeResponse data) => json.encode(data.toJson());
-class GetSkillLanguageResumeResponse {
-  GetSkillLanguageResumeResponse({
+GetUserInformationResumeResponse getUserInformationResumeResponseFromJson(String str) => GetUserInformationResumeResponse.fromJson(json.decode(str));
+String getUserInformationResumeResponseToJson(GetUserInformationResumeResponse data) => json.encode(data.toJson());
+class GetUserInformationResumeResponse {
+  GetUserInformationResumeResponse({
       Head? head, 
       Body? body,}){
     _head = head;
     _body = body;
 }
 
-  GetSkillLanguageResumeResponse.fromJson(dynamic json) {
+  GetUserInformationResumeResponse.fromJson(dynamic json) {
     _head = json['head'] != null ? Head.fromJson(json['head']) : null;
     _body = json['body'] != null ? Body.fromJson(json['body']) : null;
   }
   Head? _head;
   Body? _body;
-GetSkillLanguageResumeResponse copyWith({  Head? head,
+GetUserInformationResumeResponse copyWith({  Head? head,
   Body? body,
-}) => GetSkillLanguageResumeResponse(  head: head ?? _head,
+}) => GetUserInformationResumeResponse(  head: head ?? _head,
   body: body ?? _body,
 );
   Head? get head => _head;
@@ -39,8 +39,9 @@ GetSkillLanguageResumeResponse copyWith({  Head? head,
 
 }
 
-/// screeninfo : {"save":"บันทึก","editinfomations":"แก้ไขข้อมูล","language_th":"ทักษะทางภาษา","language_en":"Skill Language","level":"ระดับความสามารถ / Skill level","level_th":"ระดับความสามารถ","level_en":"Skill level","description_th":"รายละเอียด","description_en":"Description","deleteor":"Delete/ลบ","delete":"ลบ"}
-/// data : {"id":0,"orderchoose":0,"language":"","languageen":"","value":"","detail":"","detailen":""}
+/// screeninfo : {"textprefix_th":"คำนำหน้า","textprefix_en":"prefix","textname_th":"ชื่อ","textname_en":"Name","textlastname_th":"นามสกุล","textlastname_en":"Last name","save":"บันทึก","editinfomations":"แก้ไขข้อมูล"}
+/// prefix : [{"specifically":"P1","th":"นาง","en":"MRS"},{"specifically":"P2","th":"นางสาว","en":"MISS"},{"specifically":"P3","th":"นาย","en":"MR"}]
+/// data : {"prefixid":"P1","prefix_th":"นาง","prefix_en":"MRS","name":"","lastname":"","nameen":"","lastnameen":""}
 /// errorbutton : {"buttonok":"OK","buttonconfirm":"Confirm","buttonyes":"Yes","buttonno":"No","buttoncancel":"Cancel"}
 /// alertmessage : {"alertdeletedata_th":"คุณต้องการลบข้อมูลนี้ใช่หรือไม่?","alertdeletedata_en":"Do you want to delete this information?","alertsavedata_th":" คุณต้องการบันทึกข้อมูลนี้ใช่หรือไม่","alertsavedata_en":"Do you want to save this information?","completefields_th":"กรุณากรอกให้ครบทุกช่อง","completefields_en":"Please complete all fields."}
 
@@ -49,10 +50,12 @@ String bodyToJson(Body data) => json.encode(data.toJson());
 class Body {
   Body({
       Screeninfo? screeninfo, 
+      List<Prefix>? prefix, 
       Data? data, 
       Errorbutton? errorbutton, 
       Alertmessage? alertmessage,}){
     _screeninfo = screeninfo;
+    _prefix = prefix;
     _data = data;
     _errorbutton = errorbutton;
     _alertmessage = alertmessage;
@@ -60,24 +63,34 @@ class Body {
 
   Body.fromJson(dynamic json) {
     _screeninfo = json['screeninfo'] != null ? Screeninfo.fromJson(json['screeninfo']) : null;
+    if (json['prefix'] != null) {
+      _prefix = [];
+      json['prefix'].forEach((v) {
+        _prefix?.add(Prefix.fromJson(v));
+      });
+    }
     _data = json['data'] != null ? Data.fromJson(json['data']) : null;
     _errorbutton = json['errorbutton'] != null ? Errorbutton.fromJson(json['errorbutton']) : null;
     _alertmessage = json['alertmessage'] != null ? Alertmessage.fromJson(json['alertmessage']) : null;
   }
   Screeninfo? _screeninfo;
+  List<Prefix>? _prefix;
   Data? _data;
   Errorbutton? _errorbutton;
   Alertmessage? _alertmessage;
 Body copyWith({  Screeninfo? screeninfo,
+  List<Prefix>? prefix,
   Data? data,
   Errorbutton? errorbutton,
   Alertmessage? alertmessage,
 }) => Body(  screeninfo: screeninfo ?? _screeninfo,
+  prefix: prefix ?? _prefix,
   data: data ?? _data,
   errorbutton: errorbutton ?? _errorbutton,
   alertmessage: alertmessage ?? _alertmessage,
 );
   Screeninfo? get screeninfo => _screeninfo;
+  List<Prefix>? get prefix => _prefix;
   Data? get data => _data;
   Errorbutton? get errorbutton => _errorbutton;
   Alertmessage? get alertmessage => _alertmessage;
@@ -86,6 +99,9 @@ Body copyWith({  Screeninfo? screeninfo,
     final map = <String, dynamic>{};
     if (_screeninfo != null) {
       map['screeninfo'] = _screeninfo?.toJson();
+    }
+    if (_prefix != null) {
+      map['prefix'] = _prefix?.map((v) => v.toJson()).toList();
     }
     if (_data != null) {
       map['data'] = _data?.toJson();
@@ -236,199 +252,217 @@ Errorbutton copyWith({  String? buttonok,
 
 }
 
-/// id : 0
-/// orderchoose : 0
-/// language : ""
-/// languageen : ""
-/// value : ""
-/// detail : ""
-/// detailen : ""
+/// prefixid : "P1"
+/// prefix_th : "นาง"
+/// prefix_en : "MRS"
+/// name : ""
+/// lastname : ""
+/// nameen : ""
+/// lastnameen : ""
 
 Data dataFromJson(String str) => Data.fromJson(json.decode(str));
 String dataToJson(Data data) => json.encode(data.toJson());
 class Data {
   Data({
-      int? id, 
-      int? orderchoose, 
-      String? language, 
-      String? languageen, 
-      String? value, 
-      String? detail, 
-      String? detailen,}){
-    _id = id;
-    _orderchoose = orderchoose;
-    _language = language;
-    _languageen = languageen;
-    _value = value;
-    _detail = detail;
-    _detailen = detailen;
+      String? prefixid, 
+      String? prefixTh, 
+      String? prefixEn, 
+      String? name, 
+      String? lastname, 
+      String? nameen, 
+      String? lastnameen,}){
+    _prefixid = prefixid;
+    _prefixTh = prefixTh;
+    _prefixEn = prefixEn;
+    _name = name;
+    _lastname = lastname;
+    _nameen = nameen;
+    _lastnameen = lastnameen;
 }
 
   Data.fromJson(dynamic json) {
-    _id = json['id'];
-    _orderchoose = json['orderchoose'];
-    _language = json['language'];
-    _languageen = json['languageen'];
-    _value = json['value'];
-    _detail = json['detail'];
-    _detailen = json['detailen'];
+    _prefixid = json['prefixid'];
+    _prefixTh = json['prefix_th'];
+    _prefixEn = json['prefix_en'];
+    _name = json['name'];
+    _lastname = json['lastname'];
+    _nameen = json['nameen'];
+    _lastnameen = json['lastnameen'];
   }
-  int? _id;
-  int? _orderchoose;
-  String? _language;
-  String? _languageen;
-  String? _value;
-  String? _detail;
-  String? _detailen;
-Data copyWith({  int? id,
-  int? orderchoose,
-  String? language,
-  String? languageen,
-  String? value,
-  String? detail,
-  String? detailen,
-}) => Data(  id: id ?? _id,
-  orderchoose: orderchoose ?? _orderchoose,
-  language: language ?? _language,
-  languageen: languageen ?? _languageen,
-  value: value ?? _value,
-  detail: detail ?? _detail,
-  detailen: detailen ?? _detailen,
+  String? _prefixid;
+  String? _prefixTh;
+  String? _prefixEn;
+  String? _name;
+  String? _lastname;
+  String? _nameen;
+  String? _lastnameen;
+Data copyWith({  String? prefixid,
+  String? prefixTh,
+  String? prefixEn,
+  String? name,
+  String? lastname,
+  String? nameen,
+  String? lastnameen,
+}) => Data(  prefixid: prefixid ?? _prefixid,
+  prefixTh: prefixTh ?? _prefixTh,
+  prefixEn: prefixEn ?? _prefixEn,
+  name: name ?? _name,
+  lastname: lastname ?? _lastname,
+  nameen: nameen ?? _nameen,
+  lastnameen: lastnameen ?? _lastnameen,
 );
-  int? get id => _id;
-  int? get orderchoose => _orderchoose;
-  String? get language => _language;
-  String? get languageen => _languageen;
-  String? get value => _value;
-  String? get detail => _detail;
-  String? get detailen => _detailen;
+  String? get prefixid => _prefixid;
+  String? get prefixTh => _prefixTh;
+  String? get prefixEn => _prefixEn;
+  String? get name => _name;
+  String? get lastname => _lastname;
+  String? get nameen => _nameen;
+  String? get lastnameen => _lastnameen;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['id'] = _id;
-    map['orderchoose'] = _orderchoose;
-    map['language'] = _language;
-    map['languageen'] = _languageen;
-    map['value'] = _value;
-    map['detail'] = _detail;
-    map['detailen'] = _detailen;
+    map['prefixid'] = _prefixid;
+    map['prefix_th'] = _prefixTh;
+    map['prefix_en'] = _prefixEn;
+    map['name'] = _name;
+    map['lastname'] = _lastname;
+    map['nameen'] = _nameen;
+    map['lastnameen'] = _lastnameen;
     return map;
   }
 
 }
 
+/// specifically : "P1"
+/// th : "นาง"
+/// en : "MRS"
+
+Prefix prefixFromJson(String str) => Prefix.fromJson(json.decode(str));
+String prefixToJson(Prefix data) => json.encode(data.toJson());
+class Prefix {
+  Prefix({
+      String? specifically, 
+      String? th, 
+      String? en,}){
+    _specifically = specifically;
+    _th = th;
+    _en = en;
+}
+
+  Prefix.fromJson(dynamic json) {
+    _specifically = json['specifically'];
+    _th = json['th'];
+    _en = json['en'];
+  }
+  String? _specifically;
+  String? _th;
+  String? _en;
+Prefix copyWith({  String? specifically,
+  String? th,
+  String? en,
+}) => Prefix(  specifically: specifically ?? _specifically,
+  th: th ?? _th,
+  en: en ?? _en,
+);
+  String? get specifically => _specifically;
+  String? get th => _th;
+  String? get en => _en;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['specifically'] = _specifically;
+    map['th'] = _th;
+    map['en'] = _en;
+    return map;
+  }
+
+}
+
+/// textprefix_th : "คำนำหน้า"
+/// textprefix_en : "prefix"
+/// textname_th : "ชื่อ"
+/// textname_en : "Name"
+/// textlastname_th : "นามสกุล"
+/// textlastname_en : "Last name"
 /// save : "บันทึก"
 /// editinfomations : "แก้ไขข้อมูล"
-/// language_th : "ทักษะทางภาษา"
-/// language_en : "Skill Language"
-/// level : "ระดับความสามารถ / Skill level"
-/// level_th : "ระดับความสามารถ"
-/// level_en : "Skill level"
-/// description_th : "รายละเอียด"
-/// description_en : "Description"
-/// deleteor : "Delete/ลบ"
-/// delete : "ลบ"
 
 Screeninfo screeninfoFromJson(String str) => Screeninfo.fromJson(json.decode(str));
 String screeninfoToJson(Screeninfo data) => json.encode(data.toJson());
 class Screeninfo {
   Screeninfo({
+      String? textprefixTh, 
+      String? textprefixEn, 
+      String? textnameTh, 
+      String? textnameEn, 
+      String? textlastnameTh, 
+      String? textlastnameEn, 
       String? save, 
-      String? editinfomations, 
-      String? languageTh, 
-      String? languageEn, 
-      String? level, 
-      String? levelTh, 
-      String? levelEn, 
-      String? descriptionTh, 
-      String? descriptionEn, 
-      String? deleteor, 
-      String? delete,}){
+      String? editinfomations,}){
+    _textprefixTh = textprefixTh;
+    _textprefixEn = textprefixEn;
+    _textnameTh = textnameTh;
+    _textnameEn = textnameEn;
+    _textlastnameTh = textlastnameTh;
+    _textlastnameEn = textlastnameEn;
     _save = save;
     _editinfomations = editinfomations;
-    _languageTh = languageTh;
-    _languageEn = languageEn;
-    _level = level;
-    _levelTh = levelTh;
-    _levelEn = levelEn;
-    _descriptionTh = descriptionTh;
-    _descriptionEn = descriptionEn;
-    _deleteor = deleteor;
-    _delete = delete;
 }
 
   Screeninfo.fromJson(dynamic json) {
+    _textprefixTh = json['textprefix_th'];
+    _textprefixEn = json['textprefix_en'];
+    _textnameTh = json['textname_th'];
+    _textnameEn = json['textname_en'];
+    _textlastnameTh = json['textlastname_th'];
+    _textlastnameEn = json['textlastname_en'];
     _save = json['save'];
     _editinfomations = json['editinfomations'];
-    _languageTh = json['language_th'];
-    _languageEn = json['language_en'];
-    _level = json['level'];
-    _levelTh = json['level_th'];
-    _levelEn = json['level_en'];
-    _descriptionTh = json['description_th'];
-    _descriptionEn = json['description_en'];
-    _deleteor = json['deleteor'];
-    _delete = json['delete'];
   }
+  String? _textprefixTh;
+  String? _textprefixEn;
+  String? _textnameTh;
+  String? _textnameEn;
+  String? _textlastnameTh;
+  String? _textlastnameEn;
   String? _save;
   String? _editinfomations;
-  String? _languageTh;
-  String? _languageEn;
-  String? _level;
-  String? _levelTh;
-  String? _levelEn;
-  String? _descriptionTh;
-  String? _descriptionEn;
-  String? _deleteor;
-  String? _delete;
-Screeninfo copyWith({  String? save,
+Screeninfo copyWith({  String? textprefixTh,
+  String? textprefixEn,
+  String? textnameTh,
+  String? textnameEn,
+  String? textlastnameTh,
+  String? textlastnameEn,
+  String? save,
   String? editinfomations,
-  String? languageTh,
-  String? languageEn,
-  String? level,
-  String? levelTh,
-  String? levelEn,
-  String? descriptionTh,
-  String? descriptionEn,
-  String? deleteor,
-  String? delete,
-}) => Screeninfo(  save: save ?? _save,
+}) => Screeninfo(  textprefixTh: textprefixTh ?? _textprefixTh,
+  textprefixEn: textprefixEn ?? _textprefixEn,
+  textnameTh: textnameTh ?? _textnameTh,
+  textnameEn: textnameEn ?? _textnameEn,
+  textlastnameTh: textlastnameTh ?? _textlastnameTh,
+  textlastnameEn: textlastnameEn ?? _textlastnameEn,
+  save: save ?? _save,
   editinfomations: editinfomations ?? _editinfomations,
-  languageTh: languageTh ?? _languageTh,
-  languageEn: languageEn ?? _languageEn,
-  level: level ?? _level,
-  levelTh: levelTh ?? _levelTh,
-  levelEn: levelEn ?? _levelEn,
-  descriptionTh: descriptionTh ?? _descriptionTh,
-  descriptionEn: descriptionEn ?? _descriptionEn,
-  deleteor: deleteor ?? _deleteor,
-  delete: delete ?? _delete,
 );
+  String? get textprefixTh => _textprefixTh;
+  String? get textprefixEn => _textprefixEn;
+  String? get textnameTh => _textnameTh;
+  String? get textnameEn => _textnameEn;
+  String? get textlastnameTh => _textlastnameTh;
+  String? get textlastnameEn => _textlastnameEn;
   String? get save => _save;
   String? get editinfomations => _editinfomations;
-  String? get languageTh => _languageTh;
-  String? get languageEn => _languageEn;
-  String? get level => _level;
-  String? get levelTh => _levelTh;
-  String? get levelEn => _levelEn;
-  String? get descriptionTh => _descriptionTh;
-  String? get descriptionEn => _descriptionEn;
-  String? get deleteor => _deleteor;
-  String? get delete => _delete;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
+    map['textprefix_th'] = _textprefixTh;
+    map['textprefix_en'] = _textprefixEn;
+    map['textname_th'] = _textnameTh;
+    map['textname_en'] = _textnameEn;
+    map['textlastname_th'] = _textlastnameTh;
+    map['textlastname_en'] = _textlastnameEn;
     map['save'] = _save;
     map['editinfomations'] = _editinfomations;
-    map['language_th'] = _languageTh;
-    map['language_en'] = _languageEn;
-    map['level'] = _level;
-    map['level_th'] = _levelTh;
-    map['level_en'] = _levelEn;
-    map['description_th'] = _descriptionTh;
-    map['description_en'] = _descriptionEn;
-    map['deleteor'] = _deleteor;
-    map['delete'] = _delete;
     return map;
   }
 
