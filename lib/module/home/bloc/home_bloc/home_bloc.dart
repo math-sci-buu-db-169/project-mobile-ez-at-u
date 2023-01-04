@@ -49,10 +49,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> with HomeRepository {
               message: response.statusMessage ?? "",
               checkrefreshtokenmessage: refreshTokenResponse));
         } else {
-          emit(HomeError(message: refreshTokenResponse.head?.message ?? ""));
+          emit(HomeError(errorMessage: refreshTokenResponse.head?.message ?? ""));
         }
       } else {
-        emit(HomeError(message: response.statusMessage ?? ""));
+        emit(HomeError(errorMessage: response.statusMessage ?? ""));
       }
     }
 
@@ -80,7 +80,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> with HomeRepository {
           await getRefHomeEventInitial(event, emit);
         } else {
           emit(HomeError(
-              message: checkTokenExpiredResponse.head?.message ?? ""));
+              errorMessage: checkTokenExpiredResponse.head?.message ?? ""));
         }
       } else if (responseCheckTokenExpiredResponse.statusCode == 401) {
         print("CheckHome 4 == checkTokenExpiredResponse.head?.status == 401");
@@ -116,7 +116,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> with HomeRepository {
         // }
       } else {
         emit(HomeError(
-            message: responseCheckTokenExpiredResponse.statusMessage ?? ""));
+            errorMessage: responseCheckTokenExpiredResponse.statusMessage ?? ""));
       }
     }
 
@@ -224,29 +224,29 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> with HomeRepository {
                                     responseNoActivityStudent: alertNoActivityStudentResponse));
                               } else {
                                 emit(HomeError(
-                                    message:
+                                    errorMessage:
                                     alertNoActivityStudentResponse.head?.message ?? ""));
                               }
                             } else {
                               emit(HomeError(
-                                  message:
+                                  errorMessage:
                                   responseAlertNoActivityStudentResponse.statusMessage ??
                                       ""));
                             }
                           }
                           else {
                             emit(HomeError(
-                                message:
+                                errorMessage:
                                 apiStatusActivityStudentResponse.head?.message ?? ""));
                           }
                         } else {
                           emit(HomeError(
-                              message:
+                              errorMessage:
                               apiStatusActivityStudentResponse.head?.message ?? ""));
                         }
                       } else {
                         emit(
-                            HomeError(message: responseActivityStudent.statusMessage ?? ""));
+                            HomeError(errorMessage: responseActivityStudent.statusMessage ?? ""));
                       }
                     } else if (getUserRoleResponse.body?.userrole == "TC"){
                       //--
@@ -281,54 +281,54 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> with HomeRepository {
                                     responseNoActivityTeacher: alertNoActivityTeacherResponse));
                               } else {
                                 emit(HomeError(
-                                    message:
+                                    errorMessage:
                                     alertNoActivityTeacherResponse.head?.message ?? ""));
                               }
                             } else {
                               emit(HomeError(
-                                  message:
+                                  errorMessage:
                                   responseNoActivityTeacherResponse.statusMessage ??
                                       ""));
                             }
                           }
                           else {
                             emit(HomeError(
-                                message:
+                                errorMessage:
                                 apiActivityTeacherResponse.head?.message ?? ""));
                           }
                         } else {
                           emit(HomeError(
-                              message:
+                              errorMessage:
                               apiActivityTeacherResponse.head?.message ?? ""));
                         }
                       } else {
                         emit(
-                            HomeError(message: responseActivityTeacher.statusMessage ?? ""));
+                            HomeError(errorMessage: responseActivityTeacher.statusMessage ?? ""));
                       }
                       //--
                     }
                   }
                     } else {
                       emit(
-                          HomeError(message: responseProfileTeacherApi.head?.message ?? ""));
+                          HomeError(errorMessage: responseProfileTeacherApi.head?.message ?? ""));
                     }
                 }
               } else {
                 emit(
-                    HomeError(message: apiProfileResponse.head?.message ?? ""));
+                    HomeError(errorMessage: apiProfileResponse.head?.message ?? ""));
               }
             } else {
-              emit(HomeError(message: responseHome.statusMessage ?? ""));
+              emit(HomeError(errorMessage: responseHome.statusMessage ?? ""));
             }
           }
           else {
-            emit(HomeError(message: screenHomeResponse.head?.message ?? ""));
+            emit(HomeError(errorMessage: screenHomeResponse.head?.message ?? ""));
           }
         } else {
-          emit(HomeError(message: responseHome.statusMessage ?? ""));
+          emit(HomeError(errorMessage: responseHome.statusMessage ?? ""));
         }
       } on DioError catch (e) {
-        emit(HomeError(message: e.response?.statusMessage ?? ""));
+        emit(HomeError(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
 
@@ -348,13 +348,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> with HomeRepository {
                 userLanguage: event.userLanguage));
           } else {
             emit(
-                HomeError(message: changeLanguageResponse.head?.message ?? ""));
+                HomeError(errorMessage: changeLanguageResponse.head?.message ?? ""));
           }
         } else {
-          emit(HomeError(message: responseChangeLanguage.statusMessage ?? ""));
+          emit(HomeError(errorMessage: responseChangeLanguage.statusMessage ?? ""));
         }
       } on DioError catch (e) {
-        emit(HomeError(message: e.response?.statusMessage ?? ""));
+        emit(HomeError(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
 
@@ -385,13 +385,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> with HomeRepository {
             emit(HomeLogoutState(
                 responseSubmitLogoutResponse: submitLogoutResponse));
           } else {
-            emit(HomeError(message: submitLogoutResponse.head?.message ?? ""));
+            emit(HomeError(errorMessage: submitLogoutResponse.head?.message ?? ""));
           }
         } else {
-          emit(HomeError(message: responseLogoutHome.statusMessage ?? ""));
+          emit(HomeError(errorMessage: responseLogoutHome.statusMessage ?? ""));
         }
       } on DioError catch (e) {
-        emit(HomeError(message: e.response?.statusMessage ?? ""));
+        emit(HomeError(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
     on<OnClickConfirmDeleteAccountHomeEvent>((event, emit) async {
@@ -408,14 +408,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> with HomeRepository {
             emit(OnClickConfirmDeleteAccountState());
           } else {
             emit(HomeError(
-                message: submitDeleteAccountResponse.head?.message ?? ""));
+                errorMessage: submitDeleteAccountResponse.head?.message ?? ""));
           }
         } else {
           emit(HomeError(
-              message: responseDeleteAccountHome.statusMessage ?? ""));
+              errorMessage: responseDeleteAccountHome.statusMessage ?? ""));
         }
       } on DioError catch (e) {
-        emit(HomeError(message: e.response?.statusMessage ?? ""));
+        emit(HomeError(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
     on<HomeScreenSettingInfoEvent>((event, emit) async {
@@ -445,13 +445,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> with HomeRepository {
 
           }
           else {
-            emit(HomeError(message: settingScreenResponse.head?.message ?? ""));
+            emit(HomeError(errorMessage: settingScreenResponse.head?.message ?? ""));
           }
         } else {
-          emit(HomeError(message: responseHome.statusMessage ?? ""));
+          emit(HomeError(errorMessage: responseHome.statusMessage ?? ""));
         }
       } on DioError catch (e) {
-        emit(HomeError(message: e.response?.statusMessage ?? ""));
+        emit(HomeError(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
   }

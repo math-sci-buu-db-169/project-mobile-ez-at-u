@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../components/components_resume.dart';
-import '../examples/content_design_resume.dart';
+import '../screen_resume/content_design_resume.dart';
 
 late SharedPreferences prefs;
 

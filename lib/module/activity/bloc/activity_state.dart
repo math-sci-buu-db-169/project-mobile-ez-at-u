@@ -10,9 +10,9 @@ class ActivityDetailLoading extends ActivityState {}
 class ActivityDetailEndLoading extends ActivityState {}
 class ActivityEndLoading extends ActivityState {}
 class ActivityError extends ActivityState {
-  String message;
+  String errorMessage;
 
-  ActivityError({required this.message});
+  ActivityError({required this.errorMessage});
 }
 class EditActivityLoading extends ActivityState {}
 class OnClickEditActivityScreenInfoState extends ActivityState {
@@ -24,9 +24,9 @@ class EditActivityDetailLoading extends ActivityState {}
 class EditActivityDetailEndLoading extends ActivityState {}
 class EditActivityEndLoading extends ActivityState {}
 class EditActivityError extends ActivityState {
-  String message;
+  String errorMessage;
 
-  EditActivityError({required this.message});
+  EditActivityError({required this.errorMessage});
 }
 class ActivityScreenInfoSuccessState extends ActivityState {
   AddEditActivityScreenApi response;
@@ -51,8 +51,8 @@ class SubmitEditActivityState extends ActivityState {
 class SubmitAddEditActivityLoadingState extends ActivityState {}
 class SubmitAddEditActivityEndLoadingState extends ActivityState {}
 class SubmitAddEditActivityError extends ActivityState {
-  String message;
-  SubmitAddEditActivityError({required this.message});
+  String errorMessage;
+  SubmitAddEditActivityError({required this.errorMessage});
 }
 class SubmitDeleteActivityByStudentState extends ActivityState {
   DefaultSubmitResponse responseDelete;
@@ -69,10 +69,10 @@ class RefreshTokenSuccessState extends ActivityState{
   });
 }
 class TokenExpiredState extends ActivityState{
-  String message;
+  String errorMessage;
   RefreshTokenResponse checkrefreshtokenmessage;
   TokenExpiredState({
-    required this.message,
+    required this.errorMessage,
     required this.checkrefreshtokenmessage,
   });}
 class ActivityListTeacherScreenInfoSuccessState extends ActivityState {
@@ -98,8 +98,8 @@ class SubmitAddEditDeleteByTeacherActivityState extends ActivityState {
 class SubmitAddEditActivityByTeacherLoadingState extends ActivityState {}
 class SubmitAddEditActivityByTeacherEndLoadingState extends ActivityState {}
 class SubmitAddEditDeleteActivityByTeacherError extends ActivityState {
-  String message;
-  SubmitAddEditDeleteActivityByTeacherError({required this.message});
+  String errorMessage;
+  SubmitAddEditDeleteActivityByTeacherError({required this.errorMessage});
 }
 class getDataActivityNameListByTeacherSuccessState extends ActivityState {
   ActivityNameListByTeacher response;
@@ -114,8 +114,8 @@ class SubmitApproveActivityByTeacherState extends ActivityState {
   SubmitApproveActivityByTeacherState({required this.responseApproveActivitySubmitByTeacher});
 }
 class SubmitApproveActivityByTeacherErrorState extends ActivityState {
-  String message;
-  SubmitApproveActivityByTeacherErrorState({required this.message});
+  String errorMessage;
+  SubmitApproveActivityByTeacherErrorState({required this.errorMessage});
 }
 class selectActivityByStudentScreenInfoSuccessState extends ActivityState {
   SelectActivityByStudentScreenApi response;
@@ -130,8 +130,8 @@ class SubmitSelectActivityByStudentState extends ActivityState {
 class SubmitSelectActivityByStudentLoadingState extends ActivityState {}
 class SubmitSelectActivityByStudentEndLoadingState extends ActivityState {}
 class SubmitSelectActivityByStudentErrorState extends ActivityState {
-  String message;
-  SubmitSelectActivityByStudentErrorState({required this.message});
+  String errorMessage;
+  SubmitSelectActivityByStudentErrorState({required this.errorMessage});
 }
 class selectActivityByStudentFilterDateScreenInfoSuccessState extends ActivityState {
   SelectActivityByStudentScreenApi response;

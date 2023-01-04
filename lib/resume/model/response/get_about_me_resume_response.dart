@@ -1,6 +1,6 @@
 import 'dart:convert';
 /// head : {"status":200,"message":"success","modulename":"home/resume","timeexpire":false}
-/// body : {"screeninfo":{"aboutme_th":"เกี่ยวกับฉัน","aboutme_en":"About me","save":"Save/บันทึก","editinfomations":"แก้ไขข้อมูล"},"data":{"details":"Experienced software engineer with a passion for developing innovative programs that expedite the efficiency and effectiveness of organizational success. Well-versed in technology and writing code to create systems that are reliable and user-friendly.9999","detailsen":"Experienced software engineer with a passion for developing innovative programs that expedite the efficiency and effectiveness of organizational success. Well-versed in technology and writing code to create systems that are reliable and user-friendly.9999"}}
+/// body : {"screeninfo":{"aboutme_th":"เกี่ยวกับฉัน","aboutme_en":"About me","save":"Save","editinfomations":"Edit Infomation","deleteor":"Delete/ลบ","delete":"Delete"},"data":{"details":"สิ่งที่ใช้สมัครงานวัตถุประสงค์ของ RESUME คือสิ่งที่ต้องทำคือปล่อยให้ตัวบุคคลทำงานร่วมกันเพื่อให้ RESUME ของเอกสารสำคัญซึ่งนำไปใช้งาน วัตถุประสงค์ของ RESUME คือสิ่งที่ต้องทำคือปล่อยให้ตัวบุคคลทำงานร่วมกันเพื่อให้ RESUME ตอบสนองเอกสารสำคัญในการนำไปใช้  บอกเล่าตัวเองเพื่อตำแหน่งงานที่ต้องการในตัวเองเพื่อพนักงานตำแหน่งงานที่ต้องการ","detailsen":"used for applying for jobs  The main purpose of RESUME is to introduce yourself to the employer, so RESUME is an important document which is used in job application.  The main purpose of RESUME is to introduce yourself to the employer, so RESUME "},"errorbutton":{"buttonok":"OK","buttonconfirm":"Confirm","buttonyes":"Yes","buttonno":"No","buttoncancel":"Cancel"},"alertmessage":{"alertdeletedata_th":"คุณต้องการลบข้อมูลนี้ใช่หรือไม่?","alertdeletedata_en":"Do you want to delete this information?","alertsavedata_th":" คุณต้องการบันทึกข้อมูลนี้ใช่หรือไม่","alertsavedata_en":"Do you want to save this information?","completefields_th":"กรุณากรอกให้ครบทุกช่อง","completefields_en":"Please complete all fields."}}
 
 GetAboutMeResumeResponse getAboutMeResumeResponseFromJson(String str) => GetAboutMeResumeResponse.fromJson(json.decode(str));
 String getAboutMeResumeResponseToJson(GetAboutMeResumeResponse data) => json.encode(data.toJson());
@@ -39,32 +39,48 @@ GetAboutMeResumeResponse copyWith({  Head? head,
 
 }
 
-/// screeninfo : {"aboutme_th":"เกี่ยวกับฉัน","aboutme_en":"About me","save":"Save/บันทึก","editinfomations":"แก้ไขข้อมูล"}
-/// data : {"details":"Experienced software engineer with a passion for developing innovative programs that expedite the efficiency and effectiveness of organizational success. Well-versed in technology and writing code to create systems that are reliable and user-friendly.9999","detailsen":"Experienced software engineer with a passion for developing innovative programs that expedite the efficiency and effectiveness of organizational success. Well-versed in technology and writing code to create systems that are reliable and user-friendly.9999"}
+/// screeninfo : {"aboutme_th":"เกี่ยวกับฉัน","aboutme_en":"About me","save":"Save","editinfomations":"Edit Infomation","deleteor":"Delete/ลบ","delete":"Delete"}
+/// data : {"details":"สิ่งที่ใช้สมัครงานวัตถุประสงค์ของ RESUME คือสิ่งที่ต้องทำคือปล่อยให้ตัวบุคคลทำงานร่วมกันเพื่อให้ RESUME ของเอกสารสำคัญซึ่งนำไปใช้งาน วัตถุประสงค์ของ RESUME คือสิ่งที่ต้องทำคือปล่อยให้ตัวบุคคลทำงานร่วมกันเพื่อให้ RESUME ตอบสนองเอกสารสำคัญในการนำไปใช้  บอกเล่าตัวเองเพื่อตำแหน่งงานที่ต้องการในตัวเองเพื่อพนักงานตำแหน่งงานที่ต้องการ","detailsen":"used for applying for jobs  The main purpose of RESUME is to introduce yourself to the employer, so RESUME is an important document which is used in job application.  The main purpose of RESUME is to introduce yourself to the employer, so RESUME "}
+/// errorbutton : {"buttonok":"OK","buttonconfirm":"Confirm","buttonyes":"Yes","buttonno":"No","buttoncancel":"Cancel"}
+/// alertmessage : {"alertdeletedata_th":"คุณต้องการลบข้อมูลนี้ใช่หรือไม่?","alertdeletedata_en":"Do you want to delete this information?","alertsavedata_th":" คุณต้องการบันทึกข้อมูลนี้ใช่หรือไม่","alertsavedata_en":"Do you want to save this information?","completefields_th":"กรุณากรอกให้ครบทุกช่อง","completefields_en":"Please complete all fields."}
 
 Body bodyFromJson(String str) => Body.fromJson(json.decode(str));
 String bodyToJson(Body data) => json.encode(data.toJson());
 class Body {
   Body({
       Screeninfo? screeninfo, 
-      Data? data,}){
+      Data? data, 
+      Errorbutton? errorbutton, 
+      Alertmessage? alertmessage,}){
     _screeninfo = screeninfo;
     _data = data;
+    _errorbutton = errorbutton;
+    _alertmessage = alertmessage;
 }
 
   Body.fromJson(dynamic json) {
     _screeninfo = json['screeninfo'] != null ? Screeninfo.fromJson(json['screeninfo']) : null;
     _data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    _errorbutton = json['errorbutton'] != null ? Errorbutton.fromJson(json['errorbutton']) : null;
+    _alertmessage = json['alertmessage'] != null ? Alertmessage.fromJson(json['alertmessage']) : null;
   }
   Screeninfo? _screeninfo;
   Data? _data;
+  Errorbutton? _errorbutton;
+  Alertmessage? _alertmessage;
 Body copyWith({  Screeninfo? screeninfo,
   Data? data,
+  Errorbutton? errorbutton,
+  Alertmessage? alertmessage,
 }) => Body(  screeninfo: screeninfo ?? _screeninfo,
   data: data ?? _data,
+  errorbutton: errorbutton ?? _errorbutton,
+  alertmessage: alertmessage ?? _alertmessage,
 );
   Screeninfo? get screeninfo => _screeninfo;
   Data? get data => _data;
+  Errorbutton? get errorbutton => _errorbutton;
+  Alertmessage? get alertmessage => _alertmessage;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -74,13 +90,154 @@ Body copyWith({  Screeninfo? screeninfo,
     if (_data != null) {
       map['data'] = _data?.toJson();
     }
+    if (_errorbutton != null) {
+      map['errorbutton'] = _errorbutton?.toJson();
+    }
+    if (_alertmessage != null) {
+      map['alertmessage'] = _alertmessage?.toJson();
+    }
     return map;
   }
 
 }
 
-/// details : "Experienced software engineer with a passion for developing innovative programs that expedite the efficiency and effectiveness of organizational success. Well-versed in technology and writing code to create systems that are reliable and user-friendly.9999"
-/// detailsen : "Experienced software engineer with a passion for developing innovative programs that expedite the efficiency and effectiveness of organizational success. Well-versed in technology and writing code to create systems that are reliable and user-friendly.9999"
+/// alertdeletedata_th : "คุณต้องการลบข้อมูลนี้ใช่หรือไม่?"
+/// alertdeletedata_en : "Do you want to delete this information?"
+/// alertsavedata_th : " คุณต้องการบันทึกข้อมูลนี้ใช่หรือไม่"
+/// alertsavedata_en : "Do you want to save this information?"
+/// completefields_th : "กรุณากรอกให้ครบทุกช่อง"
+/// completefields_en : "Please complete all fields."
+
+Alertmessage alertmessageFromJson(String str) => Alertmessage.fromJson(json.decode(str));
+String alertmessageToJson(Alertmessage data) => json.encode(data.toJson());
+class Alertmessage {
+  Alertmessage({
+      String? alertdeletedataTh, 
+      String? alertdeletedataEn, 
+      String? alertsavedataTh, 
+      String? alertsavedataEn, 
+      String? completefieldsTh, 
+      String? completefieldsEn,}){
+    _alertdeletedataTh = alertdeletedataTh;
+    _alertdeletedataEn = alertdeletedataEn;
+    _alertsavedataTh = alertsavedataTh;
+    _alertsavedataEn = alertsavedataEn;
+    _completefieldsTh = completefieldsTh;
+    _completefieldsEn = completefieldsEn;
+}
+
+  Alertmessage.fromJson(dynamic json) {
+    _alertdeletedataTh = json['alertdeletedata_th'];
+    _alertdeletedataEn = json['alertdeletedata_en'];
+    _alertsavedataTh = json['alertsavedata_th'];
+    _alertsavedataEn = json['alertsavedata_en'];
+    _completefieldsTh = json['completefields_th'];
+    _completefieldsEn = json['completefields_en'];
+  }
+  String? _alertdeletedataTh;
+  String? _alertdeletedataEn;
+  String? _alertsavedataTh;
+  String? _alertsavedataEn;
+  String? _completefieldsTh;
+  String? _completefieldsEn;
+Alertmessage copyWith({  String? alertdeletedataTh,
+  String? alertdeletedataEn,
+  String? alertsavedataTh,
+  String? alertsavedataEn,
+  String? completefieldsTh,
+  String? completefieldsEn,
+}) => Alertmessage(  alertdeletedataTh: alertdeletedataTh ?? _alertdeletedataTh,
+  alertdeletedataEn: alertdeletedataEn ?? _alertdeletedataEn,
+  alertsavedataTh: alertsavedataTh ?? _alertsavedataTh,
+  alertsavedataEn: alertsavedataEn ?? _alertsavedataEn,
+  completefieldsTh: completefieldsTh ?? _completefieldsTh,
+  completefieldsEn: completefieldsEn ?? _completefieldsEn,
+);
+  String? get alertdeletedataTh => _alertdeletedataTh;
+  String? get alertdeletedataEn => _alertdeletedataEn;
+  String? get alertsavedataTh => _alertsavedataTh;
+  String? get alertsavedataEn => _alertsavedataEn;
+  String? get completefieldsTh => _completefieldsTh;
+  String? get completefieldsEn => _completefieldsEn;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['alertdeletedata_th'] = _alertdeletedataTh;
+    map['alertdeletedata_en'] = _alertdeletedataEn;
+    map['alertsavedata_th'] = _alertsavedataTh;
+    map['alertsavedata_en'] = _alertsavedataEn;
+    map['completefields_th'] = _completefieldsTh;
+    map['completefields_en'] = _completefieldsEn;
+    return map;
+  }
+
+}
+
+/// buttonok : "OK"
+/// buttonconfirm : "Confirm"
+/// buttonyes : "Yes"
+/// buttonno : "No"
+/// buttoncancel : "Cancel"
+
+Errorbutton errorbuttonFromJson(String str) => Errorbutton.fromJson(json.decode(str));
+String errorbuttonToJson(Errorbutton data) => json.encode(data.toJson());
+class Errorbutton {
+  Errorbutton({
+      String? buttonok, 
+      String? buttonconfirm, 
+      String? buttonyes, 
+      String? buttonno, 
+      String? buttoncancel,}){
+    _buttonok = buttonok;
+    _buttonconfirm = buttonconfirm;
+    _buttonyes = buttonyes;
+    _buttonno = buttonno;
+    _buttoncancel = buttoncancel;
+}
+
+  Errorbutton.fromJson(dynamic json) {
+    _buttonok = json['buttonok'];
+    _buttonconfirm = json['buttonconfirm'];
+    _buttonyes = json['buttonyes'];
+    _buttonno = json['buttonno'];
+    _buttoncancel = json['buttoncancel'];
+  }
+  String? _buttonok;
+  String? _buttonconfirm;
+  String? _buttonyes;
+  String? _buttonno;
+  String? _buttoncancel;
+Errorbutton copyWith({  String? buttonok,
+  String? buttonconfirm,
+  String? buttonyes,
+  String? buttonno,
+  String? buttoncancel,
+}) => Errorbutton(  buttonok: buttonok ?? _buttonok,
+  buttonconfirm: buttonconfirm ?? _buttonconfirm,
+  buttonyes: buttonyes ?? _buttonyes,
+  buttonno: buttonno ?? _buttonno,
+  buttoncancel: buttoncancel ?? _buttoncancel,
+);
+  String? get buttonok => _buttonok;
+  String? get buttonconfirm => _buttonconfirm;
+  String? get buttonyes => _buttonyes;
+  String? get buttonno => _buttonno;
+  String? get buttoncancel => _buttoncancel;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['buttonok'] = _buttonok;
+    map['buttonconfirm'] = _buttonconfirm;
+    map['buttonyes'] = _buttonyes;
+    map['buttonno'] = _buttonno;
+    map['buttoncancel'] = _buttoncancel;
+    return map;
+  }
+
+}
+
+/// details : "สิ่งที่ใช้สมัครงานวัตถุประสงค์ของ RESUME คือสิ่งที่ต้องทำคือปล่อยให้ตัวบุคคลทำงานร่วมกันเพื่อให้ RESUME ของเอกสารสำคัญซึ่งนำไปใช้งาน วัตถุประสงค์ของ RESUME คือสิ่งที่ต้องทำคือปล่อยให้ตัวบุคคลทำงานร่วมกันเพื่อให้ RESUME ตอบสนองเอกสารสำคัญในการนำไปใช้  บอกเล่าตัวเองเพื่อตำแหน่งงานที่ต้องการในตัวเองเพื่อพนักงานตำแหน่งงานที่ต้องการ"
+/// detailsen : "used for applying for jobs  The main purpose of RESUME is to introduce yourself to the employer, so RESUME is an important document which is used in job application.  The main purpose of RESUME is to introduce yourself to the employer, so RESUME "
 
 Data dataFromJson(String str) => Data.fromJson(json.decode(str));
 String dataToJson(Data data) => json.encode(data.toJson());
@@ -117,8 +274,10 @@ Data copyWith({  String? details,
 
 /// aboutme_th : "เกี่ยวกับฉัน"
 /// aboutme_en : "About me"
-/// save : "Save/บันทึก"
-/// editinfomations : "แก้ไขข้อมูล"
+/// save : "Save"
+/// editinfomations : "Edit Infomation"
+/// deleteor : "Delete/ลบ"
+/// delete : "Delete"
 
 Screeninfo screeninfoFromJson(String str) => Screeninfo.fromJson(json.decode(str));
 String screeninfoToJson(Screeninfo data) => json.encode(data.toJson());
@@ -127,11 +286,15 @@ class Screeninfo {
       String? aboutmeTh, 
       String? aboutmeEn, 
       String? save, 
-      String? editinfomations,}){
+      String? editinfomations, 
+      String? deleteor, 
+      String? delete,}){
     _aboutmeTh = aboutmeTh;
     _aboutmeEn = aboutmeEn;
     _save = save;
     _editinfomations = editinfomations;
+    _deleteor = deleteor;
+    _delete = delete;
 }
 
   Screeninfo.fromJson(dynamic json) {
@@ -139,24 +302,34 @@ class Screeninfo {
     _aboutmeEn = json['aboutme_en'];
     _save = json['save'];
     _editinfomations = json['editinfomations'];
+    _deleteor = json['deleteor'];
+    _delete = json['delete'];
   }
   String? _aboutmeTh;
   String? _aboutmeEn;
   String? _save;
   String? _editinfomations;
+  String? _deleteor;
+  String? _delete;
 Screeninfo copyWith({  String? aboutmeTh,
   String? aboutmeEn,
   String? save,
   String? editinfomations,
+  String? deleteor,
+  String? delete,
 }) => Screeninfo(  aboutmeTh: aboutmeTh ?? _aboutmeTh,
   aboutmeEn: aboutmeEn ?? _aboutmeEn,
   save: save ?? _save,
   editinfomations: editinfomations ?? _editinfomations,
+  deleteor: deleteor ?? _deleteor,
+  delete: delete ?? _delete,
 );
   String? get aboutmeTh => _aboutmeTh;
   String? get aboutmeEn => _aboutmeEn;
   String? get save => _save;
   String? get editinfomations => _editinfomations;
+  String? get deleteor => _deleteor;
+  String? get delete => _delete;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -164,6 +337,8 @@ Screeninfo copyWith({  String? aboutmeTh,
     map['aboutme_en'] = _aboutmeEn;
     map['save'] = _save;
     map['editinfomations'] = _editinfomations;
+    map['deleteor'] = _deleteor;
+    map['delete'] = _delete;
     return map;
   }
 
@@ -178,7 +353,7 @@ Head headFromJson(String str) => Head.fromJson(json.decode(str));
 String headToJson(Head data) => json.encode(data.toJson());
 class Head {
   Head({
-      num? status, 
+      int? status, 
       String? message, 
       String? modulename, 
       bool? timeexpire,}){
@@ -194,11 +369,11 @@ class Head {
     _modulename = json['modulename'];
     _timeexpire = json['timeexpire'];
   }
-  num? _status;
+  int? _status;
   String? _message;
   String? _modulename;
   bool? _timeexpire;
-Head copyWith({  num? status,
+Head copyWith({  int? status,
   String? message,
   String? modulename,
   bool? timeexpire,
@@ -207,7 +382,7 @@ Head copyWith({  num? status,
   modulename: modulename ?? _modulename,
   timeexpire: timeexpire ?? _timeexpire,
 );
-  num? get status => _status;
+  int? get status => _status;
   String? get message => _message;
   String? get modulename => _modulename;
   bool? get timeexpire => _timeexpire;

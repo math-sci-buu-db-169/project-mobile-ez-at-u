@@ -14,37 +14,44 @@ import '../../customs/size/size.dart';
 import '../../customs/text_file/build_textformfiled_unlimit_custom.dart';
 import '../../module/login/screen/login_screen/login_screen.dart';
 import '../bloc_resume/resume_bloc.dart';
-import '../examples/content_design_resume_edit.dart';
+import 'content_design_resume_edit.dart';
 import '../model/response/get_certificate_resume_response.dart';
 
 class EditCertificateResumeScreen extends StatelessWidget {
-  final int  id;
+  final int id;
+  final int count;
   const EditCertificateResumeScreen({
-    Key? key, required this.id,
+    Key? key,
+    required this.id,
+    required this.count,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) =>
-        ResumeBloc()..add(GetEditScreenCertificateResumeEvent(id: id)),
+        create: (context) => ResumeBloc()..add(GetEditScreenCertificateResumeEvent(id: id)),
         // child: const GenerativeWidget());
-        child:  EditCertificateResumePage(id:id));
+        child: EditCertificateResumePage(
+          id: id,
+          count: count,
+        ));
   }
 }
 
 class EditCertificateResumePage extends StatefulWidget {
-  final int  id;
+  final int id;
+  final int count;
   const EditCertificateResumePage({
-    Key? key, required this.id,
+    Key? key,
+    required this.id,
+    required this.count,
   }) : super(key: key);
 
   @override
   State<EditCertificateResumePage> createState() => _EditCertificateResumePageState();
 }
 
-class _EditCertificateResumePageState extends State<EditCertificateResumePage>
-    with ProgressDialog {
+class _EditCertificateResumePageState extends State<EditCertificateResumePage> with ProgressDialog {
   late String valueLanguage;
   late SharedPreferences prefs;
   late String textSessionExpired;
@@ -56,14 +63,13 @@ class _EditCertificateResumePageState extends State<EditCertificateResumePage>
   @override
   void initState() {
     valueLanguage = "TH";
-    orderChoose   = 0 ;
-    isSearchStatus   = 0 ;
+    orderChoose = 0;
+    isSearchStatus = 0;
     getUserLanguage();
     _isSessionUnauthorized();
     context.read<ResumeBloc>().add(GetEditScreenCertificateResumeEvent(id: widget.id));
     super.initState();
   }
-
 
   getUserLanguage() async {
     prefs = await SharedPreferences.getInstance();
@@ -73,10 +79,8 @@ class _EditCertificateResumePageState extends State<EditCertificateResumePage>
   Future<void> _isSessionUnauthorized() async {
     prefs = await SharedPreferences.getInstance();
     valueLanguage = prefs.getString('userLanguage') ?? 'TH';
-    textSessionExpired =
-    valueLanguage == 'EN' ? textUnauthorizedEN : textUnauthorizedTH;
-    textSubSessionExpired =
-    valueLanguage == 'EN' ? textSubUnauthorizedEN : textSubUnauthorizedTH;
+    textSessionExpired = valueLanguage == 'EN' ? textUnauthorizedEN : textUnauthorizedTH;
+    textSubSessionExpired = valueLanguage == 'EN' ? textSubUnauthorizedEN : textSubUnauthorizedTH;
     _buttonOk = valueLanguage == 'EN' ? buttonOkEN : buttonOkTH;
     setState(() {});
   }
@@ -85,8 +89,7 @@ class _EditCertificateResumePageState extends State<EditCertificateResumePage>
   TextEditingController titleControllerEN = TextEditingController();
   TextEditingController detailControllerTH = TextEditingController();
   TextEditingController detailControllerEN = TextEditingController();
-  List<String> lengthPopupMenuItem =["High School Certificate","Bachelor Degrees","Master Degrees","Doctor Degrees","Honorary Doctorate Degree"];
-
+  // List<String> lengthPopupMenuItem =["High School Certificate","Bachelor Degrees","Master Degrees","Doctor Degrees","Honorary Doctorate Degree"];
 
   @override
   Widget build(BuildContext context) {
@@ -95,18 +98,13 @@ class _EditCertificateResumePageState extends State<EditCertificateResumePage>
     return BlocConsumer<ResumeBloc, ResumeState>(
       listener: (context, state) {
         if (state is GetEditScreenCertificateResumeSuccessState) {
-          isGetCertificateResumeResponse =
-              state.isGetCertificateResumeResponse;
+          isGetCertificateResumeResponse = state.isGetCertificateResumeResponse;
           setState(() {
-
-            orderChoose = isGetCertificateResumeResponse?.body?.data?.orderchoose??0 ;
+            orderChoose = isGetCertificateResumeResponse?.body?.data?.orderchoose ?? 0;
           });
         }
         if (state is SentEditCertificateResumeSuccessState) {
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                  builder: (BuildContext context) => const ContentDesignResumeEditScreen()));
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => const ContentDesignResumeEditScreen()));
         }
         if (state is CertificatePreviewResumeLoading) {
           showProgressDialog(context);
@@ -116,44 +114,31 @@ class _EditCertificateResumePageState extends State<EditCertificateResumePage>
         }
         if (state is CertificateResumeError) {
           if (state.errorMessage.toString() == 'Unauthorized') {
-            dialogSessionExpiredOneBtn(
-                context, textSessionExpired, textSubSessionExpired, _buttonOk,
-                onClickBtn: () {
-                  cleanDelete();
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) => const LoginScreen()));
-                });
+            dialogSessionExpiredOneBtn(context, textSessionExpired, textSubSessionExpired, _buttonOk, onClickBtn: () {
+              cleanDelete();
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => const LoginScreen()));
+            });
+          } else if (state.errorMessage.toUpperCase().toString() == 'S401EXP01' || state.errorMessage.toUpperCase().toString() == 'T401NOT01') {
+            dialogSessionExpiredOneBtn(context, textSessionExpired, textSubSessionExpired, _buttonOk, onClickBtn: () {
+              cleanDelete();
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => const LoginScreen()));
+            });
           } else {
-            dialogOneLineOneBtn(context, '${state.errorMessage}\n ', _buttonOk,
-                onClickBtn: () {
-                  Navigator.of(context).pop();
-                });
-          }
-
-          // show dialog error
-          if (kDebugMode) {
-            print(state.errorMessage);
+            dialogOneLineOneBtn(context, '${state.errorMessage}\n ', _buttonOk, onClickBtn: () {
+              Navigator.of(context).pop();
+            });
           }
         }
       },
       builder: (context, state) {
         if (state is GetEditScreenCertificateResumeSuccessState) {
-          isGetCertificateResumeResponse =
-              state.isGetCertificateResumeResponse;
-          String? textTitleTh =
-              '${isGetCertificateResumeResponse?.body?.screeninfo?.titleTh} *';
-          String? textTitleEn =
-              '${isGetCertificateResumeResponse?.body?.screeninfo?.titleEn} *';
-          String? textDetailTh =
-              '${isGetCertificateResumeResponse?.body?.screeninfo?.descriptionTh} *';
-          String? textDetailEn =
-              '${isGetCertificateResumeResponse?.body?.screeninfo?.descriptionEn} *';
-          String? textEditInfo=
-              isGetCertificateResumeResponse?.body?.screeninfo?.editinfomations;
-          String? textSave =
-              isGetCertificateResumeResponse?.body?.screeninfo?.save;
+          isGetCertificateResumeResponse = state.isGetCertificateResumeResponse;
+          String? textTitleTh = '${isGetCertificateResumeResponse?.body?.screeninfo?.titleTh} *';
+          String? textTitleEn = '${isGetCertificateResumeResponse?.body?.screeninfo?.titleEn} *';
+          String? textDetailTh = '${isGetCertificateResumeResponse?.body?.screeninfo?.descriptionTh} *';
+          String? textDetailEn = '${isGetCertificateResumeResponse?.body?.screeninfo?.descriptionEn} *';
+          String? textEditInfo = isGetCertificateResumeResponse?.body?.screeninfo?.editinfomations;
+          String? textSave = isGetCertificateResumeResponse?.body?.screeninfo?.save;
           String? titleTh = isGetCertificateResumeResponse?.body?.data?.title;
           String? titleEn = isGetCertificateResumeResponse?.body?.data?.titleen;
           String? detailTh = isGetCertificateResumeResponse?.body?.data?.description;
@@ -165,7 +150,52 @@ class _EditCertificateResumePageState extends State<EditCertificateResumePage>
                 elevation: 0,
                 leading: IconButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                    // Navigator.pop(context);
+                    dialogOneLineTwoBtnWarning(
+                        context,
+                        "${isGetCertificateResumeResponse?.body?.alertmessage?.alertsavedataTh ?? "คุณต้องการบันทึกข้อมูลนี้ใช่หรือไม่?"}\n${isGetCertificateResumeResponse?.body?.alertmessage?.alertsavedataEn ?? "Do you want to save this information?"}",
+                        isGetCertificateResumeResponse?.body?.errorbutton?.buttonyes ?? "yes ",
+                        isGetCertificateResumeResponse?.body?.errorbutton?.buttonno ?? "No", onClickBtn: (String result) {
+                      Navigator.of(context).pop();
+                      switch (result) {
+                        case 'Cancel':
+                          {
+                            //"No"
+
+                            Navigator.pushReplacement(
+                                context, MaterialPageRoute(builder: (BuildContext context) => const ContentDesignResumeEditScreen()));
+                            print('Cancel');
+                            break;
+                          }
+                        case 'OK':
+                          {
+
+                            //"Yes"
+                            if (((titleControllerTH.text == '' ? titleTh : titleControllerTH.text) ?? '') == '' ||
+                                ((titleControllerEN.text == '' ? titleEn : titleControllerEN.text) ?? '') == '' ||
+                                ((detailControllerTH.text == '' ? detailTh : detailControllerTH.text) ?? '') == '' ||
+                                ((detailControllerTH.text == '' ? detailEn : detailControllerTH.text) ?? '') == '') {
+                              dialogOneLineOneBtn(
+                                  context,
+                                  '${isGetCertificateResumeResponse?.body?.alertmessage?.completefieldsTh ?? "กรุณากรอกให้ครบทุกช่อง"}\n'
+                                      '${isGetCertificateResumeResponse?.body?.alertmessage?.completefieldsEn ?? "Please complete all fields."} ',
+                                  _buttonOk, onClickBtn: () {
+                                Navigator.of(context).pop();
+                              });
+                            } else {
+                              context.read<ResumeBloc>().add(SentEditCertificateResumeEvent(
+                                edit: true,
+                                id: widget.id,
+                                orderChoose: orderChoose,
+                                titleTH: (titleControllerTH.text == '' ? titleTh : titleControllerTH.text) ?? '',
+                                titleEN: (titleControllerEN.text == '' ? titleEn : titleControllerEN.text) ?? '',
+                                detailTH: (detailControllerTH.text == '' ? detailTh : detailControllerTH.text) ?? '',
+                                detailEN: (detailControllerEN.text == '' ? detailEn : detailControllerEN.text) ?? '',
+                              ));
+                            }
+                          }
+                      }
+                    });
                   },
                   icon: Icon(
                     Icons.arrow_back,
@@ -173,13 +203,8 @@ class _EditCertificateResumePageState extends State<EditCertificateResumePage>
                     color: Theme.of(context).appBarTheme.foregroundColor,
                   ),
                 ),
-                title: Text(textEditInfo ??
-                    '',
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                        color:
-                        Theme.of(context).appBarTheme.foregroundColor))),
+                title: Text(textEditInfo ?? '',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Theme.of(context).appBarTheme.foregroundColor))),
             body: SafeArea(
               child: SizedBox(
                 height: MediaQuery.of(context).size.height,
@@ -233,7 +258,6 @@ class _EditCertificateResumePageState extends State<EditCertificateResumePage>
                         initialvalue: detailTh,
                         textInputType: TextInputType.text,
                       ),
-
                       BuildTextFormFieldUnLimitCustomNotIconsNotContainer(
                         textEditingController: detailControllerEN,
                         onChanged: (valueDetailControllerEN) {
@@ -249,188 +273,178 @@ class _EditCertificateResumePageState extends State<EditCertificateResumePage>
                         initialvalue: detailEn,
                         textInputType: TextInputType.text,
                       ),
-
-
-
                       PopupMenuButton(
                         child: Align(
                           alignment: Alignment.centerRight,
                           child: Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Container(
-                                padding: EdgeInsets.only(right: 5,left: 5,top: 20,bottom: 20),
+                                padding: EdgeInsets.only(right: 5, left: 5, top: 20, bottom: 20),
                                 decoration: BoxDecoration(
                                   borderRadius: const BorderRadius.all(
                                     Radius.circular(10),
                                   ),
-                                  color: Theme.of(context).primaryColor == Colors.black
-                                      ? Color(0xFF1F222A)
-                                      : Colors.transparent.withOpacity(0.03),
+                                  color: Theme.of(context).primaryColor == Colors.black ? Color(0xFF1F222A) : Colors.transparent.withOpacity(0.03),
                                 ),
-                                child: Padding(padding: EdgeInsets.only(left: 10,right: 10),child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      orderChoose == 0?
-                                      isSearchStatus == 0?
-                                      "โปรดเลือกลำดับการแสดง":
-                                      "การแสดงอันดับที่  $isSearchStatus"
-                                          :"การแสดงอันดับที่  $orderChoose",
-                                      style: TextStyle(
-                                        // decoration: TextDecoration.underline,
-                                          decorationThickness: 2,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500,
-                                          color: Theme.of(context).appBarTheme.foregroundColor),
-                                    ), Text(
-                                      'เลือก',
-                                      style: TextStyle(
-                                          decoration: TextDecoration.underline,
-                                          decorationThickness: 2,
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.w500,
-                                          color: Theme.of(context).appBarTheme.foregroundColor),
-                                    ),
-
-                                  ],
-                                ),)
-                            ),
-
+                                child: Padding(
+                                  padding: EdgeInsets.only(left: 10, right: 10),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        orderChoose == 0
+                                            ? isSearchStatus == 0
+                                                ? "โปรดเลือกลำดับการแสดง"
+                                                : "การแสดงอันดับที่  $isSearchStatus"
+                                            : "การแสดงอันดับที่  $orderChoose",
+                                        style: TextStyle(
+                                            // decoration: TextDecoration.underline,
+                                            decorationThickness: 2,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w500,
+                                            color: Theme.of(context).appBarTheme.foregroundColor),
+                                      ),
+                                      Text(
+                                        'เลือก',
+                                        style: TextStyle(
+                                            decoration: TextDecoration.underline,
+                                            decorationThickness: 2,
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.w500,
+                                            color: Theme.of(context).appBarTheme.foregroundColor),
+                                      ),
+                                    ],
+                                  ),
+                                )),
                           ),
                         ),
                         itemBuilder: (context) {
-                          return List.generate(
-                              (lengthPopupMenuItem.length)
-                              , (index) {
-
-                            return  PopupMenuItem(
+                          return List.generate(widget.count, (index) {
+                            return PopupMenuItem(
                               value: index + 1,
-                              child: Text("${index + 1}" ??'Settings',style: TextStyle(color: Theme.of(context).appBarTheme.foregroundColor),),
+                              child: Text(
+                                "${index + 1}" ?? 'Settings',
+                                style: TextStyle(color: Theme.of(context).appBarTheme.foregroundColor),
+                              ),
                             );
-
-                          }
-                          );
+                          });
                         },
                         onSelected: (value) {
-                          isSearchStatus = value ;
-                          orderChoose = value ;
+                          isSearchStatus = value;
+                          orderChoose = value;
                           setState(() {
-                            isSearchStatus = value ;
-                            orderChoose = value ;
-                          }
-                          );
-
+                            isSearchStatus = value;
+                            orderChoose = value;
+                          });
                         },
-
                       ),
-
-
                       const SizedBox(
                         height: 50,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-
                           Container(
-
-                            width: widget.id >0 ? null:MediaQuery.of(context).size.width-50,
+                            width: widget.id > 0 ? null : MediaQuery.of(context).size.width - 50,
                             child: ButtonIconsCustomLimit(
-                              label:  widget.id >0 ?
-                              isGetCertificateResumeResponse?.body?.screeninfo?.editinfomations??"แก้ไขข้อมูล" :
-                              isGetCertificateResumeResponse?.body?.screeninfo?.save??"บันทึก",
-
+                              label: widget.id > 0
+                                  ? isGetCertificateResumeResponse?.body?.screeninfo?.editinfomations ?? "แก้ไขข้อมูล"
+                                  : isGetCertificateResumeResponse?.body?.screeninfo?.save ?? "บันทึก",
                               buttonIcons: Icon(
                                 FontAwesomeIcons.paperPlane,
                                 color: Theme.of(context).iconTheme.color,
                                 size: 20.0,
                               ),
                               colortext: Theme.of(context).bottomAppBarColor,
-                              colorbutton:
-                              Theme.of(context).scaffoldBackgroundColor,
+                              colorbutton: Theme.of(context).scaffoldBackgroundColor,
                               sizetext: 14,
                               colorborder: Theme.of(context).bottomAppBarColor.withOpacity(0.65),
                               sizeborder: 3,
                               onPressed: () {
-                                context.read<ResumeBloc>().add(SentEditCertificateResumeEvent(
-                                  edit: true,
-                                  id:widget.id,
-                                  orderChoose: orderChoose,
-                                  titleTH :(titleControllerTH.text == ''
-                                      ? titleTh
-                                      : titleControllerTH.text) ??
-                                      '',
-                                  titleEN : (titleControllerEN.text == ''
-                                      ? titleEn
-                                      : titleControllerEN.text) ??
-                                      '' ,
-                                  detailTH :(detailControllerTH.text == ''
-                                      ? detailTh
-                                      : detailControllerTH.text) ??
-                                      '' ,
-                                  detailEN : (detailControllerEN.text == ''
-                                      ? detailEn
-                                      : detailControllerEN.text) ??
-                                      '' ,
-                                ));
+                                //"Yes"
+                                if (((titleControllerTH.text == '' ? titleTh : titleControllerTH.text) ?? '') == '' ||
+                                    ((titleControllerEN.text == '' ? titleEn : titleControllerEN.text) ?? '') == '' ||
+                                    ((detailControllerTH.text == '' ? detailTh : detailControllerTH.text) ?? '') == '' ||
+                                    ((detailControllerTH.text == '' ? detailEn : detailControllerTH.text) ?? '') == '') {
+                                  dialogOneLineOneBtn(
+                                      context,
+                                      '${isGetCertificateResumeResponse?.body?.alertmessage?.completefieldsTh ?? "กรุณากรอกให้ครบทุกช่อง"}\n'
+                                          '${isGetCertificateResumeResponse?.body?.alertmessage?.completefieldsEn ?? "Please complete all fields."} ',
+                                      _buttonOk, onClickBtn: () {
+                                    Navigator.of(context).pop();
+                                  });
+                                } else {
+                                  context.read<ResumeBloc>().add(SentEditCertificateResumeEvent(
+                                    edit: true,
+                                    id: widget.id,
+                                    orderChoose: orderChoose,
+                                    titleTH: (titleControllerTH.text == '' ? titleTh : titleControllerTH.text) ?? '',
+                                    titleEN: (titleControllerEN.text == '' ? titleEn : titleControllerEN.text) ?? '',
+                                    detailTH: (detailControllerTH.text == '' ? detailTh : detailControllerTH.text) ?? '',
+                                    detailEN: (detailControllerEN.text == '' ? detailEn : detailControllerEN.text) ?? '',
+                                  ));
+                                }
                               },
                             ),
-                          )
-                          ,
-                          if(widget.id >0)
-                          Container(
-                            child: ButtonIconsCustomLimit(
-                              label:  isGetCertificateResumeResponse?.body?.screeninfo?.deleteor??"Delete/ลบ",
-                              // label: "ดูทั้งหมด",
-                              buttonIcons: Icon(
-                                FontAwesomeIcons.trashCan,
-                                color:bcButtonDelete.withOpacity(0.8),
-                                size: 20.0,
+                          ),
+                          if (widget.id > 0)
+                            Container(
+                              child: ButtonIconsCustomLimit(
+                                label: isGetCertificateResumeResponse?.body?.screeninfo?.deleteor ?? "Delete/ลบ",
+                                // label: "ดูทั้งหมด",
+                                buttonIcons: Icon(
+                                  FontAwesomeIcons.trashCan,
+                                  color: bcButtonDelete.withOpacity(0.8),
+                                  size: 20.0,
+                                ),
+                                colortext: bcButtonDelete.withOpacity(0.8),
+                                colorbutton: Theme.of(context).scaffoldBackgroundColor,
+                                sizetext: 14,
+                                colorborder: bcButtonDelete.withOpacity(0.8),
+                                sizeborder: 3,
+                                onPressed: () {
+                                  dialogOneLineTwoBtnWarning(
+                                      context,
+                                      "${isGetCertificateResumeResponse?.body?.alertmessage?.alertdeletedataTh ?? "คุณต้องการลบข้อมูลนี้ใช่หรือไม่?"}\n${isGetCertificateResumeResponse?.body?.alertmessage?.alertdeletedataEn ?? "Do you want to delete this information?"}",
+                                      isGetCertificateResumeResponse?.body?.errorbutton?.buttonyes ?? "yes ",
+                                      isGetCertificateResumeResponse?.body?.errorbutton?.buttonno ?? "No", onClickBtn: (String result) {
+                                    Navigator.of(context).pop();
+                                    switch (result) {
+                                      case 'Cancel':
+                                        {
+                                          //"No"
+
+                                          print('Cancel');
+                                          break;
+                                        }
+                                      case 'OK':
+                                        {
+                                          //"Yes"
+                                          context.read<ResumeBloc>().add(SentEditCertificateResumeEvent(
+                                                edit: false,
+                                                id: widget.id,
+                                                orderChoose: orderChoose,
+                                                titleTH: (titleControllerTH.text == '' ? titleTh : titleControllerTH.text) ?? '',
+                                                titleEN: (titleControllerEN.text == '' ? titleEn : titleControllerEN.text) ?? '',
+                                                detailTH: (detailControllerTH.text == '' ? detailTh : detailControllerTH.text) ?? '',
+                                                detailEN: (detailControllerEN.text == '' ? detailEn : detailControllerEN.text) ?? '',
+                                              ));
+                                        }
+                                    }
+                                  });
+                                },
                               ),
-                              colortext:bcButtonDelete.withOpacity(0.8),
-                              colorbutton:
-                              Theme.of(context).scaffoldBackgroundColor,
-                              sizetext: 14,
-                              colorborder:bcButtonDelete.withOpacity(0.8),
-                              sizeborder: 3,
-                              onPressed: () {
-                                context.read<ResumeBloc>().add(SentEditCertificateResumeEvent(
-                                  edit: false,
-                                  id:widget.id,
-                                  orderChoose: orderChoose,
-                                  titleTH :(titleControllerTH.text == ''
-                                      ? titleTh
-                                      : titleControllerTH.text) ??
-                                      '',
-                                  titleEN : (titleControllerEN.text == ''
-                                      ? titleEn
-                                      : titleControllerEN.text) ??
-                                      '' ,
-                                  detailTH :(detailControllerTH.text == ''
-                                      ? detailTh
-                                      : detailControllerTH.text) ??
-                                      '' ,
-                                  detailEN : (detailControllerEN.text == ''
-                                      ? detailEn
-                                      : detailControllerEN.text) ??
-                                      '' ,
-                                ));
-                              },
-                            ),
-                          )
+                            )
                         ],
                       ),
-
                       const SizedBox(
                         height: 150,
                       ),
-
                     ],
                   ),
                 ),
               ),
             ),
-
           );
         }
         return Container();

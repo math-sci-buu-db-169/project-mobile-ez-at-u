@@ -14,8 +14,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../customs/message/text_add_edit_activity.dart';
+import '../../../customs/message/text_button.dart';
+import '../../../customs/message/text_error.dart';
+import '../../../utils/shared_preferences.dart';
+import '../../login/screen/login_screen/login_screen.dart';
 
 class AddActivityByTeacherScreen extends StatelessWidget {
   const AddActivityByTeacherScreen({Key? key}) : super(key: key);
@@ -45,12 +50,40 @@ class _AddActivityByTeacherPageState extends State<AddActivityByTeacherPage> wit
   AddEditDeleteActivityByTeacherScreen? _addEditDeleteActivityByTeacherScreenApi;
   DateTime date = DateTime.now();
   late String? dateFormated;
+  late SharedPreferences prefs;
+  late String _userLanguage;
+  late String textSessionExpired;
+  late String textSubSessionExpired;
+  late String _buttonOk;
   @override
-  void initState() {
+  void initState() {_isSessionUnauthorized();
+  _isSessionExpired();
     dateFormated = DateFormat('d/M/y').format(date);
     sDate.text = dateFormated.toString();
     fDate.text = dateFormated.toString();
     super.initState();
+  }
+
+  Future<void> _isSessionUnauthorized() async {
+    prefs = await SharedPreferences.getInstance();
+    _userLanguage = prefs.getString('userLanguage') ?? 'TH';
+    _userLanguage = prefs.getString('userLanguage') ?? 'TH';
+    textSessionExpired =
+    _userLanguage == 'EN' ? textUnauthorizedEN : textUnauthorizedTH;
+    textSubSessionExpired =
+    _userLanguage == 'EN' ? textSubUnauthorizedEN : textSubUnauthorizedTH;
+    _buttonOk = _userLanguage == 'EN' ? buttonOkEN : buttonOkTH;
+    setState(() {});
+  }
+
+  Future<void> _isSessionExpired() async {
+    prefs = await SharedPreferences.getInstance();
+    _userLanguage = prefs.getString('userLanguage') ?? 'TH';
+    if (kDebugMode) {
+      print(prefs.getString('userLanguage') ?? 'TH');
+    }
+    // textSessionExpired = _userLanguage =='EN'? textUnauthorizedEN:textUnauthorizedTH;
+    setState(() {});
   }
 
   @override
@@ -69,13 +102,44 @@ class _AddActivityByTeacherPageState extends State<AddActivityByTeacherPage> wit
               MaterialPageRoute(builder: (context) => const HomeScreen()));
         }
         if (state is SubmitAddEditDeleteActivityByTeacherError) {
-          dialogOneLineOneBtn(context, '${state.message}\n ', "OK",
-              onClickBtn: () {
-            Navigator.of(context).pop();
-          });
-          if (kDebugMode) {
-            print(state.message);
+          if (state.errorMessage.toString() == 'Unauthorized') {
+            dialogSessionExpiredOneBtn(
+                context, textSessionExpired, textSubSessionExpired, _buttonOk,
+                onClickBtn: () {
+                  cleanDelete();
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => const LoginScreen()));
+                });
+          } else if (state.errorMessage.toUpperCase().toString() == 'S401EXP01'||state.errorMessage.toUpperCase().toString() == 'T401NOT01') {
+            dialogSessionExpiredOneBtn(
+                context, textSessionExpired, textSubSessionExpired, _buttonOk,
+                onClickBtn: () {
+                  cleanDelete();
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => const LoginScreen()));
+                });
+          }else {
+            dialogOneLineOneBtn(context, '${state.errorMessage}\n ', _buttonOk,
+                onClickBtn: () {
+                  Navigator.of(context).pop();
+                });
           }
+        }
+
+        if (state is TokenExpiredState) {
+          dialogSessionExpiredOneBtn(
+              context, textSessionExpired, textSubSessionExpired, _buttonOk,
+              onClickBtn: () {
+                cleanDelete();
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => const LoginScreen()));
+              });
         }
         if (state is ActivityLoading) {
           showProgressDialog(context);
@@ -84,12 +148,12 @@ class _AddActivityByTeacherPageState extends State<AddActivityByTeacherPage> wit
           hideProgressDialog(context);
         }
         if (state is ActivityError) {
-          dialogOneLineOneBtn(context, '${state.message}\n ', "OK",
+          dialogOneLineOneBtn(context, '${state.errorMessage}\n ', "OK",
               onClickBtn: () {
                 Navigator.of(context).pop();
               });
           if (kDebugMode) {
-            print(state.message);
+            print(state.errorMessage);
           }
         }
       },

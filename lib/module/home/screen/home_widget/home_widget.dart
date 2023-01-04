@@ -11,7 +11,7 @@ import 'package:ez_at_u/module/profile/screen/profile_page_teacher.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../../../../resume/examples/content_design_resume_edit.dart';
+import '../../../../resume/screen_resume/content_design_resume_edit.dart';
 import 'home_body_widget.dart';
 import '../../../../customs/button/button_custom.dart';
 import '../../../../customs/message/text_home.dart';

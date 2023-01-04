@@ -13,7 +13,7 @@ import '../../customs/text_file/build_textformfiled_unlimit_custom.dart';
 import '../../module/login/screen/login_screen/login_screen.dart';
 import '../bloc_resume/resume_bloc.dart';
 import '../components/components_resume.dart';
-import '../examples/content_design_resume.dart';
+import 'content_design_resume.dart';
 class EditResumeScreen extends StatelessWidget {
   final PreViewResumeResponse isResumeData;
   const EditResumeScreen({Key? key, required this.isResumeData}) : super(key: key);
@@ -97,23 +97,32 @@ class _EditResumePageState extends State<EditResumePage> with ProgressDialog {
           hideProgressDialog(context);
         }
         if (state is ResumeError) {
-          if(state.errorMessage.toString() == 'Unauthorized'){
-
-            dialogSessionExpiredOneBtn(context, textSessionExpired , textSubSessionExpired, _buttonOk, onClickBtn: () {
-              cleanDelete();
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => const LoginScreen()));
-            });
-          }else{
-            dialogOneLineOneBtn(context, '${state.errorMessage}\n ', _buttonOk  , onClickBtn: () {
-              Navigator.of(context).pop();
-            });
+          if (state.errorMessage.toString() == 'Unauthorized') {
+            dialogSessionExpiredOneBtn(
+                context, textSessionExpired, textSubSessionExpired, _buttonOk,
+                onClickBtn: () {
+                  cleanDelete();
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => const LoginScreen()));
+                });
+          } else if (state.errorMessage.toUpperCase().toString() == 'S401EXP01'||state.errorMessage.toUpperCase().toString() == 'T401NOT01') {
+            dialogSessionExpiredOneBtn(
+                context, textSessionExpired, textSubSessionExpired, _buttonOk,
+                onClickBtn: () {
+                  cleanDelete();
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => const LoginScreen()));
+                });
+          }else {
+            dialogOneLineOneBtn(context, '${state.errorMessage}\n ', _buttonOk,
+                onClickBtn: () {
+                  Navigator.of(context).pop();
+                });
           }
-
-          // show dialog error
-          if (kDebugMode) {
-            print(state.errorMessage);
-          }
-
         }
       },
       builder: (context, state) {

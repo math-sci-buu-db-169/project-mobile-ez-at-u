@@ -87,18 +87,44 @@ class _MoreSrarchNisitPageState extends State<MoreSrarchNisitPage> with Progress
           hideProgressDialog(context);
         }
         if (state is MoreSrarchNisitError) {
-          if (state.message.toString() == 'Unauthorized') {
-            dialogSessionExpiredOneBtn(context, textSessionExpired, textSubSessionExpired, _buttonOk, onClickBtn: () {
-              cleanDelete();
-              Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (BuildContext context) => const LoginScreen()));
-            });
+          if (state.errorMessage.toString() == 'Unauthorized') {
+            dialogSessionExpiredOneBtn(
+                context, textSessionExpired, textSubSessionExpired, _buttonOk,
+                onClickBtn: () {
+                  cleanDelete();
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => const LoginScreen()));
+                });
+          } else if (state.errorMessage.toUpperCase().toString() == 'S401EXP01'||state.errorMessage.toUpperCase().toString() == 'T401NOT01') {
+            dialogSessionExpiredOneBtn(
+                context, textSessionExpired, textSubSessionExpired, _buttonOk,
+                onClickBtn: () {
+                  cleanDelete();
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => const LoginScreen()));
+                });
+          }else {
+            dialogOneLineOneBtn(context, '${state.errorMessage}\n ', _buttonOk,
+                onClickBtn: () {
+                  Navigator.of(context).pop();
+                });
           }
-          else {
-            dialogOneLineOneBtn(context, '${state.message}\n ', _buttonOk, onClickBtn: () {
-              Navigator.of(context).pop();
-            });
-          }
+        }
+
+        if (state is TokenExpiredState) {
+          dialogSessionExpiredOneBtn(
+              context, textSessionExpired, textSubSessionExpired, _buttonOk,
+              onClickBtn: () {
+                cleanDelete();
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => const LoginScreen()));
+              });
         }
         if (state is MoreSrarchNisitSuccessState) {
           _screenMoreBoardStudentListResponse = state.responseBoardListStudent;

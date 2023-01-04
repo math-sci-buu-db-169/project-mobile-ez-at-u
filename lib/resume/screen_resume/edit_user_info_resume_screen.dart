@@ -13,8 +13,9 @@ import '../../customs/size/size.dart';
 import '../../customs/text_file/build_textformfiled_unlimit_custom.dart';
 import '../../module/login/screen/login_screen/login_screen.dart';
 import '../bloc_resume/resume_bloc.dart';
-import '../examples/content_design_resume_edit.dart';
-import '../model/response/get_user_infomartion_resume_response.dart';
+import '../components/components_resume.dart';
+import 'content_design_resume_edit.dart';
+import '../model/response/get_user_informartion_resume_response.dart';
 
 class EditUserInfoResumeScreen extends StatelessWidget {
   const EditUserInfoResumeScreen({
@@ -132,22 +133,27 @@ class _EditUserInfoResumePageState extends State<EditUserInfoResumePage>
             dialogSessionExpiredOneBtn(
                 context, textSessionExpired, textSubSessionExpired, _buttonOk,
                 onClickBtn: () {
-              cleanDelete();
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) => const LoginScreen()));
-            });
-          } else {
+                  cleanDelete();
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => const LoginScreen()));
+                });
+          } else if (state.errorMessage.toUpperCase().toString() == 'S401EXP01'||state.errorMessage.toUpperCase().toString() == 'T401NOT01') {
+            dialogSessionExpiredOneBtn(
+                context, textSessionExpired, textSubSessionExpired, _buttonOk,
+                onClickBtn: () {
+                  cleanDelete();
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => const LoginScreen()));
+                });
+          }else {
             dialogOneLineOneBtn(context, '${state.errorMessage}\n ', _buttonOk,
                 onClickBtn: () {
-              Navigator.of(context).pop();
-            });
-          }
-
-          // show dialog error
-          if (kDebugMode) {
-            print(state.errorMessage);
+                  Navigator.of(context).pop();
+                });
           }
         }
       },
@@ -192,9 +198,88 @@ class _EditUserInfoResumePageState extends State<EditUserInfoResumePage>
               backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
               elevation: 0,
               leading: IconButton(
+
+
                 onPressed: () {
-                  Navigator.pop(context);
+                  dialogOneLineTwoBtnWarning(
+                      context,
+                      "${isGetUserInformationResumeResponse?.body?.alertmessage?.alertsavedataTh??"คุณต้องการบันทึกข้อมูลนี้ใช่หรือไม่?"}\n${isGetUserInformationResumeResponse?.body?.alertmessage?.alertsavedataEn??"Do you want to save this information?"}",
+                      isGetUserInformationResumeResponse?.body?.errorbutton?.buttonyes??"yes ",
+                      isGetUserInformationResumeResponse?.body?.errorbutton?.buttonno??"No",
+                      onClickBtn: (String result) {
+                        Navigator.of(context).pop();
+                        switch (result) {
+                          case 'Cancel':
+                            {
+                              //"No"
+
+
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) => const ContentDesignResumeEditScreen()));
+
+                              print('Cancel');
+                              break;
+                            }
+                          case 'OK':
+                            {
+                              //"Yes"
+
+                              if(
+                              ((nameControllerTH.text == ''
+                                  ? nameTh
+                                  : nameControllerTH.text) ??
+                                  '') == ''
+                                  ||
+                                  ((lastNameControllerTH.text == ''
+                                      ? lastNameTh
+                                      : lastNameControllerTH.text) ??
+                                      '') == ''
+                                  ||
+                                  ((nameControllerEN.text == ''
+                                      ? nameEn
+                                      : nameControllerEN.text) ??
+                                      '') == ''
+                                  ||
+                                  ((lastNameControllerEN.text == ''
+                                      ? lastNameEn
+                                      : lastNameControllerEN.text) ??
+                                      '')== ''){
+
+                                dialogOneLineOneBtn(context, '${isGetUserInformationResumeResponse?.body?.alertmessage?.completefieldsTh??"กรุณากรอกให้ครบทุกช่อง"}\n'
+                                    '${isGetUserInformationResumeResponse?.body?.alertmessage?.completefieldsEn??"Please complete all fields."} ', _buttonOk,
+                                    onClickBtn: () {
+                                      Navigator.of(context).pop();
+                                    });
+                              }
+                              else{
+
+                                context.read<ResumeBloc>().add(SentEditUserInfoResumeEvent(
+                                  prefixId: isPrefixController,
+                                  name:  (nameControllerTH.text == ''
+                                      ? nameTh
+                                      : nameControllerTH.text) ??
+                                      '',
+                                  lastName:  (lastNameControllerTH.text == ''
+                                      ? lastNameTh
+                                      : lastNameControllerTH.text) ??
+                                      '',
+                                  nameEN: (nameControllerEN.text == ''
+                                      ? nameEn
+                                      : nameControllerEN.text) ??
+                                      '',
+                                  lastNameEN: (lastNameControllerEN.text == ''
+                                      ? lastNameEn
+                                      : lastNameControllerEN.text) ??
+                                      '',
+                                ));
+                              }
+                            }
+                        }
+                      });
                 },
+
                 icon: Icon(
                   Icons.arrow_back,
                   size: sizeTitle24,
@@ -359,31 +444,36 @@ class _EditUserInfoResumePageState extends State<EditUserInfoResumePage>
                 ),
               ),
             ),
-            floatingActionButton: floatingSetThemePDF(
+            floatingActionButton: floatingButtonSave(
               context: context,
               setState,
               textSave ?? 'Save',
-              nameControllerTH: (nameControllerTH.text == ''
-                      ? nameTh
-                      : nameControllerTH.text) ??
-                  '',
-              lastNameControllerTH: (lastNameControllerTH.text == ''
-                      ? lastNameTh
-                      : lastNameControllerTH.text) ??
-                  '',
-              isPrefixController: isPrefixController,
-              nameControllerEN: (nameControllerEN.text == ''
-                      ? nameEn
-                      : nameControllerEN.text) ??
-                  '',
-              lastNameControllerEN: (lastNameControllerEN.text == ''
-                      ? lastNameEn
-                      : lastNameControllerEN.text) ??
-                  '',
-              prefixControllerEN: (prefixControllerEN.text == ''
-                      ? prefixEn
-                      : prefixControllerEN.text) ??
-                  '',
+              pop: false,
+              onPressed: () {
+                context.read<ResumeBloc>().add(SentEditUserInfoResumeEvent(
+                    prefixId: isPrefixController,
+                    name:  (nameControllerTH.text == ''
+                        ? nameTh
+                        : nameControllerTH.text) ??
+                        '',
+                    lastName:  (lastNameControllerTH.text == ''
+                        ? lastNameTh
+                        : lastNameControllerTH.text) ??
+                        '',
+                    nameEN: (nameControllerEN.text == ''
+                        ? nameEn
+                        : nameControllerEN.text) ??
+                        '',
+                    lastNameEN: (lastNameControllerEN.text == ''
+                        ? lastNameEn
+                        : lastNameControllerEN.text) ??
+                        '',
+                ));
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) => const ContentDesignResumeScreen()));
+              },
             ),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerFloat,
@@ -396,46 +486,4 @@ class _EditUserInfoResumePageState extends State<EditUserInfoResumePage>
       },
     );
   }
-}
-
-floatingSetThemePDF(
-  setState,
-  String pdf, {
-  required BuildContext context,
-  required String nameControllerTH,
-  required String lastNameControllerTH,
-  required String isPrefixController,
-  required String nameControllerEN,
-  required String lastNameControllerEN,
-  required String prefixControllerEN,
-}) {
-  print(
-      " prefix: $isPrefixController ,name: $nameControllerTH,lastName: $lastNameControllerTH,prefixEN: $prefixControllerEN,nameEN: $nameControllerEN,lastNameEN: $lastNameControllerEN");
-  return FloatingActionButton.extended(
-    backgroundColor:
-        Theme.of(context).appBarTheme.backgroundColor?.withOpacity(0.9),
-    foregroundColor: Colors.black,
-    onPressed: () {
-      context.read<ResumeBloc>().add(SentEditUserInfoResumeEvent(
-          prefixId: isPrefixController,
-          name: nameControllerTH,
-          lastName: lastNameControllerTH,
-          nameEN: nameControllerEN,
-          lastNameEN: lastNameControllerEN));
-      // Navigator.push(
-      //     context,
-      //     MaterialPageRoute(
-      //         builder: (context) => const ContentDesignResumeScreen()));
-    },
-    icon: Icon(
-      FontAwesomeIcons.paperPlane,
-      color: Theme.of(context).iconTheme.color,
-      size: 20.0,
-    ),
-    label: Text('   ${pdf ?? 'PDF'}',
-        style: TextStyle(
-          fontSize: sizeTextSmaller14,
-          color: Theme.of(context).iconTheme.color,
-        )),
-  );
 }

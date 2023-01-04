@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
@@ -16,7 +15,7 @@ import '../../customs/size/size.dart';
 import '../../customs/text_file/build_textformfiled_unlimit_custom.dart';
 import '../../module/login/screen/login_screen/login_screen.dart';
 import '../bloc_resume/resume_bloc.dart';
-import '../examples/content_design_resume_edit.dart';
+import 'content_design_resume_edit.dart';
 import '../model/response/get_address_resume_response.dart';
 import '../model/response/get_district_list_address_resume_response.dart';
 import '../model/response/get_province_address_resume_response.dart';
@@ -31,10 +30,9 @@ class EditAddressResumeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) =>
-            ResumeBloc()..add(GetEditScreenAddressResumeEvent()),
+        create: (context) => ResumeBloc()..add(GetEditScreenAddressResumeEvent()),
         // child: const GenerativeWidget());
-        child:  const EditAddressResumePage());
+        child: const EditAddressResumePage());
   }
 }
 
@@ -47,8 +45,7 @@ class EditAddressResumePage extends StatefulWidget {
   State<EditAddressResumePage> createState() => _EditAddressResumePageState();
 }
 
-class _EditAddressResumePageState extends State<EditAddressResumePage>
-    with ProgressDialog {
+class _EditAddressResumePageState extends State<EditAddressResumePage> with ProgressDialog {
   late String valueLanguage;
   late SharedPreferences prefs;
   late String textSessionExpired;
@@ -64,18 +61,18 @@ class _EditAddressResumePageState extends State<EditAddressResumePage>
   late String districtID;
   late String provinceID;
   late String subDistrictID;
-   late GetAddressResumeResponse isGetAddressResumeResponse;
-   late GetProvinceAddressResumeResponse   isGetProvinceAddressResumeResponse;
-   late GetDistrictListAddressResumeResponse   isGetDistrictListAddressResumeResponse;
-   late GetSubDistrictListAddressResumeResponse   isGetSubDistrictListAddressResumeResponse;
-   late GetZipCodeAddressResumeResponse   isGetZipCodeAddressResumeResponse;
+  late GetAddressResumeResponse isGetAddressResumeResponse;
+  late GetProvinceAddressResumeResponse isGetProvinceAddressResumeResponse;
+  late GetDistrictListAddressResumeResponse isGetDistrictListAddressResumeResponse;
+  late GetSubDistrictListAddressResumeResponse isGetSubDistrictListAddressResumeResponse;
+  late GetZipCodeAddressResumeResponse isGetZipCodeAddressResumeResponse;
 
   TextEditingController houseControllerTHEN = TextEditingController();
   TextEditingController mooControllerTHEN = TextEditingController();
   TextEditingController soiControllerEN = TextEditingController();
   TextEditingController soiControllerTH = TextEditingController();
   TextEditingController roadControllerTH = TextEditingController();
-  TextEditingController roadControllerEN= TextEditingController();
+  TextEditingController roadControllerEN = TextEditingController();
   TextEditingController subDistrictControllerTH = TextEditingController();
   TextEditingController subDistrictControllerEN = TextEditingController();
   TextEditingController districtControllerEN = TextEditingController();
@@ -91,12 +88,12 @@ class _EditAddressResumePageState extends State<EditAddressResumePage>
     _isSessionUnauthorized();
     searchStatus = 0;
     isSearchStatus = 0;
-    provinceName ='';
-    districtName ='';
-    subDistrictName ='';
-    getZipCode ='';
-    subDistrictID='';
-    districtID ='';
+    provinceName = '';
+    districtName = '';
+    subDistrictName = '';
+    getZipCode = '';
+    subDistrictID = '';
+    districtID = '';
     provinceID = '';
     context.read<ResumeBloc>().add(GetEditScreenAddressResumeEvent());
     super.initState();
@@ -110,58 +107,48 @@ class _EditAddressResumePageState extends State<EditAddressResumePage>
   Future<void> _isSessionUnauthorized() async {
     prefs = await SharedPreferences.getInstance();
     valueLanguage = prefs.getString('userLanguage') ?? 'TH';
-    textSessionExpired =
-        valueLanguage == 'EN' ? textUnauthorizedEN : textUnauthorizedTH;
-    textSubSessionExpired =
-        valueLanguage == 'EN' ? textSubUnauthorizedEN : textSubUnauthorizedTH;
+    textSessionExpired = valueLanguage == 'EN' ? textUnauthorizedEN : textUnauthorizedTH;
+    textSubSessionExpired = valueLanguage == 'EN' ? textSubUnauthorizedEN : textSubUnauthorizedTH;
     _buttonOk = valueLanguage == 'EN' ? buttonOkEN : buttonOkTH;
     setState(() {});
   }
-
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ResumeBloc, ResumeState>(
       listener: (context, state) {
         if (state is GetEditScreenAddressResumeSuccessState) {
-
           setState(() {
-            isGetAddressResumeResponse =
-              state.isGetAddressResumeResponse;
-          isGetProvinceAddressResumeResponse =
-              state.isGetProvinceAddressResumeResponse;
-             subDistrictID=isGetAddressResumeResponse.body?.data?.subdistrictId??'';
-            districtID=isGetAddressResumeResponse.body?.data?.districtId??'';
-            provinceID=isGetAddressResumeResponse.body?.data?.provinceId??'';
+            isGetAddressResumeResponse = state.isGetAddressResumeResponse;
+            isGetProvinceAddressResumeResponse = state.isGetProvinceAddressResumeResponse;
+            subDistrictID = isGetAddressResumeResponse.body?.data?.subdistrictId ?? '';
+            districtID = isGetAddressResumeResponse.body?.data?.districtId ?? '';
+            provinceID = isGetAddressResumeResponse.body?.data?.provinceId ?? '';
             addressDistrictList.clear();
             addressSubDistrictList.clear();
-            provinceName ="${isGetAddressResumeResponse.body?.data?.provinceTh??''}/${isGetAddressResumeResponse.body?.data?.provinceEn??''}" ;
-            districtName ="${isGetAddressResumeResponse.body?.data?.districtTh??''}/${isGetAddressResumeResponse.body?.data?.districtEn??''}" ;
-            subDistrictName ="${isGetAddressResumeResponse.body?.data?.subdistrictTh??''}/${isGetAddressResumeResponse.body?.data?.subdistrictEn??''}" ;
-            getZipCode =isGetAddressResumeResponse.body?.data?.zipcode??'' ;
+            provinceName = "${isGetAddressResumeResponse.body?.data?.provinceTh ?? ''}/${isGetAddressResumeResponse.body?.data?.provinceEn ?? ''}";
+            districtName = "${isGetAddressResumeResponse.body?.data?.districtTh ?? ''}/${isGetAddressResumeResponse.body?.data?.districtEn ?? ''}";
+            subDistrictName =
+                "${isGetAddressResumeResponse.body?.data?.subdistrictTh ?? ''}/${isGetAddressResumeResponse.body?.data?.subdistrictEn ?? ''}";
+            getZipCode = isGetAddressResumeResponse.body?.data?.zipcode ?? '';
             isGetProvinceAddressResumeResponse.body?.provincelist?.forEach((element) {
-              addressProvinceList.add(
-                  ContentAddress(addressID: element.provinceid ?? 0,  contentTH: element.provincenameth ?? '', contentEN: element.provincenameen ?? ''));
+              addressProvinceList.add(ContentAddress(
+                  addressID: element.provinceid ?? 0, contentTH: element.provincenameth ?? '', contentEN: element.provincenameen ?? ''));
             });
 
             isGetAddressResumeResponse.body?.districtlist?.forEach((element) {
-              addressDistrictList.add(
-                  ContentAddress(addressID: element.districtid ?? 0,  contentTH: element.districtnameth ?? '', contentEN: element.districtnameen ?? ''));
+              addressDistrictList.add(ContentAddress(
+                  addressID: element.districtid ?? 0, contentTH: element.districtnameth ?? '', contentEN: element.districtnameen ?? ''));
             });
-
 
             isGetAddressResumeResponse.body?.tambonlist?.forEach((element) {
               addressSubDistrictList.add(
-                  ContentAddress(addressID: element.tambonid ?? 0,  contentTH: element.tambonnameth ?? '', contentEN: element.tambonnameen ?? ''));
+                  ContentAddress(addressID: element.tambonid ?? 0, contentTH: element.tambonnameth ?? '', contentEN: element.tambonnameen ?? ''));
             });
-
           });
         }
         if (state is SentEditAddressResumeSuccessState) {
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                  builder: (BuildContext context) => const ContentDesignResumeEditScreen()));
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => const ContentDesignResumeEditScreen()));
         }
         if (state is AddressPreviewResumeLoading) {
           showProgressDialog(context);
@@ -171,116 +158,143 @@ class _EditAddressResumePageState extends State<EditAddressResumePage>
         }
         if (state is AddressResumeError) {
           if (state.errorMessage.toString() == 'Unauthorized') {
-            dialogSessionExpiredOneBtn(
-                context, textSessionExpired, textSubSessionExpired, _buttonOk,
-                onClickBtn: () {
+            dialogSessionExpiredOneBtn(context, textSessionExpired, textSubSessionExpired, _buttonOk, onClickBtn: () {
               cleanDelete();
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) => const LoginScreen()));
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => const LoginScreen()));
+            });
+          } else if (state.errorMessage.toUpperCase().toString() == 'S401EXP01' || state.errorMessage.toUpperCase().toString() == 'T401NOT01') {
+            dialogSessionExpiredOneBtn(context, textSessionExpired, textSubSessionExpired, _buttonOk, onClickBtn: () {
+              cleanDelete();
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => const LoginScreen()));
             });
           } else {
-            dialogOneLineOneBtn(context, '${state.errorMessage}\n ', _buttonOk,
-                onClickBtn: () {
+            dialogOneLineOneBtn(context, '${state.errorMessage}\n ', _buttonOk, onClickBtn: () {
               Navigator.of(context).pop();
             });
-          }
-
-          // show dialog error
-          if (kDebugMode) {
-            print(state.errorMessage);
           }
         }
 
         if (state is GetEditScreenDistrictAddressResumeSuccessState) {
-          isGetDistrictListAddressResumeResponse =
-              state.isGetDistrictListAddressResumeResponse;
+          isGetDistrictListAddressResumeResponse = state.isGetDistrictListAddressResumeResponse;
           print(jsonEncode(isGetDistrictListAddressResumeResponse));
 
           setState(() {
-            isGetDistrictListAddressResumeResponse =
-                state.isGetDistrictListAddressResumeResponse;
+            isGetDistrictListAddressResumeResponse = state.isGetDistrictListAddressResumeResponse;
             isGetDistrictListAddressResumeResponse.body?.districtlist?.forEach((element) {
-              addressDistrictList.add(
-                  ContentAddress(addressID: element.districtid ?? 0,  contentTH: element.districtnameth ?? '', contentEN: element.districtnameen ?? ''));
+              addressDistrictList.add(ContentAddress(
+                  addressID: element.districtid ?? 0, contentTH: element.districtnameth ?? '', contentEN: element.districtnameen ?? ''));
             });
-
           });
-
         }
         if (state is GetEditScreenSubDistrictAddressResumeSuccessState) {
-          isGetSubDistrictListAddressResumeResponse =
-              state.isGetSubDistrictListAddressResumeResponse;
+          isGetSubDistrictListAddressResumeResponse = state.isGetSubDistrictListAddressResumeResponse;
           print(jsonEncode(isGetSubDistrictListAddressResumeResponse));
 
           setState(() {
-            isGetSubDistrictListAddressResumeResponse =
-                state.isGetSubDistrictListAddressResumeResponse;
+            isGetSubDistrictListAddressResumeResponse = state.isGetSubDistrictListAddressResumeResponse;
             isGetSubDistrictListAddressResumeResponse.body?.tambonlist?.forEach((element) {
               addressSubDistrictList.add(
-                  ContentAddress(addressID: element.tambonid ?? 0,  contentTH: element.tambonnameth ?? '', contentEN: element.tambonnameen ?? ''));
+                  ContentAddress(addressID: element.tambonid ?? 0, contentTH: element.tambonnameth ?? '', contentEN: element.tambonnameen ?? ''));
             });
-
           });
-
         }
         if (state is GetEditScreenZipCodeAddressResumeSuccessState) {
-          isGetZipCodeAddressResumeResponse =
-              state.isGetZipCodeAddressResumeResponse;
+          isGetZipCodeAddressResumeResponse = state.isGetZipCodeAddressResumeResponse;
           print(jsonEncode(isGetZipCodeAddressResumeResponse));
 
           setState(() {
-            isGetZipCodeAddressResumeResponse =
-                state.isGetZipCodeAddressResumeResponse;
-            getZipCode =isGetZipCodeAddressResumeResponse.body?.zipcode??'';
-            zipCodeControllerTH.text  =isGetZipCodeAddressResumeResponse.body?.zipcode??'';
-
+            isGetZipCodeAddressResumeResponse = state.isGetZipCodeAddressResumeResponse;
+            getZipCode = isGetZipCodeAddressResumeResponse.body?.zipcode ?? '';
+            zipCodeControllerTH.text = isGetZipCodeAddressResumeResponse.body?.zipcode ?? '';
           });
-
         }
       },
       builder: (context, state) {
-        if (state is GetEditScreenAddressResumeSuccessState)
-        {isGetAddressResumeResponse =
-            state.isGetAddressResumeResponse;
-        isGetProvinceAddressResumeResponse =
-            state.isGetProvinceAddressResumeResponse;
+        if (state is GetEditScreenAddressResumeSuccessState) {
+          isGetAddressResumeResponse = state.isGetAddressResumeResponse;
+          isGetProvinceAddressResumeResponse = state.isGetProvinceAddressResumeResponse;
 
-        String? textEditInfo=
-            isGetAddressResumeResponse.body?.screeninfo?.editinfomations;
-        String? textSave =
-            isGetAddressResumeResponse.body?.screeninfo?.save;
-        String? textHouse =isGetAddressResumeResponse.body?.screeninfo?.number ??'บ้านเลขที่ / House no.';
-        String? textMoo =isGetAddressResumeResponse.body?.screeninfo?.moo ??'หมู่ / Moo.';
-        String? textSoiTh =isGetAddressResumeResponse.body?.screeninfo?.soiTh ??'ซอย';
-        String? textSoiEn =isGetAddressResumeResponse.body?.screeninfo?.soiEn ??'Soi';
-        String? textZipCode =isGetAddressResumeResponse.body?.screeninfo?.zipcode ??'รหัสไปรษณีย์ / Zip Code"';
-        String? textRoadTh =isGetAddressResumeResponse.body?.screeninfo?.roadTh ??'Soi';
-        String? textRoadEn =isGetAddressResumeResponse.body?.screeninfo?.roadEn ??'Soi';
-        String? textSubDistrictTh = isGetAddressResumeResponse.body?.screeninfo?.subdistrictTh??'ตำบล';
-        String? textSubDistrictEn =isGetAddressResumeResponse.body?.screeninfo?.subdistrictEn??'SubDistrict';
-        String? textDistrictTh =isGetAddressResumeResponse.body?.screeninfo?.districtTh??'อำเภอ';
-        String? textDistrictEn =isGetAddressResumeResponse.body?.screeninfo?.districtEn??'District';
-        String? textProvinceTh = isGetAddressResumeResponse.body?.screeninfo?.provinceTh??'จังหวัด';
-        String? textProvinceEn =isGetAddressResumeResponse.body?.screeninfo?.provinceEn??'Province' ;
-        String? house = isGetAddressResumeResponse.body?.data?.number;
-        String? moo = isGetAddressResumeResponse.body?.data?.moo;
-        String? soiTh = isGetAddressResumeResponse.body?.data?.soiTh;
-        String? soiEn = isGetAddressResumeResponse.body?.data?.soiEn;
-        String? roadTh = isGetAddressResumeResponse.body?.data?.roadTh;
-        String? roadEn = isGetAddressResumeResponse.body?.data?.roadEn;
-        String? subDistrictTh = isGetAddressResumeResponse.body?.data?.subdistrictTh;
-        String? subDistrictEn = isGetAddressResumeResponse.body?.data?.subdistrictEn;
-        String? districtTh = isGetAddressResumeResponse.body?.data?.districtTh;
-        String? districtEn = isGetAddressResumeResponse.body?.data?.districtEn;
+          String? textEditInfo = isGetAddressResumeResponse.body?.screeninfo?.editinfomations;
+          String? textSave = isGetAddressResumeResponse.body?.screeninfo?.save;
+          String? textHouse = isGetAddressResumeResponse.body?.screeninfo?.number ?? 'บ้านเลขที่ / House no.';
+          String? textMoo = isGetAddressResumeResponse.body?.screeninfo?.moo ?? 'หมู่ / Moo.';
+          String? textSoiTh = isGetAddressResumeResponse.body?.screeninfo?.soiTh ?? 'ซอย';
+          String? textSoiEn = isGetAddressResumeResponse.body?.screeninfo?.soiEn ?? 'Soi';
+          String? textZipCode = isGetAddressResumeResponse.body?.screeninfo?.zipcode ?? 'รหัสไปรษณีย์ / Zip Code"';
+          String? textRoadTh = isGetAddressResumeResponse.body?.screeninfo?.roadTh ?? 'Soi';
+          String? textRoadEn = isGetAddressResumeResponse.body?.screeninfo?.roadEn ?? 'Soi';
+          String? textSubDistrictTh = isGetAddressResumeResponse.body?.screeninfo?.subdistrictTh ?? 'ตำบล';
+          String? textSubDistrictEn = isGetAddressResumeResponse.body?.screeninfo?.subdistrictEn ?? 'SubDistrict';
+          String? textDistrictTh = isGetAddressResumeResponse.body?.screeninfo?.districtTh ?? 'อำเภอ';
+          String? textDistrictEn = isGetAddressResumeResponse.body?.screeninfo?.districtEn ?? 'District';
+          String? textProvinceTh = isGetAddressResumeResponse.body?.screeninfo?.provinceTh ?? 'จังหวัด';
+          String? textProvinceEn = isGetAddressResumeResponse.body?.screeninfo?.provinceEn ?? 'Province';
+          String? house = isGetAddressResumeResponse.body?.data?.number;
+          String? moo = isGetAddressResumeResponse.body?.data?.moo;
+          String? soiTh = isGetAddressResumeResponse.body?.data?.soiTh;
+          String? soiEn = isGetAddressResumeResponse.body?.data?.soiEn;
+          String? roadTh = isGetAddressResumeResponse.body?.data?.roadTh;
+          String? roadEn = isGetAddressResumeResponse.body?.data?.roadEn;
+          String? subDistrictTh = isGetAddressResumeResponse.body?.data?.subdistrictTh;
+          String? subDistrictEn = isGetAddressResumeResponse.body?.data?.subdistrictEn;
+          String? districtTh = isGetAddressResumeResponse.body?.data?.districtTh;
+          String? districtEn = isGetAddressResumeResponse.body?.data?.districtEn;
           return Scaffold(
             appBar: AppBar(
               backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
               elevation: 0,
               leading: IconButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  // Navigator.pop(context);
+
+                  // Navigator.pop(context);
+                  dialogOneLineTwoBtnWarning(
+                      context,
+                      "${isGetAddressResumeResponse.body?.alertmessage?.alertsavedataTh ?? "คุณต้องการบันทึกข้อมูลนี้ใช่หรือไม่?"}\n${isGetAddressResumeResponse?.body?.alertmessage?.alertsavedataEn ?? "Do you want to save this information?"}",
+                      isGetAddressResumeResponse.body?.errorbutton?.buttonyes ?? "yes ",
+                      isGetAddressResumeResponse.body?.errorbutton?.buttonno ?? "No", onClickBtn: (String result) {
+                    Navigator.of(context).pop();
+                    switch (result) {
+                      case 'Cancel':
+                        {
+                          //"No"
+
+                          Navigator.pushReplacement(
+                              context, MaterialPageRoute(builder: (BuildContext context) => const ContentDesignResumeEditScreen()));
+                          print('Cancel');
+                          break;
+                        }
+                      case 'OK':
+                        {
+                          //"Yes"
+                          if ((subDistrictID) == '' ||
+                              (districtID) == '' ||
+                              (provinceID) == '' ||
+                              ((zipCodeControllerTH.text == '' ? getZipCode : zipCodeControllerTH.text) ?? '') == '') {
+                            dialogOneLineOneBtn(
+                                context,
+                                '${isGetAddressResumeResponse.body?.alertmessage?.completefieldsTh ?? "กรุณากรอกให้ครบทุกช่อง"}\n'
+                                '${isGetAddressResumeResponse.body?.alertmessage?.completefieldsEn ?? "Please complete all fields."} ',
+                                _buttonOk, onClickBtn: () {
+                              Navigator.of(context).pop();
+                            });
+                          } else {
+                            context.read<ResumeBloc>().add(SendEditAddressResumeEvent(
+                                  house: (houseControllerTHEN.text == '' ? house : houseControllerTHEN.text) ?? '',
+                                  moo: (mooControllerTHEN.text == '' ? moo : mooControllerTHEN.text) ?? '',
+                                  soiTH: (soiControllerTH.text == '' ? soiTh : soiControllerTH.text) ?? '',
+                                  soiEN: (soiControllerEN.text == '' ? soiEn : soiControllerEN.text) ?? '',
+                                  roadTH: (roadControllerTH.text == '' ? roadTh : roadControllerTH.text) ?? '',
+                                  roadEN: (roadControllerEN.text == '' ? roadEn : roadControllerEN.text) ?? '',
+                                  subDistrictID: subDistrictID,
+                                  districtID: districtID,
+                                  provinceID: provinceID,
+                                  zipcode: (zipCodeControllerTH.text == '' ? getZipCode : zipCodeControllerTH.text) ?? '',
+                                ));
+                          }
+                        }
+                    }
+                  });
                 },
                 icon: Icon(
                   Icons.arrow_back,
@@ -288,8 +302,7 @@ class _EditAddressResumePageState extends State<EditAddressResumePage>
                   color: Theme.of(context).appBarTheme.foregroundColor,
                 ),
               ),
-              title: Text(textEditInfo ??
-                  '',
+              title: Text(textEditInfo ?? '',
                   style: TextStyle(
                     // color: Colors.black,
                     fontSize: sizeTitle24,
@@ -320,7 +333,6 @@ class _EditAddressResumePageState extends State<EditAddressResumePage>
                         initialvalue: house,
                         textInputType: TextInputType.number,
                       ),
-
                       BuildTextFormFieldUnLimitCustomNotIconsNotContainer(
                         textEditingController: mooControllerTHEN,
                         onChanged: (mooValueControllerTH) {
@@ -349,7 +361,6 @@ class _EditAddressResumePageState extends State<EditAddressResumePage>
                         initialvalue: soiTh,
                         textInputType: TextInputType.text,
                       ),
-
                       BuildTextFormFieldUnLimitCustomNotIconsNotContainer(
                         textEditingController: soiControllerEN,
                         onChanged: (soiValueControllerEN) {
@@ -378,7 +389,6 @@ class _EditAddressResumePageState extends State<EditAddressResumePage>
                         initialvalue: roadTh,
                         textInputType: TextInputType.text,
                       ),
-
                       BuildTextFormFieldUnLimitCustomNotIconsNotContainer(
                         textEditingController: roadControllerEN,
                         onChanged: (roadValueControllerEN) {
@@ -397,330 +407,283 @@ class _EditAddressResumePageState extends State<EditAddressResumePage>
                         child: Align(
                           alignment: Alignment.centerRight,
                           child: Padding(
-                              padding: const EdgeInsets.fromLTRB(10, 15, 10,0),
-                            child: Stack(
-                              children: [
-                                Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  padding: EdgeInsets.only(
-                                      right: 5, left: 15, top: 15, bottom: 15),
-                                  decoration: BoxDecoration(
-                                    borderRadius: const BorderRadius.all(
-                                      Radius.circular(10),
+                              padding: const EdgeInsets.fromLTRB(10, 15, 10, 0),
+                              child: Stack(
+                                children: [
+                                  Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    padding: EdgeInsets.only(right: 5, left: 15, top: 15, bottom: 15),
+                                    decoration: BoxDecoration(
+                                      borderRadius: const BorderRadius.all(
+                                        Radius.circular(10),
+                                      ),
+                                      color:
+                                          Theme.of(context).primaryColor == Colors.black ? Color(0xFF1F222A) : Colors.transparent.withOpacity(0.03),
                                     ),
-                                    color: Theme.of(context).primaryColor ==
-                                        Colors.black
-                                        ? Color(0xFF1F222A)
-                                        : Colors.transparent.withOpacity(0.03),
+                                    child: Text(
+                                      provinceName == '' ? "โปรดเลือก จังหวัด" : provinceName,
+                                      maxLines: 3,
+                                      style: TextStyle(
+                                          // decoration: TextDecoration.underline,
+                                          decorationThickness: 2,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w500,
+                                          color: Theme.of(context).appBarTheme.foregroundColor),
+                                    ),
                                   ),
-                                  child: Text(
-                                    provinceName == ''
-                                        ?  "โปรดเลือก จังหวัด":provinceName,
-                                    maxLines: 3,
-                                    style: TextStyle(
-                                      // decoration: TextDecoration.underline,
-                                        decorationThickness: 2,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w500,
-                                        color: Theme.of(context)
-                                            .appBarTheme
-                                            .foregroundColor),
-                                  ),),
-                                Positioned(
-                                  top: 0,
-                                  left: 15,
-                                  child: Text(
-                                    "$textProvinceTh/$textProvinceEn *",
-                                  
-                                  style: TextStyle(
-                                    // decoration: TextDecoration.underline,
-                                      decorationThickness: 2,
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.w500,
-                                      color: Theme.of(context)
-                                          .appBarTheme
-                                          .foregroundColor),
-                                  ),)
-                              ],
-                            )
-                          ),
+                                  Positioned(
+                                    top: 0,
+                                    left: 15,
+                                    child: Text(
+                                      "$textProvinceTh/$textProvinceEn *",
+                                      style: TextStyle(
+                                          // decoration: TextDecoration.underline,
+                                          decorationThickness: 2,
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.w500,
+                                          color: Theme.of(context).appBarTheme.foregroundColor),
+                                    ),
+                                  )
+                                ],
+                              )),
                         ),
                         itemBuilder: (context) {
-                          return List.generate(addressProvinceList.length??0,
-                                  (index) {
-                                return PopupMenuItem(
-                                  value: index ,
-                                  child: Text('${addressProvinceList[index].contentTH} / ${addressProvinceList[index].contentEN}',
-                                    style: TextStyle(
-                                        color: Theme.of(context)
-                                            .appBarTheme
-                                            .foregroundColor),
-                                  ),
-                                );
-                              });
+                          return List.generate(addressProvinceList.length ?? 0, (index) {
+                            return PopupMenuItem(
+                              value: index,
+                              child: Text(
+                                '${addressProvinceList[index].contentTH} / ${addressProvinceList[index].contentEN}',
+                                style: TextStyle(color: Theme.of(context).appBarTheme.foregroundColor),
+                              ),
+                            );
+                          });
                         },
                         onSelected: (value) {
-                          provinceName ='${addressProvinceList[value].contentTH} / ${addressProvinceList[value].contentEN}';
+                          provinceName = '${addressProvinceList[value].contentTH} / ${addressProvinceList[value].contentEN}';
                           setState(() {
                             addressDistrictList.clear();
                             districtName = '';
                             addressSubDistrictList.clear();
-                            subDistrictName ='';
-                            getZipCode ='';
+                            subDistrictName = '';
+                            getZipCode = '';
 
-                            subDistrictID='';
-                            districtID ='';
+                            subDistrictID = '';
+                            districtID = '';
                             provinceID = addressProvinceList[value].addressID.toString();
-                            context.read<ResumeBloc>().add(GetEditScreenDistrictAddressResumeEvent(provinceId: addressProvinceList[value].addressID.toString()?? '-'));
-                            provinceName ='${addressProvinceList[value].contentTH} / ${addressProvinceList[value].contentEN}';
-
+                            context
+                                .read<ResumeBloc>()
+                                .add(GetEditScreenDistrictAddressResumeEvent(provinceId: addressProvinceList[value].addressID.toString() ?? '-'));
+                            provinceName = '${addressProvinceList[value].contentTH} / ${addressProvinceList[value].contentEN}';
                           });
                         },
                       ),
-                     if( addressDistrictList.isNotEmpty)
-                      PopupMenuButton(
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(10, 15, 10,0),
-                            child:
-                            Stack(
-                              children: [
-                                Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  padding: EdgeInsets.only(
-                                      right: 5, left: 15, top: 15, bottom: 15),
-                                  decoration: BoxDecoration(
-                                    borderRadius: const BorderRadius.all(
-                                      Radius.circular(10),
+                      if (addressDistrictList.isNotEmpty)
+                        PopupMenuButton(
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(10, 15, 10, 0),
+                              child: Stack(
+                                children: [
+                                  Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    padding: EdgeInsets.only(right: 5, left: 15, top: 15, bottom: 15),
+                                    decoration: BoxDecoration(
+                                      borderRadius: const BorderRadius.all(
+                                        Radius.circular(10),
+                                      ),
+                                      color:
+                                          Theme.of(context).primaryColor == Colors.black ? Color(0xFF1F222A) : Colors.transparent.withOpacity(0.03),
                                     ),
-                                    color: Theme.of(context).primaryColor ==
-                                        Colors.black
-                                        ? Color(0xFF1F222A)
-                                        : Colors.transparent.withOpacity(0.03),
+                                    child: Text(
+                                      districtName == '' ? "โปรดเลือก อำเภอ" : districtName,
+                                      maxLines: 3,
+                                      style: TextStyle(
+                                          // decoration: TextDecoration.underline,
+                                          decorationThickness: 2,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w500,
+                                          color: Theme.of(context).appBarTheme.foregroundColor),
+                                    ),
                                   ),
-                                  child: Text(
-                                    districtName == ''
-                                        ?  "โปรดเลือก อำเภอ": districtName,
-                                    maxLines: 3,
-                                    style: TextStyle(
-                                      // decoration: TextDecoration.underline,
-                                        decorationThickness: 2,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w500,
-                                        color: Theme.of(context)
-                                            .appBarTheme
-                                            .foregroundColor),
-                                  ),),
-                                Positioned(
-                                  top: 0,
-                                  left: 15,
-                                  child: Text(
-                                    "$textDistrictTh/$textDistrictEn *",
-
-                                    style: TextStyle(
-                                      // decoration: TextDecoration.underline,
-                                        decorationThickness: 2,
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.w500,
-                                        color: Theme.of(context)
-                                            .appBarTheme
-                                            .foregroundColor),
-                                  ),)
-                              ],
+                                  Positioned(
+                                    top: 0,
+                                    left: 15,
+                                    child: Text(
+                                      "$textDistrictTh/$textDistrictEn *",
+                                      style: TextStyle(
+                                          // decoration: TextDecoration.underline,
+                                          decorationThickness: 2,
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.w500,
+                                          color: Theme.of(context).appBarTheme.foregroundColor),
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
+                          itemBuilder: (context) {
+                            return List.generate(addressDistrictList.length ?? 0, (index) {
+                              return PopupMenuItem(
+                                value: index,
+                                child: Text(
+                                  '${addressDistrictList[index].contentTH} / ${addressDistrictList[index].contentEN}',
+                                  style: TextStyle(color: Theme.of(context).appBarTheme.foregroundColor),
+                                ),
+                              );
+                            });
+                          },
+                          onSelected: (value) {
+                            districtName = '${addressDistrictList[value].contentTH} / ${addressDistrictList[value].contentEN}';
+                            setState(() {
+                              addressSubDistrictList.clear();
+                              subDistrictName = '';
+                              getZipCode = '';
+                              subDistrictID = '';
+                              districtID = addressDistrictList[value].addressID.toString();
+                              context
+                                  .read<ResumeBloc>()
+                                  .add(GetEditScreenTamBonAddressResumeEvent(tamBonId: addressDistrictList[value].addressID.toString() ?? '-'));
+                              districtName = '${addressDistrictList[value].contentTH} / ${addressDistrictList[value].contentEN}';
+                            });
+                          },
                         ),
-                        itemBuilder: (context) {
-                          return List.generate(addressDistrictList.length??0,
-                                  (index) {
-                                return PopupMenuItem(
-                                  value: index ,
-                                  child: Text('${addressDistrictList[index].contentTH} / ${addressDistrictList[index].contentEN}',
-                                    style: TextStyle(
-                                        color: Theme.of(context)
-                                            .appBarTheme
-                                            .foregroundColor),
-                                  ),
-                                );
-                              });
-                        },
-                        onSelected: (value) {
-                          districtName ='${addressDistrictList[value].contentTH} / ${addressDistrictList[value].contentEN}';
-                          setState(() {
-                            addressSubDistrictList.clear();
-                            subDistrictName ='';
-                            getZipCode ='';
-                            subDistrictID='';
-                            districtID =addressDistrictList[value].addressID.toString();
-                            context.read<ResumeBloc>().add(GetEditScreenTamBonAddressResumeEvent(tamBonId: addressDistrictList[value].addressID.toString()?? '-'));
-                            districtName ='${addressDistrictList[value].contentTH} / ${addressDistrictList[value].contentEN}';
-
-                          });
-                        },
-                      ),
-                     if( addressSubDistrictList.isNotEmpty)
-                      PopupMenuButton(
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(10, 15, 10,0),
-                            child:
-                            Stack(
-                              children: [
-                                Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  padding: EdgeInsets.only(
-                                      right: 5, left: 15, top: 15, bottom: 15),
-                                  decoration: BoxDecoration(
-                                    borderRadius: const BorderRadius.all(
-                                      Radius.circular(10),
+                      if (addressSubDistrictList.isNotEmpty)
+                        PopupMenuButton(
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(10, 15, 10, 0),
+                              child: Stack(
+                                children: [
+                                  Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    padding: EdgeInsets.only(right: 5, left: 15, top: 15, bottom: 15),
+                                    decoration: BoxDecoration(
+                                      borderRadius: const BorderRadius.all(
+                                        Radius.circular(10),
+                                      ),
+                                      color:
+                                          Theme.of(context).primaryColor == Colors.black ? Color(0xFF1F222A) : Colors.transparent.withOpacity(0.03),
                                     ),
-                                    color: Theme.of(context).primaryColor ==
-                                        Colors.black
-                                        ? Color(0xFF1F222A)
-                                        : Colors.transparent.withOpacity(0.03),
+                                    child: Text(
+                                      subDistrictName == '' ? "โปรดเลือก ตำบล" : subDistrictName,
+                                      maxLines: 3,
+                                      style: TextStyle(
+                                          // decoration: TextDecoration.underline,
+                                          decorationThickness: 2,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w500,
+                                          color: Theme.of(context).appBarTheme.foregroundColor),
+                                    ),
                                   ),
-                                  child: Text(
-                                    subDistrictName == ''
-                                        ?  "โปรดเลือก ตำบล": subDistrictName,
-                                    maxLines: 3,
-                                    style: TextStyle(
-                                      // decoration: TextDecoration.underline,
-                                        decorationThickness: 2,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w500,
-                                        color: Theme.of(context)
-                                            .appBarTheme
-                                            .foregroundColor),
-                                  ),),
-                                Positioned(
-                                  top: 0,
-                                  left: 15,
-                                  child: Text(
-                                    "$textSubDistrictTh/$textSubDistrictEn*",
-
-                                    style: TextStyle(
-                                      // decoration: TextDecoration.underline,
-                                        decorationThickness: 2,
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.w500,
-                                        color: Theme.of(context)
-                                            .appBarTheme
-                                            .foregroundColor),
-                                  ),)
-                              ],
+                                  Positioned(
+                                    top: 0,
+                                    left: 15,
+                                    child: Text(
+                                      "$textSubDistrictTh/$textSubDistrictEn*",
+                                      style: TextStyle(
+                                          // decoration: TextDecoration.underline,
+                                          decorationThickness: 2,
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.w500,
+                                          color: Theme.of(context).appBarTheme.foregroundColor),
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
+                          itemBuilder: (context) {
+                            return List.generate(addressSubDistrictList.length ?? 0, (index) {
+                              return PopupMenuItem(
+                                value: index,
+                                child: Text(
+                                  '${addressSubDistrictList[index].contentTH} / ${addressSubDistrictList[index].contentEN}',
+                                  style: TextStyle(color: Theme.of(context).appBarTheme.foregroundColor),
+                                ),
+                              );
+                            });
+                          },
+                          onSelected: (value) {
+                            subDistrictName = '${addressSubDistrictList[value].contentTH} / ${addressSubDistrictList[value].contentEN}';
+                            setState(() {
+                              getZipCode = '';
+                              subDistrictID = addressSubDistrictList[value].addressID.toString();
+                              context
+                                  .read<ResumeBloc>()
+                                  .add(GetEditScreenZipCodeAddressResumeEvent(subDistrictID: addressSubDistrictList[value].addressID.toString()));
+                              subDistrictName = '${addressSubDistrictList[value].contentTH} / ${addressSubDistrictList[value].contentEN}';
+                            });
+                          },
                         ),
-                        itemBuilder: (context) {
-                          return List.generate(addressSubDistrictList.length??0,
-                                  (index) {
-                                return PopupMenuItem(
-                                  value: index ,
-                                  child: Text('${addressSubDistrictList[index].contentTH} / ${addressSubDistrictList[index].contentEN}',
-                                    style: TextStyle(
-                                        color: Theme.of(context)
-                                            .appBarTheme
-                                            .foregroundColor),
-                                  ),
-                                );
-                              });
-                        },
-                        onSelected: (value) {
-                          subDistrictName ='${addressSubDistrictList[value].contentTH} / ${addressSubDistrictList[value].contentEN}';
-                          setState(() {
-
-                            getZipCode ='';
-                            subDistrictID=addressSubDistrictList[value].addressID.toString();
-                            context.read<ResumeBloc>().add(GetEditScreenZipCodeAddressResumeEvent(subDistrictID: addressSubDistrictList[value].addressID.toString()));
-                            subDistrictName ='${addressSubDistrictList[value].contentTH} / ${addressSubDistrictList[value].contentEN}';
-
-                          });
-                        },
-                      ),
-                      if( getZipCode.isNotEmpty)
-                      BuildTextFormFieldUnLimitCustomNotIconsNotContainer(
-                        textEditingController: zipCodeControllerTH,
-                        onChanged: (zipCodeVControllerTH) {
-                          setState(() {
-                            zipCodeControllerTH.text = zipCodeVControllerTH;
-                          });
-                          if (kDebugMode) {
-                            print(zipCodeControllerTH.text);
-                          }
-                        },
-                        hintLabel: textZipCode,
-                        initialvalue: getZipCode,
-                        textInputType: TextInputType.text,
-                      ),
+                      if (getZipCode.isNotEmpty)
+                        BuildTextFormFieldUnLimitCustomNotIconsNotContainer(
+                          textEditingController: zipCodeControllerTH,
+                          onChanged: (zipCodeVControllerTH) {
+                            setState(() {
+                              zipCodeControllerTH.text = zipCodeVControllerTH;
+                            });
+                            if (kDebugMode) {
+                              print(zipCodeControllerTH.text);
+                            }
+                          },
+                          hintLabel: textZipCode,
+                          initialvalue: getZipCode,
+                          textInputType: TextInputType.text,
+                        ),
                       const SizedBox(
                         height: 50,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-
                           Container(
-
-                            width:MediaQuery.of(context).size.width-50,
+                            width: MediaQuery.of(context).size.width - 50,
                             child: ButtonIconsCustomLimit(
-                              label:
-                              isGetAddressResumeResponse.body?.screeninfo?.save??"บันทึก",
+                              label: isGetAddressResumeResponse.body?.screeninfo?.save ?? "บันทึก",
                               buttonIcons: Icon(
                                 FontAwesomeIcons.paperPlane,
                                 color: Theme.of(context).iconTheme.color,
                                 size: 20.0,
                               ),
                               colortext: Theme.of(context).bottomAppBarColor,
-                              colorbutton:
-                              Theme.of(context).scaffoldBackgroundColor,
+                              colorbutton: Theme.of(context).scaffoldBackgroundColor,
                               sizetext: 14,
                               colorborder: Theme.of(context).bottomAppBarColor.withOpacity(0.65),
                               sizeborder: 3,
-                              onPressed: () {
-                                context.read<ResumeBloc>().add(SendEditAddressResumeEvent(
-                                    house: (houseControllerTHEN.text == ''
-                                        ? house
-                                        : houseControllerTHEN.text) ??
-                                        '',
-                                    moo:  (mooControllerTHEN.text == ''
-                                        ? moo
-                                        : mooControllerTHEN.text) ??
-                                        '',
-                                    soiTH:  (soiControllerTH.text == ''
-                                        ? soiTh
-                                        : soiControllerTH.text) ??
-                                        '',
-                                    soiEN:   (soiControllerEN.text == ''
-                                        ? soiEn
-                                        : soiControllerEN.text) ??
-                                        '',
-                                    roadTH:   (roadControllerTH.text == ''
-                                        ? roadTh
-                                        : roadControllerTH.text) ??
-                                        '',
-                                    roadEN: (roadControllerEN.text == ''
-                                        ? roadEn
-                                        : roadControllerEN.text) ??
-                                        '',
+                              onPressed: () { //"Yes"
+                                if ((subDistrictID) == '' ||
+                                    (districtID) == '' ||
+                                    (provinceID) == '' ||
+                                    ((zipCodeControllerTH.text == '' ? getZipCode : zipCodeControllerTH.text) ?? '') == '') {
+                                  dialogOneLineOneBtn(
+                                      context,
+                                      '${isGetAddressResumeResponse.body?.alertmessage?.completefieldsTh ?? "กรุณากรอกให้ครบทุกช่อง"}\n'
+                                          '${isGetAddressResumeResponse.body?.alertmessage?.completefieldsEn ?? "Please complete all fields."} ',
+                                      _buttonOk, onClickBtn: () {
+                                    Navigator.of(context).pop();
+                                  });
+                                } else {
+                                  context.read<ResumeBloc>().add(SendEditAddressResumeEvent(
+                                    house: (houseControllerTHEN.text == '' ? house : houseControllerTHEN.text) ?? '',
+                                    moo: (mooControllerTHEN.text == '' ? moo : mooControllerTHEN.text) ?? '',
+                                    soiTH: (soiControllerTH.text == '' ? soiTh : soiControllerTH.text) ?? '',
+                                    soiEN: (soiControllerEN.text == '' ? soiEn : soiControllerEN.text) ?? '',
+                                    roadTH: (roadControllerTH.text == '' ? roadTh : roadControllerTH.text) ?? '',
+                                    roadEN: (roadControllerEN.text == '' ? roadEn : roadControllerEN.text) ?? '',
                                     subDistrictID: subDistrictID,
                                     districtID: districtID,
                                     provinceID: provinceID,
-                                    zipcode:(zipCodeControllerTH.text == ''
-                                        ? getZipCode
-                                        : zipCodeControllerTH.text) ??
-                                        '',
-
-                                ));
+                                    zipcode: (zipCodeControllerTH.text == '' ? getZipCode : zipCodeControllerTH.text) ?? '',
+                                  ));
+                                }
                               },
                             ),
-                          )
-                          ,
-
+                          ),
                         ],
                       ),
-
                       const SizedBox(
                         height: 150,
                       ),
@@ -729,14 +692,13 @@ class _EditAddressResumePageState extends State<EditAddressResumePage>
                 ),
               ),
             ),
-
           );
         }
 
         return Container();
       },
       buildWhen: (context, state) {
-        return state is GetEditScreenAddressResumeSuccessState ;
+        return state is GetEditScreenAddressResumeSuccessState;
       },
     );
   }

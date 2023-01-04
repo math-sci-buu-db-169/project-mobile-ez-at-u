@@ -9,20 +9,19 @@ import '../../../../module/activity/screen/buildlistactivity.dart';
 import '../../../../module/home/model/response/home_response/alert_no_activity_response.dart';
 
 homeBodyActivityWidget(
-  BuildContext context,
-  ScreenStatusActivityStudentResponse? screenStatusActivityStudentResponse,
+    BuildContext context,
+    ScreenStatusActivityStudentResponse? screenStatusActivityStudentResponse,
     ActivityListTeacherScreen? screenStatusActivityTeacherResponse,
-    String role
-) {
+    String role) {
   return Container(
     color: Theme.of(context).scaffoldBackgroundColor,
-
     child: Padding(
       padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
       child: SingleChildScrollView(
         child: Column(
           children: [
-            buildListActivity(context, screenStatusActivityStudentResponse, screenStatusActivityTeacherResponse, role),
+            buildListActivity(context, screenStatusActivityStudentResponse,
+                screenStatusActivityTeacherResponse, role),
             const SizedBox(
               height: 300,
             ),
@@ -60,35 +59,107 @@ homeStudentBodyEmptyActivityWidget(
   AlertNoActivityStudentResponse? alertNoActivityResponse,
 ) {
   return Container(
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: transparent),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20), color: transparent),
       width: double.infinity,
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-             Icon(
-              Icons.running_with_errors_outlined,
-              color:Theme.of(context).bottomAppBarColor.withOpacity(0.8),
-              size: 100,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(5.0),
+                  child: Icon(
+                    FontAwesomeIcons.solidFaceFrown,
+                    color: Theme.of(context).bottomAppBarColor.withOpacity(0.4),
+                    size: 20,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(5.0),
+                  child: Icon(
+                    FontAwesomeIcons.solidFaceFrown,
+                    color: Theme.of(context).bottomAppBarColor.withOpacity(0.4),
+                    size: 30,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(5.0),
+                  child: Icon(
+                    FontAwesomeIcons.solidFaceFrownOpen,
+                    color: Theme.of(context).bottomAppBarColor.withOpacity(0.5),
+                    size: 40,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(5.0),
+                  child: Icon(
+                    FontAwesomeIcons.solidFaceSadTear,
+                    color: Theme.of(context).bottomAppBarColor.withOpacity(0.6),
+                    size: 50,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(5.0),
+                  child: Icon(
+                    FontAwesomeIcons.solidFaceFrownOpen,
+                    color: Theme.of(context).bottomAppBarColor.withOpacity(0.5),
+                    size: 40,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(5.0),
+                  child: Icon(
+                    FontAwesomeIcons.solidFaceFrown,
+                    color: Theme.of(context).bottomAppBarColor.withOpacity(0.4),
+                    size: 30,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(5.0),
+                  child: Icon(
+                    FontAwesomeIcons.solidFaceFrown,
+                    color: Theme.of(context).bottomAppBarColor.withOpacity(0.4),
+                    size: 20,
+                  ),
+                ),
+              ],
             ),
             const SizedBox(
               height: 10,
             ),
-            Text(alertNoActivityResponse?.body?.screeninfo?.noactivity??noActivity,
-                style:  TextStyle(fontSize: 20, fontWeight: FontWeight.w500,
-                  color:Theme.of(context).bottomAppBarColor.withOpacity(0.8),)),
+            Text(
+                alertNoActivityResponse?.body?.screeninfo?.noactivity ??
+                    noActivity,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                  color: Theme.of(context).bottomAppBarColor.withOpacity(0.8),
+                )),
             const SizedBox(
               height: 5,
             ),
-            Text(alertNoActivityResponse?.body?.screeninfo?.subactlineone??subNoActivityLineOne,
-                style:  TextStyle(fontSize: 15, fontWeight: FontWeight.w500,
-                  color:Theme.of(context).bottomAppBarColor.withOpacity(0.8),)),
+            Text(
+                alertNoActivityResponse?.body?.screeninfo?.subactlineone ??
+                    subNoActivityLineOne,
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                  color: Theme.of(context).bottomAppBarColor.withOpacity(0.8),
+                )),
             const SizedBox(
               height: 5,
             ),
-            Text(alertNoActivityResponse?.body?.screeninfo?.subactlinetwo??subNoActivityLineTwo,
-                style:  TextStyle(fontSize: 15, fontWeight: FontWeight.w500,
-                  color:Theme.of(context).bottomAppBarColor.withOpacity(0.8),)),
+            Text(
+                alertNoActivityResponse?.body?.screeninfo?.subactlinetwo ??
+                    subNoActivityLineTwo,
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                  color: Theme.of(context).bottomAppBarColor.withOpacity(0.8),
+                )),
             const SizedBox(
               height: 100,
             ),
@@ -98,23 +169,31 @@ homeStudentBodyEmptyActivityWidget(
 }
 
 homeTeacherBodyEmptyActivityWidget(
-    BuildContext context,
-    NoActivityTeacherResponse? NoActivityTeacherResponse,
-    ) {
-  String textOne = NoActivityTeacherResponse?.body?.screeninfo?.noactivity??noActivity;
-  String textTwo = NoActivityTeacherResponse?.body?.screeninfo?.subactlineone??subNoActivityLineOne;
-  String textThree = NoActivityTeacherResponse?.body?.screeninfo?.subactlinetwo??subNoActivityLineTwo;
+  BuildContext context,
+  NoActivityTeacherResponse? NoActivityTeacherResponse,
+) {
+  String textOne =
+      NoActivityTeacherResponse?.body?.screeninfo?.noactivity ?? noActivity;
+  String textTwo = NoActivityTeacherResponse?.body?.screeninfo?.subactlineone ??
+      subNoActivityLineOne;
+  String textThree =
+      NoActivityTeacherResponse?.body?.screeninfo?.subactlinetwo ??
+          subNoActivityLineTwo;
   return Container(
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: transparent),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20), color: transparent),
       width: double.infinity,
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            FaIcon(FontAwesomeIcons.faceSmile,
+            FaIcon(
+              FontAwesomeIcons.faceSmile,
               color: Colors.green.withOpacity(0.8)
               // color:Theme.of(context).bottomAppBarColor.withOpacity(0.8)
-              ,size: 100,),
+              ,
+              size: 100,
+            ),
             // Icon(
             //   Icons.running_with_errors_outlined,
             //   color:Theme.of(context).bottomAppBarColor.withOpacity(0.8),
@@ -130,10 +209,16 @@ homeTeacherBodyEmptyActivityWidget(
             SizedBox(
               child: Padding(
                 padding: const EdgeInsets.only(left: 1.0, right: 1.0),
-                child: Text(NoActivityTeacherResponse?.body?.screeninfo?.noactivity??noActivityTeacher,
+                child: Text(
+                    NoActivityTeacherResponse?.body?.screeninfo?.noactivity ??
+                        noActivityTeacher,
                     textAlign: TextAlign.center,
-                    style:  TextStyle(fontSize: 20, fontWeight: FontWeight.w500,
-                      color:Theme.of(context).bottomAppBarColor.withOpacity(0.8),)),
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                      color:
+                          Theme.of(context).bottomAppBarColor.withOpacity(0.8),
+                    )),
               ),
             ),
             const SizedBox(
@@ -141,10 +226,15 @@ homeTeacherBodyEmptyActivityWidget(
             ),
             Padding(
               padding: const EdgeInsets.only(left: 1.0, right: 1.0),
-              child: Text(NoActivityTeacherResponse?.body?.screeninfo?.subactlineone??subNoActivityTeacherLineOne,
+              child: Text(
+                  NoActivityTeacherResponse?.body?.screeninfo?.subactlineone ??
+                      subNoActivityTeacherLineOne,
                   textAlign: TextAlign.center,
-                  style:  TextStyle(fontSize: 15, fontWeight: FontWeight.w500,
-                    color:Theme.of(context).bottomAppBarColor.withOpacity(0.8),)),
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                    color: Theme.of(context).bottomAppBarColor.withOpacity(0.8),
+                  )),
             ),
             const SizedBox(
               height: 5,

@@ -40,14 +40,14 @@ class LockAppBloc extends Bloc<LockAppEvent, LockAppState> with HomeRepository {
           );
         }
         else if (refreshTokenResponse.head?.status == 400) {
-          emit(TokenExpiredState(message: response.statusMessage ?? "", checkrefreshtokenmessage : refreshTokenResponse));
+          emit(TokenExpiredState(errorMessage: response.statusMessage ?? "", checkrefreshtokenmessage : refreshTokenResponse));
         }
         else {
           emit(LockAppError(
-              message: refreshTokenResponse.head?.message ?? ""));
+              errorMessage: refreshTokenResponse.head?.message ?? ""));
         }
       }  else {
-        emit(LockAppError(message: response.statusMessage ?? ""));
+        emit(LockAppError(errorMessage: response.statusMessage ?? ""));
       }
     }
 
@@ -82,7 +82,7 @@ class LockAppBloc extends Bloc<LockAppEvent, LockAppState> with HomeRepository {
         }
         else {
           emit(LockAppError(
-              message: checkTokenExpiredResponse.head?.message ?? ""));
+              errorMessage: checkTokenExpiredResponse.head?.message ?? ""));
         }
       }
 
@@ -93,7 +93,7 @@ class LockAppBloc extends Bloc<LockAppEvent, LockAppState> with HomeRepository {
       }
       else {
         emit(LockAppError(
-            message: responseCheckTokenExpiredResponse.statusMessage ?? ""));
+            errorMessage: responseCheckTokenExpiredResponse.statusMessage ?? ""));
       }
     }
 
@@ -117,13 +117,13 @@ class LockAppBloc extends Bloc<LockAppEvent, LockAppState> with HomeRepository {
             );
             emit(ScreenInfoLockAppSuccessState(lockAppScreenResponse: lockAppScreenResponse));
           } else {
-            emit(LockAppError(message: lockAppScreenResponse.head?.message ?? ""));
+            emit(LockAppError(errorMessage: lockAppScreenResponse.head?.message ?? ""));
           }
         } else {
-          emit(LockAppError(message: response.statusMessage ?? ""));
+          emit(LockAppError(errorMessage: response.statusMessage ?? ""));
         }
       } on DioError catch (e) {
-        emit(LockAppError(message: e.response?.statusMessage ?? ""));
+        emit(LockAppError(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
 

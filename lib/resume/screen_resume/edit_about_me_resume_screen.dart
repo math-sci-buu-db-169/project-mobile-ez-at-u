@@ -13,7 +13,8 @@ import '../../customs/size/size.dart';
 import '../../customs/text_file/build_textformfiled_unlimit_custom.dart';
 import '../../module/login/screen/login_screen/login_screen.dart';
 import '../bloc_resume/resume_bloc.dart';
-import '../examples/content_design_resume_edit.dart';
+import '../components/components_resume.dart';
+import 'content_design_resume_edit.dart';
 import '../model/response/get_about_me_resume_response.dart';
 
 class EditAboutMeResumeScreen extends StatelessWidget {
@@ -115,28 +116,33 @@ class _EditAboutMeResumePageState extends State<EditAboutMeResumePage>
         if (state is AboutMePreviewResumeEndLoading) {
           hideProgressDialog(context);
         }
-        if (state is AboutMeResumeError) {
-          if (state.errorMessage.toString() == 'Unauthorized') {
-            dialogSessionExpiredOneBtn(
-                context, textSessionExpired, textSubSessionExpired, _buttonOk,
-                onClickBtn: () {
-              cleanDelete();
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) => const LoginScreen()));
-            });
-          } else {
-            dialogOneLineOneBtn(context, '${state.errorMessage}\n ', _buttonOk,
-                onClickBtn: () {
-              Navigator.of(context).pop();
-            });
-          }
-
-          // show dialog error
-          if (kDebugMode) {
-            print(state.errorMessage);
-          }
+        if (state is AboutMeResumeError) {if (state.errorMessage.toString() == 'Unauthorized') {
+          dialogSessionExpiredOneBtn(
+              context, textSessionExpired, textSubSessionExpired, _buttonOk,
+              onClickBtn: () {
+                cleanDelete();
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => const LoginScreen()));
+              });
+        }
+        else if (state.errorMessage.toUpperCase().toString() == 'S401EXP01'||state.errorMessage.toUpperCase().toString() == 'T401NOT01') {
+          dialogSessionExpiredOneBtn(
+              context, textSessionExpired, textSubSessionExpired, _buttonOk,
+              onClickBtn: () {
+                cleanDelete();
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => const LoginScreen()));
+              });
+        }else {
+          dialogOneLineOneBtn(context, '${state.errorMessage}\n ', _buttonOk,
+              onClickBtn: () {
+                Navigator.of(context).pop();
+              });
+        }
         }
       },
       builder: (context, state) {
@@ -153,15 +159,71 @@ class _EditAboutMeResumePageState extends State<EditAboutMeResumePage>
               '${isGetAboutMeResumeResponse?.body?.screeninfo?.aboutmeEn} *';
           String? aboutMeTh = isGetAboutMeResumeResponse?.body?.data?.details;
           String? aboutMeEn = isGetAboutMeResumeResponse?.body?.data?.detailsen;
-
           return Scaffold(
             appBar: AppBar(
               backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
               elevation: 0,
               leading: IconButton(
+
+
+
                 onPressed: () {
-                  Navigator.pop(context);
+                  dialogOneLineTwoBtnWarning(
+                      context,
+                      "${isGetAboutMeResumeResponse?.body?.alertmessage?.alertsavedataTh??"คุณต้องการบันทึกข้อมูลนี้ใช่หรือไม่?"}\n${isGetAboutMeResumeResponse?.body?.alertmessage?.alertsavedataEn??"Do you want to save this information?"}",
+                      isGetAboutMeResumeResponse?.body?.errorbutton?.buttonyes??"yes ",
+                      isGetAboutMeResumeResponse?.body?.errorbutton?.buttonno??"No",
+                      onClickBtn: (String result) {
+                        Navigator.of(context).pop();
+                        switch (result) {
+                          case 'Cancel':
+                            {
+                              //"No"
+
+
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) => const ContentDesignResumeEditScreen()));
+
+                              print('Cancel');
+                              break;
+                            }
+                          case 'OK':
+                            {
+                              //"Yes"
+
+                              if((aboutMeControllerTH.text == ''
+                                  ? aboutMeTh
+                                  : aboutMeControllerTH.text)  == ''||
+                                  (aboutMeControllerEN.text == ''
+                                      ? aboutMeEn
+                                      : aboutMeControllerEN.text)  == ''){
+
+                                dialogOneLineOneBtn(context, '${isGetAboutMeResumeResponse?.body?.alertmessage?.completefieldsTh??"กรุณากรอกให้ครบทุกช่อง"}\n'
+                                    '${isGetAboutMeResumeResponse?.body?.alertmessage?.completefieldsEn??"Please complete all fields."} ', _buttonOk,
+                                    onClickBtn: () {
+                                      Navigator.of(context).pop();
+                                    });
+                              }
+                              else{
+
+                                context.read<ResumeBloc>().add(SentEditAboutMeResumeEvent(
+                                  aboutMeControllerTH: (aboutMeControllerTH.text == ''
+                                      ? aboutMeTh
+                                      : aboutMeControllerTH.text) ??
+                                      '',
+                                  aboutMeControllerEN: (aboutMeControllerEN.text == ''
+                                      ? aboutMeEn
+                                      : aboutMeControllerEN.text) ??
+                                      '',));
+                              }
+                            }
+                        }
+                      });
                 },
+
+
                 icon: Icon(
                   Icons.arrow_back,
                   size: sizeTitle24,
@@ -224,19 +286,28 @@ class _EditAboutMeResumePageState extends State<EditAboutMeResumePage>
                 ),
               ),
             ),
-            floatingActionButton: floatingSetThemePDF(
+            floatingActionButton: floatingButtonSave(
               context: context,
               setState,
               textSave ?? 'Save',
-              aboutMeControllerTH: (aboutMeControllerTH.text == ''
-                      ? aboutMeTh
-                      : aboutMeControllerTH.text) ??
-                  '',
-              aboutMeControllerEN: (aboutMeControllerEN.text == ''
-                      ? aboutMeEn
-                      : aboutMeControllerEN.text) ??
-                  '',
+              pop: false,
+              onPressed: () {
+                context.read<ResumeBloc>().add(SentEditAboutMeResumeEvent(
+                    aboutMeControllerTH: (aboutMeControllerTH.text == ''
+                        ? aboutMeTh
+                        : aboutMeControllerTH.text) ??
+                        '',
+                    aboutMeControllerEN: (aboutMeControllerEN.text == ''
+                        ? aboutMeEn
+                        : aboutMeControllerEN.text) ??
+                        '',));
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) => const ContentDesignResumeScreen()));
+              },
             ),
+
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerFloat,
           );
@@ -248,36 +319,4 @@ class _EditAboutMeResumePageState extends State<EditAboutMeResumePage>
       },
     );
   }
-}
-
-floatingSetThemePDF(
-  setState,
-  String pdf, {
-  required BuildContext context,
-  required String aboutMeControllerTH,
-  required String aboutMeControllerEN,
-}) {return FloatingActionButton.extended(
-    backgroundColor:
-        Theme.of(context).appBarTheme.backgroundColor?.withOpacity(0.9),
-    foregroundColor: Colors.black,
-    onPressed: () {
-      context.read<ResumeBloc>().add(SentEditAboutMeResumeEvent(
-          aboutMeControllerTH: aboutMeControllerTH,
-          aboutMeControllerEN: aboutMeControllerEN));
-      // Navigator.push(
-      //     context,
-      //     MaterialPageRoute(
-      //         builder: (context) => const ContentDesignResumeScreen()));
-    },
-    icon: Icon(
-      FontAwesomeIcons.paperPlane,
-      color: Theme.of(context).iconTheme.color,
-      size: 20.0,
-    ),
-    label: Text('   ${pdf ?? 'PDF'}',
-        style: TextStyle(
-          fontSize: sizeTextSmaller14,
-          color: Theme.of(context).iconTheme.color,
-        )),
-  );
 }

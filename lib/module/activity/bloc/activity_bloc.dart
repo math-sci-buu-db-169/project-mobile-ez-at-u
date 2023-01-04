@@ -45,14 +45,14 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
           );
         }
         else if (refreshTokenResponse.head?.status == 400) {
-          emit(TokenExpiredState(message: response.statusMessage ?? "", checkrefreshtokenmessage : refreshTokenResponse));
+          emit(TokenExpiredState(errorMessage: response.statusMessage ?? "", checkrefreshtokenmessage : refreshTokenResponse));
         }
         else {
           emit(ActivityError(
-              message: refreshTokenResponse.head?.message ?? ""));
+              errorMessage: refreshTokenResponse.head?.message ?? ""));
         }
       }  else {
-        emit(ActivityError(message: response.statusMessage ?? ""));
+        emit(ActivityError(errorMessage: response.statusMessage ?? ""));
       }
     }
 
@@ -85,7 +85,7 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
         }
         else {
           emit(ActivityError(
-              message: checkTokenExpiredResponse.head?.message ?? ""));
+              errorMessage: checkTokenExpiredResponse.head?.message ?? ""));
         }
       }
 
@@ -96,7 +96,7 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
       }
       else {
         emit(ActivityError(
-            message: responseCheckTokenExpiredResponse.statusMessage ?? ""));
+            errorMessage: responseCheckTokenExpiredResponse.statusMessage ?? ""));
       }
     }
 
@@ -116,13 +116,13 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
                 response: screenActivityResponse));
           } else {
             emit(ActivityError(
-                message: screenActivityResponse.head?.message ?? ""));
+                errorMessage: screenActivityResponse.head?.message ?? ""));
           }
         } else {
-          emit(ActivityError(message: response.statusMessage ?? ""));
+          emit(ActivityError(errorMessage: response.statusMessage ?? ""));
         }
       } on DioError catch (e) {
-        emit(ActivityError(message: e.response?.statusMessage ?? ""));
+        emit(ActivityError(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
     on<EditActivityScreenInfoEvent>((event, emit) async {
@@ -140,13 +140,13 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
                 response: screenActivityResponse));
           } else {
             emit(EditActivityError(
-                message: screenActivityResponse.head?.message ?? ""));
+                errorMessage: screenActivityResponse.head?.message ?? ""));
           }
         } else {
-          emit(EditActivityError(message: responseEditActivityScreen.statusMessage ?? ""));
+          emit(EditActivityError(errorMessage: responseEditActivityScreen.statusMessage ?? ""));
         }
       } on DioError catch (e) {
-        emit(EditActivityError(message: e.response?.statusMessage ?? ""));
+        emit(EditActivityError(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
     on<OnClickEditActivityScreenInfoEvent>((event, emit) async {
@@ -180,14 +180,14 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
           if (addEditResponse.head?.status == 200) {
             emit(SubmitAddEditActivityState(responseAddEdit: addEditResponse));
           } else {
-            emit(SubmitAddEditActivityError(message: addEditResponse.head?.message ?? ""));
+            emit(SubmitAddEditActivityError(errorMessage: addEditResponse.head?.message ?? ""));
           }
         } else {
           emit(SubmitAddEditActivityError(
-              message: responseAddEditSubmit.statusMessage ?? ""));
+              errorMessage: responseAddEditSubmit.statusMessage ?? ""));
         }
       } on DioError catch (e) {
-        emit(SubmitAddEditActivityError(message: e.response?.statusMessage ?? ""));
+        emit(SubmitAddEditActivityError(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
     on<SubmitDeleteActivityByStudentEvent>((event, emit) async {
@@ -215,16 +215,16 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
               if (kDebugMode) {
                 print("ActivityError  + 1");
               }
-              emit(ActivityError(message: deleteResponse.head?.message ?? ""));
+              emit(ActivityError(errorMessage: deleteResponse.head?.message ?? ""));
             }
           } catch (e) {
-            emit(ActivityError(message: e.toString()));
+            emit(ActivityError(errorMessage: e.toString()));
           }
         } else {
-          emit(ActivityError(message: responseDeleteSubmit.statusMessage ?? ""));
+          emit(ActivityError(errorMessage: responseDeleteSubmit.statusMessage ?? ""));
         }
       } on DioError catch (e) {
-        emit(ActivityError(message: e.response?.statusMessage ?? ""));
+        emit(ActivityError(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
     on<ActivityListTeacherScreenInfoEvent>((event, emit) async {
@@ -246,14 +246,14 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
           } else {
             print("เข้า error");
             emit(ActivityError(
-                message: screenActivityListResponse.head?.message ?? ""));
+                errorMessage: screenActivityListResponse.head?.message ?? ""));
           }
         } else {
           print("เข้า error");
-          emit(ActivityError(message: response.statusMessage ?? ""));
+          emit(ActivityError(errorMessage: response.statusMessage ?? ""));
         }
       } on DioError catch (e) {
-        emit(ActivityError(message: e.response?.statusMessage ?? ""));
+        emit(ActivityError(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
     on<ActivityListTeacherSearchScreenInfoEvent>((event, emit) async {
@@ -275,14 +275,14 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
           } else {
             print("เข้า error");
             emit(ActivityError(
-                message: screenActivityListResponse.head?.message ?? ""));
+                errorMessage: screenActivityListResponse.head?.message ?? ""));
           }
         } else {
           print("เข้า error");
-          emit(ActivityError(message: response.statusMessage ?? ""));
+          emit(ActivityError(errorMessage: response.statusMessage ?? ""));
         }
       } on DioError catch (e) {
-        emit(ActivityError(message: e.response?.statusMessage ?? ""));
+        emit(ActivityError(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
     on<getScreenAddEditDeleteActivityByTeacherEvent>((event, emit) async {
@@ -303,14 +303,14 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
           } else {
             print("เข้า error");
             emit(ActivityError(
-                message: screenAddActivityByTeacherResponse.head?.message ?? ""));
+                errorMessage: screenAddActivityByTeacherResponse.head?.message ?? ""));
           }
         } else {
           print("เข้า error");
-          emit(ActivityError(message: response.statusMessage ?? ""));
+          emit(ActivityError(errorMessage: response.statusMessage ?? ""));
         }
       } on DioError catch (e) {
-        emit(ActivityError(message: e.response?.statusMessage ?? ""));
+        emit(ActivityError(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
     on<SubmitAddEditDeleteActivityByTeacherEvent>((event, emit) async {
@@ -335,14 +335,14 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
           if (addEditDeleteByTeacherResponse.head?.status == 200) {
             emit(SubmitAddEditDeleteByTeacherActivityState(responseAddEditDeleteByTeacher: addEditDeleteByTeacherResponse));
           } else {
-            emit(SubmitAddEditDeleteActivityByTeacherError(message: addEditDeleteByTeacherResponse.head?.message ?? ""));
+            emit(SubmitAddEditDeleteActivityByTeacherError(errorMessage: addEditDeleteByTeacherResponse.head?.message ?? ""));
           }
         } else {
           emit(SubmitAddEditDeleteActivityByTeacherError(
-              message: responseAddEditDeleteByTeacherSubmit.statusMessage ?? ""));
+              errorMessage: responseAddEditDeleteByTeacherSubmit.statusMessage ?? ""));
         }
       } on DioError catch (e) {
-        emit(SubmitAddEditDeleteActivityByTeacherError(message: e.response?.statusMessage ?? ""));
+        emit(SubmitAddEditDeleteActivityByTeacherError(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
     on<getDataActivityNameListByTeacherEvent>((event, emit) async {
@@ -363,14 +363,14 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
           } else {
             print("เข้า error");
             emit(ActivityError(
-                message: activityNameListByTeacherResponse.head?.message ?? ""));
+                errorMessage: activityNameListByTeacherResponse.head?.message ?? ""));
           }
         } else {
           print("เข้า error");
-          emit(ActivityError(message: response.statusMessage ?? ""));
+          emit(ActivityError(errorMessage: response.statusMessage ?? ""));
         }
       } on DioError catch (e) {
-        emit(ActivityError(message: e.response?.statusMessage ?? ""));
+        emit(ActivityError(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
     on<SubmitApproveActivityByTeacherEvent>((event, emit) async {
@@ -390,14 +390,14 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
           if (approveActivityByTeacherResponse.head?.status == 200) {
             emit(SubmitApproveActivityByTeacherState(responseApproveActivitySubmitByTeacher: approveActivityByTeacherResponse));
           } else {
-            emit(SubmitApproveActivityByTeacherErrorState(message: approveActivityByTeacherResponse.head?.message ?? ""));
+            emit(SubmitApproveActivityByTeacherErrorState(errorMessage: approveActivityByTeacherResponse.head?.message ?? ""));
           }
         } else {
           emit(SubmitApproveActivityByTeacherErrorState(
-              message: responseApproveActivityByTeacherSubmit.statusMessage ?? ""));
+              errorMessage: responseApproveActivityByTeacherSubmit.statusMessage ?? ""));
         }
       } on DioError catch (e) {
-        emit(SubmitApproveActivityByTeacherErrorState(message: e.response?.statusMessage ?? ""));
+        emit(SubmitApproveActivityByTeacherErrorState(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
     on<SelectActivityByStudentScreenInfoEvent>((event, emit) async {
@@ -420,14 +420,14 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
           } else {
             print("เข้า error");
             emit(SubmitSelectActivityByStudentErrorState(
-                message: selectActivityByStudentScreenInfoResponse.head?.message ?? ""));
+                errorMessage: selectActivityByStudentScreenInfoResponse.head?.message ?? ""));
           }
         } else {
           print("เข้า error");
-          emit(SubmitSelectActivityByStudentErrorState(message: response.statusMessage ?? ""));
+          emit(SubmitSelectActivityByStudentErrorState(errorMessage: response.statusMessage ?? ""));
         }
       } on DioError catch (e) {
-        emit(SubmitSelectActivityByStudentErrorState(message: e.response?.statusMessage ?? ""));
+        emit(SubmitSelectActivityByStudentErrorState(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
     on<SelectActivityByStudentFilterDateScreenInfoEvent>((event, emit) async {
@@ -450,14 +450,14 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
           } else {
             print("เข้า error");
             emit(SubmitSelectActivityByStudentErrorState(
-                message: selectActivityByStudentScreenInfoResponse.head?.message ?? ""));
+                errorMessage: selectActivityByStudentScreenInfoResponse.head?.message ?? ""));
           }
         } else {
           print("เข้า error");
-          emit(SubmitSelectActivityByStudentErrorState(message: response.statusMessage ?? ""));
+          emit(SubmitSelectActivityByStudentErrorState(errorMessage: response.statusMessage ?? ""));
         }
       } on DioError catch (e) {
-        emit(SubmitSelectActivityByStudentErrorState(message: e.response?.statusMessage ?? ""));
+        emit(SubmitSelectActivityByStudentErrorState(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
     on<SubmitSelectActivityByStudentEvent>((event, emit) async {
@@ -476,14 +476,14 @@ class ActivityBloc extends Bloc<ActivityEvent, ActivityState>
           if (selectActivityByStudentResponse.head?.status == 200) {
             emit(SubmitSelectActivityByStudentState(responseSelectActivityByStudentSubmit: selectActivityByStudentResponse));
           } else {
-            emit(SubmitSelectActivityByStudentErrorState(message: selectActivityByStudentResponse.head?.message ?? ""));
+            emit(SubmitSelectActivityByStudentErrorState(errorMessage: selectActivityByStudentResponse.head?.message ?? ""));
           }
         } else {
           emit(SubmitSelectActivityByStudentErrorState(
-              message: responseSubmitSelectActivityByStudent.statusMessage ?? ""));
+              errorMessage: responseSubmitSelectActivityByStudent.statusMessage ?? ""));
         }
       } on DioError catch (e) {
-        emit(SubmitSelectActivityByStudentErrorState(message: e.response?.statusMessage ?? ""));
+        emit(SubmitSelectActivityByStudentErrorState(errorMessage: e.response?.statusMessage ?? ""));
       }
     });
   }

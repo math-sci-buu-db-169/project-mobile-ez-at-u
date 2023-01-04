@@ -25,7 +25,7 @@ import '../model/response/get_province_address_resume_response.dart';
 import '../model/response/get_skill_language_resume_response.dart';
 import '../model/response/get_skill_resume_response.dart';
 import '../model/response/get_sub_district_list_address_resume_response.dart';
-import '../model/response/get_user_infomartion_resume_response.dart';
+import '../model/response/get_user_informartion_resume_response.dart';
 import '../model/response/get_zip_code_address_resume_response.dart';
 import '../model/response/image_up_load_resume_response.dart';
 import '../model/response/pre_view_resume_response.dart';
@@ -58,16 +58,16 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
             isRole: refreshTokenResponse.body?.role ?? "TC",
             userLanguage: refreshTokenResponse.body?.language ?? "TH",
           );
-        } else if (refreshTokenResponse.head?.status == 400) {
+        } else if (refreshTokenResponse.head?.status == 401) {
           emit(TokenExpiredState(
-              message: response.statusMessage ?? "",
+              message: response.statusMessage ?? "S401EXP01",
               checkrefreshtokenmessage: refreshTokenResponse));
         } else {
           emit(ResumeError(
-              errorMessage: refreshTokenResponse.head?.message ?? ""));
+              errorMessage: refreshTokenResponse.head?.message ?? "S401EXP01"));
         }
       } else {
-        emit(ResumeError(errorMessage: response.statusMessage ?? ""));
+        emit(ResumeError(errorMessage: response.statusMessage ?? "S401EXP01"));
       }
     }
 
@@ -247,7 +247,8 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
           ApiEditResumeResponseHead.fromJson(responseSetOnColorResume.data);
           if (setOnSelectedResume.head?.status == 200|| apiEditResumeResponseHead.head?.status == 200) {
             emit(SetOnSelectedResumeSuccessState(
-                isSetOnSelectedResume: setOnSelectedResume));
+                isSetOnSelectedResume: setOnSelectedResume,
+                pop: event.pop,));
           } else {
             emit(PreviewResumeError(
                 errorMessage: setOnSelectedResume.head?.message ?? ""));
@@ -577,6 +578,8 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
 
     on<SendEditAddressResumeEvent>((event, emit) async {
         try {
+
+          emit(AddressPreviewResumeLoading());
           print("SendEditAddressResumeEvent 5 +3 == SendEditAddressResumeEvent");
 
           await checkPreviewResumeEventInitial(event, emit);
@@ -592,6 +595,7 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
             provinceID: event.provinceID ,
             zipcode:event.zipcode ,
           );
+          emit(AddressPreviewResumeEndLoading());
           if (responseSentEditSkillResume.statusCode == 200) {
             ApiEditResumeResponseHead sentEditContactResumeResponse =
             ApiEditResumeResponseHead.fromJson(
@@ -981,7 +985,8 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
                   responseSentEditPositionsResume.data);
           if (sentEditContactResumeResponse.head?.status == 200) {
             emit(SentEditContactResumeSuccessState(
-                apiEditResumeResponseHead: sentEditContactResumeResponse));
+                apiEditResumeResponseHead: sentEditContactResumeResponse,
+               pop:event.pop));
           } else {
             emit(PreviewResumeError(
                 errorMessage:

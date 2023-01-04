@@ -259,11 +259,13 @@ class EditChooseImageUpLoadResumeSuccess extends ResumeState {
 }
 class SentEditContactResumeSuccessState extends  ResumeState {
   ApiEditResumeResponseHead apiEditResumeResponseHead;
-  SentEditContactResumeSuccessState({required this.apiEditResumeResponseHead});
+  bool pop;
+  SentEditContactResumeSuccessState({required this.apiEditResumeResponseHead, required this. pop});
 }
 class SetOnSelectedResumeSuccessState extends  ResumeState {
   SetOnSelectedResume isSetOnSelectedResume;
-  SetOnSelectedResumeSuccessState({required this.isSetOnSelectedResume});
+  bool pop;
+  SetOnSelectedResumeSuccessState({required this.isSetOnSelectedResume, required this.pop});
 }
 class SetOnSelectedAndGenResumeSuccessState extends  ResumeState {
   SetOnSelectedResume isSetOnSelectedResume;
