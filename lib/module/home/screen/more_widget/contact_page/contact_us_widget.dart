@@ -91,14 +91,15 @@ titleContactUS(BuildContext context, ScreenMoreContactUsResponse? screenMoreCont
                 ? Image(
               width: 100,
               height: 100,
-              image: NetworkImage(screenMoreContactUsResponse?.body?.screeninfo?.titlecontactus ??
+              image: NetworkImage(
+                  // screenMoreContactUsResponse?.body?.screeninfo?.titlecontactus ??
                   'https://webzbinaryz.web.app/assets/EZ@US.png'),
             )
                 : const Image(
                 width: 100,
                 height: 100,
                 image: AssetImage(
-                  'assets/logo/EZ@ULOGO.png',
+                  'assets/logo/logo.png',
                 ))),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,

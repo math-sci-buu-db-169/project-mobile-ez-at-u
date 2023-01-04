@@ -418,7 +418,6 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                             spaceGap(20.0),
                             GestureDetector(
                                 onTap: () {
-                                  print("Container clicked ChangePhotoRequest");
                                   context
                                       .read<ResumeBloc>()
                                       .add(EditChangePhotoRequest());
@@ -723,7 +722,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                     "ระดับประกาศนียบัตรมัธยมศึกษาตอนปลาย",
                                 educationData: isPreViewResumeResponse
                                     .body?.data?.education?.hsc,
-                                appBarForegroundColor: appBarForegroundColor,
+                                appBarForeGroundColor: appBarForegroundColor,
                                 returnResumeEdit: returnResumeEdit,
 
                                 boolClick:  isClickEducationHSC,
@@ -745,7 +744,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                     "ระดับปริญญาตรี",
                                 educationData: isPreViewResumeResponse
                                     .body?.data?.education?.bd,
-                                appBarForegroundColor: appBarForegroundColor,
+                                appBarForeGroundColor: appBarForegroundColor,
                                 returnResumeEdit: returnResumeEdit,
 
                                 boolClick:  isClickEducationBD,
@@ -767,7 +766,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                     "ระดับปริญญาโท",
                                 educationData: isPreViewResumeResponse
                                     .body?.data?.education?.md,
-                                appBarForegroundColor: appBarForegroundColor,
+                                appBarForeGroundColor: appBarForegroundColor,
                                 returnResumeEdit: returnResumeEdit,
 
                                 boolClick:  isClickEducationMD,
@@ -789,7 +788,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                     "ระดับปริญญาเอก",
                                 educationData: isPreViewResumeResponse
                                     .body?.data?.education?.dd,
-                                appBarForegroundColor: appBarForegroundColor,
+                                appBarForeGroundColor: appBarForegroundColor,
                                 returnResumeEdit: returnResumeEdit,
 
                                 boolClick:  isClickEducationDD,
@@ -811,7 +810,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                     "ระดับปริญญาดุษฎีบัณฑิตกิตติมศักดิ์",
                                 educationData: isPreViewResumeResponse
                                     .body?.data?.education?.hdd,
-                                appBarForegroundColor: appBarForegroundColor,
+                                appBarForeGroundColor: appBarForegroundColor,
                                 returnResumeEdit: returnResumeEdit,
 
                                 boolClick:  isClickEducationHDD,

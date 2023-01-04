@@ -12,6 +12,7 @@ import '../../customs/size/size.dart';
 import '../bloc_resume/resume_bloc.dart';
 import '../screen_resume/content_design_resume.dart';
 import '../model/response/pre_view_resume_response.dart';
+import '../screen_resume/content_design_resume_color.dart';
 import '../screen_resume/edit_certificate_resume_screen.dart';
 import '../screen_resume/edit_education_resume_screen.dart';
 import '../screen_resume/edit_experience_resume_screen.dart';
@@ -216,8 +217,8 @@ floatingGoToSetThemePDF(
       Navigator.push(
           context,
           MaterialPageRoute(
-              // builder: (context) => const ContentDesignResumeScreenColor()));
-              builder: (context) => const ContentDesignResumeScreen()));
+              builder: (context) => const ContentDesignResumeScreenColor()));
+              // builder: (context) => const ContentDesignResumeScreen()));
     },
     icon: Icon(
       FontAwesomeIcons.barsStaggered,
@@ -839,7 +840,7 @@ buildEducationOnSelectCard(
     required String showSome,
     required String activityNot,
     required BuildContext context,
-    required Color appBarForegroundColor,
+    required Color appBarForeGroundColor,
     required String title,
     required Function() returnResumeEdit,
     required Color Function(Set<MaterialState> states) getColor,
@@ -853,7 +854,12 @@ buildEducationOnSelectCard(
     children: [
       Padding(
         padding: const EdgeInsets.all(5),
-        child: Text(title),
+        child: Text(title,
+          style: TextStyle(
+            fontSize: 12,
+            color: appBarForeGroundColor, // height: 2.0,
+          ),
+        ),
       ),
       Column(
           children: List.generate(
@@ -864,7 +870,7 @@ buildEducationOnSelectCard(
             buildDetailResumeCheckboxCustomNotIconsReadOnly(
                 context: context,
                 detail: "${educationData[index].startdate??''} - ${educationData[index].enddate??''} : ${educationData[index].placeofstudy??''}\n${educationData[index].detail??''}",
-                appBarForeGroundColor: appBarForegroundColor,
+                appBarForeGroundColor: appBarForeGroundColor,
                 checkbox: Checkbox(
                   checkColor: Theme.of(context).primaryColor,
                   fillColor: MaterialStateProperty.resolveWith(getColor),
@@ -1194,7 +1200,7 @@ buildCardPositionEditResumeScreen(
               // width: 0,
               // left: 0,
               right: MediaQuery.of(context).padding.right + 15,
-              bottom: MediaQuery.of(context).padding.bottom + 15,
+              bottom: MediaQuery.of(context).padding.bottom ,
               child: InkWell(
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -1526,7 +1532,7 @@ buildEducationCard(
     required String title,
     required String type,
     required educationData,
-    required Color appBarForegroundColor,
+    required Color appBarForeGroundColor,
     required Function() returnResumeEdit,
     required bool boolClick,
     required Null Function() onTap, required int count}) {
@@ -1535,7 +1541,12 @@ buildEducationCard(
     children: [
       Padding(
         padding: const EdgeInsets.all(5),
-        child: Text(title),
+        child: Text(title,
+          style: TextStyle(
+          fontSize: 12,
+          color: appBarForeGroundColor, // height: 2.0,
+        ),
+      ),
       ),
       Column(
           children: List.generate(
@@ -1549,7 +1560,7 @@ buildEducationCard(
                     "     ${educationData?[index].startdate ?? ""} - ${educationData?[index].startdate ?? ""} "
                     "${educationData?[index].placeofstudy ?? ""} \n"
                     "${educationData?[index].detail ?? ""}",
-                appBarForeGroundColor: appBarForegroundColor),
+                appBarForeGroundColor: appBarForeGroundColor),
             Positioned(
               // height: 0,
               // width: 0,
