@@ -132,6 +132,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> with ProfileRepositor
         if (kDebugMode) {
           print('Change avatar request');
         }
+        print("CheckProfile 5 == ProfileApiEvent");
+        await  checkProfileEventInitial(event, emit) ;
         final image = await ImagePicker().pickImage(source: ImageSource.gallery,imageQuality: 100);
         if (image == null) return;
         final imageTemp = image.path;
@@ -148,6 +150,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> with ProfileRepositor
           SubmitImageResponse submitImageResponse = SubmitImageResponse.fromJson(responseBase64Img.data);
           if(submitImageResponse.head?.status == 200){
             emit(ChooseAvatarSuccess(avatarImage: imageCroppedTemp,base64img: base64Image));
+          } else
+          if(submitImageResponse.head?.status == 401){
+            emit(ProfileError(errorMessage: submitImageResponse.head?.message??""));
           }
         }
       }
