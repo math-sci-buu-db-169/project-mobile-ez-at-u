@@ -128,34 +128,10 @@ class _ProfilePageTeacherState extends State<ProfilePageTeacher> with ProgressDi
                       builder: (BuildContext context) => const LoginScreen()));
             });
       }
-      if (state is GeneralSubmitSuccessState) {
+      if (state is TeacherProfileSubmitSuccessState) {
         // print("TEST general");
         // print(state.responseGeneral.toJson());
         // print("TEST general");
-        context.read<ProfileBloc>().add(ProfileApiTeacherEvent());
-      }
-      if (state is EducationSubmitSuccessState) {
-        // print("TEST edu");
-        // print(state.responseEducation.toJson());
-        // print("TEST edu");
-        context.read<ProfileBloc>().add(ProfileApiTeacherEvent());
-      }
-      if (state is AddressSubmitSuccessState) {
-        // print("TEST address");
-        // print(state.responseAddress.toJson());
-        // print("TEST address");
-        context.read<ProfileBloc>().add(ProfileApiTeacherEvent());
-      }
-      if (state is ContactSubmitSuccessState) {
-        // print("TEST contact");
-        // print(state.responseContact.toJson());
-        // print("TEST contact");
-        context.read<ProfileBloc>().add(ProfileApiTeacherEvent());
-      }
-      if (state is CareerSubmitSuccessState) {
-        // print("TEST Career");
-        // print(state.responseCareer.toJson());
-        // print("TEST Career");
         context.read<ProfileBloc>().add(ProfileApiTeacherEvent());
       }
       if (state is ChooseAvatarSuccess) {

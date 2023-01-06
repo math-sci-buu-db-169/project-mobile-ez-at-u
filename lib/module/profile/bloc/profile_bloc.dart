@@ -141,6 +141,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> with ProfileRepositor
         final bytes = File(cropImage.path).readAsBytesSync();
         String base64Image =  base64Encode(bytes);
         log("img_pan : $base64Image");
+        print("CheckProfile 5 == ProfileApiEvent");
+        await  checkProfileEventInitial(event, emit) ;
         Response responseBase64Img = await sentProfileImage(base64Image);
         if(responseBase64Img.statusCode == 200){
           SubmitImageResponse submitImageResponse = SubmitImageResponse.fromJson(responseBase64Img.data);
