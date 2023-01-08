@@ -28,8 +28,14 @@ class MyDio {
   // }
 
   // /ServiceTest
+  // static final _optionsServer = BaseOptions(
+  //   baseUrl: 'http://msd.buu.ac.th/ServiceTest',
+  //   connectTimeout: 5000,
+  //   receiveTimeout: 5000,
+  // );
+  // /ton_server
   static final _optionsServer = BaseOptions(
-    baseUrl: 'http://msd.buu.ac.th/ServiceTest',
+    baseUrl: 'http://ezatuapi.totddns.com:45360/dev',
     connectTimeout: 5000,
     receiveTimeout: 5000,
   );
