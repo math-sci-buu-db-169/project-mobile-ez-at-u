@@ -36,8 +36,8 @@ class MyDio {
   // /ton_server
   static final _optionsServer = BaseOptions(
     baseUrl: 'http://ezatuapi.totddns.com:45360/dev',
-    connectTimeout: 5000,
-    receiveTimeout: 5000,
+    connectTimeout: 15000,
+    receiveTimeout: 15000,
   );
 
   static Dio createDioServer() {
