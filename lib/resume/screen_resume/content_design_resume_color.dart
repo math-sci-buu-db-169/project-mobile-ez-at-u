@@ -638,7 +638,7 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                   child: Column(
                     children: [
                       Card(
-                        color: Colors.transparent,EZ
+                        color: Colors.transparent,
                         child: Column(
                           children: [
                             Text(
