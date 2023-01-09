@@ -71,7 +71,7 @@ class CustomDatePickerForResumeMMYYState
                       //show only even months
                       // selectableMonthPredicate: (DateTime val) => val.month.isEven,
                       headerColor: Theme.of(context).appBarTheme.backgroundColor?.withOpacity(0.6),
-                      headerTextColor: Theme.of(context).scaffoldBackgroundColor,
+                      headerTextColor: Theme.of(context).appBarTheme.foregroundColor,
                       selectedMonthBackgroundColor: tcButtonLine,
                       selectedMonthTextColor:Theme.of(context).scaffoldBackgroundColor,
                       unselectedMonthTextColor: Colors.green,

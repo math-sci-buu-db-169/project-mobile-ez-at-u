@@ -638,6 +638,7 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                   child: Column(
                     children: [
                       Card(
+                        color: Colors.transparent,
                         child: Column(
                           children: [
                             Text(
@@ -1190,7 +1191,7 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                               educationData: isPreViewResumeResponse
                                   .body?.data?.education?.hsc ??
                                   [],
-                              appBarForegroundColor: appBarForegroundColor,
+                              appBarForeGroundColor: appBarForegroundColor,
                               returnResumeEdit: () {},
                               boolClick: isOnSelectClickResume.education.hsc,
                               onTap: () {
@@ -1213,7 +1214,7 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                               educationData: isPreViewResumeResponse
                                   .body?.data?.education?.bd ??
                                   [],
-                              appBarForegroundColor: appBarForegroundColor,
+                              appBarForeGroundColor: appBarForegroundColor,
                               returnResumeEdit: () {},
                               boolClick: isOnSelectClickResume.education.bd,
                               onTap: () {
@@ -1236,7 +1237,7 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                               educationData: isPreViewResumeResponse
                                   .body?.data?.education?.md ??
                                   [],
-                              appBarForegroundColor: appBarForegroundColor,
+                              appBarForeGroundColor: appBarForegroundColor,
                               returnResumeEdit: () {},
                               boolClick: isOnSelectClickResume.education.md,
                               onTap: () {
@@ -1259,7 +1260,7 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                               educationData: isPreViewResumeResponse
                                   .body?.data?.education?.dd ??
                                   [],
-                              appBarForegroundColor: appBarForegroundColor,
+                              appBarForeGroundColor: appBarForegroundColor,
                               returnResumeEdit: () {},
                               boolClick: isOnSelectClickResume.education.dd,
                               onTap: () {
@@ -1283,7 +1284,7 @@ class _BodyPreviewResumeColorState extends State<BodyPreviewResumeColor> {
                               educationData: isPreViewResumeResponse
                                   .body?.data?.education?.hdd ??
                                   [],
-                              appBarForegroundColor: appBarForegroundColor,
+                              appBarForeGroundColor: appBarForegroundColor,
                               returnResumeEdit: () {},
                               boolClick: isOnSelectClickResume.education.hdd,
                               onTap: () {

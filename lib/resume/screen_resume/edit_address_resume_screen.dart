@@ -634,7 +634,7 @@ class _EditAddressResumePageState extends State<EditAddressResumePage> with Prog
                           textInputType: TextInputType.text,
                         ),
                       const SizedBox(
-                        height: 50,
+                        height: 10,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
