@@ -450,7 +450,36 @@ class _EditUserInfoResumePageState extends State<EditUserInfoResumePage>
               textSave ?? 'Save',
               pop: false,
               onPressed: () {
-                context.read<ResumeBloc>().add(SentEditUserInfoResumeEvent(
+                if(
+                ((nameControllerTH.text == ''
+                    ? nameTh
+                    : nameControllerTH.text) ??
+                    '') == ''
+                    ||
+                    ((lastNameControllerTH.text == ''
+                        ? lastNameTh
+                        : lastNameControllerTH.text) ??
+                        '') == ''
+                    ||
+                    ((nameControllerEN.text == ''
+                        ? nameEn
+                        : nameControllerEN.text) ??
+                        '') == ''
+                    ||
+                    ((lastNameControllerEN.text == ''
+                        ? lastNameEn
+                        : lastNameControllerEN.text) ??
+                        '')== ''){
+
+                  dialogOneLineOneBtn(context, '${isGetUserInformationResumeResponse?.body?.alertmessage?.completefieldsTh??"กรุณากรอกให้ครบทุกช่อง"}\n'
+                      '${isGetUserInformationResumeResponse?.body?.alertmessage?.completefieldsEn??"Please complete all fields."} ', _buttonOk,
+                      onClickBtn: () {
+                        Navigator.of(context).pop();
+                      });
+                }
+                else{
+
+                  context.read<ResumeBloc>().add(SentEditUserInfoResumeEvent(
                     prefixId: isPrefixController,
                     name:  (nameControllerTH.text == ''
                         ? nameTh
@@ -468,7 +497,9 @@ class _EditUserInfoResumePageState extends State<EditUserInfoResumePage>
                         ? lastNameEn
                         : lastNameControllerEN.text) ??
                         '',
-                ));
+                  ));
+                }
+
                 // Navigator.push(
                 //     context,
                 //     MaterialPageRoute(

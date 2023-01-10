@@ -9,7 +9,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../check_token/token_bloc.dart';
 import '../../customs/color/color_const.dart';
 import '../../customs/dialog/dialog_widget.dart';
 import '../../customs/image_base_64.dart';

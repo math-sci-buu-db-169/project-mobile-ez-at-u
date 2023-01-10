@@ -11,6 +11,15 @@ class ResumeInitialState  extends ResumeState {}
 //   final String base64img;
 //   ChangPhotoResumeSuccess({required this.avatarImage,required this.base64img});
 // }
+
+class TokenExpiredState extends ResumeState {
+
+  String message;
+  RefreshTokenResponse checkrefreshtokenmessage;
+  TokenExpiredState({required this.message, required this.checkrefreshtokenmessage});
+
+}
+
 class ResumeError extends  ResumeState {
   String errorMessage;
   ResumeError({required this.errorMessage});

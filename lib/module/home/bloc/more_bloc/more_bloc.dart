@@ -17,25 +17,18 @@ import 'package:ez_at_u/module/home/repository/more_repository.dart';
 import 'package:ez_at_u/module/home/model/response/more_response/screen_more_board_student_list_response.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../../main_route/main_route_bloc/main_route_bloc.dart';
-import '../../../../main_route/main_route_bloc_model/check_token_expired_response.dart';
-import '../../../../main_route/main_route_bloc_model/refresh_token_response.dart';
+import '../../../../main_route/main_route_model/check_token_expired_response.dart';
+import '../../../../main_route/main_route_model/refresh_token_response.dart';
 import '../../../../utils/shared_preferences.dart';
 import '../../model/response/more_response/courses_screen_response.dart';
 import '../../model/response/more_response/related_links_response.dart';
-import '../../model/response/more_response/scree_more_pdpa_response.dart';
-import '../../model/response/more_response/screen_more_board_student_list_detail_response.dart';
-import '../../model/response/more_response/screen_more_board_student_list_response.dart';
-import '../../model/response/more_response/screen_more_board_teacher_response.dart';
-import '../../model/response/more_response/screen_more_contact_us_response.dart';
-import '../../model/response/more_response/screen_more_faq_response.dart';
-import '../../model/response/more_response/screen_more_list_name_gen_response.dart';
-import '../../model/response/more_response/screen_more_response.dart';
 
 part 'more_event.dart';
 part 'more_state.dart';
 
 late SharedPreferences prefs;
+late String? isMainRouteRefresh;
+late String? isMainRouteKey;
 class MoreBloc extends Bloc<MoreEvent, MoreState> with MoreRepository {
   bool isFetching = false;
   MoreBloc() : super(MoreInitial()) {

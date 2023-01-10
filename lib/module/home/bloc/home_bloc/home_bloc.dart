@@ -15,9 +15,8 @@ import 'package:ez_at_u/module/home/model/response/home_response/change_language
 import 'package:ez_at_u/module/home/model/response/home_response/screen_home_response.dart';
 import 'package:ez_at_u/module/home/repository/home_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../../../check_token/token_bloc.dart';
-import '../../../../main_route/main_route_bloc_model/check_token_expired_response.dart';
-import '../../../../main_route/main_route_bloc_model/refresh_token_response.dart';
+import '../../../../main_route/main_route_model/check_token_expired_response.dart';
+import '../../../../main_route/main_route_model/refresh_token_response.dart';
 import '../../../login/model/response/log_sessions/log_sessions_response.dart';
 import '../../model/response/home_response/setting_screen_response.dart';
 
@@ -25,6 +24,8 @@ part 'home_event.dart';
 part 'home_state.dart';
 
 late SharedPreferences prefs;
+late String? isMainRouteRefresh;
+late String? isMainRouteKey;
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> with HomeRepository {
   HomeBloc() : super(HomeInitial()) {
@@ -156,6 +157,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> with HomeRepository {
                     screenHomeResponse.body?.errorbutton?.buttoncancel);
 
             print("here 2  == getApiProfile");
+            await checkHomeEventInitial(event, emit);
             Response responseProfile = await getApiProfile();
             print("here out 2  == getApiProfile");
             if (responseProfile.statusCode == 200) {
@@ -174,6 +176,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> with HomeRepository {
                 // } else {
                   ///------------------------
                   print("here 2.5  == getApiProfileTeacher");
+                await checkHomeEventInitial(event, emit);
                   Response responseProfileTeacher = await profileTeacherScreen();
                   print("here out 2.5  == getApiProfileTeacher");
                   if (responseProfileTeacher.statusCode == 200) {
@@ -195,6 +198,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> with HomeRepository {
                       ///-------------------------
                 // }
                     print("here 3  == getUserRole");
+                    await checkHomeEventInitial(event, emit);
                     Response responseGetUserRole = await getUserRole();
                     print("here out 3  == getUserRole");
                     if (responseGetUserRole.statusCode == 200){
@@ -204,6 +208,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> with HomeRepository {
                   if (getUserRoleResponse.head?.status == 200) {
 
                     if (getUserRoleResponse.body?.userrole == "ST"){
+                      await checkHomeEventInitial(event, emit);
                       Response responseActivityStudent = await getApiActivityStudent();
                       if (responseActivityStudent.statusCode == 200) {
                         ScreenStatusActivityStudentResponse apiStatusActivityStudentResponse =
@@ -261,6 +266,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> with HomeRepository {
                       }
                     } else if (getUserRoleResponse.body?.userrole == "TC"){
                       //--
+
+                      await checkHomeEventInitial(event, emit);
                       Response responseActivityTeacher = await getScreenActivityListTeacher();
                       if (responseActivityTeacher.statusCode == 200) {
                         ActivityListTeacherScreen apiActivityTeacherResponse =

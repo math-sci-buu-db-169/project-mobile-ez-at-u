@@ -3,10 +3,8 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../../../check_token/token_bloc.dart';
-import '../../../../main_route/main_route_bloc_model/check_token_expired_response.dart';
-import '../../../../main_route/main_route_bloc_model/refresh_token_response.dart';
+import '../../../../main_route/main_route_model/check_token_expired_response.dart';
+import '../../../../main_route/main_route_model/refresh_token_response.dart';
 import '../../../../utils/shared_preferences.dart';
 import '../../model/response/home_response/lock_app_screen_response.dart';
 import '../../repository/home_repository.dart';
@@ -15,6 +13,8 @@ part 'lock_app_event.dart';
 part 'lock_app_state.dart';
 
 late SharedPreferences prefs;
+late String? isMainRouteRefresh;
+late String? isMainRouteKey;
 class LockAppBloc extends Bloc<LockAppEvent, LockAppState> with HomeRepository {
   LockAppBloc() : super(LockAppInitial()) {
     on<LockAppEvent>((event, emit) {

@@ -11,7 +11,7 @@ import '../customs/dialog/dialog_widget.dart';
 import '../customs/message/text_button.dart';
 import '../customs/message/text_error.dart';
 import '../customs/progress_dialog.dart';
-import '../main_route/main_route_bloc_model/refresh_token_response.dart';
+import '../main_route/main_route_model/refresh_token_response.dart';
 import '../module/login/screen/login_screen/login_screen.dart';
 import '../utils/shared_preferences.dart';
 

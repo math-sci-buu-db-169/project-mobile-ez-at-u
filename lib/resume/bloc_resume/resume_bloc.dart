@@ -8,9 +8,8 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../check_token/token_bloc.dart';
-import '../../main_route/main_route_bloc_model/check_token_expired_response.dart';
-import '../../main_route/main_route_bloc_model/refresh_token_response.dart';
+import '../../main_route/main_route_model/check_token_expired_response.dart';
+import '../../main_route/main_route_model/refresh_token_response.dart';
 import '../../utils/shared_preferences.dart';
 import '../components/components_resume.dart';
 import '../model/response/api_edit_resume_response_head.dart';
@@ -35,7 +34,10 @@ import '../repository/resume_repository.dart';
 part 'resume_event.dart';
 part 'resume_state.dart';
 
+
 late SharedPreferences prefs;
+late String? isMainRouteRefresh;
+late String? isMainRouteKey;
 
 class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
   ResumeBloc() : super(ResumeInitial()) {
@@ -368,6 +370,7 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
       if (kDebugMode) {
         print('Change avatar 999');
       }
+      await checkPreviewResumeEventInitial(event, emit);
       final image = await ImagePicker()
           .pickImage(source: ImageSource.gallery, imageQuality: 100);
       if (image == null) return;
@@ -380,6 +383,7 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
       log("img_pan : $base64Image");
       emit(EditPreviewResumeLoading());
       print("CheckProfile 66 == ChangePhotoRequest");
+      await checkPreviewResumeEventInitial(event, emit);
       await setResumePhoto(resumePhoto: base64Image ?? '');
       await checkPreviewResumeEventInitial(event, emit);
       Response responseBase64Img =
@@ -399,6 +403,7 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> with ResumeRepository {
     on<ResumeInnitEvent>((event, emit) async {
       prefs = await SharedPreferences.getInstance();
       var isPhotoResume = prefs.getString('ResumePhoto') ?? '';
+      await checkPreviewResumeEventInitial(event, emit);
       await setResumePhoto(resumePhoto: isPhotoResume);
       emit(ResumeInitialState());
     });

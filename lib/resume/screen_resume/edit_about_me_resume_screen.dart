@@ -194,10 +194,10 @@ class _EditAboutMeResumePageState extends State<EditAboutMeResumePage>
                               //"Yes"
 
                               if((aboutMeControllerTH.text == ''
-                                  ? aboutMeTh
+                                  ? aboutMeTh ?? ''
                                   : aboutMeControllerTH.text)  == ''||
                                   (aboutMeControllerEN.text == ''
-                                      ? aboutMeEn
+                                      ? aboutMeEn ??''
                                       : aboutMeControllerEN.text)  == ''){
 
                                 dialogOneLineOneBtn(context, '${isGetAboutMeResumeResponse?.body?.alertmessage?.completefieldsTh??"กรุณากรอกให้ครบทุกช่อง"}\n'
@@ -292,7 +292,23 @@ class _EditAboutMeResumePageState extends State<EditAboutMeResumePage>
               textSave ?? 'Save',
               pop: false,
               onPressed: () {
-                context.read<ResumeBloc>().add(SentEditAboutMeResumeEvent(
+
+                if((aboutMeControllerTH.text == ''
+                    ? aboutMeTh ?? ''
+                    : aboutMeControllerTH.text)  == ''||
+                    (aboutMeControllerEN.text == ''
+                        ? aboutMeEn ??''
+                        : aboutMeControllerEN.text)  == ''){
+
+                  dialogOneLineOneBtn(context, '${isGetAboutMeResumeResponse?.body?.alertmessage?.completefieldsTh??"กรุณากรอกให้ครบทุกช่อง"}\n'
+                      '${isGetAboutMeResumeResponse?.body?.alertmessage?.completefieldsEn??"Please complete all fields."} ', _buttonOk,
+                      onClickBtn: () {
+                        Navigator.of(context).pop();
+                      });
+                }
+                else{
+
+                  context.read<ResumeBloc>().add(SentEditAboutMeResumeEvent(
                     aboutMeControllerTH: (aboutMeControllerTH.text == ''
                         ? aboutMeTh
                         : aboutMeControllerTH.text) ??
@@ -301,6 +317,7 @@ class _EditAboutMeResumePageState extends State<EditAboutMeResumePage>
                         ? aboutMeEn
                         : aboutMeControllerEN.text) ??
                         '',));
+                }
                 // Navigator.push(
                 //     context,
                 //     MaterialPageRoute(

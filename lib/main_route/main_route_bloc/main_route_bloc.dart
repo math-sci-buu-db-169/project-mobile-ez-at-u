@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../utils/shared_preferences.dart';
-import '../main_route_bloc_model/check_token_expired_response.dart';
-import '../main_route_bloc_model/refresh_token_response.dart';
+import '../main_route_model/check_token_expired_response.dart';
+import '../main_route_model/refresh_token_response.dart';
 import '../main_route_repository/main_route_repository.dart';
 
 part 'main_route_event.dart';

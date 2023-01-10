@@ -5,7 +5,7 @@ import 'package:local_auth/local_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../customs/pin/pin_lock_app_screen.dart';
 import 'main_route_bloc/main_route_bloc.dart';
-import 'main_route_bloc_model/refresh_token_response.dart';
+import 'main_route_model/refresh_token_response.dart';
 import '../../../../../customs/dialog/dialog_widget.dart';
 import '../../../../../customs/message/text_button.dart';
 import '../../../../../customs/message/text_error.dart';

@@ -15,8 +15,9 @@ import 'package:ez_at_u/module/activity/repository/activity_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../main_route/main_route_bloc/main_route_bloc.dart';
-import '../../../main_route/main_route_bloc_model/check_token_expired_response.dart';
-import '../../../main_route/main_route_bloc_model/refresh_token_response.dart';
+import '../../../main_route/main_route_model/check_token_expired_response.dart';
+import '../../../main_route/main_route_model/refresh_token_response.dart';
+import '../../../main_route/main_route_model/refresh_token_response.dart';
 import '../../../utils/shared_preferences.dart';
 
 part 'activity_event.dart';
