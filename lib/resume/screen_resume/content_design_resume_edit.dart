@@ -28,7 +28,6 @@ import 'edit_address_resume_screen.dart';
 import 'edit_skill_language_resume_screen.dart';
 import 'edit_skill_resume_screen.dart';
 import 'edit_user_info_resume_screen.dart';
-import 'content_design_resume_color.dart';
 
 class ContentDesignResumeEditScreen extends StatelessWidget {
   const ContentDesignResumeEditScreen({Key? key}) : super(key: key);
@@ -318,12 +317,12 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                 ),
               ]),
           body: SafeArea(
-              child: Container(
+              child: SizedBox(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: SingleChildScrollView(
               child: Padding(
-                padding: EdgeInsets.all(5.0),
+                padding: const EdgeInsets.all(5.0),
                 child: Column(
                   children: [
                     Row(
@@ -337,16 +336,16 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                             child: Stack(
                               children: [
                                 Container(
-                                  padding: EdgeInsets.all(10),
+                                  padding: const EdgeInsets.all(10),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(50),
                                   ),
                                   child: DottedBorder(
                                     borderType: BorderType.RRect,
-                                    radius: Radius.circular(12),
-                                    padding: EdgeInsets.all(2),
+                                    radius: const Radius.circular(12),
+                                    padding: const EdgeInsets.all(2),
                                     child: ClipRRect(
-                                      borderRadius: BorderRadius.all(Radius.circular(12)),
+                                      borderRadius: const BorderRadius.all(Radius.circular(12)),
                                       child: Container(
                                         //inner container
 
@@ -377,7 +376,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                     FontAwesomeIcons.image,
                                     color: Theme.of(context).iconTheme.color,
                                     size: 20,
-                                    shadows: <Shadow>[Shadow(color: Colors.white, blurRadius: 15.0)],
+                                    shadows: const <Shadow>[Shadow(color: Colors.white, blurRadius: 15.0)],
                                   ),
                                 )
                               ],
@@ -388,7 +387,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Padding(
-                                  padding: EdgeInsets.only(left: 15, top: 20, bottom: 5),
+                                  padding: const EdgeInsets.only(left: 15, top: 20, bottom: 5),
                                   child: Text(
                                     "$name $lastname",
                                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Theme.of(context).appBarTheme.foregroundColor),
@@ -432,7 +431,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                   ],
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.only(left: 15, top: 5),
+                                  padding: const EdgeInsets.only(left: 15, top: 5),
                                   child: Text(
                                     " ${isPreViewResumeResponse.body?.screeninfo?.ratio ?? "The aspect ratio must be 3:4"} \n"
                                     "${isPreViewResumeResponse.body?.screeninfo?.sizepictuce ?? "The aspect ratio must be 3:4"} ",
@@ -811,7 +810,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                               isPreViewResumeEditData: isPreViewResumeResponse.body?.screeninfo?.editinfomations ?? "Edit Information",
                               ontap: () {
                                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                  return EditAddressResumeScreen();
+                                  return const EditAddressResumeScreen();
                                 })).then(
                                   (value) => setState(() {
                                     context.read<ResumeBloc>().add(GetEditScreenPreviewResumeEvent());
@@ -912,7 +911,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                 ));
                               }),
                           Padding(
-                            padding: EdgeInsets.only(bottom: 10),
+                            padding: const EdgeInsets.only(bottom: 10),
                             child: Column(children: [
                               Column(
                                 children: List.generate(
@@ -945,7 +944,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                                         fontWeight: FontWeight.w500,
                                                         color: Theme.of(context).appBarTheme.foregroundColor))),
                                             Padding(
-                                              padding: EdgeInsets.only(left: 10),
+                                              padding: const EdgeInsets.only(left: 10),
                                               child: ClipRRect(
                                                 borderRadius: BorderRadius.circular(8),
                                                 child: SizedBox(
@@ -1004,18 +1003,18 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                               );
                             },
                             child: Container(
-                              padding: EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(50),
                               ),
                               child: DottedBorder(
                                 color: (Theme.of(context).iconTheme.color ?? Colors.grey).withOpacity(0.5),
                                 borderType: BorderType.RRect,
-                                radius: Radius.circular(12),
-                                padding: EdgeInsets.all(2),
+                                radius: const Radius.circular(12),
+                                padding: const EdgeInsets.all(2),
                                 child: ClipRRect(
-                                  borderRadius: BorderRadius.all(Radius.circular(12)),
-                                  child: Container(
+                                  borderRadius: const BorderRadius.all(Radius.circular(12)),
+                                  child: SizedBox(
                                     //inner container
 
                                     height: 20, //height of inner container
@@ -1053,7 +1052,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                 ));
                               }),
                           Padding(
-                            padding: EdgeInsets.only(bottom: 10),
+                            padding: const EdgeInsets.only(bottom: 10),
                             child: Column(children: [
                               Column(
                                 children: List.generate(
@@ -1086,7 +1085,7 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                                                         fontWeight: FontWeight.w500,
                                                         color: Theme.of(context).appBarTheme.foregroundColor))),
                                             Padding(
-                                              padding: EdgeInsets.only(left: 10),
+                                              padding: const EdgeInsets.only(left: 10),
                                               child: ClipRRect(
                                                 borderRadius: BorderRadius.circular(8),
                                                 child: SizedBox(
@@ -1144,18 +1143,18 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                               );
                             },
                             child: Container(
-                              padding: EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(50),
                               ),
                               child: DottedBorder(
                                 color: (Theme.of(context).iconTheme.color ?? Colors.grey).withOpacity(0.5),
                                 borderType: BorderType.RRect,
-                                radius: Radius.circular(12),
-                                padding: EdgeInsets.all(2),
+                                radius: const Radius.circular(12),
+                                padding: const EdgeInsets.all(2),
                                 child: ClipRRect(
-                                  borderRadius: BorderRadius.all(Radius.circular(12)),
-                                  child: Container(
+                                  borderRadius: const BorderRadius.all(Radius.circular(12)),
+                                  child: SizedBox(
                                     //inner container
 
                                     height: 20, //height of inner container
