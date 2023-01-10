@@ -428,7 +428,8 @@ class _EditSkillLanguageResumePageState extends State<EditSkillLanguageResumePag
                                       _buttonOk, onClickBtn: () {
                                     Navigator.of(context).pop();
                                   });
-                                } else {
+                                }
+                                else {
                                   context.read<ResumeBloc>().add(SentEditSkillLanguageResumeEvent(
                                         edit: true,
                                         id: widget.id,

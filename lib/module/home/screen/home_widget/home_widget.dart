@@ -4,14 +4,16 @@ import 'package:ez_at_u/module/activity/screen/activity_name_by_teacher_page.dar
 import 'package:ez_at_u/module/activity/screen/add_activity_by_teacher.dart';
 import 'package:ez_at_u/module/activity/screen/select_activity_by_student.dart';
 import 'package:ez_at_u/module/home/model/response/home_response/no_activity_teacher_response.dart';
+import 'package:ez_at_u/module/home/screen/home_screen/home_screen.dart';
 import 'package:ez_at_u/module/home/screen/home_widget/drawer_teacher_widget.dart';
 import 'package:ez_at_u/module/home/screen/home_widget/setting_screen.dart';
 import 'package:ez_at_u/module/profile/model/response/profile_teacher_screen_api.dart';
 import 'package:ez_at_u/module/profile/screen/profile_page_teacher.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../../../../customs/dialog/dialog_widget.dart';
 import '../../../../resume/screen_resume/content_design_resume_edit.dart';
+import '../more_screen/pdpa_screen.dart';
 import 'home_body_widget.dart';
 import '../../../../customs/button/button_custom.dart';
 import '../../../../customs/message/text_home.dart';
@@ -22,6 +24,49 @@ import '../../../../module/home/screen/more_screen/more_screen.dart';
 import '../../../../module/home/screen/home_widget/drawer_student_widget.dart';
 import '../../../../module/profile/model/response/api_profile_response.dart';
 import '../../../../module/profile/screen/profile_page.dart';
+
+popupReleaseVersion({required BuildContext context,
+required String buttonOk,
+required String appVersion,
+required String pDPAVersion, ScreenHomeResponse? screenHomeResponse,  required void Function({required String launchInBrowser}) launchInBrowserSetState, required Future<dynamic> pop, required bool popup}){
+  if(appVersion == "${screenHomeResponse?.body?.other?.appVersion}"){
+    if("${screenHomeResponse?.body?.other?.userPdpaVersion}" == "${screenHomeResponse?.body?.other?.pdpaVersion}"){
+
+      print('++++++++++++++++++++++++++++++++++++++++++++++++ if 1 pop+++++++++++++++++++++++++++++++++++') ;
+      if(true ==true){
+
+        pop;
+      }
+      else{
+
+      }
+    }
+    else{
+      print('++++++++++++++++++++++++++++++++++++++++++++++++ else 2 +++++++++++++++++++++++++++++++++++') ;
+      return dialogSessionAppOneBtn(
+
+          context, "${screenHomeResponse?.body?.alertmessage?.titlenewpadaversion}", "${screenHomeResponse?.body?.alertmessage?.subtitlenewpadaversion}",'$pDPAVersion >>> ${screenHomeResponse?.body?.other?.pdpaVersion}' ,buttonOk,
+          onClickBtn: () {
+            // launchInBrowserSetState( launchInBrowser: "${screenHomeResponse?.body?.other?.pdpaLink}") ;
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>  const PDPAMoreScreen(load: true,)));
+            // Navigator.of(context).pop();
+          });
+    }
+  }
+  else{
+    print('++++++++++++++++++++++++++++++++++++++++++++++++ else 1 +++++++++++++++++++++++++++++++++++') ;
+    return dialogSessionAppOneBtn(
+        context, "${screenHomeResponse?.body?.alertmessage?.titlenewappversion}", "${screenHomeResponse?.body?.alertmessage?.subtitlenewappversion}",'$appVersion   >>> ${screenHomeResponse?.body?.other?.appVersion}', buttonOk,
+        onClickBtn: () {
+          launchInBrowserSetState( launchInBrowser: "${screenHomeResponse?.body?.other?.appLink}") ;
+          // Navigator.of(context).pop();
+        });
+  }
+
+}
 
 buildContentHomeScreen(
     BuildContext context,
@@ -43,7 +88,7 @@ buildContentHomeScreen(
     required bool isHidden,
     required int intThemeMode,
     required void Function() iniGetThemeMode,
-    required String role}) {
+    required String role, required String appVersion, required bool appRelease, required String pDPAVersion, required pDPAReleasep, required String buttonOk, required void Function({required String launchInBrowser}) launchInBrowserSetState}) {
   String userRole = role;
   return WillPopScope(
     onWillPop: () async {
@@ -111,6 +156,13 @@ buildContentHomeScreen(
                 onPressed: () {
                   print("ชื่ออาจารย์ =" "${screenProfileTeacherResponse?.body?.profileGeneralTH?.name}");
                   print("นามสกุลอาจารย์ =" "${screenProfileTeacherResponse?.body?.profileGeneralTH?.lastname}");
+                  popupReleaseVersion(context: context, buttonOk: buttonOk, appVersion: appVersion,
+                      pDPAVersion: pDPAVersion, screenHomeResponse: screenHomeResponse,
+                      pop: Navigator.push(context, MaterialPageRoute(builder: (context) =>  const HomeScreen())) ,
+                      popup:false,
+                      launchInBrowserSetState:launchInBrowserSetState
+                  );
+
                   Scaffold.of(context).openDrawer();
                 },
                 tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
@@ -161,14 +213,25 @@ buildContentHomeScreen(
                     icon: FaIcon(FontAwesomeIcons.fileLines,
                         color: Theme.of(context).iconTheme.color, size: 20),
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityNameListByTeacherScreen()));
+                      popupReleaseVersion(context: context, buttonOk: buttonOk, appVersion: appVersion,
+                          pDPAVersion: pDPAVersion, screenHomeResponse: screenHomeResponse,
+                          pop: Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityNameListByTeacherScreen())),
+                          popup:true,
+                          launchInBrowserSetState:launchInBrowserSetState
+                      );
+
                     },
                   ),
                   IconButton(
                     icon: FaIcon(FontAwesomeIcons.plus,
                         color: Theme.of(context).iconTheme.color, size: 20),
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) =>  const AddActivityByTeacherScreen()));
+                      popupReleaseVersion(context: context, buttonOk: buttonOk, appVersion: appVersion,
+                          pDPAVersion: pDPAVersion, screenHomeResponse: screenHomeResponse,
+                          pop:  Navigator.push(context, MaterialPageRoute(builder: (context) =>  const AddActivityByTeacherScreen())),
+                          popup:true,
+                          launchInBrowserSetState:launchInBrowserSetState
+                      );
                     },
                   )
                 ]
@@ -226,11 +289,16 @@ buildContentHomeScreen(
                         colorborder: Theme.of(context).scaffoldBackgroundColor,
                         sizeborder: 3,
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const SelectActivityByStudentScreen()));
+                          popupReleaseVersion(context: context, buttonOk: buttonOk, appVersion: appVersion,
+                              pDPAVersion: pDPAVersion, screenHomeResponse: screenHomeResponse,
+                              pop: Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                      const SelectActivityByStudentScreen())),
+                              popup:true,
+                              launchInBrowserSetState:launchInBrowserSetState
+                          );
                         },
                       ),
                     )
@@ -252,12 +320,17 @@ buildContentHomeScreen(
                             colorborder:
                                 Theme.of(context).scaffoldBackgroundColor,
                             sizeborder: 3,
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const ActivityListForTeacher()));
+                            onPressed: () { popupReleaseVersion(context: context, buttonOk: buttonOk, appVersion: appVersion,
+                                pDPAVersion: pDPAVersion, screenHomeResponse: screenHomeResponse,
+                                pop:
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                          const ActivityListForTeacher())),
+                                popup:true,
+                                launchInBrowserSetState:launchInBrowserSetState
+                            );
                             },
                           ),
                         )
@@ -276,33 +349,48 @@ buildContentHomeScreen(
                         child: IconButton(
                       icon: FaIcon(FontAwesomeIcons.userLarge,
                           color: Theme.of(context).iconTheme.color, size: 40),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const ProfileScreen()));
+                      onPressed: () { popupReleaseVersion(context: context, buttonOk: buttonOk, appVersion: appVersion,
+                          pDPAVersion: pDPAVersion, screenHomeResponse: screenHomeResponse,
+                          pop:
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const ProfileScreen())),
+                          popup:true,
+                          launchInBrowserSetState:launchInBrowserSetState
+                      );
                       },
                     )):(userRole == "TC") ?
                 Expanded(
                     child: IconButton(
                       icon: FaIcon(FontAwesomeIcons.userLarge,
                           color: Theme.of(context).iconTheme.color, size: 40),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const ProfileScreenTeacher()));
+                      onPressed: () { popupReleaseVersion(context: context, buttonOk: buttonOk, appVersion: appVersion,
+                          pDPAVersion: pDPAVersion, screenHomeResponse: screenHomeResponse,
+                          pop:
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const ProfileScreenTeacher())),
+                          popup:true,
+                          launchInBrowserSetState:launchInBrowserSetState
+                      );
                       },
                     )):
                     Expanded(
                         child: IconButton(
                           icon: FaIcon(FontAwesomeIcons.userLarge,
                               color: Theme.of(context).iconTheme.color, size: 40),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const ProfileScreen()));
+                          onPressed: () { popupReleaseVersion(context: context, buttonOk: buttonOk, appVersion: appVersion,
+                              pDPAVersion: pDPAVersion, screenHomeResponse: screenHomeResponse,
+                              pop:
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => const ProfileScreen())),
+                              popup:true,
+                              launchInBrowserSetState:launchInBrowserSetState
+                          );
                           },
                         )),
                     if(userRole == "ST")
@@ -310,11 +398,16 @@ buildContentHomeScreen(
                         child: IconButton(
                       icon: FaIcon(FontAwesomeIcons.solidFilePdf,
                           color: Theme.of(context).iconTheme.color, size: 40),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const ContentDesignResumeEditScreen()));
+                      onPressed: () { popupReleaseVersion(context: context, buttonOk: buttonOk, appVersion: appVersion,
+                          pDPAVersion: pDPAVersion, screenHomeResponse: screenHomeResponse,
+                          pop:
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const ContentDesignResumeEditScreen())),
+                          popup:true,
+                          launchInBrowserSetState:launchInBrowserSetState
+                      );
                       },
                       // icon: const FaIcon(FontAwesomeIcons.house,color: tcBlack, size: 40),
                       // onPressed: () {},
@@ -324,10 +417,16 @@ buildContentHomeScreen(
                       icon: FaIcon(FontAwesomeIcons.gear,
                           color: Theme.of(context).iconTheme.color, size: 40),
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const SettingScreen()));
+                        popupReleaseVersion(context: context, buttonOk: buttonOk, appVersion: appVersion,
+                            pDPAVersion: pDPAVersion, screenHomeResponse: screenHomeResponse,
+                            pop:
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const SettingScreen())),
+                            popup:true,
+                            launchInBrowserSetState:launchInBrowserSetState
+                        );
                       },
                     )),
                     Expanded(
@@ -335,10 +434,16 @@ buildContentHomeScreen(
                       icon: FaIcon(FontAwesomeIcons.layerGroup,
                           color: Theme.of(context).iconTheme.color, size: 40),
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const MoreScreen()));
+                        popupReleaseVersion(context: context, buttonOk: buttonOk, appVersion: appVersion,
+                            pDPAVersion: pDPAVersion, screenHomeResponse: screenHomeResponse,
+                            pop: Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const MoreScreen())),
+                            popup:true,
+                            launchInBrowserSetState:launchInBrowserSetState
+                        );
+
                       },
                     )),
                   ],

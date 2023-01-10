@@ -635,8 +635,8 @@ class _BodyPreviewResumeState extends State<BodyPreviewResume> {
               title: Center(
                   child: Text(
                       isPreViewResumeResponse
-                              .body?.screeninfo?.titlesetthemecolor ??
-                          "Set Theme And Color",
+                              .body?.screeninfo?.titlesettheme ??
+                          "Set Theme",
                       style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w500,

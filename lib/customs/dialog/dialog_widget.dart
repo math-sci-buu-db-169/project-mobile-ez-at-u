@@ -146,6 +146,61 @@ void dialogSessionExpiredOneBtn(BuildContext context, String content , String su
       });
 }
 
+void dialogSessionAppOneBtn(BuildContext context, String content , String subContent, String subContentLineTwo,String btn, {required void Function() onClickBtn}) {
+  void handleClickBtn() {
+    onClickBtn();
+  }
+
+  showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return WillPopScope(
+            onWillPop: () async {
+              return false;
+            },
+            child: Dialog(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const SizedBox(height: 10),
+                        Text(content, textAlign: TextAlign.center,
+                            style:  TextStyle(fontSize: 20, fontWeight: FontWeight.bold,
+                              color: Theme.of(context).bottomAppBarColor,)),
+                        const SizedBox(height: 10),
+                        Text(subContent, textAlign: TextAlign.start,
+                          style:  TextStyle(fontSize: 14,
+                            color: Theme.of(context).bottomAppBarColor,),),
+                        const SizedBox(height: 8),
+                        Text(subContentLineTwo, textAlign: TextAlign.center,
+                          style:  TextStyle(fontSize: 14,
+                            color: Theme.of(context).bottomAppBarColor,),),
+                        const SizedBox( height: 15),
+                        Row(
+                          children: [
+                            const Expanded(child: SizedBox()),
+                            ElevatedButton(
+                              style: styleButtonDialog,
+                              onPressed: () => {handleClickBtn()},
+                              child: Text(
+                                btn,
+                                style: const TextStyle(color: tcButtonTextBlack),
+                              ),
+                            )],
+                        )
+                      ],
+                    ),
+                  ),
+                )));
+      });
+}
 
 void dialogOneLineTwoBtn(BuildContext context, String content, String btn1, String btn2,
     {required void Function(String result) onClickBtn}) {

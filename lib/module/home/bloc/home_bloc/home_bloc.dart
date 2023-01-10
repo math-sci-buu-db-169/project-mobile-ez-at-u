@@ -120,6 +120,17 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> with HomeRepository {
       }
     }
 
+    on<HomeScreenAlertMessageEvent>((event, emit) async {
+      try {
+        print("CheckHome 6 == HomeScreenInfoEvent");
+        await checkHomeEventInitial(event, emit);
+        print("here 1  == getScreenHome");
+
+        emit(HomeScreenAlertMessageSuccessState());
+      } on DioError catch (e) {
+        emit(HomeError(errorMessage: e.response?.statusMessage ?? ""));
+      }
+    });
     on<HomeScreenInfoEvent>((event, emit) async {
       try {
         emit(HomeLoading());

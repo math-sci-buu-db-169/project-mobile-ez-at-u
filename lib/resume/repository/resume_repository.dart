@@ -456,6 +456,45 @@ class ResumeRepository {
         }
       }
     }));
+    print('2222222222222222222222222222222222222222');
+    print('2222222222222222222222222222222222222222');
+    print('2222222222222222222222222222222222222222');
+    print('2222222222222222222222222222222222222222');
+    print(jsonEncode({
+      "data_on_select": {
+        "position_on_select": positionOnSelect,
+        "experience_on_select": experienceOnSelect,
+        "education_on_select": {
+          "hsc_on_select": educationHSCOnSelect,
+          "bd_on_select": educationBDOnSelect,
+          "md_on_select": educationMDOnSelect,
+          "dd_on_select": educationDDOnSelect,
+          "hdd_on_select": educationHDDOnSelect
+        },
+        "skill_on_select": skillOnSelect,
+        "certificate_on_select": certificateOnSelect,
+        "language_on_select": languageOnSelect,
+        "social_on_select": {
+          "onselected_email": socialOnSelect[0].onselect,
+          "onselected_phone": socialOnSelect[1].onselect,
+          "onselected_facebook": socialOnSelect[2].onselect,
+          "onselected_line": socialOnSelect[3].onselect,
+          "onselected_instagram": socialOnSelect[4].onselect,
+          "onselected_twitter": socialOnSelect[5].onselect,
+          "onselected_youtube": socialOnSelect[6].onselect,
+        },
+        "address_on_select": {
+          "onselected_number": addressOnSelect[0].onselect,
+          "onselected_moo": addressOnSelect[1].onselect,
+          "onselected_soi": addressOnSelect[2].onselect,
+          "onselected_road": addressOnSelect[3].onselect,
+          "onselected_subdistrict": addressOnSelect[4].onselect,
+          "onselected_district": addressOnSelect[5].onselect,
+          "onselected_province": addressOnSelect[6].onselect,
+          "onselected_zipcode": addressOnSelect[7].onselect,
+        }
+      }
+    }));
     return await MyDio.createDioServer().post("/resume/setonselectresume",
         data: jsonEncode({
           "data_on_select": {

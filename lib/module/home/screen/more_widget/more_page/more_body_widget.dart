@@ -215,7 +215,7 @@ moreBodyWidget(BuildContext context, ScreenMoreResponse? screenMoreResponse,
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const PDPAMoreScreen(),
+                          builder: (context) => const PDPAMoreScreen(load: false,),
                         ),
                       );
                     },

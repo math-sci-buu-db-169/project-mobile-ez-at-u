@@ -1055,60 +1055,6 @@ class _BodyEditPreviewResumeState extends State<BodyEditPreviewResume> {
                               }),
                           Padding(
                             padding: EdgeInsets.only(bottom: 10),
-                            child: Column(
-                                children: List.generate(isPreViewResumeResponse.body?.data?.language?.length ?? 0, (index) {
-                              return Padding(
-                                  padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
-                                  child: InkWell(
-                                    onTap: () {
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                        return EditSkillLanguageResumeScreen(
-                                          id: isPreViewResumeResponse.body?.data?.language?[index].id ?? 0,
-                                          count: countIntData?.language ?? 0,
-                                        );
-                                      })).then(
-                                        (value) => setState(() {
-                                          context.read<ResumeBloc>().add(GetEditScreenPreviewResumeEvent());
-                                        }),
-                                      );
-                                    },
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Expanded(
-                                            child: Text(isPreViewResumeResponse.body?.data?.language?[index].language ?? "",
-                                                maxLines: 5,
-                                                style: TextStyle(
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.w500,
-                                                    color: Theme.of(context).appBarTheme.foregroundColor))),
-                                        Padding(
-                                          padding: EdgeInsets.only(left: 10),
-                                          child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(8),
-                                            child: SizedBox(
-                                              width: MediaQuery.of(context).size.width - 250,
-                                              child: LinearPercentIndicator(
-                                                  padding: EdgeInsets.zero,
-                                                  animation: true,
-                                                  lineHeight: 20.0,
-                                                  animationDuration: 2500,
-                                                  percent: int.parse("${isPreViewResumeResponse.body?.data?.language?[index].value ?? 0}") / 100.0,
-                                                  center: Text("${isPreViewResumeResponse.body?.data?.language?[index].value ?? 0}.0%"),
-                                                  linearStrokeCap: LinearStrokeCap.roundAll,
-                                                  progressColor: widgetPointerValueColor(
-                                                    int.parse("${isPreViewResumeResponse.body?.data?.language?[index].value ?? 0}") / 1.0,
-                                                  )),
-                                            ),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ));
-                            })),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(bottom: 10),
                             child: Column(children: [
                               Column(
                                 children: List.generate(

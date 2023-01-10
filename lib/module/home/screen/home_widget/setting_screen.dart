@@ -472,7 +472,7 @@ class _SettingPageState extends State<SettingPage> with ProgressDialog {
                                     btn2: _settingScreenResponse
                                             ?.body?.errorbutton?.buttoncancel ??
                                         buttonCancelTH,
-                                    isScreenTo: const PDPAMoreScreen(),
+                                    isScreenTo: const PDPAMoreScreen(load: false,),
                                     textFieldOne: TextFieldPasswordCustom(
                                       textEditingController: passwordController,
                                       onChanged: (value) {

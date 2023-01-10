@@ -12,19 +12,21 @@ import '../../../../module/login/screen/login_screen/login_screen.dart';
 import '../../../../utils/shared_preferences.dart';
 
 class PDPAMoreScreen extends StatelessWidget {
-  const PDPAMoreScreen({Key? key}) : super(key: key);
+  final bool load ;
+  const PDPAMoreScreen({Key? key, required this.load}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(create: (context) => MoreBloc()..add(MorePDPAEvent(
         usabilityScreen:true,versionPDPA:''
 
-    )), child: const PDPAPage());
+    )), child:  PDPAPage(load:load));
   }
 }
 
 class PDPAPage extends StatefulWidget {
-  const PDPAPage({Key? key}) : super(key: key);
+  final bool load ;
+  const PDPAPage({Key? key, required this.load}) : super(key: key);
 
   @override
   State<PDPAPage> createState() => _PDPAPageState();
@@ -125,7 +127,7 @@ class _PDPAPageState extends State<PDPAPage> with ProgressDialog {
       builder: (context, state) {
         if (state is MorePDPASuccessState) {
           _screenHomeMorePDPAResponse = state.responsePDPA;
-          return mPDPAMoreWidget(context, _screenHomeMorePDPAResponse,getIsVersionPDPA,isChecked,getColor,isCheckedSetState);
+          return mPDPAMoreWidget(context, _screenHomeMorePDPAResponse,getIsVersionPDPA,isChecked,getColor,isCheckedSetState,load:widget.load);
         } else {
           return Container();
         }

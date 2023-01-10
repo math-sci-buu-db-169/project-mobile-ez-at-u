@@ -1,3 +1,4 @@
+import 'package:ez_at_u/module/home/screen/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
@@ -17,7 +18,7 @@ mPDPAMoreWidget(
     String getIsVersionPDPA,
     bool isChecked,
     Color Function(Set<MaterialState> states) getColor,
-    Function(bool? value) isCheckedSetState) {
+    Function(bool? value) isCheckedSetState, {required load}) {
   return WillPopScope(
       onWillPop: () async {
         return false;
@@ -28,7 +29,15 @@ mPDPAMoreWidget(
           elevation: 0,
           leading: IconButton(
             onPressed: () {
-              Navigator.pop(context);
+              if(load ==true ){
+                Navigator.pop(context);
+              }else{
+
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => const HomeScreen()));
+              }
             },
             icon: Icon(
               Icons.arrow_back,

@@ -1,16 +1,16 @@
 import 'dart:convert';
 /// head : {"status":200,"message":"success","modulename":"home/resume","timeexpire":false}
-/// body : {"screenInfo":{"aboutme":"เกี่ยวกับฉัน","aboutmedetail":"เกี่ยวกับฉัน รายละเอียด","address":"ที่อยู่","appliedposition":"ตำแหน่งที่สมัคร","certificate":"ใบรับรอง","contact":"ติดต่อ","textdefault":"ค่าเริ่มต้น","description":"คำอธิบาย","detail":"รายละเอียด","district":"อำเภอ","editinfomations":"แก้ไขข้อมูล","education":"การศึกษา","educationinfo":"ข้อมูลการศึกษา","email":"อีเมล","enddate":"วันสิ้นสุด","experience":"ประสบการณ์","facebook":"เฟคบุ๊ค","instagram":"อินสตาแกรม","language":"ภาษา","lastname":"นามสกุล","line":"ไลน์","moo":"หมู่","mypositions":"ตำแหน่งของฉัน","n":"นิ้ว","name":"ชื่อ","number":"บ้านเลขที่","phone":"โทรศัพท์","pictuce":"รูปภาพ","placeofstudy":"สถานศึกษา","position":"ตำแหน่ง","positions":"ตำแหน่ง","prefix":"คำนำหน้า","province":"จังหวัด","ratio":"อัตราส่วนภาพต้องเป็น 3:4","road":"ถนน","select":"เลือก","selectacolor":"โปรดเลือกสี","selecttheinformation":"โปรดเลือกข้อมูล ","size":"ขนาด","sizepictuce":"ขนาดไฟล์ไม่เกิน 5 MB","skill":"ทักษะ","soi":"ซอย","startdate":"วันเริ่มต้น","subdistrict":"ตำบล","themecolor":"สีธีม","title":"หัวเรื่อง","titlesetthemecolor":"ตั้งค่าธีมและสี","twitter":"ทวิตเตอร์","type":"ประเภทการศึกษา","value":"ระดับ","whcm":"(กxส) ซม","zipcode":"รหัสไปรษณีย์","unkhown":"ไม่ทราบ","viewpdf":"PDF","titleresumeinformation":"ข้อมูลเรซูเม่","hsc":"ประกาศนียบัตรมัธยมศึกษาตอนปลาย","bd":"ระดับปริญญาตรี","md":"ปริญญาโท    ","dd":"ปริญญาเอก","hdd":"ปริญญาดุษฎีบัณฑิตกิตติมศักดิ์","tapedit":"แตะเพื่อแก้ไข้ข้อมูล","save":"บันทึก","saveor":"Save/บันทึก","youtube":"ยูทูป"},"data":{"userinfo":{"prefixid":"","prefix":"","name":"","lastname":""},"position":[{"id":8,"orderchoose":2,"onselect":true,"position":"4444444","office":"44455","detail":"string"},{"id":7,"orderchoose":9,"onselect":true,"position":"โปรแกรมการแข่งขันกีฬา","office":"","detail":"string"}],"aboutme":"","contactinfo":{"email":"","phone":"","facebook":"","line":"","instagram":"","twitter":"","youtube":"","onselected_email":false,"onselected_phone":false,"onselected_facebook":false,"onselected_line":false,"onselected_instagram":false,"onselected_twitter":false,"onselected_youtube":false},"address":{"number":"num","moo":"mo","soi":"so","road":"ro","subdistrict":"ฝั่งแดง","district":"อำเภอนากลาง","province":"หนองบัวลำภู","zipcode":"","onselected_number":false,"onselected_moo":false,"onselected_soi":false,"onselected_road":false,"onselected_subdistrict":true,"onselected_district":true,"onselected_province":true,"onselected_zipcode":true},"experience":[{"id":3,"orderchoose":0,"onselect":true,"startdate":"12/2022","enddate":"12/2022","position":"","detail":""}],"education":{"hsc":[{"id":6,"orderchoose":0,"onselect":true,"startdate":"12/2022","enddate":"12/2022","type":"HSC","placeofstudy":"คำแสนวัดสวนดอกอำเภอ","detail":""}],"bd":[{"id":7,"orderchoose":0,"onselect":true,"startdate":"12/2022","enddate":"12/2022","type":"BD","placeofstudy":"","detail":""}],"md":[{"id":8,"orderchoose":0,"onselect":true,"startdate":"12/2022","enddate":"12/2022","type":"MD","placeofstudy":"","detail":""}],"dd":[{"id":9,"orderchoose":0,"onselect":true,"startdate":"12/2022","enddate":"12/2022","type":"DD","placeofstudy":"","detail":""}],"hdd":[{"id":10,"orderchoose":0,"onselect":true,"startdate":"12/2022","enddate":"12/2022","type":"HDD","placeofstudy":"","detail":""}]},"skill":[{"id":4,"orderchoose":0,"onselect":true,"skill":"ออกแบบ","value":"50","detail":"ออกแบบหน้าจอ"}],"certificate":[{"id":2,"orderchoose":4,"onselect":true,"title":"ใบรับรอง d","description":""}],"language":[{"id":2,"orderchoose":1,"onselect":true,"language":"ภาษา","value":"60","detail":""}],"resumedatacount":{"position":2,"experience":1,"education_hsc":1,"education_bd":1,"education_md":1,"education_dd":1,"education_hdd":1,"skill":1,"certificate":1,"language":1},"image":""}}
+/// body : {"screeninfo":{"aboutme":"เกี่ยวกับฉัน","aboutmedetail":"เกี่ยวกับฉัน รายละเอียด","address":"ที่อยู่","appliedposition":"ตำแหน่งที่สมัคร","certificate":"ใบรับรอง","contact":"ติดต่อ","textdefault":"ค่าเริ่มต้น","description":"คำอธิบาย","detail":"รายละเอียด","district":"อำเภอ","editinfomations":"แก้ไขข้อมูล","education":"การศึกษา","educationinfo":"ข้อมูลการศึกษา","email":"อีเมล","enddate":"วันสิ้นสุด","experience":"ประสบการณ์","facebook":"เฟคบุ๊ค","instagram":"อินสตาแกรม","language":"ภาษา","lastname":"นามสกุล","line":"ไลน์","moo":"หมู่","mypositions":"ตำแหน่งของฉัน","n":"นิ้ว","name":"ชื่อ","number":"บ้านเลขที่","phone":"โทรศัพท์","pictuce":"รูปภาพ","placeofstudy":"สถานศึกษา","position":"ตำแหน่งที่สนใจ","positions":null,"prefix":"คำนำหน้า","province":"จังหวัด","ratio":"อัตราส่วนภาพต้องเป็น 3:4","road":"ถนน","select":"เลือก","selectacolor":"โปรดเลือกสี","selecttheinformation":"โปรดเลือกข้อมูล ","size":"ขนาด","sizepictuce":"ขนาดไฟล์ไม่เกิน 5 MB","skill":"ทักษะ","soi":"ซอย","startdate":"วันเริ่มต้น","subdistrict":"ตำบล","themecolor":"สีธีม","title":"หัวเรื่อง","titlesetthemecolor":"ตั้งค่าธีมและสี","titlesettheme":null,"twitter":"ทวิตเตอร์","type":"ประเภทการศึกษา","value":"ระดับ","whcm":"(กxส) ซม","zipcode":"รหัสไปรษณีย์","unkhown":"ไม่ทราบ","viewpdf":"PDF","titleresumeinformation":"ข้อมูลเรซูเม่","hsc":"ประกาศนียบัตรมัธยมศึกษาตอนปลาย","bd":"ระดับปริญญาตรี","md":"ปริญญาโท    ","dd":"ปริญญาเอก","hdd":"ปริญญาดุษฎีบัณฑิตกิตติมศักดิ์","tapedit":"แตะเพื่อแก้ไข้ข้อมูล","save":"บันทึก","saveor":"Save/บันทึก","youtube":"ยูทูป","showall":"แสดงทั้งหมด","showsome":"แสดงบางส่วน","activitynot":"คุณยังไม่มีข้อมูลส่วนนี้","btnresume1":"ถัดไป","btnresume2":"ส่งออก PDF","selectednot":"ไม่สามารถเลือกได้"},"data":{"resumeColor":false,"userinfo":{"prefixid":"P1","prefix":"นาง","name":"","lastname":""},"position":[{"id":4,"orderchoose":1,"onselect":true,"position":"นักพัฒนาซอฟต์แวร์3","office":"  ","detail":"string"},{"id":1,"orderchoose":2,"onselect":false,"position":"นักพัฒนาซอฟต์แวร์","office":"ฟรีวิลล์ โซลูชั่นส์ จํากัด","detail":"string"},{"id":2,"orderchoose":2,"onselect":false,"position":"คณิตศาสตร์ประกันภัย","office":"","detail":"string"},{"id":5,"orderchoose":4,"onselect":true,"position":" ","office":" ","detail":"string"}],"aboutme":"สิ่งที่ใช้สมัครงานวัตถุประสงค์ของ RESUME คือสิ่งที่ต้องทำคือปล่อยให้ตัวบุคคลทำงานร่วมกันเพื่อให้ RESUME ของเอกสารสำคัญซึ่งนำไปใช้งาน วัตถุประสงค์ของ RESUME คือสิ่งที่ต้องทำคือปล่อยให้ตัวบุคคลทำงานร่วมกันเพื่อให้ RESUME ตอบสนองเอกสารสำคัญในการนำไปใช้  บอกเล่าตัวเองเพื่อตำแหน่งงานที่ต้องการในตัวเองเพื่อพนักงานตำแหน่งงานที่ต้องการ","contactinfo":{"email":"sittipon.profile.home@gmail.com","phone":"0828894191","facebook":"สิทธิพล ชินโน","line":"0930582335","instagram":"","twitter":"","youtube":"","onselected_email":false,"onselected_phone":false,"onselected_facebook":false,"onselected_line":false,"onselected_instagram":false,"onselected_twitter":false,"onselected_youtube":false},"address":{"number":"169","moo":"","soi":"","road":"","subdistrict":"แสนสุข","district":"อำเภอเมืองชลบุรี","province":"ชลบุรี","zipcode":"20130","onselected_number":false,"onselected_moo":false,"onselected_soi":false,"onselected_road":false,"onselected_subdistrict":true,"onselected_district":false,"onselected_province":false,"onselected_zipcode":true},"experience":[{"id":1,"orderchoose":0,"onselect":true,"startdate":"12/2022","enddate":"12/2022","position":"t","detail":"ddddddddddddddddddddd"}],"education":{"hsc":[{"id":1,"orderchoose":1,"onselect":false,"startdate":"12/2022","enddate":"12/2022","type":"HSC","placeofstudy":"คำแสนวิทยาสรรค์","detail":"วิทย์-คณิตศาสตร์"}],"bd":[{"id":2,"orderchoose":1,"onselect":false,"startdate":"12/2022","enddate":"12/2022","type":"BD","placeofstudy":"มหาวิทยาลัยบูรพา","detail":"คณะวิทยาศาสตร์ สาขาคณิตศาสตร์"},{"id":3,"orderchoose":2,"onselect":false,"startdate":"12/2022","enddate":"12/2022","type":"BD","placeofstudy":"มหาวิทยาลัยบูรพา","detail":"คณะวิทยาศาสตร์ สาขา สถิติ"}],"md":[{"id":1,"orderchoose":1,"onselect":false,"startdate":"12/2022","enddate":"12/2022","type":"HSC","placeofstudy":"คำแสนวิทยาสรรค์","detail":"วิทย์-คณิตศาสตร์"}],"dd":[{"id":1,"orderchoose":1,"onselect":false,"startdate":"12/2022","enddate":"12/2022","type":"HSC","placeofstudy":"คำแสนวิทยาสรรค์","detail":"วิทย์-คณิตศาสตร์"}],"hdd":[{"id":1,"orderchoose":1,"onselect":false,"startdate":"12/2022","enddate":"12/2022","type":"HSC","placeofstudy":"คำแสนวิทยาสรรค์","detail":"วิทย์-คณิตศาสตร์"}]},"skill":[{"id":6,"orderchoose":0,"onselect":true,"skill":"","value":"50","detail":""}],"certificate":[{"id":6,"orderchoose":1,"onselect":false,"title":" ","description":" "}],"language":[{"id":4,"orderchoose":0,"onselect":false,"language":"","value":null,"detail":""}],"resumedatacount":{"position":4,"experience":1,"education_hsc":1,"education_bd":2,"education_md":0,"education_dd":0,"education_hdd":0,"skill":1,"certificate":1,"language":1},"resumedatacolor":{"text":0,"name":0,"theme":8,"aboutme":4,"position":5,"education":10,"contact":12,"address":17,"experience":4,"certificate":14,"skill":3,"language":36},"image":""}}
 
 PreViewResumeResponse preViewResumeResponseFromJson(String str) => PreViewResumeResponse.fromJson(json.decode(str));
 String preViewResumeResponseToJson(PreViewResumeResponse data) => json.encode(data.toJson());
 class PreViewResumeResponse {
   PreViewResumeResponse({
-    Head? head,
-    Body? body,}){
+      Head? head, 
+      Body? body,}){
     _head = head;
     _body = body;
-  }
+}
 
   PreViewResumeResponse.fromJson(dynamic json) {
     _head = json['head'] != null ? Head.fromJson(json['head']) : null;
@@ -18,11 +18,11 @@ class PreViewResumeResponse {
   }
   Head? _head;
   Body? _body;
-  PreViewResumeResponse copyWith({  Head? head,
-    Body? body,
-  }) => PreViewResumeResponse(  head: head ?? _head,
-    body: body ?? _body,
-  );
+PreViewResumeResponse copyWith({  Head? head,
+  Body? body,
+}) => PreViewResumeResponse(  head: head ?? _head,
+  body: body ?? _body,
+);
   Head? get head => _head;
   Body? get body => _body;
 
@@ -39,18 +39,18 @@ class PreViewResumeResponse {
 
 }
 
-/// screenInfo : {"aboutme":"เกี่ยวกับฉัน","aboutmedetail":"เกี่ยวกับฉัน รายละเอียด","address":"ที่อยู่","appliedposition":"ตำแหน่งที่สมัคร","certificate":"ใบรับรอง","contact":"ติดต่อ","textdefault":"ค่าเริ่มต้น","description":"คำอธิบาย","detail":"รายละเอียด","district":"อำเภอ","editinfomations":"แก้ไขข้อมูล","education":"การศึกษา","educationinfo":"ข้อมูลการศึกษา","email":"อีเมล","enddate":"วันสิ้นสุด","experience":"ประสบการณ์","facebook":"เฟคบุ๊ค","instagram":"อินสตาแกรม","language":"ภาษา","lastname":"นามสกุล","line":"ไลน์","moo":"หมู่","mypositions":"ตำแหน่งของฉัน","n":"นิ้ว","name":"ชื่อ","number":"บ้านเลขที่","phone":"โทรศัพท์","pictuce":"รูปภาพ","placeofstudy":"สถานศึกษา","position":"ตำแหน่ง","positions":"ตำแหน่ง","prefix":"คำนำหน้า","province":"จังหวัด","ratio":"อัตราส่วนภาพต้องเป็น 3:4","road":"ถนน","select":"เลือก","selectacolor":"โปรดเลือกสี","selecttheinformation":"โปรดเลือกข้อมูล ","size":"ขนาด","sizepictuce":"ขนาดไฟล์ไม่เกิน 5 MB","skill":"ทักษะ","soi":"ซอย","startdate":"วันเริ่มต้น","subdistrict":"ตำบล","themecolor":"สีธีม","title":"หัวเรื่อง","titlesetthemecolor":"ตั้งค่าธีมและสี","twitter":"ทวิตเตอร์","type":"ประเภทการศึกษา","value":"ระดับ","whcm":"(กxส) ซม","zipcode":"รหัสไปรษณีย์","unkhown":"ไม่ทราบ","viewpdf":"PDF","titleresumeinformation":"ข้อมูลเรซูเม่","hsc":"ประกาศนียบัตรมัธยมศึกษาตอนปลาย","bd":"ระดับปริญญาตรี","md":"ปริญญาโท    ","dd":"ปริญญาเอก","hdd":"ปริญญาดุษฎีบัณฑิตกิตติมศักดิ์","tapedit":"แตะเพื่อแก้ไข้ข้อมูล","save":"บันทึก","saveor":"Save/บันทึก","youtube":"ยูทูป"}
-/// data : {"userinfo":{"prefixid":"","prefix":"","name":"","lastname":""},"position":[{"id":8,"orderchoose":2,"onselect":true,"position":"4444444","office":"44455","detail":"string"},{"id":7,"orderchoose":9,"onselect":true,"position":"โปรแกรมการแข่งขันกีฬา","office":"","detail":"string"}],"aboutme":"","contactinfo":{"email":"","phone":"","facebook":"","line":"","instagram":"","twitter":"","youtube":"","onselected_email":false,"onselected_phone":false,"onselected_facebook":false,"onselected_line":false,"onselected_instagram":false,"onselected_twitter":false,"onselected_youtube":false},"address":{"number":"num","moo":"mo","soi":"so","road":"ro","subdistrict":"ฝั่งแดง","district":"อำเภอนากลาง","province":"หนองบัวลำภู","zipcode":"","onselected_number":false,"onselected_moo":false,"onselected_soi":false,"onselected_road":false,"onselected_subdistrict":true,"onselected_district":true,"onselected_province":true,"onselected_zipcode":true},"experience":[{"id":3,"orderchoose":0,"onselect":true,"startdate":"12/2022","enddate":"12/2022","position":"","detail":""}],"education":{"hsc":[{"id":6,"orderchoose":0,"onselect":true,"startdate":"12/2022","enddate":"12/2022","type":"HSC","placeofstudy":"คำแสนวัดสวนดอกอำเภอ","detail":""}],"bd":[{"id":7,"orderchoose":0,"onselect":true,"startdate":"12/2022","enddate":"12/2022","type":"BD","placeofstudy":"","detail":""}],"md":[{"id":8,"orderchoose":0,"onselect":true,"startdate":"12/2022","enddate":"12/2022","type":"MD","placeofstudy":"","detail":""}],"dd":[{"id":9,"orderchoose":0,"onselect":true,"startdate":"12/2022","enddate":"12/2022","type":"DD","placeofstudy":"","detail":""}],"hdd":[{"id":10,"orderchoose":0,"onselect":true,"startdate":"12/2022","enddate":"12/2022","type":"HDD","placeofstudy":"","detail":""}]},"skill":[{"id":4,"orderchoose":0,"onselect":true,"skill":"ออกแบบ","value":"50","detail":"ออกแบบหน้าจอ"}],"certificate":[{"id":2,"orderchoose":4,"onselect":true,"title":"ใบรับรอง d","description":""}],"language":[{"id":2,"orderchoose":1,"onselect":true,"language":"ภาษา","value":"60","detail":""}],"resumedatacount":{"position":2,"experience":1,"education_hsc":1,"education_bd":1,"education_md":1,"education_dd":1,"education_hdd":1,"skill":1,"certificate":1,"language":1},"image":""}
+/// screeninfo : {"aboutme":"เกี่ยวกับฉัน","aboutmedetail":"เกี่ยวกับฉัน รายละเอียด","address":"ที่อยู่","appliedposition":"ตำแหน่งที่สมัคร","certificate":"ใบรับรอง","contact":"ติดต่อ","textdefault":"ค่าเริ่มต้น","description":"คำอธิบาย","detail":"รายละเอียด","district":"อำเภอ","editinfomations":"แก้ไขข้อมูล","education":"การศึกษา","educationinfo":"ข้อมูลการศึกษา","email":"อีเมล","enddate":"วันสิ้นสุด","experience":"ประสบการณ์","facebook":"เฟคบุ๊ค","instagram":"อินสตาแกรม","language":"ภาษา","lastname":"นามสกุล","line":"ไลน์","moo":"หมู่","mypositions":"ตำแหน่งของฉัน","n":"นิ้ว","name":"ชื่อ","number":"บ้านเลขที่","phone":"โทรศัพท์","pictuce":"รูปภาพ","placeofstudy":"สถานศึกษา","position":"ตำแหน่งที่สนใจ","positions":null,"prefix":"คำนำหน้า","province":"จังหวัด","ratio":"อัตราส่วนภาพต้องเป็น 3:4","road":"ถนน","select":"เลือก","selectacolor":"โปรดเลือกสี","selecttheinformation":"โปรดเลือกข้อมูล ","size":"ขนาด","sizepictuce":"ขนาดไฟล์ไม่เกิน 5 MB","skill":"ทักษะ","soi":"ซอย","startdate":"วันเริ่มต้น","subdistrict":"ตำบล","themecolor":"สีธีม","title":"หัวเรื่อง","titlesetthemecolor":"ตั้งค่าธีมและสี","titlesettheme":null,"twitter":"ทวิตเตอร์","type":"ประเภทการศึกษา","value":"ระดับ","whcm":"(กxส) ซม","zipcode":"รหัสไปรษณีย์","unkhown":"ไม่ทราบ","viewpdf":"PDF","titleresumeinformation":"ข้อมูลเรซูเม่","hsc":"ประกาศนียบัตรมัธยมศึกษาตอนปลาย","bd":"ระดับปริญญาตรี","md":"ปริญญาโท    ","dd":"ปริญญาเอก","hdd":"ปริญญาดุษฎีบัณฑิตกิตติมศักดิ์","tapedit":"แตะเพื่อแก้ไข้ข้อมูล","save":"บันทึก","saveor":"Save/บันทึก","youtube":"ยูทูป","showall":"แสดงทั้งหมด","showsome":"แสดงบางส่วน","activitynot":"คุณยังไม่มีข้อมูลส่วนนี้","btnresume1":"ถัดไป","btnresume2":"ส่งออก PDF","selectednot":"ไม่สามารถเลือกได้"}
+/// data : {"resumeColor":false,"userinfo":{"prefixid":"P1","prefix":"นาง","name":"","lastname":""},"position":[{"id":4,"orderchoose":1,"onselect":true,"position":"นักพัฒนาซอฟต์แวร์3","office":"  ","detail":"string"},{"id":1,"orderchoose":2,"onselect":false,"position":"นักพัฒนาซอฟต์แวร์","office":"ฟรีวิลล์ โซลูชั่นส์ จํากัด","detail":"string"},{"id":2,"orderchoose":2,"onselect":false,"position":"คณิตศาสตร์ประกันภัย","office":"","detail":"string"},{"id":5,"orderchoose":4,"onselect":true,"position":" ","office":" ","detail":"string"}],"aboutme":"สิ่งที่ใช้สมัครงานวัตถุประสงค์ของ RESUME คือสิ่งที่ต้องทำคือปล่อยให้ตัวบุคคลทำงานร่วมกันเพื่อให้ RESUME ของเอกสารสำคัญซึ่งนำไปใช้งาน วัตถุประสงค์ของ RESUME คือสิ่งที่ต้องทำคือปล่อยให้ตัวบุคคลทำงานร่วมกันเพื่อให้ RESUME ตอบสนองเอกสารสำคัญในการนำไปใช้  บอกเล่าตัวเองเพื่อตำแหน่งงานที่ต้องการในตัวเองเพื่อพนักงานตำแหน่งงานที่ต้องการ","contactinfo":{"email":"sittipon.profile.home@gmail.com","phone":"0828894191","facebook":"สิทธิพล ชินโน","line":"0930582335","instagram":"","twitter":"","youtube":"","onselected_email":false,"onselected_phone":false,"onselected_facebook":false,"onselected_line":false,"onselected_instagram":false,"onselected_twitter":false,"onselected_youtube":false},"address":{"number":"169","moo":"","soi":"","road":"","subdistrict":"แสนสุข","district":"อำเภอเมืองชลบุรี","province":"ชลบุรี","zipcode":"20130","onselected_number":false,"onselected_moo":false,"onselected_soi":false,"onselected_road":false,"onselected_subdistrict":true,"onselected_district":false,"onselected_province":false,"onselected_zipcode":true},"experience":[{"id":1,"orderchoose":0,"onselect":true,"startdate":"12/2022","enddate":"12/2022","position":"t","detail":"ddddddddddddddddddddd"}],"education":{"hsc":[{"id":1,"orderchoose":1,"onselect":false,"startdate":"12/2022","enddate":"12/2022","type":"HSC","placeofstudy":"คำแสนวิทยาสรรค์","detail":"วิทย์-คณิตศาสตร์"}],"bd":[{"id":2,"orderchoose":1,"onselect":false,"startdate":"12/2022","enddate":"12/2022","type":"BD","placeofstudy":"มหาวิทยาลัยบูรพา","detail":"คณะวิทยาศาสตร์ สาขาคณิตศาสตร์"},{"id":3,"orderchoose":2,"onselect":false,"startdate":"12/2022","enddate":"12/2022","type":"BD","placeofstudy":"มหาวิทยาลัยบูรพา","detail":"คณะวิทยาศาสตร์ สาขา สถิติ"}],"md":[{"id":1,"orderchoose":1,"onselect":false,"startdate":"12/2022","enddate":"12/2022","type":"HSC","placeofstudy":"คำแสนวิทยาสรรค์","detail":"วิทย์-คณิตศาสตร์"}],"dd":[{"id":1,"orderchoose":1,"onselect":false,"startdate":"12/2022","enddate":"12/2022","type":"HSC","placeofstudy":"คำแสนวิทยาสรรค์","detail":"วิทย์-คณิตศาสตร์"}],"hdd":[{"id":1,"orderchoose":1,"onselect":false,"startdate":"12/2022","enddate":"12/2022","type":"HSC","placeofstudy":"คำแสนวิทยาสรรค์","detail":"วิทย์-คณิตศาสตร์"}]},"skill":[{"id":6,"orderchoose":0,"onselect":true,"skill":"","value":"50","detail":""}],"certificate":[{"id":6,"orderchoose":1,"onselect":false,"title":" ","description":" "}],"language":[{"id":4,"orderchoose":0,"onselect":false,"language":"","value":null,"detail":""}],"resumedatacount":{"position":4,"experience":1,"education_hsc":1,"education_bd":2,"education_md":0,"education_dd":0,"education_hdd":0,"skill":1,"certificate":1,"language":1},"resumedatacolor":{"text":0,"name":0,"theme":8,"aboutme":4,"position":5,"education":10,"contact":12,"address":17,"experience":4,"certificate":14,"skill":3,"language":36},"image":""}
 
 Body bodyFromJson(String str) => Body.fromJson(json.decode(str));
 String bodyToJson(Body data) => json.encode(data.toJson());
 class Body {
   Body({
-    Screeninfo? screeninfo,
-    Data? data,}){
+      Screeninfo? screeninfo, 
+      Data? data,}){
     _screeninfo = screeninfo;
     _data = data;
-  }
+}
 
   Body.fromJson(dynamic json) {
     _screeninfo = json['screeninfo'] != null ? Screeninfo.fromJson(json['screeninfo']) : null;
@@ -58,11 +58,11 @@ class Body {
   }
   Screeninfo? _screeninfo;
   Data? _data;
-  Body copyWith({  Screeninfo? screeninfo,
-    Data? data,
-  }) => Body(  screeninfo: screeninfo ?? _screeninfo,
-    data: data ?? _data,
-  );
+Body copyWith({  Screeninfo? screeninfo,
+  Data? data,
+}) => Body(  screeninfo: screeninfo ?? _screeninfo,
+  data: data ?? _data,
+);
   Screeninfo? get screeninfo => _screeninfo;
   Data? get data => _data;
 
@@ -78,23 +78,27 @@ class Body {
   }
 
 }
-/// userinfo : {"prefixid":"","prefix":"","name":"","lastname":""}
-/// position : [{"id":8,"orderchoose":2,"onselect":true,"position":"4444444","office":"44455","detail":"string"},{"id":7,"orderchoose":9,"onselect":true,"position":"โปรแกรมการแข่งขันกีฬา","office":"","detail":"string"}]
-/// aboutme : ""
-/// contactinfo : {"email":"","phone":"","facebook":"","line":"","instagram":"","twitter":"","youtube":"","onselected_email":false,"onselected_phone":false,"onselected_facebook":false,"onselected_line":false,"onselected_instagram":false,"onselected_twitter":false,"onselected_youtube":false}
-/// address : {"number":"num","moo":"mo","soi":"so","road":"ro","subdistrict":"ฝั่งแดง","district":"อำเภอนากลาง","province":"หนองบัวลำภู","zipcode":"","onselected_number":false,"onselected_moo":false,"onselected_soi":false,"onselected_road":false,"onselected_subdistrict":true,"onselected_district":true,"onselected_province":true,"onselected_zipcode":true}
-/// experience : [{"id":3,"orderchoose":0,"onselect":true,"startdate":"12/2022","enddate":"12/2022","position":"","detail":""}]
-/// education : {"hsc":[{"id":6,"orderchoose":0,"onselect":true,"startdate":"12/2022","enddate":"12/2022","type":"HSC","placeofstudy":"คำแสนวัดสวนดอกอำเภอ","detail":""}],"bd":[{"id":7,"orderchoose":0,"onselect":true,"startdate":"12/2022","enddate":"12/2022","type":"BD","placeofstudy":"","detail":""}],"md":[{"id":8,"orderchoose":0,"onselect":true,"startdate":"12/2022","enddate":"12/2022","type":"MD","placeofstudy":"","detail":""}],"dd":[{"id":9,"orderchoose":0,"onselect":true,"startdate":"12/2022","enddate":"12/2022","type":"DD","placeofstudy":"","detail":""}],"hdd":[{"id":10,"orderchoose":0,"onselect":true,"startdate":"12/2022","enddate":"12/2022","type":"HDD","placeofstudy":"","detail":""}]}
-/// skill : [{"id":4,"orderchoose":0,"onselect":true,"skill":"ออกแบบ","value":"50","detail":"ออกแบบหน้าจอ"}]
-/// certificate : [{"id":2,"orderchoose":4,"onselect":true,"title":"ใบรับรอง d","description":""}]
-/// language : [{"id":2,"orderchoose":1,"onselect":true,"language":"ภาษา","value":"60","detail":""}]
-/// resumedatacount : {"position":2,"experience":1,"education_hsc":1,"education_bd":1,"education_md":1,"education_dd":1,"education_hdd":1,"skill":1,"certificate":1,"language":1}
+
+/// resumeColor : false
+/// userinfo : {"prefixid":"P1","prefix":"นาง","name":"","lastname":""}
+/// position : [{"id":4,"orderchoose":1,"onselect":true,"position":"นักพัฒนาซอฟต์แวร์3","office":"  ","detail":"string"},{"id":1,"orderchoose":2,"onselect":false,"position":"นักพัฒนาซอฟต์แวร์","office":"ฟรีวิลล์ โซลูชั่นส์ จํากัด","detail":"string"},{"id":2,"orderchoose":2,"onselect":false,"position":"คณิตศาสตร์ประกันภัย","office":"","detail":"string"},{"id":5,"orderchoose":4,"onselect":true,"position":" ","office":" ","detail":"string"}]
+/// aboutme : "สิ่งที่ใช้สมัครงานวัตถุประสงค์ของ RESUME คือสิ่งที่ต้องทำคือปล่อยให้ตัวบุคคลทำงานร่วมกันเพื่อให้ RESUME ของเอกสารสำคัญซึ่งนำไปใช้งาน วัตถุประสงค์ของ RESUME คือสิ่งที่ต้องทำคือปล่อยให้ตัวบุคคลทำงานร่วมกันเพื่อให้ RESUME ตอบสนองเอกสารสำคัญในการนำไปใช้  บอกเล่าตัวเองเพื่อตำแหน่งงานที่ต้องการในตัวเองเพื่อพนักงานตำแหน่งงานที่ต้องการ"
+/// contactinfo : {"email":"sittipon.profile.home@gmail.com","phone":"0828894191","facebook":"สิทธิพล ชินโน","line":"0930582335","instagram":"","twitter":"","youtube":"","onselected_email":false,"onselected_phone":false,"onselected_facebook":false,"onselected_line":false,"onselected_instagram":false,"onselected_twitter":false,"onselected_youtube":false}
+/// address : {"number":"169","moo":"","soi":"","road":"","subdistrict":"แสนสุข","district":"อำเภอเมืองชลบุรี","province":"ชลบุรี","zipcode":"20130","onselected_number":false,"onselected_moo":false,"onselected_soi":false,"onselected_road":false,"onselected_subdistrict":true,"onselected_district":false,"onselected_province":false,"onselected_zipcode":true}
+/// experience : [{"id":1,"orderchoose":0,"onselect":true,"startdate":"12/2022","enddate":"12/2022","position":"t","detail":"ddddddddddddddddddddd"}]
+/// education : {"hsc":[{"id":1,"orderchoose":1,"onselect":false,"startdate":"12/2022","enddate":"12/2022","type":"HSC","placeofstudy":"คำแสนวิทยาสรรค์","detail":"วิทย์-คณิตศาสตร์"}],"bd":[{"id":2,"orderchoose":1,"onselect":false,"startdate":"12/2022","enddate":"12/2022","type":"BD","placeofstudy":"มหาวิทยาลัยบูรพา","detail":"คณะวิทยาศาสตร์ สาขาคณิตศาสตร์"},{"id":3,"orderchoose":2,"onselect":false,"startdate":"12/2022","enddate":"12/2022","type":"BD","placeofstudy":"มหาวิทยาลัยบูรพา","detail":"คณะวิทยาศาสตร์ สาขา สถิติ"}],"md":[{"id":1,"orderchoose":1,"onselect":false,"startdate":"12/2022","enddate":"12/2022","type":"HSC","placeofstudy":"คำแสนวิทยาสรรค์","detail":"วิทย์-คณิตศาสตร์"}],"dd":[{"id":1,"orderchoose":1,"onselect":false,"startdate":"12/2022","enddate":"12/2022","type":"HSC","placeofstudy":"คำแสนวิทยาสรรค์","detail":"วิทย์-คณิตศาสตร์"}],"hdd":[{"id":1,"orderchoose":1,"onselect":false,"startdate":"12/2022","enddate":"12/2022","type":"HSC","placeofstudy":"คำแสนวิทยาสรรค์","detail":"วิทย์-คณิตศาสตร์"}]}
+/// skill : [{"id":6,"orderchoose":0,"onselect":true,"skill":"","value":"50","detail":""}]
+/// certificate : [{"id":6,"orderchoose":1,"onselect":false,"title":" ","description":" "}]
+/// language : [{"id":4,"orderchoose":0,"onselect":false,"language":"","value":null,"detail":""}]
+/// resumedatacount : {"position":4,"experience":1,"education_hsc":1,"education_bd":2,"education_md":0,"education_dd":0,"education_hdd":0,"skill":1,"certificate":1,"language":1}
+/// resumedatacolor : {"text":0,"name":0,"theme":8,"aboutme":4,"position":5,"education":10,"contact":12,"address":17,"experience":4,"certificate":14,"skill":3,"language":36}
 /// image : ""
 
 Data dataFromJson(String str) => Data.fromJson(json.decode(str));
 String dataToJson(Data data) => json.encode(data.toJson());
 class Data {
   Data({
+      bool? resumeColor, 
       Userinfo? userinfo, 
       List<Position>? position, 
       String? aboutme, 
@@ -105,9 +109,10 @@ class Data {
       List<Skill>? skill, 
       List<Certificate>? certificate, 
       List<Language>? language, 
-      Resumedatacount? resumedatacount,
-      Resumedatacolor? resumedatacolor,
-    String? image,}){
+      Resumedatacount? resumedatacount, 
+      Resumedatacolor? resumedatacolor, 
+      String? image,}){
+    _resumeColor = resumeColor;
     _userinfo = userinfo;
     _position = position;
     _aboutme = aboutme;
@@ -124,6 +129,7 @@ class Data {
 }
 
   Data.fromJson(dynamic json) {
+    _resumeColor = json['resumeColor'];
     _userinfo = json['userinfo'] != null ? Userinfo.fromJson(json['userinfo']) : null;
     if (json['position'] != null) {
       _position = [];
@@ -163,6 +169,7 @@ class Data {
     _resumedatacolor = json['resumedatacolor'] != null ? Resumedatacolor.fromJson(json['resumedatacolor']) : null;
     _image = json['image'];
   }
+  bool? _resumeColor;
   Userinfo? _userinfo;
   List<Position>? _position;
   String? _aboutme;
@@ -176,7 +183,8 @@ class Data {
   Resumedatacount? _resumedatacount;
   Resumedatacolor? _resumedatacolor;
   String? _image;
-Data copyWith({  Userinfo? userinfo,
+Data copyWith({  bool? resumeColor,
+  Userinfo? userinfo,
   List<Position>? position,
   String? aboutme,
   Contactinfo? contactinfo,
@@ -189,7 +197,8 @@ Data copyWith({  Userinfo? userinfo,
   Resumedatacount? resumedatacount,
   Resumedatacolor? resumedatacolor,
   String? image,
-}) => Data(  userinfo: userinfo ?? _userinfo,
+}) => Data(  resumeColor: resumeColor ?? _resumeColor,
+  userinfo: userinfo ?? _userinfo,
   position: position ?? _position,
   aboutme: aboutme ?? _aboutme,
   contactinfo: contactinfo ?? _contactinfo,
@@ -203,6 +212,7 @@ Data copyWith({  Userinfo? userinfo,
   resumedatacolor: resumedatacolor ?? _resumedatacolor,
   image: image ?? _image,
 );
+  bool? get resumeColor => _resumeColor;
   Userinfo? get userinfo => _userinfo;
   List<Position>? get position => _position;
   String? get aboutme => _aboutme;
@@ -219,6 +229,7 @@ Data copyWith({  Userinfo? userinfo,
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
+    map['resumeColor'] = _resumeColor;
     if (_userinfo != null) {
       map['userinfo'] = _userinfo?.toJson();
     }
@@ -259,22 +270,35 @@ Data copyWith({  Userinfo? userinfo,
 
 }
 
+/// text : 0
+/// name : 0
+/// theme : 8
+/// aboutme : 4
+/// position : 5
+/// education : 10
+/// contact : 12
+/// address : 17
+/// experience : 4
+/// certificate : 14
+/// skill : 3
+/// language : 36
+
 Resumedatacolor resumedatacolorFromJson(String str) => Resumedatacolor.fromJson(json.decode(str));
 String resumedatacolorToJson(Resumedatacolor data) => json.encode(data.toJson());
 class Resumedatacolor {
   Resumedatacolor({
-    int? text,
-    int? name,
-    int? theme,
-    int? aboutme,
-    int? position,
-    int? education,
-    int? contact,
-    int? address,
-    int? experience,
-    int? certificate,
-    int? skill,
-    int? language,}){
+      int? text, 
+      int? name, 
+      int? theme, 
+      int? aboutme, 
+      int? position, 
+      int? education, 
+      int? contact, 
+      int? address, 
+      int? experience, 
+      int? certificate, 
+      int? skill, 
+      int? language,}){
     _text = text;
     _name = name;
     _theme = theme;
@@ -287,7 +311,7 @@ class Resumedatacolor {
     _certificate = certificate;
     _skill = skill;
     _language = language;
-  }
+}
 
   Resumedatacolor.fromJson(dynamic json) {
     _text = json['text'];
@@ -315,31 +339,31 @@ class Resumedatacolor {
   int? _certificate;
   int? _skill;
   int? _language;
-  Resumedatacolor copyWith({  int? text,
-    int? name,
-    int? theme,
-    int? aboutme,
-    int? position,
-    int? education,
-    int? contact,
-    int? address,
-    int? experience,
-    int? certificate,
-    int? skill,
-    int? language,
-  }) => Resumedatacolor(  text: text ?? _text,
-    name: name ?? _name,
-    theme: theme ?? _theme,
-    aboutme: aboutme ?? _aboutme,
-    position: position ?? _position,
-    education: education ?? _education,
-    contact: contact ?? _contact,
-    address: address ?? _address,
-    experience: experience ?? _experience,
-    certificate: certificate ?? _certificate,
-    skill: skill ?? _skill,
-    language: language ?? _language,
-  );
+Resumedatacolor copyWith({  int? text,
+  int? name,
+  int? theme,
+  int? aboutme,
+  int? position,
+  int? education,
+  int? contact,
+  int? address,
+  int? experience,
+  int? certificate,
+  int? skill,
+  int? language,
+}) => Resumedatacolor(  text: text ?? _text,
+  name: name ?? _name,
+  theme: theme ?? _theme,
+  aboutme: aboutme ?? _aboutme,
+  position: position ?? _position,
+  education: education ?? _education,
+  contact: contact ?? _contact,
+  address: address ?? _address,
+  experience: experience ?? _experience,
+  certificate: certificate ?? _certificate,
+  skill: skill ?? _skill,
+  language: language ?? _language,
+);
   int? get text => _text;
   int? get name => _name;
   int? get theme => _theme;
@@ -372,24 +396,13 @@ class Resumedatacolor {
 
 }
 
-/// position : 0
-/// experience : 0
-/// education_hsc : 0
-/// education_bd : 0
+/// position : 4
+/// experience : 1
+/// education_hsc : 1
+/// education_bd : 2
 /// education_md : 0
 /// education_dd : 0
 /// education_hdd : 0
-/// skill : 0
-/// certificate : 0
-/// language : 0
-
-/// position : 2
-/// experience : 1
-/// education_hsc : 1
-/// education_bd : 1
-/// education_md : 1
-/// education_dd : 1
-/// education_hdd : 1
 /// skill : 1
 /// certificate : 1
 /// language : 1
@@ -491,11 +504,11 @@ Resumedatacount copyWith({  int? position,
 
 }
 
-/// id : 2
-/// orderchoose : 1
-/// onselect : true
-/// language : "ภาษา"
-/// value : "60"
+/// id : 4
+/// orderchoose : 0
+/// onselect : false
+/// language : ""
+/// value : null
 /// detail : ""
 
 Language languageFromJson(String str) => Language.fromJson(json.decode(str));
@@ -506,7 +519,7 @@ class Language {
       int? orderchoose, 
       bool? onselect, 
       String? language, 
-      String? value, 
+      dynamic value, 
       String? detail,}){
     _id = id;
     _orderchoose = orderchoose;
@@ -528,13 +541,13 @@ class Language {
   int? _orderchoose;
   bool? _onselect;
   String? _language;
-  String? _value;
+  dynamic _value;
   String? _detail;
 Language copyWith({  int? id,
   int? orderchoose,
   bool? onselect,
   String? language,
-  String? value,
+  dynamic value,
   String? detail,
 }) => Language(  id: id ?? _id,
   orderchoose: orderchoose ?? _orderchoose,
@@ -547,7 +560,7 @@ Language copyWith({  int? id,
   int? get orderchoose => _orderchoose;
   bool? get onselect => _onselect;
   String? get language => _language;
-  String? get value => _value;
+  dynamic get value => _value;
   String? get detail => _detail;
 
   Map<String, dynamic> toJson() {
@@ -563,11 +576,11 @@ Language copyWith({  int? id,
 
 }
 
-/// id : 2
-/// orderchoose : 4
-/// onselect : true
-/// title : "ใบรับรอง d"
-/// description : ""
+/// id : 6
+/// orderchoose : 1
+/// onselect : false
+/// title : " "
+/// description : " "
 
 Certificate certificateFromJson(String str) => Certificate.fromJson(json.decode(str));
 String certificateToJson(Certificate data) => json.encode(data.toJson());
@@ -626,12 +639,12 @@ Certificate copyWith({  int? id,
 
 }
 
-/// id : 4
+/// id : 6
 /// orderchoose : 0
 /// onselect : true
-/// skill : "ออกแบบ"
+/// skill : ""
 /// value : "50"
-/// detail : "ออกแบบหน้าจอ"
+/// detail : ""
 
 Skill skillFromJson(String str) => Skill.fromJson(json.decode(str));
 String skillToJson(Skill data) => json.encode(data.toJson());
@@ -698,11 +711,11 @@ Skill copyWith({  int? id,
 
 }
 
-/// hsc : [{"id":6,"orderchoose":0,"onselect":true,"startdate":"12/2022","enddate":"12/2022","type":"HSC","placeofstudy":"คำแสนวัดสวนดอกอำเภอ","detail":""}]
-/// bd : [{"id":7,"orderchoose":0,"onselect":true,"startdate":"12/2022","enddate":"12/2022","type":"BD","placeofstudy":"","detail":""}]
-/// md : [{"id":8,"orderchoose":0,"onselect":true,"startdate":"12/2022","enddate":"12/2022","type":"MD","placeofstudy":"","detail":""}]
-/// dd : [{"id":9,"orderchoose":0,"onselect":true,"startdate":"12/2022","enddate":"12/2022","type":"DD","placeofstudy":"","detail":""}]
-/// hdd : [{"id":10,"orderchoose":0,"onselect":true,"startdate":"12/2022","enddate":"12/2022","type":"HDD","placeofstudy":"","detail":""}]
+/// hsc : [{"id":1,"orderchoose":1,"onselect":false,"startdate":"12/2022","enddate":"12/2022","type":"HSC","placeofstudy":"คำแสนวิทยาสรรค์","detail":"วิทย์-คณิตศาสตร์"}]
+/// bd : [{"id":2,"orderchoose":1,"onselect":false,"startdate":"12/2022","enddate":"12/2022","type":"BD","placeofstudy":"มหาวิทยาลัยบูรพา","detail":"คณะวิทยาศาสตร์ สาขาคณิตศาสตร์"},{"id":3,"orderchoose":2,"onselect":false,"startdate":"12/2022","enddate":"12/2022","type":"BD","placeofstudy":"มหาวิทยาลัยบูรพา","detail":"คณะวิทยาศาสตร์ สาขา สถิติ"}]
+/// md : [{"id":1,"orderchoose":1,"onselect":false,"startdate":"12/2022","enddate":"12/2022","type":"HSC","placeofstudy":"คำแสนวิทยาสรรค์","detail":"วิทย์-คณิตศาสตร์"}]
+/// dd : [{"id":1,"orderchoose":1,"onselect":false,"startdate":"12/2022","enddate":"12/2022","type":"HSC","placeofstudy":"คำแสนวิทยาสรรค์","detail":"วิทย์-คณิตศาสตร์"}]
+/// hdd : [{"id":1,"orderchoose":1,"onselect":false,"startdate":"12/2022","enddate":"12/2022","type":"HSC","placeofstudy":"คำแสนวิทยาสรรค์","detail":"วิทย์-คณิตศาสตร์"}]
 
 Education educationFromJson(String str) => Education.fromJson(json.decode(str));
 String educationToJson(Education data) => json.encode(data.toJson());
@@ -796,14 +809,14 @@ Education copyWith({  List<Hsc>? hsc,
 
 }
 
-/// id : 10
-/// orderchoose : 0
-/// onselect : true
+/// id : 1
+/// orderchoose : 1
+/// onselect : false
 /// startdate : "12/2022"
 /// enddate : "12/2022"
-/// type : "HDD"
-/// placeofstudy : ""
-/// detail : ""
+/// type : "HSC"
+/// placeofstudy : "คำแสนวิทยาสรรค์"
+/// detail : "วิทย์-คณิตศาสตร์"
 
 Hdd hddFromJson(String str) => Hdd.fromJson(json.decode(str));
 String hddToJson(Hdd data) => json.encode(data.toJson());
@@ -886,14 +899,14 @@ Hdd copyWith({  int? id,
 
 }
 
-/// id : 9
-/// orderchoose : 0
-/// onselect : true
+/// id : 1
+/// orderchoose : 1
+/// onselect : false
 /// startdate : "12/2022"
 /// enddate : "12/2022"
-/// type : "DD"
-/// placeofstudy : ""
-/// detail : ""
+/// type : "HSC"
+/// placeofstudy : "คำแสนวิทยาสรรค์"
+/// detail : "วิทย์-คณิตศาสตร์"
 
 Dd ddFromJson(String str) => Dd.fromJson(json.decode(str));
 String ddToJson(Dd data) => json.encode(data.toJson());
@@ -976,14 +989,14 @@ Dd copyWith({  int? id,
 
 }
 
-/// id : 8
-/// orderchoose : 0
-/// onselect : true
+/// id : 1
+/// orderchoose : 1
+/// onselect : false
 /// startdate : "12/2022"
 /// enddate : "12/2022"
-/// type : "MD"
-/// placeofstudy : ""
-/// detail : ""
+/// type : "HSC"
+/// placeofstudy : "คำแสนวิทยาสรรค์"
+/// detail : "วิทย์-คณิตศาสตร์"
 
 Md mdFromJson(String str) => Md.fromJson(json.decode(str));
 String mdToJson(Md data) => json.encode(data.toJson());
@@ -1066,14 +1079,14 @@ Md copyWith({  int? id,
 
 }
 
-/// id : 7
-/// orderchoose : 0
-/// onselect : true
+/// id : 2
+/// orderchoose : 1
+/// onselect : false
 /// startdate : "12/2022"
 /// enddate : "12/2022"
 /// type : "BD"
-/// placeofstudy : ""
-/// detail : ""
+/// placeofstudy : "มหาวิทยาลัยบูรพา"
+/// detail : "คณะวิทยาศาสตร์ สาขาคณิตศาสตร์"
 
 Bd bdFromJson(String str) => Bd.fromJson(json.decode(str));
 String bdToJson(Bd data) => json.encode(data.toJson());
@@ -1156,14 +1169,14 @@ Bd copyWith({  int? id,
 
 }
 
-/// id : 6
-/// orderchoose : 0
-/// onselect : true
+/// id : 1
+/// orderchoose : 1
+/// onselect : false
 /// startdate : "12/2022"
 /// enddate : "12/2022"
 /// type : "HSC"
-/// placeofstudy : "คำแสนวัดสวนดอกอำเภอ"
-/// detail : ""
+/// placeofstudy : "คำแสนวิทยาสรรค์"
+/// detail : "วิทย์-คณิตศาสตร์"
 
 Hsc hscFromJson(String str) => Hsc.fromJson(json.decode(str));
 String hscToJson(Hsc data) => json.encode(data.toJson());
@@ -1246,13 +1259,13 @@ Hsc copyWith({  int? id,
 
 }
 
-/// id : 3
+/// id : 1
 /// orderchoose : 0
 /// onselect : true
 /// startdate : "12/2022"
 /// enddate : "12/2022"
-/// position : ""
-/// detail : ""
+/// position : "t"
+/// detail : "ddddddddddddddddddddd"
 
 Experience experienceFromJson(String str) => Experience.fromJson(json.decode(str));
 String experienceToJson(Experience data) => json.encode(data.toJson());
@@ -1327,21 +1340,21 @@ Experience copyWith({  int? id,
 
 }
 
-/// number : "num"
-/// moo : "mo"
-/// soi : "so"
-/// road : "ro"
-/// subdistrict : "ฝั่งแดง"
-/// district : "อำเภอนากลาง"
-/// province : "หนองบัวลำภู"
-/// zipcode : ""
+/// number : "169"
+/// moo : ""
+/// soi : ""
+/// road : ""
+/// subdistrict : "แสนสุข"
+/// district : "อำเภอเมืองชลบุรี"
+/// province : "ชลบุรี"
+/// zipcode : "20130"
 /// onselected_number : false
 /// onselected_moo : false
 /// onselected_soi : false
 /// onselected_road : false
 /// onselected_subdistrict : true
-/// onselected_district : true
-/// onselected_province : true
+/// onselected_district : false
+/// onselected_province : false
 /// onselected_zipcode : true
 
 Address addressFromJson(String str) => Address.fromJson(json.decode(str));
@@ -1489,10 +1502,10 @@ Address copyWith({  String? number,
 
 }
 
-/// email : ""
-/// phone : ""
-/// facebook : ""
-/// line : ""
+/// email : "sittipon.profile.home@gmail.com"
+/// phone : "0828894191"
+/// facebook : "สิทธิพล ชินโน"
+/// line : "0930582335"
 /// instagram : ""
 /// twitter : ""
 /// youtube : ""
@@ -1633,11 +1646,11 @@ Contactinfo copyWith({  String? email,
 
 }
 
-/// id : 8
-/// orderchoose : 2
+/// id : 4
+/// orderchoose : 1
 /// onselect : true
-/// position : "4444444"
-/// office : "44455"
+/// position : "นักพัฒนาซอฟต์แวร์3"
+/// office : "  "
 /// detail : "string"
 
 Position positionFromJson(String str) => Position.fromJson(json.decode(str));
@@ -1705,8 +1718,8 @@ Position copyWith({  int? id,
 
 }
 
-/// prefixid : ""
-/// prefix : ""
+/// prefixid : "P1"
+/// prefix : "นาง"
 /// name : ""
 /// lastname : ""
 
@@ -1788,8 +1801,8 @@ Userinfo copyWith({  String? prefixid,
 /// phone : "โทรศัพท์"
 /// pictuce : "รูปภาพ"
 /// placeofstudy : "สถานศึกษา"
-/// position : "ตำแหน่ง"
-/// positions : "ตำแหน่ง"
+/// position : "ตำแหน่งที่สนใจ"
+/// positions : null
 /// prefix : "คำนำหน้า"
 /// province : "จังหวัด"
 /// ratio : "อัตราส่วนภาพต้องเป็น 3:4"
@@ -1806,6 +1819,7 @@ Userinfo copyWith({  String? prefixid,
 /// themecolor : "สีธีม"
 /// title : "หัวเรื่อง"
 /// titlesetthemecolor : "ตั้งค่าธีมและสี"
+/// titlesettheme : null
 /// twitter : "ทวิตเตอร์"
 /// type : "ประเภทการศึกษา"
 /// value : "ระดับ"
@@ -1823,81 +1837,88 @@ Userinfo copyWith({  String? prefixid,
 /// save : "บันทึก"
 /// saveor : "Save/บันทึก"
 /// youtube : "ยูทูป"
+/// showall : "แสดงทั้งหมด"
+/// showsome : "แสดงบางส่วน"
+/// activitynot : "คุณยังไม่มีข้อมูลส่วนนี้"
+/// btnresume1 : "ถัดไป"
+/// btnresume2 : "ส่งออก PDF"
+/// selectednot : "ไม่สามารถเลือกได้"
 
 Screeninfo screeninfoFromJson(String str) => Screeninfo.fromJson(json.decode(str));
 String screeninfoToJson(Screeninfo data) => json.encode(data.toJson());
 class Screeninfo {
   Screeninfo({
-    String? aboutme,
-    String? aboutmedetail,
-    String? address,
-    String? appliedposition,
-    String? certificate,
-    String? contact,
-    String? textdefault,
-    String? description,
-    String? detail,
-    String? district,
-    String? editinfomations,
-    String? education,
-    String? educationinfo,
-    String? email,
-    String? enddate,
-    String? experience,
-    String? facebook,
-    String? instagram,
-    String? language,
-    String? lastname,
-    String? line,
-    String? moo,
-    String? mypositions,
-    String? n,
-    String? name,
-    String? number,
-    String? phone,
-    String? pictuce,
-    String? placeofstudy,
-    String? position,
-    String? positions,
-    String? prefix,
-    String? province,
-    String? ratio,
-    String? road,
-    String? select,
-    String? selectacolor,
-    String? selecttheinformation,
-    String? size,
-    String? sizepictuce,
-    String? skill,
-    String? soi,
-    String? startdate,
-    String? subdistrict,
-    String? themecolor,
-    String? title,
-    String? titlesetthemecolor,
-    String? twitter,
-    String? type,
-    String? value,
-    String? whcm,
-    String? zipcode,
-    String? unkhown,
-    String? viewpdf,
-    String? titleresumeinformation,
-    String? hsc,
-    String? bd,
-    String? md,
-    String? dd,
-    String? hdd,
-    String? tapedit,
-    String? save,
-    String? saveor,
-    String? youtube,
-    String? showall,
-    String? showsome,
-    String? activitynot,
-    String? selectednot,
-    String? btnresume1,
-    String? btnresume2,}){
+      String? aboutme, 
+      String? aboutmedetail, 
+      String? address, 
+      String? appliedposition, 
+      String? certificate, 
+      String? contact, 
+      String? textdefault, 
+      String? description, 
+      String? detail, 
+      String? district, 
+      String? editinfomations, 
+      String? education, 
+      String? educationinfo, 
+      String? email, 
+      String? enddate, 
+      String? experience, 
+      String? facebook, 
+      String? instagram, 
+      String? language, 
+      String? lastname, 
+      String? line, 
+      String? moo, 
+      String? mypositions, 
+      String? n, 
+      String? name, 
+      String? number, 
+      String? phone, 
+      String? pictuce, 
+      String? placeofstudy, 
+      String? position, 
+      dynamic positions, 
+      String? prefix, 
+      String? province, 
+      String? ratio, 
+      String? road, 
+      String? select, 
+      String? selectacolor, 
+      String? selecttheinformation, 
+      String? size, 
+      String? sizepictuce, 
+      String? skill, 
+      String? soi, 
+      String? startdate, 
+      String? subdistrict, 
+      String? themecolor, 
+      String? title, 
+      String? titlesetthemecolor, 
+      dynamic titlesettheme, 
+      String? twitter, 
+      String? type, 
+      String? value, 
+      String? whcm, 
+      String? zipcode, 
+      String? unkhown, 
+      String? viewpdf, 
+      String? titleresumeinformation, 
+      String? hsc, 
+      String? bd, 
+      String? md, 
+      String? dd, 
+      String? hdd, 
+      String? tapedit, 
+      String? save, 
+      String? saveor, 
+      String? youtube, 
+      String? showall, 
+      String? showsome, 
+      String? activitynot, 
+      String? btnresume1, 
+      String? btnresume2, 
+      String? selectednot,}){
     _aboutme = aboutme;
     _aboutmedetail = aboutmedetail;
     _address = address;
@@ -1945,6 +1966,7 @@ class Screeninfo {
     _themecolor = themecolor;
     _title = title;
     _titlesetthemecolor = titlesetthemecolor;
+    _titlesettheme = titlesettheme;
     _twitter = twitter;
     _type = type;
     _value = value;
@@ -1965,10 +1987,10 @@ class Screeninfo {
     _showall = showall;
     _showsome = showsome;
     _activitynot = activitynot;
-    _selectednot = selectednot;
     _btnresume1 = btnresume1;
     _btnresume2 = btnresume2;
-  }
+    _selectednot = selectednot;
+}
 
   Screeninfo.fromJson(dynamic json) {
     _aboutme = json['aboutme'];
@@ -2018,6 +2040,7 @@ class Screeninfo {
     _themecolor = json['themecolor'];
     _title = json['title'];
     _titlesetthemecolor = json['titlesetthemecolor'];
+    _titlesettheme = json['titlesettheme'];
     _twitter = json['twitter'];
     _type = json['type'];
     _value = json['value'];
@@ -2038,9 +2061,9 @@ class Screeninfo {
     _showall = json['showall'];
     _showsome = json['showsome'];
     _activitynot = json['activitynot'];
-    _selectednot = json['selectednot'];
     _btnresume1 = json['btnresume1'];
     _btnresume2 = json['btnresume2'];
+    _selectednot = json['selectednot'];
   }
   String? _aboutme;
   String? _aboutmedetail;
@@ -2072,7 +2095,7 @@ class Screeninfo {
   String? _pictuce;
   String? _placeofstudy;
   String? _position;
-  String? _positions;
+  dynamic _positions;
   String? _prefix;
   String? _province;
   String? _ratio;
@@ -2089,6 +2112,7 @@ class Screeninfo {
   String? _themecolor;
   String? _title;
   String? _titlesetthemecolor;
+  dynamic _titlesettheme;
   String? _twitter;
   String? _type;
   String? _value;
@@ -2109,150 +2133,152 @@ class Screeninfo {
   String? _showall;
   String? _showsome;
   String? _activitynot;
-  String? _selectednot;
   String? _btnresume1;
   String? _btnresume2;
-  Screeninfo copyWith({  String? aboutme,
-    String? aboutmedetail,
-    String? address,
-    String? appliedposition,
-    String? certificate,
-    String? contact,
-    String? textdefault,
-    String? description,
-    String? detail,
-    String? district,
-    String? editinfomations,
-    String? education,
-    String? educationinfo,
-    String? email,
-    String? enddate,
-    String? experience,
-    String? facebook,
-    String? instagram,
-    String? language,
-    String? lastname,
-    String? line,
-    String? moo,
-    String? mypositions,
-    String? n,
-    String? name,
-    String? number,
-    String? phone,
-    String? pictuce,
-    String? placeofstudy,
-    String? position,
-    String? positions,
-    String? prefix,
-    String? province,
-    String? ratio,
-    String? road,
-    String? select,
-    String? selectacolor,
-    String? selecttheinformation,
-    String? size,
-    String? sizepictuce,
-    String? skill,
-    String? soi,
-    String? startdate,
-    String? subdistrict,
-    String? themecolor,
-    String? title,
-    String? titlesetthemecolor,
-    String? twitter,
-    String? type,
-    String? value,
-    String? whcm,
-    String? zipcode,
-    String? unkhown,
-    String? viewpdf,
-    String? titleresumeinformation,
-    String? hsc,
-    String? bd,
-    String? md,
-    String? dd,
-    String? hdd,
-    String? tapedit,
-    String? save,
-    String? saveor,
-    String? youtube,
-    String? showall,
-    String? showsome,
-    String? activitynot,
-    String? selectednot,
-    String? btnresume1,
-    String? btnresume2,
-  }) => Screeninfo(  aboutme: aboutme ?? _aboutme,
-    aboutmedetail: aboutmedetail ?? _aboutmedetail,
-    address: address ?? _address,
-    appliedposition: appliedposition ?? _appliedposition,
-    certificate: certificate ?? _certificate,
-    contact: contact ?? _contact,
-    textdefault: textdefault ?? _textdefault,
-    description: description ?? _description,
-    detail: detail ?? _detail,
-    district: district ?? _district,
-    editinfomations: editinfomations ?? _editinfomations,
-    education: education ?? _education,
-    educationinfo: educationinfo ?? _educationinfo,
-    email: email ?? _email,
-    enddate: enddate ?? _enddate,
-    experience: experience ?? _experience,
-    facebook: facebook ?? _facebook,
-    instagram: instagram ?? _instagram,
-    language: language ?? _language,
-    lastname: lastname ?? _lastname,
-    line: line ?? _line,
-    moo: moo ?? _moo,
-    mypositions: mypositions ?? _mypositions,
-    n: n ?? _n,
-    name: name ?? _name,
-    number: number ?? _number,
-    phone: phone ?? _phone,
-    pictuce: pictuce ?? _pictuce,
-    placeofstudy: placeofstudy ?? _placeofstudy,
-    position: position ?? _position,
-    positions: positions ?? _positions,
-    prefix: prefix ?? _prefix,
-    province: province ?? _province,
-    ratio: ratio ?? _ratio,
-    road: road ?? _road,
-    select: select ?? _select,
-    selectacolor: selectacolor ?? _selectacolor,
-    selecttheinformation: selecttheinformation ?? _selecttheinformation,
-    size: size ?? _size,
-    sizepictuce: sizepictuce ?? _sizepictuce,
-    skill: skill ?? _skill,
-    soi: soi ?? _soi,
-    startdate: startdate ?? _startdate,
-    subdistrict: subdistrict ?? _subdistrict,
-    themecolor: themecolor ?? _themecolor,
-    title: title ?? _title,
-    titlesetthemecolor: titlesetthemecolor ?? _titlesetthemecolor,
-    twitter: twitter ?? _twitter,
-    type: type ?? _type,
-    value: value ?? _value,
-    whcm: whcm ?? _whcm,
-    zipcode: zipcode ?? _zipcode,
-    unkhown: unkhown ?? _unkhown,
-    viewpdf: viewpdf ?? _viewpdf,
-    titleresumeinformation: titleresumeinformation ?? _titleresumeinformation,
-    hsc: hsc ?? _hsc,
-    bd: bd ?? _bd,
-    md: md ?? _md,
-    dd: dd ?? _dd,
-    hdd: hdd ?? _hdd,
-    tapedit: tapedit ?? _tapedit,
-    save: save ?? _save,
-    saveor: saveor ?? _saveor,
-    youtube: youtube ?? _youtube,
-    showall: showall ?? _showall,
-    showsome: showsome ?? _showsome,
-    activitynot: activitynot ?? _activitynot,
-    selectednot: selectednot ?? _selectednot,
-    btnresume1: btnresume1 ?? _btnresume1,
-    btnresume2: btnresume2 ?? _btnresume2,
-  );
+  String? _selectednot;
+Screeninfo copyWith({  String? aboutme,
+  String? aboutmedetail,
+  String? address,
+  String? appliedposition,
+  String? certificate,
+  String? contact,
+  String? textdefault,
+  String? description,
+  String? detail,
+  String? district,
+  String? editinfomations,
+  String? education,
+  String? educationinfo,
+  String? email,
+  String? enddate,
+  String? experience,
+  String? facebook,
+  String? instagram,
+  String? language,
+  String? lastname,
+  String? line,
+  String? moo,
+  String? mypositions,
+  String? n,
+  String? name,
+  String? number,
+  String? phone,
+  String? pictuce,
+  String? placeofstudy,
+  String? position,
+  dynamic positions,
+  String? prefix,
+  String? province,
+  String? ratio,
+  String? road,
+  String? select,
+  String? selectacolor,
+  String? selecttheinformation,
+  String? size,
+  String? sizepictuce,
+  String? skill,
+  String? soi,
+  String? startdate,
+  String? subdistrict,
+  String? themecolor,
+  String? title,
+  String? titlesetthemecolor,
+  dynamic titlesettheme,
+  String? twitter,
+  String? type,
+  String? value,
+  String? whcm,
+  String? zipcode,
+  String? unkhown,
+  String? viewpdf,
+  String? titleresumeinformation,
+  String? hsc,
+  String? bd,
+  String? md,
+  String? dd,
+  String? hdd,
+  String? tapedit,
+  String? save,
+  String? saveor,
+  String? youtube,
+  String? showall,
+  String? showsome,
+  String? activitynot,
+  String? btnresume1,
+  String? btnresume2,
+  String? selectednot,
+}) => Screeninfo(  aboutme: aboutme ?? _aboutme,
+  aboutmedetail: aboutmedetail ?? _aboutmedetail,
+  address: address ?? _address,
+  appliedposition: appliedposition ?? _appliedposition,
+  certificate: certificate ?? _certificate,
+  contact: contact ?? _contact,
+  textdefault: textdefault ?? _textdefault,
+  description: description ?? _description,
+  detail: detail ?? _detail,
+  district: district ?? _district,
+  editinfomations: editinfomations ?? _editinfomations,
+  education: education ?? _education,
+  educationinfo: educationinfo ?? _educationinfo,
+  email: email ?? _email,
+  enddate: enddate ?? _enddate,
+  experience: experience ?? _experience,
+  facebook: facebook ?? _facebook,
+  instagram: instagram ?? _instagram,
+  language: language ?? _language,
+  lastname: lastname ?? _lastname,
+  line: line ?? _line,
+  moo: moo ?? _moo,
+  mypositions: mypositions ?? _mypositions,
+  n: n ?? _n,
+  name: name ?? _name,
+  number: number ?? _number,
+  phone: phone ?? _phone,
+  pictuce: pictuce ?? _pictuce,
+  placeofstudy: placeofstudy ?? _placeofstudy,
+  position: position ?? _position,
+  positions: positions ?? _positions,
+  prefix: prefix ?? _prefix,
+  province: province ?? _province,
+  ratio: ratio ?? _ratio,
+  road: road ?? _road,
+  select: select ?? _select,
+  selectacolor: selectacolor ?? _selectacolor,
+  selecttheinformation: selecttheinformation ?? _selecttheinformation,
+  size: size ?? _size,
+  sizepictuce: sizepictuce ?? _sizepictuce,
+  skill: skill ?? _skill,
+  soi: soi ?? _soi,
+  startdate: startdate ?? _startdate,
+  subdistrict: subdistrict ?? _subdistrict,
+  themecolor: themecolor ?? _themecolor,
+  title: title ?? _title,
+  titlesetthemecolor: titlesetthemecolor ?? _titlesetthemecolor,
+  titlesettheme: titlesettheme ?? _titlesettheme,
+  twitter: twitter ?? _twitter,
+  type: type ?? _type,
+  value: value ?? _value,
+  whcm: whcm ?? _whcm,
+  zipcode: zipcode ?? _zipcode,
+  unkhown: unkhown ?? _unkhown,
+  viewpdf: viewpdf ?? _viewpdf,
+  titleresumeinformation: titleresumeinformation ?? _titleresumeinformation,
+  hsc: hsc ?? _hsc,
+  bd: bd ?? _bd,
+  md: md ?? _md,
+  dd: dd ?? _dd,
+  hdd: hdd ?? _hdd,
+  tapedit: tapedit ?? _tapedit,
+  save: save ?? _save,
+  saveor: saveor ?? _saveor,
+  youtube: youtube ?? _youtube,
+  showall: showall ?? _showall,
+  showsome: showsome ?? _showsome,
+  activitynot: activitynot ?? _activitynot,
+  btnresume1: btnresume1 ?? _btnresume1,
+  btnresume2: btnresume2 ?? _btnresume2,
+  selectednot: selectednot ?? _selectednot,
+);
   String? get aboutme => _aboutme;
   String? get aboutmedetail => _aboutmedetail;
   String? get address => _address;
@@ -2283,7 +2309,7 @@ class Screeninfo {
   String? get pictuce => _pictuce;
   String? get placeofstudy => _placeofstudy;
   String? get position => _position;
-  String? get positions => _positions;
+  dynamic get positions => _positions;
   String? get prefix => _prefix;
   String? get province => _province;
   String? get ratio => _ratio;
@@ -2300,6 +2326,7 @@ class Screeninfo {
   String? get themecolor => _themecolor;
   String? get title => _title;
   String? get titlesetthemecolor => _titlesetthemecolor;
+  dynamic get titlesettheme => _titlesettheme;
   String? get twitter => _twitter;
   String? get type => _type;
   String? get value => _value;
@@ -2320,9 +2347,9 @@ class Screeninfo {
   String? get showall => _showall;
   String? get showsome => _showsome;
   String? get activitynot => _activitynot;
-  String? get selectednot => _selectednot;
   String? get btnresume1 => _btnresume1;
   String? get btnresume2 => _btnresume2;
+  String? get selectednot => _selectednot;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -2373,6 +2400,7 @@ class Screeninfo {
     map['themecolor'] = _themecolor;
     map['title'] = _title;
     map['titlesetthemecolor'] = _titlesetthemecolor;
+    map['titlesettheme'] = _titlesettheme;
     map['twitter'] = _twitter;
     map['type'] = _type;
     map['value'] = _value;
@@ -2393,9 +2421,9 @@ class Screeninfo {
     map['showall'] = _showall;
     map['showsome'] = _showsome;
     map['activitynot'] = _activitynot;
-    map['selectednot'] = _selectednot;
     map['btnresume1'] = _btnresume1;
     map['btnresume2'] = _btnresume2;
+    map['selectednot'] = _selectednot;
     return map;
   }
 

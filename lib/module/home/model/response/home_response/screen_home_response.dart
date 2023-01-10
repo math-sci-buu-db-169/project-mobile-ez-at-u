@@ -1,6 +1,6 @@
 import 'dart:convert';
-/// head : {"status":200,"message":"success","modulename":"Activity","timeexpire":false}
-/// body : {"screenInfo":{"titleact":"My activity","btnadd":"Add","textname":"Name","textnickname":"Nickname","textgen":"Gen","textstdcode":"Student code","textemail":"Email","textrole":"Role","textlang":"Language","textthai":"ไทย","btncpass":"Change password","btncpin":"Change PIN","btndelacc":"Delete account","textappver":"Application version","btnlogout":"Logout","modetheme":"Theme mode","lockscreencode":"Lock screen code","dark":"Dark","setting":"Setting","position":"Academic position","titleactteacher":"Approve","btnseeall":"All"},"errorbutton":{"buttonok":"OK","buttonconfirm":"Confirm","buttonyes":"Yes","buttonno":"No","buttoncancel":"Cancel"},"alertmessage":{"alertdeleteaccount":"Do you want to delete your account? If you want to delete your account Press 'Okay' or 'Cancel' to continue using your account.","alertdeleteaccountpassword":"Please enter your password to confirm account deletion","alertdeleteaccountpdpa":"Account deletion is according to terms and conditions.","alertlogout":"Do you want to logout?","alertpassword":"Password","emailsupport":"scibuu.pr@gmail.com","phonesupport":"0-3810-3011"}}
+/// head : {"status":200,"message":"success","modulename":"activity","timeexpire":false}
+/// body : {"screenInfo":{"titleact":"กิจกรรมของฉัน","btnadd":"เพิ่ม","textname":"ชื่อ","textnickname":"ชื่อเล่น","textgen":"รุ่น","textstdcode":"รหัสนิสิต","textemail":"อิเมล","textrole":"ประเภทผู้ใช้งาน","textlang":"ภาษา","textthai":"Thai","btncpass":"เปลี่ยนรหัสผ่าน","btncpin":"เปลี่ยนรหัส PIN","btndelacc":"ลบบัญชี","textappver":"เวอร์ชันแอปพลิเคชัน","btnlogout":"ออกจากระบบ","modetheme":"โหมดธีม","lockscreencode":"รหัสล็อคหน้าจอ","dark":"มืด","setting":"ตั้งค่า","position":"ตำแหน่งทางวิชาการ","titleactteacher":"ยืนยันกิจกรรม","btnseeall":"ดูทั้งหมด"},"errorbutton":{"buttonok":"ตกลง","buttonconfirm":"ยืนยัน","buttonyes":"ใช่","buttonno":"ไม่ใช่","buttoncancel":"ยกเลิก"},"alertmessage":{"alertdeleteaccount":"คุณต้องการลบบัญชีใช่หรือไม่ หากคุณต้องการลบบัญชีผู้ใช้ กรุณากดปุ่ม 'ตกลง' หรือกดปุ่ม 'ยกเลิก' เพื่อกลับไปใช้งาน","alertdeleteaccountpassword":"กรุณากรอกรหัสผ่าน เพื่อยืนยันการลบบัญชี ","alertdeleteaccountpdpa":"การลบบัญชี จะเป็นไปตามเงื่อนไขและข้อตกลง","alertlogout":"คุณต้องการออกจากระบบใช่หรือไม่","alertpassword":"รหัสผ่าน","emailsupport":"scibuu.pr@gmail.com","phonesupport":"0-3810-3011","alertpdpa":"alertpdpaTH","alertupdateapp":"alertupdateappTH","titlenewappversion":"แอป EZ@U มีเวอร์ชันใหม่มาแล้วค่ะ","subtitlenewappversion":"กรุณาอัปเดตแอปเพื่อประสบการณ์ในการใช้งานที่ดีกว่าเดิม","titlenewpadaversion":"กรุณาอัปเดตแอปเพื่อสิทธิในการเข้าถึงข้อมูลที่ดีของท่านค่ะ","subtitlenewpadaversion":"แอป EZ@U มีเงื่อนไขข้อตกเวอร์ชันใหม่มาแล้วค่ะ"},"other":{"user_pdpa_version":"1","pdpa_version":"1.0.1","pdpa_link":"https://webzbinaryz.web.app/pdpa","app_version":"1.0.0","app_link":"https://drive.google.com/drive/folders/1rCn2H4H-9X43nW_pRTVDG-V9MEntuu0c?usp=sharing"}}
 
 ScreenHomeResponse screenHomeResponseFromJson(String str) => ScreenHomeResponse.fromJson(json.decode(str));
 String screenHomeResponseToJson(ScreenHomeResponse data) => json.encode(data.toJson());
@@ -39,9 +39,10 @@ ScreenHomeResponse copyWith({  Head? head,
 
 }
 
-/// screenInfo : {"titleact":"My activity","btnadd":"Add","textname":"Name","textnickname":"Nickname","textgen":"Gen","textstdcode":"Student code","textemail":"Email","textrole":"Role","textlang":"Language","textthai":"ไทย","btncpass":"Change password","btncpin":"Change PIN","btndelacc":"Delete account","textappver":"Application version","btnlogout":"Logout","modetheme":"Theme mode","lockscreencode":"Lock screen code","dark":"Dark","setting":"Setting","position":"Academic position","titleactteacher":"Approve","btnseeall":"All"}
-/// errorbutton : {"buttonok":"OK","buttonconfirm":"Confirm","buttonyes":"Yes","buttonno":"No","buttoncancel":"Cancel"}
-/// alertmessage : {"alertdeleteaccount":"Do you want to delete your account? If you want to delete your account Press 'Okay' or 'Cancel' to continue using your account.","alertdeleteaccountpassword":"Please enter your password to confirm account deletion","alertdeleteaccountpdpa":"Account deletion is according to terms and conditions.","alertlogout":"Do you want to logout?","alertpassword":"Password","emailsupport":"scibuu.pr@gmail.com","phonesupport":"0-3810-3011"}
+/// screenInfo : {"titleact":"กิจกรรมของฉัน","btnadd":"เพิ่ม","textname":"ชื่อ","textnickname":"ชื่อเล่น","textgen":"รุ่น","textstdcode":"รหัสนิสิต","textemail":"อิเมล","textrole":"ประเภทผู้ใช้งาน","textlang":"ภาษา","textthai":"Thai","btncpass":"เปลี่ยนรหัสผ่าน","btncpin":"เปลี่ยนรหัส PIN","btndelacc":"ลบบัญชี","textappver":"เวอร์ชันแอปพลิเคชัน","btnlogout":"ออกจากระบบ","modetheme":"โหมดธีม","lockscreencode":"รหัสล็อคหน้าจอ","dark":"มืด","setting":"ตั้งค่า","position":"ตำแหน่งทางวิชาการ","titleactteacher":"ยืนยันกิจกรรม","btnseeall":"ดูทั้งหมด"}
+/// errorbutton : {"buttonok":"ตกลง","buttonconfirm":"ยืนยัน","buttonyes":"ใช่","buttonno":"ไม่ใช่","buttoncancel":"ยกเลิก"}
+/// alertmessage : {"alertdeleteaccount":"คุณต้องการลบบัญชีใช่หรือไม่ หากคุณต้องการลบบัญชีผู้ใช้ กรุณากดปุ่ม 'ตกลง' หรือกดปุ่ม 'ยกเลิก' เพื่อกลับไปใช้งาน","alertdeleteaccountpassword":"กรุณากรอกรหัสผ่าน เพื่อยืนยันการลบบัญชี ","alertdeleteaccountpdpa":"การลบบัญชี จะเป็นไปตามเงื่อนไขและข้อตกลง","alertlogout":"คุณต้องการออกจากระบบใช่หรือไม่","alertpassword":"รหัสผ่าน","emailsupport":"scibuu.pr@gmail.com","phonesupport":"0-3810-3011","alertpdpa":"alertpdpaTH","alertupdateapp":"alertupdateappTH","titlenewappversion":"แอป EZ@U มีเวอร์ชันใหม่มาแล้วค่ะ","subtitlenewappversion":"กรุณาอัปเดตแอปเพื่อประสบการณ์ในการใช้งานที่ดีกว่าเดิม","titlenewpadaversion":"กรุณาอัปเดตแอปเพื่อสิทธิในการเข้าถึงข้อมูลที่ดีของท่านค่ะ","subtitlenewpadaversion":"แอป EZ@U มีเงื่อนไขข้อตกเวอร์ชันใหม่มาแล้วค่ะ"}
+/// other : {"user_pdpa_version":"1","pdpa_version":"1.0.1","pdpa_link":"https://webzbinaryz.web.app/pdpa","app_version":"1.0.0","app_link":"https://drive.google.com/drive/folders/1rCn2H4H-9X43nW_pRTVDG-V9MEntuu0c?usp=sharing"}
 
 Body bodyFromJson(String str) => Body.fromJson(json.decode(str));
 String bodyToJson(Body data) => json.encode(data.toJson());
@@ -49,30 +50,37 @@ class Body {
   Body({
       ScreenInfo? screenInfo, 
       Errorbutton? errorbutton, 
-      Alertmessage? alertmessage,}){
+      Alertmessage? alertmessage, 
+      Other? other,}){
     _screenInfo = screenInfo;
     _errorbutton = errorbutton;
     _alertmessage = alertmessage;
+    _other = other;
 }
 
   Body.fromJson(dynamic json) {
     _screenInfo = json['screenInfo'] != null ? ScreenInfo.fromJson(json['screenInfo']) : null;
     _errorbutton = json['errorbutton'] != null ? Errorbutton.fromJson(json['errorbutton']) : null;
     _alertmessage = json['alertmessage'] != null ? Alertmessage.fromJson(json['alertmessage']) : null;
+    _other = json['other'] != null ? Other.fromJson(json['other']) : null;
   }
   ScreenInfo? _screenInfo;
   Errorbutton? _errorbutton;
   Alertmessage? _alertmessage;
+  Other? _other;
 Body copyWith({  ScreenInfo? screenInfo,
   Errorbutton? errorbutton,
   Alertmessage? alertmessage,
+  Other? other,
 }) => Body(  screenInfo: screenInfo ?? _screenInfo,
   errorbutton: errorbutton ?? _errorbutton,
   alertmessage: alertmessage ?? _alertmessage,
+  other: other ?? _other,
 );
   ScreenInfo? get screenInfo => _screenInfo;
   Errorbutton? get errorbutton => _errorbutton;
   Alertmessage? get alertmessage => _alertmessage;
+  Other? get other => _other;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -85,18 +93,90 @@ Body copyWith({  ScreenInfo? screenInfo,
     if (_alertmessage != null) {
       map['alertmessage'] = _alertmessage?.toJson();
     }
+    if (_other != null) {
+      map['other'] = _other?.toJson();
+    }
     return map;
   }
 
 }
 
-/// alertdeleteaccount : "Do you want to delete your account? If you want to delete your account Press 'Okay' or 'Cancel' to continue using your account."
-/// alertdeleteaccountpassword : "Please enter your password to confirm account deletion"
-/// alertdeleteaccountpdpa : "Account deletion is according to terms and conditions."
-/// alertlogout : "Do you want to logout?"
-/// alertpassword : "Password"
+/// user_pdpa_version : "1"
+/// pdpa_version : "1.0.1"
+/// pdpa_link : "https://webzbinaryz.web.app/pdpa"
+/// app_version : "1.0.0"
+/// app_link : "https://drive.google.com/drive/folders/1rCn2H4H-9X43nW_pRTVDG-V9MEntuu0c?usp=sharing"
+
+Other otherFromJson(String str) => Other.fromJson(json.decode(str));
+String otherToJson(Other data) => json.encode(data.toJson());
+class Other {
+  Other({
+      String? userPdpaVersion, 
+      String? pdpaVersion, 
+      String? pdpaLink, 
+      String? appVersion, 
+      String? appLink,}){
+    _userPdpaVersion = userPdpaVersion;
+    _pdpaVersion = pdpaVersion;
+    _pdpaLink = pdpaLink;
+    _appVersion = appVersion;
+    _appLink = appLink;
+}
+
+  Other.fromJson(dynamic json) {
+    _userPdpaVersion = json['user_pdpa_version'];
+    _pdpaVersion = json['pdpa_version'];
+    _pdpaLink = json['pdpa_link'];
+    _appVersion = json['app_version'];
+    _appLink = json['app_link'];
+  }
+  String? _userPdpaVersion;
+  String? _pdpaVersion;
+  String? _pdpaLink;
+  String? _appVersion;
+  String? _appLink;
+Other copyWith({  String? userPdpaVersion,
+  String? pdpaVersion,
+  String? pdpaLink,
+  String? appVersion,
+  String? appLink,
+}) => Other(  userPdpaVersion: userPdpaVersion ?? _userPdpaVersion,
+  pdpaVersion: pdpaVersion ?? _pdpaVersion,
+  pdpaLink: pdpaLink ?? _pdpaLink,
+  appVersion: appVersion ?? _appVersion,
+  appLink: appLink ?? _appLink,
+);
+  String? get userPdpaVersion => _userPdpaVersion;
+  String? get pdpaVersion => _pdpaVersion;
+  String? get pdpaLink => _pdpaLink;
+  String? get appVersion => _appVersion;
+  String? get appLink => _appLink;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['user_pdpa_version'] = _userPdpaVersion;
+    map['pdpa_version'] = _pdpaVersion;
+    map['pdpa_link'] = _pdpaLink;
+    map['app_version'] = _appVersion;
+    map['app_link'] = _appLink;
+    return map;
+  }
+
+}
+
+/// alertdeleteaccount : "คุณต้องการลบบัญชีใช่หรือไม่ หากคุณต้องการลบบัญชีผู้ใช้ กรุณากดปุ่ม 'ตกลง' หรือกดปุ่ม 'ยกเลิก' เพื่อกลับไปใช้งาน"
+/// alertdeleteaccountpassword : "กรุณากรอกรหัสผ่าน เพื่อยืนยันการลบบัญชี "
+/// alertdeleteaccountpdpa : "การลบบัญชี จะเป็นไปตามเงื่อนไขและข้อตกลง"
+/// alertlogout : "คุณต้องการออกจากระบบใช่หรือไม่"
+/// alertpassword : "รหัสผ่าน"
 /// emailsupport : "scibuu.pr@gmail.com"
 /// phonesupport : "0-3810-3011"
+/// alertpdpa : "alertpdpaTH"
+/// alertupdateapp : "alertupdateappTH"
+/// titlenewappversion : "แอป EZ@U มีเวอร์ชันใหม่มาแล้วค่ะ"
+/// subtitlenewappversion : "กรุณาอัปเดตแอปเพื่อประสบการณ์ในการใช้งานที่ดีกว่าเดิม"
+/// titlenewpadaversion : "กรุณาอัปเดตแอปเพื่อสิทธิในการเข้าถึงข้อมูลที่ดีของท่านค่ะ"
+/// subtitlenewpadaversion : "แอป EZ@U มีเงื่อนไขข้อตกเวอร์ชันใหม่มาแล้วค่ะ"
 
 Alertmessage alertmessageFromJson(String str) => Alertmessage.fromJson(json.decode(str));
 String alertmessageToJson(Alertmessage data) => json.encode(data.toJson());
@@ -108,7 +188,13 @@ class Alertmessage {
       String? alertlogout, 
       String? alertpassword, 
       String? emailsupport, 
-      String? phonesupport,}){
+      String? phonesupport, 
+      String? alertpdpa, 
+      String? alertupdateapp, 
+      String? titlenewappversion, 
+      String? subtitlenewappversion, 
+      String? titlenewpadaversion, 
+      String? subtitlenewpadaversion,}){
     _alertdeleteaccount = alertdeleteaccount;
     _alertdeleteaccountpassword = alertdeleteaccountpassword;
     _alertdeleteaccountpdpa = alertdeleteaccountpdpa;
@@ -116,6 +202,12 @@ class Alertmessage {
     _alertpassword = alertpassword;
     _emailsupport = emailsupport;
     _phonesupport = phonesupport;
+    _alertpdpa = alertpdpa;
+    _alertupdateapp = alertupdateapp;
+    _titlenewappversion = titlenewappversion;
+    _subtitlenewappversion = subtitlenewappversion;
+    _titlenewpadaversion = titlenewpadaversion;
+    _subtitlenewpadaversion = subtitlenewpadaversion;
 }
 
   Alertmessage.fromJson(dynamic json) {
@@ -126,6 +218,12 @@ class Alertmessage {
     _alertpassword = json['alertpassword'];
     _emailsupport = json['emailsupport'];
     _phonesupport = json['phonesupport'];
+    _alertpdpa = json['alertpdpa'];
+    _alertupdateapp = json['alertupdateapp'];
+    _titlenewappversion = json['titlenewappversion'];
+    _subtitlenewappversion = json['subtitlenewappversion'];
+    _titlenewpadaversion = json['titlenewpadaversion'];
+    _subtitlenewpadaversion = json['subtitlenewpadaversion'];
   }
   String? _alertdeleteaccount;
   String? _alertdeleteaccountpassword;
@@ -134,6 +232,12 @@ class Alertmessage {
   String? _alertpassword;
   String? _emailsupport;
   String? _phonesupport;
+  String? _alertpdpa;
+  String? _alertupdateapp;
+  String? _titlenewappversion;
+  String? _subtitlenewappversion;
+  String? _titlenewpadaversion;
+  String? _subtitlenewpadaversion;
 Alertmessage copyWith({  String? alertdeleteaccount,
   String? alertdeleteaccountpassword,
   String? alertdeleteaccountpdpa,
@@ -141,6 +245,12 @@ Alertmessage copyWith({  String? alertdeleteaccount,
   String? alertpassword,
   String? emailsupport,
   String? phonesupport,
+  String? alertpdpa,
+  String? alertupdateapp,
+  String? titlenewappversion,
+  String? subtitlenewappversion,
+  String? titlenewpadaversion,
+  String? subtitlenewpadaversion,
 }) => Alertmessage(  alertdeleteaccount: alertdeleteaccount ?? _alertdeleteaccount,
   alertdeleteaccountpassword: alertdeleteaccountpassword ?? _alertdeleteaccountpassword,
   alertdeleteaccountpdpa: alertdeleteaccountpdpa ?? _alertdeleteaccountpdpa,
@@ -148,6 +258,12 @@ Alertmessage copyWith({  String? alertdeleteaccount,
   alertpassword: alertpassword ?? _alertpassword,
   emailsupport: emailsupport ?? _emailsupport,
   phonesupport: phonesupport ?? _phonesupport,
+  alertpdpa: alertpdpa ?? _alertpdpa,
+  alertupdateapp: alertupdateapp ?? _alertupdateapp,
+  titlenewappversion: titlenewappversion ?? _titlenewappversion,
+  subtitlenewappversion: subtitlenewappversion ?? _subtitlenewappversion,
+  titlenewpadaversion: titlenewpadaversion ?? _titlenewpadaversion,
+  subtitlenewpadaversion: subtitlenewpadaversion ?? _subtitlenewpadaversion,
 );
   String? get alertdeleteaccount => _alertdeleteaccount;
   String? get alertdeleteaccountpassword => _alertdeleteaccountpassword;
@@ -156,6 +272,12 @@ Alertmessage copyWith({  String? alertdeleteaccount,
   String? get alertpassword => _alertpassword;
   String? get emailsupport => _emailsupport;
   String? get phonesupport => _phonesupport;
+  String? get alertpdpa => _alertpdpa;
+  String? get alertupdateapp => _alertupdateapp;
+  String? get titlenewappversion => _titlenewappversion;
+  String? get subtitlenewappversion => _subtitlenewappversion;
+  String? get titlenewpadaversion => _titlenewpadaversion;
+  String? get subtitlenewpadaversion => _subtitlenewpadaversion;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -166,16 +288,22 @@ Alertmessage copyWith({  String? alertdeleteaccount,
     map['alertpassword'] = _alertpassword;
     map['emailsupport'] = _emailsupport;
     map['phonesupport'] = _phonesupport;
+    map['alertpdpa'] = _alertpdpa;
+    map['alertupdateapp'] = _alertupdateapp;
+    map['titlenewappversion'] = _titlenewappversion;
+    map['subtitlenewappversion'] = _subtitlenewappversion;
+    map['titlenewpadaversion'] = _titlenewpadaversion;
+    map['subtitlenewpadaversion'] = _subtitlenewpadaversion;
     return map;
   }
 
 }
 
-/// buttonok : "OK"
-/// buttonconfirm : "Confirm"
-/// buttonyes : "Yes"
-/// buttonno : "No"
-/// buttoncancel : "Cancel"
+/// buttonok : "ตกลง"
+/// buttonconfirm : "ยืนยัน"
+/// buttonyes : "ใช่"
+/// buttonno : "ไม่ใช่"
+/// buttoncancel : "ยกเลิก"
 
 Errorbutton errorbuttonFromJson(String str) => Errorbutton.fromJson(json.decode(str));
 String errorbuttonToJson(Errorbutton data) => json.encode(data.toJson());
@@ -234,28 +362,28 @@ Errorbutton copyWith({  String? buttonok,
 
 }
 
-/// titleact : "My activity"
-/// btnadd : "Add"
-/// textname : "Name"
-/// textnickname : "Nickname"
-/// textgen : "Gen"
-/// textstdcode : "Student code"
-/// textemail : "Email"
-/// textrole : "Role"
-/// textlang : "Language"
-/// textthai : "ไทย"
-/// btncpass : "Change password"
-/// btncpin : "Change PIN"
-/// btndelacc : "Delete account"
-/// textappver : "Application version"
-/// btnlogout : "Logout"
-/// modetheme : "Theme mode"
-/// lockscreencode : "Lock screen code"
-/// dark : "Dark"
-/// setting : "Setting"
-/// position : "Academic position"
-/// titleactteacher : "Approve"
-/// btnseeall : "All"
+/// titleact : "กิจกรรมของฉัน"
+/// btnadd : "เพิ่ม"
+/// textname : "ชื่อ"
+/// textnickname : "ชื่อเล่น"
+/// textgen : "รุ่น"
+/// textstdcode : "รหัสนิสิต"
+/// textemail : "อิเมล"
+/// textrole : "ประเภทผู้ใช้งาน"
+/// textlang : "ภาษา"
+/// textthai : "Thai"
+/// btncpass : "เปลี่ยนรหัสผ่าน"
+/// btncpin : "เปลี่ยนรหัส PIN"
+/// btndelacc : "ลบบัญชี"
+/// textappver : "เวอร์ชันแอปพลิเคชัน"
+/// btnlogout : "ออกจากระบบ"
+/// modetheme : "โหมดธีม"
+/// lockscreencode : "รหัสล็อคหน้าจอ"
+/// dark : "มืด"
+/// setting : "ตั้งค่า"
+/// position : "ตำแหน่งทางวิชาการ"
+/// titleactteacher : "ยืนยันกิจกรรม"
+/// btnseeall : "ดูทั้งหมด"
 
 ScreenInfo screenInfoFromJson(String str) => ScreenInfo.fromJson(json.decode(str));
 String screenInfoToJson(ScreenInfo data) => json.encode(data.toJson());
@@ -452,14 +580,14 @@ ScreenInfo copyWith({  String? titleact,
 
 /// status : 200
 /// message : "success"
-/// modulename : "Activity"
+/// modulename : "activity"
 /// timeexpire : false
 
 Head headFromJson(String str) => Head.fromJson(json.decode(str));
 String headToJson(Head data) => json.encode(data.toJson());
 class Head {
   Head({
-      num? status, 
+      int? status, 
       String? message, 
       String? modulename, 
       bool? timeexpire,}){
@@ -475,11 +603,11 @@ class Head {
     _modulename = json['modulename'];
     _timeexpire = json['timeexpire'];
   }
-  num? _status;
+  int? _status;
   String? _message;
   String? _modulename;
   bool? _timeexpire;
-Head copyWith({  num? status,
+Head copyWith({  int? status,
   String? message,
   String? modulename,
   bool? timeexpire,
@@ -488,7 +616,7 @@ Head copyWith({  num? status,
   modulename: modulename ?? _modulename,
   timeexpire: timeexpire ?? _timeexpire,
 );
-  num? get status => _status;
+  int? get status => _status;
   String? get message => _message;
   String? get modulename => _modulename;
   bool? get timeexpire => _timeexpire;

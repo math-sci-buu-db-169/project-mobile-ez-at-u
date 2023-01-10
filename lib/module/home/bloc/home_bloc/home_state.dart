@@ -10,6 +10,8 @@ class HomeAlertLoading extends HomeState {}
 
 class HomeEndLoading extends HomeState {}
 
+class HomeScreenAlertMessageSuccessState extends HomeState {}
+
 class HomeError extends HomeState {
   String errorMessage;
   HomeError({required this.errorMessage});

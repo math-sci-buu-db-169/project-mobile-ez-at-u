@@ -3,6 +3,7 @@ part of 'home_bloc.dart';
 abstract class HomeEvent {}
 
 class HomeScreenInfoEvent extends HomeEvent {}
+class HomeScreenAlertMessageEvent extends HomeEvent {}
 class HomeScreenSettingInfoEvent extends HomeEvent {}
 
 class ChangeLanguageHomeScreenInfoEvent extends HomeEvent {}

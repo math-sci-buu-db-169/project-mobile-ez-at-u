@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_info/package_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../../module/login/screen/login_screen/login_screen.dart';
 import '../../../../customs/dialog/dialog_widget.dart';
 import '../../../../customs/message/text_button.dart';
@@ -60,6 +61,10 @@ class _HomePageState extends State<HomePage> with ProgressDialog {
   late String textSubSessionExpired;
   late String _buttonOk;
   late String _role;
+  late bool pDPARelease;
+  late String pDPAVersion;
+  late bool appRelease;
+  late String appVersion;
   late int intThemeMode = 2;
   late ThemeMode themeMode;
   // late String? _refreshKey;
@@ -74,17 +79,28 @@ class _HomePageState extends State<HomePage> with ProgressDialog {
   @override
   void initState() {
     _initPackageInfo();
+    _ReleaseVersion();
     _initRole();
     _iniGetThemeMode();
     _isSessionUnauthorized();
     super.initState();
   }
 
+  Future<void> _ReleaseVersion() async {
+
+    setState(() {
+        pDPARelease = true;
+        pDPAVersion='';
+        appRelease = true;
+        appVersion='';
+    });
+  }
   Future<void> _initPackageInfo() async {
     final info = await PackageInfo.fromPlatform();
 
     setState(() {
       _packageInfo = info;
+      appVersion=_packageInfo.version;
     });
   }
   void _initRole()  async{
@@ -143,8 +159,24 @@ class _HomePageState extends State<HomePage> with ProgressDialog {
     _screenProfileResponse?.body?.profileGeneralInfo?.langeuage == 'TH' ? _userLanguage = "EN" : _userLanguage = "TH";
     context.read<HomeBloc>().add(OnClickChangeLanguageHomeEvent(userLanguage: _userLanguage));
   }
+  Future<void> _launchInBrowser(Uri url) async {
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw 'Could not launch $url';
+    }
+  }
+  void _launchInBrowserSetState({required String launchInBrowser}) {
 
+        setState(() {
+          _launchInBrowser(Uri.parse(launchInBrowser));
+          print('launchInBrowser(Uri.parse(launchInBrowser))');
+
+        });
+  }
   void _changeLanguageSuccess({required String userLanguage}) {
+
     setUserLanguage(userLanguage);
     context.read<HomeBloc>().add(HomeScreenInfoEvent());
   }
@@ -213,6 +245,19 @@ class _HomePageState extends State<HomePage> with ProgressDialog {
         if (state is OnClickChangeLanguageHomeSuccessState) {
           _changeLanguageSuccess(userLanguage: state.userLanguage);
         }
+        if (state is ScreenInfoHomeSuccessState) {
+
+          context.read<HomeBloc>().add(HomeScreenAlertMessageEvent());
+
+        }
+        if (state is HomeScreenAlertMessageSuccessState) {
+          dialogSessionExpiredOneBtn(
+              context, "textSessionExpired", "textSubSessionExpired", _buttonOk,
+              onClickBtn: () {
+                Navigator.of(context).pop();
+              });
+
+        }
       },
       builder: (context, state) {
         if (state is ScreenInfoHomeSuccessState) {
@@ -222,7 +267,9 @@ class _HomePageState extends State<HomePage> with ProgressDialog {
           _screenStatusActivityStudentResponse = state.responseActivityStudent;
           _screenStatusActivityTeacherResponse = state.responseActivityTeacher;
           _userLanguage = _screenProfileResponse?.body?.profileGeneralInfo?.langeuage ?? "TH";
-          print("ชื่ออาจารย์ในไฟล์ home_screen = ${state.responseProfileTeacher?.body?.profileGeneralTH?.name}");
+          pDPAVersion ="${_screenHomeResponse?.body?.other?.userPdpaVersion}";
+          print("ชื่ออาจารย์ในไฟล์ home_screen = ${state.responseProfileTeacher.body?.profileGeneralTH?.name}");
+
           return buildContentHomeScreen(
               context,
               _toggleLanguageView,
@@ -240,15 +287,20 @@ class _HomePageState extends State<HomePage> with ProgressDialog {
               _noActivityTeacherResponse,
               activityStudentIsEmpty: false,
               activityTeacherIsEmpty: false,
+              buttonOk: _buttonOk,
               versionApp: _packageInfo.version,
               otpCodeController,
-              passwordController);
+              passwordController,appVersion:appVersion,appRelease:appRelease,pDPAVersion:pDPAVersion,pDPAReleasep:pDPARelease,
+
+            launchInBrowserSetState:_launchInBrowserSetState,);
+
         } else if (state is ScreenInfoHomeNoActivityStudentAndTeacherSuccessState) {
           _screenHomeResponse = state.responseScreenInfoHome;
           _screenProfileResponse = state.responseProfile;
           _screenProfileTeacherResponse = state.responseProfileTeacher;
           _noActivityStudentResponse = state.responseNoActivityStudent;
           _noActivityTeacherResponse = state.responseNoActivityTeacher;
+          pDPAVersion ="${_screenHomeResponse?.body?.other?.userPdpaVersion}";
           _userLanguage = _screenProfileResponse?.body?.profileGeneralInfo?.langeuage ?? "TH"; //+++
           return buildContentHomeScreen(
               context,
@@ -267,9 +319,12 @@ class _HomePageState extends State<HomePage> with ProgressDialog {
               _noActivityTeacherResponse,
               activityStudentIsEmpty: true,
               activityTeacherIsEmpty: true,
+              buttonOk: _buttonOk,
               versionApp: _packageInfo.version,
               otpCodeController,
-              passwordController);
+              passwordController,appVersion:appVersion,appRelease:appRelease,pDPAVersion:pDPAVersion,pDPAReleasep:pDPARelease,
+
+            launchInBrowserSetState:_launchInBrowserSetState,);
         }
 
         return Scaffold(
