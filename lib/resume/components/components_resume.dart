@@ -1175,6 +1175,8 @@ buildCardPositionEditResumeScreen(
     required String editInFormations,
     required String title,
     required String type,
+    required String showSome,
+    required String showAll,
     required positionData,
     required Color appBarForegroundColor,
     required Function() returnResumeEdit,
@@ -1231,10 +1233,7 @@ buildCardPositionEditResumeScreen(
           onTap: onTap,
           child: Text(
             boolClick == false
-                ?
-                // editInFormations ??
-                "ดูเพิ่มเติม"
-                : "แสดงบางส่วน",
+                ?showSome : showAll,
             style: TextStyle(
                 decoration: TextDecoration.underline,
                 decorationThickness: 2,
@@ -1296,6 +1295,8 @@ buildExperienceCard(
     required String editInFormations,
     required String title,
     required String type,
+      required String showSome,
+      required String showAll,
     required experienceData,
     required Color appBarForegroundColor,
     required Function() returnResumeEdit,
@@ -1353,9 +1354,7 @@ buildExperienceCard(
           child: Text(
             boolClick == false
                 ?
-                // editInFormations ??
-                "ดูเพิ่มเติม"
-                : "แสดงบางส่วน",
+  showSome : showAll,
             style: TextStyle(
                 decoration: TextDecoration.underline,
                 decorationThickness: 2,
@@ -1414,6 +1413,8 @@ buildCertificateCard(
     required String editInFormations,
     required String title,
     required String type,
+      required String showSome,
+      required String showAll,
     required certificateData,
     required Color appBarForegroundColor,
     required Function() returnResumeEdit,
@@ -1469,10 +1470,7 @@ buildCertificateCard(
           onTap: onTap,
           child: Text(
             boolClick == false
-                ?
-                // editInFormations ??
-                "ดูเพิ่มเติม"
-                : "แสดงบางส่วน",
+                ?showSome : showAll,
             style: TextStyle(
                 decoration: TextDecoration.underline,
                 decorationThickness: 2,
@@ -1532,6 +1530,8 @@ buildEducationCard(
     required String title,
     required String type,
     required educationData,
+      required String showSome,
+      required String showAll,
     required Color appBarForeGroundColor,
     required Function() returnResumeEdit,
     required bool boolClick,
@@ -1598,10 +1598,7 @@ buildEducationCard(
           onTap: onTap,
           child: Text(
             boolClick == false
-                ?
-                // editInFormations ??
-                "ดูเพิ่มเติม"
-                : "แสดงบางส่วน",
+                ?showSome : showAll,
             style: TextStyle(
                 decoration: TextDecoration.underline,
                 decorationThickness: 2,

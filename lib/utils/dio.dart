@@ -36,6 +36,7 @@ class MyDio {
   // /ton_server
   static final _optionsServer = BaseOptions(
     baseUrl: 'http://ezatuapi.totddns.com:45360/dev',
+      // baseUrl: 'http://msd.buu.ac.th/ServiceTest',
     connectTimeout: 15000,
     receiveTimeout: 15000,
   );
