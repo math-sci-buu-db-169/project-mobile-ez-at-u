@@ -139,6 +139,9 @@ class ChangePasswordBloc extends Bloc<ChangePasswordEvent, ChangePasswordState> 
           } else {
             emit(ChangePasswordError(message: changePasswordResponse.head?.message ?? ""));
           }
+          print("refresh token ================================");
+          print(changePasswordResponse?.body?.refreshtoken);
+          print("refresh token ================================");
         } else {
           emit(ChangePasswordError(message: response.statusMessage ?? ""));
         }

@@ -35,6 +35,14 @@ class ChangePasswordRepository {
     prefs = await SharedPreferences.getInstance();
     refreshToken = prefs.getString('refreshKey');
     String? userLanguage = prefs.getString('userLanguage');
+    print(jsonEncode({
+      "currentpassword": currentPassword,
+      "newpassword": newPassword,
+      "confirmpassword": confirmPassword,
+      "refreshtoken": refreshToken,
+      "language": userLanguage
+    })
+    );
     return await MyDio.createDioServer().post("/api/home/changepassword",
         data: jsonEncode({
           "currentpassword": currentPassword,
