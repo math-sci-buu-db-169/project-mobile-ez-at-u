@@ -339,10 +339,8 @@ buildAddActivityByTeacherBody(
                   }else {
                     dialogOneLineOneBtn(
                         context,
-                        // addEditDeleteActivityScreenByTeacherApi
-                        //     ?.body?.alertmessage?.alertfillallactivity ??
-                        alertFillAllActivity??alertFillAllActivity,
-                        // addEditDeleteActivityScreenByTeacherApi?.body?.errorbutton?.buttonok ??
+                        addEditDeleteActivityScreenByTeacherApi
+                            ?.body?.screeninfo?.warningfillall ?? alertFillAllActivity,
                         buttonOK??
                             buttonOK, onClickBtn: () {
                       Navigator.of(context).pop();

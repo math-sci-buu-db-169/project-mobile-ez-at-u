@@ -1,6 +1,6 @@
 import 'dart:convert';
 /// head : {"status":200,"message":"success","modulename":"activity","timeexpire":false}
-/// body : {"screeninfo":{"titleaddactivity":"เพิ่มกิจกรรม","textactivityname":"ชื่อกิจกรรม","textobjectives":"วัตถุประสงค์","textvenue":"สถานที่จัด","textstartdate":"วันที่เริ่มกิจกรรม","textfinishdate":"วันที่ทำกิจกรรมเสร็จสิ้น","buttonadd":"เพิ่ม","titlelistactivityname":"รายชื่อกิจกรรม","titleeditactivity":"แก้ไขกิจกรรม","buttonsave":"บันทึก","buttondelete":"ลบ","buttoncancel":"ยกเลิก","warningdeletetext":"คุณต้องการลบกิจกรรมนี้ใช่หรือไม่?"}}
+/// body : {"screeninfo":{"titleaddactivity":"Add activity","textactivityname":"Activity name","textobjectives":"Objectives","textvenue":"Venue","textstartdate":"Start date","textfinishdate":"Finish date","buttonadd":"Add","titlelistactivityname":"Activity name list","titleeditactivity":"Edit activity","buttonsave":"Save","buttondelete":"Delete","buttoncancel":"Cancel","warningdeletetext":"Do you want to delete this activity?","warningfillall":"Please fill out all fields"}}
 
 AddEditDeleteActivityByTeacherScreen addEditDeleteActivityByTeacherScreenFromJson(String str) => AddEditDeleteActivityByTeacherScreen.fromJson(json.decode(str));
 String addEditDeleteActivityByTeacherScreenToJson(AddEditDeleteActivityByTeacherScreen data) => json.encode(data.toJson());
@@ -39,7 +39,7 @@ AddEditDeleteActivityByTeacherScreen copyWith({  Head? head,
 
 }
 
-/// screeninfo : {"titleaddactivity":"เพิ่มกิจกรรม","textactivityname":"ชื่อกิจกรรม","textobjectives":"วัตถุประสงค์","textvenue":"สถานที่จัด","textstartdate":"วันที่เริ่มกิจกรรม","textfinishdate":"วันที่ทำกิจกรรมเสร็จสิ้น","buttonadd":"เพิ่ม","titlelistactivityname":"รายชื่อกิจกรรม","titleeditactivity":"แก้ไขกิจกรรม","buttonsave":"บันทึก","buttondelete":"ลบ","buttoncancel":"ยกเลิก","warningdeletetext":"คุณต้องการลบกิจกรรมนี้ใช่หรือไม่?"}
+/// screeninfo : {"titleaddactivity":"Add activity","textactivityname":"Activity name","textobjectives":"Objectives","textvenue":"Venue","textstartdate":"Start date","textfinishdate":"Finish date","buttonadd":"Add","titlelistactivityname":"Activity name list","titleeditactivity":"Edit activity","buttonsave":"Save","buttondelete":"Delete","buttoncancel":"Cancel","warningdeletetext":"Do you want to delete this activity?","warningfillall":"Please fill out all fields"}
 
 Body bodyFromJson(String str) => Body.fromJson(json.decode(str));
 String bodyToJson(Body data) => json.encode(data.toJson());
@@ -68,19 +68,20 @@ Body copyWith({  Screeninfo? screeninfo,
 
 }
 
-/// titleaddactivity : "เพิ่มกิจกรรม"
-/// textactivityname : "ชื่อกิจกรรม"
-/// textobjectives : "วัตถุประสงค์"
-/// textvenue : "สถานที่จัด"
-/// textstartdate : "วันที่เริ่มกิจกรรม"
-/// textfinishdate : "วันที่ทำกิจกรรมเสร็จสิ้น"
-/// buttonadd : "เพิ่ม"
-/// titlelistactivityname : "รายชื่อกิจกรรม"
-/// titleeditactivity : "แก้ไขกิจกรรม"
-/// buttonsave : "บันทึก"
-/// buttondelete : "ลบ"
-/// buttoncancel : "ยกเลิก"
-/// warningdeletetext : "คุณต้องการลบกิจกรรมนี้ใช่หรือไม่?"
+/// titleaddactivity : "Add activity"
+/// textactivityname : "Activity name"
+/// textobjectives : "Objectives"
+/// textvenue : "Venue"
+/// textstartdate : "Start date"
+/// textfinishdate : "Finish date"
+/// buttonadd : "Add"
+/// titlelistactivityname : "Activity name list"
+/// titleeditactivity : "Edit activity"
+/// buttonsave : "Save"
+/// buttondelete : "Delete"
+/// buttoncancel : "Cancel"
+/// warningdeletetext : "Do you want to delete this activity?"
+/// warningfillall : "Please fill out all fields"
 
 Screeninfo screeninfoFromJson(String str) => Screeninfo.fromJson(json.decode(str));
 String screeninfoToJson(Screeninfo data) => json.encode(data.toJson());
@@ -98,7 +99,8 @@ class Screeninfo {
       String? buttonsave, 
       String? buttondelete, 
       String? buttoncancel, 
-      String? warningdeletetext,}){
+      String? warningdeletetext, 
+      String? warningfillall,}){
     _titleaddactivity = titleaddactivity;
     _textactivityname = textactivityname;
     _textobjectives = textobjectives;
@@ -112,6 +114,7 @@ class Screeninfo {
     _buttondelete = buttondelete;
     _buttoncancel = buttoncancel;
     _warningdeletetext = warningdeletetext;
+    _warningfillall = warningfillall;
 }
 
   Screeninfo.fromJson(dynamic json) {
@@ -128,6 +131,7 @@ class Screeninfo {
     _buttondelete = json['buttondelete'];
     _buttoncancel = json['buttoncancel'];
     _warningdeletetext = json['warningdeletetext'];
+    _warningfillall = json['warningfillall'];
   }
   String? _titleaddactivity;
   String? _textactivityname;
@@ -142,6 +146,7 @@ class Screeninfo {
   String? _buttondelete;
   String? _buttoncancel;
   String? _warningdeletetext;
+  String? _warningfillall;
 Screeninfo copyWith({  String? titleaddactivity,
   String? textactivityname,
   String? textobjectives,
@@ -155,6 +160,7 @@ Screeninfo copyWith({  String? titleaddactivity,
   String? buttondelete,
   String? buttoncancel,
   String? warningdeletetext,
+  String? warningfillall,
 }) => Screeninfo(  titleaddactivity: titleaddactivity ?? _titleaddactivity,
   textactivityname: textactivityname ?? _textactivityname,
   textobjectives: textobjectives ?? _textobjectives,
@@ -168,6 +174,7 @@ Screeninfo copyWith({  String? titleaddactivity,
   buttondelete: buttondelete ?? _buttondelete,
   buttoncancel: buttoncancel ?? _buttoncancel,
   warningdeletetext: warningdeletetext ?? _warningdeletetext,
+  warningfillall: warningfillall ?? _warningfillall,
 );
   String? get titleaddactivity => _titleaddactivity;
   String? get textactivityname => _textactivityname;
@@ -182,6 +189,7 @@ Screeninfo copyWith({  String? titleaddactivity,
   String? get buttondelete => _buttondelete;
   String? get buttoncancel => _buttoncancel;
   String? get warningdeletetext => _warningdeletetext;
+  String? get warningfillall => _warningfillall;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -198,6 +206,7 @@ Screeninfo copyWith({  String? titleaddactivity,
     map['buttondelete'] = _buttondelete;
     map['buttoncancel'] = _buttoncancel;
     map['warningdeletetext'] = _warningdeletetext;
+    map['warningfillall'] = _warningfillall;
     return map;
   }
 
